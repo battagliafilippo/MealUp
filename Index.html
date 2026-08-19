@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>FitMeals PWA</title>
+
+    <!-- Meta Tag PWA per Safari / iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FitMeals">
+    <meta name="theme-color" content="#0d0d0e">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Sfondo Mesh Ambientale -->
+    <div class="ambient-mesh">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Contenitore App -->
+    <main id="app-container">
+
+        <!-- SCHERMATA 1: FEED RICETTE -->
+        <section id="view-home" class="view active">
+            <header class="header">
+                <div>
+                    <span class="subtitle">I tuoi pasti su misura</span>
+                    <h1>FitMeals</h1>
+                </div>
+                <button class="icon-btn" id="btn-open-add">+</button>
+            </header>
+
+            <!-- Filtri Categoria -->
+            <div class="filter-bar">
+                <button class="chip active" data-filter="all">Tutte</button>
+                <button class="chip" data-filter="sano">🟢 Sano</button>
+                <button class="chip" data-filter="medio">🟡 Medio</button>
+                <button class="chip" data-filter="sgarro">🔴 Sgarro</button>
+            </div>
+
+            <!-- Lista Ricette Filtrate -->
+            <div id="recipe-list" class="cards-list"></div>
+        </section>
+
+        <!-- SCHERMATA 2: SVUOTA FRIGO -->
+        <section id="view-fridge" class="view">
+            <header class="header">
+                <div>
+                    <span class="subtitle">Matching Intelligente</span>
+                    <h1>Svuota Frigo</h1>
+                </div>
+            </header>
+
+            <p class="section-desc">Seleziona quello che hai in dispensa:</p>
+            <div id="pantry-chips" class="pantry-grid"></div>
+
+            <hr class="divider">
+
+            <h3>Ricette Realizzabili</h3>
+            <div id="fridge-results" class="cards-list"></div>
+        </section>
+
+        <!-- SCHERMATA 3: PROFILO & BLACKLIST -->
+        <section id="view-profile" class="view">
+            <header class="header">
+                <div>
+                    <span class="subtitle">Preferenze & Sicurezza</span>
+                    <h1>Profilo</h1>
+                </div>
+            </header>
+
+            <div class="glass-card profile-card">
+                <h3>Ingredienti Esclusi</h3>
+                <p class="section-desc">Le ricette contenenti questi ingredienti vengono nascoste con priorità assoluta.</p>
+
+                <div class="input-group">
+                    <input type="text" id="input-forbidden" placeholder="Es. Melanzane, Menta...">
+                    <button id="btn-add-forbidden" class="btn-primary">+</button>
+                </div>
+
+                <div id="blacklist-tags" class="tags-container"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODALE: DETTAGLIO RICETTA & SOSTITUZIONE INGREDIENTI -->
+    <div id="modal-detail" class="modal">
+        <div class="modal-content glass-card">
+            <button class="close-btn" id="btn-close-detail">&times;</button>
+            <div id="detail-body"></div>
+        </div>
+    </div>
+
+    <!-- MODALE: AGGIUNGI NUOVA RICETTA -->
+    <div id="modal-add" class="modal">
+        <div class="modal-content glass-card">
+            <button class="close-btn" id="btn-close-add">&times;</button>
+            <h2>Nuova Ricetta</h2>
+            <form id="form-add-recipe">
+                <input type="text" id="add-title" placeholder="Titolo ricetta" required>
+                <div class="row">
+                    <input type="number" id="add-prep" placeholder="Prep (min)" required>
+                    <input type="number" id="add-cook" placeholder="Cottura (min)" required>
+                </div>
+                <div class="row">
+                    <input type="number" id="add-cal" placeholder="Kcal" required>
+                    <input type="number" id="add-pro" placeholder="Proteine (g)" required>
+                </div>
+                <div class="row">
+                    <input type="number" id="add-carbs" placeholder="Carboidrati (g)" required>
+                    <input type="number" id="add-fat" placeholder="Grassi (g)" required>
+                </div>
+                <select id="add-cat">
+                    <option value="sano">🟢 Sano</option>
+                    <option value="medio">🟡 Medio</option>
+                    <option value="sgarro">🔴 Sgarro</option>
+                </select>
+                <textarea id="add-ingredients" placeholder="Ingredienti separati da virgola (es. Pollo, Ceci, Senape)" required></textarea>
+                <textarea id="add-steps" placeholder="Passaggi di preparazione separati da punto (es. Taglia il pollo. Cucina a fuoco vivo.)" required></textarea>
+                <button type="submit" class="btn-primary full-width">Salva Ricetta</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TAB BAR IN BASSO (Glassmorphism Apple Style) -->
+    <nav class="tab-bar">
+        <button class="tab-item active" data-target="view-home">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+            <span>Ricette</span>
+        </button>
+        <button class="tab-item" data-target="view-fridge">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-9 13H7v-2h4v2zm0-4H7V9h4v2zm7 4h-4V9h4v6z"/></svg>
+            <span>Svuota Frigo</span>
+        </button>
+        <button class="tab-item" data-target="view-profile">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <span>Profilo</span>
+        </button>
+    </nav>
+
+    <!-- JS -->
+    <script src="app.js"></script>
+</body>
+</html>
