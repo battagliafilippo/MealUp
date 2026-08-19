@@ -58,33 +58,30 @@ const COMMON_PANTRY = [
     "Funghi", "Peperoni", "Yogurt greco 0%"
 ];
 
-// Mappa delle sostituzioni intelligenti (Ingrediente -> Sostituto, Tempo var, Testo)
 const SUBSTITUTION_MAP = {
-    "Petto di pollo": { substitute: "Carni bianche (Tacchino)", prepDelta: 0, cookDelta: 2 },
+    "Petto di pollo": { substitute: "Tacchino", prepDelta: 0, cookDelta: 2 },
     "Carpaccio di manzo": { substitute: "Bresaola", prepDelta: -2, cookDelta: -1 },
-    "Tonno": { substitute: "Sgombro in scatola", prepDelta: 0, cookDelta: 0 },
-    "Couscous": { substitute: "Riso Integrale Pre-cottos", prepDelta: 0, cookDelta: 3 },
+    "Tonno": { substitute: "Sgombro", prepDelta: 0, cookDelta: 0 },
+    "Couscous": { substitute: "Riso Integrale", prepDelta: 0, cookDelta: 3 },
     "Ceci": { substitute: "Fagioli Rossi", prepDelta: 0, cookDelta: 0 }
 };
 
-// Stato Locale
 let recipes = JSON.parse(localStorage.getItem("fitmeals_recipes")) || DEFAULT_RECIPES;
 let blacklist = JSON.parse(localStorage.getItem("fitmeals_blacklist")) || ["Insalata a foglia", "Menta", "Zucchine", "Melanzane", "Pomodori"];
 let selectedPantry = new Set();
 let currentFilter = "all";
 
 // ==========================================
-// ENGINE LOGIC (RecipeEngine trasposto)
+// ENGINE LOGIC
 // ==========================================
 const RecipeEngine = {
-    // Filtro Zero-Tolleranza Blacklist
     isSafe(recipe, blacklist) {
+        if (!recipe.ingredientNames) return true;
         return !recipe.ingredientNames.some(ing => 
             blacklist.some(b => ing.toLowerCase().includes(b.toLowerCase()))
         );
     },
 
-    // Priorità: Sano > Più Veloce
     sortRecipes(recipesList) {
         const categoryPriority = { "sano": 1, "medio": 2, "sgarro": 3 };
         return [...recipesList].sort((a, b) => {
@@ -92,13 +89,12 @@ const RecipeEngine = {
             const prioB = categoryPriority[b.healthCategory] || 99;
             if (prioA !== prioB) return prioA - prioB;
             
-            const timeA = a.prepTime + a.cookTime;
-            const timeB = b.prepTime + b.cookTime;
+            const timeA = (a.prepTime || 0) + (a.cookTime || 0);
+            const timeB = (b.prepTime || 0) + (b.cookTime || 0);
             return timeA - timeB;
         });
     },
 
-    // Algoritmo Matching Svuota Frigo
     matchFridge(recipesList, selectedIngredients) {
         if (selectedIngredients.size === 0) return [];
 
@@ -122,17 +118,15 @@ function renderHomeFeed() {
     const container = document.getElementById("recipe-list");
     container.innerHTML = "";
 
-    // Applica filtro sicurezza + ordinamento Engine
     let safeRecipes = recipes.filter(r => RecipeEngine.isSafe(r, blacklist));
     safeRecipes = RecipeEngine.sortRecipes(safeRecipes);
 
-    // Applica filtro categoria UI
     if (currentFilter !== "all") {
         safeRecipes = safeRecipes.filter(r => r.healthCategory === currentFilter);
     }
 
     if (safeRecipes.length === 0) {
-        container.innerHTML = `<div class="glass-card"><p class="section-desc">Nessuna ricetta disponibile con i filtri e la blacklist attivi.</p></div>`;
+        container.innerHTML = `<div class="glass-card"><p class="section-desc">Nessuna ricetta trovata con i filtri e la blacklist selezionati.</p></div>`;
         return;
     }
 
@@ -146,7 +140,7 @@ function renderHomeFeed() {
                 <span class="badge badge-${recipe.healthCategory}">${recipe.healthCategory}</span>
             </div>
             <div class="recipe-info">
-                <span>⏱️ ${recipe.prepTime + recipe.cookTime} min</span>
+                <span>⏱️ ${(recipe.prepTime || 0) + (recipe.cookTime || 0)} min</span>
                 <span>🔥 ${recipe.calories} kcal</span>
             </div>
             <div class="recipe-macros">
@@ -187,7 +181,7 @@ function renderFridgeResults() {
     const results = RecipeEngine.matchFridge(safeRecipes, selectedPantry);
 
     if (results.length === 0) {
-        container.innerHTML = `<p class="section-desc">Seleziona almeno un ingrediente per calcolare le ricette possibili.</p>`;
+        container.innerHTML = `<p class="section-desc">Seleziona uno o più ingredienti in alto per visualizzare le ricette realizzabili.</p>`;
         return;
     }
 
@@ -219,49 +213,18 @@ function renderBlacklist() {
 }
 
 // ==========================================
-// SOSTITUZIONE INGREDIENTI & DETTAGLIO
+// DETTAGLIO RICETTA & SOSTITUZIONE
 // ==========================================
 function openRecipeDetail(recipeId) {
     const recipe = recipes.find(r => r.id === recipeId);
     if (!recipe) return;
 
-    let modifiedPrep = recipe.prepTime;
-    let modifiedCook = recipe.cookTime;
+    let modifiedPrep = recipe.prepTime || 0;
+    let modifiedCook = recipe.cookTime || 0;
     let activeSubstitutions = {};
 
     const modal = document.getElementById("modal-detail");
     const body = document.getElementById("detail-body");
-
-    function renderDetailContent() {
-        body.innerHTML = `
-            <h2>${recipe.title}</h2>
-            <div class="recipe-info" style="margin-top:8px;">
-                <span>⏱️ Prep: ${modifiedPrep}m | Cottura: ${modifiedCook}m</span>
-                <span>🔥 ${recipe.calories} kcal</span>
-            </div>
-
-            <hr class="divider">
-            <h3>Ingredienti</h3>
-            <p class="section-desc">Tocca un ingrediente per trovare un sostituto:</p>
-            <div class="pantry-grid">
-                ${recipe.ingredientNames.map(ing => {
-                    const subInfo = SUBSTITUTION_MAP[ing];
-                    const isSubbed = activeSubstitutions[ing];
-                    return `
-                        <div class="pantry-chip ${isSubbed ? 'selected' : ''}" onclick="toggleSubstitution('${ing}', '${recipe.id}')">
-                            ${isSubbed ? activeSubstitutions[ing] : ing} ${subInfo ? '🔄' : ''}
-                        </div>
-                    `;
-                }).join('')}
-            </div>
-
-            <hr class="divider">
-            <h3>Preparazione</h3>
-            <ol style="padding-left:20px; font-size:0.9rem; line-height:1.5;">
-                ${recipe.steps.map(s => `<li style="margin-bottom:8px;">${s}</li>`).join('')}
-            </ol>
-        `;
-    }
 
     window.toggleSubstitution = (ing) => {
         const subInfo = SUBSTITUTION_MAP[ing];
@@ -279,12 +242,45 @@ function openRecipeDetail(recipeId) {
         renderDetailContent();
     };
 
+    function renderDetailContent() {
+        body.innerHTML = `
+            <h2>${recipe.title}</h2>
+            <div class="recipe-info" style="margin-top:8px;">
+                <span>⏱️ Prep: ${modifiedPrep}m | Cottura: ${modifiedCook}m</span>
+                <span>🔥 ${recipe.calories} kcal</span>
+            </div>
+
+            <hr class="divider">
+            <h3>Ingredienti</h3>
+            <p class="section-desc">Tocca un ingrediente con icona 🔄 per sostituirlo:</p>
+            <div class="pantry-grid">
+                ${recipe.ingredientNames.map(ing => {
+                    const subInfo = SUBSTITUTION_MAP[ing];
+                    const isSubbed = activeSubstitutions[ing];
+                    return `
+                        <div class="pantry-chip ${isSubbed ? 'selected' : ''}" onclick="toggleSubstitution('${ing}')">
+                            ${isSubbed ? activeSubstitutions[ing] : ing} ${subInfo ? '🔄' : ''}
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+
+            <hr class="divider">
+            <h3>Preparazione</h3>
+            <ol style="padding-left:20px; font-size:0.9rem; line-height:1.5;">
+                ${recipe.steps && recipe.steps.length > 0 
+                    ? recipe.steps.map(s => `<li style="margin-bottom:8px;">${s}</li>`).join('')
+                    : '<li>Nessuna istruzione inserita.</li>'}
+            </ol>
+        `;
+    }
+
     renderDetailContent();
     modal.classList.add("active");
 }
 
 // ==========================================
-// GESTIONE EVENTI & NAVIGATION
+// EVENT LISTENERS & NAVIGATION
 // ==========================================
 document.querySelectorAll(".tab-item").forEach(btn => {
     btn.onclick = () => {
@@ -305,35 +301,33 @@ document.querySelectorAll(".chip").forEach(btn => {
     };
 });
 
-// Modali
 document.getElementById("btn-open-add").onclick = () => document.getElementById("modal-add").classList.add("active");
 document.getElementById("btn-close-add").onclick = () => document.getElementById("modal-add").classList.remove("active");
 document.getElementById("btn-close-detail").onclick = () => document.getElementById("modal-detail").classList.remove("active");
 
-// Form Aggiungi Ricetta
 document.getElementById("form-add-recipe").onsubmit = (e) => {
     e.preventDefault();
     const newRecipe = {
         id: Date.now().toString(),
         title: document.getElementById("add-title").value,
-        prepTime: parseInt(document.getElementById("add-prep").value),
-        cookTime: parseInt(document.getElementById("add-cook").value),
-        calories: parseInt(document.getElementById("add-cal").value),
-        proteinGrams: parseInt(document.getElementById("add-pro").value),
-        carbsGrams: parseInt(document.getElementById("add-carbs").value),
-        fatGrams: parseInt(document.getElementById("add-fat").value),
+        prepTime: parseInt(document.getElementById("add-prep").value) || 0,
+        cookTime: parseInt(document.getElementById("add-cook").value) || 0,
+        calories: parseInt(document.getElementById("add-cal").value) || 0,
+        proteinGrams: parseInt(document.getElementById("add-pro").value) || 0,
+        carbsGrams: parseInt(document.getElementById("add-carbs").value) || 0,
+        fatGrams: parseInt(document.getElementById("add-fat").value) || 0,
         healthCategory: document.getElementById("add-cat").value,
-        ingredientNames: document.getElementById("add-ingredients").value.split(",").map(i => i.trim()),
-        steps: document.getElementById("add-steps").value.split(".").filter(s => s.trim().length > 0)
+        ingredientNames: document.getElementById("add-ingredients").value.split(",").map(i => i.trim()).filter(i => i.length > 0),
+        steps: document.getElementById("add-steps").value.split(".").map(s => s.trim()).filter(s => s.length > 0)
     };
 
     recipes.push(newRecipe);
     localStorage.setItem("fitmeals_recipes", JSON.stringify(recipes));
+    document.getElementById("form-add-recipe").reset();
     document.getElementById("modal-add").classList.remove("active");
     renderHomeFeed();
 };
 
-// Blacklist Actions
 document.getElementById("btn-add-forbidden").onclick = () => {
     const input = document.getElementById("input-forbidden");
     const val = input.value.trim();
@@ -353,9 +347,7 @@ window.removeForbidden = (item) => {
     renderHomeFeed();
 };
 
-// ==========================================
-// INIT APP
-// ==========================================
+// Inizializzazione
 renderHomeFeed();
 renderPantryChips();
 renderBlacklist();
