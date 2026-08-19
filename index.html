@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>MealUp - PWA</title>
+
+    <meta name="theme-color" content="#121110">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MealUp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="ambient-mesh">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div id="app-container">
+
+        <!-- VIEW 1: HOME / RICETTE -->
+        <section id="view-home" class="view active">
+            <header class="header">
+                <div>
+                    <span class="subtitle">Piano Nutrizionale</span>
+                    <h1>MealUp</h1>
+                </div>
+                <button class="icon-btn" id="btn-add-recipe" aria-label="Aggiungi Ricetta">+</button>
+            </header>
+
+            <div class="workout-state-selector">
+                <button class="workout-btn active" data-state="rest">
+                    <span class="workout-icon">🛋️</span>
+                    <span>Riposo</span>
+                </button>
+                <button class="workout-btn" data-state="home_gym">
+                    <span class="workout-icon">🏋️</span>
+                    <span>Home Gym</span>
+                </button>
+                <button class="workout-btn" data-state="cardio">
+                    <span class="workout-icon">🚴</span>
+                    <span>Cardio</span>
+                </button>
+                <button class="workout-btn" data-state="tennis">
+                    <span class="workout-icon">🎾</span>
+                    <span>Tennis</span>
+                </button>
+            </div>
+
+            <div class="filter-bar">
+                <button class="chip active" data-category="all">Tutte</button>
+                <button class="chip" data-category="clean">Clean / Sano</button>
+                <button class="chip" data-category="postworkout">Post-Workout</button>
+                <button class="chip" data-category="highprotein">High Protein</button>
+                <button class="chip" data-category="sgarro">Sgarro</button>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 0 4px;">
+                <span style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase;">Ordinamento</span>
+                <select id="sort-select" style="width: auto; padding: 6px 10px; font-size: 0.78rem;">
+                    <option value="calories_asc">Calorie (Crescenti)</option>
+                    <option value="calories_desc">Calorie (Decrescenti)</option>
+                    <option value="protein_desc">Proteine (Massime)</option>
+                    <option value="best_value">Efficienza ⚡ (Best Value)</option>
+                </select>
+            </div>
+
+            <div id="recipes-container" class="cards-list"></div>
+        </section>
+
+        <!-- VIEW 2: SVUOTA FRIGO & CONFEZIONATI -->
+        <section id="view-pantry" class="view">
+            <header class="header">
+                <div>
+                    <span class="subtitle">Igienico & Anti-Spreco</span>
+                    <h1>Svuota Frigo</h1>
+                </div>
+            </header>
+
+            <p class="section-desc">Seleziona gli ingredienti disponibili nel tuo frigo per trovare istantaneamente le ricette idonee senza alimenti in blacklist.</p>
+
+            <div id="pantry-grid" class="pantry-grid"></div>
+
+            <hr class="divider">
+
+            <h2 style="font-size: 1.1rem; margin-bottom: 10px;">Ricette Trovate</h2>
+            <div id="pantry-results" class="cards-list"></div>
+
+            <hr class="divider">
+
+            <h2 style="font-size: 1.1rem; margin-bottom: 6px;">Snack & Confezionati Preferiti</h2>
+            <p class="section-desc">Prodotti ad alto contenuto proteico pronti all'uso. Trova i punti vendita nelle tue vicinanze.</p>
+            
+            <div id="packaged-products-container" class="packaged-grid"></div>
+        </section>
+
+        <!-- VIEW 3: PROFILO & BLACKLIST -->
+        <section id="view-profile" class="view">
+            <header class="header">
+                <div>
+                    <span class="subtitle">Personalizzazione</span>
+                    <h1>Profilo & Filtri</h1>
+                </div>
+            </header>
+
+            <div class="glass-card">
+                <h3 style="font-size: 1rem; margin-bottom: 8px;">Gestione Blacklist Ingredienti</h3>
+                <p class="section-desc">Gli alimenti presenti in questa lista verranno rigorosamente filtrati ed esclusi da ogni ricetta e suggerimento dell'app.</p>
+
+                <div class="input-group">
+                    <input type="text" id="input-forbidden" placeholder="Es. pomodori, zucchine...">
+                    <button class="btn-primary" id="btn-add-forbidden">Aggiungi</button>
+                </div>
+
+                <div id="blacklist-tags" class="tags-container" style="margin-top: 12px;"></div>
+            </div>
+
+            <div class="glass-card" style="margin-top: 16px;">
+                <h3 style="font-size: 1rem; margin-bottom: 8px;">Preferenze Nutrizionali</h3>
+                <p class="section-desc">
+                    <strong>Focus:</strong> Elevato apporto proteico (pollo, carpaccio, tonno, feta, albumi, yogurt greco 0%).<br>
+                    <strong>Condimenti & Spezie:</strong> Senape, pimentón, cumino, erba cipollina, salsa di soia a basso contenuto di sodio.
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- MODALE 1: DETTAGLIO RICETTA -->
+    <div id="modal-detail" class="modal">
+        <div class="glass-card modal-content">
+            <button class="close-btn" onclick="closeDetailModal()">&times;</button>
+            <div id="modal-detail-content"></div>
+        </div>
+    </div>
+
+    <!-- MODALE 2: AGGIUNTA RICETTA -->
+    <div id="modal-add" class="modal">
+        <div class="glass-card modal-content">
+            <button class="close-btn" id="btn-close-modal">&times;</button>
+            <h2 style="font-size: 1.3rem; margin-bottom: 12px;">Nuova Ricetta</h2>
+            
+            <form id="form-add-recipe">
+                <div style="margin-bottom: 10px;">
+                    <label style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">Titolo Ricetta</label>
+                    <input type="text" id="field-title" placeholder="Es. Pollo al Pimentón e Feta" required>
+                </div>
+
+                <div class="row">
+                    <div style="flex: 1;">
+                        <label style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">Prep (min)</label>
+                        <input type="number" id="field-preptime" placeholder="10" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">Cottura (min)</label>
+                        <input type="number" id="field-cooktime" placeholder="15" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div style="flex: 1;">
+                        <label style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">Calorie (kcal)</label>
+                        <input type="number" id="field-calories" placeholder="450" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">Proteine (g)</label>
+                        <input type="number" id="field-protein" placeholder="40" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div style="flex: 1;">
+                        <label style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">Carbo (g)</label>
+                        <input type="number" id="field-carbs" placeholder="30">
+                    </div>
+                    <div style="flex: 1;">
+                        <label style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">Grassi (g)</label>
+                        <input type="number" id="field-fat" placeholder="10">
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 10px;">
+                    <label style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">Ingredienti (separati da virgola)</label>
+                    <input type="text" id="field-ingredients" placeholder="pollo, feta, pimenton, senape">
+                </div>
+
+                <div style="margin-bottom: 14px;">
+                    <label style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">Istruzioni di Preparazione (un passaggio per riga)</label>
+                    <textarea id="field-steps" rows="3" placeholder="1. Taglia il pollo a dadini&#10;2. Spennella con la senape..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary full-width">Salva Ricetta</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TAB BAR NAVIGATION -->
+    <nav class="tab-bar">
+        <button class="tab-item active" data-view="home">
+            <svg class="icon" viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <span>Ricette</span>
+        </button>
+        <button class="tab-item" data-view="pantry">
+            <svg class="icon" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H9v-2h6v2zm3-4H6V8h12v6z"/>
+            </svg>
+            <span>Frigo</span>
+        </button>
+        <button class="tab-item" data-view="profile">
+            <svg class="icon" viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <span>Profilo</span>
+        </button>
+    </nav>
+
+    <script src="app.js"></script>
+</body>
+</html>
