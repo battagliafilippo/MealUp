@@ -481,7 +481,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
   await test('eliminare una ricetta non lascia riferimenti orfani', async () => {
     const a = await app();
     a.apri('bresaola');
-    const rid = a.d.getElementById('detail-stella').dataset.val;
+    const rid = a.stato().recipes.find(r => /bresaola/i.test(r.title)).id;
     a.click('#detail-body [data-act=fav]');
     a.click('#detail-body [data-act=shop-add]');
     const del = a.d.querySelector('#detail-body [data-act=delete]');
@@ -3163,13 +3163,12 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     } });
     eq(a.testo('#campanella-conto'), '1', 'il badge non conta');
     a.click('[data-act=notifiche-apri]');
-    vero(a.d.querySelector('.notifica.nuova'), 'la notifica nuova non e\' evidenziata');
+    // entrare nel centro vuol dire aver visto: numero via, righe normali
+    vero(a.d.getElementById('campanella-conto').hidden, 'entrando il numero deve sparire');
+    vero(!a.d.querySelector('.notifica.nuova'), 'entrando l\'evidenza deve spegnersi');
     vero(/latte/.test(a.testo('.notifica')), 'manca il latte');
     a.click('[data-act=notifica-ricette]');
     eq(a.d.getElementById('search-input').value, 'latte', 'Ricette non apre la ricerca');
-    a.click('[data-act=notifiche-apri]');
-    vero(!a.d.querySelector('.notifica.nuova'), 'dopo l\'uso deve smettere di essere evidenziata');
-    vero(a.d.getElementById('campanella-conto').hidden, 'il badge deve sparire');
     a.click('[data-act=notifica-via]');
     vero(!a.d.querySelector('.notifica'), 'la x non cancella la notifica');
   });

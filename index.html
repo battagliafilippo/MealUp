@@ -276,6 +276,10 @@ h4{font-size:1rem;font-weight:700;letter-spacing:-.2px}
 /* Il numero delle calorie si muove quando cambia: un battito, non un salto. */
 @keyframes battito{0%{transform:scale(1)}35%{transform:scale(1.12)}100%{transform:scale(1)}}
 .conta-kcal{display:inline-block}
+/* Il colore delle calorie racconta il bilancio: avorio finche' c'e' strada,
+   ambra vicino al limite, rame quando l'hai passato. */
+.flip.quasi i{color:#e6bd58}
+.flip.oltre i{color:#ea8a63}
 .conta-kcal.cambia{animation:battito .5s cubic-bezier(.22,.8,.28,1)}
 .gamba{display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px;
   border-radius:14px;background:var(--v1-fondo);border:var(--v1-bordo);box-shadow:var(--v1-ombra);
@@ -758,7 +762,7 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .modal.centro{align-items:center}
 .conferma-box{max-width:340px;margin:auto;text-align:center;padding:22px 18px}
 .conferma-box p{font-size:1.02rem;line-height:1.45;margin-bottom:16px}
-.campanella{position:absolute;top:10px;right:12px;z-index:6;width:42px;height:42px;
+.campanella{position:absolute;top:10px;right:64px;z-index:6;width:42px;height:42px;
   border-radius:50%;display:flex;align-items:center;justify-content:center;
   background:var(--v1-fondo);border:var(--v1-bordo);box-shadow:var(--v1-ombra);
   color:var(--text-secondary)}
@@ -2863,10 +2867,6 @@ h3{font-weight:600;letter-spacing:-.018em}
 <!-- ============ MODALE DETTAGLIO ============ -->
 <div id="modal-detail" class="modal" role="dialog" aria-modal="true" aria-label="Dettaglio ricetta">
   <div class="modal-content glass-card">
-    <button type="button" id="detail-stella" class="stella in-testa" data-act="fav" data-val=""
-      aria-label="Preferita">
-      <svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.6 6.1.6-4.6 4.1 1.3 6-5.3-3.1-5.3 3.1 1.3-6-4.6-4.1 6.1-.6z"/></svg>
-    </button>
     <button type="button" class="close-btn" data-act="close-modal" aria-label="Chiudi">&times;</button>
     <div id="detail-body"></div>
   </div>
@@ -7016,7 +7016,7 @@ function anelloGiornata(mealId) {
         ${[76, 100, 124].map(x => '<ellipse class="piedino" cx="' + x + '" cy="185.5" rx="5" ry="2"/>').join('')}
       </svg>
       <div class="anello-centro">
-        <span class="flip conta-kcal" data-valore="${piano.consumato}">${String(piano.consumato).split('').map(c =>
+        <span class="flip conta-kcal ${!piano.target ? '' : piano.consumato > piano.target ? 'oltre' : piano.consumato >= piano.target * 0.85 ? 'quasi' : 'entro'}" data-valore="${piano.consumato}">${String(piano.consumato).split('').map(c =>
           '<i>' + c + '</i>').join('')}<em>kcal</em></span>
       </div>
     </div>
@@ -8421,11 +8421,6 @@ function anteprimaRicetta(id) {
   currentDetailId = null;
   scalaDettaglio = [];
   document.getElementById('modal-detail').classList.toggle('modo-istanza', !!istanzaAperta);
-  const stTesta = document.getElementById('detail-stella');
-  if (stTesta) {
-    stTesta.dataset.val = r.id;
-    stTesta.classList.toggle('on', isFav(r.id));
-  }
   openModal('modal-detail');
 }
 
@@ -8821,11 +8816,6 @@ function openDetail(id, tornando) {
   }
 
   document.getElementById('modal-detail').classList.toggle('modo-istanza', !!istanzaAperta);
-  const stTesta = document.getElementById('detail-stella');
-  if (stTesta) {
-    stTesta.dataset.val = r.id;
-    stTesta.classList.toggle('on', isFav(r.id));
-  }
   openModal('modal-detail');
 }
 
@@ -13172,8 +13162,6 @@ document.addEventListener('click', e => {
     }
     case 'fav': {
       toggleFav(val);
-      const st = document.getElementById('detail-stella');
-      if (st && st.dataset.val === val) st.classList.toggle('on', isFav(val));
       document.querySelectorAll('.scheda-stella[data-val="' + val + '"]')
         .forEach(x => x.classList.toggle('on', isFav(val)));
       break;
@@ -13405,6 +13393,10 @@ document.addEventListener('click', e => {
       break;
     case 'notifiche-apri':
       aggiornaNotificheScadenze();
+      // entrare nel centro notifiche vuol dire averle viste: il numero se ne
+      // va e la campanella torna spenta.
+      (S.notifiche || []).forEach(n => { n.letta = true; });
+      save();
       renderNotifiche();
       openModal('modal-notifiche');
       break;
