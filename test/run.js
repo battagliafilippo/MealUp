@@ -200,7 +200,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.tab('view-fridge');
     for (let i = 0; i < 3; i++) a.click('#shopping-body .shop-item:not(.done):not(.have)');
     const prima = a.stato().myIngredients.length;
-    a.click('[data-act=shop-bought]'); a.click('[data-act=shop-bought]');
+    a.click('[data-act=shop-bought]'); a.click('[data-act=conferma-si]');
     almeno(a.stato().myIngredients.length, prima + 1, 'dispensa non aggiornata');
     eq(a.stato().shopping.length, 0, 'lista non svuotata');
   });
@@ -396,7 +396,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     const card = a.conta('#recipe-list .card-btn');
     vero(card <= 31, 'schede renderizzate subito: ' + card);
     const peso = a.d.getElementById('recipe-list').innerHTML.length;
-    vero(peso < 56000, 'lista di ' + Math.round(peso / 1024) + ' KB');
+    vero(peso < 70000, 'lista di ' + Math.round(peso / 1024) + ' KB');
     vero(a.click('[data-act=home-more]'), 'manca il pulsante per allungare');
     almeno(a.conta('#recipe-list .card-btn'), card + 20, 'la lista non si allunga');
   });
@@ -481,7 +481,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
   await test('eliminare una ricetta non lascia riferimenti orfani', async () => {
     const a = await app();
     a.apri('bresaola');
-    const rid = a.d.querySelector('#detail-body [data-act=fav]').dataset.val;
+    const rid = a.d.getElementById('detail-stella').dataset.val;
     a.click('#detail-body [data-act=fav]');
     a.click('#detail-body [data-act=shop-add]');
     const del = a.d.querySelector('#detail-body [data-act=delete]');
@@ -1232,9 +1232,9 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
   await test('le bevande si bevono, non si mangiano', async () => {
     const a = await app();
     a.apri('lattina di cola');
-    vero(a.testo('#detail-body').includes("L'ho bevuta"), 'dice ancora mangiato');
+    vero(a.testo('#detail-body .azioni-rapide').includes('Bevuta'), 'dice ancora mangiato');
     a.apri('pollo alla cacciatora');
-    vero(a.testo('#detail-body').includes("L'ho mangiato"), 'il verbo e cambiato dove non doveva');
+    vero(a.testo('#detail-body .azioni-rapide').includes('Mangiato'), 'il verbo e cambiato dove non doveva');
   });
 
   await test('il disegno si riempie con quello che hai in dispensa', async () => {
@@ -1384,7 +1384,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       it.click();
     }
     a.click('[data-act=shop-bought]');
-    a.click('[data-act=shop-bought]');
+    a.click('[data-act=conferma-si]');
   };
 
   await test('freschi e confezionati partono con durate diverse', async () => {
@@ -1563,7 +1563,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       it.click();
     }
     a.click('[data-act=shop-bought]');
-    a.click('[data-act=shop-bought]');
+    a.click('[data-act=conferma-si]');
     eq(a.stato().freschezza['pollo'].qta, 400, 'la quantita\' non e\' entrata in dispensa');
 
     // una ricetta che ne usa 200
@@ -1588,7 +1588,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       it.click();
     }
     a.click('[data-act=shop-bought]');
-    a.click('[data-act=shop-bought]');
+    a.click('[data-act=conferma-si]');
     a.apri('petto di pollo alla piastra');
     a.click('#detail-body [data-act=log-meal]');
     vero(!a.stato().freschezza['pollo'], 'la scorta esaurita resta in elenco');
@@ -1611,7 +1611,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     }
     eq(a.testo('[data-act=shop-bought]').trim(), 'Fine spesa', 'il tasto non si chiama Fine spesa');
     a.click('[data-act=shop-bought]');
-    a.click('[data-act=shop-bought]');
+    a.click('[data-act=conferma-si]');
 
     const f = a.stato().freschezza;
     eq(f['pollo'].posto, 'frigo', 'il pollo non e\' in frigo');
@@ -1635,7 +1635,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       it.click();
     }
     a.click('[data-act=shop-bought]');
-    a.click('[data-act=shop-bought]');
+    a.click('[data-act=conferma-si]');
     a.click('[data-act=frigo-sez][data-val=freezer]');
     const testo = a.testo('#freezer-body');
     vero(/mesi/.test(testo), 'nel freezer non parla di mesi: ' + testo.slice(0, 80));
@@ -1694,7 +1694,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       it.click();
     }
     a.click('[data-act=shop-bought]');
-    a.click('[data-act=shop-bought]');
+    a.click('[data-act=conferma-si]');
     const prima = a.stato().freschezza['pollo'];
     const dal = prima.dal, entro = prima.entro;
 
@@ -2011,7 +2011,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(a.d.querySelector('.porz-mini'), 'manca il contatore delle porzioni');
     a.click('[data-act=storico-piu]'); a.click('[data-act=storico-piu]');
     a.click('[data-act=storico-piu]'); a.click('[data-act=storico-piu]');
-    eq(a.testo('.storico-conferma .porz-mini b').trim(), '3', 'il contatore non sale');
+    eq(a.testo('.storico-conferma .porz-mini b').trim(), '2\u00bd', 'il contatore non sale a mezzi');
 
     // e si puo\' contare in grammi invece che in porzioni
     a.click('[data-act=storico-unita]');
@@ -2064,7 +2064,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.click('#modal-detail [data-act=close-modal]');
     a.tab('view-home');
     const box = a.d.getElementById('anello-unico');
-    const centro = parseInt(box.querySelector('.anello-centro b').textContent, 10);
+    const centro = Number(box.querySelector('.conta-kcal').dataset.valore);
     almeno(centro, 500, 'il centro non conta quello che hai mangiato');
     // gli archi pieni ora esistono solo quando il pasto ha qualcosa dentro
     eq(box.querySelectorAll('.riempito').length, 1, 'dovrebbe essersi riempito un arco solo');
@@ -2240,7 +2240,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.click('[data-act=quick-save]');
 
     const box = a.d.getElementById('anello-unico');
-    eq(box.querySelector('.conta-kcal').textContent, '500', 'le kcal non sono nel cerchio');
+    eq(box.querySelector('.conta-kcal').dataset.valore, '500', 'le kcal non sono nel cerchio');
     const macro = box.querySelector('.macro-giorno');
     vero(macro, 'manca la riga dei macro');
     vero(/proteine/.test(macro.textContent) && /carboidrati/.test(macro.textContent)
@@ -2731,7 +2731,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     almeno(t.querySelectorAll('.storico-numeri b').length, 3, 'mancano le medie');
     // i giorni passati stanno qui, e il conto di oggi parte da zero
     vero(/\d+.?kcal al giorno/.test(t.textContent), 'la media non si legge');
-    eq(a.testo('#anello-unico .conta-kcal'), '0', 'oggi non parte da zero');
+    eq(a.d.querySelector('#anello-unico .conta-kcal').dataset.valore, '0', 'oggi non parte da zero');
   });
 
   await test('la migrazione degli id porta con se\' lo storico', async () => {
@@ -2856,7 +2856,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.tab('view-fridge');
     a.click('[data-act=frigo-sez][data-val=avanzi]');
     a.click('[data-act=storico-apri]');
-    a.click('[data-act=storico-meno]');   // da 1 a mezza
+    // parte gia' dalla mezza porzione
     vero(/\u00bd/.test(a.testo('.storico-conferma .porz-mini b')), 'il mezzo non si vede');
     a.click('[data-act=storico-conferma][data-dove=frigo]');
     eq(a.stato().leftovers[0].n, 0.5, 'la mezza porzione non e\' stata messa via');
@@ -3101,6 +3101,93 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       vero(![...b.d.querySelectorAll('#combinazioni-body .scheda')].some(x => x.dataset.val === rid),
         'la combinazione chiusa e\' ancora li\'');
     }
+  });
+
+  console.log('\nDetta la spesa');
+  await test('il dettato diventa righe riconosciute, con quantita e dubbi', async () => {
+    const a = await app();
+    const V = a.dom.window.fitmealsVoce;
+    const righe = V.interpreta('pomodori, mozzarella e due litri di latte, tre confezioni di iogurt greco, parmiggiano');
+    eq(righe.length, 5, 'le voci non si separano');
+    vero(righe[0].sicuro && righe[0].nome === 'pomodori', 'pomodori non riconosciuti');
+    const latte = righe.find(r => r.nome === 'latte');
+    vero(latte && latte.q === 2 && latte.u === 'kg', 'due litri di latte non diventano 2 kg');
+    vero(righe.some(r => /yogurt/.test(r.nome)), 'iogurt non trova lo yogurt');
+    vero(righe.some(r => r.nome === 'parmigiano'), 'parmiggiano non trova il parmigiano');
+    // un pasticcio resta modificabile, non riconosciuto a forza
+    const boh = V.interpreta('gnappole sfrigolate')[0];
+    vero(!boh.sicuro, 'un pasticcio non deve dirsi sicuro');
+    eq(boh.nome, 'gnappole sfrigolate', 'il testo dettato deve restare come scritto');
+  });
+
+  await test('la spesa dettata passa dallo stesso salvataggio del manuale', async () => {
+    const a = await app();
+    a.tab('view-fridge');
+    vero(a.d.querySelector('.mic-spesa'), 'manca il bottone del microfono');
+
+    a.dom.window.fitmealsVoce.daTesto('pane, due litri di latte');
+    vero(a.d.getElementById('modal-dettatura').classList.contains('active'), 'la conferma non si apre');
+    // una correzione a mano prima di salvare
+    const prima = a.d.querySelector('.riga-dettata .det-nome');
+    prima.value = 'pane integrale';
+    a.click('[data-act=detta-salva]');
+
+    // e una voce scritta a mano, per confrontare
+    a.set('shop-add', 'farina');
+    a.d.getElementById('shop-qta').value = '1';
+    a.click('[data-act=shop-extra]');
+
+    const S = a.stato();
+    const dettata = S.shopExtra.find(x => x.n === 'latte');
+    const corretta = S.shopExtra.find(x => x.n === 'pane integrale');
+    const manuale = S.shopExtra.find(x => x.n === 'farina');
+    vero(dettata && corretta && manuale, 'mancano voci');
+    eq(Object.keys(dettata).sort().join(), Object.keys(manuale).sort().join(),
+      'la voce dettata ha una struttura diversa dal manuale');
+    eq(dettata.qta, 2000, 'i litri non sono diventati grammi come nel manuale');
+
+    // spuntata e portata in dispensa, la scadenza segue le stesse regole
+    const voce = a.dom.window.fitmealsDebug().shopExtra.find(x => x.n === 'latte');
+    vero(voce.unita === 'g', 'l\'unita interna non e\' quella di casa');
+  });
+
+  await test('le scadenze di oggi arrivano nella campanella e si gestiscono', async () => {
+    const ora = Date.now();
+    const a = await app({ storage: {
+      seedVersion: 11, compatto: 1, recipes: [],
+      profiles: [{ id:'u1', name:'G', age:'38', height:'178', weight:'82', sex:'m',
+                   work:'sedentario', sport:'3', goal:'cut' }],
+      ui: { active:'u1', cookFor:['u1'] },
+      freschezza: { latte: { nome:'latte', qta:500, dal: ora - 3*86400000,
+                             posto:'frigo', entro: ora + 3600000 } }
+    } });
+    eq(a.testo('#campanella-conto'), '1', 'il badge non conta');
+    a.click('[data-act=notifiche-apri]');
+    vero(a.d.querySelector('.notifica.nuova'), 'la notifica nuova non e\' evidenziata');
+    vero(/latte/.test(a.testo('.notifica')), 'manca il latte');
+    a.click('[data-act=notifica-ricette]');
+    eq(a.d.getElementById('search-input').value, 'latte', 'Ricette non apre la ricerca');
+    a.click('[data-act=notifiche-apri]');
+    vero(!a.d.querySelector('.notifica.nuova'), 'dopo l\'uso deve smettere di essere evidenziata');
+    vero(a.d.getElementById('campanella-conto').hidden, 'il badge deve sparire');
+    a.click('[data-act=notifica-via]');
+    vero(!a.d.querySelector('.notifica'), 'la x non cancella la notifica');
+  });
+
+  await test('fine spesa chiede Si o No al centro, non il doppio tocco', async () => {
+    const a = await app();
+    a.tab('view-fridge');
+    a.dom.window.fitmealsVoce.daTesto('pane');
+    a.click('[data-act=detta-salva]');
+    const chk = a.d.querySelector('[data-act=shop-check]');
+    if (chk) chk.click();
+    a.click('[data-act=shop-bought]');
+    vero(a.d.getElementById('modal-conferma').classList.contains('active'), 'la domanda non appare');
+    vero(/Chiudo la spesa/.test(a.testo('#conferma-testo')), 'testo della domanda sbagliato');
+    a.click('[data-act=conferma-si]');
+    await new Promise(r => setTimeout(r, 250));
+    vero(a.stato().pantry.includes('pane'), 'il Si non chiude la spesa');
+    vero(a.d.querySelectorAll('.mic-campo').length >= 5, 'mancano i microfoni sulle barre');
   });
 
   const b = bilancio();

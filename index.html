@@ -21,7 +21,13 @@
   --r-lg:22px; --r-md:12px; --r-sm:8px;
 }
 *{box-sizing:border-box;margin:0;padding:0;font-family:var(--font-system);-webkit-tap-highlight-color:transparent}
-button,input,select,textarea{font-size:16px}
+/* Sul telefono i caratteri erano piccoli: la radice sale al 112% e ogni
+   misura in rem cresce di conseguenza, in tutta l'app. */
+/* Caratteri piu' grandi in tutta l'app: sul telefono si deve leggere
+   senza strizzare gli occhi. */
+html{font-size:122%}
+body{font-size:1rem}
+button,input,select,textarea{font-size:1rem}
 button,.chip,.tab-item,a{touch-action:manipulation;cursor:pointer}
 :focus-visible{outline:2px solid var(--accent-primary);outline-offset:2px}
 body{
@@ -190,10 +196,6 @@ h4{font-size:1rem;font-weight:700;letter-spacing:-.2px}
 .bilancia .striscia-seg.f-col{fill:#c2803a}
 .bilancia .striscia-seg.f-pra{fill:#4c8a6b}
 .bilancia .striscia-seg.f-cen{fill:#5a58a0}
-.anello-centro b{font-family:'SF Mono',ui-monospace,Menlo,monospace;color:#f4efe6;
-  font-size:1.02rem;font-weight:600;letter-spacing:.22em;line-height:1;text-indent:.22em;
-  color:var(--tema, var(--accent-primary));font-variant-numeric:tabular-nums}
-.anello-centro span{font-size:.5rem;letter-spacing:.06em;color:rgba(244,239,230,.55);margin-top:0}
 
 .menu-oggi{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 12px;justify-content:center}
 .voce-oggi{display:inline-flex;align-items:center;gap:2px;padding:5px 4px 5px 12px;border-radius:16px;
@@ -701,6 +703,108 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .avanzi-somma span{font-size:.68rem;color:var(--text-tertiary);letter-spacing:.04em}
 /* Il piatto mangiato si modifica in un riquadro tratteggiato: e' una copia.
    I comandi che toccherebbero l'originale spariscono. */
+/* La stellina delle preferite: in alto a sinistra nel dettaglio, e su ogni
+   scheda. Vuota o piena, sempre a portata di pollice. */
+.stella{position:absolute;top:10px;left:12px;width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;background:var(--v1-fondo);
+  border:var(--v1-bordo);box-shadow:var(--v1-ombra);color:var(--text-tertiary);z-index:3}
+.stella svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.75;
+  stroke-linejoin:round}
+.stella.on{color:#e4b23c}
+.stella.on svg{fill:#e4b23c;stroke:#c99a2e}
+.stella.mini{position:absolute;top:6px;right:6px;left:auto;width:30px;height:30px;
+  background:none;border:none;box-shadow:none}
+.stella.mini svg{width:17px;height:17px}
+.scheda.con-stella{padding-right:38px}
+
+.azioni-rapide{position:sticky;top:-1px;z-index:5;display:grid;
+  grid-template-columns:1.2fr 1fr 1fr;gap:8px;padding:10px 0;margin:0 0 6px;
+  background:linear-gradient(var(--carta) 78%, transparent)}
+.azioni-rapide button{padding:12px 8px;font-size:.95rem}
+
+/* La barra dei comandi sta in cima e resta sottomano mentre scorri. */
+.azioni-rapide.in-cima{position:sticky;top:-2px;z-index:5;display:flex;gap:8px;
+  padding:10px 2px;margin:-6px -2px 10px;
+  background:linear-gradient(var(--carta) 78%, transparent);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.azioni-rapide.in-cima .btn-primary,.azioni-rapide.in-cima .btn-ghost{flex:1;
+  padding:12px 6px;font-size:.92rem}
+.stella.in-testa{position:absolute;top:10px;left:12px;z-index:6;width:40px;height:40px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--v1-fondo);border:var(--v1-bordo);box-shadow:var(--v1-ombra)}
+.stella.in-testa svg{width:20px;height:20px;fill:none;stroke:var(--text-tertiary);
+  stroke-width:1.75;stroke-linejoin:round}
+.stella.in-testa.on svg{fill:#e4b23c;stroke:#b8862c}
+.scheda-stella{position:absolute;top:8px;right:8px;width:30px;height:30px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center}
+.scheda-stella svg{width:16px;height:16px;fill:none;stroke:var(--text-tertiary);
+  stroke-width:1.6;stroke-linejoin:round;opacity:.7}
+.scheda-stella.on svg{fill:#e4b23c;stroke:#b8862c;opacity:1}
+.scheda{position:relative}
+.scheda .scheda-titolo{padding-right:26px}
+/* Il comando delle persone, bello grande: si tocca col pollice. */
+.persone .porz-mini.grande .passo{width:44px;height:44px;font-size:1.35rem}
+.persone .porz-mini.grande b{min-width:34px;font-size:1.3rem}
+.persone .field-label{font-size:.86rem}
+/* Detta la spesa: il microfono accanto alla riga, il cerchio che ascolta,
+   le righe da controllare prima di salvare. */
+.testa-riquadro{display:flex;align-items:center;justify-content:space-between;width:100%;
+  background:none;border:none;padding:0;font:inherit;color:inherit;text-align:left}
+.testa-riquadro svg{width:18px;height:18px;fill:none;stroke:var(--text-tertiary);
+  stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;
+  transition:transform .25s cubic-bezier(.22,.8,.28,1)}
+.glass-card.riducibile.chiusa > *:not(h3){display:none}
+.glass-card.riducibile.chiusa .testa-riquadro svg{transform:rotate(-90deg)}
+.modal.centro{align-items:center}
+.conferma-box{max-width:340px;margin:auto;text-align:center;padding:22px 18px}
+.conferma-box p{font-size:1.02rem;line-height:1.45;margin-bottom:16px}
+.campanella{position:absolute;top:10px;right:12px;z-index:6;width:42px;height:42px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--v1-fondo);border:var(--v1-bordo);box-shadow:var(--v1-ombra);
+  color:var(--text-secondary)}
+.campanella svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.75;
+  stroke-linecap:round;stroke-linejoin:round}
+.campanella i{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;
+  border-radius:9px;background:#b8552e;color:#fff;font-size:.66rem;font-style:normal;
+  display:flex;align-items:center;justify-content:center;padding:0 4px;font-weight:700}
+#view-home{position:relative}
+.notifica{display:flex;align-items:center;gap:8px;padding:10px 8px;border-radius:14px;
+  margin-bottom:6px;background:var(--v1-fondo);border:var(--v1-bordo)}
+.notifica.nuova{border-left:4px solid #b8552e;background:color-mix(in srgb,#b8552e 7%,transparent)}
+.notifica-testo{flex:1;font-size:.9rem;line-height:1.3}
+.notifica .x{width:32px;height:32px;flex:0 0 auto}
+.notifica-scegli{width:22px;height:22px;border-radius:50%;border:2px solid var(--text-tertiary);
+  background:none;flex:0 0 auto}
+.notifica-scegli.on{background:#4c8a6b;border-color:#4c8a6b}
+.mic-campo{width:38px;height:38px;border-radius:12px;flex:0 0 auto;display:flex;
+  align-items:center;justify-content:center;background:none;border:none;
+  color:var(--text-tertiary)}
+.mic-campo svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.75;
+  stroke-linecap:round;stroke-linejoin:round}
+.mic-campo.ascolta{color:#b8552e;animation:battito 1s infinite}
+.mic-spesa{width:46px;height:46px;border-radius:14px;flex:0 0 auto;display:flex;
+  align-items:center;justify-content:center;background:var(--v1-fondo);
+  border:var(--v1-bordo);box-shadow:var(--v1-ombra);color:var(--tema, var(--accent-primary))}
+.mic-spesa svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.75;
+  stroke-linecap:round;stroke-linejoin:round}
+.mic-cerchio{position:relative;width:110px;height:110px;margin:6px auto 10px;
+  display:flex;align-items:center;justify-content:center}
+.mic-cerchio svg{width:44px;height:44px;fill:none;stroke:var(--tema, var(--accent-primary));
+  stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.mic-cerchio i{position:absolute;inset:0;border-radius:50%;
+  border:2px solid color-mix(in srgb, var(--tema, var(--accent-primary)) 45%, transparent);
+  animation:onda 1.6s ease-out infinite}
+.mic-cerchio i:nth-child(2){animation-delay:.8s}
+.dettatura-testo{min-height:44px;padding:10px 12px;border-radius:14px;margin:10px 0;
+  background:var(--v1-fondo);border:var(--v1-bordo);font-size:.95rem;line-height:1.45;
+  color:var(--text-secondary)}
+.riga-dettata{display:grid;grid-template-columns:1fr 64px 44px 34px;gap:6px;align-items:center;
+  margin-bottom:4px}
+.riga-dettata .det-nota{grid-column:1 / -1;font-size:.7rem;color:var(--text-tertiary);
+  margin:-2px 2px 6px}
+.riga-dettata.incerta .det-nome{border-color:#c9a23c}
+.riga-dettata .x{width:34px;height:34px}
+.riga-dettata .det-u{text-align:center}
 .istanza-box{padding:14px;border-radius:18px;margin:14px 0 4px;
   background:color-mix(in srgb, var(--tema, var(--accent-primary)) 7%, transparent);
   border:1px dashed color-mix(in srgb, var(--tema, var(--accent-primary)) 38%, transparent)}
@@ -946,6 +1050,14 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
   background:var(--v1-fondo);border:var(--v1-bordo);box-shadow:var(--v2-ombra);
   color:var(--tema, var(--accent-primary));font-weight:400;
   transition:transform .18s cubic-bezier(.22,.8,.28,1)}
+/* Lo stepper delle porzioni e delle persone: tondi grandi, comodi col pollice. */
+.porz-mini{display:inline-flex;align-items:center;gap:8px}
+.porz-mini .passo{width:38px;height:38px;border-radius:50%;border:var(--v1-bordo);
+  background:var(--v1-fondo);box-shadow:var(--v1-ombra);font-size:1.15rem;line-height:1;
+  display:flex;align-items:center;justify-content:center;color:var(--text-primary)}
+.porz-mini b{min-width:30px;text-align:center;font-size:1.1rem;font-variant-numeric:tabular-nums}
+.porz-mini.grande .passo{width:48px;height:48px;font-size:1.45rem}
+.porz-mini.grande b{min-width:42px;font-size:1.4rem}
 .porzioni button:active{transform:scale(.9)}
 .porzioni button:disabled{opacity:.3}
 .porz-num{text-align:center;min-width:92px}
@@ -1244,9 +1356,6 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
 .bilancia .striscia-seg.f-col{fill:#c2803a}
 .bilancia .striscia-seg.f-pra{fill:#4c8a6b}
 .bilancia .striscia-seg.f-cen{fill:#5a58a0}
-.anello-centro b{font-size:1.5rem;font-weight:600;letter-spacing:-.045em;line-height:1;
-  color:var(--tema, var(--accent-primary));font-variant-numeric:tabular-nums}
-.anello-centro span{font-size:.7rem;color:var(--text-tertiary);margin-top:3px}
 
 .menu-oggi{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 12px;justify-content:center}
 .voce-oggi{display:inline-flex;align-items:center;gap:2px;padding:5px 4px 5px 12px;border-radius:16px;
@@ -1450,9 +1559,6 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
 .bilancia .striscia-seg.f-col{fill:#c2803a}
 .bilancia .striscia-seg.f-pra{fill:#4c8a6b}
 .bilancia .striscia-seg.f-cen{fill:#5a58a0}
-.anello-centro b{font-size:1.5rem;font-weight:600;letter-spacing:-.045em;line-height:1;
-  color:var(--tema, var(--accent-primary));font-variant-numeric:tabular-nums}
-.anello-centro span{font-size:.7rem;color:var(--text-tertiary);margin-top:3px}
 
 .menu-oggi{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 12px;justify-content:center}
 .voce-oggi{display:inline-flex;align-items:center;gap:2px;padding:5px 4px 5px 12px;border-radius:16px;
@@ -1623,9 +1729,6 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
 .bilancia .striscia-seg.f-col{fill:#c2803a}
 .bilancia .striscia-seg.f-pra{fill:#4c8a6b}
 .bilancia .striscia-seg.f-cen{fill:#5a58a0}
-.anello-centro b{font-size:1.5rem;font-weight:600;letter-spacing:-.045em;line-height:1;
-  color:var(--tema, var(--accent-primary));font-variant-numeric:tabular-nums}
-.anello-centro span{font-size:.7rem;color:var(--text-tertiary);margin-top:3px}
 
 .menu-oggi{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 12px;justify-content:center}
 .voce-oggi{display:inline-flex;align-items:center;gap:2px;padding:5px 4px 5px 12px;border-radius:16px;
@@ -1848,9 +1951,6 @@ input:focus,textarea:focus,select:focus{background:rgba(255,255,255,.78);
 .bilancia .striscia-seg.f-col{fill:#c2803a}
 .bilancia .striscia-seg.f-pra{fill:#4c8a6b}
 .bilancia .striscia-seg.f-cen{fill:#5a58a0}
-.anello-centro b{font-size:1.5rem;font-weight:600;letter-spacing:-.045em;line-height:1;
-  color:var(--tema, var(--accent-primary));font-variant-numeric:tabular-nums}
-.anello-centro span{font-size:.7rem;color:var(--text-tertiary);margin-top:3px}
 
 .menu-oggi{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 12px;justify-content:center}
 .voce-oggi{display:inline-flex;align-items:center;gap:2px;padding:5px 4px 5px 12px;border-radius:16px;
@@ -2080,9 +2180,6 @@ h3{font-weight:600;letter-spacing:-.018em}
 .bilancia .striscia-seg.f-col{fill:#c2803a}
 .bilancia .striscia-seg.f-pra{fill:#4c8a6b}
 .bilancia .striscia-seg.f-cen{fill:#5a58a0}
-.anello-centro b{font-size:1.5rem;font-weight:600;letter-spacing:-.045em;line-height:1;
-  color:var(--tema, var(--accent-primary));font-variant-numeric:tabular-nums}
-.anello-centro span{font-size:.7rem;color:var(--text-tertiary);margin-top:3px}
 
 .menu-oggi{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 12px;justify-content:center}
 .voce-oggi{display:inline-flex;align-items:center;gap:2px;padding:5px 4px 5px 12px;border-radius:16px;
@@ -2254,24 +2351,42 @@ h3{font-weight:600;letter-spacing:-.018em}
       <span class="pasto-barra"></span>
     </div>
 
+    <button type="button" class="campanella" data-act="notifiche-apri" aria-label="Scadenze di oggi">
+      <svg viewBox="0 0 24 24"><path d="M6 10a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/>
+        <path d="M10 19a2 2 0 0 0 4 0"/></svg>
+      <i id="campanella-conto" hidden></i>
+    </button>
+
     <div class="anello-box" id="anello-unico"></div>
 
     <div class="pager" id="pager">
       <section class="pagina" id="pagina-col" data-pasto="col">
-        <input type="search" class="pasto-search" id="cerca-col" autocomplete="off"
+        <input type="search" class="pasto-search" id="cerca-col" autocomplete="off" data-mic="1"
                placeholder="Cerca fra le colazioni…">
+        <button type="button" class="mic-campo" data-act="voce-campo" data-val="cerca-col"
+          aria-label="Detta la ricerca">
+          <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/>
+            <path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button>
         <div class="cards-list" id="lista-col"></div>
       </section>
 
       <section class="pagina" id="pagina-pra" data-pasto="pra">
-        <input type="search" class="pasto-search" id="cerca-pra" autocomplete="off"
+        <input type="search" class="pasto-search" id="cerca-pra" autocomplete="off" data-mic="1"
                placeholder="Cerca un piatto per pranzo…">
+        <button type="button" class="mic-campo" data-act="voce-campo" data-val="cerca-pra"
+          aria-label="Detta la ricerca">
+          <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/>
+            <path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button>
         <div class="cards-list" id="lista-pra"></div>
       </section>
 
       <section class="pagina" id="pagina-cen" data-pasto="cen">
-        <input type="search" class="pasto-search" id="cerca-cen" autocomplete="off"
+        <input type="search" class="pasto-search" id="cerca-cen" autocomplete="off" data-mic="1"
                placeholder="Cerca un piatto per cena…">
+        <button type="button" class="mic-campo" data-act="voce-campo" data-val="cerca-cen"
+          aria-label="Detta la ricerca">
+          <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/>
+            <path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button>
         <div class="cards-list" id="lista-cen"></div>
       </section>
     </div>
@@ -2300,6 +2415,10 @@ h3{font-weight:600;letter-spacing:-.018em}
       <div class="credenza">
         <div class="credenza-testa">
           <input type="search" id="disp-cerca" placeholder="Cerca o aggiungi\u2026" maxlength="60" autocomplete="off">
+          <button type="button" class="mic-campo" data-act="voce-campo" data-val="disp-cerca"
+            aria-label="Detta la ricerca">
+            <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/>
+              <path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button>
           <input type="number" id="disp-qta" min="0" step="any" inputmode="decimal" placeholder="q.t\u00e0">
           <button type="button" class="btn-ghost" id="disp-unita" data-act="disp-unita">g</button>
           <button type="button" class="btn-primary" data-act="disp-add">+</button>
@@ -2414,6 +2533,10 @@ h3{font-weight:600;letter-spacing:-.018em}
     </header>
 
     <input type="search" id="search-input" placeholder="Cerca in tutte le ricette…" autocomplete="off">
+    <button type="button" class="mic-campo" data-act="voce-campo" data-val="search-input"
+      aria-label="Detta la ricerca">
+      <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/>
+        <path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button>
     <div id="search-hist" class="search-hist"></div>
 
     <div id="comandi-cerca"></div>
@@ -2530,8 +2653,9 @@ h3{font-weight:600;letter-spacing:-.018em}
         <div id="energy-out"></div>
       </div>
 
-      <div class="glass-card" data-sez="tu">
-        <h3>I miei ingredienti</h3>
+      <div class="glass-card riducibile" data-sez="tu" data-riquadro="miei">
+        <h3><button type="button" class="testa-riquadro" data-act="prof-riduci" data-val="miei">I miei ingredienti
+          <svg viewBox="0 0 24 24"><path d="M8 10l4 4 4-4"/></svg></button></h3>
         <p class="section-desc">Riempiono i chip di Svuota Frigo e i suggerimenti del form ricetta.</p>
         <div class="input-group">
           <input type="text" id="input-ingredient" placeholder="Es. salmone, avena…" autocomplete="off" enterkeyhint="done">
@@ -2540,8 +2664,9 @@ h3{font-weight:600;letter-spacing:-.018em}
         <div id="my-ingredients-tags" class="tags-container"></div>
       </div>
 
-      <div class="glass-card" data-sez="tu">
-        <h3>Ingredienti esclusi</h3>
+      <div class="glass-card riducibile" data-sez="tu" data-riquadro="esclusi">
+        <h3><button type="button" class="testa-riquadro" data-act="prof-riduci" data-val="esclusi">Ingredienti esclusi
+          <svg viewBox="0 0 24 24"><path d="M8 10l4 4 4-4"/></svg></button></h3>
         <p class="section-desc" id="ban-desc">Valgono per il profilo attivo: una ricetta sparisce quando mangia chi non tollera quell'ingrediente.</p>
         <div class="input-group">
           <input type="text" id="input-forbidden" placeholder="Es. melanzane, menta…" autocomplete="off" enterkeyhint="done">
@@ -2659,6 +2784,60 @@ h3{font-weight:600;letter-spacing:-.018em}
     </button>
   </div>
 
+  <div id="modal-notifiche" class="modal" role="dialog" aria-modal="true" aria-label="Scadenze di oggi">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h2>Da mangiare oggi</h2>
+        <button type="button" class="x" data-act="close-modal" aria-label="Chiudi">\u00d7</button>
+      </div>
+      <p class="hint">Quello che scade oggi tra frigo, freezer e dispensa. Tocca
+        <b>Ricette</b> per cucinarlo, il cerchietto per selezionare.</p>
+      <div id="notifiche-lista"></div>
+      <button type="button" class="btn-ghost full-width" style="margin-top:10px"
+        data-act="notifiche-lette">Segna come letto</button>
+    </div>
+  </div>
+
+  <div id="modal-conferma" class="modal centro" role="alertdialog" aria-modal="true">
+    <div class="modal-content conferma-box">
+      <p id="conferma-testo"></p>
+      <div class="row">
+        <button type="button" class="btn-ghost" data-act="conferma-no">No</button>
+        <button type="button" class="btn-primary" data-act="conferma-si">S\u00ec</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-dettatura" class="modal" role="dialog" aria-modal="true" aria-label="Detta la spesa">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h2>Detta la spesa</h2>
+        <button type="button" class="x" data-act="detta-chiudi" aria-label="Chiudi">\u00d7</button>
+      </div>
+      <div id="dettatura-ascolto">
+        <div class="mic-cerchio"><i></i><i></i>
+          <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/>
+            <path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg>
+        </div>
+        <p class="hint" style="text-align:center">Parla normalmente: <i>\u201cpomodori,
+          mozzarella, due litri di latte\u201d</i>. Le virgole e le \u201ce\u201d
+          separano le voci.</p>
+        <p id="dettatura-testo" class="dettatura-testo"></p>
+        <button type="button" class="btn-primary full-width" data-act="detta-fine">Ho finito</button>
+      </div>
+      <div id="dettatura-righe" hidden>
+        <p class="hint">Controlla, correggi o togli: poi aggiungo tutto alla lista,
+          come se l'avessi scritto a mano.</p>
+        <div id="dettatura-lista"></div>
+        <button type="button" class="chip mini" data-act="detta-riga">+ aggiungi una riga</button>
+        <div class="row" style="margin-top:12px">
+          <button type="button" class="btn-ghost" data-act="detta-riprova">Riprova</button>
+          <button type="button" class="btn-primary" data-act="detta-salva">Aggiungi alla spesa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="modal-pasto-piatti" class="modal" role="dialog" aria-modal="true">
     <div class="modal-content">
       <div class="modal-head">
@@ -2684,6 +2863,10 @@ h3{font-weight:600;letter-spacing:-.018em}
 <!-- ============ MODALE DETTAGLIO ============ -->
 <div id="modal-detail" class="modal" role="dialog" aria-modal="true" aria-label="Dettaglio ricetta">
   <div class="modal-content glass-card">
+    <button type="button" id="detail-stella" class="stella in-testa" data-act="fav" data-val=""
+      aria-label="Preferita">
+      <svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.6 6.1.6-4.6 4.1 1.3 6-5.3-3.1-5.3 3.1 1.3-6-4.6-4.1 6.1-.6z"/></svg>
+    </button>
     <button type="button" class="close-btn" data-act="close-modal" aria-label="Chiudi">&times;</button>
     <div id="detail-body"></div>
   </div>
@@ -2818,7 +3001,7 @@ h3{font-weight:600;letter-spacing:-.018em}
   </button>
 </nav>
 
-<section id="cook-mode" hidden aria-label="Modalità cucina">
+<section id="cook-mode" hidden aria-label="Prepara">
   <header class="cook-top">
     <button type="button" data-act="cook-close" aria-label="Esci senza chiudere la ricetta">&times;</button>
     <span id="cook-title"></span>
@@ -5387,6 +5570,22 @@ const GRILL = [
 let S;
 let storageOk = true;
 
+/* Se un errore inatteso interrompe l'app (capita su certi telefoni), non deve
+   morire in silenzio: un avviso col motivo aiuta a capirci qualcosa. */
+let erroreGiaDetto = false;
+window.addEventListener('error', ev => {
+  if (erroreGiaDetto) return;
+  erroreGiaDetto = true;
+  try {
+    const t = document.getElementById('toast');
+    if (t) {
+      t.textContent = '\u26a0\ufe0f Errore: ' + (ev.message || 'sconosciuto').slice(0, 120);
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 9000);
+    }
+  } catch (x) {}
+});
+
 // Storage con fallback in memoria: in anteprima o in navigazione privata
 // l'app continua a funzionare, semplicemente non persiste.
 const LS = (function () {
@@ -5397,6 +5596,11 @@ const LS = (function () {
     return localStorage;
   } catch (e) {
     storageOk = false;
+    setTimeout(() => {
+      try {
+        toast('\u26a0\ufe0f Memoria bloccata: qui i salvataggi durano solo finch\u00e9 l\'app \u00e8 aperta. Controlla di non essere in navigazione privata e che in Impostazioni \u203a Safari non sia attivo "Blocca tutti i cookie".');
+      } catch (x) {}
+    }, 1200);
     const mem = {};
     return {
       getItem: k => (k in mem ? mem[k] : null),
@@ -5514,9 +5718,17 @@ function save() {
   try {
     LS.setItem(KEY, JSON.stringify(statoDaSalvare()));
   } catch (e) {
+    if (storageOk) toast('\u26a0\ufe0f Il telefono non mi lascia salvare: i dati vivono solo finch\u00e9 l\'app resta aperta.');
     storageOk = false;
   }
 }
+
+/* Chiedo al sistema di considerare i dati "persistenti": su iPhone e Android
+   riduce molto il rischio che il telefono li butti via per far spazio. */
+try {
+  if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
+} catch (e) {}
+
 
 /* ---------- utility ---------- */
 function esc(s) {
@@ -5925,7 +6137,7 @@ function recipeCard(r, extra, n) {
   const fuori = fuoriStagione(r);
 
   return `
-    <button type="button" class="glass-card card-btn scheda ${fuori ? 'fuori-stagione' : ''}"
+    <button type="button" class="glass-card card-btn scheda con-stella ${fuori ? 'fuori-stagione' : ''}"
       data-act="detail" data-val="${esc(r.id)}"${ritardo}
       ${fuori ? 'title="Fuori stagione"' : ''}>
       <span class="scheda-arte" ${copertura ? `style="--riempi:${copertura}%"` : ''}>${arteRicetta(r)}</span>
@@ -5933,7 +6145,15 @@ function recipeCard(r, extra, n) {
         <span class="scheda-titolo">${esc(r.title)}</span>
         ${piede}
       </span>
-      ${isFav(r.id) ? '<span class="scheda-stella">\u2605</span>' : ''}
+      <span class="stella mini ${isFav(r.id) ? 'on' : ''}" role="button"
+        data-act="fav" data-val="${esc(r.id)}"
+        aria-label="${isFav(r.id) ? 'Togli dalle preferite' : 'Metti tra le preferite'}">
+        <svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.6 6.1.6-4.6 4.1 1.3 6-5.3-3.1-5.3 3.1 1.3-6-4.6-4.1 6.1-.6z"/></svg>
+      </span>
+    <span class="stella scheda-stella ${isFav(r.id) ? 'on' : ''}" role="button"
+        data-act="fav" data-val="${esc(r.id)}" aria-label="Preferita">
+        <svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.6 6.1.6-4.6 4.1 1.3 6-5.3-3.1-5.3 3.1 1.3-6-4.6-4.1 6.1-.6z"/></svg>
+      </span>
     </button>`;
 }
 
@@ -6551,9 +6771,10 @@ function archiGiornata() {
 /* Il numero non salta da 0 a 775: ci arriva in mezzo secondo, con un battito
    alla fine. E' l'unico momento in cui l'app si fa notare, ed e' quello giusto. */
 function animaNumero(el, da, a) {
-  // Il numero giusto lo scrivo subito: l'animazione e' un di piu' che parte
-  // solo dove c'e' un vero ciclo di disegno.
-  el.textContent = a;
+  // Le cifre del flip clock: il numero conta da 'da' ad 'a' e ogni cifra
+  // resta nella sua cella nera con la riga del ribaltamento.
+  const celle = n => String(n).split('').map(c => '<i>' + c + '</i>').join('') + '<em>kcal</em>';
+  el.innerHTML = celle(a);
   const rAF = typeof requestAnimationFrame === 'function' ? requestAnimationFrame : null;
   if (!rAF || typeof performance === 'undefined') return;
 
@@ -6562,9 +6783,9 @@ function animaNumero(el, da, a) {
   const passo = ora => {
     const t = Math.min(1, (ora - inizio) / durata);
     const morbido = 1 - Math.pow(1 - t, 3);
-    el.textContent = Math.round(da + (a - da) * morbido);
+    el.innerHTML = celle(Math.round(da + (a - da) * morbido));
     if (t < 1) rAF(passo);
-    else { el.textContent = a; setTimeout(() => el.classList.remove('cambia'), 500); }
+    else { el.innerHTML = celle(a); setTimeout(() => el.classList.remove('cambia'), 500); }
   };
   rAF(passo);
 }
@@ -6578,6 +6799,41 @@ const sepolte = new Set();
 const xSugg = chiave =>
   `<span class="sugg-x" role="button" aria-label="Togli dalla vista"
      data-act="sugg-chiudi" data-val="${chiave}">\u00d7</span>`;
+
+/* La finestra della ricetta si chiude anche abbassandola con un dito:
+   se il contenuto e' in cima e trascini giu' abbastanza, va via. */
+(function () {
+  let y0 = null, dy = 0, attivo = false;
+  const dentro = () => document.querySelector('#modal-detail .modal-content');
+  document.addEventListener('touchstart', e => {
+    const c = dentro();
+    if (!c || !document.getElementById('modal-detail').classList.contains('active')) return;
+    if (!c.contains(e.target) || c.scrollTop > 4) return;
+    y0 = e.touches[0].clientY; dy = 0; attivo = true;
+    c.style.transition = 'none';
+  }, { passive: true });
+  document.addEventListener('touchmove', e => {
+    if (!attivo || y0 === null) return;
+    dy = e.touches[0].clientY - y0;
+    const c = dentro();
+    if (c && dy > 0) c.style.transform = 'translateY(' + Math.min(dy, 320) + 'px)';
+  }, { passive: true });
+  document.addEventListener('touchend', () => {
+    if (!attivo) return;
+    const c = dentro();
+    attivo = false; y0 = null;
+    if (!c) return;
+    c.style.transition = '';
+    if (dy > 110) {
+      c.style.transform = '';
+      const x = document.querySelector('#modal-detail [data-act=close-modal]');
+      if (x) x.click();
+    } else {
+      c.style.transform = '';
+    }
+    dy = 0;
+  }, { passive: true });
+})();
 
 let pastoFinestra = null;   // il pasto la cui finestra e' aperta o era aperta
 let tornaAlPasto = false;
@@ -6760,9 +7016,8 @@ function anelloGiornata(mealId) {
         ${[76, 100, 124].map(x => '<ellipse class="piedino" cx="' + x + '" cy="185.5" rx="5" ry="2"/>').join('')}
       </svg>
       <div class="anello-centro">
-        <span class="flip">${String(piano.consumato).split('').map(c =>
+        <span class="flip conta-kcal" data-valore="${piano.consumato}">${String(piano.consumato).split('').map(c =>
           '<i>' + c + '</i>').join('')}<em>kcal</em></span>
-        <b class="conta-kcal" data-valore="${piano.consumato}" hidden>${piano.consumato}</b>
       </div>
     </div>
 
@@ -7155,7 +7410,7 @@ function renderHome() {
          Mostra altre ${Math.min(PAGINA, restanti)} \u00b7 ne restano ${restanti}</button>` : '') +
       (hidden ? `<p class="miss" style="text-align:center">${hidden} ricett${hidden === 1 ? 'a nascosta' : 'e nascoste'} dagli ingredienti esclusi.</p>` : '')
     : emptyState(S.ui.fav ? 'Nessuna preferita con questi filtri.<br>Tocca \u2605 nel dettaglio di una ricetta per aggiungerla.'
-        : S.ui.freq ? 'Non hai ancora registrato pasti.<br>Usa "L\'ho mangiato" e le ricette che ripeti finiranno qui.'
+        : S.ui.freq ? 'Non hai ancora registrato pasti.<br>Usa "Mangiato" e le ricette che ripeti finiranno qui.'
         : query
         ? 'Nessun risultato per “' + esc(query) + '”.<br>Prova con un ingrediente o allarga i filtri.'
         : 'Nessuna ricetta con questi filtri.<br>Tocca <b>+</b> in alto per aggiungerne una.');
@@ -7604,7 +7859,7 @@ function renderCronologia() {
       if (inFreezer) messe.push(inFreezer.n + ' in freezer');
       const aperto = storicoAperto === u.rid;
       const unita = unitaStorico[u.rid] || 'porz';
-      const quanti = porzioniStorico[u.rid] || (unita === 'g' ? pesoPorzione(u.r) : 1);
+      const quanti = porzioniStorico[u.rid] || (unita === 'g' ? pesoPorzione(u.r) : 0.5);
       return `
       <div class="storico">
         <span class="storico-arte">${arteRicetta(u.r)}</span>
@@ -7887,7 +8142,15 @@ function setProfileDirty(v) {
   if (row) row.hidden = !v;
 }
 
+function aggiornaRiquadriChiusi() {
+  const chiusi = (S.ui && S.ui.riquadriChiusi) || {};
+  document.querySelectorAll('.glass-card.riducibile').forEach(c => {
+    c.classList.toggle('chiusa', !!chiusi[c.dataset.riquadro]);
+  });
+}
+
 function renderProfile() {
+  aggiornaRiquadriChiusi();
   const p = activeProfile();
 
   // Dieci schede una sotto l'altra non le leggeva nessuno: quattro gruppi,
@@ -8140,6 +8403,7 @@ function anteprimaRicetta(id) {
   const m = personPortion(r);
   const cov = S.pantry.length ? coverage(r) : null;
   document.getElementById('detail-body').innerHTML = `
+
     <span class="dettaglio-arte">${arteRicetta(r)}</span>
     <h2 style="text-align:center">${esc(r.title)}</h2>
     ${porzioniCucina(r) > 1 ? `<p class="in-tutto">In tutto per ${porzioniCucina(r)}:
@@ -8157,6 +8421,11 @@ function anteprimaRicetta(id) {
   currentDetailId = null;
   scalaDettaglio = [];
   document.getElementById('modal-detail').classList.toggle('modo-istanza', !!istanzaAperta);
+  const stTesta = document.getElementById('detail-stella');
+  if (stTesta) {
+    stTesta.dataset.val = r.id;
+    stTesta.classList.toggle('on', isFav(r.id));
+  }
   openModal('modal-detail');
 }
 
@@ -8393,6 +8662,12 @@ function openDetail(id, tornando) {
     ? S.recipes.find(x => x.id === scalaDettaglio[scalaDettaglio.length - 1]) : null;
 
   document.getElementById('detail-body').innerHTML = `
+    <div class="azioni-rapide in-cima">
+      <button type="button" class="btn-primary" data-act="cook-open" data-val="${esc(r.id)}">Prepara</button>
+      <button type="button" class="btn-ghost" data-act="log-meal" data-val="${esc(r.id)}">${portataOf(r) === 'bevanda' ? 'Bevuta' : 'Mangiato'}</button>
+      <button type="button" class="btn-ghost" data-act="confronta-con" data-val="${esc(r.id)}">Confronta</button>
+    </div>
+
     ${daDove ? `<button type="button" class="torna" data-act="detail-indietro">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
       ${esc(daDove.title)}</button>` : ''}
@@ -8493,22 +8768,18 @@ function openDetail(id, tornando) {
       ${cookPanel(r)}
     </details>
 
-    <h3 style="margin:20px 0 8px">Passaggi${r.cook > 0
-      ? ` <button type="button" class="step-timer" data-act="timer-start" data-val="${r.cook * 60}"
-           data-lab="${esc(r.title)}" data-rec="${esc(r.id)}">\u23f1 cottura ${r.cook} min</button>` : ''}</h3>
-    <ol class="steps">${(r.steps || []).map((s, n) => {
-      const d = stepDuration(s);
-      const btn = d ? `<button type="button" class="step-timer" data-act="timer-start" data-val="${d.sec}"
-        data-lab="${esc(r.title)} \u00b7 passo ${n + 1}" data-rec="${esc(r.id)}" data-step="${n}">\u23f1 ${d.txt}</button>` : '';
-      return `<li>${esc(s)}${btn}</li>`;
-    }).join('')}</ol>
-    ${r.note ? `<div class="note-box">${esc(r.note)}</div>` : ''}
-    <button type="button" class="btn-primary full-width" data-act="cook-open" data-val="${esc(r.id)}">Modalit\u00e0 cucina</button>
-    <div class="row" style="margin-top:8px">
-      <button type="button" class="btn-ghost" data-act="fav" data-val="${esc(r.id)}">${isFav(r.id) ? '★ Preferita' : '☆ Preferita'}</button>
-      <button type="button" class="btn-ghost" data-act="confronta-con" data-val="${esc(r.id)}">Confronta</button>
-      <button type="button" class="btn-ghost" data-act="log-meal" data-val="${esc(r.id)}">${portataOf(r) === 'bevanda' ? "L'ho bevuta" : "L'ho mangiato"}</button>
-    </div>
+    <details class="sezione preparazione">
+      <summary>Passaggi${r.cook > 0
+        ? ` <span class="step-timer" role="button" data-act="timer-start" data-val="${r.cook * 60}"
+             data-lab="${esc(r.title)}" data-rec="${esc(r.id)}">\u23f1 cottura ${r.cook} min</span>` : ''}</summary>
+      <ol class="steps">${(r.steps || []).map((s, n) => {
+        const d = stepDuration(s);
+        const btn = d ? `<button type="button" class="step-timer" data-act="timer-start" data-val="${d.sec}"
+          data-lab="${esc(r.title)} \u00b7 passo ${n + 1}" data-rec="${esc(r.id)}" data-step="${n}">\u23f1 ${d.txt}</button>` : '';
+        return `<li>${esc(s)}${btn}</li>`;
+      }).join('')}</ol>
+      ${r.note ? `<div class="note-box">${esc(r.note)}</div>` : ''}
+    </details>
     ${(() => {
       const ab = salsePerPiatto(r);
       if (!ab.length) return '';
@@ -8550,6 +8821,11 @@ function openDetail(id, tornando) {
   }
 
   document.getElementById('modal-detail').classList.toggle('modo-istanza', !!istanzaAperta);
+  const stTesta = document.getElementById('detail-stella');
+  if (stTesta) {
+    stTesta.dataset.val = r.id;
+    stTesta.classList.toggle('on', isFav(r.id));
+  }
   openModal('modal-detail');
 }
 
@@ -8829,7 +9105,7 @@ function renderTrend() {
   const attivi = dailySeries(p.id, 30).filter(x => x.m > 0);
 
   if (!attivi.length) {
-    el.innerHTML = '<p class="miss">Nessun pasto registrato finora. Ogni volta che tocchi "L\'ho mangiato" questa sezione si riempie.</p>';
+    el.innerHTML = '<p class="miss">Nessun pasto registrato finora. Ogni volta che tocchi "Mangiato" questa sezione si riempie.</p>';
     return;
   }
 
@@ -10352,6 +10628,298 @@ function renderShopSuggest(q) {
       ${esc(n)} <i>${unitaDi(n) === 'pz' ? 'pz' : 'g'}</i></button>`).join('');
 }
 
+/* L'UNICO punto che aggiunge una voce manuale alla spesa: ci passano la
+   tastiera E la dettatura, cosi' la voce che nasce e' identica in tutto,
+   scadenze comprese quando poi finisce in dispensa. */
+/* ---------- detta la spesa ----------
+   Web Speech API del browser: gratis, niente server. Il testo dettato viene
+   spezzato in voci, ogni voce confrontata col vocabolario degli ingredienti
+   per somiglianza (distanza di Levenshtein): se il riconoscimento e' sicuro
+   la riga si precompila, altrimenti resta il testo dettato, modificabile. */
+
+function distanzaLev(a, b) {
+  const m = a.length, n = b.length;
+  if (!m) return n; if (!n) return m;
+  let prev = Array.from({ length: n + 1 }, (_, j) => j);
+  for (let i = 1; i <= m; i++) {
+    const cur = [i];
+    for (let j = 1; j <= n; j++) {
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1,
+        prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    }
+    prev = cur;
+  }
+  return prev[n];
+}
+
+function somiglianza(a, b) {
+  a = norm(a); b = norm(b);
+  if (!a || !b) return 0;
+  if (a === b) return 1;
+  const base = 1 - distanzaLev(a, b) / Math.max(a.length, b.length);
+  // il singolare e il plurale sono lo stesso ingrediente
+  const spoglia = x => x.replace(/[ieo]$/, 'a');
+  const varia = spoglia(a) === spoglia(b) ? 0.12 : 0;
+  const dentro = (a.length > 3 && b.includes(a)) || (b.length > 3 && a.includes(b)) ? 0.1 : 0;
+  return Math.min(1, base + varia + dentro);
+}
+
+function riconosciIngrediente(testo) {
+  let migliore = null, punteggio = 0;
+  vocabolarioIngredienti().forEach(n => {
+    const p = somiglianza(testo, n);
+    if (p > punteggio) { punteggio = p; migliore = n; }
+  });
+  return { nome: migliore, punteggio: punteggio };
+}
+
+const NUMERI_DETTI = { 'un': 1, 'uno': 1, 'una': 1, 'due': 2, 'tre': 3, 'quattro': 4,
+  'cinque': 5, 'sei': 6, 'sette': 7, 'otto': 8, 'nove': 9, 'dieci': 10,
+  'dozzina': 12, 'mezzo': 0.5, 'mezza': 0.5 };
+
+/* "due litri di latte" -> { q: 2, u: 'kg', resto: 'latte' } (i liquidi si
+   tengono in grammi come tutto il resto: un litro conta mille). */
+function staccaQuantita(seg) {
+  const t = seg.trim().toLowerCase()
+    .replace(/^(e|poi|piu|pi\u00f9|anche|prendi|compra|serve|servono)\s+/, '');
+  const m = t.match(new RegExp(
+    '^(\\d+(?:[.,]\\d+)?|' + Object.keys(NUMERI_DETTI).join('|') + ')\\s*' +
+    '(kg|chili|chilo|hg|etti|etto|grammi|gr|g|litri|litro|l|ml|cl|pezzi|pz|' +
+    'confezioni|confezione|pacchi|pacco|bottiglie|bottiglia|scatole|scatola|' +
+    'vasetti|vasetto|barattoli|barattolo|lattine|lattina)?\\s*(?:di\\s+)?(.+)$'));
+  if (!m) return { q: NaN, u: 'g', resto: t };
+
+  let q = NUMERI_DETTI[m[1]] !== undefined ? NUMERI_DETTI[m[1]] : parseFloat(m[1].replace(',', '.'));
+  const unita = m[2] || '';
+  let u = 'pz';
+  if (/^(kg|chili|chilo|litri|litro|l)$/.test(unita)) u = 'kg';
+  else if (/^(hg|etti|etto)$/.test(unita)) { u = 'g'; q = q * 100; }
+  else if (/^(grammi|gr|g)$/.test(unita)) u = 'g';
+  else if (/^ml$/.test(unita)) u = 'g';
+  else if (/^cl$/.test(unita)) { u = 'g'; q = q * 10; }
+  return { q: q, u: u, resto: m[3].trim() };
+}
+
+/* Il testo dettato intero -> le righe della schermata di conferma. */
+function interpretaDettato(testo) {
+  return String(testo)
+    .split(/[,;.]| e | ed | poi | piu | pi\u00f9 /i)
+    .map(x => x.trim()).filter(Boolean)
+    .map(seg => {
+      const { q, u, resto } = staccaQuantita(seg);
+      const r = riconosciIngrediente(resto);
+      const sicuro = r.punteggio >= 0.72;
+      return {
+        detto: resto,
+        nome: sicuro ? r.nome : resto,
+        sicuro: sicuro,
+        proposta: !sicuro && r.punteggio >= 0.5 ? r.nome : null,
+        q: isFinite(q) && q > 0 ? q : '',
+        u: u
+      };
+    });
+}
+
+let vocale = null;          // l'oggetto SpeechRecognition, quando c'e'
+let vocaleTesto = '';       // quello che ha capito finora
+
+function dettaturaMostra(fase) {
+  document.getElementById('dettatura-ascolto').hidden = fase !== 'ascolto';
+  document.getElementById('dettatura-righe').hidden = fase !== 'righe';
+}
+
+function apriDettatura() {
+  vocaleTesto = '';
+  const vivo = document.getElementById('dettatura-testo');
+  vivo.textContent = '';
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SR) {
+    // niente riconoscimento su questo browser: righe vuote, si scrive a mano
+    dettaturaMostra('righe');
+    righeDettatura([{ nome: '', detto: '', sicuro: false, proposta: null, q: '', u: 'g' }]);
+    openModal('modal-dettatura');
+    toast('Questo browser non ha la dettatura: scrivi le voci, il resto \u00e8 uguale.');
+    return;
+  }
+
+  dettaturaMostra('ascolto');
+  openModal('modal-dettatura');
+
+  vocale = new SR();
+  vocale.lang = 'it-IT';
+  vocale.continuous = true;
+  vocale.interimResults = true;
+  vocale.onresult = ev => {
+    let finale = '', bozza = '';
+    for (let i = 0; i < ev.results.length; i++) {
+      const r = ev.results[i];
+      if (r.isFinal) finale += r[0].transcript + ' ';
+      else bozza += r[0].transcript;
+    }
+    vocaleTesto = finale.trim();
+    vivo.textContent = (finale + bozza).trim();
+  };
+  vocale.onerror = ev => {
+    if (ev.error === 'not-allowed' || ev.error === 'service-not-allowed') {
+      toast('Il microfono \u00e8 bloccato: consenti l\'accesso e riprova.');
+      dettaturaMostra('righe');
+      righeDettatura([{ nome: '', detto: '', sicuro: false, proposta: null, q: '', u: 'g' }]);
+    }
+  };
+  try { vocale.start(); } catch (e) {}
+}
+
+function fermaVocale() {
+  if (vocale) { try { vocale.stop(); } catch (e) {} vocale = null; }
+}
+
+function righeDettaturaUna() {
+  return `<div class="riga-dettata incerta">
+    <input type="text" class="det-nome" value="" placeholder="prodotto" aria-label="Nome del prodotto">
+    <input type="number" class="det-q" min="0" step="any" inputmode="decimal" placeholder="q.t\u00e0"
+      aria-label="Quantit\u00e0">
+    <button type="button" class="det-u chip mini" data-act="detta-unita">g</button>
+    <button type="button" class="x" data-act="detta-togli" aria-label="Togli">\u00d7</button>
+    <span class="det-nota"></span>
+  </div>`;
+}
+
+function righeDettatura(righe) {
+  const box = document.getElementById('dettatura-lista');
+  box.innerHTML = righe.map((r, i) => `
+    <div class="riga-dettata ${r.sicuro ? '' : 'incerta'}" data-i="${i}">
+      <input type="text" class="det-nome" value="${esc(r.nome)}" placeholder="prodotto"
+        aria-label="Nome del prodotto">
+      <input type="number" class="det-q" min="0" step="any" inputmode="decimal"
+        value="${r.q}" placeholder="q.t\u00e0" aria-label="Quantit\u00e0">
+      <button type="button" class="det-u chip mini" data-act="detta-unita">${r.u}</button>
+      <button type="button" class="x" data-act="detta-togli" aria-label="Togli">\u00d7</button>
+      <span class="det-nota">${r.sicuro
+        ? 'riconosciuto'
+        : r.proposta
+          ? `forse <button type="button" class="lnk" data-act="detta-forse"
+               data-val="${esc(r.proposta)}">${esc(r.proposta)}</button>?`
+          : (r.detto ? 'da controllare' : '')}</span>
+    </div>`).join('');
+}
+
+// per le prove automatiche e per chi incolla un testo: stesso identico percorso
+window.fitmealsVoce = {
+  interpreta: interpretaDettato,
+  riconosci: riconosciIngrediente,
+  daTesto: t => {
+    dettaturaMostra('righe');
+    righeDettatura(interpretaDettato(t));
+    openModal('modal-dettatura');
+  }
+};
+
+/* Un microfono su ogni barra di ricerca: tocchi, parli, il campo si riempie
+   e la ricerca parte da sola. Un ascolto solo, niente virgole richieste. */
+/* ---------- le notifiche delle scadenze ----------
+   Ogni giorno, quello che scade OGGI (frigo, freezer, dispensa, avanzi)
+   diventa una notifica nella campanella: da li' si aprono le ricette con
+   quell'ingrediente, si segna come letta, si cancella una per una. */
+function aggiornaNotificheScadenze() {
+  const oggi = new Date(); oggi.setHours(0, 0, 0, 0);
+  const domani = oggi.getTime() + 86400000;
+  S.notifiche = S.notifiche || [];
+  scadenzeDelGiorno().forEach(v => {
+    if (v.quando >= domani || v.quando < oggi.getTime() - 3 * 86400000) return;
+    const chiave = dayKey() + '|' + v.nome + '|' + v.dove;
+    if (S.notifiche.some(n => n.chiave === chiave)) return;
+    S.notifiche.push({ id: 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
+      chiave: chiave, nome: v.nome, dove: v.dove, giorno: dayKey(),
+      scaduto: v.quando < oggi.getTime(), letta: false });
+  });
+  // le notifiche dei giorni passati se ne vanno da sole dopo una settimana
+  S.notifiche = S.notifiche.filter(n => !n.giorno || n.giorno >= dayKey() - 0 || true);
+  save();
+}
+
+function nonLette() { return (S.notifiche || []).filter(n => !n.letta).length; }
+
+function aggiornaCampanella() {
+  const b = document.getElementById('campanella-conto');
+  if (!b) return;
+  const n = nonLette();
+  b.textContent = n; b.hidden = !n;
+}
+
+function renderNotifiche() {
+  const box = document.getElementById('notifiche-lista');
+  if (!box) return;
+  const voci = (S.notifiche || []).slice().reverse();
+  box.innerHTML = voci.length ? voci.map(n => `
+    <div class="notifica ${n.letta ? '' : 'nuova'}" data-id="${n.id}">
+      <button type="button" class="notifica-scegli ${n.scelta ? 'on' : ''}"
+        data-act="notifica-scegli" data-val="${n.id}" aria-label="Seleziona"></button>
+      <span class="notifica-testo">
+        <b>${esc(n.nome)}</b> ${n.scaduto ? 'scaduto' : 'scade oggi'} \u00b7 ${esc(n.dove)}
+      </span>
+      <button type="button" class="chip mini" data-act="notifica-ricette"
+        data-val="${n.id}">Ricette</button>
+      <button type="button" class="x" data-act="notifica-via" data-val="${n.id}"
+        aria-label="Elimina">\u00d7</button>
+    </div>`).join('')
+    : '<p class="miss">Niente in scadenza oggi: dispensa tranquilla.</p>';
+  aggiornaCampanella();
+}
+
+/* Una domanda al centro dello schermo: Si o No, senza doppi tocchi. */
+let dopoConferma = null;
+function chiedi(testo, poi) {
+  document.getElementById('conferma-testo').textContent = testo;
+  dopoConferma = poi;
+  openModal('modal-conferma');
+}
+
+let vocaleCampo = null;
+function dettaNelCampo(idCampo) {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const campo = document.getElementById(idCampo);
+  if (!campo) return;
+  if (!SR) { toast('Questo browser non ha la dettatura.'); campo.focus(); return; }
+  if (vocaleCampo) { try { vocaleCampo.stop(); } catch (e) {} }
+  const r = new SR();
+  vocaleCampo = r;
+  r.lang = 'it-IT'; r.interimResults = true;
+  campo.placeholder = 'Ti ascolto\u2026';
+  const bottone = document.querySelector('.mic-campo[data-val="' + idCampo + '"]');
+  if (bottone) bottone.classList.add('ascolta');
+  const fine = () => {
+    campo.placeholder = campo.dataset.ph || '';
+    if (bottone) bottone.classList.remove('ascolta');
+    vocaleCampo = null;
+  };
+  r.onresult = ev => {
+    let testo = '';
+    for (let i = 0; i < ev.results.length; i++) testo += ev.results[i][0].transcript;
+    campo.value = testo.trim();
+    campo.dispatchEvent(new Event('input', { bubbles: true }));
+  };
+  r.onend = fine; r.onerror = fine;
+  try { r.start(); } catch (e) { fine(); }
+}
+
+const micCampo = id =>
+  `<button type="button" class="mic-campo" data-act="voce-campo" data-val="${id}"
+     aria-label="Detta la ricerca">
+     <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/>
+       <path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button>`;
+
+function spesaVoceManuale(nome, q, u) {
+  const buona = isFinite(q) && q > 0;
+  const etichetta = buona ? (u === 'pz' ? String(q) : u === 'kg' ? q + ' kg' : q + ' g') : '';
+  let qta = q;
+  if (u === 'kg' && buona) qta = q * 1000;      // dentro si tiene tutto in grammi
+  S.shopExtra = S.shopExtra || [];
+  S.shopExtra.push({ id: 'x' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
+    n: String(nome).trim().toLowerCase(),
+    qta: buona ? qta : null, unita: u === 'pz' ? 'pz' : 'g', qty: etichetta });
+}
+
 function aggiornaUnitaSpesa() {
   const b = document.getElementById('shop-unita');
   const inp = document.getElementById('shop-add');
@@ -10410,6 +10978,11 @@ function renderShopping() {
 
   el.innerHTML = `
     <div class="input-group" style="margin-bottom:8px">
+      <button type="button" class="mic-spesa" data-act="detta-apri" aria-label="Detta la spesa"
+        title="Detta la spesa">
+        <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/>
+          <path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg>
+      </button>
       <input type="search" id="shop-add" placeholder="Aggiungi alla lista\u2026"
              autocomplete="off" enterkeyhint="done">
       <input type="number" id="shop-qta" min="0" step="any" inputmode="decimal" placeholder="q.t\u00e0"
@@ -10934,6 +11507,7 @@ function renderCook() {
     const factor = fattoreCucina(r);
     const m = perPortion(r);
     body.innerHTML = `
+
       <span class="cook-eyebrow">Per quante persone</span>
       <div class="porzioni">
         <button type="button" class="porz-meno" data-act="porzioni" data-val="${porz - 1}"
@@ -10975,7 +11549,7 @@ function renderCook() {
         <div class="big">\ud83c\udf7d\ufe0f</div>
         <h2 style="font-size:1.4rem;margin-bottom:8px">\u00c8 pronto</h2>
         <p class="section-desc">${fatti} passaggi su ${steps.length} spuntati.</p>
-        <button type="button" class="btn-primary full-width" data-act="log-meal" data-val="${esc(r.id)}">${cookRecipe() && portataOf(cookRecipe()) === 'bevanda' ? "L'ho bevuta" : "L'ho mangiato"}</button>
+        <button type="button" class="btn-primary full-width" data-act="log-meal" data-val="${esc(r.id)}">${cookRecipe() && portataOf(cookRecipe()) === 'bevanda' ? 'Bevuta' : 'Mangiato'}</button>
         <span class="field-label" style="margin:18px 0 6px">Ne hai cucinate di pi\u00f9?</span>
         <div class="pantry-grid" style="justify-content:center">
           ${[1, 2, 3].map(n => `<button type="button" class="chip" data-act="leftover-add"
@@ -12514,7 +13088,7 @@ document.addEventListener('click', e => {
       const era = unitaStorico[val] || 'porz';
       unitaStorico[val] = era === 'porz' ? 'g' : 'porz';
       // Passando di unita' converto il numero, cosi' non si perde il senso.
-      const q = porzioniStorico[val] || 1;
+      const q = porzioniStorico[val] || 0.5;
       porzioniStorico[val] = era === 'porz'
         ? Math.round(q * pesoPorzione(r))
         : Math.max(1, Math.round(q / pesoPorzione(r)));
@@ -12527,7 +13101,7 @@ document.addEventListener('click', e => {
       const unita = unitaStorico[val] || 'porz';
       // Anche la mezza porzione e' un avanzo: il passo e' mezzo piatto.
       const passo = unita === 'g' ? 50 : 0.5;
-      const ora = porzioniStorico[val] || (unita === 'g' ? pesoPorzione(r) : 1);
+      const ora = porzioniStorico[val] || (unita === 'g' ? pesoPorzione(r) : 0.5);
       const minimo = unita === 'g' ? 50 : 0.5;
       const massimo = unita === 'g' ? 5000 : 12;
       porzioniStorico[val] = Math.round(Math.max(minimo, Math.min(massimo,
@@ -12539,7 +13113,7 @@ document.addEventListener('click', e => {
       const r = S.recipes.find(x => x.id === val);
       if (!r) break;
       const unita = unitaStorico[val] || 'porz';
-      const q = porzioniStorico[val] || (unita === 'g' ? pesoPorzione(r) : 1);
+      const q = porzioniStorico[val] || (unita === 'g' ? pesoPorzione(r) : 0.5);
       const porzioni = unita === 'g'
         ? Math.max(0.5, Math.round(q / pesoPorzione(r) * 10) / 10)
         : q;
@@ -12596,7 +13170,14 @@ document.addEventListener('click', e => {
       save(); renderProfile(); renderHome();
       break;
     }
-    case 'fav': toggleFav(val); break;
+    case 'fav': {
+      toggleFav(val);
+      const st = document.getElementById('detail-stella');
+      if (st && st.dataset.val === val) st.classList.toggle('on', isFav(val));
+      document.querySelectorAll('.scheda-stella[data-val="' + val + '"]')
+        .forEach(x => x.classList.toggle('on', isFav(val)));
+      break;
+    }
     case 'fav-filter': S.ui.fav = !S.ui.fav; if (S.ui.fav) S.ui.freq = false; save(); renderHome(); renderFiltri(); break;
     case 'freq-filter': S.ui.freq = !S.ui.freq; if (S.ui.freq) S.ui.fav = false; save(); renderHome(); renderFiltri(); break;
     case 'shop-add': {
@@ -12710,14 +13291,9 @@ document.addEventListener('click', e => {
       const inp = F('shop-add');
       const n = (inp.value || '').trim();
       if (!n) { inp.focus(); break; }
-      let q = parseFloat(F('shop-qta').value);
+      const q = parseFloat(F('shop-qta').value);
       const u = F('shop-unita').textContent.trim();
-      const buona = isFinite(q) && q > 0;
-      const etichetta = buona ? (u === 'pz' ? String(q) : u === 'kg' ? q + ' kg' : q + ' g') : '';
-      if (u === 'kg' && buona) q = q * 1000;      // dentro si tiene tutto in grammi
-      S.shopExtra = S.shopExtra || [];
-      S.shopExtra.push({ id: 'x' + Date.now().toString(36), n: n.toLowerCase(),
-        qta: buona ? q : null, unita: u === 'pz' ? 'pz' : 'g', qty: etichetta });
+      spesaVoceManuale(n, q, u);
       inp.value = '';
       F('shop-qta').value = '';
       document.getElementById('shop-suggest').innerHTML = '';
@@ -12744,7 +13320,13 @@ document.addEventListener('click', e => {
     case 'shop-bought': {
       const presi = shoppingItems().filter(v => (S.shopDone || {})[v.key]);
       if (!presi.length) { toast('Spunta quello che hai preso.'); break; }
-      if (!armed(t, 'Conferma ' + presi.length + ' voci')) break;
+      if (!t.dataset.confermato) {
+        chiedi('Chiudo la spesa e porto ' + presi.length
+          + (presi.length === 1 ? ' voce' : ' voci') + ' in dispensa?', () => {
+          t.dataset.confermato = '1'; t.click(); delete t.dataset.confermato;
+        });
+        break;
+      }
 
       pushUndo('Spesa completata');
       // Quello che hai comprato entra in dispensa: la spesa alimenta il frigo.
@@ -12821,6 +13403,98 @@ document.addEventListener('click', e => {
       if (val.startsWith('abbina:') && currentDetailId) openDetail(currentDetailId, true);
       else renderAll();
       break;
+    case 'notifiche-apri':
+      aggiornaNotificheScadenze();
+      renderNotifiche();
+      openModal('modal-notifiche');
+      break;
+    case 'notifica-scegli': {
+      const n = (S.notifiche || []).find(x => x.id === val);
+      if (n) { n.scelta = !n.scelta; save(); renderNotifiche(); }
+      break;
+    }
+    case 'notifica-via':
+      S.notifiche = (S.notifiche || []).filter(x => x.id !== val);
+      save(); renderNotifiche();
+      break;
+    case 'notifica-ricette': {
+      const n = (S.notifiche || []).find(x => x.id === val);
+      if (!n) break;
+      n.letta = true; save();
+      closeModals();
+      document.querySelector('[data-act=tab][data-val=view-search]').click();
+      const campo = document.getElementById('search-input');
+      campo.value = n.nome;
+      campo.dispatchEvent(new Event('input', { bubbles: true }));
+      break;
+    }
+    case 'notifiche-lette': {
+      const scelte = (S.notifiche || []).filter(x => x.scelta);
+      (scelte.length ? scelte : (S.notifiche || [])).forEach(x => { x.letta = true; x.scelta = false; });
+      save(); renderNotifiche();
+      break;
+    }
+    case 'conferma-si': {
+      const fai = dopoConferma; dopoConferma = null;
+      closeModals();
+      if (fai) fai();
+      break;
+    }
+    case 'conferma-no': dopoConferma = null; closeModals(); break;
+    case 'voce-campo': dettaNelCampo(val); break;
+    case 'detta-apri': apriDettatura(); break;
+    case 'detta-chiudi':
+      fermaVocale();
+      chiudiModal('modal-dettatura');
+      break;
+    case 'detta-fine': {
+      fermaVocale();
+      const testo = vocaleTesto || document.getElementById('dettatura-testo').textContent;
+      dettaturaMostra('righe');
+      righeDettatura(testo.trim()
+        ? interpretaDettato(testo)
+        : [{ nome: '', detto: '', sicuro: false, proposta: null, q: '', u: 'g' }]);
+      break;
+    }
+    case 'detta-riprova': apriDettatura(); break;
+    case 'detta-riga': {
+      const box = document.getElementById('dettatura-lista');
+      const div = document.createElement('div');
+      div.innerHTML = righeDettaturaUna();
+      box.appendChild(div.firstElementChild);
+      break;
+    }
+    case 'detta-unita': {
+      t.textContent = t.textContent === 'g' ? 'kg' : (t.textContent === 'kg' ? 'pz' : 'g');
+      break;
+    }
+    case 'detta-forse': {
+      const riga = t.closest('.riga-dettata');
+      riga.querySelector('.det-nome').value = val;
+      riga.classList.remove('incerta');
+      riga.querySelector('.det-nota').textContent = 'riconosciuto';
+      break;
+    }
+    case 'detta-togli':
+      t.closest('.riga-dettata').remove();
+      break;
+    case 'detta-salva': {
+      const righe = [...document.querySelectorAll('#dettatura-lista .riga-dettata')]
+        .map(r => ({
+          nome: r.querySelector('.det-nome').value.trim(),
+          q: parseFloat(r.querySelector('.det-q').value),
+          u: r.querySelector('.det-u').textContent.trim()
+        }))
+        .filter(r => r.nome);
+      if (!righe.length) { toast('Niente da aggiungere.'); break; }
+      pushUndo('Spesa dettata: ' + righe.length + (righe.length === 1 ? ' voce' : ' voci'));
+      // ogni voce passa dallo STESSO salvataggio dell'inserimento a mano
+      righe.forEach(r => spesaVoceManuale(r.nome, r.q, r.u));
+      save(); renderFridge();
+      closeModals();
+      toast(righe.length + (righe.length === 1 ? ' voce aggiunta' : ' voci aggiunte') + ' alla lista.', 'Annulla');
+      break;
+    }
     case 'storia-indietro': vaiIndietro(); break;
     case 'storia-avanti': vaiAvanti(); break;
 
@@ -13017,6 +13691,12 @@ document.addEventListener('click', e => {
       break;
     }
     case 'frigo-sez': S.ui.frigoSez = val; save(); renderFridge(); window.scrollTo(0, 0); break;
+    case 'prof-riduci': {
+      S.ui.riquadriChiusi = S.ui.riquadriChiusi || {};
+      S.ui.riquadriChiusi[val] = !S.ui.riquadriChiusi[val];
+      save(); aggiornaRiquadriChiusi();
+      break;
+    }
     case 'prof-sez': S.ui.profSez = val; save(); renderProfile(); window.scrollTo(0, 0); break;
     case 'pick-profile': {
       const prima = S.ui.active;
@@ -13407,7 +14087,48 @@ window.fitmealsArte = { ARTE: ARTE, arteRicetta: arteRicetta };
 window.fitmealsTimers = { lista: () => TIMERS, scadi: () => TIMERS.forEach(t => { t.end = Date.now() - 10; }) };
 window.fitmealsPlan = () => dayPlan();
 
+/* La finestra della ricetta si chiude anche trascinandola in basso, come
+   un foglio: la segui col dito, e oltre la soglia se ne va. */
+(function () {
+  const modale = document.getElementById('modal-detail');
+  if (!modale) return;
+  const foglio = modale.querySelector('.modal-content');
+  if (!foglio) return;
+  let y0 = null, dy = 0;
+
+  foglio.addEventListener('touchstart', e => {
+    if (foglio.scrollTop > 8) { y0 = null; return; }
+    y0 = e.touches[0].clientY; dy = 0;
+    foglio.style.transition = 'none';
+  }, { passive: true });
+
+  foglio.addEventListener('touchmove', e => {
+    if (y0 === null) return;
+    dy = Math.max(0, e.touches[0].clientY - y0);
+    if (dy > 0) foglio.style.transform = 'translateY(' + dy + 'px)';
+  }, { passive: true });
+
+  foglio.addEventListener('touchend', () => {
+    if (y0 === null) return;
+    foglio.style.transition = '';
+    if (dy > 90) {
+      foglio.style.transform = 'translateY(100vh)';
+      setTimeout(() => {
+        foglio.style.transform = '';
+        istanzaAperta = null;
+        const x = modale.querySelector('[data-act=close-modal]');
+        if (x) x.click();
+      }, 180);
+    } else {
+      foglio.style.transform = '';
+    }
+    y0 = null; dy = 0;
+  });
+})();
+
+aggiornaNotificheScadenze();
 renderAll();
+aggiornaCampanella();
 
 /* Avviso sugli avanzi che stanno per scadere: una volta al giorno, non a ogni
    apertura, altrimenti diventa rumore e si smette di leggerlo. */
