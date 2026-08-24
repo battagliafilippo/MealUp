@@ -2530,6 +2530,9 @@ h3{font-weight:600;letter-spacing:-.018em}
         </div>
         <div id="disp-suggest" class="tags-container"></div>
         <div class="riga-comandi" style="margin:8px 0 0">
+          <button type="button" class="chip" data-act="detta-apri" data-val="dispensa"
+            title="Detta di fila quello che hai comprato: lo metto in dispensa">
+            <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg>Detta</button>
           <button type="button" class="chip" data-act="etichetta-apri" title="Un prodotto che le ricette non conoscono: leggo l'etichetta">
             <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;vertical-align:-2px;margin-right:4px"><path d="M4 7V5.5A1.5 1.5 0 0 1 5.5 4H7M17 4h1.5A1.5 1.5 0 0 1 20 5.5V7M20 17v1.5a1.5 1.5 0 0 1-1.5 1.5H17M7 20H5.5A1.5 1.5 0 0 1 4 18.5V17M8 9v6M11 9v6M14.5 9v6M17 9v3"/></svg>Etichetta</button>
           <button type="button" class="sorpresa" data-act="sorprendimi" data-val="dispensa">
@@ -2997,13 +3000,13 @@ h3{font-weight:600;letter-spacing:-.018em}
       </div>
 
       <div id="dettatura-righe" hidden>
-        <p class="hint">Controlla, correggi o togli: poi aggiungo tutto alla lista,
+        <p class="hint" id="dettatura-righe-hint">Controlla, correggi o togli: poi aggiungo tutto alla lista,
           come se l'avessi scritto a mano.</p>
         <div id="dettatura-lista"></div>
         <button type="button" class="chip mini" data-act="detta-riga">+ aggiungi una riga</button>
         <div class="row" style="margin-top:12px">
           <button type="button" class="btn-ghost" data-act="detta-riprova">Riprova</button>
-          <button type="button" class="btn-primary" data-act="detta-salva">Aggiungi alla spesa</button>
+          <button type="button" class="btn-primary" data-act="detta-salva" id="detta-salva-btn">Aggiungi alla spesa</button>
         </div>
       </div>
     </div>
@@ -11162,10 +11165,24 @@ function spezzaElencoDettato(seg) {
   // Una finestra di nome non puo' scavalcare un numero o un'unita':
   // "mozzarella due" somiglia a "mozzarella", ma il "due" apre la voce dopo.
   const finestraPulita = (da, largh) => {
-    for (let k = da + (da === i ? 1 : 0); k < da + largh; k++) {
+    for (let k = da + 1; k < da + largh; k++) {
       if (DETTATO_NUMERO.test(parole[k]) || DETTATO_UNITA.test(parole[k])) return false;
     }
     return true;
+  };
+
+  // Fra le finestre possibili vince quella che il vocabolario riconosce
+  // MEGLIO, non la piu' lunga: "cipolla passata" somiglia a "cipolla rossa"
+  // (0.73), ma "cipolla" da sola e' esatta e lascia la passata al pomodoro.
+  const finestraMigliore = da => {
+    let largh = 0, punte = 0;
+    for (const l of [3, 2, 1]) {
+      if (da + l > parole.length) continue;
+      if (l > 1 && !finestraPulita(da, l)) continue;
+      const r = riconosciIngrediente(parole.slice(da, da + l).join(' '));
+      if (r.punteggio > punte + 1e-9) { punte = r.punteggio; largh = l; }
+    }
+    return punte >= 0.72 ? largh : 0;
   };
 
   while (i < parole.length) {
@@ -11177,27 +11194,15 @@ function spezzaElencoDettato(seg) {
           && (parole[fine + 1] === 'mezzo' || parole[fine + 1] === 'mezza')) fine += 2;
       if (fine < parole.length && DETTATO_UNITA.test(parole[fine])) fine += 1;
       if (fine < parole.length && (parole[fine] === 'di' || parole[fine] === 'd')) fine += 1;
-      // il nome: la finestra piu' lunga che il vocabolario riconosce
-      let prese = 0;
-      for (const largh of [3, 2, 1]) {
-        if (fine + largh > parole.length) continue;
-        if (largh > 1 && !finestraPulita(fine, largh)) continue;
-        const r = riconosciIngrediente(parole.slice(fine, fine + largh).join(' '));
-        if (r.punteggio >= 0.72) { prese = largh; break; }
-      }
+      // il nome: la finestra che il vocabolario riconosce meglio
+      let prese = finestraMigliore(fine);
       if (!prese) prese = Math.min(1, parole.length - fine);
       voci.push(parole.slice(i, fine + prese).join(' '));
       i = fine + prese;
       continue;
     }
-    // 2. una finestra di parole che il vocabolario riconosce e' una voce
-    let prese = 0;
-    for (const largh of [3, 2, 1]) {
-      if (i + largh > parole.length) continue;
-      if (largh > 1 && !finestraPulita(i, largh)) continue;
-      const r = riconosciIngrediente(parole.slice(i, i + largh).join(' '));
-      if (r.punteggio >= 0.72) { prese = largh; break; }
-    }
+    // 2. la finestra di parole che il vocabolario riconosce meglio e' una voce
+    let prese = finestraMigliore(i);
     if (prese) {
       chiudiResto();
       voci.push(parole.slice(i, i + prese).join(' '));
@@ -11238,6 +11243,14 @@ let vocale = null;          // l'oggetto SpeechRecognition, quando c'e'
 let vocaleTesto = '';       // quello che ha capito finora
 
 function dettaturaMostra(fase) {
+  // le scritte della fase delle righe seguono la destinazione
+  const hintRighe = document.getElementById('dettatura-righe-hint');
+  const salvaBtn = document.getElementById('detta-salva-btn');
+  if (hintRighe) hintRighe.textContent = dettaturaDove === 'dispensa'
+    ? 'Controlla, correggi o togli: poi metto tutto in dispensa, come se l\'avessi scritto a mano.'
+    : 'Controlla, correggi o togli: poi aggiungo tutto alla lista, come se l\'avessi scritto a mano.';
+  if (salvaBtn) salvaBtn.textContent = dettaturaDove === 'dispensa'
+    ? 'Metti in dispensa' : 'Aggiungi alla spesa';
   document.getElementById('dettatura-ascolto').hidden = fase !== 'ascolto';
   document.getElementById('dettatura-righe').hidden = fase !== 'righe';
   const scan = document.getElementById('dettatura-scan');
@@ -11253,11 +11266,12 @@ function dettaturaMostra(fase) {
     ? 'Scansiona lo scontrino'
     : (fase === 'righe' && modoInserimento === 'scontrino')
       ? 'Dallo scontrino'
-      : 'Detta la spesa';
+      : dettaturaDove === 'dispensa' ? 'Riempi la dispensa' : 'Detta la spesa';
 }
 
-function apriDettatura() {
+function apriDettatura(dove) {
   modoInserimento = 'voce';
+  dettaturaDove = dove === 'dispensa' ? 'dispensa' : 'spesa';
   vocaleTesto = '';
   const vivo = document.getElementById('dettatura-testo');
   vivo.textContent = '';
@@ -11342,6 +11356,7 @@ function righeDettatura(righe) {
    schermata di conferma, stesso salvataggio, stesse scadenze. */
 
 var modoInserimento = 'voce';   // 'voce' | 'scontrino': cambia solo le scritte
+var dettaturaDove = 'spesa';    // 'spesa' | 'dispensa': dove finiscono le voci
 
 /* Le righe che su uno scontrino non sono mai un prodotto. */
 const SCON_RUMORE = new RegExp(
@@ -11503,6 +11518,7 @@ function cameraProbabile() {
 
 function apriScontrino() {
   modoInserimento = 'scontrino';
+  dettaturaDove = 'spesa';
   if (!window.FileReader) {
     scontrinoRipiego('Questo browser non sa aprire i file.');
     return;
@@ -11797,7 +11813,9 @@ document.addEventListener('change', ev => {
 window.fitmealsVoce = {
   interpreta: interpretaDettato,
   riconosci: riconosciIngrediente,
-  daTesto: t => {
+  daTesto: (t, dove) => {
+    modoInserimento = 'voce';
+    dettaturaDove = dove === 'dispensa' ? 'dispensa' : 'spesa';
     dettaturaMostra('righe');
     righeDettatura(interpretaDettato(t));
     openModal('modal-dettatura');
@@ -14594,7 +14612,7 @@ document.addEventListener('click', e => {
       if (val === 'incinta' && prof.incinta) toast('Fabbisogno alzato di 300 kcal, niente deficit, niente alcol e crudi.');
       break;
     }
-    case 'detta-apri': apriDettatura(); break;
+    case 'detta-apri': apriDettatura(val); break;
     case 'spesa-a-mano': {
       const inp = document.getElementById('shop-add');
       if (inp) { inp.focus(); inp.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
@@ -14656,7 +14674,7 @@ document.addEventListener('click', e => {
     case 'detta-riprova':
       // riprovare rifa' quello che stavi facendo: la foto o la voce
       if (modoInserimento === 'scontrino') apriScontrino();
-      else apriDettatura();
+      else apriDettatura(dettaturaDove);
       break;
     case 'detta-riga': {
       const box = document.getElementById('dettatura-lista');
@@ -14688,6 +14706,22 @@ document.addEventListener('click', e => {
         }))
         .filter(r => r.nome);
       if (!righe.length) { toast('Niente da aggiungere.'); break; }
+      if (dettaturaDove === 'dispensa') {
+        // ogni voce passa dallo STESSO salvataggio del + della dispensa
+        pushUndo('Dispensa dettata: ' + righe.length + (righe.length === 1 ? ' voce' : ' voci'));
+        righe.forEach(r => {
+          let q = r.q;
+          if (r.u === 'kg' && isFinite(q)) q = q * 1000;
+          registraAcquisto(r.nome, isFinite(q) && q > 0 ? q : null, r.u === 'pz' ? 'pz' : 'g');
+          freschezza()[norm(r.nome)].posto = 'dispensa';
+          if (!S.pantry.some(x => norm(x) === norm(r.nome))) S.pantry.push(r.nome);
+          if (!S.myIngredients.some(m => norm(m) === norm(r.nome))) S.myIngredients.push(r.nome);
+        });
+        save(); renderAll();
+        closeModals();
+        toast(righe.length + (righe.length === 1 ? ' voce' : ' voci') + ' in dispensa.', 'Annulla');
+        break;
+      }
       pushUndo('Spesa dettata: ' + righe.length + (righe.length === 1 ? ' voce' : ' voci'));
       // ogni voce passa dallo STESSO salvataggio dell'inserimento a mano
       righe.forEach(r => spesaVoceManuale(r.nome, r.q, r.u));
