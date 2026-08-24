@@ -786,6 +786,17 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
   background:var(--tema, var(--accent-primary));transition:width .3s ease}
 .scan-passo{font-size:.85rem;color:var(--text-tertiary);margin:0}
 .scan-scelte{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.scan-via{display:flex;flex-direction:column;align-items:center;gap:7px;
+  padding:16px 10px;font-size:.85rem;font-weight:600;line-height:1.25;text-align:center}
+.scan-via svg{width:26px;height:26px;fill:none;stroke:var(--tema, var(--accent-primary));
+  stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.scan-via em{display:block;font-style:normal;font-size:.7rem;font-weight:400;
+  color:var(--text-tertiary);margin-top:2px}
+.scan-textarea{width:100%;box-sizing:border-box;padding:12px 14px;font:inherit;
+  font-size:.85rem;line-height:1.5;color:var(--text-primary);
+  background:var(--v1-fondo);border:var(--v1-bordo);border-radius:14px;
+  resize:vertical;outline:none}
+.scan-textarea:focus-visible{border-color:color-mix(in srgb, var(--tema, var(--accent-primary)) 55%, transparent)}
 .scheda{position:relative}
 .scheda .scheda-titolo{padding-right:26px}
 /* Il comando delle persone, bello grande: si tocca col pollice. */
@@ -2924,6 +2935,39 @@ h3{font-weight:600;letter-spacing:-.018em}
         <p id="dettatura-testo" class="dettatura-testo"></p>
         <button type="button" class="btn-primary full-width" data-act="detta-fine">Ho finito</button>
       </div>
+      <div id="dettatura-scan-scegli" hidden>
+        <p class="hint">Da dove arriva lo scontrino?</p>
+        <div class="scan-scelte">
+          <button type="button" class="btn-ghost scan-via" data-act="scan-scatta">
+            <svg viewBox="0 0 24 24"><path d="M4 8.5l1.2-2.1a1.6 1.6 0 0 1 1.4-.8h2.8a1.6 1.6 0 0 1 1.4.8L12 8.5h5.5A1.5 1.5 0 0 1 19 10v8a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 18v-8a1.5 1.5 0 0 1-1.5-1.5z" transform="translate(0.5 -1.5)"/><circle cx="12" cy="13" r="3.4"/></svg>
+            <span>Scatta una foto</span>
+          </button>
+          <button type="button" class="btn-ghost scan-via" data-act="scontrino-galleria">
+            <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4.5 17l4.5-4.5 3 3 3.5-3.5 4 4"/></svg>
+            <span>Dalla galleria</span>
+          </button>
+          <button type="button" class="btn-ghost scan-via" data-act="scan-virtuale">
+            <svg viewBox="0 0 24 24"><path d="M7 3.5h7l4 4V19a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 19V5a1.5 1.5 0 0 1 1-1.5z"/><path d="M14 3.5V8h4.5"/><path d="M9 12.5h6M9 15.5h4"/></svg>
+            <span>Scontrino virtuale<br><em>PDF o file di testo</em></span>
+          </button>
+          <button type="button" class="btn-ghost scan-via" data-act="scan-incolla">
+            <svg viewBox="0 0 24 24"><rect x="6" y="4.5" width="12" height="15" rx="2"/><path d="M9.5 4.5a2.5 2.5 0 0 1 5 0"/><path d="M9 10h6M9 13h6M9 16h3.5"/></svg>
+            <span>Incolla il testo</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="dettatura-scan-testo" hidden>
+        <p class="hint">Incolla qui le righe dello scontrino, o dell'email col riepilogo
+          della spesa: le leggo come se le avessi fotografate.</p>
+        <textarea id="scan-testo-campo" class="scan-textarea" rows="7"
+          placeholder="LATTE INTERO 1L  1,49&#10;PANE 0,500 kg  2,10&#10;..."></textarea>
+        <div class="row" style="margin-top:12px">
+          <button type="button" class="btn-ghost" data-act="scan-scegli-torna">Indietro</button>
+          <button type="button" class="btn-primary" data-act="scan-leggi-testo">Leggi lo scontrino</button>
+        </div>
+      </div>
+
       <div id="dettatura-scan" hidden>
         <div class="scan-corpo">
           <img id="scan-anteprima" class="scan-anteprima" alt="" hidden>
@@ -11014,10 +11058,14 @@ function dettaturaMostra(fase) {
   document.getElementById('dettatura-righe').hidden = fase !== 'righe';
   const scan = document.getElementById('dettatura-scan');
   const scanKo = document.getElementById('dettatura-scan-ko');
+  const scanScegli = document.getElementById('dettatura-scan-scegli');
+  const scanTesto = document.getElementById('dettatura-scan-testo');
   if (scan) scan.hidden = fase !== 'scan';
   if (scanKo) scanKo.hidden = fase !== 'scan-ko';
+  if (scanScegli) scanScegli.hidden = fase !== 'scan-scegli';
+  if (scanTesto) scanTesto.hidden = fase !== 'scan-testo';
   const tit = document.getElementById('dettatura-titolo');
-  if (tit) tit.textContent = (fase === 'scan' || fase === 'scan-ko')
+  if (tit) tit.textContent = (fase === 'scan' || fase === 'scan-ko' || fase === 'scan-scegli' || fase === 'scan-testo')
     ? 'Scansiona lo scontrino'
     : (fase === 'righe' && modoInserimento === 'scontrino')
       ? 'Dallo scontrino'
@@ -11116,6 +11164,7 @@ const SCON_RUMORE = new RegExp(
   '\\b(totale|tot|subtotale|imponibile|iva|resto|contante|contanti|carta|bancomat|' +
   'pagamento|pagato|importo|scontrino|documento|commerciale|registratore|matricola|' +
   'cassa|cassiere|operatore|codice|fiscale|piva|partita|sconto|sconti|punti|fidelity|' +
+  'ordine|ordini|fattura|ricevuta|cliente|spedizione|consegna|riepilogo|corriere|' +
   'tessera|saldo|arrivederci|grazie|prezzo|articoli|reso|rimborso|omaggio|' +
   'via|viale|piazza|corso|tel|telefono|www|http|srl|spa|snc|supermercato|market)\\b', 'i');
 
@@ -11271,21 +11320,181 @@ function cameraProbabile() {
 function apriScontrino() {
   modoInserimento = 'scontrino';
   if (!window.FileReader) {
-    scontrinoRipiego('Questo browser non sa aprire le immagini.');
+    scontrinoRipiego('Questo browser non sa aprire i file.');
     return;
   }
+  // Non piu' dritti alla fotocamera: lo scontrino puo' essere di carta
+  // (foto o galleria) oppure virtuale (il PDF o l'email del supermercato).
+  dettaturaMostra('scan-scegli');
+  openModal('modal-dettatura');
+  // se non c'e' una fotocamera, il tasto della foto non promette il falso
   cameraProbabile().then(ok => {
-    const campo = document.getElementById(ok ? 'scontrino-foto' : 'scontrino-file');
-    if (!campo) { scontrinoRipiego('Non riesco ad aprire la fotocamera.'); return; }
-    if (!ok) toast('Niente fotocamera qui: scegli una foto dello scontrino.');
-    campo.value = '';
-    campo.click();
+    const b = document.querySelector('[data-act="scan-scatta"]');
+    if (b) b.style.display = ok ? '' : 'none';
   });
+}
+
+const PDF_FONTI = [
+  'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js',
+  'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js'
+];
+const PDF_WORKER_FONTI = [
+  'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js',
+  'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'
+];
+
+/* pdf.js (Mozilla, open source, gratis) caricato solo quando serve, con piu'
+   fonti di riserva come il lettore OCR. Il worker viene ripreso come blob:
+   i browser non accettano worker da un'altra origine. */
+let pdfLibreria = null;
+function caricaPdf() {
+  if (window.pdfjsLib && window.pdfjsLib.GlobalWorkerOptions.workerSrc) {
+    return Promise.resolve(window.pdfjsLib);
+  }
+  if (pdfLibreria) return pdfLibreria;
+  pdfLibreria = new Promise((risolvi, rifiuta) => {
+    let i = 0;
+    const prova = () => {
+      if (i >= PDF_FONTI.length) { pdfLibreria = null; rifiuta(new Error('pdf-non-raggiungibile')); return; }
+      const sc = document.createElement('script');
+      sc.src = PDF_FONTI[i++];
+      sc.async = true;
+      sc.onload = () => window.pdfjsLib ? risolvi(window.pdfjsLib) : prova();
+      sc.onerror = () => { sc.remove(); prova(); };
+      document.head.appendChild(sc);
+    };
+    prova();
+  }).then(lib => {
+    let j = 0;
+    const worker = () => fetch(PDF_WORKER_FONTI[j++])
+      .then(r => { if (!r.ok) throw new Error('http ' + r.status); return r.blob(); })
+      .then(b => { lib.GlobalWorkerOptions.workerSrc = URL.createObjectURL(b); return lib; })
+      .catch(() => j < PDF_WORKER_FONTI.length ? worker() : Promise.reject(new Error('pdf-non-raggiungibile')));
+    return worker();
+  });
+  return pdfLibreria;
+}
+
+/* Le parole di una pagina PDF tornano righe: si raggruppano per altezza,
+   con una tolleranza, e si leggono da sinistra a destra. */
+function righeDaPaginaPdf(contenuto) {
+  const righe = [];
+  contenuto.items.forEach(item => {
+    const testo = (item.str || '').trim();
+    if (!testo) return;
+    const y = item.transform[5];
+    const riga = righe.find(r => Math.abs(r.y - y) < 3.5);
+    if (riga) riga.pezzi.push({ x: item.transform[4], t: testo });
+    else righe.push({ y: y, pezzi: [{ x: item.transform[4], t: testo }] });
+  });
+  return righe
+    .sort((a, b) => b.y - a.y)
+    .map(r => r.pezzi.sort((x, y) => x.x - y.x).map(p => p.t).join(' '));
+}
+
+/* Lo scontrino virtuale: un PDF con il testo dentro si legge direttamente,
+   senza OCR; uno scansionato passa dalle pagine disegnate su tela e poi
+   dallo stesso lettore OCR della foto. */
+function leggiScontrinoPdf(file) {
+  modoInserimento = 'scontrino';
+  dettaturaMostra('scan');
+  openModal('modal-dettatura');
+  const anteprima = document.getElementById('scan-anteprima');
+  if (anteprima) anteprima.hidden = true;
+  scanPasso('Apro il PDF…', 8);
+
+  file.arrayBuffer()
+    .then(dati => caricaPdf().then(lib => lib.getDocument({ data: dati }).promise))
+    .then(doc => {
+      scanPasso('Leggo il PDF…', 25);
+      const pagine = Math.min(doc.numPages, 6);
+      let catena = Promise.resolve([]);
+      for (let n = 1; n <= pagine; n++) {
+        catena = catena.then(righe =>
+          doc.getPage(n)
+            .then(p => p.getTextContent())
+            .then(c => { scanPasso('Leggo il PDF…', 25 + (n / pagine) * 45); return righe.concat(righeDaPaginaPdf(c)); }));
+      }
+      return catena.then(righe => ({ doc, righe, pagine }));
+    })
+    .then(({ doc, righe, pagine }) => {
+      const testo = righe.join('\n');
+      // se il testo c'e', siamo a posto: e' la via maestra dell'e-receipt
+      if (testo.replace(/\s/g, '').length >= 25) {
+        scontrinoRigheProva(testo);
+        return null;
+      }
+      // PDF-fotografia: pagine su tela, poi lo stesso OCR della foto
+      scanPasso('Il PDF è una scansione: leggo l’immagine…', 30);
+      let catena = Promise.resolve('');
+      for (let n = 1; n <= pagine; n++) {
+        catena = catena.then(gia =>
+          doc.getPage(n).then(pg => {
+            const vp = pg.getViewport({ scale: 2 });
+            const tela = document.createElement('canvas');
+            tela.width = vp.width; tela.height = vp.height;
+            return pg.render({ canvasContext: tela.getContext('2d'), viewport: vp }).promise
+              .then(() => caricaOcr())
+              .then(T => T.createWorker('ita', 1, {
+                logger: m => { if (m.status === 'recognizing text')
+                  scanPasso('Leggo la scansione…', 35 + ((n - 1 + m.progress) / pagine) * 60); }
+              }))
+              .then(w => w.recognize(tela)
+                .then(res => { try { w.terminate(); } catch (e) {} return gia + '\n' + ((res.data && res.data.text) || ''); })
+                .catch(err => { try { w.terminate(); } catch (e) {} throw err; }));
+          }));
+      }
+      return catena;
+    })
+    .then(testoOcr => { if (testoOcr !== null) scontrinoRigheProva(testoOcr); })
+    .catch(err => {
+      const senzaRete = err && String(err.message || err).indexOf('non-raggiungibile') >= 0;
+      scontrinoRipiego(senzaRete
+        ? 'Il lettore dei PDF si scarica la prima volta e adesso non c’è rete.'
+        : 'Non sono riuscito a leggere questo PDF.');
+    });
+}
+
+/* Il file di testo (l'email salvata, l'export del supermercato). */
+function leggiScontrinoTestoFile(file) {
+  modoInserimento = 'scontrino';
+  const lettore = new FileReader();
+  lettore.onload = () => scontrinoRigheProva(String(lettore.result || ''));
+  lettore.onerror = () => scontrinoRipiego('Non sono riuscito ad aprire questo file.');
+  lettore.readAsText(file);
+}
+
+/* Il punto d'arrivo comune di OGNI scontrino - foto, PDF, testo incollato:
+   le stesse righe modificabili, e nulla si salva prima del tuo ok. */
+function scontrinoRigheProva(testo) {
+  modoInserimento = 'scontrino';
+  const righe = interpretaScontrino(testo);
+  if (!righe.length) {
+    scontrinoRipiego('Qui dentro non ho riconosciuto nessun prodotto.');
+    return;
+  }
+  dettaturaMostra('righe');
+  righeDettatura(righe);
+  openModal('modal-dettatura');
+  const letti = righe.filter(r => r.sicuro).length;
+  toast(righe.length + (righe.length === 1 ? ' riga letta' : ' righe lette')
+    + (letti < righe.length ? ' · ' + (righe.length - letti) + ' da controllare' : ''));
 }
 
 /* Dalla foto alle righe: l'unica parte nuova. Da qui in poi e' la dettatura. */
 function leggiScontrino(file) {
   if (!file) return;
+  // lo scontrino virtuale prende la sua strada
+  if (file.type === 'application/pdf' || /\.pdf$/i.test(file.name || '')) {
+    leggiScontrinoPdf(file);
+    return;
+  }
+  if ((file.type && file.type.indexOf('text/') === 0) || /\.txt$/i.test(file.name || '')) {
+    leggiScontrinoTestoFile(file);
+    return;
+  }
   modoInserimento = 'scontrino';
   dettaturaMostra('scan');
   openModal('modal-dettatura');
@@ -11318,18 +11527,14 @@ function leggiScontrino(file) {
     .then(res => {
       scanPasso('Riconosco i prodotti…', 98);
       const testo = (res && res.data && res.data.text) || '';
-      const righe = interpretaScontrino(testo);
       pulisci();
+      const righe = interpretaScontrino(testo);
       if (!righe.length) {
         scontrinoRipiego('Su questo scontrino non ho riconosciuto nessun prodotto: '
           + 'con poca luce o la carta piegata succede.');
         return;
       }
-      dettaturaMostra('righe');
-      righeDettatura(righe);
-      const letti = righe.filter(r => r.sicuro).length;
-      toast(righe.length + (righe.length === 1 ? ' riga letta' : ' righe lette')
-        + (letti < righe.length ? ' · ' + (righe.length - letti) + ' da controllare' : ''));
+      scontrinoRigheProva(testo);
     })
     .catch(err => {
       pulisci();
@@ -11356,7 +11561,7 @@ window.fitmealsScontrino = {
    sta sul documento, cosi' vale anche dopo ogni ridisegno. */
 document.addEventListener('change', ev => {
   const t = ev.target;
-  if (!t || (t.id !== 'scontrino-foto' && t.id !== 'scontrino-file')) return;
+  if (!t || (t.id !== 'scontrino-foto' && t.id !== 'scontrino-file' && t.id !== 'scontrino-virtuale')) return;
   const file = t.files && t.files[0];
   t.value = '';
   if (file) leggiScontrino(file);
@@ -11582,6 +11787,7 @@ function renderShopping() {
     </div>
     <input type="file" id="scontrino-file" accept="image/*" hidden>
     <input type="file" id="scontrino-foto" accept="image/*" capture="environment" hidden>
+    <input type="file" id="scontrino-virtuale" accept="application/pdf,text/plain,.pdf,.txt" hidden>
     <div class="input-group" style="margin-bottom:8px">
       <input type="search" id="shop-add" placeholder="Aggiungi alla lista\u2026"
              autocomplete="off" enterkeyhint="done">
@@ -14094,6 +14300,30 @@ document.addEventListener('click', e => {
       break;
     }
     case 'scontrino-apri': apriScontrino(); break;
+    case 'scan-scatta': {
+      const campo = document.getElementById('scontrino-foto');
+      if (campo) { campo.value = ''; campo.click(); }
+      break;
+    }
+    case 'scan-virtuale': {
+      const campo = document.getElementById('scontrino-virtuale');
+      if (campo) { campo.value = ''; campo.click(); }
+      break;
+    }
+    case 'scan-incolla': {
+      dettaturaMostra('scan-testo');
+      const campo = document.getElementById('scan-testo-campo');
+      if (campo) setTimeout(() => campo.focus(), 60);
+      break;
+    }
+    case 'scan-scegli-torna': dettaturaMostra('scan-scegli'); break;
+    case 'scan-leggi-testo': {
+      const campo = document.getElementById('scan-testo-campo');
+      const testo = campo ? campo.value.trim() : '';
+      if (!testo) { toast('Incolla prima qualche riga.'); break; }
+      scontrinoRigheProva(testo);
+      break;
+    }
     case 'scontrino-galleria': {
       const campo = document.getElementById('scontrino-file');
       if (campo) { campo.value = ''; campo.click(); }
