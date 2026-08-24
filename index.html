@@ -490,6 +490,13 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .shop-item .qty--tua{color:var(--tema, var(--accent-primary));
   background:color-mix(in srgb, var(--tema, var(--accent-primary)) 12%, transparent)}
 .shop-item .qty-vuota{font-style:normal;font-weight:400;color:var(--text-tertiary)}
+.shop-eti{flex:0 0 26px;width:26px;height:26px;border-radius:8px;display:flex;
+  align-items:center;justify-content:center;color:var(--text-tertiary);cursor:pointer;
+  margin-top:-1px}
+.shop-eti svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round}
+.shop-eti:hover{color:var(--tema, var(--accent-primary));
+  background:color-mix(in srgb, var(--tema, var(--accent-primary)) 12%, transparent)}
 .shop-item--qta{display:flex;align-items:center;gap:8px}
 .shop-item--qta input{flex:0 0 84px;width:84px;padding:8px 10px;font:inherit;font-size:.85rem;
   color:var(--text-primary);background:var(--v1-fondo);border:var(--v1-bordo);border-radius:11px;
@@ -827,7 +834,10 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .modal.centro{align-items:center}
 .conferma-box{max-width:340px;margin:auto;text-align:center;padding:22px 18px}
 .conferma-box p{font-size:1.02rem;line-height:1.45;margin-bottom:16px}
-.campanella{position:absolute;top:10px;right:64px;z-index:6;width:42px;height:42px;
+/* La campanella vive nell'header, nella stessa riga del +: allineati
+   per costruzione, non per coordinate. */
+.testa-tasti{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.campanella{position:relative;width:42px;height:42px;flex:0 0 42px;
   border-radius:50%;display:flex;align-items:center;justify-content:center;
   background:var(--v1-fondo);border:var(--v1-bordo);box-shadow:var(--v1-ombra);
   color:var(--text-secondary)}
@@ -2446,7 +2456,14 @@ h3{font-weight:600;letter-spacing:-.018em}
         <span class="subtitle" id="home-sub">I tuoi pasti su misura</span>
         <h1>FitMeals</h1>
       </div>
-      <button type="button" class="icon-btn" data-act="open-form" aria-label="Aggiungi ricetta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></button>
+      <div class="testa-tasti">
+        <button type="button" class="campanella" data-act="notifiche-apri" aria-label="Scadenze di oggi">
+          <svg viewBox="0 0 24 24"><path d="M6 10a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/>
+            <path d="M10 19a2 2 0 0 0 4 0"/></svg>
+          <i id="campanella-conto" hidden></i>
+        </button>
+        <button type="button" class="icon-btn" data-act="open-form" aria-label="Aggiungi ricetta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></button>
+      </div>
     </header>
 
     <div class="pasto-tabs">
@@ -2455,12 +2472,6 @@ h3{font-weight:600;letter-spacing:-.018em}
       <button type="button" class="pasto-tab" data-act="pasto-vai" data-val="2">Cena</button>
       <span class="pasto-barra"></span>
     </div>
-
-    <button type="button" class="campanella" data-act="notifiche-apri" aria-label="Scadenze di oggi">
-      <svg viewBox="0 0 24 24"><path d="M6 10a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/>
-        <path d="M10 19a2 2 0 0 0 4 0"/></svg>
-      <i id="campanella-conto" hidden></i>
-    </button>
 
     <div class="anello-box" id="anello-unico"></div>
 
@@ -11220,6 +11231,10 @@ function spezzaElencoDettato(seg) {
 /* Il testo dettato intero -> le righe della schermata di conferma. */
 function interpretaDettato(testo) {
   const righe = [];
+  // Chi ha detto le virgole ha gia' segnato i confini: i suoi segmenti non
+  // si rispezzano, sennò "crackers di farro selvaggio" diventerebbe tre voci.
+  // Il ritaglio sul vocabolario vale solo per il dettato tutto di fila.
+  const senzaConfini = !/[,;.]|\s(?:e|ed|poi|piu|pi\u00f9)\s/i.test(String(testo));
   String(testo)
     .split(/[,;.]| e | ed | poi | piu | pi\u00f9 /i)
     .map(x => x.trim()).filter(Boolean)
@@ -11227,7 +11242,7 @@ function interpretaDettato(testo) {
       const riga = rigaDaSegmento(seg);
       // Se la voce cosi' com'e' non convince, forse e' un elenco dettato
       // senza virgole: si prova a ritagliarlo sul vocabolario.
-      if (!riga.sicuro && seg.split(/\s+/).length >= 2) {
+      if (senzaConfini && !riga.sicuro && seg.split(/\s+/).length >= 2) {
         const pezzi = spezzaElencoDettato(seg);
         if (pezzi) {
           pezzi.forEach(p => righe.push(rigaDaSegmento(p)));
@@ -11357,6 +11372,7 @@ function righeDettatura(righe) {
 
 var modoInserimento = 'voce';   // 'voce' | 'scontrino': cambia solo le scritte
 var dettaturaDove = 'spesa';    // 'spesa' | 'dispensa': dove finiscono le voci
+var etichettaVerso = 'dispensa'; // 'dispensa' | 'valori': cosa fa il salvataggio
 
 /* Le righe che su uno scontrino non sono mai un prodotto. */
 const SCON_RUMORE = new RegExp(
@@ -12010,11 +12026,18 @@ function renderShopping() {
         <button type="button" class="chip mini active" data-act="shopqta-salva" data-val="${esc(v.key)}">ok</button>
       </div>`;
     }
+    // il codice a barre compare solo sui prodotti di cui l'app non conosce
+    // ancora i valori: letta l'etichetta una volta, sparisce
+    const senzaValori = !tabellaDi(v.n);
     return `
     <button type="button" class="shop-item ${done[v.key] ? 'done' : ''} ${v.have && !done[v.key] ? 'have' : ''}"
             data-act="${modifica ? 'shop-reparto' : 'shop-check'}" data-val="${esc(modifica ? v.n : v.key)}">
       <span class="box">${done[v.key] ? '\u2713' : ''}</span>
       <span class="txt">${esc(v.n)}${v.da.length ? `<span class="from">${esc(v.da.join(', '))}</span>` : ''}</span>
+      ${senzaValori && !modifica ? `<span class="shop-eti" data-act="etichetta-apri"
+        data-val="${esc(v.n)}" data-verso="valori" role="button"
+        aria-label="Leggi l'etichetta di ${esc(v.n)}" title="Valori nutrizionali dall'etichetta">
+        <svg viewBox="0 0 24 24"><path d="M4 7V5.5A1.5 1.5 0 0 1 5.5 4H7M17 4h1.5A1.5 1.5 0 0 1 20 5.5V7M20 17v1.5a1.5 1.5 0 0 1-1.5 1.5H17M7 20H5.5A1.5 1.5 0 0 1 4 18.5V17M8 9v6M11 9v6M14.5 9v6M17 9v3"/></svg></span>` : ''}
       <span class="qty ${corretta ? 'qty--tua' : ''}" data-act="shop-qta-apri" data-val="${esc(v.key)}"
         role="button" aria-label="Correggi la quantit\u00e0 di ${esc(v.n)}">${esc(mostra) || '<i class="qty-vuota">q.t\u00e0?</i>'}</span>
       ${v.manuale ? `<span class="x" data-act="shop-extra-del" data-val="${esc(v.id)}">\u00d7</span>` : ''}
@@ -14820,6 +14843,12 @@ document.addEventListener('click', e => {
       break;
     }
     case 'etichetta-apri': {
+      // dalla lista della spesa si salvano SOLO i valori: il prodotto entrera'
+      // in dispensa quando chiudi la spesa, gia' con i suoi numeri
+      etichettaVerso = t.dataset.verso === 'valori' ? 'valori' : 'dispensa';
+      const salvaEti = document.querySelector('[data-act="etichetta-salva"]');
+      if (salvaEti) salvaEti.textContent = etichettaVerso === 'valori'
+        ? 'Salva i valori' : 'Salva e metti in dispensa';
       // precompilo col nome scritto nella barra della dispensa, se c'e'
       const gia = (document.getElementById('disp-cerca') || {}).value || '';
       ['eti-kcal','eti-pro','eti-carb','eti-gra'].forEach(id => { F(id).value = ''; });
@@ -14851,10 +14880,18 @@ document.addEventListener('click', e => {
       S.ingTabExtra = S.ingTabExtra || {};
       S.ingTabExtra[nome] = [n('eti-kcal'), n('eti-pro'), n('eti-carb'), n('eti-gra')];
       _vocabolario = null;   // il vocabolario ora conosce anche questo prodotto
+      if (!S.myIngredients.some(m => norm(m) === norm(nome))) S.myIngredients.push(nome);
+      if (etichettaVerso === 'valori') {
+        // dalla lista della spesa: i numeri entrano subito nel sistema,
+        // il prodotto arrivera' in dispensa con Fine spesa
+        save(); renderAll();
+        closeModals();
+        toast(nome + ': valori salvati. Entrera\u0300 in dispensa a fine spesa.', 'Annulla');
+        break;
+      }
       registraAcquisto(nome, null, unitaDi(nome));
       freschezza()[norm(nome)].posto = 'dispensa';
       if (!S.pantry.some(p => norm(p) === norm(nome))) S.pantry.push(nome);
-      if (!S.myIngredients.some(m => norm(m) === norm(nome))) S.myIngredients.push(nome);
       save(); renderAll();
       closeModals();
       toast(nome + ' in dispensa, con i suoi valori per 100 g.', 'Annulla');
