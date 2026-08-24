@@ -1545,7 +1545,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.set('shop-add', 'pollo');
     eq(a.testo('#shop-unita'), 'g', 'il pollo si pesa');
     a.set('shop-add', 'uovo');
-    eq(a.testo('#shop-unita'), 'pz', 'le uova si contano');
+    eq(a.testo('#shop-unita'), 'un.', 'le uova si contano');
     a.click('[data-act=shop-unita]');
     eq(a.testo('#shop-unita'), 'g', 'l\'unita non si puo\' correggere a mano');
   });
@@ -1913,7 +1913,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     };
     metti('riso', '1', 'kg');
     metti('pasta', '500', 'g');
-    metti('uovo', '6', 'pz');
+    metti('uovo', '6', 'un.');
 
     const f = a.stato().freschezza;
     eq(f['riso'].qta, 1000, 'il chilo non e\' diventato mille grammi');
@@ -3123,7 +3123,9 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
   await test('la spesa dettata passa dallo stesso salvataggio del manuale', async () => {
     const a = await app();
     a.tab('view-fridge');
-    vero(a.d.querySelector('.mic-spesa'), 'manca il bottone del microfono');
+    vero(a.d.querySelector('.modo-spesa[data-act=detta-apri]'), 'manca il bottone del microfono');
+    vero(a.d.querySelector('.modo-spesa[data-act=scontrino-apri]'), 'manca il bottone dello scontrino');
+    vero(a.d.querySelector('.modo-spesa[data-act=spesa-a-mano]'), 'manca il bottone a mano');
 
     a.dom.window.fitmealsVoce.daTesto('pane, due litri di latte');
     vero(a.d.getElementById('modal-dettatura').classList.contains('active'), 'la conferma non si apre');
@@ -3149,6 +3151,227 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     // spuntata e portata in dispensa, la scadenza segue le stesse regole
     const voce = a.dom.window.fitmealsDebug().shopExtra.find(x => x.n === 'latte');
     vero(voce.unita === 'g', 'l\'unita interna non e\' quella di casa');
+  });
+
+  await test('lo scontrino passa dallo stesso salvataggio di voce e manuale', async () => {
+    const a = await app();
+    a.tab('view-fridge');
+
+    // il testo che uscirebbe dall'OCR: prezzi, totali e codici da buttare
+    a.dom.window.fitmealsScontrino.daTesto([
+      'SUPERMERCATO PROVA SRL',
+      'VIA ROMA 1 - MILANO',
+      'LATTE INTERO 1L        1,49',
+      'PANE 0,500 kg          2,10',
+      '2 X BANANE             1,98',
+      'GNAPPOLE SFRIGOLATE    3,00',
+      'TOTALE                 8,57',
+      'CONTANTE              10,00',
+      'RESTO                  1,43'
+    ].join('\n'));
+
+    vero(a.d.getElementById('modal-dettatura').classList.contains('active'), 'la conferma non si apre');
+    const righe = [...a.d.querySelectorAll('.riga-dettata')];
+    vero(righe.length === 4, 'attese 4 righe prodotto, trovate ' + righe.length);
+    vero(!a.d.getElementById('dettatura-lista').textContent.includes('1,49'), 'un prezzo e\' rimasto in lista');
+    vero(righe.some(r => r.classList.contains('incerta')), 'la riga illeggibile deve dirsi da controllare');
+
+    a.click('[data-act=detta-salva]');
+    a.set('shop-add', 'farina');
+    a.d.getElementById('shop-qta').value = '1';
+    a.click('[data-act=shop-extra]');
+
+    const S = a.stato();
+    const latte = S.shopExtra.find(x => x.n === 'latte intero');
+    const manuale = S.shopExtra.find(x => x.n === 'farina');
+    vero(latte && manuale, 'mancano voci');
+    eq(Object.keys(latte).sort().join(), Object.keys(manuale).sort().join(),
+      'la voce da scontrino ha una struttura diversa dal manuale');
+    eq(latte.qta, 1000, 'il litro dello scontrino non e\' diventato grammi come altrove');
+    vero(!JSON.stringify(S.shopExtra).match(/1[.,]49|8[.,]57/), 'un prezzo e\' finito nei dati salvati');
+  });
+
+  await test('le diete del profilo nascondono le ricette giuste', async () => {
+    const a = await app();
+    const w = a.dom.window;
+    const prof = w.fitmealsProva.profilo();   // il profilo vivo, non un clone
+    const ha = (r, nome) => r.ing.some(i => i.n === nome);
+
+    // vegetariano: niente carne ne' pesce
+    prof.dieta = 'vegetariano';
+    let vis = w.fitmealsProva.visibili();
+    vero(vis.length > 50, 'un vegetariano deve avere ancora molte ricette');
+    vero(!vis.some(r => ha(r, 'pollo') || ha(r, 'manzo') || ha(r, 'tonno')),
+      'a un vegetariano e\' rimasta carne o pesce');
+    vero(vis.some(r => ha(r, 'parmigiano')), 'a un vegetariano il formaggio resta');
+
+    // vegano: nemmeno i derivati
+    prof.dieta = 'vegano';
+    vis = w.fitmealsProva.visibili();
+    vero(!vis.some(r => ha(r, 'parmigiano') || ha(r, 'uova') || ha(r, 'miele')),
+      'a un vegano sono rimasti derivati animali');
+
+    // celiaco: niente glutine
+    prof.dieta = ''; prof.celiaco = true;
+    vis = w.fitmealsProva.visibili();
+    vero(!vis.some(r => ha(r, 'pasta') || ha(r, 'pane') || ha(r, 'farina')),
+      'a un celiaco e\' rimasto il glutine');
+    vero(vis.some(r => ha(r, 'riso') || ha(r, 'patate')), 'a un celiaco riso e patate restano');
+    prof.celiaco = false;
+
+    // gravidanza: +300 kcal, mai deficit, niente alcol e crudi
+    Object.assign(prof, { sex: 'f', age: 30, height: 168, weight: 62, goal: 'mant' });
+    const prima = w.fitmealsProva.energia(prof).target;
+    prof.incinta = true;
+    eq(w.fitmealsProva.energia(prof).target, prima + 300, 'la gravidanza non alza di 300 kcal');
+    prof.goal = 'cut';
+    vero(w.fitmealsProva.energia(prof).target >= prima, 'in gravidanza il deficit deve sparire');
+    vis = w.fitmealsProva.visibili();
+    vero(!vis.some(r => ha(r, 'vino bianco') || ha(r, 'prosciutto crudo') || ha(r, 'gorgonzola')),
+      'in gravidanza alcol o crudi rimasti');
+    vero(!vis.some(r => /carpaccio|tartare|poke/i.test(r.title)), 'in gravidanza un piatto crudo e\' rimasto');
+
+    // il chip incinta compare solo per le donne
+    prof.sex = 'm';
+    w.fitmealsProva.renderProfilo();
+    vero(a.d.getElementById('chip-incinta').hidden, 'il chip incinta compare a un uomo');
+    prof.sex = 'f';
+    w.fitmealsProva.renderProfilo();
+    vero(!a.d.getElementById('chip-incinta').hidden, 'il chip incinta non compare a una donna');
+  });
+
+  await test('seleziona tutto spunta la lista e i pezzi si chiamano unita', async () => {
+    const a = await app();
+    a.tab('view-fridge');
+
+    // tre voci in lista: due a peso e una a pezzi
+    a.dom.window.fitmealsVoce.daTesto('due litri di latte, pane, tre uova');
+    a.click('[data-act=detta-salva]');
+    await wait(100);
+
+    // l'etichetta dei pezzi a schermo e' "un.", mai "pz"
+    vero(!/\bpz\b/.test(a.d.getElementById('shopping-body').textContent), 'in lista compare ancora pz');
+    a.dom.window.fitmealsVoce.daTesto('tre uova');
+    const unita = [...a.d.querySelectorAll('.det-u')].map(b => b.textContent.trim());
+    vero(unita.includes('un.') && !unita.includes('pz'),
+      'il bottone unita del riepilogo non dice un. (' + unita.join(',') + ')');
+    a.click('[data-act=detta-chiudi]');
+    await wait(400);
+
+    // seleziona tutto: ogni voce risulta presa
+    vero(a.click('[data-act=shop-tutti]'), 'manca il tasto seleziona tutto');
+    await wait(100);
+    const dopo = a.d.querySelectorAll('#shopping-body .shop-item:not(.done)').length;
+    eq(dopo, 0, 'dopo seleziona tutto restano voci non spuntate');
+
+    // ritoccarlo toglie tutte le spunte
+    a.click('[data-act=shop-tutti]');
+    await wait(100);
+    const riaperte = a.d.querySelectorAll('#shopping-body .shop-item.done').length;
+    eq(riaperte, 0, 'il secondo tocco non toglie le spunte');
+  });
+
+  await test('il pasto segue la pagina da cui apri il piatto, non l\'orologio', async () => {
+    const a = await app();
+    const w = a.dom.window, P = w.fitmealsProva;
+
+    // stesso istante, tre pagine diverse: tre pasti diversi
+    ['col', 'pra', 'cen'].forEach((m, i) => {
+      P.pastoContesto(m);
+      const r = a.stato().recipes[10 + i];
+      P.logMeal(r.id);
+      const log = a.stato().log.slice(-1)[0];
+      eq(log.meal, m, 'aperto dalla pagina ' + m + ', registrato in');
+    });
+
+    // un pasto esplicito vince su tutto
+    P.pastoContesto('col');
+    P.logMeal(a.stato().recipes[20].id, 'cen');
+    eq(a.stato().log.slice(-1)[0].meal, 'cen', 'il pasto esplicito non ha vinto');
+
+    // senza contesto si torna all'orologio, e deve essere un pasto vero
+    P.pastoContesto(null);
+    P.logMeal(a.stato().recipes[21].id);
+    const ultimo = a.stato().log.slice(-1)[0].meal;
+    vero(a.stato().meals.some(m => m.id === ultimo), 'senza contesto il pasto non e\' valido');
+  });
+
+  await test('quello che consumi sparisce da frigo, calendario e notifiche', async () => {
+    const a = await app();
+    const w = a.dom.window, P = w.fitmealsProva;
+
+    // pollo in frigo, in scadenza a mezzogiorno di oggi
+    const mezzogiorno = new Date(); mezzogiorno.setHours(12, 0, 0, 0);
+    P.freschezza()['pollo'] = { nome: 'pollo', qta: 100, unita: 'g',
+      dal: Date.now() - 86400000, entro: mezzogiorno.getTime(), posto: 'frigo' };
+    P.notifiche();
+
+    vero(P.scadenze().some(v => v.nome === 'pollo'), 'il pollo non e\' in calendario');
+    vero(a.stato().notifiche.some(n => n.nome === 'pollo'), 'manca la notifica di scadenza');
+
+    // lo mangio tutto
+    const r = a.stato().recipes.find(x => (x.ing || []).some(i => i.n === 'pollo'));
+    P.logMeal(r.id, 'pra');
+
+    vero(!P.freschezza()['pollo'], 'il pollo finito e\' rimasto in frigo');
+    vero(!P.scadenze().some(v => v.nome === 'pollo'), 'il pollo finito e\' rimasto in calendario');
+    vero(!P.inventario().some(v => v.nome === 'pollo'), 'il pollo finito e\' rimasto in inventario');
+    vero(!a.stato().notifiche.some(n => n.nome === 'pollo'),
+      'la notifica continua a suonare per una cosa consumata');
+
+    // il badge della campanella non si vede quando non c'e' niente
+    const badge = a.d.getElementById('campanella-conto');
+    vero(badge.hidden, 'il badge resta acceso senza notifiche');
+  });
+
+  await test('gli elenchi di ingredienti si aprono solo col loro tasto', async () => {
+    const a = await app();
+    a.tab('view-profile');
+
+    const miei = a.d.getElementById('my-ingredients-tags');
+    const esclusi = a.d.getElementById('blacklist-tags');
+    vero(miei.hidden && esclusi.hidden, 'gli elenchi sono aperti senza averli chiesti');
+
+    a.click('[data-act=mostra-tag][data-val=miei]');
+    vero(!a.d.getElementById('my-ingredients-tags').hidden, 'il tasto non apre i miei ingredienti');
+    vero(a.d.getElementById('blacklist-tags').hidden, 'si e\' aperto anche l\'altro elenco');
+
+    a.click('[data-act=mostra-tag][data-val=miei]');
+    vero(a.d.getElementById('my-ingredients-tags').hidden, 'il tasto non richiude l\'elenco');
+  });
+
+  await test('senza profilo la home spiega la bilancia invece di restare vuota', async () => {
+    const a = await app();          // installazione nuova: niente eta', altezza, peso
+    const box = a.d.getElementById('anello-unico');
+
+    vero(box.innerHTML.trim().length > 0, 'la home resta muta senza profilo');
+    vero(box.querySelector('.invito-bilancia'), 'manca l\'invito a compilare i dati');
+    vero(!box.querySelector('.bilancia'), 'la bilancia si disegna senza dati da pesare');
+    const vai = box.querySelector('.invito-bilancia');
+    eq(vai.dataset.act, 'tab', 'l\'invito non porta da nessuna parte');
+    eq(vai.dataset.val, 'view-profile', 'l\'invito non porta al profilo');
+
+    // compilati i dati, al posto dell'invito arriva la bilancia vera
+    a.profiloBase();
+    await wait(200);
+    const dopo = a.d.getElementById('anello-unico');
+    vero(!dopo.querySelector('.invito-bilancia'), 'l\'invito resta anche col profilo pieno');
+    vero(dopo.querySelector('.bilancia'), 'col profilo pieno la bilancia non compare');
+  });
+
+  await test('la bilancia si muove quando registri un pasto', async () => {
+    const a = await app();
+    a.profiloBase();
+    await wait(200);
+
+    const box = a.d.getElementById('anello-unico');
+    vero(box.querySelector('.bilancia'), 'senza bilancia non c\'e\' niente da animare');
+    vero(!box.querySelector('.gruppo-ago.oscilla'), 'l\'ago oscilla gia\' prima del pasto');
+
+    a.dom.window.fitmealsProva.logMeal(a.stato().recipes[8].id, 'pra');
+
+    vero(box.querySelector('.gruppo-ago.oscilla'), 'l\'ago non vibra dopo il pasto');
+    vero(box.querySelector('.gruppo-piatto.oscilla'), 'il piatto non si abbassa dopo il pasto');
   });
 
   await test('le scadenze di oggi arrivano nella campanella e si gestiscono', async () => {
