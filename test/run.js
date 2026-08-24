@@ -3539,10 +3539,14 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.dom.window.fitmealsVoce.daTesto('latte, crackers di farro selvaggio');
     a.click('[data-act=detta-salva]');
     await wait(100);
-    const conEti = [...a.d.querySelectorAll('.shop-item')].filter(r => r.querySelector('.shop-eti'));
-    eq(conEti.length, 1, 'il codice a barre deve stare solo sul prodotto ignoto');
-    vero(conEti[0].textContent.includes('crackers di farro selvaggio'),
-      'il prodotto con virgole si e\' rispezzato');
+    // il codice a barre ora sta su OGNI riga: colorato dove il giudizio
+    // esiste (latte), neutro dove l'etichetta non e' mai stata letta
+    const tutte = [...a.d.querySelectorAll('.shop-item')];
+    vero(tutte.every(r => r.querySelector('.shop-eti')), 'una riga e\' senza codice a barre');
+    const conEti = tutte.filter(r => r.textContent.includes('crackers di farro selvaggio'));
+    eq(conEti.length, 1, 'il prodotto con virgole si e\' rispezzato');
+    vero(!(conEti[0].querySelector('.shop-eti').getAttribute('style') || '').includes('color'),
+      'il prodotto mai letto non deve avere colore');
 
     // dall'icona al modulo, gia' col nome giusto
     conEti[0].querySelector('.shop-eti').dispatchEvent(
@@ -3560,7 +3564,8 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(P.tabella('crackers di farro selvaggio'), 'i valori non sono entrati nel sistema');
     vero(!a.stato().freschezza['crackers di farro selvaggio'],
       'il prodotto e\' entrato in dispensa prima di Fine spesa');
-    vero(![...a.d.querySelectorAll('.shop-eti')].length, 'il codice a barre deve sparire dopo la lettura');
+    vero((a.d.querySelector('.shop-eti[data-val="crackers di farro selvaggio"]').getAttribute('style') || '')
+      .includes('color'), 'dopo la lettura il barre deve colorarsi del giudizio');
 
     // a fine spesa entra in dispensa, coi numeri gia' suoi
     a.click('[data-act=shop-tutti]');
@@ -3712,6 +3717,68 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     await wait(150);
     almeno(a.d.querySelectorAll('#detail-body .salute-pallino').length, 3,
       'pallini della scala nel dettaglio');
+  });
+
+  await test('il catalogo ricorda ogni ingrediente, anche dopo il consumo', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+
+    // 1. prima lettura: valori + posto finiscono a catalogo
+    a.click('[data-act=etichetta-apri]:not([data-verso])');
+    await wait(100);
+    a.d.getElementById('eti-nome').value = 'kefir alla fragola';
+    a.d.getElementById('eti-kcal').value = '65';
+    a.d.getElementById('eti-pro').value = '3.4';
+    a.d.getElementById('eti-zuc').value = '8';
+    a.click('[data-act=etichetta-salva]');
+    await wait(150);
+    const voce = P.catalogoTrova('kefir alla fragola');
+    vero(voce && voce.posto === 'dispensa', 'la prima lettura non finisce a catalogo');
+
+    // 2. consumato e rimosso: la voce a catalogo RESTA, coi suoi valori
+    delete P.freschezza()['kefir alla fragola'];
+    vero(!P.freschezza()['kefir alla fragola'], 'la scorta doveva sparire');
+    vero(P.catalogoTrova('kefir alla fragola'), 'il consumo ha cancellato il catalogo');
+    vero(P.tabella('kefir alla fragola'), 'il consumo ha cancellato i valori');
+
+    // 3. il posto si corregge dalla schermata del catalogo
+    P.renderCatalogo();
+    a.dom.window.document.querySelector('[data-act=catalogo-posto][data-val="kefir alla fragola"]')
+      || P.catalogoRegistra('kefir alla fragola');   // il modal non e' aperto: registro il giro a mano
+    const prima = P.catalogoTrova('kefir alla fragola').posto;
+    P.catalogoTrova('kefir alla fragola').posto = 'frigo';
+
+    // 4. ricomprato dalla spesa: torna nel posto RICORDATO, coi valori suoi
+    a.dom.window.fitmealsVoce.daTesto('kefir alla fragola');
+    a.click('[data-act=detta-salva]');
+    await wait(100);
+    // il codice a barre sta su OGNI riga, colorato dal giudizio
+    const eti = a.d.querySelector('.shop-item .shop-eti');
+    vero(eti, 'manca il codice a barre sulla riga');
+    vero((eti.getAttribute('style') || '').includes('color'), 'il barre non porta il colore del giudizio');
+    a.click('[data-act=shop-tutti]');
+    a.click('[data-act=shop-bought]');
+    await wait(50);
+    a.click('[data-act=conferma-si]');
+    await wait(150);
+    eq(P.freschezza()['kefir alla fragola'].posto, 'frigo',
+      'il reinserimento non rispetta il posto ricordato');
+    eq(P.salubritaDi('kefir alla fragola').nome, 'sano',
+      'il giudizio non si riapplica da solo');
+
+    // 5. riaprendo l'etichetta, i valori tornano da soli
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    a.set('disp-cerca', 'kefir alla fragola');
+    a.click('[data-act=etichetta-apri]:not([data-verso])');
+    await wait(100);
+    eq(a.d.getElementById('eti-kcal').value, '65', 'il modulo non si precompila dal catalogo');
+    vero(a.d.getElementById('etichetta-passo').textContent.includes('catalogo'),
+      'il modulo non dice che il prodotto e\' gia\' noto');
   });
 
   await test('le scadenze di oggi arrivano nella campanella e si gestiscono', async () => {
