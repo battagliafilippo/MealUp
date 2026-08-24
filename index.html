@@ -814,11 +814,26 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
   background:var(--v1-fondo);border:var(--v1-bordo);border-radius:14px;
   resize:vertical;outline:none}
 .scan-textarea:focus-visible{border-color:color-mix(in srgb, var(--tema, var(--accent-primary)) 55%, transparent)}
+.eti-consigli[hidden],.eti-salute[hidden]{display:none}
 .eti-consigli{display:flex;flex-direction:column;gap:5px;margin:10px 0 6px;padding:13px 15px;
   border-radius:14px;font-size:.83rem;line-height:1.45;color:var(--text-secondary);
   background:color-mix(in srgb, var(--tema, var(--accent-primary)) 8%, transparent);
   border:1px solid color-mix(in srgb, var(--tema, var(--accent-primary)) 25%, transparent)}
 .eti-consigli b{font-size:.85rem;color:var(--text-primary)}
+/* Il giudizio di salubrita': una riga ben visibile sopra il tasto salva.
+   Il colore arriva dal gradino, via variabile. */
+.eti-salute{display:flex;align-items:center;gap:10px;padding:13px 15px;border-radius:14px;
+  font-size:.9rem;color:var(--text-primary);
+  background:color-mix(in srgb, var(--salute, #999) 14%, transparent);
+  border:1px solid color-mix(in srgb, var(--salute, #999) 45%, transparent)}
+.eti-salute b{color:var(--salute);font-size:.95rem;text-transform:capitalize}
+.eti-salute span:last-child{font-size:.75rem;color:var(--text-tertiary);margin-left:auto;
+  text-align:right;line-height:1.3}
+.eti-salute-scala{display:inline-flex;gap:3px;flex:0 0 auto}
+.eti-salute-scala i{width:9px;height:18px;border-radius:4px;opacity:.28;display:block}
+.eti-salute-scala i.qui{opacity:1;transform:scaleY(1.25)}
+.salute-pallino{display:inline-block;width:9px;height:9px;border-radius:50%;
+  margin-right:6px;vertical-align:1px;flex:0 0 auto}
 .scheda{position:relative}
 .scheda .scheda-titolo{padding-right:26px}
 /* Il comando delle persone, bello grande: si tocca col pollice. */
@@ -3083,6 +3098,31 @@ h3{font-weight:600;letter-spacing:-.018em}
             <label class="field-label" for="eti-gra">Grassi g</label>
             <input type="number" id="eti-gra" min="0" step="any" inputmode="decimal">
           </div>
+        </div>
+        <div class="row">
+          <div>
+            <label class="field-label" for="eti-sat">di cui saturi g</label>
+            <input type="number" id="eti-sat" min="0" step="any" inputmode="decimal">
+          </div>
+          <div>
+            <label class="field-label" for="eti-zuc">di cui zuccheri g</label>
+            <input type="number" id="eti-zuc" min="0" step="any" inputmode="decimal">
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label class="field-label" for="eti-fib">Fibre g</label>
+            <input type="number" id="eti-fib" min="0" step="any" inputmode="decimal">
+          </div>
+          <div>
+            <label class="field-label" for="eti-sale">Sale g</label>
+            <input type="number" id="eti-sale" min="0" step="any" inputmode="decimal">
+          </div>
+        </div>
+        <div id="eti-salute" class="eti-salute" hidden>
+          <span class="eti-salute-scala" aria-hidden="true"></span>
+          <b id="eti-salute-nome"></b>
+          <span id="eti-salute-nota"></span>
         </div>
         <button type="button" class="btn-primary full-width" data-act="etichetta-salva">
           Salva e metti in dispensa</button>
@@ -9053,7 +9093,7 @@ function anteprimaRicetta(id) {
       ${cov ? '<br>hai ' + cov.have.length + ' ingredienti su ' + ingNames(r).length : ''}
     </p>
     <ul class="ing-list">${(r.ing || []).map(i =>
-      `<li><span>${esc(i.n)}</span><span class="qty">${esc(fmtQty(i))}</span></li>`).join('')}</ul>
+      `<li><span>${salutePallino(i.n)}${esc(i.n)}</span><span class="qty">${esc(fmtQty(i))}</span></li>`).join('')}</ul>
     <button type="button" class="btn-primary full-width" data-act="detail" data-val="${esc(r.id)}">Apri la ricetta</button>`;
   currentDetailId = null;
   scalaDettaglio = [];
@@ -9282,7 +9322,7 @@ function openDetail(id, tornando) {
     const preso = inLista(i.n);
     const disp = disponibilita(i.n);
     return `<li>
-      <span class="${have ? 'have' : ''}">${have ? '\u2713 ' : ''}${esc(i.n)}
+      <span class="${have ? 'have' : ''}">${salutePallino(i.n)}${have ? '\u2713 ' : ''}${esc(i.n)}
         ${disp ? `<em class="ing-eta ${disp.st ? 'stato-' + disp.st.stato : ''}">${
           disp.tipo === 'avanzo' ? 'avanzo' : disp.tipo === 'freezer' ? 'in freezer' : 'in frigo'}${
           disp.dal ? ' ' + etaTesto(disp.dal) : ''}${
@@ -10418,6 +10458,107 @@ function passaACotto(chiave, quanti) {
 function tabellaDi(nome) {
   const k = String(nome || '').toLowerCase().trim();
   return ING_TAB[k] || (S.ingTabExtra || {})[k] || null;
+}
+
+/* ---------- la scala di salubrita' ----------
+   Da "sano" a "grasso" in cinque gradini, col metodo del Nutri-Score
+   pubblico, semplificato ma trasparente: punti di malus per energia,
+   grassi saturi, zuccheri e sale; punti di bonus per fibre e proteine
+   (le proteine contano solo se il malus non e' gia' alto, come da regola
+   originale). Tutto per 100 g, tutto calcolato qui, niente servizi. */
+
+const SALUTE_GRADINI = [
+  { nome: 'sano',        colore: '#4c8a6b' },
+  { nome: 'equilibrato', colore: '#8ca24f' },
+  { nome: 'moderato',    colore: '#e4b23c' },
+  { nome: 'da limitare', colore: '#d07a3a' },
+  { nome: 'grasso',      colore: '#b8552e' }
+];
+
+/* Le soglie ufficiali: ogni soglia superata vale un punto. */
+const SALUTE_SOGLIE = {
+  energiaKj: [335, 670, 1005, 1340, 1675, 2010, 2345, 2680, 3015, 3350],
+  saturi:    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  zuccheri:  [4.5, 9, 13.5, 18, 22.5, 27, 31, 36, 40, 45],
+  sale:      [0.225, 0.45, 0.675, 0.9, 1.125, 1.35, 1.575, 1.8, 2.025, 2.25],
+  fibre:     [0.9, 1.9, 2.8, 3.7, 4.7],
+  proteine:  [1.6, 3.2, 4.8, 6.4, 8]
+};
+
+function salutePunti(valore, soglie) {
+  let p = 0;
+  for (const soglia of soglie) if (valore > soglia) p++;
+  return p;
+}
+
+/* Il giudizio. Accetta valori mancanti (null): calcola con quello che c'e'
+   e dice chiaramente che il giudizio e' parziale.
+   valori: { kcal, grassi, saturi, zuccheri, fibre, proteine, sale } */
+function salubrita(valori) {
+  const v = valori || {};
+  const c = x => x !== null && x !== undefined && x !== '' && isFinite(Number(x))
+    ? Number(x) : null;
+  const kcal = c(v.kcal), grassi = c(v.grassi), proteine = c(v.proteine);
+  let saturi = c(v.saturi);
+  const zuccheri = c(v.zuccheri), fibre = c(v.fibre), sale = c(v.sale);
+
+  const mancanti = [];
+  // i saturi ignoti si stimano prudentemente da meta' dei grassi totali:
+  // approssimazione dichiarata, e il giudizio si dice parziale
+  if (saturi === null && grassi !== null) { saturi = grassi * 0.45; mancanti.push('saturi'); }
+  else if (saturi === null) mancanti.push('saturi');
+  if (zuccheri === null) mancanti.push('zuccheri');
+  if (sale === null) mancanti.push('sale');
+  if (fibre === null) mancanti.push('fibre');
+  if (kcal === null) mancanti.push('energia');
+  if (proteine === null) mancanti.push('proteine');
+
+  if (kcal === null && grassi === null && zuccheri === null && saturi === null) {
+    return null;   // con niente in mano non si giudica nessuno
+  }
+
+  let malus = 0;
+  if (kcal !== null) malus += salutePunti(kcal * 4.184, SALUTE_SOGLIE.energiaKj);
+  if (saturi !== null) malus += salutePunti(saturi, SALUTE_SOGLIE.saturi);
+  if (zuccheri !== null) malus += salutePunti(zuccheri, SALUTE_SOGLIE.zuccheri);
+  if (sale !== null) malus += salutePunti(sale, SALUTE_SOGLIE.sale);
+
+  let bonus = 0;
+  if (fibre !== null) bonus += salutePunti(fibre, SALUTE_SOGLIE.fibre);
+  // regola del Nutri-Score: con un malus gia' alto le proteine non salvano
+  if (proteine !== null && malus < 11) bonus += salutePunti(proteine, SALUTE_SOGLIE.proteine);
+
+  const punti = malus - bonus;
+  const gradino = punti <= -1 ? 0 : punti <= 2 ? 1 : punti <= 10 ? 2 : punti <= 18 ? 3 : 4;
+
+  return {
+    punti: punti,
+    gradino: gradino,
+    nome: SALUTE_GRADINI[gradino].nome,
+    colore: SALUTE_GRADINI[gradino].colore,
+    parziale: mancanti.length > 0,
+    mancanti: mancanti
+  };
+}
+
+/* Il giudizio di un ingrediente gia' noto all'app: dalla sua tabella,
+   estesa (etichetta letta) o di serie (solo i quattro valori base). */
+function salubritaDi(nome) {
+  const t = tabellaDi(nome);
+  if (!t) return null;
+  return salubrita({
+    kcal: t[0], proteine: t[1], zuccheri: t.length > 5 ? t[5] : null,
+    grassi: t[3], saturi: t.length > 4 ? t[4] : null,
+    fibre: t.length > 6 ? t[6] : null, sale: t.length > 7 ? t[7] : null
+  });
+}
+
+/* Il pallino colorato della scala, da mettere accanto a un nome. */
+function salutePallino(nome) {
+  const g = salubritaDi(nome);
+  if (!g) return '';
+  return `<i class="salute-pallino" style="background:${g.colore}"
+    title="${esc(g.nome)}${g.parziale ? ' · giudizio parziale' : ''}"></i>`;
 }
 
 /* ---------- lettura dell'etichetta nutrizionale ----------
@@ -12337,6 +12478,30 @@ function preparaEtichetta(file) {
   });
 }
 
+/* Il giudizio nel modulo dell'etichetta: si ricalcola DA SOLO a ogni
+   tocco sui campi, e si vede prima di salvare. Coi campi vuoti il calcolo
+   procede lo stesso, ma dice che il giudizio e' parziale. */
+function aggiornaSalubritaEtichetta() {
+  const box = document.getElementById('eti-salute');
+  if (!box) return;
+  const leggi = id => { const v = F(id) ? F(id).value : ''; return v === '' ? null : parseFloat(v); };
+  const g = salubrita({
+    kcal: leggi('eti-kcal'), proteine: leggi('eti-pro'),
+    grassi: leggi('eti-gra'), saturi: leggi('eti-sat'),
+    zuccheri: leggi('eti-zuc'), fibre: leggi('eti-fib'), sale: leggi('eti-sale')
+  });
+  if (!g) { box.hidden = true; return; }
+  box.hidden = false;
+  box.style.setProperty('--salute', g.colore);
+  document.getElementById('eti-salute-nome').textContent = g.nome;
+  document.getElementById('eti-salute-nota').textContent = g.parziale
+    ? 'giudizio parziale: mancano ' + g.mancanti.slice(0, 3).join(', ')
+    : 'sulla scala da sano a grasso';
+  const scala = box.querySelector('.eti-salute-scala');
+  scala.innerHTML = SALUTE_GRADINI.map((x, i) =>
+    `<i style="background:${x.colore}" class="${i === g.gradino ? 'qui' : ''}"></i>`).join('');
+}
+
 /* La foto dell'etichetta: preparata, letta due volte se serve (la seconda
    al negativo, per le tabelle chiare su fondo scuro), e i numeri finiscono
    nei campi del modulo, dove si correggono prima di salvare. */
@@ -12392,6 +12557,11 @@ function leggiEtichetta(file) {
       if (letti.proteine !== null) F('eti-pro').value = letti.proteine;
       if (letti.carboidrati !== null) F('eti-carb').value = letti.carboidrati;
       if (letti.grassi !== null) F('eti-gra').value = letti.grassi;
+      if (letti.saturi !== null) F('eti-sat').value = letti.saturi;
+      if (letti.zuccheri !== null) F('eti-zuc').value = letti.zuccheri;
+      if (letti.fibre !== null) F('eti-fib').value = letti.fibre;
+      if (letti.sale !== null) F('eti-sale').value = letti.sale;
+      aggiornaSalubritaEtichetta();
 
       if (!letti.trovati) {
         di('Da questa foto non sono riuscito a leggere quasi niente.', 0);
@@ -12414,6 +12584,13 @@ function leggiEtichetta(file) {
 
 /* I due campi file vivono dentro la vista spesa, che si ridisegna: l'ascolto
    sta sul documento, cosi' vale anche dopo ogni ridisegno. */
+// ogni tocco sui campi dell'etichetta rifa' il giudizio, senza chiedere nulla
+document.addEventListener('input', ev => {
+  if (ev.target && /^eti-(kcal|pro|carb|gra|sat|zuc|fib|sale)$/.test(ev.target.id)) {
+    aggiornaSalubritaEtichetta();
+  }
+});
+
 document.addEventListener('change', ev => {
   const t = ev.target;
   if (t && (t.id === 'etichetta-foto' || t.id === 'etichetta-file')) {
@@ -15454,7 +15631,10 @@ document.addEventListener('click', e => {
         ? 'Salva i valori' : 'Salva e metti in dispensa';
       // precompilo col nome scritto nella barra della dispensa, se c'e'
       const gia = (document.getElementById('disp-cerca') || {}).value || '';
-      ['eti-kcal','eti-pro','eti-carb','eti-gra'].forEach(id => { F(id).value = ''; });
+      ['eti-kcal','eti-pro','eti-carb','eti-gra','eti-sat','eti-zuc','eti-fib','eti-sale']
+        .forEach(id => { if (F(id)) F(id).value = ''; });
+      const salBox = document.getElementById('eti-salute');
+      if (salBox) salBox.hidden = true;
       F('eti-nome').value = (val || gia).trim();
       document.getElementById('etichetta-barra').hidden = true;
       document.getElementById('etichetta-passo').hidden = true;
@@ -15483,7 +15663,11 @@ document.addEventListener('click', e => {
       const n = id => { const v = parseFloat(F(id).value); return isFinite(v) && v >= 0 ? v : 0; };
       pushUndo('Etichetta di ' + nome);
       S.ingTabExtra = S.ingTabExtra || {};
-      S.ingTabExtra[nome] = [n('eti-kcal'), n('eti-pro'), n('eti-carb'), n('eti-gra')];
+      // i primi quattro come sempre; poi saturi, zuccheri, fibre e sale,
+      // che servono alla scala di salubrita' (null dove non scritti)
+      const opz = id => { const v = parseFloat(F(id).value); return isFinite(v) && v >= 0 ? v : null; };
+      S.ingTabExtra[nome] = [n('eti-kcal'), n('eti-pro'), n('eti-carb'), n('eti-gra'),
+        opz('eti-sat'), opz('eti-zuc'), opz('eti-fib'), opz('eti-sale')];
       _vocabolario = null;   // il vocabolario ora conosce anche questo prodotto
       if (!S.myIngredients.some(m => norm(m) === norm(nome))) S.myIngredients.push(nome);
       if (etichettaVerso === 'valori') {
@@ -16021,6 +16205,7 @@ window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
   spezzaElenco: spezzaElencoDettato,
   etichetta: interpretaEtichetta, tabella: tabellaDi,
   preparaEtichetta: preparaEtichetta,
+  salubrita: salubrita, salubritaDi: salubritaDi,
   energia: energy, renderProfilo: renderProfile,
   freschezza: freschezza, scadenze: scadenzeDelGiorno, inventario: inventario,
   logMeal: logMeal, notifiche: aggiornaNotificheScadenze, guessMeal: guessMeal,
