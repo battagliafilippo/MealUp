@@ -3531,6 +3531,51 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(a.stato().shopExtra.length, 2, 'la spesa dettata non funziona piu\'');
   });
 
+  await test('dalla lista si legge l\'etichetta: valori subito, dispensa a fine spesa', async () => {
+    const a = await app();
+    a.tab('view-fridge');
+
+    // un prodotto sconosciuto in lista: sulle righe con virgola i confini valgono
+    a.dom.window.fitmealsVoce.daTesto('latte, crackers di farro selvaggio');
+    a.click('[data-act=detta-salva]');
+    await wait(100);
+    const conEti = [...a.d.querySelectorAll('.shop-item')].filter(r => r.querySelector('.shop-eti'));
+    eq(conEti.length, 1, 'il codice a barre deve stare solo sul prodotto ignoto');
+    vero(conEti[0].textContent.includes('crackers di farro selvaggio'),
+      'il prodotto con virgole si e\' rispezzato');
+
+    // dall'icona al modulo, gia' col nome giusto
+    conEti[0].querySelector('.shop-eti').dispatchEvent(
+      new a.dom.window.MouseEvent('click', { bubbles: true }));
+    await wait(100);
+    eq(a.d.getElementById('eti-nome').value, 'crackers di farro selvaggio',
+      'il nome non si precompila');
+    a.d.getElementById('eti-kcal').value = '390';
+    a.d.getElementById('eti-pro').value = '13';
+    a.click('[data-act=etichetta-salva]');
+    await wait(150);
+
+    // i valori sono nel sistema, ma in dispensa NON c'e' ancora niente
+    const P = a.dom.window.fitmealsProva;
+    vero(P.tabella('crackers di farro selvaggio'), 'i valori non sono entrati nel sistema');
+    vero(!a.stato().freschezza['crackers di farro selvaggio'],
+      'il prodotto e\' entrato in dispensa prima di Fine spesa');
+    vero(![...a.d.querySelectorAll('.shop-eti')].length, 'il codice a barre deve sparire dopo la lettura');
+
+    // a fine spesa entra in dispensa, coi numeri gia' suoi
+    a.click('[data-act=shop-tutti]');
+    a.click('[data-act=shop-bought]');
+    await wait(50);
+    a.click('[data-act=conferma-si]');
+    await wait(150);
+    vero(a.stato().freschezza['crackers di farro selvaggio'], 'a fine spesa non e\' in dispensa');
+
+    // la campanella e il + vivono nella stessa riga dell'header
+    vero(a.d.querySelector('.header .testa-tasti .campanella') &&
+         a.d.querySelector('.header .testa-tasti .icon-btn'),
+      'campanella e + non stanno insieme nell\'header');
+  });
+
   await test('le scadenze di oggi arrivano nella campanella e si gestiscono', async () => {
     const ora = Date.now();
     const a = await app({ storage: {
