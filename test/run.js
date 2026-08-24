@@ -3634,6 +3634,41 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     almeno(a.conta('#recipe-list .card-btn'), 1, 'la buddha bowl non si trova');
   });
 
+  await test('il lettore dell\'etichetta perdona l\'OCR sporco', async () => {
+    const a = await app();
+    const E = a.dom.window.fitmealsProva.etichetta;
+
+    // le storpiature classiche dell'OCR: la elle per la i, righe spezzate
+    const sporco = E('VALORl NUTRlZlONALl per 100 g\nEnergla 1046 kJ / 250 kcal\n'
+      + 'Grassl 9,1 g\ndl cul acldl grassl saturl 5,4 g\nCarboldratl 30 g\n'
+      + 'dl cul zuccherl 21 g\nProtelne 7,5 g\nSale 0,25 g');
+    eq(sporco.trovati, 4, 'il testo sporco non si legge tutto');
+    eq(sporco.grassi, 9.1, 'i saturi hanno rubato i grassi');
+    eq(sporco.saturi, 5.4, 'i saturi non si leggono');
+    eq(sporco.zuccheri, 21, 'gli zuccheri non si leggono');
+
+    // solo kJ: si convertono in kcal
+    eq(E('Energia 1046 kJ\nGrassi 9 g\nCarboidrati 30 g\nProteine 7,5 g').kcal, 250,
+      'i kJ non diventano kcal');
+
+    // il sodio, se manca il sale, diventa sale per legge (x 2,5)
+    eq(E('Energia 380 kcal Grassi 12 g Carboidrati 55 g Proteine 11 g Sodio 0,4 g').sale, 1,
+      'il sodio non diventa sale');
+
+    // due colonne: vince quella dei 100 g, che viene prima
+    eq(E('Energia 411 kcal 123 kcal\nGrassi 9,5 g 2,9 g\nProteine 12,5 g 3,8 g').grassi, 9.5,
+      'ha preso la colonna della porzione');
+
+    // un valore impossibile e' un errore di lettura, non un alimento
+    const assurdo = E('Energia 4110 kcal Grassi 950 g Carboidrati 68 g Proteine 12,5 g');
+    vero(assurdo.kcal === null && assurdo.grassi === null, 'i valori assurdi passano');
+
+    // e se la foto non da' niente, ci sono i consigli per riprovare
+    vero(a.d.getElementById('etichetta-consigli'), 'manca il blocco dei consigli');
+    vero(a.d.querySelector('#etichetta-consigli [data-act=etichetta-scatta]'),
+      'dai consigli non si rifa la foto');
+  });
+
   await test('le scadenze di oggi arrivano nella campanella e si gestiscono', async () => {
     const ora = Date.now();
     const a = await app({ storage: {
