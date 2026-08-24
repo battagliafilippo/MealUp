@@ -3493,6 +3493,44 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(a.stato().pantry.includes('crackers di segale'), 'il prodotto non e\' nella credenza');
   });
 
+  await test('la dispensa si detta come la spesa, anche senza virgole', async () => {
+    const a = await app();
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    vero(a.d.querySelector('[data-fsez=dispensa] [data-act=detta-apri][data-val=dispensa]'),
+      'manca il tasto Detta nella dispensa');
+
+    // elenco lungo, dettato di fila senza virgole, verso la DISPENSA
+    a.dom.window.fitmealsVoce.daTesto(
+      'due chili di patate cipolla passata di pomodoro un pacco di riso', 'dispensa');
+    await wait(100);
+    eq(a.d.getElementById('dettatura-titolo').textContent, 'Riempi la dispensa',
+      'il modale non dice dove va');
+    eq(a.d.getElementById('detta-salva-btn').textContent.trim(), 'Metti in dispensa',
+      'il bottone non dice dove va');
+    const righe = [...a.d.querySelectorAll('.riga-dettata')];
+    eq(righe.length, 4, 'attese 4 voci dal dettato senza virgole');
+
+    a.click('[data-act=detta-salva]');
+    await wait(150);
+    const f = a.stato().freschezza;
+    eq(f['patate'] && f['patate'].qta, 2000, 'i due chili di patate non sono in dispensa');
+    vero(f['passata di pomodoro'], 'la passata non e\' in dispensa');
+    vero(f['patate'].posto === 'dispensa', 'le patate non stanno nella credenza');
+    vero(a.stato().pantry.includes('cipolla'), 'la cipolla non e\' nella credenza');
+    eq((a.stato().shopExtra || []).length, 0, 'la dettatura in dispensa ha sporcato la spesa');
+
+    // e la dettatura della spesa e' rimasta quella di sempre
+    a.dom.window.fitmealsVoce.daTesto('pane, latte');
+    await wait(100);
+    eq(a.d.getElementById('detta-salva-btn').textContent.trim(), 'Aggiungi alla spesa',
+      'la spesa ha perso il suo bottone');
+    a.click('[data-act=detta-salva]');
+    await wait(100);
+    eq(a.stato().shopExtra.length, 2, 'la spesa dettata non funziona piu\'');
+  });
+
   await test('le scadenze di oggi arrivano nella campanella e si gestiscono', async () => {
     const ora = Date.now();
     const a = await app({ storage: {
