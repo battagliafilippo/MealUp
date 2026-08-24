@@ -3172,9 +3172,17 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
 
     vero(a.d.getElementById('modal-dettatura').classList.contains('active'), 'la conferma non si apre');
     const righe = [...a.d.querySelectorAll('.riga-dettata')];
-    vero(righe.length === 4, 'attese 4 righe prodotto, trovate ' + righe.length);
+    vero(righe.length === 3, 'attese 3 righe prodotto, trovate ' + righe.length);
     vero(!a.d.getElementById('dettatura-lista').textContent.includes('1,49'), 'un prezzo e\' rimasto in lista');
-    vero(righe.some(r => r.classList.contains('incerta')), 'la riga illeggibile deve dirsi da controllare');
+    vero(righe.some(r => r.classList.contains('incerta')), 'la riga non esatta deve dirsi da controllare');
+    // il pasticcio che non sa di cibo ora viene scartato, non proposto
+    vero(![...a.d.querySelectorAll('.det-nome')].some(c => /gnappole/i.test(c.value)),
+      'la riga senza senso doveva essere scartata');
+    // e la schermata lo dice, con un conteggio visibile
+    const conto = a.d.getElementById('dettatura-conto');
+    vero(conto && !conto.hidden, 'il conteggio delle righe scartate non si vede');
+    vero(conto.textContent.includes('3 prodotti riconosciuti'), 'il conteggio dei prodotti manca: ' + conto.textContent);
+    vero(conto.textContent.includes('6 righe scartate automaticamente'), 'il conteggio degli scarti manca: ' + conto.textContent);
 
     a.click('[data-act=detta-salva]');
     a.set('shop-add', 'farina');
@@ -3189,6 +3197,43 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'la voce da scontrino ha una struttura diversa dal manuale');
     eq(latte.qta, 1000, 'il litro dello scontrino non e\' diventato grammi come altrove');
     vero(!JSON.stringify(S.shopExtra).match(/1[.,]49|8[.,]57/), 'un prezzo e\' finito nei dati salvati');
+  });
+
+  await test('lo scontrino scarta il rumore ma non i prodotti veri', async () => {
+    const a = await app();
+    const Sc = a.dom.window.fitmealsScontrino;
+
+    // le righe che non sono mai prodotti spariscono del tutto
+    ['CASSA 3 OPERATORE MARIA', 'OFFERTA RISPARMIO 0,50', 'REPARTO ORTOFRUTTA',
+     '12/05/2026 18:32', '456789012345', 'EURO QUATTRO/57',
+     'BENVENUTI E ARRIVEDERCI', 'GNAPPOLE SFRIGOLATE 3,00'
+    ].forEach(r => {
+      vero(Sc.riga(r) === null, 'doveva essere scartata: ' + r);
+    });
+
+    // un nome troppo lungo per essere un prodotto se ne va
+    vero(Sc.riga('LOTTO PRODUZIONE STABILIMENTO CONFEZIONAMENTO DI ORIGINE CONTROLLATA') === null,
+      'la riga chilometrica doveva essere scartata');
+
+    // ma un prodotto vero non esatto resta, da controllare e modificabile
+    const gnocchi = Sc.riga('GNOCCHI DI SEGALE BIO 2,50');
+    vero(gnocchi && !gnocchi.sicuro, 'il prodotto plausibile ma ignoto deve restare da controllare');
+    vero(/gnocchi/.test(gnocchi.nome), 'il nome plausibile si e\' perso');
+
+    // e i prodotti noti non peggiorano: passano tutti
+    ['LATTE INTERO 1L 1,49', 'PANE 0,500 kg 2,10', 'PASSATA DI POMODORO 0,89',
+     'PETTO DI POLLO 4,99', 'PARMIGIANO REGGIANO 5,20'].forEach(r => {
+      vero(Sc.riga(r) !== null, 'un prodotto vero e\' stato scartato: ' + r);
+    });
+
+    // il conteggio arriva assieme alle righe
+    const unite = Sc.interpreta('CASSA 3 OPERATORE MARIA\nLATTE INTERO 1L 1,49\nTOTALE 1,49');
+    eq(unite.length, 1, 'atteso un solo prodotto');
+    eq(unite.scartate, 2, 'gli scarti non tornano');
+
+    // nella dettatura a voce il conteggio non compare
+    a.dom.window.fitmealsVoce.daTesto('latte, pane');
+    vero(a.d.getElementById('dettatura-conto').hidden, 'il conteggio compare anche nella dettatura a voce');
   });
 
   await test('le diete del profilo nascondono le ricette giuste', async () => {
@@ -3397,10 +3442,12 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     await wait(100);
 
     const righe = [...a.d.querySelectorAll('.riga-dettata')];
-    eq(righe.length, 2, 'attese 2 righe dal testo incollato');
-    vero(righe.some(r => r.classList.contains('incerta')), 'la riga ignota non e\' da controllare');
+    eq(righe.length, 1, 'attesa 1 riga dal testo incollato');
+    vero(righe.some(r => r.classList.contains('incerta')), 'la riga non esatta non e\' da controllare');
     vero(!a.d.getElementById('dettatura-lista').textContent.includes('ORDINE'),
       'l\'intestazione dell\'ordine e\' rimasta fra i prodotti');
+    vero(a.d.getElementById('dettatura-conto').textContent.includes('3 righe scartate'),
+      'il conteggio degli scarti manca nel virtuale');
 
     // prima dell'ok si corregge: cambio nome e quantita', POI salvo
     const prima = righe[0].querySelector('.det-nome');
