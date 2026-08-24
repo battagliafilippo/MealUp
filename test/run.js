@@ -3608,6 +3608,32 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     almeno(a.conta('#recipe-list .card-btn'), 1, 'il tiramisu non si trova');
   });
 
+  await test('la nuova infornata di ricette fit \u00e8 completa e si trova', async () => {
+    const a = await app();
+    const rec = a.stato().recipes;
+
+    // le venti nuove ci sono tutte, sane, su piu' portate
+    const nuove = rec.filter(r => /^ft\d\d$/.test(r.id));
+    eq(nuove.length, 20, 'attese 20 ricette ft');
+    vero(nuove.every(r => r.cat === 'sano'), 'una ricetta fit non si dichiara sana');
+    vero(nuove.every(r => (r.tags || []).includes('fit')), 'una ricetta fit senza il tag fit');
+    const portate = new Set(nuove.map(r => r.portata));
+    almeno(portate.size, 5, 'portate coperte dalle nuove fit');
+
+    // complete come le altre: macro, ingredienti veri, passaggi
+    nuove.forEach(r => {
+      vero(r.kcal > 0 && r.pro >= 0 && r.ing.length >= 3 && r.steps.length >= 3, r.id + ' incompleta');
+      r.ing.forEach(i => vero(i.n && i.q > 0, r.id + ': ingrediente rotto'));
+    });
+
+    // e il ricettario complessivo resta a maggioranza sana
+    almeno(rec.filter(r => r.cat === 'sano').length, 230, 'ricette sane totali');
+
+    a.cerca('buddha bowl');
+    await wait(150);
+    almeno(a.conta('#recipe-list .card-btn'), 1, 'la buddha bowl non si trova');
+  });
+
   await test('le scadenze di oggi arrivano nella campanella e si gestiscono', async () => {
     const ora = Date.now();
     const a = await app({ storage: {
