@@ -287,6 +287,223 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(a.errs.length, 0, 'errori JS');
   });
 
+  // ---------------------------------------------------------------- famiglia
+  console.log('\nFamiglia');
+  await test('la famiglia si crea e l\'invito porta dentro l\'altro telefono', async () => {
+    const a = await app();
+    const b = await app();
+    a.dom.window.fitmealsFamiglia.crea('Casa prova');
+    const invito = await a.dom.window.fitmealsFamiglia.link(a.dom.window.fitmealsFamiglia.paccoInvito());
+    vero(invito.link.includes('#fm='), 'l\'invito non e\' un link');
+
+    // B apre il link: toast con il tasto Entra, un tap e sei in famiglia
+    await b.dom.window.fitmealsFamiglia.importa(invito.link);
+    await wait(200);
+    vero(b.testo('#toast').includes('invita nella famiglia'), 'l\'invito non si presenta');
+    b.d.getElementById('toast').querySelector('button').click();
+    await wait(300);
+    const famB = b.dom.window.fitmealsFamiglia.stato();
+    vero(famB && famB.id === a.dom.window.fitmealsFamiglia.stato().id, 'B non e\' nella stessa famiglia');
+    vero(famB.membri.some(m => m.nome === 'Io'), 'B non conosce chi l\'ha invitato');
+
+    // il riquadro nel profilo mostra i comandi di casa
+    b.tab('view-profile');
+    vero(b.d.querySelector('[data-act=famiglia-manda]'), 'manca Manda a casa');
+    vero(b.d.querySelector('[data-act=famiglia-invita]'), 'manca Invita in famiglia');
+    // e la spiegazione si apre e si chiude con un tap
+    const lnk = b.d.querySelector('#famiglia-body [data-act=aiuto-apri]');
+    vero(lnk, 'manca il Come funziona');
+    lnk.click();
+    vero(!b.d.getElementById('aiuto-famiglia').hidden, 'la spiegazione non si apre');
+    lnk.click();
+    vero(b.d.getElementById('aiuto-famiglia').hidden, 'la spiegazione non si chiude');
+  });
+
+  await test('la spesa di uno mette a posto la casa dell\'altro, senza doppioni', async () => {
+    const a = await app();
+    const b = await app();
+    a.dom.window.fitmealsFamiglia.crea('Casa prova');
+    const invito = await a.dom.window.fitmealsFamiglia.link(a.dom.window.fitmealsFamiglia.paccoInvito());
+    await b.dom.window.fitmealsFamiglia.importa(invito.link);
+    await wait(200);
+    b.d.getElementById('toast').querySelector('button').click();
+    await wait(200);
+
+    // A fa la spesa: latte (va in frigo) e riso (in dispensa)
+    a.tab('view-fridge');
+    const metti = (n, q) => {
+      a.set('disp-cerca', n);
+      a.d.getElementById('disp-qta').value = q;
+      a.click('[data-act=disp-add]');
+    };
+    metti('latte', '500');
+    metti('riso', '900');
+    const pacco = a.dom.window.fitmealsFamiglia.paccoSpesa();
+    eq(pacco.voci.length, 2, 'il pacco non contiene la spesa appena fatta');
+    const linkSpesa = await a.dom.window.fitmealsFamiglia.link(pacco);
+
+    // B apre il link: casa aggiornata DA SOLA, stesso salvataggio, stesso posto
+    await b.dom.window.fitmealsFamiglia.importa(linkSpesa.link);
+    await wait(300);
+    const fB = b.stato().freschezza;
+    eq(fB['latte'] && fB['latte'].qta, 500, 'il latte non e\' arrivato');
+    eq(fB['latte'].posto, 'frigo', 'il latte non e\' in frigo anche da B');
+    eq(fB['riso'] && fB['riso'].qta, 900, 'il riso non e\' arrivato');
+    eq(fB['riso'].posto, 'dispensa', 'il riso non e\' in dispensa anche da B');
+    vero(b.testo('#toast').includes('2 prodotti sistemati'), 'B non viene avvisato di cosa e\' entrato');
+
+    // lo stesso link aperto due volte non raddoppia niente
+    await b.dom.window.fitmealsFamiglia.importa(linkSpesa.link);
+    await wait(300);
+    eq(b.stato().freschezza['latte'].qta, 500, 'il doppio link ha raddoppiato il latte');
+    vero(b.testo('#toast').includes('era già arrivata'), 'il doppione non viene spiegato');
+
+    // la spesa di un'altra famiglia non tocca niente
+    const c = await app();
+    c.dom.window.fitmealsFamiglia.crea('Altra casa');
+    c.tab('view-fridge');
+    c.set('disp-cerca', 'pane');
+    c.click('[data-act=disp-add]');
+    const linkC = await c.dom.window.fitmealsFamiglia.link(c.dom.window.fitmealsFamiglia.paccoSpesa());
+    await b.dom.window.fitmealsFamiglia.importa(linkC.link);
+    await wait(200);
+    vero(!b.stato().freschezza['pane'], 'la spesa di un\'altra famiglia e\' entrata in casa');
+    vero(b.testo('#toast').includes('altra famiglia'), 'il rifiuto non viene spiegato');
+  });
+
+  await test('con l\'interruttore le ricette valgono per i gusti di tutta la famiglia', async () => {
+    const a = await app();
+    const b = await app();
+    a.dom.window.fitmealsFamiglia.crea('Casa prova');
+    const invito = await a.dom.window.fitmealsFamiglia.link(a.dom.window.fitmealsFamiglia.paccoInvito());
+    await b.dom.window.fitmealsFamiglia.importa(invito.link);
+    await wait(200);
+    b.d.getElementById('toast').querySelector('button').click();
+    await wait(200);
+
+    // B e' vegetariano: i suoi gusti viaggiano dentro la sua spesa
+    b.dom.window.fitmealsProva.profilo().dieta = 'vegetariano';
+    b.tab('view-fridge');
+    b.set('disp-cerca', 'riso');
+    b.click('[data-act=disp-add]');
+    const linkB = await b.dom.window.fitmealsFamiglia.link(b.dom.window.fitmealsFamiglia.paccoSpesa());
+    await a.dom.window.fitmealsFamiglia.importa(linkB.link);
+    await wait(300);
+    vero(a.dom.window.fitmealsFamiglia.stato().membri.some(m => m.gusti && m.gusti.dieta === 'vegetariano'),
+      'i gusti di B non sono arrivati ad A');
+
+    // interruttore acceso: niente piu' carne nelle ricette di A
+    const prima = a.dom.window.fitmealsProva.visibili().length;
+    a.tab('view-profile');
+    a.click('[data-act=famiglia-tutti]');
+    const dopo = a.dom.window.fitmealsProva.visibili();
+    vero(dopo.length < prima, 'l\'interruttore non cambia le ricette');
+    vero(!dopo.some(r => (r.ing || []).some(i => i.n === 'pollo' || i.n === 'manzo')),
+      'con un vegetariano in famiglia la carne resta');
+    // spento: si torna ai gusti propri
+    a.click('[data-act=famiglia-tutti]');
+    eq(a.dom.window.fitmealsProva.visibili().length, prima, 'spegnendo non si torna come prima');
+  });
+
+  // ---------------------------------------------------------------- cena
+  console.log('\nCena tra amici');
+  await test('la cena tra amici propone due piatti che accontentano tutti', async () => {
+    const a = await app();
+    a.tab('view-home');
+    a.click('[data-act=cena-apri]');
+    await wait(100);
+    vero(a.d.getElementById('modal-cena').classList.contains('active'), 'la cena non si apre');
+
+    // Sara vegetariana e senza funghi, aggiunta a mano coi comandi semplici
+    a.d.getElementById('cena-amico-nome').value = 'Sara';
+    a.d.querySelector('#cena-chips [data-val=vegetariano]').click();
+    a.d.getElementById('cena-amico-no').value = 'funghi';
+    a.click('[data-act=cena-amico-add]');
+    await wait(100);
+    const parte = a.dom.window.fitmealsCena.stato().partecipanti;
+    eq(parte.length, 1, 'Sara non e\' in lista');
+    eq(parte[0].gusti.dieta, 'vegetariano', 'la dieta di Sara si e\' persa');
+
+    // due proposte, con la motivazione scritta
+    a.click('[data-act=cena-trova]');
+    await wait(100);
+    const prop = [...a.d.querySelectorAll('#cena-proposte .prop-cena')];
+    eq(prop.length, 2, 'attese due proposte');
+    vero(prop[0].textContent.includes('Va bene per tutti'), 'manca la motivazione');
+    vero(prop[0].textContent.includes('Sara'), 'la motivazione non nomina chi');
+    // nessuna delle due contiene carne o funghi
+    const titoli = prop.map(x => x.querySelector('b').textContent);
+    titoli.forEach(titolo => {
+      const r = a.stato().recipes.find(y => y.title === titolo);
+      vero(r && !(r.ing || []).some(i => ['pollo', 'manzo', 'tonno', 'funghi'].includes(i.n)),
+        titolo + ' non rispetta i gusti');
+    });
+    // "Proponi altre due" cambia i piatti
+    a.click('[data-act=cena-altre]');
+    await wait(100);
+    const dopo = [...a.d.querySelectorAll('#cena-proposte .prop-cena')].map(x => x.querySelector('b').textContent);
+    vero(dopo[0] !== titoli[0], 'le proposte non cambiano');
+
+    // caso impossibile: lo dice con garbo e propone le meno peggio
+    a.dom.window.fitmealsCena.stato().partecipanti.push({ nome: 'Ugo', gusti: {
+      dieta: 'vegano', celiaco: true, incinta: false, esclusi: ['riso','patate','quinoa','mais','polenta',
+      'grano saraceno','gallette','ceci','lenticchie','fagioli','tofu','zucchine','melanzane','pomodori',
+      'insalata','avocado','frutta','mela','banana','fragole','frutti di bosco','mandorle','noci','zucca',
+      'carote','spinaci','broccoli','cavolfiore','peperoni','funghi','cetrioli','sedano','edamame','hummus',
+      'datteri','cocco','anguria','melone','pesche','albicocche','uva','kiwi','arance','limone','carciofi',
+      'pomodorini','cicoria','verza','cipolla','finocchi','radicchio','olive','cola','aranciata','chinotto',
+      'acqua tonica','menta','basilico','prezzemolo','gassosa','te freddo','succo','spremuta','energy drink',
+      'arancia','pera','salsa di soia'] } });
+    a.click('[data-act=cena-trova]');
+    await wait(100);
+    vero(a.testo('#cena-proposte').includes('Nessuna ricetta accontenta proprio tutti'),
+      'il caso impossibile non viene detto con garbo');
+    vero(a.testo('#cena-proposte').includes('Escluderebbe'),
+      'le proposte di ripiego non dicono chi resterebbe scontento');
+  });
+
+  await test('l\'invito a cena si compila dall\'ospite e la risposta torna indietro', async () => {
+    const a = await app();
+    const b = await app();
+    a.tab('view-home');
+    a.click('[data-act=cena-apri]');
+    await wait(100);
+    const cid = a.dom.window.fitmealsCena.stato().id;
+    const invito = await a.dom.window.fitmealsFamiglia.link(
+      { v: 1, tipo: 'cena-invito', op: 'op-cena-1', cid: cid, nomeCena: 'La cena', da: 'Organizzatore' });
+
+    // l'ospite apre il link: schermata semplice, niente da installare
+    await b.dom.window.fitmealsFamiglia.importa(invito.link);
+    await wait(200);
+    vero(b.d.getElementById('modal-cena-ospite').classList.contains('active'), 'l\'ospite non vede l\'invito');
+    vero(b.testo('#cena-ospite-corpo').includes('Organizzatore'), 'l\'invito non dice chi invita');
+    b.d.getElementById('cenag-nome').value = 'Piero';
+    b.d.querySelector('#cenag-chips [data-val=celiaco]').click();
+    b.d.getElementById('cenag-no').value = 'gorgonzola, cozze';
+    b.click('[data-act=cena-rispondi]');
+    await wait(300);
+    const risposta = b.d.getElementById('condividi-link');
+    vero(risposta && risposta.value.includes('#fm='), 'la risposta non diventa un link');
+
+    // la risposta torna dall'organizzatore: i gusti entrano da soli
+    await a.dom.window.fitmealsFamiglia.importa(risposta.value);
+    await wait(300);
+    const piero = a.dom.window.fitmealsCena.stato().partecipanti.find(p => p.nome === 'Piero');
+    vero(piero, 'Piero non e\' entrato nella cena');
+    vero(piero.gusti.celiaco, 'il senza glutine di Piero si e\' perso');
+    vero(piero.gusti.esclusi.includes('gorgonzola'), 'gli esclusi di Piero si sono persi');
+
+    // una risposta per una cena che non esiste piu' viene spiegata, non applicata
+    const c = await app();
+    const orfana = await c.dom.window.fitmealsFamiglia.link(
+      { v: 1, tipo: 'cena-risposta', op: 'op-x', cid: 'cena-sparita', da: 'Anna', gusti: {} });
+    await a.dom.window.fitmealsFamiglia.importa(orfana.link);
+    await wait(200);
+    vero(a.testo('#toast').includes('non trovo più'), 'la risposta orfana non viene spiegata');
+    vero(!a.dom.window.fitmealsCena.stato().partecipanti.some(p => p.nome === 'Anna'),
+      'la risposta orfana e\' entrata lo stesso');
+  });
+
   // ---------------------------------------------------------------- salute
   console.log('\nTenuta generale');
   await test('nessun errore JS navigando tutte le schede', async () => {
