@@ -3154,6 +3154,7 @@ h3{font-weight:600;letter-spacing:-.018em}
             <option value="primo">Primo</option>
             <option value="secondo">Secondo</option>
             <option value="contorno">Contorno</option>
+            <option value="dolce">Dolce</option>
             <option value="bevanda">Bevanda</option>
             <option value="salsa">Salsa</option>
             <option value="altro">Altro</option>
@@ -3265,7 +3266,7 @@ h3{font-weight:600;letter-spacing:-.018em}
    ============================================================ */
 
 const KEY = 'fitmeals.v2';
-const SEED_VERSION = 11;
+const SEED_VERSION = 12;
 
 const SEED_RECIPES = [
   { id:'r1', portata:'antipasto', title:'Carpaccio di manzo con rucola e feta', cat:'sano', prep:5, cook:0,
@@ -5739,7 +5740,131 @@ const SEED_RECIPES = [
     kcal:375, pro:9, carbs:46, fat:17, desc:'',
     ing:[{n:"ciambella",q:70,u:"g"},{n:"latte",q:150,u:"g"},{n:"caffe",q:30,u:"g"}],
     steps:["Prepara il caffè e montaci sopra il latte caldo.","Servi la ciambella a fianco.","È una colazione da domenica, non da tutti i giorni."],
-    tags:["colazione","bar"], context:'', note:"" }
+    tags:["colazione","bar"], context:'', note:"" },
+
+  /* ---------- dolci fit: la voglia di dolce senza buttare la giornata ---------- */
+
+  { id:"do01", portata:"dolce", title:"Mousse di yogurt greco al cacao", cat:"sano", prep:5, cook:0,
+    kcal:150, pro:16, carbs:16, fat:2, desc:'',
+    ing:[{n:"yogurt greco 0%",q:150,u:"g"},{n:"cacao amaro",q:8,u:"g"},{n:"miele",q:10,u:"g"}],
+    steps:["Setaccia il cacao sullo yogurt, sennò fa i grumi.","Aggiungi il miele e monta con la frusta due minuti buoni: incorpora aria e diventa mousse.","Fai riposare in frigo mezz'ora prima di mangiarla."],
+    tags:["dolce","fit","veloce","no cottura","proteico"], context:'dopo cena', note:"Due minuti veri di frusta: è l'aria a trasformare uno yogurt in un dolce." },
+
+  { id:"do02", portata:"dolce", title:"Nice cream alla banana", cat:"sano", prep:5, cook:0,
+    kcal:135, pro:2, carbs:30, fat:1, desc:'',
+    ing:[{n:"banana",q:120,u:"g"},{n:"latte",q:30,u:"g"}],
+    steps:["Congela la banana a rondelle almeno quattro ore prima.","Frulla le rondelle ancora ghiacciate col latte, poco alla volta.","Servi subito: è un gelato senza panna e senza zucchero aggiunto."],
+    tags:["dolce","fit","no cottura","estate"], context:'', note:"La banana va congelata già a rondelle: intera spacca le lame e frulla male." },
+
+  { id:"do03", portata:"dolce", title:"Ricotta con miele e noci", cat:"sano", prep:5, cook:0,
+    kcal:245, pro:12, carbs:16, fat:15, desc:'',
+    ing:[{n:"ricotta",q:120,u:"g"},{n:"miele",q:12,u:"g"},{n:"noci",q:10,u:"g"}],
+    steps:["Lavora la ricotta con una forchetta finché è cremosa.","Versa il miele a filo e spezzetta le noci sopra.","Un giro di cannella se ti piace: costa zero calorie."],
+    tags:["dolce","fit","veloce","no cottura"], context:'', note:"La ricotta di pecora è più ricca: qui rende di più quella vaccina, leggera." },
+
+  { id:"do04", portata:"dolce", title:"Palline di datteri e mandorle", cat:"medio", prep:15, cook:0,
+    kcal:235, pro:5, carbs:29, fat:12, desc:'',
+    ing:[{n:"datteri",q:40,u:"g"},{n:"mandorle",q:20,u:"g"},{n:"cacao amaro",q:5,u:"g"}],
+    steps:["Ammolla i datteri cinque minuti in acqua calda se sono duri.","Frulla datteri e mandorle fino a un impasto appiccicoso.","Forma tre palline e rotolale nel cacao. In frigo durano una settimana."],
+    tags:["dolce","fit","no cottura","meal prep","pre-workout"], context:'', note:"Sono zuccheri veri: perfette prima di allenarti, non da divano." },
+
+  { id:"do05", portata:"dolce", title:"Pancake proteici ai frutti di bosco", cat:"sano", prep:10, cook:10,
+    kcal:290, pro:17, carbs:48, fat:4, desc:'',
+    ing:[{n:"avena",q:40,u:"g"},{n:"albumi",q:100,u:"g"},{n:"banana",q:50,u:"g"},{n:"frutti di bosco",q:60,u:"g"}],
+    steps:["Frulla avena, albumi e banana fino a pastella liscia.","Cuoci in padella antiaderente a fuoco medio: girali quando le bolle scoppiano.","Impila e copri coi frutti di bosco appena scaldati in padella."],
+    tags:["dolce","fit","post-workout","colazione"], context:'merenda che sembra un premio', note:"Fuoco medio, non alto: il pancake deve gonfiare prima di colorire." },
+
+  { id:"do06", portata:"dolce", title:"Mele al forno con cannella", cat:"sano", prep:5, cook:25,
+    kcal:120, pro:1, carbs:31, fat:0, desc:'',
+    ing:[{n:"mela",q:200,u:"g"},{n:"miele",q:8,u:"g"},{n:"cannella",q:2,u:"g"}],
+    steps:["Togli il torsolo alla mela e incidi la buccia tutto intorno, sennò scoppia.","Riempi il buco con miele e cannella.","In forno a 180 per 25 minuti: è pronta quando cede al cucchiaino."],
+    tags:["dolce","fit","forno","inverno"], context:'', note:"L'incisione sulla buccia non è estetica: sfoga il vapore e la mela resta intera." },
+
+  { id:"do07", portata:"dolce", title:"Porridge dolce al cacao e pera", cat:"sano", prep:5, cook:5,
+    kcal:300, pro:11, carbs:48, fat:7, desc:'',
+    ing:[{n:"avena",q:40,u:"g"},{n:"latte",q:150,u:"g"},{n:"cacao amaro",q:6,u:"g"},{n:"pera",q:80,u:"g"}],
+    steps:["Cuoci avena e latte a fuoco basso mescolando, cinque minuti.","Fuori dal fuoco sciogli il cacao: a bollore diventa amaro.","Copri con la pera a cubetti."],
+    tags:["dolce","fit","inverno","colazione"], context:'', note:"Il cacao va sempre aggiunto a fuoco spento: il bollore ne brucia il profumo." },
+
+  { id:"do08", portata:"dolce", title:"Cheesecake fredda allo yogurt", cat:"medio", prep:25, cook:0, serves:6,
+    kcal:1600, pro:43, carbs:122, fat:104, desc:'',
+    ing:[{n:"avena",q:90,u:"g"},{n:"burro",q:30,u:"g"},{n:"formaggio spalmabile",q:300,u:"g"},{n:"yogurt greco 0%",q:200,u:"g"},{n:"miele",q:50,u:"g"},{n:"fragole",q:150,u:"g"}],
+    steps:["Frulla l'avena, impastala col burro fuso e pressala sul fondo dello stampo: mezz'ora in freezer.","Monta formaggio, yogurt e miele e versa sulla base.","Almeno quattro ore di frigo, poi copri con le fragole a fette."],
+    tags:["dolce","fit","no cottura","estate","meal prep"], context:'quando hai ospiti a dieta', note:"Niente gelatina: è il freddo lungo a farla stare in piedi, non barare sulle ore." },
+
+  { id:"do09", portata:"dolce", title:"Crema al caffè proteica", cat:"sano", prep:5, cook:0,
+    kcal:155, pro:27, carbs:9, fat:1, desc:'',
+    ing:[{n:"yogurt greco 0%",q:150,u:"g"},{n:"proteine in polvere",q:15,u:"g"},{n:"caffe",q:30,u:"g"}],
+    steps:["Sciogli le proteine nel caffè freddo, poco per volta.","Incorpora allo yogurt e monta fino a crema lucida.","Mezz'ora di frigo: si addensa e sembra un dessert da bar."],
+    tags:["dolce","fit","proteico","no cottura","post-workout"], context:'', note:"Il caffè dev'essere freddo: caldo cuoce le proteine e la crema impazzisce." },
+
+  { id:"do10", portata:"dolce", title:"Banana bread proteico", cat:"medio", prep:15, cook:45, serves:8,
+    kcal:1560, pro:49, carbs:227, fat:51, desc:'',
+    ing:[{n:"banana",q:300,u:"g"},{n:"avena",q:200,u:"g"},{n:"uovo",q:110,u:"g"},{n:"miele",q:40,u:"g"},{n:"noci",q:40,u:"g"},{n:"lievito per dolci",q:8,u:"g"}],
+    steps:["Schiaccia le banane mature a crema, più sono nere meglio è.","Frulla l'avena a farina e unisci uova, miele, lievito e noci.","In stampo da plumcake a 175 per 45 minuti: lo stecchino deve uscire asciutto."],
+    tags:["dolce","fit","forno","meal prep","colazione"], context:'la fetta della settimana', note:"Le banane troppo mature che butteresti sono esattamente quelle giuste." },
+
+  /* ---------- dolci fat: lo sgarro fatto bene, senza sensi di colpa ---------- */
+
+  { id:"do11", portata:"dolce", title:"Tiramisù classico", cat:"sgarro", prep:30, cook:0, serves:6,
+    kcal:2500, pro:57, carbs:243, fat:144, desc:'',
+    ing:[{n:"savoiardi",q:200,u:"g"},{n:"mascarpone",q:250,u:"g"},{n:"uovo",q:165,u:"g"},{n:"zucchero",q:80,u:"g"},{n:"caffe",q:150,u:"g"},{n:"cacao amaro",q:10,u:"g"}],
+    steps:["Monta i tuorli con lo zucchero, poi incorpora il mascarpone.","Aggiungi gli albumi montati a neve, dal basso verso l'alto.","Bagna i savoiardi nel caffè un secondo per lato e alterna strati: una notte di frigo, cacao alla fine."],
+    tags:["dolce","fat","sgarro","classico","no cottura"], context:'pranzo della domenica', note:"Un secondo per lato, non di più: il savoiardo zuppo affonda il dolce." },
+
+  { id:"do12", portata:"dolce", title:"Torta al cioccolato fondente", cat:"sgarro", prep:20, cook:25, serves:8,
+    kcal:3300, pro:48, carbs:281, fat:214, desc:'',
+    ing:[{n:"cioccolato fondente",q:200,u:"g"},{n:"burro",q:150,u:"g"},{n:"zucchero",q:150,u:"g"},{n:"uovo",q:220,u:"g"},{n:"farina",q:50,u:"g"}],
+    steps:["Sciogli cioccolato e burro a bagnomaria.","Monta uova e zucchero finché scrivono, poi unisci il cioccolato tiepido e la farina setacciata.","A 170 per 25 minuti: il cuore deve restare appena umido."],
+    tags:["dolce","fat","sgarro","forno","cioccolato"], context:'compleanni', note:"Cinque minuti in meno di forno valgono più di qualunque glassa." },
+
+  { id:"do13", portata:"dolce", title:"Crostata alla marmellata", cat:"sgarro", prep:30, cook:35, serves:8,
+    kcal:3390, pro:46, carbs:488, fat:139, desc:'',
+    ing:[{n:"farina",q:300,u:"g"},{n:"burro",q:150,u:"g"},{n:"zucchero",q:120,u:"g"},{n:"uovo",q:110,u:"g"},{n:"marmellata di albicocche",q:250,u:"g"}],
+    steps:["Impasta veloce farina, burro freddo a cubetti, zucchero e uova: appena sta insieme, fermati.","Un'ora di frigo, poi stendi e fodera lo stampo.","Marmellata, strisce sopra, 35 minuti a 180."],
+    tags:["dolce","fat","sgarro","forno","classico","meal prep"], context:'merenda della nonna', note:"La frolla si impasta col freddo e con fretta: il calore delle mani la rovina." },
+
+  { id:"do14", portata:"dolce", title:"Salame di cioccolato", cat:"sgarro", prep:20, cook:0, serves:10,
+    kcal:3080, pro:37, carbs:293, fat:190, desc:'',
+    ing:[{n:"biscotti frollini",q:250,u:"g"},{n:"cioccolato fondente",q:150,u:"g"},{n:"burro",q:100,u:"g"},{n:"zucchero",q:50,u:"g"},{n:"uovo",q:55,u:"g"},{n:"cacao amaro",q:15,u:"g"}],
+    steps:["Spezza i biscotti a mano: servono pezzi, non sabbia.","Mescola cioccolato e burro fusi con zucchero e uovo, poi i biscotti.","Arrotola nella carta forno a salame e almeno tre ore di frigo: si affetta come quello vero."],
+    tags:["dolce","fat","sgarro","no cottura","cioccolato"], context:'', note:"I pezzi grossi di biscotto sono il punto: è un salame, non un paté." },
+
+  { id:"do15", portata:"dolce", title:"Muffin al cioccolato", cat:"sgarro", prep:15, cook:20, serves:6,
+    kcal:2690, pro:45, carbs:320, fat:143, desc:'',
+    ing:[{n:"farina",q:200,u:"g"},{n:"zucchero",q:120,u:"g"},{n:"burro",q:100,u:"g"},{n:"uovo",q:110,u:"g"},{n:"latte",q:100,u:"g"},{n:"cioccolato fondente",q:100,u:"g"},{n:"lievito per dolci",q:8,u:"g"}],
+    steps:["Mescola i secchi da una parte e i liquidi dall'altra.","Uniscili in dieci secondi, coi grumi: è il segreto dei muffin alti.","Cioccolato a pezzi grossi dentro, 20 minuti a 190."],
+    tags:["dolce","fat","sgarro","forno","cioccolato"], context:'', note:"L'impasto liscio è l'errore: mescolato troppo, il muffin viene gommoso." },
+
+  { id:"do16", portata:"dolce", title:"Pancake americani burro e miele", cat:"sgarro", prep:10, cook:10,
+    kcal:590, pro:16, carbs:74, fat:25, desc:'',
+    ing:[{n:"farina",q:60,u:"g"},{n:"latte",q:80,u:"g"},{n:"uovo",q:55,u:"g"},{n:"zucchero",q:10,u:"g"},{n:"burro",q:20,u:"g"},{n:"miele",q:20,u:"g"},{n:"lievito per dolci",q:4,u:"g"}],
+    steps:["Pastella spessa: se cola come crepe, aggiungi farina.","Cuoci a fuoco medio, girando al primo giro di bolle.","Torre di tre, burro sopra che si scioglie, miele a filo."],
+    tags:["dolce","fat","sgarro","colazione","weekend"], context:'domenica lenta', note:"La pastella spessa fa il pancake alto: quella liquida fa una crepe triste." },
+
+  { id:"do17", portata:"dolce", title:"Torta di mele della nonna", cat:"sgarro", prep:20, cook:45, serves:8,
+    kcal:2550, pro:41, carbs:377, fat:98, desc:'',
+    ing:[{n:"mela",q:500,u:"g"},{n:"farina",q:250,u:"g"},{n:"zucchero",q:130,u:"g"},{n:"burro",q:100,u:"g"},{n:"uovo",q:110,u:"g"},{n:"latte",q:50,u:"g"},{n:"lievito per dolci",q:10,u:"g"}],
+    steps:["Monta uova e zucchero, poi burro fuso, latte, farina e lievito.","Metà mele a cubetti nell'impasto, metà a fette sopra, a raggiera.","45 minuti a 175: profuma prima di essere pronta, fidati dello stecchino."],
+    tags:["dolce","fat","sgarro","forno","classico","inverno"], context:'casa della nonna', note:"Le mele a raggiera non sono estetica: quelle sopra caramellano, quelle dentro restano morbide." },
+
+  { id:"do18", portata:"dolce", title:"Mousse al cioccolato", cat:"sgarro", prep:20, cook:0,
+    kcal:540, pro:11, carbs:35, fat:38, desc:'',
+    ing:[{n:"cioccolato fondente",q:50,u:"g"},{n:"panna",q:60,u:"g"},{n:"albumi",q:60,u:"g"},{n:"zucchero",q:10,u:"g"}],
+    steps:["Sciogli il cioccolato e lascialo intiepidire.","Monta la panna, e a parte gli albumi con lo zucchero.","Incorpora prima la panna al cioccolato, poi gli albumi dal basso: due ore di frigo."],
+    tags:["dolce","fat","sgarro","no cottura","cioccolato"], context:'cena a due', note:"Il cioccolato caldo smonta tutto: tiepido al dito, non di più." },
+
+  { id:"do19", portata:"dolce", title:"Biscotti burro e cioccolato", cat:"sgarro", prep:15, cook:12, serves:8,
+    kcal:2830, pro:40, carbs:330, fat:146, desc:'',
+    ing:[{n:"farina",q:250,u:"g"},{n:"burro",q:125,u:"g"},{n:"zucchero",q:100,u:"g"},{n:"uovo",q:55,u:"g"},{n:"cioccolato fondente",q:100,u:"g"},{n:"lievito per dolci",q:5,u:"g"}],
+    steps:["Lavora burro morbido e zucchero, poi uovo, farina e lievito.","Cioccolato a coltello, a schegge irregolari.","Palline schiacciate sulla teglia, ben distanti: 12 minuti a 180, escono morbidi e induriscono fuori."],
+    tags:["dolce","fat","sgarro","forno","cioccolato","meal prep"], context:'', note:"Sembrano crudi quando li tiri fuori: è giusto così, induriscono raffreddando." },
+
+  { id:"do20", portata:"dolce", title:"Cheesecake cotta al forno", cat:"sgarro", prep:25, cook:60, serves:8,
+    kcal:3900, pro:67, carbs:291, fat:275, desc:'',
+    ing:[{n:"biscotti frollini",q:200,u:"g"},{n:"burro",q:80,u:"g"},{n:"formaggio spalmabile",q:500,u:"g"},{n:"zucchero",q:130,u:"g"},{n:"uovo",q:165,u:"g"},{n:"panna",q:100,u:"g"}],
+    steps:["Base di biscotti tritati e burro fuso, pressata e in frigo.","Mescola formaggio, zucchero, uova e panna SENZA montare: l'aria crepa la superficie.","Un'ora a 160, poi forno spento e sportello socchiuso finché è fredda."],
+    tags:["dolce","fat","sgarro","forno","classico"], context:'occasioni serie', note:"Il raffreddamento in forno è metà della ricetta: lo sbalzo termico la spacca." }
 ];
 
 const SEED = {
@@ -6018,7 +6143,7 @@ function sameIngredient(a, b) {
   return short.every(t => long.indexOf(t) > -1);
 }
 
-const PORTATA = { colazione:'Colazione', antipasto:'Antipasto', primo:'Primo', secondo:'Secondo', contorno:'Contorno', bevanda:'Bevanda', salsa:'Salsa', altro:'Altro' };
+const PORTATA = { colazione:'Colazione', antipasto:'Antipasto', primo:'Primo', secondo:'Secondo', contorno:'Contorno', dolce:'Dolce', bevanda:'Bevanda', salsa:'Salsa', altro:'Altro' };
 function portataOf(r) { return PORTATA[r.portata] ? r.portata : 'altro'; }
 
 function ingNames(r) { return (r.ing || []).map(i => i.n); }
@@ -7044,8 +7169,8 @@ function applicaTema(pagina, tema) {
 const PASTI_HOME = ['col', 'pra', 'cen'];
 const PORTATE_PAGINA = {
   col: ['colazione', 'bevanda'],
-  pra: ['primo', 'secondo', 'contorno', 'bevanda', 'altro'],
-  cen: ['primo', 'secondo', 'contorno', 'antipasto', 'bevanda', 'altro']
+  pra: ['primo', 'secondo', 'contorno', 'dolce', 'bevanda', 'altro'],
+  cen: ['primo', 'secondo', 'contorno', 'antipasto', 'dolce', 'bevanda', 'altro']
 };
 let pastoCorrente = 0;
 const limitePagina = { col: 12, pra: 12, cen: 12 };
@@ -8595,7 +8720,7 @@ function renderAll() { aggiornaFrecce(); renderHome(); renderPasti(); renderFrid
 /* ---------- cucinare per piu persone ----------
    Quota indicativa del fabbisogno giornaliero coperta dal piatto,
    per tipo di portata. Da qui esce il moltiplicatore di ogni porzione. */
-const MEAL_SHARE = { colazione: 0.25, antipasto: 0.12, primo: 0.30, secondo: 0.28, contorno: 0.10, bevanda: 0.06, salsa: 0.05, altro: 0.25 };
+const MEAL_SHARE = { colazione: 0.25, antipasto: 0.12, primo: 0.30, secondo: 0.28, contorno: 0.10, dolce: 0.12, bevanda: 0.06, salsa: 0.05, altro: 0.25 };
 
 /* La porzione naturale di una persona: la ricetta è tarata su una giornata
    da 2000 kcal, quindi la scalo sul suo fabbisogno e non oltre. Serve a non
@@ -8802,7 +8927,7 @@ function anteprimaRicetta(id) {
 /* ---------- confronto ----------
    Valori per 100 g degli ingredienti, per poter mettere a paragone anche le
    materie prime e non solo i piatti finiti. */
-const ING_TAB = {"pasta":[353,11,72,1.4],"pasta all'uovo":[366,13,68,4],"sfoglie per lasagne":[366,13,68,4],"gnocchi di patate":[160,3,33,0.5],"riso":[332,6.7,80,0.4],"riso carnaroli":[332,6.7,80,0.4],"farro":[335,15,67,2.5],"orzo":[319,10,70,1.5],"cous cous":[376,12,72,2],"polenta":[362,8,78,1.5],"farina":[343,10,72,1],"farina di ceci":[358,20,45,6],"pangrattato":[350,11,70,3],"pane":[275,8.6,57,0.5],"pane raffermo":[290,9,60,1],"pane in cassetta":[280,8,50,4],"pasta sfoglia":[400,6,38,25],"crackers":[428,10,72,11],"grissini":[433,12,68,12],"fette biscottate":[410,11,74,6],"semola":[340,11,72,1],"quinoa":[368,14,58,6],"avena":[370,13,60,7],"fregola":[350,12,71,1.5],"lievito di birra":[105,17,3,1.5],"petto di pollo":[110,23,0,1.5],"pollo":[120,20,0,4],"fesa di tacchino":[107,24,0,1],"manzo":[150,21,0,7],"macinato di manzo":[180,20,0,11],"vitello":[107,21,0,2.5],"lonza di maiale":[157,21,0,8],"costine di maiale":[280,17,0,23],"salsiccia":[304,15,0.6,27],"agnello":[159,20,0,9],"coniglio":[118,21,0,4],"anatra":[159,19,0,9],"fegato":[129,20,3,4],"trippa":[108,15,0,5],"prosciutto crudo":[268,26,0,18],"prosciutto cotto":[215,20,1,14],"bresaola":[151,33,0,2],"speck":[303,28,0,21],"mortadella":[317,16,1,28],"salame":[425,26,1,35],"pancetta":[380,15,0,35],"guanciale":[520,12,0,52],"lardo":[891,2,0,98],"nduja":[450,15,2,42],"coppa":[390,25,0,32],"brodo di carne":[8,1,0.5,0.2],"brodo vegetale":[5,0.4,0.6,0.1],"branzino":[82,17,0,1.5],"orata":[121,20,0,4],"merluzzo":[71,17,0,0.3],"baccalà":[100,23,0,1],"salmone":[208,20,0,13],"salmone affumicato":[147,21,0,7],"tonno":[159,21,0,8],"tonno sott'olio":[192,25,0,10],"sgombro":[170,17,0,11],"alici":[96,17,0,3],"acciughe":[210,26,0,12],"sarde":[129,20,0,5],"polpo":[82,16,1,1],"seppie":[72,14,0.7,1.5],"calamari":[92,16,0.5,1.5],"gamberi":[71,13.6,0.9,1],"scampi":[89,18,0,1],"cozze":[86,12,3,2],"vongole":[72,12,2,1],"capesante":[69,12,3,0.8],"pesce spada":[118,17,0,5],"trota":[86,15,0,3],"bottarga":[350,40,0,20],"rana pescatrice":[68,15,0,0.5],"gallinella":[80,17,0,1],"uovo":[143,12.6,0.7,9.5],"tuorli":[322,16,3.6,27],"albumi":[43,10.9,0.2,0.2],"ricotta":[146,8.8,3.5,11],"ricotta salata":[280,22,2,20],"mozzarella":[253,18,1,20],"mozzarella di bufala":[288,17,1,25],"burrata":[330,17,2,28],"stracchino":[300,18,1,25],"scamorza":[334,25,1,25],"provola":[295,20,2,23],"caciocavallo":[439,32,2,33],"fontina":[343,25,1,27],"taleggio":[315,19,1,26],"gorgonzola":[324,19,1,27],"pecorino":[387,26,3.6,31],"parmigiano":[392,33,0,29],"grana":[392,33,0,29],"feta":[264,14,4,21],"formaggio spalmabile":[253,6,4,24],"mascarpone":[450,7,4,45],"yogurt greco 0%":[57,10,4,0],"latte":[64,3.3,4.9,3.6],"panna":[337,2.3,3,35],"burro":[758,0.8,1,83],"patate":[78,2,17,0.1],"patate dolci":[86,1.6,20,0.1],"carota":[35,1,8,0.2],"sedano":[20,0.7,3,0.2],"cipolla":[40,1,8,0.1],"cipolla rossa":[40,1,8,0.1],"scalogno":[72,2,17,0.2],"aglio":[41,2,8,0.2],"porri":[61,2,14,0.3],"zucchine":[21,1.3,3,0.1],"melanzane":[18,1.1,3,0.2],"peperoni":[22,1,4.2,0.3],"pomodori":[19,1,3.5,0.2],"pomodorini":[20,1,3.5,0.2],"pomodori secchi":[258,14,43,3],"radicchio":[13,1.4,1.6,0.1],"rucola":[25,2.6,2,0.7],"spinaci":[31,3.4,3,0.7],"bietole":[17,1.3,2.8,0.2],"cavolfiore":[25,3,2.7,0.3],"broccoli":[27,3,2,0.4],"verza":[27,2,4,0.2],"cime di rapa":[32,3,2,0.3],"carciofi":[47,2.7,5.5,0.2],"asparagi":[29,3.6,3,0.2],"funghi":[22,3.1,1,0.4],"funghi porcini":[27,3.9,1,0.7],"zucca":[18,1.1,3.5,0.1],"piselli":[76,5.5,12,0.5],"fave":[41,5,4.5,0.4],"fagiolini":[31,2,3,0.1],"ceci":[120,7,18,2.4],"lenticchie":[92,6.9,16,0.4],"fagioli borlotti":[91,6.9,12,0.5],"fagioli cannellini":[91,6.9,12,0.5],"cicoria":[10,1.4,0.7,0.2],"finocchi":[9,1.2,1,0.2],"cetrioli":[14,0.7,3,0.1],"insalata":[19,1.8,2.2,0.4],"olive verdi":[142,1,1,15],"olive nere":[235,1.6,1,25],"capperi":[25,2,4,0.2],"mais":[91,3.5,19,1.2],"sedano rapa":[20,1.5,2.3,0.3],"topinambur":[73,2,17,0.1],"catalogna":[12,1.5,1,0.2],"limone":[11,0.6,2.3,0],"arancia":[34,0.7,8,0.2],"mela":[45,0.2,12,0.1],"pera":[35,0.3,9,0.1],"uva":[61,0.5,15,0.1],"melone":[33,0.8,7,0.2],"fichi":[47,0.9,11,0.2],"pesche":[27,0.8,6,0.1],"frutti di bosco":[40,1,8,0.4],"avocado":[160,2,9,15],"noci":[654,15,14,65],"mandorle":[603,22,4.6,55],"pistacchi":[608,18,8,56],"nocciole":[655,14,6,64],"pinoli":[673,14,4,68],"uvetta":[283,2.5,66,0.5],"sesamo":[573,17,12,50],"semi di zucca":[559,30,11,49],"olio evo":[900,0,0,100],"aceto":[4,0,0.4,0],"aceto balsamico":[88,0.5,17,0],"vino bianco":[70,0,0.6,0],"vino rosso":[75,0,0.6,0],"marsala":[156,0,16,0],"passata di pomodoro":[35,1.5,6.5,0.3],"pelati":[32,1.3,6,0.2],"concentrato di pomodoro":[80,4,13,0.5],"senape":[66,4,6,3],"maionese":[680,1,2,75],"salsa di soia":[53,8,5,0],"miele":[304,0.3,80,0],"zucchero":[392,0,100,0],"sale":[0,0,0,0],"pepe nero":[255,11,64,3],"peperoncino":[40,2,7,0.5],"basilico":[30,3,1,0.6],"prezzemolo":[30,3,1,0.6],"erba cipollina":[30,3,4,0.7],"salvia":[60,4,7,2],"rosmarino":[131,3,20,6],"timo":[101,6,15,2],"origano":[265,9,50,4],"menta":[44,3,8,0.7],"alloro":[313,8,49,8],"noce moscata":[525,6,50,36],"zafferano":[310,11,60,6],"finocchietto":[31,3,3,0.4],"cannella":[247,4,81,1],"tartufo":[31,6,0.7,0.5],"curcuma":[312,10,67,3],"curry":[325,14,58,14],"zenzero":[80,1.8,18,0.8],"aneto":[43,3.5,7,1],"paprika":[282,14,54,13],"capperi sotto sale":[25,2,4,0.2],"tofu":[76,8,1.9,4.8],"miso":[199,12,26,6],"alga nori":[35,6,5,0.3],"noodles":[348,12,71,1.5],"spaghetti di riso":[364,6,80,0.6],"olio di sesamo":[884,0,0,100],"aceto di riso":[18,0,0.5,0],"mirin":[258,0,43,0],"latte di cocco":[197,2,3,20],"germogli di soia":[30,3,4,0.2],"anacardi":[553,18,30,44],"arachidi":[567,26,16,49],"salsa teriyaki":[89,5,15,0],"salsa agrodolce":[150,0.5,37,0.1],"edamame":[122,11,10,5],"ananas":[48,0.5,11,0.1],"cavolo cappuccio":[25,1.3,5,0.1],"wasabi":[109,5,24,0.6],"semi di sesamo":[573,17,12,50],"cola":[42,0,10.6,0],"cola zero":[0,0,0,0],"aranciata":[38,0,9.4,0],"chinotto":[40,0,10,0],"acqua tonica":[34,0,8.5,0],"gassosa":[37,0,9.2,0],"te freddo":[28,0,7,0],"succo di arancia":[45,0.7,10.4,0.2],"succo ace":[48,0.3,11.5,0.1],"succo di pera":[52,0.2,12.6,0.1],"succo di mela":[46,0.1,11.2,0.1],"energy drink":[45,0,11,0],"limonata":[30,0.1,7.3,0],"spremuta":[41,0.7,9.2,0.2],"sciroppo di menta":[260,0,65,0],"birra":[43,0.5,3.6,0],"brioche":[400,7,47,20],"cornetto al cioccolato":[430,7,50,22],"crema di nocciole":[539,6.3,57.5,30.9],"crema di pistacchio":[560,7,50,36],"marmellata di albicocche":[245,0.5,60,0.2],"marmellata frutti di bosco":[245,0.5,59,0.2],"biscotti frollini":[470,6.5,68,19],"merendina al cioccolato":[440,6.4,33,30],"plumcake":[420,6,50,21],"ciambella":[400,6,55,17],"banana":[89,1.1,23,0.3],"proteine in polvere":[380,80,6,4],"cacao amaro":[355,20,15,21],"fiocchi di latte":[98,11,3.4,4.3],"gallette di riso":[387,8,81,3],"caffe":[2,0.2,0.3,0],"succo di limone":[11,0.6,2.3,0]};
+const ING_TAB = {"pasta":[353,11,72,1.4],"pasta all'uovo":[366,13,68,4],"sfoglie per lasagne":[366,13,68,4],"gnocchi di patate":[160,3,33,0.5],"riso":[332,6.7,80,0.4],"riso carnaroli":[332,6.7,80,0.4],"farro":[335,15,67,2.5],"orzo":[319,10,70,1.5],"cous cous":[376,12,72,2],"polenta":[362,8,78,1.5],"farina":[343,10,72,1],"farina di ceci":[358,20,45,6],"pangrattato":[350,11,70,3],"pane":[275,8.6,57,0.5],"pane raffermo":[290,9,60,1],"pane in cassetta":[280,8,50,4],"pasta sfoglia":[400,6,38,25],"crackers":[428,10,72,11],"grissini":[433,12,68,12],"fette biscottate":[410,11,74,6],"semola":[340,11,72,1],"quinoa":[368,14,58,6],"avena":[370,13,60,7],"fregola":[350,12,71,1.5],"lievito di birra":[105,17,3,1.5],"petto di pollo":[110,23,0,1.5],"pollo":[120,20,0,4],"fesa di tacchino":[107,24,0,1],"manzo":[150,21,0,7],"macinato di manzo":[180,20,0,11],"vitello":[107,21,0,2.5],"lonza di maiale":[157,21,0,8],"costine di maiale":[280,17,0,23],"salsiccia":[304,15,0.6,27],"agnello":[159,20,0,9],"coniglio":[118,21,0,4],"anatra":[159,19,0,9],"fegato":[129,20,3,4],"trippa":[108,15,0,5],"prosciutto crudo":[268,26,0,18],"prosciutto cotto":[215,20,1,14],"bresaola":[151,33,0,2],"speck":[303,28,0,21],"mortadella":[317,16,1,28],"salame":[425,26,1,35],"pancetta":[380,15,0,35],"guanciale":[520,12,0,52],"lardo":[891,2,0,98],"nduja":[450,15,2,42],"coppa":[390,25,0,32],"brodo di carne":[8,1,0.5,0.2],"brodo vegetale":[5,0.4,0.6,0.1],"branzino":[82,17,0,1.5],"orata":[121,20,0,4],"merluzzo":[71,17,0,0.3],"baccalà":[100,23,0,1],"salmone":[208,20,0,13],"salmone affumicato":[147,21,0,7],"tonno":[159,21,0,8],"tonno sott'olio":[192,25,0,10],"sgombro":[170,17,0,11],"alici":[96,17,0,3],"acciughe":[210,26,0,12],"sarde":[129,20,0,5],"polpo":[82,16,1,1],"seppie":[72,14,0.7,1.5],"calamari":[92,16,0.5,1.5],"gamberi":[71,13.6,0.9,1],"scampi":[89,18,0,1],"cozze":[86,12,3,2],"vongole":[72,12,2,1],"capesante":[69,12,3,0.8],"pesce spada":[118,17,0,5],"trota":[86,15,0,3],"bottarga":[350,40,0,20],"rana pescatrice":[68,15,0,0.5],"gallinella":[80,17,0,1],"uovo":[143,12.6,0.7,9.5],"tuorli":[322,16,3.6,27],"albumi":[43,10.9,0.2,0.2],"ricotta":[146,8.8,3.5,11],"ricotta salata":[280,22,2,20],"mozzarella":[253,18,1,20],"mozzarella di bufala":[288,17,1,25],"burrata":[330,17,2,28],"stracchino":[300,18,1,25],"scamorza":[334,25,1,25],"provola":[295,20,2,23],"caciocavallo":[439,32,2,33],"fontina":[343,25,1,27],"taleggio":[315,19,1,26],"gorgonzola":[324,19,1,27],"pecorino":[387,26,3.6,31],"parmigiano":[392,33,0,29],"grana":[392,33,0,29],"feta":[264,14,4,21],"formaggio spalmabile":[253,6,4,24],"mascarpone":[450,7,4,45],"yogurt greco 0%":[57,10,4,0],"latte":[64,3.3,4.9,3.6],"panna":[337,2.3,3,35],"burro":[758,0.8,1,83],"patate":[78,2,17,0.1],"patate dolci":[86,1.6,20,0.1],"carota":[35,1,8,0.2],"sedano":[20,0.7,3,0.2],"cipolla":[40,1,8,0.1],"cipolla rossa":[40,1,8,0.1],"scalogno":[72,2,17,0.2],"aglio":[41,2,8,0.2],"porri":[61,2,14,0.3],"zucchine":[21,1.3,3,0.1],"melanzane":[18,1.1,3,0.2],"peperoni":[22,1,4.2,0.3],"pomodori":[19,1,3.5,0.2],"pomodorini":[20,1,3.5,0.2],"pomodori secchi":[258,14,43,3],"radicchio":[13,1.4,1.6,0.1],"rucola":[25,2.6,2,0.7],"spinaci":[31,3.4,3,0.7],"bietole":[17,1.3,2.8,0.2],"cavolfiore":[25,3,2.7,0.3],"broccoli":[27,3,2,0.4],"verza":[27,2,4,0.2],"cime di rapa":[32,3,2,0.3],"carciofi":[47,2.7,5.5,0.2],"asparagi":[29,3.6,3,0.2],"funghi":[22,3.1,1,0.4],"funghi porcini":[27,3.9,1,0.7],"zucca":[18,1.1,3.5,0.1],"piselli":[76,5.5,12,0.5],"fave":[41,5,4.5,0.4],"fagiolini":[31,2,3,0.1],"ceci":[120,7,18,2.4],"lenticchie":[92,6.9,16,0.4],"fagioli borlotti":[91,6.9,12,0.5],"fagioli cannellini":[91,6.9,12,0.5],"cicoria":[10,1.4,0.7,0.2],"finocchi":[9,1.2,1,0.2],"cetrioli":[14,0.7,3,0.1],"insalata":[19,1.8,2.2,0.4],"olive verdi":[142,1,1,15],"olive nere":[235,1.6,1,25],"capperi":[25,2,4,0.2],"mais":[91,3.5,19,1.2],"sedano rapa":[20,1.5,2.3,0.3],"topinambur":[73,2,17,0.1],"catalogna":[12,1.5,1,0.2],"limone":[11,0.6,2.3,0],"arancia":[34,0.7,8,0.2],"mela":[45,0.2,12,0.1],"pera":[35,0.3,9,0.1],"uva":[61,0.5,15,0.1],"melone":[33,0.8,7,0.2],"fichi":[47,0.9,11,0.2],"pesche":[27,0.8,6,0.1],"frutti di bosco":[40,1,8,0.4],"avocado":[160,2,9,15],"noci":[654,15,14,65],"mandorle":[603,22,4.6,55],"pistacchi":[608,18,8,56],"nocciole":[655,14,6,64],"pinoli":[673,14,4,68],"uvetta":[283,2.5,66,0.5],"sesamo":[573,17,12,50],"semi di zucca":[559,30,11,49],"olio evo":[900,0,0,100],"aceto":[4,0,0.4,0],"aceto balsamico":[88,0.5,17,0],"vino bianco":[70,0,0.6,0],"vino rosso":[75,0,0.6,0],"marsala":[156,0,16,0],"passata di pomodoro":[35,1.5,6.5,0.3],"pelati":[32,1.3,6,0.2],"concentrato di pomodoro":[80,4,13,0.5],"senape":[66,4,6,3],"maionese":[680,1,2,75],"salsa di soia":[53,8,5,0],"miele":[304,0.3,80,0],"zucchero":[392,0,100,0],"sale":[0,0,0,0],"pepe nero":[255,11,64,3],"peperoncino":[40,2,7,0.5],"basilico":[30,3,1,0.6],"prezzemolo":[30,3,1,0.6],"erba cipollina":[30,3,4,0.7],"salvia":[60,4,7,2],"rosmarino":[131,3,20,6],"timo":[101,6,15,2],"origano":[265,9,50,4],"menta":[44,3,8,0.7],"alloro":[313,8,49,8],"noce moscata":[525,6,50,36],"zafferano":[310,11,60,6],"finocchietto":[31,3,3,0.4],"cannella":[247,4,81,1],"tartufo":[31,6,0.7,0.5],"curcuma":[312,10,67,3],"curry":[325,14,58,14],"zenzero":[80,1.8,18,0.8],"aneto":[43,3.5,7,1],"paprika":[282,14,54,13],"capperi sotto sale":[25,2,4,0.2],"tofu":[76,8,1.9,4.8],"miso":[199,12,26,6],"alga nori":[35,6,5,0.3],"noodles":[348,12,71,1.5],"spaghetti di riso":[364,6,80,0.6],"olio di sesamo":[884,0,0,100],"aceto di riso":[18,0,0.5,0],"mirin":[258,0,43,0],"latte di cocco":[197,2,3,20],"germogli di soia":[30,3,4,0.2],"anacardi":[553,18,30,44],"arachidi":[567,26,16,49],"salsa teriyaki":[89,5,15,0],"salsa agrodolce":[150,0.5,37,0.1],"edamame":[122,11,10,5],"ananas":[48,0.5,11,0.1],"cavolo cappuccio":[25,1.3,5,0.1],"wasabi":[109,5,24,0.6],"semi di sesamo":[573,17,12,50],"cola":[42,0,10.6,0],"cola zero":[0,0,0,0],"aranciata":[38,0,9.4,0],"chinotto":[40,0,10,0],"acqua tonica":[34,0,8.5,0],"gassosa":[37,0,9.2,0],"te freddo":[28,0,7,0],"succo di arancia":[45,0.7,10.4,0.2],"succo ace":[48,0.3,11.5,0.1],"succo di pera":[52,0.2,12.6,0.1],"succo di mela":[46,0.1,11.2,0.1],"energy drink":[45,0,11,0],"limonata":[30,0.1,7.3,0],"spremuta":[41,0.7,9.2,0.2],"sciroppo di menta":[260,0,65,0],"birra":[43,0.5,3.6,0],"brioche":[400,7,47,20],"cornetto al cioccolato":[430,7,50,22],"crema di nocciole":[539,6.3,57.5,30.9],"crema di pistacchio":[560,7,50,36],"marmellata di albicocche":[245,0.5,60,0.2],"marmellata frutti di bosco":[245,0.5,59,0.2],"biscotti frollini":[470,6.5,68,19],"merendina al cioccolato":[440,6.4,33,30],"plumcake":[420,6,50,21],"ciambella":[400,6,55,17],"banana":[89,1.1,23,0.3],"proteine in polvere":[380,80,6,4],"cacao amaro":[355,20,15,21],"fiocchi di latte":[98,11,3.4,4.3],"gallette di riso":[387,8,81,3],"caffe":[2,0.2,0.3,0],"succo di limone":[11,0.6,2.3,0],"cioccolato fondente":[546,7,46,34],"savoiardi":[390,8,75,7],"datteri":[282,2.5,75,0.4],"lievito per dolci":[100,0.5,38,0.5],"fragole":[30,0.9,5.3,0.4]};
 
 let confronto = [];   // {tipo:'ricetta'|'ingrediente', id/nome}
 
@@ -10840,9 +10965,9 @@ function pastoPerIlDiario(esplicito) {
 
 const PORTATE_PASTO = {
   col: ['colazione'],
-  spu: ['colazione', 'altro', 'antipasto'],
-  pra: ['primo', 'secondo', 'altro'],
-  cen: ['primo', 'secondo', 'altro', 'antipasto']
+  spu: ['colazione', 'altro', 'antipasto', 'dolce'],
+  pra: ['primo', 'secondo', 'altro', 'dolce'],
+  cen: ['primo', 'secondo', 'altro', 'antipasto', 'dolce']
 };
 
 function lastEaten(id) {
