@@ -814,6 +814,11 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
   background:var(--v1-fondo);border:var(--v1-bordo);border-radius:14px;
   resize:vertical;outline:none}
 .scan-textarea:focus-visible{border-color:color-mix(in srgb, var(--tema, var(--accent-primary)) 55%, transparent)}
+.eti-consigli{display:flex;flex-direction:column;gap:5px;margin:10px 0 6px;padding:13px 15px;
+  border-radius:14px;font-size:.83rem;line-height:1.45;color:var(--text-secondary);
+  background:color-mix(in srgb, var(--tema, var(--accent-primary)) 8%, transparent);
+  border:1px solid color-mix(in srgb, var(--tema, var(--accent-primary)) 25%, transparent)}
+.eti-consigli b{font-size:.85rem;color:var(--text-primary)}
 .scheda{position:relative}
 .scheda .scheda-titolo{padding-right:26px}
 /* Il comando delle persone, bello grande: si tocca col pollice. */
@@ -3044,6 +3049,16 @@ h3{font-weight:600;letter-spacing:-.018em}
       </div>
       <div class="scan-barra" id="etichetta-barra" hidden><i id="etichetta-avanzamento"></i></div>
       <p class="scan-passo" id="etichetta-passo" hidden></p>
+      <div id="etichetta-consigli" class="eti-consigli" hidden>
+        <b>Tre cose che di solito bastano:</b>
+        <span>&#8226; pi&ugrave; luce, senza ombre sopra la tabella</span>
+        <span>&#8226; avvicinati finch&eacute; la tabella riempie la foto</span>
+        <span>&#8226; telefono dritto davanti all'etichetta, non di sbieco</span>
+        <div class="scan-scelte" style="margin-top:10px">
+          <button type="button" class="btn-ghost" data-act="etichetta-scatta">Rifai la foto</button>
+          <button type="button" class="btn-primary" data-act="etichetta-galleria">Dalla galleria</button>
+        </div>
+      </div>
       <div class="stack" style="margin-top:6px">
         <div>
           <label class="field-label" for="eti-nome">Prodotto</label>
@@ -10405,18 +10420,137 @@ function tabellaDi(nome) {
   return ING_TAB[k] || (S.ingTabExtra || {})[k] || null;
 }
 
-/* I numeri dell'etichetta nutrizionale, pescati nel testo dell'OCR.
-   Le etichette italiane ripetono sempre le stesse parole: energia, grassi
-   (con i saturi da scartare), carboidrati (con gli zuccheri), proteine. */
+/* ---------- lettura dell'etichetta nutrizionale ----------
+   I numeri dell'etichetta, pescati nel testo COME LO SCRIVE L'OCR: con la
+   elle al posto dell'uno, la o al posto dello zero, le parole storpiate.
+   Le righe si classificano per SOMIGLIANZA con le parole chiave delle
+   tabelle italiane ed europee, non alla lettera: "Protelne" e' proteine. */
+
+/* Dal piu' specifico al piu' generico: "di cui saturi" va riconosciuto
+   prima che la parola "grassi" al suo interno rubi la riga. */
+const ETI_CAMPI = [
+  { campo: 'saturi',      parole: ['saturi'] },
+  { campo: 'zuccheri',    parole: ['zuccheri'] },
+  { campo: 'kcal',        parole: ['energia', 'energetico', 'energy'] },
+  { campo: 'fibre',       parole: ['fibre', 'fibra'] },
+  { campo: 'proteine',    parole: ['proteine', 'protein'] },
+  { campo: 'carboidrati', parole: ['carboidrati', 'carbohydrate'] },
+  { campo: 'grassi',      parole: ['grassi', 'lipidi', 'fat'] },
+  { campo: 'sodio',       parole: ['sodio', 'sodium'] },
+  { campo: 'sale',        parole: ['sale', 'salt'] }
+];
+
+/* Ogni campo ha il suo intervallo credibile per 100 g: un valore fuori
+   scala e' un errore di lettura, non un alimento. */
+const ETI_LIMITI = {
+  kcal: [1, 950], grassi: [0, 100], saturi: [0, 100], carboidrati: [0, 100],
+  zuccheri: [0, 100], fibre: [0, 60], proteine: [0, 100], sale: [0, 30], sodio: [0, 15]
+};
+
+/* La parola della riga corrisponde alla parola chiave? Esatta, contenuta,
+   o simile abbastanza da essere lei scritta male. */
+function etiParolaCombacia(parola, chiave) {
+  if (parola === chiave) return true;
+  if (chiave.length >= 5 && parola.indexOf(chiave) >= 0) return true;
+  if (chiave.length >= 5 && parola.length >= chiave.length - 2) {
+    return somiglianza(parola, chiave) >= 0.75;
+  }
+  return false;
+}
+
+/* I numeri di un pezzo di riga, con le confusioni classiche dell'OCR
+   raddrizzate SOLO dentro i token che contengono almeno una cifra vera. */
+function etiNumeri(pezzo) {
+  const fuori = [];
+  const rx = /[<≤]?\s*([0-9OoIl|]{1,4}(?:[.,][0-9OoIl|]{1,3})?)(?=\s*(kcal|kj|mg|g\b|%|\b))/gi;
+  let m;
+  while ((m = rx.exec(pezzo)) !== null) {
+    const grezzo = m[1];
+    if (!/[0-9]/.test(grezzo)) continue;   // "Il" da solo non e' un numero
+    const pulito = grezzo.replace(/[Oo]/g, '0').replace(/[Il|]/g, '1').replace(',', '.');
+    const v = parseFloat(pulito);
+    if (!isFinite(v)) continue;
+    fuori.push({ v: v, unita: (m[2] || '').toLowerCase(), pos: m.index });
+  }
+  return fuori;
+}
+
+function etiPlausibile(campo, v) {
+  const lim = ETI_LIMITI[campo];
+  return lim ? v >= lim[0] && v <= lim[1] : true;
+}
+
 function interpretaEtichetta(testo) {
-  const t = String(testo).toLowerCase().replace(/\s+/g, ' ');
-  const numero = m => m ? parseFloat(m[1].replace(',', '.')) : null;
-  const kcal = numero(t.match(/(\d{1,4}(?:[.,]\d)?)\s*kcal/));
-  const grassi = numero(t.match(/grassi\D{0,20}?(\d{1,3}(?:[.,]\d{1,2})?)\s*g/));
-  const carboidrati = numero(t.match(/carboidrati\D{0,20}?(\d{1,3}(?:[.,]\d{1,2})?)\s*g/));
-  const proteine = numero(t.match(/proteine\D{0,20}?(\d{1,3}(?:[.,]\d{1,2})?)\s*g/));
-  const trovati = [kcal, grassi, carboidrati, proteine].filter(x => x !== null).length;
-  return { kcal, grassi, carboidrati, proteine, trovati };
+  const out = { kcal: null, grassi: null, saturi: null, carboidrati: null,
+                zuccheri: null, fibre: null, proteine: null, sale: null, sodio: null };
+
+  // righe vere se ci sono, altrimenti tutto e' una riga sola
+  const righe = String(testo || '').split(/\n+/).map(r => r.trim()).filter(Boolean);
+
+  righe.forEach(riga => {
+    const bassa = riga.toLowerCase();
+    // spezzo la riga in segmenti: ogni parola chiave apre il suo
+    const parole = bassa.split(/[^a-zàèéìòù]+/);
+    const tagli = [];   // { campo, daParola }
+    let cursore = 0;
+    parole.forEach(par => {
+      if (!par) return;
+      const dove = bassa.indexOf(par, cursore);
+      cursore = dove + par.length;
+      for (const def of ETI_CAMPI) {
+        if (def.parole.some(k => etiParolaCombacia(par, k))) {
+          // "grassi" dentro una riga gia' presa dai saturi non apre nulla
+          if (def.campo === 'grassi' && tagli.some(t => t.campo === 'saturi')) return;
+          if (def.campo === 'carboidrati' && tagli.some(t => t.campo === 'zuccheri')) return;
+          tagli.push({ campo: def.campo, da: dove });
+          return;
+        }
+      }
+    });
+
+    tagli.forEach((taglio, i) => {
+      if (out[taglio.campo] !== null) return;          // il primo trovato vince
+      const fine = i + 1 < tagli.length ? tagli[i + 1].da : bassa.length;
+      const pezzo = bassa.slice(taglio.da, fine);
+      const numeri = etiNumeri(pezzo);
+      if (!numeri.length) return;
+
+      if (taglio.campo === 'kcal') {
+        // prima le kcal dichiarate, poi i kJ da convertire
+        const inKcal = numeri.find(n => n.unita === 'kcal');
+        const inKj = numeri.find(n => n.unita === 'kj');
+        let v = inKcal ? inKcal.v : (inKj ? Math.round(inKj.v / 4.184) : null);
+        if (v === null) {
+          const libero = numeri.find(n => etiPlausibile('kcal', n.v) && n.v >= 40);
+          v = libero ? libero.v : null;
+        }
+        if (v !== null && etiPlausibile('kcal', v)) out.kcal = v;
+        return;
+      }
+
+      // per i grammi vale il PRIMO numero plausibile: nelle tabelle a due
+      // colonne la colonna dei 100 g viene prima di quella della porzione
+      for (const n of numeri) {
+        let v = n.v;
+        if (n.unita === 'mg') v = v / 1000;
+        if (n.unita === 'kcal' || n.unita === 'kj' || n.unita === '%') continue;
+        if (etiPlausibile(taglio.campo, v)) { out[taglio.campo] = v; break; }
+      }
+    });
+  });
+
+  // il sodio, se il sale manca, diventa sale: e' la conversione di legge
+  if (out.sale === null && out.sodio !== null) {
+    out.sale = Math.round(out.sodio * 2.5 * 100) / 100;
+  }
+  // i saturi non superano i grassi: se succede, la colonna era sbagliata
+  if (out.grassi !== null && out.saturi !== null && out.saturi > out.grassi) {
+    out.saturi = null;
+  }
+
+  out.trovati = ['kcal', 'grassi', 'carboidrati', 'proteine']
+    .filter(k => out[k] !== null).length;
+  return out;
 }
 
 function registraAcquisto(nome, qta, unita) {
@@ -12020,40 +12154,262 @@ window.fitmealsScontrino = {
   }
 };
 
-/* La foto dell'etichetta: lo stesso lettore OCR dello scontrino, ma i numeri
-   finiscono nei campi del modulo, dove si correggono prima di salvare. */
+/* ---------- la foto dell'etichetta, preparata prima di leggerla ----------
+   L'OCR legge male le foto come escono dal telefono: piccole, storte, grige.
+   Prima di dargliele si raddrizzano e si portano in bianco e nero pieno.
+   Tutto su tela, tutto gratis, niente librerie in piu'. */
+
+/* La foto su una tela, al massimo 1800px di lato: sotto i 1000 l'OCR non
+   distingue le cifre, sopra i 2000 lavora per niente. */
+function etiFotoSuTela(file) {
+  return new Promise((risolvi, rifiuta) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const scala = Math.min(1, 1800 / Math.max(img.naturalWidth, img.naturalHeight));
+      const su = Math.max(img.naturalWidth, img.naturalHeight) < 900 ? 2 : 1;
+      const tela = document.createElement('canvas');
+      tela.width = Math.round(img.naturalWidth * scala * su);
+      tela.height = Math.round(img.naturalHeight * scala * su);
+      const ctx = tela.getContext('2d', { willReadFrequently: true });
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, 0, 0, tela.width, tela.height);
+      risolvi(tela);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); rifiuta(new Error('foto-illeggibile')); };
+    img.src = url;
+  });
+}
+
+/* Scala di grigi con il contrasto stirato fra il 2% e il 98% dei toni:
+   la foto grigiastra del supermercato torna carta bianca e inchiostro. */
+function etiGrigiContrasto(tela) {
+  const ctx = tela.getContext('2d', { willReadFrequently: true });
+  const dati = ctx.getImageData(0, 0, tela.width, tela.height);
+  const px = dati.data;
+  const n = tela.width * tela.height;
+  const grigio = new Uint8ClampedArray(n);
+  const isto = new Uint32Array(256);
+  for (let i = 0; i < n; i++) {
+    const g = (px[i * 4] * 0.299 + px[i * 4 + 1] * 0.587 + px[i * 4 + 2] * 0.114) | 0;
+    grigio[i] = g; isto[g]++;
+  }
+  let basso = 0, alto = 255, acc = 0;
+  const soglia2 = n * 0.02;
+  for (let v = 0; v < 256; v++) { acc += isto[v]; if (acc >= soglia2) { basso = v; break; } }
+  acc = 0;
+  for (let v = 255; v >= 0; v--) { acc += isto[v]; if (acc >= soglia2) { alto = v; break; } }
+  const ampiezza = Math.max(1, alto - basso);
+  for (let i = 0; i < n; i++) {
+    grigio[i] = Math.max(0, Math.min(255, ((grigio[i] - basso) * 255 / ampiezza) | 0));
+  }
+  return grigio;
+}
+
+/* La soglia di Otsu: il punto che separa meglio carta e inchiostro. */
+function etiSogliaOtsu(grigio) {
+  const isto = new Float64Array(256);
+  for (let i = 0; i < grigio.length; i++) isto[grigio[i]]++;
+  const tot = grigio.length;
+  let somma = 0;
+  for (let v = 0; v < 256; v++) somma += v * isto[v];
+  let sommaB = 0, pesoB = 0, migliore = 127, massimo = 0;
+  for (let v = 0; v < 256; v++) {
+    pesoB += isto[v];
+    if (!pesoB) continue;
+    const pesoF = tot - pesoB;
+    if (!pesoF) break;
+    sommaB += v * isto[v];
+    const mB = sommaB / pesoB, mF = (somma - sommaB) / pesoF;
+    const fra = pesoB * pesoF * (mB - mF) * (mB - mF);
+    if (fra > massimo) { massimo = fra; migliore = v; }
+  }
+  return migliore;
+}
+
+/* Di quanti gradi pende la foto: si provano piccole rotazioni su una copia
+   ridotta e vince quella in cui le righe di testo si allineano meglio
+   (la varianza dei profili di riga e' massima quando le righe sono dritte). */
+function etiInclinazione(grigio, larg, alt, soglia) {
+  const passo = Math.max(1, Math.round(larg / 360));
+  const w = Math.floor(larg / passo), h = Math.floor(alt / passo);
+  const nero = new Uint8Array(w * h);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    nero[y * w + x] = grigio[(y * passo) * larg + (x * passo)] < soglia ? 1 : 0;
+  }
+  let meglio = 0, massima = -1;
+  for (let deg = -7; deg <= 7; deg += 0.7) {
+    const t = Math.tan(deg * Math.PI / 180);
+    const righe = new Float64Array(h);
+    for (let y = 0; y < h; y++) {
+      let conta = 0;
+      for (let x = 0; x < w; x++) {
+        const yy = Math.round(y + x * t);
+        if (yy >= 0 && yy < h && nero[yy * w + x]) conta++;
+      }
+      righe[y] = conta;
+    }
+    let media = 0;
+    for (let y = 0; y < h; y++) media += righe[y];
+    media /= h;
+    let varianza = 0;
+    for (let y = 0; y < h; y++) varianza += (righe[y] - media) * (righe[y] - media);
+    if (varianza > massima) { massima = varianza; meglio = deg; }
+  }
+  return meglio;
+}
+
+/* Il rettangolo dove sta davvero il testo: si butta la cornice di sfondo
+   guardando dove l'inchiostro c'e' e dove no. */
+function etiRitaglio(grigio, larg, alt, soglia) {
+  const colonne = new Float64Array(larg), righe = new Float64Array(alt);
+  for (let y = 0; y < alt; y++) for (let x = 0; x < larg; x++) {
+    if (grigio[y * larg + x] < soglia) { colonne[x]++; righe[y]++; }
+  }
+  const trova = (profilo, dim, minimo) => {
+    let a = 0, b = dim - 1;
+    while (a < dim && profilo[a] < minimo) a++;
+    while (b > a && profilo[b] < minimo) b--;
+    return [a, b];
+  };
+  const [x0, x1] = trova(colonne, larg, Math.max(2, alt * 0.004));
+  const [y0, y1] = trova(righe, alt, Math.max(2, larg * 0.004));
+  const padX = Math.round(larg * 0.02), padY = Math.round(alt * 0.02);
+  const box = {
+    x: Math.max(0, x0 - padX), y: Math.max(0, y0 - padY),
+    w: Math.min(larg, x1 + padX) - Math.max(0, x0 - padX),
+    h: Math.min(alt, y1 + padY) - Math.max(0, y0 - padY)
+  };
+  // un ritaglio minuscolo e' un errore di misura, non un'etichetta
+  if (box.w < larg * 0.25 || box.h < alt * 0.15) return null;
+  return box;
+}
+
+/* Tutta la preparazione in fila: grigi, contrasto, raddrizzata, ritaglio,
+   bianco e nero pieno. Torna la tela pronta e la sua gemella al negativo,
+   per le etichette stampate chiare su fondo scuro. */
+function preparaEtichetta(file) {
+  return etiFotoSuTela(file).then(tela => {
+    let grigio = etiGrigiContrasto(tela);
+    let soglia = etiSogliaOtsu(grigio);
+
+    // se pende, si raddrizza e si rimisura tutto
+    const angolo = etiInclinazione(grigio, tela.width, tela.height, soglia);
+    if (Math.abs(angolo) >= 0.7) {
+      const dritta = document.createElement('canvas');
+      dritta.width = tela.width; dritta.height = tela.height;
+      const ctx = dritta.getContext('2d', { willReadFrequently: true });
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, dritta.width, dritta.height);
+      ctx.translate(dritta.width / 2, dritta.height / 2);
+      ctx.rotate(-angolo * Math.PI / 180);
+      ctx.drawImage(tela, -tela.width / 2, -tela.height / 2);
+      tela.getContext('2d').clearRect(0, 0, 1, 1);
+      grigio = etiGrigiContrasto(dritta);
+      soglia = etiSogliaOtsu(grigio);
+      return { tela: dritta, grigio, soglia, angolo };
+    }
+    return { tela, grigio, soglia, angolo };
+  }).then(({ tela, grigio, soglia, angolo }) => {
+    const box = etiRitaglio(grigio, tela.width, tela.height, soglia) ||
+                { x: 0, y: 0, w: tela.width, h: tela.height };
+
+    const fai = inverti => {
+      const fuori = document.createElement('canvas');
+      fuori.width = box.w; fuori.height = box.h;
+      const ctx = fuori.getContext('2d');
+      const dati = ctx.createImageData(box.w, box.h);
+      for (let y = 0; y < box.h; y++) for (let x = 0; x < box.w; x++) {
+        const g = grigio[(y + box.y) * tela.width + (x + box.x)];
+        let nero = g < soglia;
+        if (inverti) nero = !nero;
+        const v = nero ? 0 : 255;
+        const i = (y * box.w + x) * 4;
+        dati.data[i] = dati.data[i + 1] = dati.data[i + 2] = v;
+        dati.data[i + 3] = 255;
+      }
+      ctx.putImageData(dati, 0, 0);
+      return fuori;
+    };
+
+    return { dritta: fai(false), negativa: fai(true), angolo: angolo, box: box };
+  });
+}
+
+/* La foto dell'etichetta: preparata, letta due volte se serve (la seconda
+   al negativo, per le tabelle chiare su fondo scuro), e i numeri finiscono
+   nei campi del modulo, dove si correggono prima di salvare. */
 function leggiEtichetta(file) {
   if (!file) return;
   const barra = document.getElementById('etichetta-barra');
   const passo = document.getElementById('etichetta-passo');
+  const consigli = document.getElementById('etichetta-consigli');
+  if (consigli) consigli.hidden = true;
   const di = (testo, quanto) => {
     if (passo) { passo.hidden = false; passo.textContent = testo; }
     if (barra) { barra.hidden = false;
       document.getElementById('etichetta-avanzamento').style.width = quanto + '%'; }
   };
-  di('Scarico il lettore\u2026', 10);
-  caricaOcr()
-    .then(T => T.createWorker('ita', 1, {
-      logger: m => { if (m.status === 'recognizing text') di('Leggo l\'etichetta\u2026', 20 + m.progress * 75); }
-    }))
-    .then(w => w.recognize(file)
-      .then(res => { try { w.terminate(); } catch (e) {} return res; })
-      .catch(err => { try { w.terminate(); } catch (e) {} throw err; }))
-    .then(res => {
-      const letti = interpretaEtichetta((res.data && res.data.text) || '');
-      if (!letti.trovati) {
-        di('Non ho trovato la tabella: scrivi i numeri a mano, o riprova con piu\u2019 luce.', 0);
-        return;
-      }
+
+  di('Preparo la foto…', 6);
+  let lavoratore = null;
+  const leggi = tela => lavoratore.recognize(tela)
+    .then(res => ({
+      letti: interpretaEtichetta((res.data && res.data.text) || ''),
+      fiducia: (res.data && res.data.confidence) || 0
+    }));
+
+  Promise.all([preparaEtichetta(file), caricaOcr()])
+    .then(([pronte, T]) =>
+      T.createWorker('ita', 1, {
+        logger: m => { if (m.status === 'recognizing text') di('Leggo l\'etichetta…', 25 + m.progress * 60); }
+      }).then(w => {
+        lavoratore = w;
+        // la pagina e' un blocco unico di tabella, e i caratteri sono noti:
+        // dirlo all'OCR vale piu' di qualunque filtro
+        return w.setParameters({
+          tessedit_pageseg_mode: '6',
+          preserve_interword_spaces: '1',
+          tessedit_char_whitelist: '0123456789abcdefghijklmnopqrstuvwxyz' +
+            'ABCDEFGHIJKLMNOPQRSTUVWXYZàèéìòù<>()/%,.:- '
+        }).then(() => pronte);
+      })
+    )
+    .then(pronte =>
+      leggi(pronte.dritta).then(prima => {
+        if (prima.letti.trovati >= 2) return prima;
+        // quasi nulla: forse l'etichetta e' chiara su fondo scuro
+        di('Riprovo al negativo…', 55);
+        return leggi(pronte.negativa).then(seconda =>
+          seconda.letti.trovati > prima.letti.trovati ? seconda : prima);
+      })
+    )
+    .then(({ letti }) => {
+      try { lavoratore.terminate(); } catch (e) {}
+
       if (letti.kcal !== null) F('eti-kcal').value = letti.kcal;
       if (letti.proteine !== null) F('eti-pro').value = letti.proteine;
       if (letti.carboidrati !== null) F('eti-carb').value = letti.carboidrati;
       if (letti.grassi !== null) F('eti-gra').value = letti.grassi;
+
+      if (!letti.trovati) {
+        di('Da questa foto non sono riuscito a leggere quasi niente.', 0);
+        if (consigli) consigli.hidden = false;
+        return;
+      }
+      const mancano = [['eti-kcal','kcal'],['eti-pro','proteine'],['eti-carb','carboidrati'],['eti-gra','grassi']]
+        .filter(([id]) => !F(id).value).map(([, nome]) => nome);
       di(letti.trovati === 4
         ? 'Letti tutti e quattro i valori: controllali e salva.'
-        : 'Letti ' + letti.trovati + ' valori su 4: completa quelli vuoti.', 100);
+        : 'Letti ' + letti.trovati + ' su 4: mancano ' + mancano.join(' e ') +
+          '. Scrivili tu, o riprova con un’altra foto.', 100);
     })
-    .catch(() => di('Non sono riuscito a leggere la foto: scrivi i numeri a mano.', 0));
+    .catch(() => {
+      try { if (lavoratore) lavoratore.terminate(); } catch (e) {}
+      di('Non sono riuscito a leggere la foto.', 0);
+      if (consigli) consigli.hidden = false;
+    });
 }
 
 /* I due campi file vivono dentro la vista spesa, che si ridisegna: l'ascolto
@@ -15102,6 +15458,8 @@ document.addEventListener('click', e => {
       F('eti-nome').value = (val || gia).trim();
       document.getElementById('etichetta-barra').hidden = true;
       document.getElementById('etichetta-passo').hidden = true;
+      const consEti = document.getElementById('etichetta-consigli');
+      if (consEti) consEti.hidden = true;
       cameraProbabile().then(ok => {
         const b = document.getElementById('etichetta-scatta');
         if (b) b.style.display = ok ? '' : 'none';
@@ -15662,6 +16020,7 @@ window.fitmealsDebug = () => clone(S);
 window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
   spezzaElenco: spezzaElencoDettato,
   etichetta: interpretaEtichetta, tabella: tabellaDi,
+  preparaEtichetta: preparaEtichetta,
   energia: energy, renderProfilo: renderProfile,
   freschezza: freschezza, scadenze: scadenzeDelGiorno, inventario: inventario,
   logMeal: logMeal, notifiche: aggiornaNotificheScadenze, guessMeal: guessMeal,
