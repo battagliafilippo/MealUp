@@ -3266,7 +3266,7 @@ h3{font-weight:600;letter-spacing:-.018em}
    ============================================================ */
 
 const KEY = 'fitmeals.v2';
-const SEED_VERSION = 12;
+const SEED_VERSION = 13;
 
 const SEED_RECIPES = [
   { id:'r1', portata:'antipasto', title:'Carpaccio di manzo con rucola e feta', cat:'sano', prep:5, cook:0,
@@ -5864,7 +5864,129 @@ const SEED_RECIPES = [
     kcal:3900, pro:67, carbs:291, fat:275, desc:'',
     ing:[{n:"biscotti frollini",q:200,u:"g"},{n:"burro",q:80,u:"g"},{n:"formaggio spalmabile",q:500,u:"g"},{n:"zucchero",q:130,u:"g"},{n:"uovo",q:165,u:"g"},{n:"panna",q:100,u:"g"}],
     steps:["Base di biscotti tritati e burro fuso, pressata e in frigo.","Mescola formaggio, zucchero, uova e panna SENZA montare: l'aria crepa la superficie.","Un'ora a 160, poi forno spento e sportello socchiuso finché è fredda."],
-    tags:["dolce","fat","sgarro","forno","classico"], context:'occasioni serie', note:"Il raffreddamento in forno è metà della ricetta: lo sbalzo termico la spacca." }
+    tags:["dolce","fat","sgarro","forno","classico"], context:'occasioni serie', note:"Il raffreddamento in forno è metà della ricetta: lo sbalzo termico la spacca." },
+
+  /* ---------- ricette sane e fit: la settimana che si regge da sola ---------- */
+
+  { id:"ft01", portata:"colazione", title:"Overnight oats yogurt e mirtilli", cat:"sano", prep:5, cook:0,
+    kcal:320, pro:23, carbs:45, fat:5, desc:'',
+    ing:[{n:"avena",q:40,u:"g"},{n:"yogurt greco 0%",q:150,u:"g"},{n:"latte",q:50,u:"g"},{n:"frutti di bosco",q:80,u:"g"},{n:"miele",q:8,u:"g"}],
+    steps:["La sera mescola avena, yogurt, latte e miele in un barattolo.","Chiudi e lascia in frigo tutta la notte: l'avena si ammorbida da sola.","Al mattino copri coi frutti di bosco e mangia freddo."],
+    tags:["fit","colazione","no cottura","meal prep","proteico"], context:'colazione pronta al risveglio', note:"Si prepara in tre barattoli la domenica: tre colazioni risolte senza pensarci." },
+
+  { id:"ft02", portata:"colazione", title:"Toast con avocado e uovo", cat:"sano", prep:5, cook:6,
+    kcal:340, pro:13, carbs:40, fat:15, desc:'',
+    ing:[{n:"pane",q:60,u:"g"},{n:"avocado",q:60,u:"g"},{n:"uovo",q:55,u:"g"},{n:"limone",q:5,u:"g"}],
+    steps:["Tosta il pane finché è dorato e croccante.","Schiaccia l'avocado con limone, sale e pepe e spalmalo.","Sopra l'uovo in camicia o sodo, come ti riesce meglio."],
+    tags:["fit","colazione","veloce"], context:'', note:"Il limone non è per il gusto: tiene verde l'avocado e sveglia tutto il resto." },
+
+  { id:"ft03", portata:"colazione", title:"Frullato verde spinaci e mela", cat:"sano", prep:5, cook:0,
+    kcal:190, pro:6, carbs:36, fat:2, desc:'',
+    ing:[{n:"spinaci",q:50,u:"g"},{n:"mela",q:150,u:"g"},{n:"banana",q:50,u:"g"},{n:"latte",q:100,u:"g"},{n:"zenzero",q:5,u:"g"}],
+    steps:["Frulla prima spinaci e latte, cosi' le foglie spariscono davvero.","Aggiungi mela, banana e zenzero e frulla ancora un minuto.","Bevilo subito: coi frullati verdi l'attesa è nemica."],
+    tags:["fit","colazione","no cottura","veloce"], context:'', note:"La banana copre gli spinaci: chi dice che sa di erba non ce l'ha messa." },
+
+  { id:"ft04", portata:"antipasto", title:"Hummus con verdure croccanti", cat:"sano", prep:10, cook:0,
+    kcal:320, pro:13, carbs:37, fat:14, desc:'',
+    ing:[{n:"ceci",q:150,u:"g"},{n:"olio evo",q:10,u:"g"},{n:"limone",q:15,u:"g"},{n:"sedano",q:50,u:"g"},{n:"carota",q:80,u:"g"},{n:"aglio",q:0.5,u:"spicchio"}],
+    steps:["Frulla i ceci con olio, limone, aglio e un cucchiaio della loro acqua.","Assaggia e aggiusta: l'hummus giusto sa di limone prima che di ceci.","Servi con sedano e carote a bastoncini al posto del pane."],
+    tags:["fit","no cottura","meal prep","vegetariano"], context:'aperitivo senza danni', note:"L'acqua dei ceci al posto dell'olio extra: cremosita' gratis." },
+
+  { id:"ft05", portata:"antipasto", title:"Caprese light coi fiocchi di latte", cat:"sano", prep:5, cook:0,
+    kcal:220, pro:18, carbs:10, fat:12, desc:'',
+    ing:[{n:"fiocchi di latte",q:150,u:"g"},{n:"pomodori",q:150,u:"g"},{n:"basilico",q:5,u:"g"},{n:"olio evo",q:5,u:"g"}],
+    steps:["Affetta i pomodori e salali cinque minuti prima: perdono acqua e guadagnano sapore.","Copri coi fiocchi di latte e il basilico spezzato a mano.","Olio a filo e pepe: la mozzarella non ti mancherà."],
+    tags:["fit","no cottura","veloce","estate","proteico"], context:'', note:"Meta' dei grassi di una caprese vera, il doppio delle proteine." },
+
+  { id:"ft06", portata:"antipasto", title:"Edamame al vapore con limone", cat:"sano", prep:2, cook:6,
+    kcal:190, pro:17, carbs:15, fat:8, desc:'',
+    ing:[{n:"edamame",q:150,u:"g"},{n:"limone",q:10,u:"g"},{n:"sale",q:2,u:"g"}],
+    steps:["Cuoci gli edamame al vapore o in acqua bollente sei minuti.","Scolali e conditi ancora caldi con sale grosso e scorza di limone.","Si mangiano spremendo i baccelli coi denti: il baccello resta nel piatto."],
+    tags:["fit","veloce","proteico","vegetariano"], context:'davanti a un film', note:"Sono lo snack da divano con piu' proteine che esista: 17 grammi a ciotola." },
+
+  { id:"ft07", portata:"primo", title:"Quinoa saltata con verdure", cat:"sano", prep:10, cook:15,
+    kcal:380, pro:12, carbs:47, fat:15, desc:'',
+    ing:[{n:"quinoa",q:70,u:"g"},{n:"zucchine",q:100,u:"g"},{n:"peperoni",q:80,u:"g"},{n:"olio evo",q:10,u:"g"},{n:"curcuma",q:2,u:"g"}],
+    steps:["Sciacqua la quinoa sotto l'acqua: toglie l'amaro della saponina.","Cuocila 12 minuti in acqua salata con la curcuma.","Salta le verdure a fuoco vivo e unisci tutto in padella un minuto."],
+    tags:["fit","vegetariano","meal prep"], context:'pranzo in ufficio', note:"Il risciacquo non si salta: la quinoa amara ha rovinato piu' pranzi del sale dimenticato." },
+
+  { id:"ft08", portata:"primo", title:"Riso con piselli e limone", cat:"sano", prep:5, cook:18,
+    kcal:405, pro:14, carbs:68, fat:9, desc:'',
+    ing:[{n:"riso",q:70,u:"g"},{n:"piselli",q:100,u:"g"},{n:"grana",q:10,u:"g"},{n:"olio evo",q:5,u:"g"},{n:"limone",q:10,u:"g"}],
+    steps:["Cuoci il riso e negli ultimi cinque minuti butta dentro i piselli.","Scola tenendo un dito d'acqua e manteca con grana e olio.","Scorza di limone alla fine: e' lei il piatto."],
+    tags:["fit","vegetariano","veloce"], context:'', note:"Un risi e bisi sbrigativo: il limone lo porta dall'inverno all'estate." },
+
+  { id:"ft09", portata:"primo", title:"Zuppa di lenticchie e carote", cat:"sano", prep:10, cook:30,
+    kcal:335, pro:15, carbs:44, fat:11, desc:'',
+    ing:[{n:"lenticchie",q:180,u:"g"},{n:"carota",q:100,u:"g"},{n:"sedano",q:40,u:"g"},{n:"cipolla",q:40,u:"g"},{n:"pomodorini",q:80,u:"g"},{n:"olio evo",q:10,u:"g"}],
+    steps:["Soffriggi cipolla, carota e sedano nell'olio, piano.","Unisci lenticchie e pomodorini, copri d'acqua due dita sopra.","Trenta minuti a fuoco basso: e' pronta quando la lenticchia si schiaccia sul cucchiaio."],
+    tags:["fit","inverno","legumi","vegetariano","meal prep"], context:"cena d'inverno", note:"Il giorno dopo e' piu' buona: fanne doppia e domani e' gia' cena." },
+
+  { id:"ft10", portata:"primo", title:"Cous cous freddo ceci e pomodorini", cat:"sano", prep:10, cook:5,
+    kcal:430, pro:15, carbs:65, fat:12, desc:'',
+    ing:[{n:"cous cous",q:60,u:"g"},{n:"ceci",q:100,u:"g"},{n:"pomodorini",q:100,u:"g"},{n:"olio evo",q:8,u:"g"},{n:"basilico",q:5,u:"g"},{n:"limone",q:10,u:"g"}],
+    steps:["Copri il cous cous con la stessa quantita' d'acqua bollente e un filo d'olio: cinque minuti col coperchio.","Sgranalo con la forchetta e fallo intiepidire.","Unisci ceci, pomodorini, basilico e limone: in frigo regge due giorni."],
+    tags:["fit","estate","no cottura","meal prep","vegetariano"], context:'pranzo da portare', note:"L'acqua pari al cous cous, non di piu': zuppo non torna indietro." },
+
+  { id:"ft11", portata:"secondo", title:"Pollo alla griglia, limone e rosmarino", cat:"sano", prep:10, cook:12,
+    kcal:265, pro:41, carbs:1, fat:11, desc:'',
+    ing:[{n:"petto di pollo",q:180,u:"g"},{n:"olio evo",q:8,u:"g"},{n:"limone",q:20,u:"g"},{n:"rosmarino",q:3,u:"g"}],
+    steps:["Apri il petto a libro e marinalo dieci minuti con olio, limone e rosmarino.","Griglia rovente: tre minuti per lato senza toccarlo, sennò si attacca.","Fallo riposare due minuti prima di tagliarlo: i succhi restano dentro."],
+    tags:["fit","proteico","veloce","griglia"], context:'', note:"Il riposo fuori dal fuoco vale quanto la cottura: tagliato subito si asciuga." },
+
+  { id:"ft12", portata:"secondo", title:"Salmone al forno con finocchi", cat:"sano", prep:10, cook:18,
+    kcal:390, pro:32, carbs:8, fat:25, desc:'',
+    ing:[{n:"salmone",q:150,u:"g"},{n:"finocchi",q:150,u:"g"},{n:"arancia",q:80,u:"g"},{n:"olio evo",q:5,u:"g"}],
+    steps:["Affetta i finocchi sottili e stendili sul fondo della teglia.","Adagia il salmone sopra con le fette d'arancia e l'olio.","Forno a 190 per 18 minuti: il pesce e' pronto quando si sfalda alla forchetta."],
+    tags:["fit","forno","omega"], context:'cena che sembra un ristorante', note:"I finocchi sotto fanno da griglia profumata e non si brucia niente." },
+
+  { id:"ft13", portata:"secondo", title:"Merluzzo in crosta di pomodorini", cat:"sano", prep:10, cook:15,
+    kcal:335, pro:37, carbs:15, fat:14, desc:'',
+    ing:[{n:"merluzzo",q:200,u:"g"},{n:"pomodorini",q:120,u:"g"},{n:"olive nere",q:20,u:"g"},{n:"pangrattato",q:15,u:"g"},{n:"olio evo",q:8,u:"g"}],
+    steps:["Copri il merluzzo con pomodorini a meta', olive e pangrattato.","Olio a filo sopra la crosta: e' lui che la fa dorare.","Forno a 200 per 15 minuti, gli ultimi due col grill."],
+    tags:["fit","forno","veloce","proteico"], context:'', note:"Il pangrattato e' poco per scelta: deve scrocchiare, non impanare." },
+
+  { id:"ft14", portata:"secondo", title:"Tofu saltato broccoli e sesamo", cat:"sano", prep:10, cook:12,
+    kcal:295, pro:21, carbs:9, fat:20, desc:'',
+    ing:[{n:"tofu",q:150,u:"g"},{n:"broccoli",q:200,u:"g"},{n:"salsa di soia",q:15,u:"g"},{n:"olio di sesamo",q:8,u:"g"},{n:"semi di sesamo",q:8,u:"g"},{n:"zenzero",q:5,u:"g"}],
+    steps:["Tampona il tofu e cuocilo a cubetti finché è dorato su due lati.","Aggiungi i broccoli sbollentati, zenzero e salsa di soia: due minuti a fuoco vivo.","Fuori dal fuoco, olio e semi di sesamo."],
+    tags:["fit","vegetariano","proteico","asiatico"], context:'', note:"Il tofu asciugato bene e' la differenza fra dorato e lesso." },
+
+  { id:"ft15", portata:"secondo", title:"Tacchino in padella con zucchine", cat:"sano", prep:5, cook:12,
+    kcal:292, pro:41, carbs:6, fat:12, desc:'',
+    ing:[{n:"fesa di tacchino",q:160,u:"g"},{n:"zucchine",q:200,u:"g"},{n:"olio evo",q:10,u:"g"},{n:"salvia",q:3,u:"g"}],
+    steps:["Rosola le fettine di tacchino un minuto per lato e mettile da parte.","Nella stessa padella salta le zucchine a rondelle con la salvia.","Rimetti il tacchino dentro un minuto, che si scambino i sapori."],
+    tags:["fit","veloce","proteico"], context:'cena del martedi', note:"Il tacchino cuoce in un lampo: di piu' e' cartone, non secondo." },
+
+  { id:"ft16", portata:"secondo", title:"Frittata di albumi e spinaci", cat:"sano", prep:5, cook:10,
+    kcal:296, pro:37, carbs:5, fat:14, desc:'',
+    ing:[{n:"albumi",q:200,u:"g"},{n:"uovo",q:55,u:"g"},{n:"spinaci",q:150,u:"g"},{n:"grana",q:10,u:"g"},{n:"olio evo",q:5,u:"g"}],
+    steps:["Fai appassire gli spinaci in padella e strizzali bene.","Sbatti albumi, uovo intero e grana, unisci gli spinaci.","Fuoco basso col coperchio: si gira quando i bordi si staccano da soli."],
+    tags:["fit","proteico","veloce","vegetariano"], context:'', note:"Un tuorlo solo su tre uova: la frittata resta gialla, i grassi no." },
+
+  { id:"ft17", portata:"contorno", title:"Verdure al forno con paprika", cat:"sano", prep:10, cook:35,
+    kcal:267, pro:6, carbs:37, fat:11, desc:'',
+    ing:[{n:"patate",q:150,u:"g"},{n:"peperoni",q:100,u:"g"},{n:"zucchine",q:100,u:"g"},{n:"cipolla rossa",q:50,u:"g"},{n:"olio evo",q:10,u:"g"},{n:"paprika",q:3,u:"g"}],
+    steps:["Taglia tutto a pezzi della stessa misura, sennò cuociono in tempi diversi.","Condisci con olio e paprika in una ciotola, non in teglia: si veste meglio.","Forno a 200 per 35 minuti, girando a meta'."],
+    tags:["fit","forno","vegetariano","contorno","meal prep"], context:'', note:"Teglia larga e verdure staccate: ammucchiate lessano invece di arrostire." },
+
+  { id:"ft18", portata:"contorno", title:"Cavolfiore arrosto alla curcuma", cat:"sano", prep:5, cook:30,
+    kcal:160, pro:8, carbs:7, fat:11, desc:'',
+    ing:[{n:"cavolfiore",q:250,u:"g"},{n:"olio evo",q:10,u:"g"},{n:"curcuma",q:3,u:"g"},{n:"limone",q:10,u:"g"}],
+    steps:["Dividi il cavolfiore in cimette e asciugale: bagnate non dorano.","Condisci con olio e curcuma e stendi su teglia calda.","Trenta minuti a 210 senza girarlo troppo: le bruciature sono il buono."],
+    tags:["fit","forno","vegetariano","contorno","inverno"], context:'', note:"Arrostito e' un'altra verdura: chi odia il cavolfiore lesso ha ragione." },
+
+  { id:"ft19", portata:"altro", title:"Buddha bowl quinoa ceci e avocado", cat:"sano", prep:15, cook:15,
+    kcal:515, pro:19, carbs:61, fat:22, desc:'',
+    ing:[{n:"quinoa",q:60,u:"g"},{n:"ceci",q:100,u:"g"},{n:"avocado",q:50,u:"g"},{n:"spinaci",q:40,u:"g"},{n:"pomodorini",q:80,u:"g"},{n:"olio evo",q:8,u:"g"},{n:"limone",q:10,u:"g"}],
+    steps:["Cuoci la quinoa e falla intiepidire stesa su un piatto.","Componi la ciotola a spicchi: quinoa, ceci, spinaci crudi, pomodorini, avocado.","Emulsiona olio e limone e versa solo all'ultimo."],
+    tags:["fit","vegetariano","meal prep","bowl"], context:'pranzo completo in una ciotola', note:"Un pasto intero con tutto in proporzione: e' la bowl a fare la dieta, non il contrario." },
+
+  { id:"ft20", portata:"altro", title:"Insalata di farro feta e pomodorini", cat:"sano", prep:10, cook:25,
+    kcal:445, pro:17, carbs:46, fat:22, desc:'',
+    ing:[{n:"farro",q:60,u:"g"},{n:"feta",q:40,u:"g"},{n:"pomodorini",q:100,u:"g"},{n:"rucola",q:30,u:"g"},{n:"olive nere",q:15,u:"g"},{n:"olio evo",q:8,u:"g"}],
+    steps:["Lessa il farro in acqua salata e raffreddalo sotto l'acqua.","Unisci pomodorini, olive, rucola e feta a cubetti.","Olio e pepe alla fine: la feta il sale ce l'ha già messo."],
+    tags:["fit","estate","meal prep","vegetariano"], context:'schiscetta della settimana', note:"Il farro non scuoce: e' il cereale giusto per chi prepara oggi e mangia giovedi'." }
 ];
 
 const SEED = {
