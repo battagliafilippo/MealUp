@@ -3781,6 +3781,64 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'il modulo non dice che il prodotto e\' gia\' noto');
   });
 
+  await test('il riepilogo della spesa parla col catalogo, e le ricette col Nutri-Score', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+    a.tab('view-fridge');
+
+    // 1. nelle righe del riepilogo: giudizio noto colorato, ignoto invitato
+    a.dom.window.fitmealsVoce.daTesto('latte, gnappole croccanti');
+    await wait(100);
+    const chips = [...a.d.querySelectorAll('.riga-dettata .det-eti')];
+    eq(chips.length, 2, 'ogni riga del riepilogo deve avere il suo chip');
+    vero((chips[0].getAttribute('style') || '').includes('color'),
+      'il prodotto noto non mostra il suo giudizio');
+    vero(!(chips[1].getAttribute('style') || '').includes('color'),
+      'l\'ignoto deve avere solo l\'invito discreto');
+
+    // 2. dal chip al modulo (stesso motore), e al salvataggio si TORNA alle righe
+    chips[1].dispatchEvent(new a.dom.window.MouseEvent('click', { bubbles: true }));
+    await wait(100);
+    vero(a.d.getElementById('modal-etichetta').classList.contains('active'), 'il modulo non si apre');
+    eq(a.d.getElementById('eti-nome').value, 'gnappole croccanti', 'il nome della riga non arriva');
+    a.d.getElementById('eti-kcal').value = '520';
+    a.d.getElementById('eti-gra').value = '28';
+    a.click('[data-act=etichetta-salva]');
+    await wait(150);
+    vero(a.d.getElementById('modal-dettatura').classList.contains('active'),
+      'dopo il salvataggio non si torna al riepilogo');
+    eq([...a.d.querySelectorAll('.det-nome')].map(x => x.value).join(','),
+      'latte,gnappole croccanti', 'le righe si sono perse al ritorno');
+    vero((a.d.querySelectorAll('.riga-dettata .det-eti')[1].getAttribute('style') || '')
+      .includes('color'), 'il chip non si aggiorna col giudizio nuovo');
+
+    // 3. le scorte conservate portano il pallino
+    a.click('[data-act=detta-chiudi]');
+    await wait(100);
+    P.catalogoRegistra('latte');
+    a.dom.window.fitmealsProva.freschezza()['latte'] =
+      { nome: 'latte', qta: 500, unita: 'g', dal: Date.now(), posto: 'frigo' };
+    a.dom.window.fitmealsProva.renderProfilo(); // un render qualsiasi non basta: uso renderAll
+    a.tab('view-fridge');
+    await wait(100);
+
+    // 4. le ricette si giudicano col Nutri-Score, presente e futuro
+    const R = a.stato().recipes;
+    const g = t => { const r = R.find(x => x.title.toLowerCase().includes(t));
+      const s = P.salubritaRicetta(r); return s ? s.nome : null; };
+    eq(g('carbonara'), 'da limitare', 'la carbonara non e\' da limitare');
+    vero(['sano', 'equilibrato'].includes(g('insalata di farro')),
+      'l\'insalata di farro deve stare nella parte sana della scala');
+
+    // nel dettaglio il gradino sostituisce la vecchia categoria a mano
+    a.apri('carbonara');
+    await wait(150);
+    const meta = a.d.querySelector('#detail-body .detail-meta');
+    vero(meta.textContent.includes('da limitare'), 'il dettaglio non mostra il gradino');
+    vero(!/·\s*sgarro\s*·/.test(meta.textContent.split('facile')[0]),
+      'il dettaglio mostra ancora la vecchia categoria');
+  });
+
   await test('le scadenze di oggi arrivano nella campanella e si gestiscono', async () => {
     const ora = Date.now();
     const a = await app({ storage: {
