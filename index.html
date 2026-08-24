@@ -835,6 +835,12 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .salute-pallino{display:inline-block;width:9px;height:9px;border-radius:50%;
   margin-right:6px;vertical-align:1px;flex:0 0 auto}
 .salute-pallino--vuoto{background:none;border:1.5px dashed var(--text-tertiary)}
+.det-eti{flex:0 0 26px;width:26px;height:26px;border-radius:8px;display:inline-flex;
+  align-items:center;justify-content:center;color:var(--text-tertiary);cursor:pointer}
+.det-eti svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round}
+.det-eti--nota svg{stroke-width:2}
+.det-eti:hover{background:color-mix(in srgb, var(--tema, var(--accent-primary)) 12%, transparent)}
 .shop-eti--nota svg{stroke-width:2}
 .targhetta-eti{align-self:flex-start;margin-bottom:4px}
 .catalogo-riga{display:flex;align-items:center;gap:8px;padding:9px 2px;
@@ -3062,7 +3068,7 @@ h3{font-weight:600;letter-spacing:-.018em}
     <div class="modal-content">
       <div class="modal-head">
         <h2>Dall'etichetta</h2>
-        <button type="button" class="x" data-act="close-modal" aria-label="Chiudi">&times;</button>
+        <button type="button" class="x" data-act="etichetta-chiudi" aria-label="Chiudi">&times;</button>
       </div>
       <p class="hint">Per un prodotto che le ricette non conoscono: inquadra la tabella
         dei <b>valori nutrizionali</b> e leggo io i numeri. Sono per 100 g, e li puoi
@@ -6774,6 +6780,8 @@ function recipeCard(r, extra, n) {
     : `<span class="scheda-dati">
          <span class="dato">${ICONE.tempo}${t}</span>
          <span class="dato">${ICONE.fuoco}${m.kcal}</span>
+         ${(() => { const g = salubritaRicetta(r);
+           return g ? `<span class="dato" title="${esc(g.nome)}${g.parziale ? ' · giudizio parziale' : ''}"><i class="salute-pallino" style="background:${g.colore};margin:0"></i></span>` : ''; })()}
        </span>`;
 
   // Il disegno si riempie in proporzione a quanto hai gia' in dispensa, e si
@@ -8140,7 +8148,7 @@ function schedaConservazione(v) {
       <div class="fresco-testa">
         <span class="fresco-arte">${disegnoPer(v.nome) || ARTE.piatto}</span>
         <span class="fresco-nome">
-          <b>${esc(v.nome)}${v.qta ? ` <button type="button" class="resta"
+          <b>${salutePallino(v.nome)}${esc(v.nome)}${v.qta ? ` <button type="button" class="resta"
             data-act="scorta-mod" data-val="${esc(v.k)}">${fmtScorta(v.qta, v.unita)}</button>` : ''}</b>
           <span>${giorno(v.dal)} \u00b7 ${etaTesto(v.dal)}${
             v.aperto ? ' \u00b7 aperto ' + giorno(v.apertoIl) : ''}</span>
@@ -9267,7 +9275,17 @@ let lastFocus = null;
 
 function openModal(id) {
   lastFocus = document.activeElement;
-  document.getElementById(id).classList.add('active');
+  const el = document.getElementById(id);
+  // se stava chiudendosi col garbo, la riapertura annulla la chiusura:
+  // senza questo, il timer della vecchia chiusura spegnerebbe il modale
+  // appena riaperto (succedeva tornando al riepilogo dopo un'etichetta)
+  if (el._fineChiusura) {
+    el.removeEventListener('animationend', el._fineChiusura);
+    clearTimeout(el._chiusuraTimer);
+    el._fineChiusura = null;
+  }
+  el.classList.remove('chiude');
+  el.classList.add('active');
   document.body.classList.add('locked');
 }
 
@@ -9278,9 +9296,11 @@ function chiudiConGarbo(el) {
   const fine = () => {
     el.classList.remove('active', 'chiude');
     el.removeEventListener('animationend', fine);
+    el._fineChiusura = null;
   };
+  el._fineChiusura = fine;
   el.addEventListener('animationend', fine);
-  setTimeout(fine, 320);   // rete di sicurezza se l'animazione non parte
+  el._chiusuraTimer = setTimeout(fine, 320);   // rete di sicurezza se l'animazione non parte
 }
 
 /* Chiude UN solo modale, col garbo di sempre: serve alla dettatura e allo
@@ -9395,7 +9415,10 @@ function openDetail(id, tornando) {
       <em>A te resta la tua porzione.</em></p>` : ''}
 
     <p class="detail-meta" style="text-align:center">
-      ${esc(PORTATA[portataOf(r)])} · ${esc(r.cat)} · ${r.prep + r.cook} min
+      ${esc(PORTATA[portataOf(r)])} · ${(() => {
+        const g = salubritaRicetta(r);
+        return g ? `<b style="color:${g.colore}">${esc(g.nome)}</b>` : esc(r.cat);
+      })()} · ${r.prep + r.cook} min
       · <span class="diff">${rebbi(difficolta(r))}${['facile', 'media', 'impegnativa'][difficolta(r) - 1]}</span>
       ${fuoriStagione(r) ? '· fuori stagione' : ''}
       ${(r.tags || []).length ? ' · ' + esc(r.tags.join(' · ')) : ''}
@@ -10623,6 +10646,34 @@ function salubritaDi(nome) {
     grassi: t[3], saturi: t.length > 4 ? t[4] : null,
     fibre: t.length > 6 ? t[6] : null, sale: t.length > 7 ? t[7] : null
   });
+}
+
+/* Lo STESSO metodo, applicato a una ricetta intera: le sue calorie e i
+   suoi macro, riportati ai 100 grammi di piatto finito pesando gli
+   ingredienti scritti. Vale per ogni ricetta, comprese quelle di domani:
+   niente giudizi scritti a mano, si calcola e basta. */
+const _salubritaRicette = {};
+function salubritaRicetta(r) {
+  if (!r || !(r.ing || []).length) return null;
+  const chiave = r.id + ':' + (r.mtime || 0);
+  if (_salubritaRicette[chiave]) return _salubritaRicette[chiave];
+
+  let peso = 0;
+  (r.ing || []).forEach(i => {
+    const g = quantitaRichiesta(i, 1, 'g');
+    if (isFinite(g) && g > 0) peso += g;
+  });
+  if (peso < 50) return null;   // dosi simboliche: meglio nessun giudizio
+
+  const f = 100 / peso;
+  const g = salubrita({
+    kcal: (Number(r.kcal) || 0) * f,
+    grassi: (Number(r.fat) || 0) * f,
+    proteine: (Number(r.pro) || 0) * f,
+    carboidrati: (Number(r.carbs) || 0) * f
+  });
+  _salubritaRicette[chiave] = g;
+  return g;
 }
 
 /* Il pallino colorato della scala, da mettere accanto a un nome. */
@@ -11938,9 +11989,38 @@ function righeDettaturaUna() {
     <input type="number" class="det-q" min="0" step="any" inputmode="decimal" placeholder="q.t\u00e0"
       aria-label="Quantit\u00e0">
     <button type="button" class="det-u chip mini" data-act="detta-unita">g</button>
+    ${chipEtichettaRiga('')}
     <button type="button" class="x" data-act="detta-togli" aria-label="Togli">\u00d7</button>
     <span class="det-nota"></span>
   </div>`;
+}
+
+/* Il chip dell'etichetta su ogni riga del riepilogo (dettatura, scontrino,
+   riga a mano): se il catalogo conosce gia' il prodotto mostra il SUO
+   giudizio, altrimenti e' l'invito discreto a leggere l'etichetta.
+   E' lo stesso identico motore della sezione prodotti: qui c'e' solo
+   il bottone che lo chiama. */
+function chipEtichettaRiga(nome) {
+  const g = nome ? salubritaDi(nome) : null;
+  return `<span class="det-eti ${g ? 'det-eti--nota' : ''}" data-act="riga-etichetta"
+    role="button" ${g ? `style="color:${g.colore}"` : ''}
+    title="${g ? esc(g.nome) + (g.parziale ? ' · giudizio parziale' : '') + ' · tocca per aggiornare'
+              : 'Leggi l\'etichetta per dargli un giudizio'}"
+    aria-label="Valori nutrizionali${nome ? ' di ' + esc(nome) : ''}">
+    <svg viewBox="0 0 24 24"><path d="M4 7V5.5A1.5 1.5 0 0 1 5.5 4H7M17 4h1.5A1.5 1.5 0 0 1 20 5.5V7M20 17v1.5a1.5 1.5 0 0 1-1.5 1.5H17M7 20H5.5A1.5 1.5 0 0 1 4 18.5V17M8 9v6M11 9v6M14.5 9v6M17 9v3"/></svg></span>`;
+}
+
+/* Dopo una lettura fatta dal riepilogo, i chip si rinfrescano senza
+   ridisegnare le righe: le correzioni scritte dall'utente non si toccano. */
+function aggiornaChipRighe() {
+  document.querySelectorAll('#dettatura-lista .riga-dettata').forEach(riga => {
+    const nome = (riga.querySelector('.det-nome') || {}).value || '';
+    const vecchio = riga.querySelector('.det-eti');
+    if (!vecchio) return;
+    const div = document.createElement('div');
+    div.innerHTML = chipEtichettaRiga(nome.trim());
+    riga.replaceChild(div.firstElementChild, vecchio);
+  });
 }
 
 function righeDettatura(righe) {
@@ -11952,6 +12032,7 @@ function righeDettatura(righe) {
       <input type="number" class="det-q" min="0" step="any" inputmode="decimal"
         value="${r.q}" placeholder="q.t\u00e0" aria-label="Quantit\u00e0">
       <button type="button" class="det-u chip mini" data-act="detta-unita">${unitaEtichetta(r.u)}</button>
+      ${chipEtichettaRiga(r.nome)}
       <button type="button" class="x" data-act="detta-togli" aria-label="Togli">\u00d7</button>
       <span class="det-nota">${r.sicuro
         ? 'riconosciuto'
@@ -11973,6 +12054,7 @@ function righeDettatura(righe) {
 var modoInserimento = 'voce';   // 'voce' | 'scontrino': cambia solo le scritte
 var dettaturaDove = 'spesa';    // 'spesa' | 'dispensa': dove finiscono le voci
 var etichettaVerso = 'dispensa'; // 'dispensa' | 'valori': cosa fa il salvataggio
+var etichettaTornaARighe = false; // aperta dal riepilogo: al termine si torna li'
 
 /* Le righe che su uno scontrino non sono mai un prodotto. */
 const SCON_RUMORE = new RegExp(
@@ -12620,6 +12702,46 @@ function aggiornaSalubritaEtichetta() {
   const scala = box.querySelector('.eti-salute-scala');
   scala.innerHTML = SALUTE_GRADINI.map((x, i) =>
     `<i style="background:${x.colore}" class="${i === g.gradino ? 'qui' : ''}"></i>`).join('');
+}
+
+/* L'UNICA porta d'ingresso del modulo etichetta: la usano la dispensa,
+   ogni riga della lista della spesa, il riepilogo della dettatura e dello
+   scontrino, e la schermata del catalogo. Un motore solo, chiamato da
+   quattro posti. */
+function apriModuloEtichetta(nome, verso) {
+  etichettaVerso = verso === 'valori' ? 'valori' : 'dispensa';
+  const salvaEti = document.querySelector('[data-act="etichetta-salva"]');
+  if (salvaEti) salvaEti.textContent = etichettaVerso === 'valori'
+    ? 'Salva i valori' : 'Salva e metti in dispensa';
+
+  ['eti-kcal','eti-pro','eti-carb','eti-gra','eti-sat','eti-zuc','eti-fib','eti-sale']
+    .forEach(id => { if (F(id)) F(id).value = ''; });
+  const salBox = document.getElementById('eti-salute');
+  if (salBox) salBox.hidden = true;
+  document.getElementById('etichetta-barra').hidden = true;
+  document.getElementById('etichetta-passo').hidden = true;
+  const consEti = document.getElementById('etichetta-consigli');
+  if (consEti) consEti.hidden = true;
+
+  // se il catalogo lo conosce gia', i valori tornano da soli: la nuova
+  // scansione serve solo se e' cambiato il prodotto
+  const giaLetta = nome ? tabellaDi(nome) : null;
+  if (giaLetta) {
+    const campi = ['eti-kcal','eti-pro','eti-carb','eti-gra','eti-sat','eti-zuc','eti-fib','eti-sale'];
+    campi.forEach((id, i) => {
+      if (F(id) && giaLetta[i] !== undefined && giaLetta[i] !== null) F(id).value = giaLetta[i];
+    });
+    setTimeout(aggiornaSalubritaEtichetta, 0);
+    const passoEti = document.getElementById('etichetta-passo');
+    if (passoEti) { passoEti.hidden = false;
+      passoEti.textContent = 'Già a catalogo: valori riapplicati. Rifai la foto solo se hai cambiato prodotto.'; }
+  }
+  F('eti-nome').value = nome || '';
+  cameraProbabile().then(ok => {
+    const b = document.getElementById('etichetta-scatta');
+    if (b) b.style.display = ok ? '' : 'none';
+  });
+  openModal('modal-etichetta');
 }
 
 /* La foto dell'etichetta: preparata, letta due volte se serve (la seconda
@@ -15766,45 +15888,31 @@ document.addEventListener('click', e => {
       save(); renderCatalogo(); renderAll();
       break;
     }
-    case 'etichetta-apri': {
-      // dalla lista della spesa si salvano SOLO i valori: il prodotto entrera'
-      // in dispensa quando chiudi la spesa, gia' con i suoi numeri
-      etichettaVerso = t.dataset.verso === 'valori' ? 'valori' : 'dispensa';
-      const salvaEti = document.querySelector('[data-act="etichetta-salva"]');
-      if (salvaEti) salvaEti.textContent = etichettaVerso === 'valori'
-        ? 'Salva i valori' : 'Salva e metti in dispensa';
-      // precompilo col nome scritto nella barra della dispensa, se c'e'
-      const gia = (document.getElementById('disp-cerca') || {}).value || '';
-      ['eti-kcal','eti-pro','eti-carb','eti-gra','eti-sat','eti-zuc','eti-fib','eti-sale']
-        .forEach(id => { if (F(id)) F(id).value = ''; });
-      const salBox = document.getElementById('eti-salute');
-      if (salBox) salBox.hidden = true;
-      // se il catalogo lo conosce gia', i valori tornano da soli: la nuova
-      // scansione serve solo se e' cambiato il prodotto
-      const nomePre = (val || gia).trim();
-      const giaLetta = nomePre ? tabellaDi(nomePre) : null;
-      if (giaLetta) {
-        const campi = ['eti-kcal','eti-pro','eti-carb','eti-gra','eti-sat','eti-zuc','eti-fib','eti-sale'];
-        campi.forEach((id, i) => {
-          if (F(id) && giaLetta[i] !== undefined && giaLetta[i] !== null) F(id).value = giaLetta[i];
-        });
-        setTimeout(aggiornaSalubritaEtichetta, 0);
-        const passoEti = document.getElementById('etichetta-passo');
-        if (passoEti) { passoEti.hidden = false;
-          passoEti.textContent = 'Gi\u00e0 a catalogo: valori riapplicati. Rifai la foto solo se hai cambiato prodotto.'; }
-      }
-      F('eti-nome').value = (val || gia).trim();
-      document.getElementById('etichetta-barra').hidden = true;
-      document.getElementById('etichetta-passo').hidden = true;
-      const consEti = document.getElementById('etichetta-consigli');
-      if (consEti) consEti.hidden = true;
-      cameraProbabile().then(ok => {
-        const b = document.getElementById('etichetta-scatta');
-        if (b) b.style.display = ok ? '' : 'none';
-      });
-      openModal('modal-etichetta');
+    case 'riga-etichetta': {
+      // dal riepilogo della spesa: stesso motore, stesso modulo. Il riepilogo
+      // resta vivo sotto, e al ritorno le righe sono come le hai lasciate.
+      const rigaEti = t.closest('.riga-dettata');
+      const nomeRiga = rigaEti ? (rigaEti.querySelector('.det-nome').value || '').trim() : '';
+      if (!nomeRiga) { toast('Scrivi prima il nome del prodotto.'); break; }
+      etichettaTornaARighe = true;
+      chiudiModal('modal-dettatura');
+      apriModuloEtichetta(nomeRiga, 'valori');
       break;
     }
+    case 'etichetta-apri':
+      apriModuloEtichetta((val || (document.getElementById('disp-cerca') || {}).value || '').trim(),
+        t.dataset.verso === 'valori' ? 'valori' : 'dispensa');
+      break;
+    case 'etichetta-chiudi':
+      if (etichettaTornaARighe) {
+        etichettaTornaARighe = false;
+        chiudiModal('modal-etichetta');
+        openModal('modal-dettatura');
+        aggiornaChipRighe();
+      } else {
+        closeModals();
+      }
+      break;
     case 'etichetta-scatta': {
       const campo = document.getElementById('etichetta-foto');
       if (campo) { campo.value = ''; campo.click(); }
@@ -15835,8 +15943,16 @@ document.addEventListener('click', e => {
         const vecchia = freschezza()[norm(nome)];
         catalogoRegistra(nome, vecchia && vecchia.posto);
         save(); renderAll();
-        closeModals();
-        toast(nome + ': valori salvati. Entrera\u0300 in dispensa a fine spesa.', 'Annulla');
+        if (etichettaTornaARighe) {
+          // si torna al riepilogo, con le righe come l'utente le ha lasciate
+          etichettaTornaARighe = false;
+          chiudiModal('modal-etichetta');
+          openModal('modal-dettatura');
+          aggiornaChipRighe();
+        } else {
+          closeModals();
+        }
+        toast(nome + ': valori salvati. Entrer\u00e0 in dispensa a fine spesa.', 'Annulla');
         break;
       }
       // il posto: quello che il catalogo ricorda; alla prima volta, la
@@ -16373,6 +16489,7 @@ window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
   preparaEtichetta: preparaEtichetta,
   salubrita: salubrita, salubritaDi: salubritaDi,
   catalogoTrova: catalogoTrova, catalogoRegistra: catalogoRegistra,
+  salubritaRicetta: salubritaRicetta,
   renderCatalogo: renderCatalogo,
   energia: energy, renderProfilo: renderProfile,
   freschezza: freschezza, scadenze: scadenzeDelGiorno, inventario: inventario,
