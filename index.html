@@ -793,6 +793,22 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
   stroke-linecap:round;stroke-linejoin:round}
 .modo-spesa:active{transform:scale(.97)}
 
+/* --- famiglia, cena tra amici e condivisione via link --- */
+.aiuto{margin-top:8px;padding:12px 14px;border-radius:16px;
+  background:color-mix(in srgb, var(--tema, var(--accent-primary)) 7%, transparent);
+  border:1px solid color-mix(in srgb, var(--tema, var(--accent-primary)) 18%, transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.aiuto[hidden]{display:none}
+.qr-box{display:flex;justify-content:center;align-items:center;margin-top:10px;
+  padding:14px;border-radius:16px;background:#fff}
+.qr-box[hidden]{display:none}
+.qr-box img,.qr-box canvas{max-width:100%}
+.cena-riga{display:flex;align-items:center;gap:8px;padding:8px 2px;
+  border-bottom:1px solid var(--glass-border)}
+.cena-riga .cena-gusti{flex:1;font-size:.75rem;color:var(--text-tertiary);line-height:1.3}
+.prop-cena .meta{display:block;font-size:.72rem;color:var(--text-tertiary);margin-top:2px}
+#manda-casa-chip[hidden]{display:none}
+
 /* --- l'invito discreto a leggere l'etichetta (stesso motore, altro punto) --- */
 .invito-eti{display:flex;align-items:center;gap:10px;margin:10px 0 2px;padding:10px 14px;
   border-radius:16px;font-size:.8rem;color:var(--text-secondary);line-height:1.35;
@@ -2513,6 +2529,9 @@ h3{font-weight:600;letter-spacing:-.018em}
         <h1>FitMeals</h1>
       </div>
       <div class="testa-tasti">
+        <button type="button" class="campanella" data-act="cena-apri" aria-label="Cena tra amici" title="Cena tra amici: due ricette che accontentano tutti">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="16.8" cy="9.2" r="2.6"/><path d="M15.8 14.4c2.3.3 4 1.9 4.5 4.6"/></svg>
+        </button>
         <button type="button" class="campanella" data-act="notifiche-apri" aria-label="Scadenze di oggi">
           <svg viewBox="0 0 24 24"><path d="M6 10a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/>
             <path d="M10 19a2 2 0 0 0 4 0"/></svg>
@@ -2603,6 +2622,9 @@ h3{font-weight:600;letter-spacing:-.018em}
           <button type="button" class="chip" data-act="catalogo-apri"
             title="Tutti gli ingredienti gia' valutati, col loro giudizio">
             <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px"><path d="M5 5.5A1.5 1.5 0 0 1 6.5 4h11A1.5 1.5 0 0 1 19 5.5v14l-3.5-2.3L12 19.5l-3.5-2.3L5 19.5z"/><path d="M8.5 8.5h7M8.5 11.5h5"/></svg>Catalogo</button>
+          <button type="button" class="chip" id="manda-casa-chip" data-act="famiglia-manda" hidden
+            title="Manda la spesa a casa: chi apre il link si ritrova tutto aggiornato">
+            <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V19h12V9.5"/></svg>Manda a casa</button>
           <button type="button" class="chip" data-act="etichetta-apri" title="Un prodotto che le ricette non conoscono: leggo l'etichetta">
             <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;vertical-align:-2px;margin-right:4px"><path d="M4 7V5.5A1.5 1.5 0 0 1 5.5 4H7M17 4h1.5A1.5 1.5 0 0 1 20 5.5V7M20 17v1.5a1.5 1.5 0 0 1-1.5 1.5H17M7 20H5.5A1.5 1.5 0 0 1 4 18.5V17M8 9v6M11 9v6M14.5 9v6M17 9v3"/></svg>Etichetta</button>
           <button type="button" class="sorpresa" data-act="sorprendimi" data-val="dispensa">
@@ -2870,6 +2892,13 @@ h3{font-weight:600;letter-spacing:-.018em}
         <button type="button" class="chip mini mostra-elenco" data-act="mostra-tag" data-val="esclusi"
           id="btn-tag-esclusi"></button>
         <div id="blacklist-tags" class="tags-container" hidden></div>
+      </div>
+
+      <div class="glass-card" id="famiglia-card" data-sez="tu">
+        <h3>Famiglia</h3>
+        <p class="section-desc">Chi vive con te usa l'app sul suo telefono, gratis: la spesa
+          di uno aggiorna la casa di tutti, con un link.</p>
+        <div id="famiglia-body"></div>
       </div>
 
       <div class="glass-card" data-sez="giornata">
@@ -3184,6 +3213,39 @@ h3{font-weight:600;letter-spacing:-.018em}
         sulla scala da sano a grasso e il posto dove va conservato. Tocca il nome per
         correggere i valori, tocca il posto per cambiarlo.</p>
       <div id="catalogo-lista"></div>
+    </div>
+  </div>
+
+  <div id="modal-condividi" class="modal" role="dialog" aria-modal="true" aria-label="Condividi il link">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h2 id="condividi-titolo">Condividi</h2>
+        <button type="button" class="x" data-act="close-modal" aria-label="Chiudi">&times;</button>
+      </div>
+      <p class="hint" id="condividi-sotto"></p>
+      <div id="condividi-corpo"></div>
+    </div>
+  </div>
+
+  <div id="modal-cena" class="modal" role="dialog" aria-modal="true" aria-label="Cena tra amici">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h2>Cena tra amici</h2>
+        <button type="button" class="x" data-act="close-modal" aria-label="Chiudi">&times;</button>
+      </div>
+      <p class="hint">Ognuno dice cosa non mangia, io incrocio i gusti e ti
+        propongo due piatti che vanno bene a tutti.</p>
+      <div id="cena-corpo"></div>
+    </div>
+  </div>
+
+  <div id="modal-cena-ospite" class="modal" role="dialog" aria-modal="true" aria-label="I tuoi gusti per la cena">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h2>Sei invitato a cena</h2>
+        <button type="button" class="x" data-act="close-modal" aria-label="Chiudi">&times;</button>
+      </div>
+      <div id="cena-ospite-corpo"></div>
     </div>
   </div>
 
@@ -6105,6 +6167,9 @@ const SEED = {
   myIngredients: ['pollo','manzo','tonno','uova','yogurt greco 0%','feta','ceci','spinaci','riso integrale','avocado','frutti di bosco','mozzarella'],
   pantry: [],
   group: { url:'', code:'', last:0 },
+  famiglia: null,
+  cena: null,
+  pacchiVisti: [],
   deleted: {},
   history: [],
   shopping: [],
@@ -6289,6 +6354,9 @@ function load() {
       freschezza: data.freschezza && typeof data.freschezza === 'object' ? data.freschezza : {},
       repartoDi: data.repartoDi && typeof data.repartoDi === 'object' ? data.repartoDi : {},
       menus: Array.isArray(data.menus) ? data.menus : [],
+      famiglia: data.famiglia && typeof data.famiglia === 'object' ? data.famiglia : null,
+      cena: data.cena && typeof data.cena === 'object' ? data.cena : null,
+      pacchiVisti: Array.isArray(data.pacchiVisti) ? data.pacchiVisti : [],
       ui: Object.assign(base.ui, data.ui || {})
     };
   } catch (e) {
@@ -6392,16 +6460,17 @@ function esclusiAttivi() {
     const p = S.profiles.find(x => x.id === id);
     (p && Array.isArray(p.esclusi) ? p.esclusi : []).forEach(v => set.add(v));
   });
+  // con l'interruttore acceso contano anche gli esclusi di tutta la famiglia
+  if (S.ui.perFamiglia && S.famiglia) (S.famiglia.membri || []).forEach(m => {
+    (((m || {}).gusti || {}).esclusi || []).forEach(v => set.add(v));
+  });
   return Array.from(set);
 }
 
 function bannedBy(r) {
-  for (const b of esclusiAttivi()) {
-    for (const name of ingNames(r)) {
-      if (sameIngredient(b, name)) return b;
-    }
-  }
-  return vietataDalleDiete(r);
+  const g = dieteAttive();
+  g.no = esclusiAttivi();
+  return contraGusti(r, g);
 }
 
 /* ---------- le diete del profilo ----------
@@ -6449,18 +6518,35 @@ function dieteAttive() {
     if (p.celiaco) out.celiaco = true;
     if (p.incinta && p.sex === 'f') out.incinta = true;
   });
+  // "Cucino per tutta la famiglia": si incrociano anche i gusti degli altri
+  // telefoni, arrivati dentro gli inviti e le spese condivise
+  if (S.ui.perFamiglia && S.famiglia) (S.famiglia.membri || []).forEach(m => {
+    const g = (m || {}).gusti || {};
+    if (g.dieta === 'vegano') { out.vegano = true; out.vegetariano = true; }
+    if (g.dieta === 'vegetariano') out.vegetariano = true;
+    if (g.celiaco) out.celiaco = true;
+    if (g.incinta) out.incinta = true;
+  });
   return out;
 }
 
-function vietataDalleDiete(r) {
-  const d = dieteAttive();
-  if (!d.vegetariano && !d.celiaco && !d.incinta) return null;
-  if (d.incinta && DIETA_GRAVIDANZA_TITOLI.test(r.title || '')) return 'gravidanza';
+/* IL motore dei gusti, uno solo per tutta l'app: profilo attivo, commensali,
+   famiglia al completo e cena tra amici passano tutti da qui. Torna il motivo
+   per cui la ricetta non va bene, o null se va bene.
+   g = { vegetariano, vegano, celiaco, incinta, no: [ingredienti da evitare] } */
+function contraGusti(r, g) {
+  if (g.incinta && DIETA_GRAVIDANZA_TITOLI.test(r.title || '')) return 'gravidanza';
+  for (const name of ingNames(r)) {
+    for (const b of (g.no || [])) {
+      if (sameIngredient(b, name)) return b;
+    }
+  }
+  if (!g.vegetariano && !g.vegano && !g.celiaco && !g.incinta) return null;
   const liste = [];
-  if (d.vegetariano) liste.push(DIETA_CARNE_PESCE);
-  if (d.vegano) liste.push(DIETA_DERIVATI);
-  if (d.celiaco) liste.push(DIETA_GLUTINE);
-  if (d.incinta) liste.push(DIETA_GRAVIDANZA);
+  if (g.vegetariano || g.vegano) liste.push(DIETA_CARNE_PESCE);
+  if (g.vegano) liste.push(DIETA_DERIVATI);
+  if (g.celiaco) liste.push(DIETA_GLUTINE);
+  if (g.incinta) liste.push(DIETA_GRAVIDANZA);
   for (const name of ingNames(r)) {
     for (const lista of liste) {
       for (const voce of lista) {
@@ -6469,6 +6555,12 @@ function vietataDalleDiete(r) {
     }
   }
   return null;
+}
+
+function vietataDalleDiete(r) {
+  const d = dieteAttive();
+  d.no = [];
+  return contraGusti(r, d);
 }
 
 /* L'elenco filtrato dagli esclusi cambia solo quando cambiano le ricette o
@@ -8917,6 +9009,7 @@ function renderProfile() {
   const ws = document.getElementById('week-switch');
   if (ws) { ws.textContent = S.ui.week ? 'attivo' : 'attiva'; ws.classList.toggle('active', !!S.ui.week); }
   renderGroup();
+  renderFamiglia();
 
   const prof = activeProfile();
   const suoi = Array.isArray(prof.esclusi) ? prof.esclusi : [];
@@ -14474,12 +14567,16 @@ function paccoGruppo() {
   };
 }
 
-async function creaLinkGruppo() {
-  const testo = JSON.stringify(paccoGruppo());
+async function creaLinkPacco(obj) {
+  const testo = JSON.stringify(obj);
   const z = await comprimi(testo);
   const payload = z ? 'z' + b64urlEnc(z) : 'j' + b64urlEnc(new TextEncoder().encode(testo));
   const base = location.origin + location.pathname;
   return { link: base + '#fm=' + payload, kb: Math.round(payload.length / 1024 * 10) / 10 };
+}
+
+async function creaLinkGruppo() {
+  return creaLinkPacco(paccoGruppo());
 }
 
 async function leggiPacco(payload) {
@@ -14520,6 +14617,8 @@ async function importaLink(testo) {
   if (!m) { toast('Non sembra un link di FitMeals.'); return; }
   try {
     const d = await leggiPacco(m[1]);
+    // i pacchi nuovi (famiglia, spesa, cena) hanno la loro strada
+    if (riceviPacco(d, m[1])) return;
     pushUndo('Dati ricevuti da ' + (d.da || 'un altro telefono'));
     const r = unisciPacco(d);
     save(); renderAll();
@@ -14527,6 +14626,487 @@ async function importaLink(testo) {
   } catch (e) {
     toast('Link non leggibile: forse si \u00e8 spezzato nell\'invio.');
   }
+}
+
+/* ---------- la famiglia connessa ----------
+   Persone che vivono insieme, ciascuna con l'app sul proprio telefono, gratis.
+   Nessun server: i dati viaggiano dentro i link (o i QR) che vi scambiate,
+   da telefono a telefono. L'aggiornamento arriva quando il link si apre,
+   non da solo in tempo reale: l'interfaccia lo dice con onestà. */
+
+/* I gusti di questo telefono, tutti i profili insieme: viaggiano negli
+   inviti e nelle spese, così gli altri possono incrociarli con i loro. */
+function gustiDelTelefono() {
+  const set = new Set(S.blacklist || []);
+  const out = { dieta: '', celiaco: false, incinta: false, esclusi: [] };
+  (S.profiles || []).forEach(p => {
+    if (p.dieta === 'vegano') out.dieta = 'vegano';
+    else if (p.dieta === 'vegetariano' && out.dieta !== 'vegano') out.dieta = 'vegetariano';
+    if (p.celiaco) out.celiaco = true;
+    if (p.incinta && p.sex === 'f') out.incinta = true;
+    (Array.isArray(p.esclusi) ? p.esclusi : []).forEach(v => set.add(v));
+  });
+  out.esclusi = Array.from(set);
+  return out;
+}
+
+function nomeMio() {
+  return (S.famiglia && S.famiglia.io) || activeProfile().name || 'Io';
+}
+
+function creaFamiglia(nome) {
+  S.famiglia = {
+    id: 'fam' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    nome: String(nome || 'La famiglia').slice(0, 40),
+    io: activeProfile().name || 'Io',
+    membri: [],
+    ultimoInvio: Date.now()
+  };
+  save();
+  return S.famiglia;
+}
+
+/* Ogni pacco che arriva porta con sé nome e gusti di chi lo manda:
+   l'elenco dei membri si tiene aggiornato da solo, senza registrazioni. */
+function membroAggiorna(d) {
+  if (!S.famiglia || !d || !d.da) return;
+  const mem = (S.famiglia.membri || []).find(m => norm(m.nome) === norm(d.da));
+  if (mem) { if (d.gusti) mem.gusti = d.gusti; mem.visto = Date.now(); }
+  else S.famiglia.membri.push({ nome: String(d.da).slice(0, 30), gusti: d.gusti || null, visto: Date.now() });
+}
+
+function paccoInvitoFamiglia() {
+  return { v: 1, tipo: 'famiglia-invito', op: uid(), fid: S.famiglia.id,
+    nomeFam: S.famiglia.nome, da: nomeMio(), gusti: gustiDelTelefono() };
+}
+
+/* Le novità dall'ultimo invio: solo quello che è entrato in casa da allora,
+   con posto, valori letti dalle etichette e memoria del catalogo. */
+function paccoSpesaFamiglia() {
+  if (!S.famiglia) return null;
+  const dal = S.famiglia.ultimoInvio || 0;
+  const voci = [];
+  Object.keys(freschezza()).forEach(k => {
+    const v = freschezza()[k];
+    if ((v.dal || 0) >= dal) voci.push({
+      n: v.nome, q: (isFinite(v.qta) && v.qta > 0) ? v.qta : null,
+      u: v.unita || 'g', posto: v.posto || 'dispensa'
+    });
+  });
+  if (!voci.length) return null;
+  const eti = {}, cat = {};
+  voci.forEach(x => {
+    Object.keys(S.ingTabExtra || {}).forEach(kk => {
+      if (sameIngredient(kk, x.n)) eti[kk] = S.ingTabExtra[kk];
+    });
+    const c = catalogoTrova(x.n);
+    if (c) cat[x.n] = c.posto;
+  });
+  return { v: 1, tipo: 'spesa', op: uid(), fid: S.famiglia.id, da: nomeMio(),
+    gusti: gustiDelTelefono(), t: Date.now(), voci: voci, eti: eti, cat: cat };
+}
+
+/* La spesa dell'altro entra in casa tua: STESSO salvataggio della spesa fatta
+   qui (quantità che si sommano, posto, catalogo). Lo stesso link aperto due
+   volte non conta due volte. */
+function applicaPaccoFamiglia(d) {
+  if (!S.famiglia) {
+    toast('Per ricevere la spesa entra prima in famiglia: fatti mandare l\'invito.');
+    return false;
+  }
+  if (d.fid !== S.famiglia.id) {
+    toast('Questa spesa è di un\'altra famiglia: non la tocco.');
+    return false;
+  }
+  S.pacchiVisti = S.pacchiVisti || [];
+  if (d.op && S.pacchiVisti.includes(d.op)) {
+    toast('Questa spesa era già arrivata: è tutto a posto com\'è.');
+    return false;
+  }
+  const voci = Array.isArray(d.voci) ? d.voci.filter(x => x && x.n) : [];
+  pushUndo('Spesa di ' + (d.da || 'famiglia'));
+  voci.forEach(x => {
+    const n = String(x.n).slice(0, 60).toLowerCase();
+    registraAcquisto(n, isFinite(x.q) && x.q > 0 ? x.q : null, x.u === 'pz' ? 'pz' : 'g');
+    const v = freschezza()[norm(n)];
+    if (v && x.posto) { v.posto = x.posto; catalogoRegistra(n, x.posto); }
+    if (!S.pantry.some(p => norm(p) === norm(n))) S.pantry.push(n);
+    if (!S.myIngredients.some(m => norm(m) === norm(n))) S.myIngredients.push(n);
+  });
+  // le etichette lette dall'altro: si ereditano dove qui mancano
+  Object.keys(d.eti || {}).forEach(kk => {
+    if (!Array.isArray(d.eti[kk])) return;
+    const gia = Object.keys(S.ingTabExtra || {}).some(mio => sameIngredient(mio, kk));
+    if (!gia) {
+      S.ingTabExtra = S.ingTabExtra || {};
+      S.ingTabExtra[kk] = d.eti[kk].slice(0, 8);
+      _vocabolario = null;
+    }
+  });
+  Object.keys(d.cat || {}).forEach(nome => {
+    if (!catalogoTrova(nome)) catalogoRegistra(nome, d.cat[nome]);
+  });
+  membroAggiorna(d);
+  if (d.op) {
+    S.pacchiVisti.push(d.op);
+    if (S.pacchiVisti.length > 80) S.pacchiVisti = S.pacchiVisti.slice(-80);
+  }
+  save(); renderAll();
+  toast('La spesa di ' + (d.da || 'famiglia') + ': ' + voci.length
+    + (voci.length === 1 ? ' prodotto sistemato' : ' prodotti sistemati') + ' in casa.', 'Annulla');
+  return true;
+}
+
+function entraInFamiglia(d) {
+  if (S.famiglia && S.famiglia.id === d.fid) {
+    membroAggiorna(d); save(); renderProfile();
+    toast('Siete già nella stessa famiglia.');
+    return;
+  }
+  pushUndo('Ingresso in famiglia');
+  S.famiglia = { id: d.fid, nome: String(d.nomeFam || 'La famiglia').slice(0, 40),
+    io: activeProfile().name || 'Io', membri: [], ultimoInvio: Date.now() };
+  membroAggiorna(d);
+  save(); renderAll();
+  toast('Sei nella famiglia «' + S.famiglia.nome + '»: d\'ora in poi la spesa viaggia con un link.', 'Annulla');
+}
+
+/* Lo smistamento dei pacchi nuovi: ogni tipo sa cosa fare. Un pacco senza
+   tipo è quello storico di profili e ricette, e prosegue per la sua strada. */
+function riceviPacco(d, raw) {
+  if (!d || !d.tipo) return false;
+  switch (d.tipo) {
+    case 'famiglia-invito':
+      toast((d.da || 'Qualcuno') + ' ti invita nella famiglia «' + (d.nomeFam || 'senza nome') + '».',
+        'Entra', { act: 'famiglia-entra', val: raw });
+      return true;
+    case 'spesa':
+      applicaPaccoFamiglia(d);
+      return true;
+    case 'cena-invito':
+      apriCenaOspite(d);
+      return true;
+    case 'cena-risposta':
+      applicaRispostaCena(d);
+      return true;
+  }
+  toast('Questo link viene da una versione più nuova dell\'app: aggiornala e riprova.');
+  return true;
+}
+
+/* Il riquadro "Come funziona?": si apre e si chiude con un tap. */
+function aiutoRiquadro(id, corpo) {
+  return `<button type="button" class="lnk" data-act="aiuto-apri" data-val="${id}">Come funziona?</button>
+    <div class="aiuto" id="${id}" hidden><p class="hint" style="margin:0">${corpo}</p></div>`;
+}
+
+const AIUTO_FAMIGLIA = `<b>Come funziona?</b><br>
+  1. Tocca «Crea la famiglia» e manda l'invito a chi vive con te: «Condividi» apre
+  WhatsApp e le altre app, scegli la chat e invia. Di persona basta far inquadrare il QR.<br>
+  2. Chi apre il link entra in famiglia, senza registrarsi.<br>
+  3. Dopo la spesa tocca «Manda a casa»: chi apre quel link si ritrova dispensa,
+  frigo e freezer già aggiornati, con valori e giudizi.<br>
+  Tutto viaggia dentro il link, da telefono a telefono: niente account, niente
+  server, niente costi. L'aggiornamento arriva quando il link viene aperto,
+  non da solo in tempo reale.`;
+
+function renderFamiglia() {
+  const el = document.getElementById('famiglia-body');
+  if (!el) return;
+  const f = S.famiglia;
+  const chip = document.getElementById('manda-casa-chip');
+  if (chip) chip.hidden = !f;
+  if (!f) {
+    el.innerHTML = `
+      <button type="button" class="btn-primary full-width" style="margin-top:0" data-act="famiglia-crea">Crea la famiglia</button>
+      <p class="hint" style="margin-top:8px">Hai ricevuto un invito? Apri il link che ti hanno mandato e sei dentro.</p>
+      ${aiutoRiquadro('aiuto-famiglia', AIUTO_FAMIGLIA)}`;
+    return;
+  }
+  const membri = [{ nome: (f.io || 'Io') + ' (tu)' }].concat(f.membri || []);
+  el.innerHTML = `
+    <p class="section-desc" style="margin-top:0">«${esc(f.nome)}» · ${membri.length} ${membri.length === 1 ? 'persona' : 'persone'}</p>
+    <div class="pantry-grid" style="margin-bottom:12px">${membri.map(m =>
+      `<span class="chip">${esc(m.nome)}</span>`).join('')}</div>
+    <div class="row">
+      <button type="button" class="btn-ghost" data-act="famiglia-invita">Invita in famiglia</button>
+      <button type="button" class="btn-primary" data-act="famiglia-manda">Manda a casa la spesa</button>
+    </div>
+    <button type="button" class="chip ${S.ui.perFamiglia ? 'active' : ''}" style="margin-top:12px" data-act="famiglia-tutti">
+      ${S.ui.perFamiglia ? '✓ ' : ''}Cucino per tutta la famiglia</button>
+    <p class="hint">${S.ui.perFamiglia
+      ? 'Le ricette mostrate vanno bene per i gusti di tutta la famiglia.'
+      : 'Accendilo e le ricette terranno conto dei gusti di tutti, non solo dei tuoi.'}</p>
+    ${aiutoRiquadro('aiuto-famiglia', AIUTO_FAMIGLIA)}
+    <button type="button" class="btn-danger full-width" data-act="famiglia-esci" style="margin-top:10px">Esci dalla famiglia</button>`;
+}
+
+/* ---------- condividere un link: un modale solo per tutto ---------- */
+
+function apriCondivisione(titolo, sotto, pacco) {
+  creaLinkPacco(pacco).then(r => {
+    const tit = document.getElementById('condividi-titolo');
+    const hint = document.getElementById('condividi-sotto');
+    const corpo = document.getElementById('condividi-corpo');
+    if (tit) tit.textContent = titolo;
+    if (hint) hint.textContent = sotto;
+    if (corpo) corpo.innerHTML = `
+      <textarea readonly id="condividi-link" rows="3" style="font-size:.72rem">${esc(r.link)}</textarea>
+      <div class="row" style="margin-top:8px">
+        <button type="button" class="btn-primary" data-act="condividi-share">Condividi</button>
+        <button type="button" class="btn-ghost" data-act="condividi-copy">Copia il link</button>
+      </div>
+      <button type="button" class="lnk" data-act="qr-mostra" style="margin-top:8px">Mostra il QR da far inquadrare</button>
+      <div class="qr-box" id="condividi-qr" hidden></div>
+      <p class="hint">${r.kb} KB · il contenuto viaggia solo dentro questo link, da telefono a telefono.</p>
+      ${aiutoRiquadro('aiuto-condividi', `<b>Come lo mando?</b><br>
+        «Condividi» apre le tue app di messaggi (WhatsApp, Telegram, SMS): scegli la
+        persona e invia. Oppure «Copia il link» e incollalo dove vuoi. Se siete nella
+        stessa stanza, «Mostra il QR»: l'altro lo inquadra con la fotocamera e il
+        link si apre da solo.`)}`;
+    openModal('modal-condividi');
+  }).catch(() => toast('Non riesco a creare il link: riprova.'));
+}
+
+/* Il QR è solo un modo comodo di aprire lo stesso link: la libreria (open
+   source, gratuita) si scarica solo quando serve, come il lettore OCR. */
+const QR_FONTI = [
+  'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js',
+  'https://cdn.jsdelivr.net/npm/qrcodejs2@0.0.2/qrcode.min.js',
+  'https://unpkg.com/qrcodejs2@0.0.2/qrcode.min.js'
+];
+let qrLibreria = null;
+function caricaQr() {
+  if (window.QRCode) return Promise.resolve(window.QRCode);
+  if (qrLibreria) return qrLibreria;
+  qrLibreria = new Promise((risolvi, rifiuta) => {
+    let i = 0;
+    const prova = () => {
+      if (i >= QR_FONTI.length) { qrLibreria = null; rifiuta(new Error('qr-non-raggiungibile')); return; }
+      const sc = document.createElement('script');
+      sc.src = QR_FONTI[i++];
+      sc.async = true;
+      sc.onload = () => window.QRCode ? risolvi(window.QRCode) : prova();
+      sc.onerror = () => { sc.remove(); prova(); };
+      document.head.appendChild(sc);
+    };
+    prova();
+  });
+  return qrLibreria;
+}
+
+/* ---------- la cena tra amici ----------
+   Funzione separata dalla famiglia: si incrociano i gusti dei partecipanti
+   (a mano o via link di risposta) e il motore dei gusti — lo stesso identico
+   delle diete del profilo — tira fuori due ricette che vanno bene a tutti. */
+
+let cenaOspite = null;   // l'invito che l'ospite sta compilando
+
+function cenaAttiva() {
+  if (!S.cena) S.cena = { id: 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
+    nome: 'La cena', partecipanti: [], giro: 0 };
+  return S.cena;
+}
+
+function gustiPartecipante(p) {
+  const g = (p && p.gusti) || {};
+  return { vegetariano: g.dieta === 'vegetariano' || g.dieta === 'vegano',
+    vegano: g.dieta === 'vegano', celiaco: !!g.celiaco, incinta: !!g.incinta,
+    no: Array.isArray(g.esclusi) ? g.esclusi : [] };
+}
+
+function etichetteGusti(g) {
+  const out = [];
+  if (g.dieta === 'vegano') out.push('vegano');
+  else if (g.dieta === 'vegetariano') out.push('vegetariano');
+  if (g.celiaco) out.push('senza glutine');
+  if (g.incinta) out.push('in gravidanza');
+  (g.esclusi || []).forEach(v => out.push('niente ' + v));
+  return out;
+}
+
+/* Ogni ricetta contro i gusti di ogni partecipante: chi resterebbe scontento e perché. */
+function analisiCena() {
+  const parts = (S.cena && S.cena.partecipanti) || [];
+  return S.recipes.map(r => {
+    const problemi = [];
+    parts.forEach(p => {
+      const motivo = contraGusti(r, gustiPartecipante(p));
+      if (motivo) problemi.push({ nome: p.nome, motivo: motivo });
+    });
+    return { r: r, problemi: problemi };
+  });
+}
+
+/* Quanta parte degli ingredienti è già in casa: a parità di gusti si
+   propongono prima i piatti che non richiedono un'altra spesa. */
+function inCasaQuota(r) {
+  const scorte = Object.keys(freschezza()).map(k => freschezza()[k].nome);
+  const ing = r.ing || [];
+  if (!ing.length || !scorte.length) return 0;
+  const presenti = ing.filter(i => scorte.some(n => sameIngredient(n, i.n))).length;
+  return presenti / ing.length;
+}
+
+function proposteCena() {
+  const a = analisiCena().filter(x => (x.r.ing || []).length);
+  const perfette = a.filter(x => !x.problemi.length);
+  const giro = (S.cena && S.cena.giro) || 0;
+  if (perfette.length) {
+    perfette.sort((x, y) => inCasaQuota(y.r) - inCasaQuota(x.r));
+    const i = (giro * 2) % perfette.length;
+    const due = perfette.length === 1 ? [perfette[0]]
+      : [perfette[i], perfette[(i + 1) % perfette.length]];
+    return { ok: true, due: due, totale: perfette.length };
+  }
+  a.sort((x, y) => x.problemi.length - y.problemi.length);
+  return { ok: false, due: a.slice(0, 2), totale: 0 };
+}
+
+function motivoInParole(m) {
+  return m === 'gravidanza' ? 'piatto non adatto in gravidanza' : 'c\'è ' + m;
+}
+
+function motivoCena(x) {
+  if (x.problemi.length) {
+    return 'Escluderebbe ' + x.problemi.map(p => p.nome + ' (' + motivoInParole(p.motivo) + ')').join(', ') + '.';
+  }
+  const voci = [];
+  ((S.cena && S.cena.partecipanti) || []).forEach(p => {
+    const g = p.gusti || {};
+    if (g.dieta === 'vegano') voci.push('vegana per ' + p.nome);
+    else if (g.dieta === 'vegetariano') voci.push('vegetariana per ' + p.nome);
+    if (g.celiaco) voci.push('senza glutine per ' + p.nome);
+    if ((g.esclusi || []).length) voci.push('niente ' + g.esclusi[0] + ' per ' + p.nome);
+  });
+  return voci.length ? 'Va bene per tutti: ' + voci.join(', ') + '.' : 'Va bene per tutti.';
+}
+
+function paccoCenaInvito() {
+  const c = cenaAttiva();
+  return { v: 1, tipo: 'cena-invito', op: uid(), cid: c.id, nomeCena: c.nome, da: nomeMio() };
+}
+
+function chipGustiCena(idBox) {
+  return `<div class="pantry-grid" style="margin:10px 0 0" id="${idBox}">
+    <button type="button" class="chip mini" data-act="cena-gusto" data-val="vegetariano">vegetariano</button>
+    <button type="button" class="chip mini" data-act="cena-gusto" data-val="vegano">vegano</button>
+    <button type="button" class="chip mini" data-act="cena-gusto" data-val="celiaco">senza glutine</button>
+  </div>`;
+}
+
+function leggiGustiCena(idBox, idNo) {
+  const box = document.getElementById(idBox);
+  const attivi = box ? [...box.querySelectorAll('.chip.active')].map(b => b.dataset.val) : [];
+  const no = ((document.getElementById(idNo) || {}).value || '')
+    .split(',').map(x => x.trim().toLowerCase()).filter(x => x.length >= 2).slice(0, 20);
+  return {
+    dieta: attivi.includes('vegano') ? 'vegano' : attivi.includes('vegetariano') ? 'vegetariano' : '',
+    celiaco: attivi.includes('celiaco'), incinta: false, esclusi: no
+  };
+}
+
+function renderCena() {
+  const c = cenaAttiva();
+  const el = document.getElementById('cena-corpo');
+  if (!el) return;
+  const righe = c.partecipanti.map((p, i) => {
+    const eti = etichetteGusti(p.gusti || {});
+    return `<div class="cena-riga">
+      <b>${esc(p.nome)}</b>
+      <span class="cena-gusti">${eti.length ? esc(eti.join(' · ')) : 'mangia tutto'}</span>
+      <button type="button" class="x" data-act="cena-amico-del" data-val="${i}" aria-label="Togli">×</button>
+    </div>`;
+  }).join('');
+  el.innerHTML = `
+    <div>
+      <label class="field-label" for="cena-nome">Come la chiamiamo?</label>
+      <input type="text" id="cena-nome" maxlength="40" value="${esc(c.nome)}" autocomplete="off">
+    </div>
+    <span class="field-label" style="margin:14px 0 6px">Chi c'è a cena</span>
+    ${righe || '<p class="hint" style="margin:0 0 6px">Per ora nessuno: aggiungi gli amici qui sotto, o mandagli l\'invito.</p>'}
+    <div class="glass-card" style="padding:12px;margin-top:10px">
+      <input type="text" id="cena-amico-nome" placeholder="Nome dell'amico" maxlength="30" autocomplete="off">
+      ${chipGustiCena('cena-chips')}
+      <input type="text" id="cena-amico-no" placeholder="Cosa non mangia? Es. pesce, funghi" autocomplete="off" style="margin-top:10px">
+      <button type="button" class="btn-ghost full-width" style="margin-top:10px" data-act="cena-amico-add">Aggiungi alla cena</button>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <button type="button" class="btn-ghost" data-act="cena-invita">Invita con un link</button>
+      <button type="button" class="btn-primary" data-act="cena-trova">Trova la cena giusta</button>
+    </div>
+    <div id="cena-proposte"></div>
+    ${aiutoRiquadro('aiuto-cena', `<b>Come funziona?</b><br>
+      Aggiungi gli amici a mano, oppure tocca «Invita con un link» e mandaglielo
+      (Condividi → scegli la chat, o fagli inquadrare il QR): chi lo apre segna
+      cosa non mangia e ti rimanda la risposta con un tap. Apri il suo link e i
+      suoi gusti entrano da soli.<br>
+      Poi «Trova la cena giusta»: due piatti che vanno bene a tutti, incrociando
+      i gusti di ognuno. Se nessun piatto accontenta proprio tutti, te lo dico
+      e ti propongo i due che scontentano meno persone.`)}`;
+}
+
+function cenaSalvaNome() {
+  const campo = document.getElementById('cena-nome');
+  if (campo && campo.value.trim()) cenaAttiva().nome = campo.value.trim().slice(0, 40);
+}
+
+function renderProposteCena() {
+  const box = document.getElementById('cena-proposte');
+  if (!box) return;
+  const c = cenaAttiva();
+  const p = proposteCena();
+  if (!p.due.length) {
+    box.innerHTML = '<p class="hint" style="margin:14px 0 0">Non ho ricette da proporre: aggiungine qualcuna e riprovo.</p>';
+    return;
+  }
+  const carte = p.due.map(x => {
+    const m = perPortion(x.r);
+    return `<div class="glass-card prop-cena" style="padding:12px;margin-top:10px">
+      <b>${esc(x.r.title)}</b>
+      <span class="meta">${m.kcal} kcal · ${m.pro} g di proteine a porzione</span>
+      <p class="hint" style="margin:6px 0 8px">${esc(motivoCena(x))}</p>
+      <button type="button" class="chip mini" data-act="detail" data-val="${esc(x.r.id)}">Apri la ricetta</button>
+    </div>`;
+  }).join('');
+  box.innerHTML = (p.ok
+      ? `<p class="hint" style="margin:14px 0 0">${p.totale === 1 ? 'Una sola ricetta va bene' : p.totale + ' ricette andrebbero bene'} per ${c.partecipanti.length > 1 ? 'tutti e ' + c.partecipanti.length : 'tutti'}: ecco${p.due.length === 1 ? 'la' : 'ne due'}.</p>`
+      : `<p class="hint" style="margin:14px 0 0">Nessuna ricetta accontenta proprio tutti: queste due sono quelle che scontentano meno persone.</p>`)
+    + carte
+    + `<button type="button" class="btn-ghost full-width" style="margin-top:10px" data-act="cena-altre">Proponi altre due</button>`;
+}
+
+/* Il telefono dell'ospite: si apre dal link d'invito, si compila in dieci
+   secondi, e la risposta è un altro link da rimandare indietro. */
+function apriCenaOspite(d) {
+  cenaOspite = d;
+  const el = document.getElementById('cena-ospite-corpo');
+  if (!el) return;
+  el.innerHTML = `
+    <p class="hint" style="margin-top:0">${esc(d.da || 'Un amico')} ti invita a
+      «${esc(d.nomeCena || 'una cena')}»: segna cosa non mangi e rimandagli la
+      risposta. Niente da installare, niente account.</p>
+    <input type="text" id="cenag-nome" placeholder="Il tuo nome" maxlength="30" autocomplete="off">
+    ${chipGustiCena('cenag-chips')}
+    <input type="text" id="cenag-no" placeholder="Cosa non mangi? Es. pesce, funghi" autocomplete="off" style="margin-top:10px">
+    <button type="button" class="btn-primary full-width" style="margin-top:12px" data-act="cena-rispondi">Crea la risposta da mandare</button>`;
+  openModal('modal-cena-ospite');
+}
+
+function applicaRispostaCena(d) {
+  if (!S.cena || S.cena.id !== d.cid) {
+    toast('Questa risposta è per una cena che non trovo più.');
+    return;
+  }
+  const nome = String(d.da || 'Ospite').slice(0, 30);
+  const gia = S.cena.partecipanti.find(p => norm(p.nome) === norm(nome));
+  if (gia) gia.gusti = d.gusti || gia.gusti;
+  else S.cena.partecipanti.push({ nome: nome, gusti: d.gusti || {} });
+  save();
+  renderCena();
+  openModal('modal-cena');
+  const eti = etichetteGusti(d.gusti || {});
+  toast('I gusti di ' + nome + ' sono arrivati: ' + (eti.length ? eti.join(' · ') : 'mangia tutto') + '.');
 }
 
 /* ---------- gruppo ----------
@@ -15655,6 +16235,11 @@ document.addEventListener('click', e => {
       renderFridge();
       toast(pezzi.join(' \u00b7 ')
         + (daDatare ? ' \u00b7 ' + daDatare + ' da datare' : '') + '.', 'Annulla');
+      // in famiglia la spesa fatta si propone da sola: un tap e parte il link
+      if (S.famiglia) setTimeout(() => {
+        toast('La mandi anche a casa? Dispensa e frigo si aggiornano anche dagli altri.',
+          'Manda', { act: 'famiglia-manda' });
+      }, 6500);
       break;
     }
     case 'shop-copy': {
@@ -16334,6 +16919,148 @@ document.addEventListener('click', e => {
     }
     case 'link-import': importaLink(F('link-in').value); F('link-in').value = ''; break;
     case 'link-merge': importaLink('#fm=' + val); break;
+    case 'aiuto-apri': {
+      // la piccola spiegazione: un tap la apre, un tap la nasconde
+      const aiuto = document.getElementById(val);
+      if (aiuto) aiuto.hidden = !aiuto.hidden;
+      break;
+    }
+    case 'famiglia-crea': {
+      const mio = activeProfile().name || '';
+      creaFamiglia(mio ? 'La famiglia di ' + mio : 'La famiglia');
+      renderFamiglia();
+      toast('Famiglia creata: ora invita chi vive con te.');
+      apriCondivisione('Invita in famiglia',
+        'Manda questo link a chi vive con te: aprendolo entra nella famiglia, senza registrarsi.',
+        paccoInvitoFamiglia());
+      break;
+    }
+    case 'famiglia-invita':
+      if (!S.famiglia) break;
+      apriCondivisione('Invita in famiglia',
+        'Manda questo link a chi vive con te: aprendolo entra nella famiglia, senza registrarsi.',
+        paccoInvitoFamiglia());
+      break;
+    case 'famiglia-manda': {
+      if (!S.famiglia) { toast('Prima crea la famiglia, dal Profilo.'); break; }
+      const paccoCasa = paccoSpesaFamiglia();
+      if (!paccoCasa) { toast('Niente di nuovo da mandare: la casa è già allineata.'); break; }
+      S.famiglia.ultimoInvio = Date.now();
+      save();
+      apriCondivisione('Manda a casa la spesa',
+        'Chi apre questo link si ritrova dispensa, frigo e freezer già aggiornati: '
+        + paccoCasa.voci.length + (paccoCasa.voci.length === 1 ? ' prodotto' : ' prodotti') + '.',
+        paccoCasa);
+      break;
+    }
+    case 'famiglia-tutti':
+      S.ui.perFamiglia = !S.ui.perFamiglia;
+      save(); renderAll();
+      toast(S.ui.perFamiglia
+        ? 'Le ricette ora tengono conto dei gusti di tutta la famiglia.'
+        : 'Torni a vedere le ricette per i gusti di questo telefono.');
+      break;
+    case 'famiglia-esci':
+      if (!armed(t, 'Conferma uscita')) break;
+      S.famiglia = null;
+      S.ui.perFamiglia = false;
+      save(); renderAll();
+      toast('Fuori dalla famiglia. Dispensa e catalogo restano tuoi.');
+      break;
+    case 'famiglia-entra':
+      leggiPacco(val).then(d => {
+        if (d && d.tipo === 'famiglia-invito') entraInFamiglia(d);
+      }).catch(() => toast('L\'invito non è leggibile: fattelo rimandare.'));
+      break;
+    case 'condividi-copy': {
+      const campoLink = F('condividi-link');
+      if (!campoLink) break;
+      navigator.clipboard && navigator.clipboard.writeText(campoLink.value)
+        .then(() => toast('Link copiato: incollalo nella chat.'))
+        .catch(() => { campoLink.select(); toast('Selezionalo e copialo a mano.'); });
+      break;
+    }
+    case 'condividi-share': {
+      const campoLink = F('condividi-link');
+      if (!campoLink) break;
+      if (navigator.share) navigator.share({ title: 'FitMeals', url: campoLink.value }).catch(() => {});
+      else { campoLink.select(); toast('Qui la condivisione diretta non c\'è: copia il link.'); }
+      break;
+    }
+    case 'qr-mostra': {
+      const campoQr = F('condividi-link');
+      const scatola = document.getElementById('condividi-qr');
+      if (!campoQr || !scatola) break;
+      if (!scatola.hidden) { scatola.hidden = true; break; }
+      if (campoQr.value.length > 2300) {
+        toast('Questo link è troppo lungo per un QR: usa Condividi o Copia.');
+        break;
+      }
+      caricaQr().then(Q => {
+        scatola.innerHTML = '';
+        new Q(scatola, { text: campoQr.value, width: 200, height: 200,
+          correctLevel: Q.CorrectLevel ? Q.CorrectLevel.L : 1 });
+        scatola.hidden = false;
+      }).catch(() => toast('Il generatore di QR non è raggiungibile ora: usa Copia il link.'));
+      break;
+    }
+    case 'cena-apri':
+      cenaAttiva();
+      renderCena();
+      openModal('modal-cena');
+      break;
+    case 'cena-gusto': {
+      // vegano e vegetariano non convivono sulla stessa persona
+      const era = t.classList.contains('active');
+      if (!era && (val === 'vegano' || val === 'vegetariano')) {
+        [...t.parentElement.querySelectorAll('.chip')].forEach(b => {
+          if (b !== t && (b.dataset.val === 'vegano' || b.dataset.val === 'vegetariano')) b.classList.remove('active');
+        });
+      }
+      t.classList.toggle('active');
+      break;
+    }
+    case 'cena-amico-add': {
+      const nomeAmico = (F('cena-amico-nome').value || '').trim().slice(0, 30);
+      if (!nomeAmico) { toast('Come si chiama?'); F('cena-amico-nome').focus(); break; }
+      cenaSalvaNome();
+      cenaAttiva().partecipanti.push({ nome: nomeAmico, gusti: leggiGustiCena('cena-chips', 'cena-amico-no') });
+      save(); renderCena();
+      break;
+    }
+    case 'cena-amico-del':
+      cenaAttiva().partecipanti.splice(Number(val), 1);
+      save(); renderCena();
+      break;
+    case 'cena-invita':
+      cenaSalvaNome(); save();
+      apriCondivisione('Invita alla cena',
+        'Chi apre questo link segna i suoi gusti e ti rimanda la risposta con un tap.',
+        paccoCenaInvito());
+      break;
+    case 'cena-trova':
+      cenaSalvaNome();
+      cenaAttiva().giro = 0;
+      save();
+      renderProposteCena();
+      break;
+    case 'cena-altre':
+      cenaAttiva().giro = ((S.cena && S.cena.giro) || 0) + 1;
+      save();
+      renderProposteCena();
+      break;
+    case 'cena-rispondi': {
+      if (!cenaOspite) break;
+      const nomeOspite = (F('cenag-nome').value || '').trim().slice(0, 30);
+      if (!nomeOspite) { toast('Scrivi il tuo nome, così sanno di chi sono i gusti.'); F('cenag-nome').focus(); break; }
+      const rispostaCena = { v: 1, tipo: 'cena-risposta', op: uid(), cid: cenaOspite.cid,
+        da: nomeOspite, gusti: leggiGustiCena('cenag-chips', 'cenag-no') };
+      chiudiModal('modal-cena-ospite');
+      apriCondivisione('Rimanda la risposta',
+        'Manda questo link a ' + (cenaOspite.da || 'chi organizza') + ': i tuoi gusti entrano da soli nella sua cena.',
+        rispostaCena);
+      break;
+    }
     case 'group-url': {
       const v = (F('group-url').value || '').trim();
       if (!/^https?:\/\//.test(v)) { toast('Inserisci un indirizzo che inizia con https://'); break; }
@@ -16622,6 +17349,15 @@ window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
   freschezza: freschezza, scadenze: scadenzeDelGiorno, inventario: inventario,
   logMeal: logMeal, notifiche: aggiornaNotificheScadenze, guessMeal: guessMeal,
   pastoContesto: v => { if (v !== undefined) pastoContesto = v; return pastoContesto; } };
+window.fitmealsFamiglia = {
+  crea: creaFamiglia, stato: () => S.famiglia,
+  paccoInvito: paccoInvitoFamiglia, paccoSpesa: paccoSpesaFamiglia,
+  link: creaLinkPacco, importa: importaLink, gusti: gustiDelTelefono
+};
+window.fitmealsCena = {
+  stato: cenaAttiva, analisi: analisiCena, proposte: proposteCena,
+  contra: contraGusti, ospite: apriCenaOspite
+};
 window.fitmealsArte = { ARTE: ARTE, arteRicetta: arteRicetta };
 window.fitmealsTimers = { lista: () => TIMERS, scadi: () => TIMERS.forEach(t => { t.end = Date.now() - 10; }) };
 window.fitmealsPlan = () => dayPlan();
@@ -16730,6 +17466,8 @@ aggiornaCampanella();
   if (!m) return;
   history.replaceState(null, '', location.pathname);   // il link non resta nella barra
   leggiPacco(m[1]).then(d => {
+    // i pacchi nuovi (invito in famiglia, spesa, cena) sanno cosa fare da soli
+    if (riceviPacco(d, m[1])) return;
     const chi = d.da || 'un altro telefono';
     toast('Dati ricevuti da ' + chi + '. Vuoi unirli ai tuoi?', 'Unisci',
           { act: 'link-merge', val: m[1] });
