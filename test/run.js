@@ -35,7 +35,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     const a = await app();
     const c = {};
     a.stato().recipes.forEach(r => c[r.portata] = (c[r.portata] || 0) + 1);
-    ['colazione', 'antipasto', 'primo', 'secondo', 'contorno', 'salsa'].forEach(p => almeno(c[p] || 0, 1, p));
+    ['colazione', 'antipasto', 'primo', 'secondo', 'contorno', 'dolce', 'salsa'].forEach(p => almeno(c[p] || 0, 1, p));
   });
 
   // ---------------------------------------------------------------- filtri
@@ -3574,6 +3574,38 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(a.d.querySelector('.header .testa-tasti .campanella') &&
          a.d.querySelector('.header .testa-tasti .icon-btn'),
       'campanella e + non stanno insieme nell\'header');
+  });
+
+  await test('i dolci ci sono, fit e fat, e si comportano da ricette vere', async () => {
+    const a = await app();
+    const dolci = a.stato().recipes.filter(r => r.portata === 'dolce');
+    almeno(dolci.length, 20, 'dolci nel ricettario');
+
+    const fit = dolci.filter(r => (r.tags || []).includes('fit'));
+    const fat = dolci.filter(r => (r.tags || []).includes('fat'));
+    almeno(fit.length, 8, 'dolci fit');
+    almeno(fat.length, 8, 'dolci fat');
+    vero(fat.every(r => r.cat === 'sgarro'), 'un dolce fat non si dichiara sgarro');
+    vero(fit.every(r => r.cat !== 'sgarro'), 'un dolce fit si dichiara sgarro');
+
+    // ogni dolce ha tutto quello che l'app si aspetta da una ricetta
+    dolci.forEach(r => {
+      vero(r.kcal > 0 && r.ing.length && r.steps.length >= 2, r.title + ' incompleta');
+      r.ing.forEach(i => vero(i.n && i.q > 0, r.title + ': ingrediente rotto'));
+    });
+
+    // le porzioni delle torte tornano: una fetta di tiramisu' non fa 2500 kcal
+    const tir = dolci.find(r => r.id === 'do11');
+    const porz = a.dom.window.fitmealsProva ? null : null;
+    vero(tir.serves >= 6, 'il tiramisu non dichiara le porzioni');
+
+    // la ricerca li trova per come li chiami
+    a.cerca('dolci fat');
+    await wait(150);
+    vero(a.conta('#recipe-list .card-btn') >= 8, 'cercando "dolci fat" non escono');
+    a.cerca('tiramisu');
+    await wait(150);
+    almeno(a.conta('#recipe-list .card-btn'), 1, 'il tiramisu non si trova');
   });
 
   await test('le scadenze di oggi arrivano nella campanella e si gestiscono', async () => {
