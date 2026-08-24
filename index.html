@@ -794,6 +794,9 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .modo-spesa:active{transform:scale(.97)}
 
 /* --- famiglia, cena tra amici e condivisione via link --- */
+/* il modale del link si apre anche SOPRA un altro modale (es. dalla cena):
+   senza questo restava dipinto sotto e sembrava che il tasto non facesse niente */
+#modal-condividi{z-index:120}
 .aiuto{margin-top:8px;padding:12px 14px;border-radius:16px;
   background:color-mix(in srgb, var(--tema, var(--accent-primary)) 7%, transparent);
   border:1px solid color-mix(in srgb, var(--tema, var(--accent-primary)) 18%, transparent);
@@ -16858,6 +16861,9 @@ document.addEventListener('click', e => {
         tornaAlPasto = false;
         setTimeout(() => apriPiattiDelPasto(pastoFinestra), 60);
       }
+      // il modale del link sta sopra un altro (es. la cena): chiudendolo
+      // si torna a quello sotto, non si butta giu' tutto
+      if (finestra && finestra.id === 'modal-condividi') { chiudiModal('modal-condividi'); break; }
     } closeModals(); break;
     case 'suggest': {
       const ta = F('f-ing');
