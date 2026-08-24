@@ -3669,6 +3669,51 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'dai consigli non si rifa la foto');
   });
 
+  await test('la scala di salubrita\' va da sano a grasso e non mente', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+
+    // coi valori completi il giudizio e' pieno, e ordina il mondo come deve
+    const yogurt = P.salubrita({ kcal:57, proteine:10, grassi:0.4, saturi:0.2, zuccheri:4, fibre:0, sale:0.1 });
+    const merendina = P.salubrita({ kcal:440, proteine:6.4, grassi:30, saturi:12, zuccheri:28, fibre:1, sale:0.4 });
+    eq(yogurt.nome, 'sano', 'lo yogurt greco non e\' sano');
+    vero(!yogurt.parziale, 'coi valori completi il giudizio non e\' pieno');
+    eq(merendina.nome, 'grasso', 'la merendina non e\' grassa');
+
+    // dalla tabella di serie (4 valori) si giudica lo stesso, ma parziale
+    const burro = P.salubritaDi('burro');
+    const spinaci = P.salubritaDi('spinaci');
+    eq(burro.nome, 'grasso', 'il burro non e\' grasso');
+    eq(spinaci.nome, 'sano', 'gli spinaci non sono sani');
+    vero(burro.parziale && spinaci.parziale, 'il giudizio di serie deve dirsi parziale');
+
+    // nel modulo dell'etichetta il giudizio si aggiorna DA SOLO scrivendo
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    a.click('[data-act=etichetta-apri]');
+    await wait(100);
+    vero(a.d.getElementById('eti-salute').hidden, 'il badge compare prima dei numeri');
+    a.set('eti-kcal', '480'); a.set('eti-gra', '22'); a.set('eti-sat', '11'); a.set('eti-zuc', '24');
+    vero(!a.d.getElementById('eti-salute').hidden, 'il badge non si accende scrivendo');
+    vero(a.d.getElementById('eti-salute-nota').textContent.includes('parziale'),
+      'coi campi vuoti il giudizio non si dice parziale');
+
+    // al salvataggio i valori estesi restano, e con loro il giudizio
+    a.d.getElementById('eti-nome').value = 'biscotti prova';
+    a.click('[data-act=etichetta-salva]');
+    await wait(150);
+    const tab = P.tabella('biscotti prova');
+    eq(tab.length, 8, 'la tabella estesa non si salva');
+    eq(tab[4], 11, 'i saturi non si salvano');
+
+    // e gli ingredienti dentro le ricette portano il pallino della scala
+    a.apri('carbonara');
+    await wait(150);
+    almeno(a.d.querySelectorAll('#detail-body .salute-pallino').length, 3,
+      'pallini della scala nel dettaglio');
+  });
+
   await test('le scadenze di oggi arrivano nella campanella e si gestiscono', async () => {
     const ora = Date.now();
     const a = await app({ storage: {
