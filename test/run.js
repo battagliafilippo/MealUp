@@ -3374,6 +3374,46 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(box.querySelector('.gruppo-piatto.oscilla'), 'il piatto non si abbassa dopo il pasto');
   });
 
+  await test('lo scontrino accetta anche il virtuale: scelta, testo incollato, correzioni', async () => {
+    const a = await app();
+    a.tab('view-fridge');
+
+    // il tasto apre la scelta, con la via del PDF e quella del testo
+    a.click('[data-act=scontrino-apri]');
+    await wait(100);
+    vero(!a.d.getElementById('dettatura-scan-scegli').hidden, 'la scelta non compare');
+    vero(a.d.querySelector('[data-act=scan-virtuale]'), 'manca la via del PDF');
+    vero(a.d.getElementById('scontrino-virtuale'), 'manca il campo file del virtuale');
+    vero((a.d.getElementById('scontrino-virtuale').accept || '').includes('pdf'),
+      'il campo virtuale non accetta i PDF');
+
+    // il testo incollato passa dalle stesse righe modificabili della foto
+    a.click('[data-act=scan-incolla]');
+    await wait(100);
+    vero(!a.d.getElementById('dettatura-scan-testo').hidden, 'il riquadro per incollare non compare');
+    a.d.getElementById('scan-testo-campo').value =
+      'ORDINE N. 12345\nLATTE INTERO 1L  1,49\nGNAPPOLE SFRIGOLATE 3,00\nTOTALE 4,49';
+    a.click('[data-act=scan-leggi-testo]');
+    await wait(100);
+
+    const righe = [...a.d.querySelectorAll('.riga-dettata')];
+    eq(righe.length, 2, 'attese 2 righe dal testo incollato');
+    vero(righe.some(r => r.classList.contains('incerta')), 'la riga ignota non e\' da controllare');
+    vero(!a.d.getElementById('dettatura-lista').textContent.includes('ORDINE'),
+      'l\'intestazione dell\'ordine e\' rimasta fra i prodotti');
+
+    // prima dell'ok si corregge: cambio nome e quantita', POI salvo
+    const prima = righe[0].querySelector('.det-nome');
+    prima.value = 'latte';
+    righe[0].querySelector('.det-q').value = '2';
+    a.click('[data-act=detta-salva]');
+    await wait(100);
+    const S = a.stato();
+    const latte = S.shopExtra.find(x => x.n === 'latte');
+    vero(latte, 'la correzione del nome non e\' arrivata al salvataggio');
+    eq(latte.qta, 2000, 'la correzione della quantita\' non e\' arrivata al salvataggio');
+  });
+
   await test('le scadenze di oggi arrivano nella campanella e si gestiscono', async () => {
     const ora = Date.now();
     const a = await app({ storage: {
