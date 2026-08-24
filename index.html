@@ -484,6 +484,16 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .shop-item .from{display:block;font-size:.68rem;color:var(--text-tertiary);margin-top:2px}
 .shop-item .qty{color:var(--accent-primary);font-weight:600;font-size:.82rem;white-space:nowrap;margin-top:1px}
 .shop-item.done .txt,.shop-item.done .qty{color:var(--text-tertiary);text-decoration:line-through}
+/* La quantita' sulla riga e' un comando: tocchi e scrivi quanto hai comprato. */
+.shop-item .qty{padding:2px 8px;margin:-2px -8px 0 0;border-radius:9px;cursor:pointer}
+.shop-item .qty:hover{background:rgba(255,255,255,.07)}
+.shop-item .qty--tua{color:var(--tema, var(--accent-primary));
+  background:color-mix(in srgb, var(--tema, var(--accent-primary)) 12%, transparent)}
+.shop-item .qty-vuota{font-style:normal;font-weight:400;color:var(--text-tertiary)}
+.shop-item--qta{display:flex;align-items:center;gap:8px}
+.shop-item--qta input{flex:0 0 84px;width:84px;padding:8px 10px;font:inherit;font-size:.85rem;
+  color:var(--text-primary);background:var(--v1-fondo);border:var(--v1-bordo);border-radius:11px;
+  text-align:center;outline:none}
 .shop-item.have{opacity:.5}
 .shop-item .x{color:var(--text-tertiary);font-weight:700;padding:0 4px}
 .meal-row{border-top:1px solid rgba(255,255,255,.06);padding:14px 0}
@@ -2520,6 +2530,8 @@ h3{font-weight:600;letter-spacing:-.018em}
         </div>
         <div id="disp-suggest" class="tags-container"></div>
         <div class="riga-comandi" style="margin:8px 0 0">
+          <button type="button" class="chip" data-act="etichetta-apri" title="Un prodotto che le ricette non conoscono: leggo l'etichetta">
+            <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;vertical-align:-2px;margin-right:4px"><path d="M4 7V5.5A1.5 1.5 0 0 1 5.5 4H7M17 4h1.5A1.5 1.5 0 0 1 20 5.5V7M20 17v1.5a1.5 1.5 0 0 1-1.5 1.5H17M7 20H5.5A1.5 1.5 0 0 1 4 18.5V17M8 9v6M11 9v6M14.5 9v6M17 9v3"/></svg>Etichetta</button>
           <button type="button" class="sorpresa" data-act="sorprendimi" data-val="dispensa">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 3l1.9 4.6L19 9l-4 3.3 1.2 5.2L12 15l-4.2 2.5L9 12.3 5 9l5.1-1.4z"/>
@@ -2929,9 +2941,9 @@ h3{font-weight:600;letter-spacing:-.018em}
           <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/>
             <path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg>
         </div>
-        <p class="hint" style="text-align:center">Parla normalmente: <i>\u201cpomodori,
-          mozzarella, due litri di latte\u201d</i>. Le virgole e le \u201ce\u201d
-          separano le voci.</p>
+        <p class="hint" style="text-align:center">Parla normalmente: <i>\u201cpomodori
+          mozzarella due litri di latte\u201d</i>. Puoi solo elencare: le virgole
+          non servono.</p>
         <p id="dettatura-testo" class="dettatura-testo"></p>
         <button type="button" class="btn-primary full-width" data-act="detta-fine">Ho finito</button>
       </div>
@@ -2996,6 +3008,60 @@ h3{font-weight:600;letter-spacing:-.018em}
       </div>
     </div>
   </div>
+
+  <div id="modal-etichetta" class="modal" role="dialog" aria-modal="true" aria-label="Leggi l'etichetta">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h2>Dall'etichetta</h2>
+        <button type="button" class="x" data-act="close-modal" aria-label="Chiudi">&times;</button>
+      </div>
+      <p class="hint">Per un prodotto che le ricette non conoscono: inquadra la tabella
+        dei <b>valori nutrizionali</b> e leggo io i numeri. Sono per 100 g, e li puoi
+        correggere prima di salvare.</p>
+      <div class="scan-scelte" style="margin-bottom:14px">
+        <button type="button" class="btn-ghost scan-via" data-act="etichetta-scatta" id="etichetta-scatta">
+          <svg viewBox="0 0 24 24"><path d="M4 8.5l1.2-2.1a1.6 1.6 0 0 1 1.4-.8h2.8a1.6 1.6 0 0 1 1.4.8L12 8.5h5.5A1.5 1.5 0 0 1 19 10v8a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 18v-8a1.5 1.5 0 0 1-1.5-1.5z" transform="translate(0.5 -1.5)"/><circle cx="12" cy="13" r="3.4"/></svg>
+          <span>Fotografa l'etichetta</span>
+        </button>
+        <button type="button" class="btn-ghost scan-via" data-act="etichetta-galleria">
+          <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4.5 17l4.5-4.5 3 3 3.5-3.5 4 4"/></svg>
+          <span>Dalla galleria</span>
+        </button>
+      </div>
+      <div class="scan-barra" id="etichetta-barra" hidden><i id="etichetta-avanzamento"></i></div>
+      <p class="scan-passo" id="etichetta-passo" hidden></p>
+      <div class="stack" style="margin-top:6px">
+        <div>
+          <label class="field-label" for="eti-nome">Prodotto</label>
+          <input type="text" id="eti-nome" maxlength="60" autocomplete="off" placeholder="Es. crackers di segale">
+        </div>
+        <div class="row">
+          <div>
+            <label class="field-label" for="eti-kcal">kcal / 100 g</label>
+            <input type="number" id="eti-kcal" min="0" step="any" inputmode="decimal">
+          </div>
+          <div>
+            <label class="field-label" for="eti-pro">Proteine g</label>
+            <input type="number" id="eti-pro" min="0" step="any" inputmode="decimal">
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label class="field-label" for="eti-carb">Carboidrati g</label>
+            <input type="number" id="eti-carb" min="0" step="any" inputmode="decimal">
+          </div>
+          <div>
+            <label class="field-label" for="eti-gra">Grassi g</label>
+            <input type="number" id="eti-gra" min="0" step="any" inputmode="decimal">
+          </div>
+        </div>
+        <button type="button" class="btn-primary full-width" data-act="etichetta-salva">
+          Salva e metti in dispensa</button>
+      </div>
+    </div>
+  </div>
+  <input type="file" id="etichetta-file" accept="image/*" hidden>
+  <input type="file" id="etichetta-foto" accept="image/*" capture="environment" hidden>
 
   <div id="modal-pasto-piatti" class="modal" role="dialog" aria-modal="true">
     <div class="modal-content">
@@ -5685,6 +5751,8 @@ const SEED = {
   pantryUse: {},
   shopExtra: [],
   shopDone: {},
+  shopQta: {},        // per voce della lista: la quantita' DAVVERO comprata
+  ingTabExtra: {},    // i valori nutrizionali letti dalle etichette, per 100 g
   searches: [],
   weights: [],
   notes: {},
@@ -5835,6 +5903,8 @@ function load() {
       pantryUse: data.pantryUse && typeof data.pantryUse === 'object' ? data.pantryUse : {},
       shopExtra: Array.isArray(data.shopExtra) ? data.shopExtra : [],
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
+      shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
+      ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
       notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -8731,7 +8801,7 @@ function vociConfronto() {
       return { nome: r.title, sotto: 'una porzione', arte: arteRicetta(r), rid: r.id,
                kcal: m.kcal, pro: m.pro, carbs: m.carbs, fat: m.fat, tempo: totalTime(r) };
     }
-    const v = ING_TAB[c.nome];
+    const v = tabellaDi(c.nome);
     if (!v) return null;
     return { nome: c.nome, sotto: '100 g', arte: disegnoPer(c.nome) || ARTE.piatto,
              kcal: v[0], pro: v[1], carbs: v[2], fat: v[3], tempo: null };
@@ -8833,7 +8903,8 @@ function cercaDaConfrontare(q) {
   if (query.length < 2) { box.innerHTML = ''; return; }
 
   const ric = visibleRecipes().filter(r => matchesQuery(r, query)).slice(0, 4);
-  const ing = Object.keys(ING_TAB).filter(n => norm(n).includes(norm(query))).slice(0, 4);
+  const ing = Object.keys(ING_TAB).concat(Object.keys(S.ingTabExtra || {}))
+    .filter(n => norm(n).includes(norm(query))).slice(0, 4);
 
   box.innerHTML = ric.map(r => `<button type="button" class="chip" data-act="conf-add"
       data-tipo="ricetta" data-val="${esc(r.id)}">${esc(r.title)}</button>`).join('')
@@ -10066,6 +10137,27 @@ function passaACotto(chiave, quanti) {
   return { preso: preso, giorni: g, nome: nomeCotto };
 }
 
+/* La tabella di un ingrediente: prima quella di serie, poi quella letta
+   dall'etichetta col telefono. Sempre per 100 g. */
+function tabellaDi(nome) {
+  const k = String(nome || '').toLowerCase().trim();
+  return ING_TAB[k] || (S.ingTabExtra || {})[k] || null;
+}
+
+/* I numeri dell'etichetta nutrizionale, pescati nel testo dell'OCR.
+   Le etichette italiane ripetono sempre le stesse parole: energia, grassi
+   (con i saturi da scartare), carboidrati (con gli zuccheri), proteine. */
+function interpretaEtichetta(testo) {
+  const t = String(testo).toLowerCase().replace(/\s+/g, ' ');
+  const numero = m => m ? parseFloat(m[1].replace(',', '.')) : null;
+  const kcal = numero(t.match(/(\d{1,4}(?:[.,]\d)?)\s*kcal/));
+  const grassi = numero(t.match(/grassi\D{0,20}?(\d{1,3}(?:[.,]\d{1,2})?)\s*g/));
+  const carboidrati = numero(t.match(/carboidrati\D{0,20}?(\d{1,3}(?:[.,]\d{1,2})?)\s*g/));
+  const proteine = numero(t.match(/proteine\D{0,20}?(\d{1,3}(?:[.,]\d{1,2})?)\s*g/));
+  const trovati = [kcal, grassi, carboidrati, proteine].filter(x => x !== null).length;
+  return { kcal, grassi, carboidrati, proteine, trovati };
+}
+
 function registraAcquisto(nome, qta, unita) {
   const k = norm(nome);
   const g = giorniFreschezza(nome);
@@ -10935,6 +11027,7 @@ function vocabolarioIngredienti() {
   const set = new Set();
   S.recipes.forEach(r => (r.ing || []).forEach(i => set.add(i.n.toLowerCase())));
   Object.keys(ING_TAB).forEach(n => set.add(n));
+  Object.keys(S.ingTabExtra || {}).forEach(n => set.add(n));
   (S.myIngredients || []).forEach(n => set.add(n));
   _vocabolario = Array.from(set).sort();
   return _vocabolario;
@@ -11030,24 +11123,115 @@ function staccaQuantita(seg) {
   return { q: q, u: u, resto: m[3].trim() };
 }
 
+/* Un segmento -> una riga della schermata di conferma. */
+function rigaDaSegmento(seg) {
+  const { q, u, resto } = staccaQuantita(seg);
+  const r = riconosciIngrediente(resto);
+  const sicuro = r.punteggio >= 0.72;
+  return {
+    detto: resto,
+    nome: sicuro ? r.nome : resto,
+    sicuro: sicuro,
+    proposta: !sicuro && r.punteggio >= 0.5 ? r.nome : null,
+    q: isFinite(q) && q > 0 ? q : '',
+    u: u
+  };
+}
+
+/* Le parole-numero e le unita' che aprono una voce nuova nel parlato. */
+const DETTATO_NUMERO = new RegExp('^(\\d+(?:[.,]\\d+)?|' +
+  Object.keys(NUMERI_DETTI).join('|') + ')$');
+const DETTATO_UNITA = /^(kg|chili|chilo|hg|etti|etto|grammi|gr|g|litri|litro|l|ml|cl|pezzi|pz|unita|unit\u00e0|confezioni|confezione|pacchi|pacco|bottiglie|bottiglia|scatole|scatola|vasetti|vasetto|barattoli|barattolo|lattine|lattina)$/;
+
+/* Chi detta di fila, senza dire "virgola", elenca e basta: "pomodori
+   mozzarella due litri di latte". Le voci si ritagliano cosi': un numero
+   apre sempre una voce nuova, e i nomi si riconoscono provando le finestre
+   di tre, due e una parola contro il vocabolario degli ingredienti. */
+function spezzaElencoDettato(seg) {
+  const parole = seg.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if (parole.length < 2) return null;
+
+  const voci = [];
+  let resto = [];       // parole non riconosciute, in attesa
+  let i = 0;
+
+  const chiudiResto = () => {
+    if (resto.length) { voci.push(resto.join(' ')); resto = []; }
+  };
+
+  // Una finestra di nome non puo' scavalcare un numero o un'unita':
+  // "mozzarella due" somiglia a "mozzarella", ma il "due" apre la voce dopo.
+  const finestraPulita = (da, largh) => {
+    for (let k = da + (da === i ? 1 : 0); k < da + largh; k++) {
+      if (DETTATO_NUMERO.test(parole[k]) || DETTATO_UNITA.test(parole[k])) return false;
+    }
+    return true;
+  };
+
+  while (i < parole.length) {
+    // 1. un numero apre una voce: si prende con unita', 'di' e articoli
+    if (DETTATO_NUMERO.test(parole[i])) {
+      chiudiResto();
+      let fine = i + 1;
+      if (fine < parole.length && (parole[fine] === 'e')
+          && (parole[fine + 1] === 'mezzo' || parole[fine + 1] === 'mezza')) fine += 2;
+      if (fine < parole.length && DETTATO_UNITA.test(parole[fine])) fine += 1;
+      if (fine < parole.length && (parole[fine] === 'di' || parole[fine] === 'd')) fine += 1;
+      // il nome: la finestra piu' lunga che il vocabolario riconosce
+      let prese = 0;
+      for (const largh of [3, 2, 1]) {
+        if (fine + largh > parole.length) continue;
+        if (largh > 1 && !finestraPulita(fine, largh)) continue;
+        const r = riconosciIngrediente(parole.slice(fine, fine + largh).join(' '));
+        if (r.punteggio >= 0.72) { prese = largh; break; }
+      }
+      if (!prese) prese = Math.min(1, parole.length - fine);
+      voci.push(parole.slice(i, fine + prese).join(' '));
+      i = fine + prese;
+      continue;
+    }
+    // 2. una finestra di parole che il vocabolario riconosce e' una voce
+    let prese = 0;
+    for (const largh of [3, 2, 1]) {
+      if (i + largh > parole.length) continue;
+      if (largh > 1 && !finestraPulita(i, largh)) continue;
+      const r = riconosciIngrediente(parole.slice(i, i + largh).join(' '));
+      if (r.punteggio >= 0.72) { prese = largh; break; }
+    }
+    if (prese) {
+      chiudiResto();
+      voci.push(parole.slice(i, i + prese).join(' '));
+      i += prese;
+      continue;
+    }
+    // 3. parola ignota: resta in attesa, si chiudera' al prossimo confine
+    resto.push(parole[i]);
+    i += 1;
+  }
+  chiudiResto();
+  return voci.length >= 2 ? voci : null;
+}
+
 /* Il testo dettato intero -> le righe della schermata di conferma. */
 function interpretaDettato(testo) {
-  return String(testo)
+  const righe = [];
+  String(testo)
     .split(/[,;.]| e | ed | poi | piu | pi\u00f9 /i)
     .map(x => x.trim()).filter(Boolean)
-    .map(seg => {
-      const { q, u, resto } = staccaQuantita(seg);
-      const r = riconosciIngrediente(resto);
-      const sicuro = r.punteggio >= 0.72;
-      return {
-        detto: resto,
-        nome: sicuro ? r.nome : resto,
-        sicuro: sicuro,
-        proposta: !sicuro && r.punteggio >= 0.5 ? r.nome : null,
-        q: isFinite(q) && q > 0 ? q : '',
-        u: u
-      };
+    .forEach(seg => {
+      const riga = rigaDaSegmento(seg);
+      // Se la voce cosi' com'e' non convince, forse e' un elenco dettato
+      // senza virgole: si prova a ritagliarlo sul vocabolario.
+      if (!riga.sicuro && seg.split(/\s+/).length >= 2) {
+        const pezzi = spezzaElencoDettato(seg);
+        if (pezzi) {
+          pezzi.forEach(p => righe.push(rigaDaSegmento(p)));
+          return;
+        }
+      }
+      righe.push(riga);
     });
+  return righe;
 }
 
 let vocale = null;          // l'oggetto SpeechRecognition, quando c'e'
@@ -11557,10 +11741,52 @@ window.fitmealsScontrino = {
   }
 };
 
+/* La foto dell'etichetta: lo stesso lettore OCR dello scontrino, ma i numeri
+   finiscono nei campi del modulo, dove si correggono prima di salvare. */
+function leggiEtichetta(file) {
+  if (!file) return;
+  const barra = document.getElementById('etichetta-barra');
+  const passo = document.getElementById('etichetta-passo');
+  const di = (testo, quanto) => {
+    if (passo) { passo.hidden = false; passo.textContent = testo; }
+    if (barra) { barra.hidden = false;
+      document.getElementById('etichetta-avanzamento').style.width = quanto + '%'; }
+  };
+  di('Scarico il lettore\u2026', 10);
+  caricaOcr()
+    .then(T => T.createWorker('ita', 1, {
+      logger: m => { if (m.status === 'recognizing text') di('Leggo l\'etichetta\u2026', 20 + m.progress * 75); }
+    }))
+    .then(w => w.recognize(file)
+      .then(res => { try { w.terminate(); } catch (e) {} return res; })
+      .catch(err => { try { w.terminate(); } catch (e) {} throw err; }))
+    .then(res => {
+      const letti = interpretaEtichetta((res.data && res.data.text) || '');
+      if (!letti.trovati) {
+        di('Non ho trovato la tabella: scrivi i numeri a mano, o riprova con piu\u2019 luce.', 0);
+        return;
+      }
+      if (letti.kcal !== null) F('eti-kcal').value = letti.kcal;
+      if (letti.proteine !== null) F('eti-pro').value = letti.proteine;
+      if (letti.carboidrati !== null) F('eti-carb').value = letti.carboidrati;
+      if (letti.grassi !== null) F('eti-gra').value = letti.grassi;
+      di(letti.trovati === 4
+        ? 'Letti tutti e quattro i valori: controllali e salva.'
+        : 'Letti ' + letti.trovati + ' valori su 4: completa quelli vuoti.', 100);
+    })
+    .catch(() => di('Non sono riuscito a leggere la foto: scrivi i numeri a mano.', 0));
+}
+
 /* I due campi file vivono dentro la vista spesa, che si ridisegna: l'ascolto
    sta sul documento, cosi' vale anche dopo ogni ridisegno. */
 document.addEventListener('change', ev => {
   const t = ev.target;
+  if (t && (t.id === 'etichetta-foto' || t.id === 'etichetta-file')) {
+    const foto = t.files && t.files[0];
+    t.value = '';
+    if (foto) leggiEtichetta(foto);
+    return;
+  }
   if (!t || (t.id !== 'scontrino-foto' && t.id !== 'scontrino-file' && t.id !== 'scontrino-virtuale')) return;
   const file = t.files && t.files[0];
   t.value = '';
@@ -11745,14 +11971,37 @@ function renderShopping() {
   const presi = voci.filter(v => done[v.key]);
   const inCasa = voci.filter(v => !done[v.key] && v.have);
 
-  const riga = v => `
+  /* La quantita' sulla riga si tocca: quella scritta e' quella che entrera'
+     in frigo, dispensa o freezer quando chiudi la spesa. */
+  const qtaAperta = S.ui.shopQtaAperta;
+  const riga = v => {
+    const corretta = (S.shopQta || {})[v.key];
+    const mostra = corretta
+      ? fmtScorta(corretta.qta, corretta.unita)
+      : (v.qty || '');
+    if (qtaAperta === v.key && !modifica) {
+      const q0 = corretta ? (corretta.unita === 'pz' ? corretta.qta
+        : corretta.qta >= 1000 ? Math.round(corretta.qta / 100) / 10 : corretta.qta) : '';
+      const u0 = corretta ? (corretta.unita === 'pz' ? 'un.'
+        : corretta.qta >= 1000 ? 'kg' : 'g') : unitaEtichetta(unitaDi(v.n));
+      return `<div class="shop-item shop-item--qta">
+        <span class="txt">${esc(v.n)}</span>
+        <input type="number" id="shopqta-campo" min="0" step="any" inputmode="decimal"
+          value="${q0}" placeholder="quanto" aria-label="Quantit\u00e0 comprata di ${esc(v.n)}">
+        <button type="button" class="chip mini" id="shopqta-unita" data-act="shopqta-unita">${u0}</button>
+        <button type="button" class="chip mini active" data-act="shopqta-salva" data-val="${esc(v.key)}">ok</button>
+      </div>`;
+    }
+    return `
     <button type="button" class="shop-item ${done[v.key] ? 'done' : ''} ${v.have && !done[v.key] ? 'have' : ''}"
             data-act="${modifica ? 'shop-reparto' : 'shop-check'}" data-val="${esc(modifica ? v.n : v.key)}">
       <span class="box">${done[v.key] ? '\u2713' : ''}</span>
       <span class="txt">${esc(v.n)}${v.da.length ? `<span class="from">${esc(v.da.join(', '))}</span>` : ''}</span>
-      <span class="qty">${esc(v.qty)}</span>
+      <span class="qty ${corretta ? 'qty--tua' : ''}" data-act="shop-qta-apri" data-val="${esc(v.key)}"
+        role="button" aria-label="Correggi la quantit\u00e0 di ${esc(v.n)}">${esc(mostra) || '<i class="qty-vuota">q.t\u00e0?</i>'}</span>
       ${v.manuale ? `<span class="x" data-act="shop-extra-del" data-val="${esc(v.id)}">\u00d7</span>` : ''}
     </button>`;
+  };
 
   const gruppi = reparti().map(rep => {
     const items = daPrendere.filter(v => v.cat === rep.id);
@@ -13362,6 +13611,8 @@ function importBackup(file) {
         pantryUse: data.pantryUse && typeof data.pantryUse === 'object' ? data.pantryUse : {},
         shopExtra: Array.isArray(data.shopExtra) ? data.shopExtra : [],
         shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
+      shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
+      ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
         searches: Array.isArray(data.searches) ? data.searches : [],
         weights: Array.isArray(data.weights) ? data.weights : [],
         notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -13413,6 +13664,8 @@ function importBackup(file) {
       menus: Array.isArray(data.menus) ? data.menus : [],
       shopExtra: Array.isArray(data.shopExtra) ? data.shopExtra : [],
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
+      shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
+      ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
       notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -13427,6 +13680,8 @@ function importBackup(file) {
       pantryUse: data.pantryUse && typeof data.pantryUse === 'object' ? data.pantryUse : {},
       shopExtra: Array.isArray(data.shopExtra) ? data.shopExtra : [],
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
+      shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
+      ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
       notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -13443,6 +13698,8 @@ function importBackup(file) {
       pantryUse: data.pantryUse && typeof data.pantryUse === 'object' ? data.pantryUse : {},
       shopExtra: Array.isArray(data.shopExtra) ? data.shopExtra : [],
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
+      shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
+      ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
       notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -13462,6 +13719,8 @@ function importBackup(file) {
       pantryUse: data.pantryUse && typeof data.pantryUse === 'object' ? data.pantryUse : {},
       shopExtra: Array.isArray(data.shopExtra) ? data.shopExtra : [],
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
+      shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
+      ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
       notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -13483,6 +13742,8 @@ function importBackup(file) {
       pantryUse: data.pantryUse && typeof data.pantryUse === 'object' ? data.pantryUse : {},
       shopExtra: Array.isArray(data.shopExtra) ? data.shopExtra : [],
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
+      shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
+      ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
       notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -14010,7 +14271,7 @@ document.addEventListener('click', e => {
     case 'shop-clear':
       if (!armed(t, 'Conferma')) break;
       pushUndo('Svuotamento della lista spesa');
-      S.shopping = []; S.shopExtra = []; S.shopDone = {};
+      S.shopping = []; S.shopExtra = []; S.shopDone = {}; S.shopQta = {}; S.ui.shopQtaAperta = null;
       save(); renderFridge(); toast('Lista svuotata.', 'Annulla');
       break;
     case 'shop-edit': S.ui.shopEdit = !S.ui.shopEdit; save(); renderShopping(); break;
@@ -14045,6 +14306,41 @@ document.addEventListener('click', e => {
       S.repartoDi[norm(val)] = nuovo.id;
       save(); renderShopping();
       toast(val + ' \u2192 ' + nuovo.nome);
+      break;
+    }
+    case 'shop-qta-apri': {
+      S.ui.shopQtaAperta = S.ui.shopQtaAperta === val ? null : val;
+      renderShopping();
+      const campo = document.getElementById('shopqta-campo');
+      if (campo) campo.focus();
+      break;
+    }
+    case 'shopqta-unita': {
+      const b = F('shopqta-unita');
+      b.textContent = prossimaUnita(b.textContent);
+      break;
+    }
+    case 'shopqta-salva': {
+      const campo = F('shopqta-campo');
+      let q = parseFloat(campo ? campo.value : '');
+      const u = unitaValore(F('shopqta-unita').textContent);
+      S.shopQta = S.shopQta || {};
+      if (!isFinite(q) || q <= 0) {
+        delete S.shopQta[val];    // campo vuoto: torna la stima
+      } else {
+        if (u === 'kg') q = q * 1000;
+        S.shopQta[val] = { qta: Math.round(q * 10) / 10, unita: u === 'pz' ? 'pz' : 'g' };
+        // per le voci aggiunte a mano la correzione vale anche sulla voce stessa
+        if (val.startsWith('x:')) {
+          const extra = (S.shopExtra || []).find(x => 'x:' + x.id === val);
+          if (extra) {
+            extra.qta = S.shopQta[val].qta; extra.unita = S.shopQta[val].unita;
+            extra.qty = fmtScorta(extra.qta, extra.unita);
+          }
+        }
+      }
+      S.ui.shopQtaAperta = null;
+      save(); renderShopping();
       break;
     }
     case 'shop-tutti': {
@@ -14164,12 +14460,17 @@ document.addEventListener('click', e => {
         if (!S.myIngredients.some(m => norm(m) === norm(n))) S.myIngredients.push(n);
         if (!S.pantry.includes(n)) S.pantry.push(n);
         const extra = (S.shopExtra || []).find(x => sameIngredient(x.n, n));
-        registraAcquisto(n, extra && extra.qta ? extra.qta : null,
-          extra && extra.unita ? extra.unita : null);
+        // vince la quantita' che hai corretto tu sulla riga della lista
+        const tua = (S.shopQta || {})[v.key];
+        registraAcquisto(n,
+          tua ? tua.qta : (extra && extra.qta ? extra.qta : null),
+          tua ? tua.unita : (extra && extra.unita ? extra.unita : null));
       });
       const daDatare = presi.filter(v => !giorniFreschezza(v.n)).length;
       S.shopExtra = (S.shopExtra || []).filter(x => !S.shopDone['x:' + x.id]);
       S.shopDone = {};
+      S.shopQta = {};
+      S.ui.shopQtaAperta = null;
       S.shopping = [];
       save(); renderAll();
       // Riepilogo di dove e' finito tutto: e' l'unica cosa che serve sapere
@@ -14482,6 +14783,47 @@ document.addEventListener('click', e => {
       document.getElementById('disp-suggest').innerHTML = '';
       aggiornaUnitaDispensa();
       F('disp-qta').focus();
+      break;
+    }
+    case 'etichetta-apri': {
+      // precompilo col nome scritto nella barra della dispensa, se c'e'
+      const gia = (document.getElementById('disp-cerca') || {}).value || '';
+      ['eti-kcal','eti-pro','eti-carb','eti-gra'].forEach(id => { F(id).value = ''; });
+      F('eti-nome').value = (val || gia).trim();
+      document.getElementById('etichetta-barra').hidden = true;
+      document.getElementById('etichetta-passo').hidden = true;
+      cameraProbabile().then(ok => {
+        const b = document.getElementById('etichetta-scatta');
+        if (b) b.style.display = ok ? '' : 'none';
+      });
+      openModal('modal-etichetta');
+      break;
+    }
+    case 'etichetta-scatta': {
+      const campo = document.getElementById('etichetta-foto');
+      if (campo) { campo.value = ''; campo.click(); }
+      break;
+    }
+    case 'etichetta-galleria': {
+      const campo = document.getElementById('etichetta-file');
+      if (campo) { campo.value = ''; campo.click(); }
+      break;
+    }
+    case 'etichetta-salva': {
+      const nome = (F('eti-nome').value || '').trim().toLowerCase().slice(0, 60);
+      if (!nome) { toast('Dai un nome al prodotto.'); F('eti-nome').focus(); break; }
+      const n = id => { const v = parseFloat(F(id).value); return isFinite(v) && v >= 0 ? v : 0; };
+      pushUndo('Etichetta di ' + nome);
+      S.ingTabExtra = S.ingTabExtra || {};
+      S.ingTabExtra[nome] = [n('eti-kcal'), n('eti-pro'), n('eti-carb'), n('eti-gra')];
+      _vocabolario = null;   // il vocabolario ora conosce anche questo prodotto
+      registraAcquisto(nome, null, unitaDi(nome));
+      freschezza()[norm(nome)].posto = 'dispensa';
+      if (!S.pantry.some(p => norm(p) === norm(nome))) S.pantry.push(nome);
+      if (!S.myIngredients.some(m => norm(m) === norm(nome))) S.myIngredients.push(nome);
+      save(); renderAll();
+      closeModals();
+      toast(nome + ' in dispensa, con i suoi valori per 100 g.', 'Annulla');
       break;
     }
     case 'disp-add': {
@@ -15000,6 +15342,8 @@ if (tabBtn && S.ui.tab !== 'view-home') {
 window.fitmealsDebug = () => clone(S);
 // gancio per le prove automatiche: il profilo vivo e i motori, non dei cloni
 window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
+  spezzaElenco: spezzaElencoDettato,
+  etichetta: interpretaEtichetta, tabella: tabellaDi,
   energia: energy, renderProfilo: renderProfile,
   freschezza: freschezza, scadenze: scadenzeDelGiorno, inventario: inventario,
   logMeal: logMeal, notifiche: aggiornaNotificheScadenze, guessMeal: guessMeal,
