@@ -3414,6 +3414,85 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(latte.qta, 2000, 'la correzione della quantita\' non e\' arrivata al salvataggio');
   });
 
+  await test('la quantita\' comprata si corregge in lista e vince su Fine spesa', async () => {
+    const a = await app();
+    a.tab('view-fridge');
+    a.dom.window.fitmealsVoce.daTesto('latte');
+    a.click('[data-act=detta-salva]');
+    await wait(100);
+
+    // tocco la quantita' sulla riga, scrivo 700 g, salvo
+    vero(a.click('.shop-item .qty'), 'la quantita\' in riga non si tocca');
+    await wait(100);
+    a.d.getElementById('shopqta-campo').value = '700';
+    a.click('[data-act=shopqta-salva]');
+    await wait(100);
+    vero(a.testo('#shopping-body').includes('700 g'), 'la correzione non si vede in lista');
+
+    // chiudo la spesa: in freschezza entra la MIA quantita'
+    a.click('[data-act=shop-tutti]');
+    a.click('[data-act=shop-bought]');
+    await wait(50);
+    a.click('[data-act=conferma-si]');
+    await wait(150);
+    const f = a.stato().freschezza;
+    eq(f['latte'] && f['latte'].qta, 700, 'in dispensa non e\' entrata la quantita\' corretta');
+  });
+
+  await test('la dettatura capisce l\'elenco anche senza virgole', async () => {
+    const a = await app();
+    const V = a.dom.window.fitmealsVoce;
+
+    const righe = V.interpreta('pomodori mozzarella due litri di latte');
+    eq(righe.length, 3, 'attese 3 voci dal dettato senza virgole');
+    eq(righe[0].nome, 'pomodori', 'prima voce sbagliata');
+    eq(righe[1].nome, 'mozzarella', 'seconda voce sbagliata');
+    eq(righe[2].nome, 'latte', 'terza voce sbagliata');
+    eq(righe[2].q, 2, 'la quantita\' del latte si e\' persa');
+
+    // i nomi composti restano interi
+    const composti = V.interpreta('petto di pollo passata di pomodoro basilico');
+    eq(composti.length, 3, 'i nomi composti si sono spezzati');
+    eq(composti[0].nome, 'petto di pollo', 'petto di pollo spezzato');
+
+    // e il pasticcio singolo resta una voce sola, come prima
+    const boh = V.interpreta('gnappole sfrigolate');
+    eq(boh.length, 1, 'il pasticcio deve restare una voce');
+    vero(!boh[0].sicuro, 'il pasticcio non deve dirsi sicuro');
+  });
+
+  await test('l\'etichetta nutrizionale entra fra gli ingredienti con i suoi numeri', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+
+    // il parser pesca i quattro valori nel testo dell'OCR
+    const letti = P.etichetta('Energia 1720 kJ / 411 kcal Grassi 9,5 g di cui saturi 1,2 g '
+      + 'Carboidrati 68 g di cui zuccheri 3,1 g Proteine 12,5 g Sale 1,1 g');
+    eq(letti.kcal, 411, 'kcal sbagliate');
+    eq(letti.grassi, 9.5, 'grassi sbagliati');
+    eq(letti.carboidrati, 68, 'carboidrati sbagliati');
+    eq(letti.proteine, 12.5, 'proteine sbagliate');
+
+    // dal modulo al salvataggio: tabella, dispensa e vocabolario
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    a.click('[data-act=etichetta-apri]');
+    await wait(100);
+    a.d.getElementById('eti-nome').value = 'crackers di segale';
+    a.d.getElementById('eti-kcal').value = '411';
+    a.d.getElementById('eti-pro').value = '12.5';
+    a.d.getElementById('eti-carb').value = '68';
+    a.d.getElementById('eti-gra').value = '9.5';
+    a.click('[data-act=etichetta-salva]');
+    await wait(150);
+
+    const tab = P.tabella('crackers di segale');
+    vero(tab && tab[0] === 411 && tab[1] === 12.5, 'la tabella non e\' stata salvata');
+    vero(a.stato().freschezza['crackers di segale'], 'il prodotto non e\' in dispensa');
+    vero(a.stato().pantry.includes('crackers di segale'), 'il prodotto non e\' nella credenza');
+  });
+
   await test('le scadenze di oggi arrivano nella campanella e si gestiscono', async () => {
     const ora = Date.now();
     const a = await app({ storage: {
