@@ -834,6 +834,18 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .eti-salute-scala i.qui{opacity:1;transform:scaleY(1.25)}
 .salute-pallino{display:inline-block;width:9px;height:9px;border-radius:50%;
   margin-right:6px;vertical-align:1px;flex:0 0 auto}
+.salute-pallino--vuoto{background:none;border:1.5px dashed var(--text-tertiary)}
+.shop-eti--nota svg{stroke-width:2}
+.targhetta-eti{align-self:flex-start;margin-bottom:4px}
+.catalogo-riga{display:flex;align-items:center;gap:8px;padding:9px 2px;
+  border-bottom:1px solid rgba(255,255,255,.05)}
+.catalogo-nome{flex:1;min-width:0;display:flex;align-items:center;gap:4px;
+  background:none;border:none;color:inherit;font:inherit;font-size:.9rem;
+  text-align:left;padding:2px 0;cursor:pointer}
+.catalogo-nome span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.catalogo-nome em{font-style:normal;font-size:.7rem;color:var(--text-tertiary);
+  margin-left:auto;padding-left:8px;flex:0 0 auto}
+.catalogo-riga .chip.mini{flex:0 0 auto}
 .scheda{position:relative}
 .scheda .scheda-titolo{padding-right:26px}
 /* Il comando delle persone, bello grande: si tocca col pollice. */
@@ -2564,6 +2576,9 @@ h3{font-weight:600;letter-spacing:-.018em}
           <button type="button" class="chip" data-act="detta-apri" data-val="dispensa"
             title="Detta di fila quello che hai comprato: lo metto in dispensa">
             <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg>Detta</button>
+          <button type="button" class="chip" data-act="catalogo-apri"
+            title="Tutti gli ingredienti gia' valutati, col loro giudizio">
+            <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px"><path d="M5 5.5A1.5 1.5 0 0 1 6.5 4h11A1.5 1.5 0 0 1 19 5.5v14l-3.5-2.3L12 19.5l-3.5-2.3L5 19.5z"/><path d="M8.5 8.5h7M8.5 11.5h5"/></svg>Catalogo</button>
           <button type="button" class="chip" data-act="etichetta-apri" title="Un prodotto che le ricette non conoscono: leggo l'etichetta">
             <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;vertical-align:-2px;margin-right:4px"><path d="M4 7V5.5A1.5 1.5 0 0 1 5.5 4H7M17 4h1.5A1.5 1.5 0 0 1 20 5.5V7M20 17v1.5a1.5 1.5 0 0 1-1.5 1.5H17M7 20H5.5A1.5 1.5 0 0 1 4 18.5V17M8 9v6M11 9v6M14.5 9v6M17 9v3"/></svg>Etichetta</button>
           <button type="button" class="sorpresa" data-act="sorprendimi" data-val="dispensa">
@@ -3131,6 +3146,19 @@ h3{font-weight:600;letter-spacing:-.018em}
   </div>
   <input type="file" id="etichetta-file" accept="image/*" hidden>
   <input type="file" id="etichetta-foto" accept="image/*" capture="environment" hidden>
+
+  <div id="modal-catalogo" class="modal" role="dialog" aria-modal="true" aria-label="Catalogo ingredienti">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h2>Catalogo</h2>
+        <button type="button" class="x" data-act="close-modal" aria-label="Chiudi">&times;</button>
+      </div>
+      <p class="hint">Tutto quello che l'app ha conosciuto almeno una volta: il giudizio
+        sulla scala da sano a grasso e il posto dove va conservato. Tocca il nome per
+        correggere i valori, tocca il posto per cambiarlo.</p>
+      <div id="catalogo-lista"></div>
+    </div>
+  </div>
 
   <div id="modal-pasto-piatti" class="modal" role="dialog" aria-modal="true">
     <div class="modal-content">
@@ -6069,6 +6097,7 @@ const SEED = {
   shopDone: {},
   shopQta: {},        // per voce della lista: la quantita' DAVVERO comprata
   ingTabExtra: {},    // i valori nutrizionali letti dalle etichette, per 100 g
+  catalogo: {},       // ogni ingrediente passato di qui: nome e posto giusto, per sempre
   searches: [],
   weights: [],
   notes: {},
@@ -6221,6 +6250,7 @@ function load() {
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
       notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -8325,6 +8355,10 @@ function renderCredenza() {
               ${esc(v.nome)}${v.qta ? ' <i>' + fmtScorta(v.qta, v.unita) + '</i>' : ''}
             </button>
             ${aperto ? `<span class="targhetta">
+              <button type="button" class="chip mini targhetta-eti" data-act="etichetta-apri"
+                data-val="${esc(v.nome)}" data-verso="valori"
+                ${salubritaDi(v.nome) ? `style="color:${salubritaDi(v.nome).colore}"` : ''}>${salubritaDi(v.nome)
+                  ? '\u25cf ' + esc(salubritaDi(v.nome).nome) : 'etichetta'}</button>
               <b>preso ${new Date(v.dal).toLocaleDateString('it-IT', { day: '2-digit', month: 'short' })}</b>
               <span>${etaTesto(v.dal)}</span>
               <b>${v.entro
@@ -10453,11 +10487,49 @@ function passaACotto(chiave, quanti) {
   return { preso: preso, giorni: g, nome: nomeCotto };
 }
 
+/* ---------- il catalogo centrale ----------
+   Ogni ingrediente entrato nel circuito dell'app almeno una volta lascia
+   qui la sua voce: il nome, la sezione dove va conservato, la data.
+   Consumarlo o toglierlo dalla dispensa NON lo cancella: al prossimo
+   acquisto l'app lo riconosce e riapplica tutto da sola. I valori
+   nutrizionali stanno in ingTabExtra, il giudizio si ricalcola da quelli:
+   una fonte sola per ciascuna cosa, niente copie che divergono. */
+
+function catalogoTrova(nome) {
+  const cat = S.catalogo || {};
+  const k = norm(nome);
+  if (cat[k]) return cat[k];
+  // lo stesso motore di somiglianza usato ovunque nell'app
+  for (const chiave of Object.keys(cat)) {
+    if (sameIngredient(chiave, nome)) return cat[chiave];
+  }
+  return null;
+}
+
+function catalogoRegistra(nome, posto) {
+  S.catalogo = S.catalogo || {};
+  const k = norm(nome);
+  const nuovo = !S.catalogo[k];
+  S.catalogo[k] = {
+    nome: String(nome).toLowerCase().trim(),
+    posto: posto || (S.catalogo[k] && S.catalogo[k].posto) || dovConservare(nome),
+    dal: (S.catalogo[k] && S.catalogo[k].dal) || Date.now()
+  };
+  if (nuovo) _vocabolario = null;   // il vocabolario ora lo conosce
+  return S.catalogo[k];
+}
+
 /* La tabella di un ingrediente: prima quella di serie, poi quella letta
-   dall'etichetta col telefono. Sempre per 100 g. */
+   dall'etichetta col telefono; se il nome non combacia alla lettera, si
+   riconosce per somiglianza fra le etichette gia' lette. Sempre per 100 g. */
 function tabellaDi(nome) {
   const k = String(nome || '').toLowerCase().trim();
-  return ING_TAB[k] || (S.ingTabExtra || {})[k] || null;
+  const diretta = ING_TAB[k] || (S.ingTabExtra || {})[k];
+  if (diretta) return diretta;
+  for (const chiave of Object.keys(S.ingTabExtra || {})) {
+    if (sameIngredient(chiave, nome)) return S.ingTabExtra[chiave];
+  }
+  return null;
 }
 
 /* ---------- la scala di salubrita' ----------
@@ -10698,7 +10770,10 @@ function registraAcquisto(nome, qta, unita) {
   const k = norm(nome);
   const g = giorniFreschezza(nome);
   const prima = freschezza()[k];
-  const posto = (prima && prima.posto) || dovConservare(nome);
+  // il posto lo decide, nell'ordine: dov'era gia', dove il catalogo ricorda
+  // che va tenuto, e solo alla fine la regola generale
+  const ricordo = catalogoTrova(nome);
+  const posto = (prima && prima.posto) || (ricordo && ricordo.posto) || dovConservare(nome);
   // In dispensa vale la durata del confezionato: un barattolo di passata non
   // e' un pomodoro fresco, anche se la parola e' la stessa.
   const gg = posto === 'dispensa' ? mesiDispensa(nome) * 30 : g;
@@ -10715,6 +10790,8 @@ function registraAcquisto(nome, qta, unita) {
     // Quello che avevi gia' si somma a quello che hai appena comprato.
     qta: (qta || 0) + ((prima && prima.qta) || 0)
   };
+  // e il passaggio resta a catalogo, per la prossima volta
+  catalogoRegistra(nome, posto);
 }
 
 function freschiInScadenza() {
@@ -11564,6 +11641,7 @@ function vocabolarioIngredienti() {
   S.recipes.forEach(r => (r.ing || []).forEach(i => set.add(i.n.toLowerCase())));
   Object.keys(ING_TAB).forEach(n => set.add(n));
   Object.keys(S.ingTabExtra || {}).forEach(n => set.add(n));
+  Object.keys(S.catalogo || {}).forEach(k => set.add((S.catalogo[k].nome || k)));
   (S.myIngredients || []).forEach(n => set.add(n));
   _vocabolario = Array.from(set).sort();
   return _vocabolario;
@@ -12478,6 +12556,48 @@ function preparaEtichetta(file) {
   });
 }
 
+/* La schermata del catalogo: ogni ingrediente conosciuto, dal piu' sano
+   al piu' grasso, col suo posto. Da qui si corregge tutto a mano. */
+const POSTI_CATALOGO = ['frigo', 'dispensa', 'freezer'];
+
+function renderCatalogo() {
+  const box = document.getElementById('catalogo-lista');
+  if (!box) return;
+
+  // l'unione: chi ha un'etichetta letta e chi e' solo passato di qua
+  const chiavi = new Set(Object.keys(S.ingTabExtra || {}).map(norm));
+  Object.keys(S.catalogo || {}).forEach(k => chiavi.add(k));
+
+  const voci = Array.from(chiavi).map(k => {
+    const cat = (S.catalogo || {})[k];
+    const nome = (cat && cat.nome) || k;
+    const giudizio = salubritaDi(nome);
+    return {
+      nome: nome,
+      giudizio: giudizio,
+      posto: (cat && cat.posto) || dovConservare(nome),
+      letta: !!(S.ingTabExtra || {})[nome] || !!(S.ingTabExtra || {})[k]
+    };
+  }).sort((a, b) => {
+    const ga = a.giudizio ? a.giudizio.gradino : 9;
+    const gb = b.giudizio ? b.giudizio.gradino : 9;
+    return ga - gb || a.nome.localeCompare(b.nome);
+  });
+
+  box.innerHTML = voci.length ? voci.map(v => `
+    <div class="catalogo-riga">
+      <button type="button" class="catalogo-nome" data-act="etichetta-apri"
+        data-val="${esc(v.nome)}" data-verso="valori">
+        ${v.giudizio ? `<i class="salute-pallino" style="background:${v.giudizio.colore}"></i>` : '<i class="salute-pallino salute-pallino--vuoto"></i>'}
+        <span>${esc(v.nome)}</span>
+        <em>${v.giudizio ? esc(v.giudizio.nome) + (v.giudizio.parziale ? ' · parziale' : '') : 'mai letta l’etichetta'}</em>
+      </button>
+      <button type="button" class="chip mini" data-act="catalogo-posto"
+        data-val="${esc(v.nome)}">${esc(v.posto)}</button>
+    </div>`).join('')
+    : '<p class="miss">Ancora vuoto: leggi la prima etichetta dalla spesa o dalla dispensa, o aggiungi qualcosa.</p>';
+}
+
 /* Il giudizio nel modulo dell'etichetta: si ricalcola DA SOLO a ogni
    tocco sui campi, e si vede prima di salvare. Coi campi vuoti il calcolo
    procede lo stesso, ma dice che il giudizio e' parziale. */
@@ -12806,17 +12926,20 @@ function renderShopping() {
         <button type="button" class="chip mini active" data-act="shopqta-salva" data-val="${esc(v.key)}">ok</button>
       </div>`;
     }
-    // il codice a barre compare solo sui prodotti di cui l'app non conosce
-    // ancora i valori: letta l'etichetta una volta, sparisce
-    const senzaValori = !tabellaDi(v.n);
+    // il codice a barre sta su OGNI riga: per i prodotti mai letti apre lo
+    // scan, per quelli gia' a catalogo mostra il giudizio e permette di
+    // rifare la lettura se e' cambiato prodotto
+    const giudizioRiga = salubritaDi(v.n);
     return `
     <button type="button" class="shop-item ${done[v.key] ? 'done' : ''} ${v.have && !done[v.key] ? 'have' : ''}"
             data-act="${modifica ? 'shop-reparto' : 'shop-check'}" data-val="${esc(modifica ? v.n : v.key)}">
       <span class="box">${done[v.key] ? '\u2713' : ''}</span>
       <span class="txt">${esc(v.n)}${v.da.length ? `<span class="from">${esc(v.da.join(', '))}</span>` : ''}</span>
-      ${senzaValori && !modifica ? `<span class="shop-eti" data-act="etichetta-apri"
+      ${!modifica ? `<span class="shop-eti ${giudizioRiga ? 'shop-eti--nota' : ''}" data-act="etichetta-apri"
         data-val="${esc(v.n)}" data-verso="valori" role="button"
-        aria-label="Leggi l'etichetta di ${esc(v.n)}" title="Valori nutrizionali dall'etichetta">
+        ${giudizioRiga ? `style="color:${giudizioRiga.colore}"` : ''}
+        aria-label="Valori nutrizionali di ${esc(v.n)}"
+        title="${giudizioRiga ? esc(giudizioRiga.nome) + (giudizioRiga.parziale ? ' · giudizio parziale' : '') + ' · tocca per aggiornare' : 'Leggi l\'etichetta'}">
         <svg viewBox="0 0 24 24"><path d="M4 7V5.5A1.5 1.5 0 0 1 5.5 4H7M17 4h1.5A1.5 1.5 0 0 1 20 5.5V7M20 17v1.5a1.5 1.5 0 0 1-1.5 1.5H17M7 20H5.5A1.5 1.5 0 0 1 4 18.5V17M8 9v6M11 9v6M14.5 9v6M17 9v3"/></svg></span>` : ''}
       <span class="qty ${corretta ? 'qty--tua' : ''}" data-act="shop-qta-apri" data-val="${esc(v.key)}"
         role="button" aria-label="Correggi la quantit\u00e0 di ${esc(v.n)}">${esc(mostra) || '<i class="qty-vuota">q.t\u00e0?</i>'}</span>
@@ -14434,6 +14557,7 @@ function importBackup(file) {
         shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
         searches: Array.isArray(data.searches) ? data.searches : [],
         weights: Array.isArray(data.weights) ? data.weights : [],
         notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -14487,6 +14611,7 @@ function importBackup(file) {
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
       notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -14503,6 +14628,7 @@ function importBackup(file) {
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
       notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -14521,6 +14647,7 @@ function importBackup(file) {
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
       notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -14542,6 +14669,7 @@ function importBackup(file) {
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
       notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -14565,6 +14693,7 @@ function importBackup(file) {
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
       notes: data.notes && typeof data.notes === 'object' ? data.notes : {},
@@ -15622,6 +15751,21 @@ document.addEventListener('click', e => {
       F('disp-qta').focus();
       break;
     }
+    case 'catalogo-apri':
+      renderCatalogo();
+      openModal('modal-catalogo');
+      break;
+    case 'catalogo-posto': {
+      // il posto cicla: frigo, dispensa, freezer. E il catalogo ricorda.
+      const voce = catalogoTrova(val) || catalogoRegistra(val);
+      const dopo = POSTI_CATALOGO[(POSTI_CATALOGO.indexOf(voce.posto) + 1) % POSTI_CATALOGO.length];
+      voce.posto = dopo;
+      // se ce l'hai in casa adesso, si sposta anche la scorta
+      const viva = freschezza()[norm(val)];
+      if (viva) viva.posto = dopo;
+      save(); renderCatalogo(); renderAll();
+      break;
+    }
     case 'etichetta-apri': {
       // dalla lista della spesa si salvano SOLO i valori: il prodotto entrera'
       // in dispensa quando chiudi la spesa, gia' con i suoi numeri
@@ -15635,6 +15779,20 @@ document.addEventListener('click', e => {
         .forEach(id => { if (F(id)) F(id).value = ''; });
       const salBox = document.getElementById('eti-salute');
       if (salBox) salBox.hidden = true;
+      // se il catalogo lo conosce gia', i valori tornano da soli: la nuova
+      // scansione serve solo se e' cambiato il prodotto
+      const nomePre = (val || gia).trim();
+      const giaLetta = nomePre ? tabellaDi(nomePre) : null;
+      if (giaLetta) {
+        const campi = ['eti-kcal','eti-pro','eti-carb','eti-gra','eti-sat','eti-zuc','eti-fib','eti-sale'];
+        campi.forEach((id, i) => {
+          if (F(id) && giaLetta[i] !== undefined && giaLetta[i] !== null) F(id).value = giaLetta[i];
+        });
+        setTimeout(aggiornaSalubritaEtichetta, 0);
+        const passoEti = document.getElementById('etichetta-passo');
+        if (passoEti) { passoEti.hidden = false;
+          passoEti.textContent = 'Gi\u00e0 a catalogo: valori riapplicati. Rifai la foto solo se hai cambiato prodotto.'; }
+      }
       F('eti-nome').value = (val || gia).trim();
       document.getElementById('etichetta-barra').hidden = true;
       document.getElementById('etichetta-passo').hidden = true;
@@ -15672,14 +15830,22 @@ document.addEventListener('click', e => {
       if (!S.myIngredients.some(m => norm(m) === norm(nome))) S.myIngredients.push(nome);
       if (etichettaVerso === 'valori') {
         // dalla lista della spesa: i numeri entrano subito nel sistema,
-        // il prodotto arrivera' in dispensa con Fine spesa
+        // il prodotto arrivera' in dispensa con Fine spesa. Il catalogo
+        // intanto ricorda dove andra' conservato.
+        const vecchia = freschezza()[norm(nome)];
+        catalogoRegistra(nome, vecchia && vecchia.posto);
         save(); renderAll();
         closeModals();
         toast(nome + ': valori salvati. Entrera\u0300 in dispensa a fine spesa.', 'Annulla');
         break;
       }
+      // il posto: quello che il catalogo ricorda; alla prima volta, la
+      // dispensa (il bottone sta li'). Scorta e catalogo restano d'accordo.
+      const ricordoEti = catalogoTrova(nome);
+      const postoEti = (ricordoEti && ricordoEti.posto) || 'dispensa';
       registraAcquisto(nome, null, unitaDi(nome));
-      freschezza()[norm(nome)].posto = 'dispensa';
+      freschezza()[norm(nome)].posto = postoEti;
+      catalogoRegistra(nome, postoEti);
       if (!S.pantry.some(p => norm(p) === norm(nome))) S.pantry.push(nome);
       save(); renderAll();
       closeModals();
@@ -16206,6 +16372,8 @@ window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
   etichetta: interpretaEtichetta, tabella: tabellaDi,
   preparaEtichetta: preparaEtichetta,
   salubrita: salubrita, salubritaDi: salubritaDi,
+  catalogoTrova: catalogoTrova, catalogoRegistra: catalogoRegistra,
+  renderCatalogo: renderCatalogo,
   energia: energy, renderProfilo: renderProfile,
   freschezza: freschezza, scadenze: scadenzeDelGiorno, inventario: inventario,
   logMeal: logMeal, notifiche: aggiornaNotificheScadenze, guessMeal: guessMeal,
