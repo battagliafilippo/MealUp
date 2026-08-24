@@ -794,6 +794,12 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .modo-spesa:active{transform:scale(.97)}
 
 /* --- la scansione dello scontrino --- */
+#dettatura-conto{display:inline-flex;align-items:center;gap:6px;margin:10px 2px 2px;
+  padding:6px 12px;border-radius:999px;font-size:.75rem;color:var(--text-secondary);
+  background:color-mix(in srgb, var(--tema, var(--accent-primary)) 10%, transparent);
+  border:1px solid color-mix(in srgb, var(--tema, var(--accent-primary)) 22%, transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+#dettatura-conto[hidden]{display:none}
 .scan-corpo{text-align:center;padding:4px 0 2px}
 .scan-anteprima{max-width:100%;max-height:180px;border-radius:14px;display:block;
   margin:0 auto 12px;border:var(--v1-bordo)}
@@ -3054,6 +3060,7 @@ h3{font-weight:600;letter-spacing:-.018em}
       <div id="dettatura-righe" hidden>
         <p class="hint" id="dettatura-righe-hint">Controlla, correggi o togli: poi aggiungo tutto alla lista,
           come se l'avessi scritto a mano.</p>
+        <p id="dettatura-conto" hidden></p>
         <div id="dettatura-lista"></div>
         <button type="button" class="chip mini" data-act="detta-riga">+ aggiungi una riga</button>
         <div class="row" style="margin-top:12px">
@@ -11919,6 +11926,9 @@ function dettaturaMostra(fase) {
     ? 'Metti in dispensa' : 'Aggiungi alla spesa';
   document.getElementById('dettatura-ascolto').hidden = fase !== 'ascolto';
   document.getElementById('dettatura-righe').hidden = fase !== 'righe';
+  // il conteggio delle righe scartate vale solo per lo scontrino appena letto
+  const conto = document.getElementById('dettatura-conto');
+  if (conto) { conto.hidden = true; conto.textContent = ''; }
   const scan = document.getElementById('dettatura-scan');
   const scanKo = document.getElementById('dettatura-scan-ko');
   const scanScegli = document.getElementById('dettatura-scan-scegli');
@@ -12063,12 +12073,38 @@ const SCON_RUMORE = new RegExp(
   'cassa|cassiere|operatore|codice|fiscale|piva|partita|sconto|sconti|punti|fidelity|' +
   'ordine|ordini|fattura|ricevuta|cliente|spedizione|consegna|riepilogo|corriere|' +
   'tessera|saldo|arrivederci|grazie|prezzo|articoli|reso|rimborso|omaggio|' +
+  'offerta|offerte|promozione|promo|risparmio|risparmiato|buono|coupon|preconto|' +
+  'reparto|benvenuto|benvenuti|vendita|esercizio|euro|totali|chiusura|' +
   'via|viale|piazza|corso|tel|telefono|www|http|srl|spa|snc|supermercato|market)\\b', 'i');
 
 /* Prezzi, prezzi al chilo, codici a barre: servono solo per essere buttati. */
 const SCON_PREZZO_FINE = /(?:€|eur)?\s*\d{1,4}[.,]\d{2}\s*[a-z*]{0,3}\s*$/i;
 const SCON_PREZZO_UNIT  = /\b(?:x|@)?\s*\d{1,4}[.,]\d{2}\s*(?:€|eur)?\s*\/\s*(?:kg|l|lt|pz)\b/ig;
 const SCON_EAN = /\b\d{6,13}\b/g;
+
+/* Le parole del cibo che l'app conosce (ricette, tabelle, catalogo): servono
+   per capire se una riga di scontrino parla di cibo oppure no. L'insieme si
+   ricostruisce da solo quando il vocabolario cambia. */
+let _paroleAlimentari = null;
+let _paroleAlimentariDa = null;
+function parolaAlimentare(parola) {
+  const vocab = vocabolarioIngredienti();
+  if (_paroleAlimentariDa !== vocab) {
+    _paroleAlimentari = new Set();
+    vocab.forEach(nome => norm(nome).split(/\s+/).forEach(p => {
+      if (p.length >= 4) _paroleAlimentari.add(p);
+    }));
+    _paroleAlimentariDa = vocab;
+  }
+  const p = norm(parola);
+  if (p.length < 4) return false;
+  if (_paroleAlimentari.has(p)) return true;
+  if (p.length < 5) return false;
+  for (const nota of _paroleAlimentari) {
+    if (Math.abs(nota.length - p.length) <= 2 && somiglianza(p, nota) >= 0.78) return true;
+  }
+  return false;
+}
 
 /* Una riga di scontrino -> una riga della schermata di conferma.
    Torna null se la riga non e' un prodotto. */
@@ -12121,10 +12157,16 @@ function interpretaRigaScontrino(rigaGrezza) {
   // sigle di reparto attaccate davanti ("art.", "cf", "bio")
   nome = nome.replace(/^(art|cod|ref|conf|pz)\.?\s+/i, '').trim();
   if (nome.length < 3) return null;
+  if (nome.length > 45) return null;
   if (!/[a-zàèéìòù]{3}/i.test(nome)) return null;
 
   const r = riconosciIngrediente(nome);
   const sicuro = r.punteggio >= 0.72;
+  // la porta: se la riga non somiglia a nessun ingrediente noto e nessuna
+  // sua parola sa di cibo, non e' un prodotto e si scarta del tutto
+  const plausibile = r.punteggio >= 0.5 ||
+    nome.split(/\s+/).some(par => parolaAlimentare(par));
+  if (!plausibile) return null;
   // quantita' assente: lo stesso default dell'inserimento a mano
   if (!u) u = (typeof unitaDi === 'function' && unitaDi(sicuro ? r.nome : nome) === 'pz') ? 'pz' : 'g';
 
@@ -12143,10 +12185,12 @@ function interpretaRigaScontrino(rigaGrezza) {
 function interpretaScontrino(testo) {
   const righe = String(testo).split(/\r?\n/);
   const fuori = [];
+  let scartate = 0;
   righe.forEach(riga => {
     let voce = null;
     try { voce = interpretaRigaScontrino(riga); } catch (e) { voce = null; }
     if (voce) fuori.push(voce);
+    else if (riga.trim().length >= 3) scartate++;
   });
   // lo stesso prodotto letto due volte di fila: sommo invece di ripeterlo
   const unite = [];
@@ -12156,6 +12200,8 @@ function interpretaScontrino(testo) {
     else if (gia && v.q === '' && gia.q === '') return;
     else unite.push(v);
   });
+  // quante righe sono state buttate via: la schermata di conferma lo dice
+  unite.scartate = scartate;
   return unite;
 }
 
@@ -12369,12 +12415,22 @@ function leggiScontrinoTestoFile(file) {
 function scontrinoRigheProva(testo) {
   modoInserimento = 'scontrino';
   const righe = interpretaScontrino(testo);
+  const scartate = righe.scartate || 0;
   if (!righe.length) {
-    scontrinoRipiego('Qui dentro non ho riconosciuto nessun prodotto.');
+    scontrinoRipiego(scartate
+      ? 'Ho letto ' + scartate + (scartate === 1 ? ' riga, ma nessuna' : ' righe, ma nessuna') + ' sembrava un prodotto.'
+      : 'Qui dentro non ho riconosciuto nessun prodotto.');
     return;
   }
   dettaturaMostra('righe');
   righeDettatura(righe);
+  // il resoconto onesto: quanti prodotti tengo, quante righe ho buttato
+  const conto = document.getElementById('dettatura-conto');
+  if (conto) {
+    conto.textContent = righe.length + (righe.length === 1 ? ' prodotto riconosciuto' : ' prodotti riconosciuti')
+      + (scartate ? ' · ' + scartate + (scartate === 1 ? ' riga scartata automaticamente' : ' righe scartate automaticamente') : '');
+    conto.hidden = false;
+  }
   openModal('modal-dettatura');
   const letti = righe.filter(r => r.sicuro).length;
   toast(righe.length + (righe.length === 1 ? ' riga letta' : ' righe lette')
@@ -12447,12 +12503,8 @@ function leggiScontrino(file) {
 window.fitmealsScontrino = {
   interpreta: interpretaScontrino,
   riga: interpretaRigaScontrino,
-  daTesto: t => {
-    modoInserimento = 'scontrino';
-    dettaturaMostra('righe');
-    righeDettatura(interpretaScontrino(t));
-    openModal('modal-dettatura');
-  }
+  parolaAlimentare: parolaAlimentare,
+  daTesto: t => { scontrinoRigheProva(t); }
 };
 
 /* ---------- la foto dell'etichetta, preparata prima di leggerla ----------
