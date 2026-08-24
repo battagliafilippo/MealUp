@@ -3766,6 +3766,68 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'pallini della scala nel dettaglio');
   });
 
+  await test('l\'aggiunta diretta in dispensa parla col catalogo come la spesa', async () => {
+    const a = await app();
+    const w = a.dom.window;
+    const P = w.fitmealsProva;
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    const metti = nome => {
+      a.set('disp-cerca', nome);
+      a.click('[data-act=disp-add]');
+    };
+
+    // 1. prodotto sconosciuto: compare l'invito discreto, e non obbliga
+    metti('crema di sesamo');
+    const box = a.d.getElementById('invito-eti-dispensa');
+    vero(!box.hidden && /etichetta/i.test(box.textContent), 'manca l\'invito discreto');
+    a.click('#invito-eti-dispensa [data-act=invito-eti-no]');
+    vero(box.hidden, 'l\'invito non si chiude con la crocetta');
+    vero(a.stato().freschezza['crema di sesamo'], 'il prodotto non e\' entrato comunque');
+
+    // 2. prodotto gia' noto: giudizio automatico, nessun invito, e il posto
+    //    lo decide la stessa logica degli altri flussi (il latte va in frigo
+    //    anche se lo aggiungi dalla barra della dispensa)
+    metti('latte');
+    eq(a.stato().freschezza['latte'].posto, 'frigo', 'il latte non e\' andato in frigo');
+    vero(box.hidden, 'invito mostrato per un prodotto che ha gia\' i valori');
+    vero(P.salubritaDi('latte'), 'il giudizio del latte non arriva da solo');
+
+    // 3. la memoria del catalogo vince sulla regola generale
+    P.catalogoRegistra('caffe in grani', 'freezer');
+    metti('caffe in grani');
+    eq(a.stato().freschezza['caffe in grani'].posto, 'freezer',
+      'la memoria del catalogo non decide il posto');
+
+    // 4. l'invito apre lo STESSO modulo etichetta; il salvataggio da'
+    //    giudizio e catalogo per gli usi futuri, senza spostare la scorta
+    metti('crema di sesamo');
+    vero(!box.hidden, 'l\'invito non ricompare per il prodotto ancora senza giudizio');
+    a.click('#invito-eti-dispensa [data-act=invito-eti-vai]');
+    await wait(50);
+    vero(a.d.getElementById('modal-etichetta').classList.contains('active'),
+      'l\'invito non apre il modulo etichetta');
+    eq(a.d.getElementById('eti-nome').value, 'crema di sesamo', 'il nome non arriva al modulo');
+    a.d.getElementById('eti-kcal').value = '640';
+    a.d.getElementById('eti-pro').value = '20';
+    a.d.getElementById('eti-carb').value = '18';
+    a.d.getElementById('eti-gra').value = '55';
+    a.click('[data-act=etichetta-salva]');
+    await wait(50);
+    vero(P.salubritaDi('crema di sesamo'), 'il giudizio non e\' nato dalla lettura');
+    vero(P.catalogoTrova('crema di sesamo'), 'il catalogo non ha imparato il prodotto');
+    vero(a.stato().freschezza['crema di sesamo'], 'la scorta e\' sparita leggendo l\'etichetta');
+    vero(box.hidden, 'l\'invito resta anche dopo la lettura');
+
+    // 5. spostare a mano una scorta insegna al catalogo, come dagli altri punti
+    a.click('[data-act=frigo-sez][data-val=frigo]');
+    await wait(100);
+    a.click('#frigo-body [data-act=fresco-posto][data-val=latte]');
+    eq(P.catalogoTrova('latte').posto, 'dispensa',
+      'il giro del posto non insegna al catalogo');
+  });
+
   await test('il catalogo ricorda ogni ingrediente, anche dopo il consumo', async () => {
     const a = await app();
     const P = a.dom.window.fitmealsProva;
