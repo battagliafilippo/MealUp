@@ -10837,6 +10837,9 @@ function etiParolaCombacia(parola, chiave) {
   // le abbreviazioni delle etichette sono troncamenti: la parola stampata
   // e' l'inizio esatto della parola intera (il punto sparisce gia' prima)
   if (parola.length >= 4 && chiave.length >= 5 && chiave.indexOf(parola) === 0) return true;
+  // e l'OCR spesso mangia l'inizio: "oidrati" e' la coda di "carboidrati"
+  if (parola.length >= 5 && chiave.length >= 6 &&
+      chiave.slice(-parola.length) === parola) return true;
   if (chiave.length >= 5 && parola.length >= chiave.length - 2) {
     return somiglianza(parola, chiave) >= 0.75;
   }
@@ -10847,7 +10850,9 @@ function etiParolaCombacia(parola, chiave) {
    raddrizzate SOLO dentro i token che contengono almeno una cifra vera. */
 function etiNumeri(pezzo) {
   const fuori = [];
-  const rx = /[<≤]?\s*([0-9OoIl|]{1,4}(?:[.,][0-9OoIl|]{1,3})?)(?=\s*(kcal|kj|mg|g\b|%|\b))/gi;
+  // le unita' vere, le loro storpiature d'OCR (kcal letto hcal o kcai), e
+  // una lettera qualunque come confine: "614hcal" non deve inghiottire il 614
+  const rx = /[<≤]?\s*([0-9OoIl|]{1,4}(?:[.,][0-9OoIl|]{1,3})?)(?=\s*(kcal|hcal|kcai|lcal|kca\b|kal\b|ka\b|kj|mg|g\b|%|[a-zàèéìòù]|\b))/gi;
   let m;
   while ((m = rx.exec(pezzo)) !== null) {
     const grezzo = m[1];
@@ -10855,7 +10860,10 @@ function etiNumeri(pezzo) {
     const pulito = grezzo.replace(/[Oo]/g, '0').replace(/[Il|]/g, '1').replace(',', '.');
     const v = parseFloat(pulito);
     if (!isFinite(v)) continue;
-    const unita = (m[2] || '').toLowerCase();
+    let unita = (m[2] || '').toLowerCase();
+    if (/^(kcal|hcal|kcai|lcal|kca|kal|ka)$/.test(unita)) unita = 'kcal';
+    else if (unita === 'j') unita = 'kj';   // una J sola dopo un numero e' il kJ
+    else if (unita.length === 1 && unita !== 'g' && unita !== '%') unita = '';
     // La confusione piu' frequente dell'OCR sulle etichette: la "g" dell'unita'
     // letta come "9" e incollata al numero ("1,2 g" -> "1,29", "68 g" -> "689").
     // Se il numero non ha unita' e finisce per 9, si offre anche la variante
@@ -10878,6 +10886,71 @@ function etiPlausibile(campo, v) {
   return lim ? v >= lim[0] && v <= lim[1] : true;
 }
 
+/* L'energia della riga, con tutte le difese: kcal dichiarate, kJ da
+   convertire, il controllo incrociato fra i due, l'uno di troppo che in
+   realta' era la sbarra di "kJ/kcal", e la coppia di numeri in rapporto
+   4,184 quando le unita' si sono perse per strada. */
+function etiScegliKcal(numeri) {
+  const inKcal = numeri.find(n => n.unita === 'kcal');
+  const inKj = numeri.find(n => n.unita === 'kj');
+  let v = inKcal ? inKcal.v : (inKj ? Math.round(inKj.v / 4.184) : null);
+  // "sicura" vuol dire confermata in modo incrociato: kcal e kJ che si
+  // danno ragione, o una riparazione che il rapporto 4,184 ha convalidato
+  let sicura = false;
+  // ci sono tutti e due: devono raccontare la stessa energia. Se le kcal
+  // lette non tornano coi kJ, la conversione dai kJ e' piu' affidabile
+  if (inKcal && inKj) {
+    const daKj = inKj.v / 4.184;
+    if (daKj > 0 && Math.abs(inKcal.v - daKj) / daKj > 0.25) v = Math.round(daKj);
+    sicura = true;
+  }
+  // il kJ ha perso l'unita' per strada: un numero libero che diviso 4,184
+  // combacia con le kcal le conferma; se non combacia con niente ed e'
+  // l'unico candidato, con kcal sospettosamente piccole, era lui il kJ
+  if (inKcal && !inKj) {
+    const candidati = numeri
+      .filter(n => !n.unita && n.v >= 200 && n.v <= 4200)
+      .map(n => n.v / 4.184)
+      .filter(d => etiPlausibile('kcal', Math.round(d)));
+    const coerente = candidati.find(d => Math.abs(inKcal.v - d) / d <= 0.25);
+    if (coerente) sicura = true;
+    else if (candidati.length === 1 && inKcal.v < 120) {
+      v = Math.round(candidati[0]);
+      sicura = true;
+    }
+  }
+  // "/614" letto "1614": se le kcal hanno un 1 di troppo davanti e il resto
+  // torna in rapporto kJ/kcal con un altro numero della riga, era la sbarra
+  if (v !== null && v >= 1000 && v <= 1999) {
+    const senzaUno = v - 1000;
+    if (etiPlausibile('kcal', senzaUno) && numeri.some(n =>
+        n.v !== v && n.v / senzaUno > 3.7 && n.v / senzaUno < 4.7)) {
+      v = senzaUno;
+      sicura = true;
+    }
+  }
+  if (v === null) {
+    // "2546/614" senza unita': due numeri in rapporto ~4,184 sono per
+    // forza kJ e kcal, e le kcal sono il secondo
+    const liberi = numeri.filter(n => !n.unita);
+    for (let j = 0; j + 1 < liberi.length; j++) {
+      const rapporto = liberi[j].v / (liberi[j + 1].v || 1);
+      if (rapporto > 3.7 && rapporto < 4.7 && etiPlausibile('kcal', liberi[j + 1].v)) {
+        v = liberi[j + 1].v;
+        sicura = true;
+        break;
+      }
+    }
+  }
+  if (v === null) {
+    // un numero senza unita' vale solo se e' l'UNICO della riga
+    // ("Energia 411"): pescarne uno fra tanti e' tirare a indovinare
+    const liberi = numeri.filter(n => !n.unita && etiPlausibile('kcal', n.v) && n.v >= 40);
+    if (liberi.length === 1) v = liberi[0].v;
+  }
+  return v !== null && etiPlausibile('kcal', v) ? { v: v, sicura: sicura } : null;
+}
+
 /* Due letture della stessa etichetta si completano: la prima vince, la
    seconda riempie i buchi. Cosi' il passaggio in grigi e quello in bianco
    e nero mettono insieme quello che ciascuno ha letto meglio. */
@@ -10890,6 +10963,12 @@ function etiUnisci(a, b) {
       // sempre lo zero e' l'OCR che ha perso la cifra, non un vero zero
       else if (out[k] === 0 && b[k] > 0) out[k] = b[k];
     });
+  // le kcal confermate dal controllo incrociato coi kJ battono sempre
+  // quelle solo indovinate da un numero libero
+  if (b.kcal != null && b.kcalSicura && !out.kcalSicura) {
+    out.kcal = b.kcal;
+    out.kcalSicura = true;
+  }
   if (out.sale === null && out.sodio != null) out.sale = Math.round(out.sodio * 2.5 * 100) / 100;
   if (out.grassi !== null && out.saturi !== null && out.saturi > out.grassi) out.saturi = null;
   out.trovati = ['kcal', 'grassi', 'carboidrati', 'proteine'].filter(k => out[k] !== null).length;
@@ -10932,22 +11011,8 @@ function interpretaEtichetta(testo) {
       if (!numeri.length) return;
 
       if (taglio.campo === 'kcal') {
-        // prima le kcal dichiarate, poi i kJ da convertire
-        const inKcal = numeri.find(n => n.unita === 'kcal');
-        const inKj = numeri.find(n => n.unita === 'kj');
-        let v = inKcal ? inKcal.v : (inKj ? Math.round(inKj.v / 4.184) : null);
-        // ci sono tutti e due: devono raccontare la stessa energia. Se le
-        // kcal lette non tornano coi kJ, e' l'OCR che ha perso una cifra,
-        // e la conversione dai kJ e' piu' affidabile della lettura storta
-        if (inKcal && inKj) {
-          const daKj = inKj.v / 4.184;
-          if (daKj > 0 && Math.abs(inKcal.v - daKj) / daKj > 0.25) v = Math.round(daKj);
-        }
-        if (v === null) {
-          const libero = numeri.find(n => etiPlausibile('kcal', n.v) && n.v >= 40);
-          v = libero ? libero.v : null;
-        }
-        if (v !== null && etiPlausibile('kcal', v)) out.kcal = v;
+        const scelta = etiScegliKcal(numeri);
+        if (scelta) { out.kcal = scelta.v; out.kcalSicura = scelta.sicura; }
         return;
       }
 
@@ -10960,6 +11025,17 @@ function interpretaEtichetta(testo) {
         if (etiPlausibile(taglio.campo, v)) { out[taglio.campo] = v; break; }
       }
     });
+
+    // la parola "Energia" a volte non si legge, ma kcal e kJ non mentono:
+    // una riga senza parole chiave che pero' contiene quelle unita'
+    // e' la riga dell'energia
+    if (out.kcal === null && !tagli.length) {
+      const numeri = etiNumeri(bassa);
+      if (numeri.some(n => n.unita === 'kcal' || n.unita === 'kj')) {
+        const scelta = etiScegliKcal(numeri);
+        if (scelta) { out.kcal = scelta.v; out.kcalSicura = scelta.sicura; }
+      }
+    }
   });
 
   // il sodio, se il sale manca, diventa sale: e' la conversione di legge
@@ -12712,7 +12788,9 @@ function etiFotoSuTela(file) {
       const ctx = tela.getContext('2d', { willReadFrequently: true });
       ctx.imageSmoothingQuality = 'high';
       ctx.drawImage(img, 0, 0, tela.width, tela.height);
-      risolvi(tela);
+      // la foto originale resta a disposizione: serve al secondo sguardo
+      // ravvicinato sulla tabella, alla risoluzione piena del telefono
+      risolvi({ tela: tela, img: img, scala: tela.width / img.naturalWidth });
     };
     img.onerror = () => { URL.revokeObjectURL(url); rifiuta(new Error('foto-illeggibile')); };
     img.src = url;
@@ -12827,7 +12905,9 @@ function etiRitaglio(grigio, larg, alt, soglia) {
    bianco e nero pieno. Torna la tela pronta e la sua gemella al negativo,
    per le etichette stampate chiare su fondo scuro. */
 function preparaEtichetta(file) {
-  return etiFotoSuTela(file).then(tela => {
+  let fotoImg = null, fotoScala = 1;
+  return etiFotoSuTela(file).then(({ tela, img, scala }) => {
+    fotoImg = img; fotoScala = scala;
     let grigio = etiGrigiContrasto(tela);
     let soglia = etiSogliaOtsu(grigio);
 
@@ -12898,8 +12978,239 @@ function preparaEtichetta(file) {
       return fuori;
     })();
 
-    return { grigia: grigia, dritta: fai(scuro), negativa: fai(!scuro), angolo: angolo, box: box };
+    return { grigia: grigia, dritta: fai(scuro), negativa: fai(!scuro), angolo: angolo, box: box,
+      sorgente: { img: fotoImg, scala: fotoScala, angolo: angolo, box: box,
+                  telaW: tela.width, telaH: tela.height } };
   });
+}
+
+/* ---------- il secondo sguardo ravvicinato ----------
+   Sulle foto vere la tabella spesso occupa un angolo: la prima lettura
+   riconosce le parole ma sbaglia i numeri, troppo piccoli. Allora si
+   guarda DOVE l'OCR ha visto le parole della tabella, si ritaglia quella
+   zona dalla foto originale a piena risoluzione e si rilegge solo quella,
+   ingrandita. Gratis, client-side, stessa libreria. */
+
+/* Le parole con le loro coordinate, dal formato tsv dell'OCR. */
+function etiParoleDaTsv(tsv) {
+  return String(tsv || '').split('\n').map(r => r.split('\t'))
+    .filter(c => c.length >= 12 && c[0] === '5' && c[11] && c[11].trim())
+    .map(c => ({ testo: c[11].trim(), x0: +c[6], y0: +c[7],
+                 x1: +c[6] + +c[8], y1: +c[7] + +c[9] }));
+}
+
+/* Le righe della tabella ricostruite dalla GEOMETRIA: le parole si
+   raggruppano per altezza e si ordinano da sinistra a destra. Serve con la
+   lettura "sparsa" dell'OCR, che trova i numeri ma perde l'ordine. */
+function etiRigheSpaziali(parole) {
+  if (!parole || !parole.length) return '';
+  const ordinate = parole.slice().sort((a, b) => (a.y0 + a.y1) - (b.y0 + b.y1));
+  // la MEDIANA delle altezze, non la media: una scritta grande non deve
+  // allargare la soglia fino a fondere due righe vicine della tabella
+  const alte = ordinate.map(w => w.y1 - w.y0).sort((a, b) => a - b);
+  const mediana = alte[Math.floor(alte.length / 2)] || 10;
+  const righe = [];
+  let riga = [ordinate[0]];
+  let cyRiga = (ordinate[0].y0 + ordinate[0].y1) / 2;
+  for (let i = 1; i < ordinate.length; i++) {
+    const w = ordinate[i];
+    const cy = (w.y0 + w.y1) / 2;
+    if (cy - cyRiga <= mediana * 0.6) {
+      riga.push(w);
+      cyRiga = cyRiga + (cy - cyRiga) / riga.length;
+    } else { righe.push(riga); riga = [w]; cyRiga = cy; }
+  }
+  righe.push(riga);
+  return righe.map(r => r.sort((a, b) => a.x0 - b.x0).map(w => w.testo).join(' ')).join('\n');
+}
+
+/* L'abbinamento diretto campo-numero: le etichette di riga lette da
+   lontano dicono DOVE sta ogni voce; i numeri letti da vicino si
+   agganciano alla riga col centro piu' vicino. Niente ricostruzioni di
+   testo: geometria e plausibilita', il resto lo fa il parser dei numeri. */
+function etiAbbinaCampi(lontane, vicine) {
+  const out = { kcal: null, grassi: null, saturi: null, carboidrati: null,
+                zuccheri: null, fibre: null, proteine: null, sale: null, sodio: null };
+  // le righe-campo riconosciute fra le parole lontane
+  const righe = [];
+  (lontane || []).forEach(w => {
+    const t = String(w.testo).toLowerCase().replace(/[^a-zàèéìòù]/g, '');
+    if (t.length < 3) return;
+    for (let i = 0; i < ETI_CAMPI.length; i++) {
+      if (ETI_CAMPI[i].parole.some(k => etiParolaCombacia(t, k))) {
+        righe.push({ campo: ETI_CAMPI[i].campo, prec: i,
+          cy: (w.y0 + w.y1) / 2, alt: Math.max(8, w.y1 - w.y0) });
+        return;
+      }
+    }
+  });
+  if (!righe.length) return out;
+  // sulla stessa riga vince il campo piu' specifico ("di cui saturi" batte
+  // il "grassi" che contiene): stesso ordine di precedenza del parser
+  righe.sort((a, b) => a.cy - b.cy);
+  const ancore = [];
+  righe.forEach(r => {
+    const vicina = ancore.find(a => Math.abs(a.cy - r.cy) < Math.max(a.alt, r.alt) * 0.8);
+    if (!vicina) ancore.push(r);
+    else if (r.prec < vicina.prec) { vicina.campo = r.campo; vicina.prec = r.prec; }
+  });
+  // a ogni ancora i numeri vicini della sua fascia, da sinistra a destra
+  ancore.forEach(a => {
+    if (out[a.campo] !== null) return;
+    const fascia = (vicine || []).filter(w => /\d/.test(w.testo) &&
+        Math.abs((w.y0 + w.y1) / 2 - a.cy) < a.alt * 0.9)
+      .sort((p, q) => p.x0 - q.x0);
+    if (!fascia.length) return;
+    const numeri = etiNumeri(fascia.map(w => w.testo).join(' ').toLowerCase());
+    if (!numeri.length) return;
+    if (a.campo === 'kcal') {
+      const scelta = etiScegliKcal(numeri);
+      if (scelta) { out.kcal = scelta.v; out.kcalSicura = scelta.sicura; }
+      return;
+    }
+    for (const n of numeri) {
+      let v = n.v;
+      if (n.unita === 'mg') v = v / 1000;
+      if (n.unita === 'kcal' || n.unita === 'kj' || n.unita === '%') continue;
+      if (etiPlausibile(a.campo, v)) { out[a.campo] = v; break; }
+    }
+  });
+  return out;
+}
+
+/* Il rettangolo dove sta la tabella: le parole chiave riconosciute, piu'
+   le cifre che stanno sulle loro stesse righe (la colonna dei valori). */
+const ETI_ZONA_CHIAVI = ['energia', 'energy', 'grassi', 'fat', 'carboidrati',
+  'carbohydrate', 'proteine', 'protein', 'zuccheri', 'saturi', 'saturates',
+  'fibre', 'sale', 'salt', 'kcal', 'nutrizionale', 'nutrizionali', 'nutritional'];
+
+function etiZonaValori(parole, largTela, altTela) {
+  const chiavi = [];
+  (parole || []).forEach(w => {
+    const t = String(w.testo).toLowerCase().replace(/[^a-zàèéìòù]/g, '');
+    if (t.length < 3) return;
+    if (ETI_ZONA_CHIAVI.some(k => etiParolaCombacia(t, k))) chiavi.push(w);
+  });
+  if (chiavi.length < 3) return null;
+  let x0 = Math.min.apply(null, chiavi.map(w => w.x0));
+  let x1 = Math.max.apply(null, chiavi.map(w => w.x1));
+  let y0 = Math.min.apply(null, chiavi.map(w => w.y0));
+  let y1 = Math.max.apply(null, chiavi.map(w => w.y1));
+  const rigaMedia = chiavi.reduce((s, w) => s + (w.y1 - w.y0), 0) / chiavi.length;
+  // per ogni riga con una parola chiave si prendono solo i DUE numeri piu'
+  // vicini alla sua destra: la colonna dei valori sta li', mentre telefoni
+  // e indirizzi piu' in la' non devono allargare la zona
+  chiavi.forEach(k => {
+    const cy = (k.y0 + k.y1) / 2;
+    const stessaRiga = (parole || []).filter(w =>
+      /\d/.test(w.testo) && w.x0 >= k.x0 &&
+      (w.y0 + w.y1) / 2 > k.y0 - rigaMedia && (w.y0 + w.y1) / 2 < k.y1 + rigaMedia)
+      .sort((a, b) => a.x0 - b.x0).slice(0, 2);
+    stessaRiga.forEach(w => { x0 = Math.min(x0, w.x0); x1 = Math.max(x1, w.x1); });
+  });
+  // in larghezza un po' d'aria; in basso molta di piu': le righe in fondo
+  // (proteine, sale) sono spesso proprio quelle che da lontano non si
+  // leggevano, e la zona deve comprenderle anche senza averle viste
+  const mx = (x1 - x0) * 0.07 + rigaMedia;
+  const zona = { x0: Math.max(0, x0 - mx),
+                 y0: Math.max(0, y0 - (y1 - y0) * 0.08 - rigaMedia),
+                 x1: Math.min(largTela, x1 + mx),
+                 y1: Math.min(altTela, y1 + (y1 - y0) * 0.35 + rigaMedia * 2) };
+  // se la zona e' quasi tutta la tela, avvicinarsi non aggiunge niente
+  if ((zona.x1 - zona.x0) * (zona.y1 - zona.y0) > largTela * altTela * 0.8) return null;
+  if (zona.x1 - zona.x0 < 40 || zona.y1 - zona.y0 < 40) return null;
+  return zona;
+}
+
+/* La zona ripulita per l'OCR: via i filetti orizzontali che corrono sotto
+   ogni voce della tabella (l'OCR li scambia per parte delle lettere e
+   butta l'intera riga), e una sfumatura leggera che mangia la grana della
+   foto senza toccare le lettere. */
+function etiPulisciZona(grigio, w, h) {
+  const soglia = etiSogliaOtsu(grigio);
+  // un filetto e' una corsa CONTINUA di scuro piu' lunga di un quarto della
+  // larghezza: si cancella solo la corsa, mai il resto della riga
+  const minimo = Math.max(60, w * 0.25);
+  for (let y = 0; y < h; y++) {
+    let inizio = -1;
+    for (let x = 0; x <= w; x++) {
+      const scuro = x < w && grigio[y * w + x] < soglia;
+      if (scuro && inizio < 0) inizio = x;
+      else if (!scuro && inizio >= 0) {
+        if (x - inizio >= minimo) {
+          for (let k = inizio; k < x; k++) grigio[y * w + k] = 255;
+        }
+        inizio = -1;
+      }
+    }
+  }
+  const fuori = new Uint8ClampedArray(grigio.length);
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      let s = 0, n = 0;
+      for (let dy = -1; dy <= 1; dy++) {
+        const yy = y + dy;
+        if (yy < 0 || yy >= h) continue;
+        for (let dx = -1; dx <= 1; dx++) {
+          const xx = x + dx;
+          if (xx < 0 || xx >= w) continue;
+          s += grigio[yy * w + xx]; n++;
+        }
+      }
+      fuori[y * w + x] = s / n;
+    }
+  }
+  return fuori;
+}
+
+/* La zona della tabella, ripresa dalla FOTO ORIGINALE e ingrandita fino a
+   1900px, raddrizzata come la prima passata e riportata in grigi puliti. */
+function etiTelaZoom(sorgente, zona) {
+  if (!sorgente || !sorgente.img) return null;
+  const a = sorgente.angolo * Math.PI / 180;
+  const cx = sorgente.telaW / 2, cy = sorgente.telaH / 2;
+  const punti = [[zona.x0, zona.y0], [zona.x1, zona.y0], [zona.x0, zona.y1], [zona.x1, zona.y1]]
+    .map(p => {
+      const xt = p[0] + sorgente.box.x, yt = p[1] + sorgente.box.y;
+      // il ritaglio vive nella tela raddrizzata: si torna indietro ruotando
+      const xo = cx + (xt - cx) * Math.cos(a) - (yt - cy) * Math.sin(a);
+      const yo = cy + (xt - cx) * Math.sin(a) + (yt - cy) * Math.cos(a);
+      return [xo / sorgente.scala, yo / sorgente.scala];
+    });
+  const sx0 = Math.max(0, Math.min.apply(null, punti.map(p => p[0])));
+  const sy0 = Math.max(0, Math.min.apply(null, punti.map(p => p[1])));
+  const sx1 = Math.min(sorgente.img.naturalWidth, Math.max.apply(null, punti.map(p => p[0])));
+  const sy1 = Math.min(sorgente.img.naturalHeight, Math.max.apply(null, punti.map(p => p[1])));
+  const w = sx1 - sx0, h = sy1 - sy0;
+  if (w < 60 || h < 60) return null;
+  const su = Math.min(3, 1900 / w);
+  const fuori = document.createElement('canvas');
+  fuori.width = Math.round(w * su);
+  fuori.height = Math.round(h * su);
+  const ctx = fuori.getContext('2d', { willReadFrequently: true });
+  ctx.imageSmoothingQuality = 'high';
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, fuori.width, fuori.height);
+  ctx.translate(fuori.width / 2, fuori.height / 2);
+  ctx.rotate(-a);
+  ctx.drawImage(sorgente.img, sx0, sy0, w, h,
+    -fuori.width / 2, -fuori.height / 2, fuori.width, fuori.height);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  // grigi col contrasto stirato, ripuliti da filetti e grana,
+  // al contrario se il buio vince
+  const grigio = etiPulisciZona(etiGrigiContrasto(fuori), fuori.width, fuori.height);
+  const soglia = etiSogliaOtsu(grigio);
+  let neri = 0;
+  for (let i = 0; i < grigio.length; i++) if (grigio[i] < soglia) neri++;
+  const scuro = neri > grigio.length * 0.55;
+  const dati = ctx.createImageData(fuori.width, fuori.height);
+  for (let i = 0; i < grigio.length; i++) {
+    const g = scuro ? 255 - grigio[i] : grigio[i];
+    dati.data[i * 4] = dati.data[i * 4 + 1] = dati.data[i * 4 + 2] = g;
+    dati.data[i * 4 + 3] = 255;
+  }
+  ctx.putImageData(dati, 0, 0);
+  return fuori;
 }
 
 /* La schermata del catalogo: ogni ingrediente conosciuto, dal piu' sano
@@ -13025,11 +13336,25 @@ function leggiEtichetta(file) {
 
   di('Preparo la foto…', 6);
   let lavoratore = null;
-  const leggi = tela => lavoratore.recognize(tela)
-    .then(res => ({
-      letti: interpretaEtichetta((res.data && res.data.text) || ''),
-      fiducia: (res.data && res.data.confidence) || 0
-    }));
+  // ogni lettura interpreta DUE volte: il testo cosi' come esce dall'OCR,
+  // e le righe ricostruite dalla geometria delle parole. Si completano.
+  const leggi = (tela, psm) => (psm
+      ? lavoratore.setParameters({ tessedit_pageseg_mode: psm, user_defined_dpi: '300' })
+      : Promise.resolve())
+    .then(() => lavoratore.recognize(tela, {}, { text: true, tsv: true }))
+    .then(res => {
+      const parole = etiParoleDaTsv(res.data && res.data.tsv);
+      const daTesto = interpretaEtichetta((res.data && res.data.text) || '');
+      const daSpazio = interpretaEtichetta(etiRigheSpaziali(parole));
+      // dalle righe ricostruite le kcal si accettano solo confermate:
+      // parole e numeri rimessi insieme possono accostare cose sbagliate
+      if (daSpazio.kcal !== null && !daSpazio.kcalSicura) {
+        daSpazio.kcal = null;
+        daSpazio.trovati = ['kcal', 'grassi', 'carboidrati', 'proteine']
+          .filter(k => daSpazio[k] !== null).length;
+      }
+      return { letti: etiUnisci(daTesto, daSpazio), parole: parole };
+    });
 
   Promise.all([preparaEtichetta(file), caricaOcr()])
     .then(([pronte, T]) =>
@@ -13047,29 +13372,72 @@ function leggiEtichetta(file) {
         }).then(() => pronte);
       })
     )
-    .then(pronte =>
+    .then(pronte => {
+      const aPosto = l => l.trovati >= 4 &&
+        l.saturi !== null && l.zuccheri !== null && l.sale !== null &&
+        l.saturi !== 0 && l.zuccheri !== 0 && l.sale !== 0;
+
+      // l'avvicinamento: dalle parole gia' viste si capisce dove sta la
+      // tabella, la si riprende dalla foto originale ingrandita e si
+      // rilegge solo quella. E' la mossa che salva le tabelle piccole.
+      const avvicina = (esito) => {
+        if (aPosto(esito.letti)) return esito;
+        // la zona si cerca su OGNI lettura fatta, in ordine di fiducia:
+        // basta che una abbia visto le parole della tabella
+        let zona = null, paroleZona = null;
+        for (const parole of (esito.serie || [esito.parole])) {
+          zona = etiZonaValori(parole, pronte.grigia.width, pronte.grigia.height);
+          if (zona) { paroleZona = parole; break; }
+        }
+        const tela2 = zona ? etiTelaZoom(pronte.sorgente, zona) : null;
+        if (!tela2) return esito;
+        di('Mi avvicino alla tabella…', 78);
+        // da vicino si legge "sparso": trova i numeri anche dove il blocco
+        // unico si perde, e le righe le rimette insieme la geometria
+        return leggi(tela2, '11').then(vicino => {
+          // la fusione per coordinate: le etichette di riga lette da lontano
+          // e i numeri letti da vicino finiscono sulle STESSE righe, e il
+          // parser di sempre le legge come una tabella intera
+          const sx = (zona.x1 - zona.x0) / tela2.width;
+          const sy = (zona.y1 - zona.y0) / tela2.height;
+          const vicine = vicino.parole.map(w => ({ testo: w.testo,
+            x0: zona.x0 + w.x0 * sx, x1: zona.x0 + w.x1 * sx,
+            y0: zona.y0 + w.y0 * sy, y1: zona.y0 + w.y1 * sy }));
+          // le etichette di riga viste da lontano + i numeri visti da vicino
+          const fuse = etiAbbinaCampi(paroleZona, vicine);
+          // chi comanda: se da lontano si era letto qualcosa di solido,
+          // l'avvicinamento riempie i buchi; se da lontano era quasi buio,
+          // comanda l'abbinamento ravvicinato. Le kcal sicure vincono sempre.
+          const letti = esito.letti.trovati >= 2
+            ? etiUnisci(etiUnisci(esito.letti, vicino.letti), fuse)
+            : etiUnisci(etiUnisci(fuse, vicino.letti), esito.letti);
+          return { letti: letti };
+        });
+      };
+
       // primo giro sui grigi: sulle foto vere, con luci e ombre, l'OCR con la
       // sua soglia locale legge piu' del nostro bianco e nero secco
-      leggi(pronte.grigia).then(prima => {
+      return leggi(pronte.grigia).then(prima => {
         // ci si ferma solo quando c'e' TUTTO e niente puzza: uno zero su
         // zuccheri o saturi e' quasi sempre una cifra persa, non un vero zero
-        const l1 = prima.letti;
-        const completa = l1.trovati >= 4 &&
-          l1.saturi !== null && l1.zuccheri !== null && l1.sale !== null &&
-          l1.saturi !== 0 && l1.zuccheri !== 0 && l1.sale !== 0;
-        if (completa) return prima;
+        if (aPosto(prima.letti)) return prima;
         // secondo giro sul bianco e nero: quello che ha letto in piu' riempie i buchi
-        di('Rileggo in bianco e nero…', 55);
+        di('Rileggo in bianco e nero…', 50);
         return leggi(pronte.dritta).then(seconda => {
-          const insieme = { letti: etiUnisci(prima.letti, seconda.letti) };
-          if (insieme.letti.trovati >= 2) return insieme;
+          const insieme = {
+            letti: etiUnisci(prima.letti, seconda.letti),
+            serie: [prima.parole, seconda.parole]
+          };
+          if (insieme.letti.trovati >= 2) return avvicina(insieme);
           // quasi nulla: forse l'etichetta e' chiara su fondo scuro
-          di('Riprovo al negativo…', 75);
-          return leggi(pronte.negativa).then(terza =>
-            ({ letti: etiUnisci(insieme.letti, terza.letti) }));
+          di('Riprovo al negativo…', 65);
+          return leggi(pronte.negativa).then(terza => avvicina({
+            letti: etiUnisci(insieme.letti, terza.letti),
+            serie: insieme.serie.concat([terza.parole])
+          }));
         });
-      })
-    )
+      });
+    })
     .then(({ letti }) => {
       try { lavoratore.terminate(); } catch (e) {}
 
@@ -17434,6 +17802,7 @@ window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
   etichetta: interpretaEtichetta, tabella: tabellaDi,
   preparaEtichetta: preparaEtichetta,
   salubrita: salubrita, salubritaDi: salubritaDi, etiUnisci: etiUnisci,
+  etiParoleDaTsv: etiParoleDaTsv, etiZonaValori: etiZonaValori, etiTelaZoom: etiTelaZoom,
   catalogoTrova: catalogoTrova, catalogoRegistra: catalogoRegistra,
   salubritaRicetta: salubritaRicetta,
   renderCatalogo: renderCatalogo,
