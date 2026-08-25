@@ -3960,6 +3960,21 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(E('Energia 411 kcal Sale 1,19 g Grassi 9 g Carboidrati 68 g Proteine 12 g').sale, 1.19,
       'un valore vero a due decimali e\' stato amputato');
 
+    // le abbreviazioni stampate sulle etichette si riconoscono come le parole intere
+    const abbrev = E('Valore energ. 1720 kJ / 411 kcal\nGrassi tot. 9,5 g\ndi cui sat. 1,2 g\n'
+      + 'Carboidr. 68 g\ndi cui zucch. 3,1 g\nFibr. 5,6 g\nProt. 12,5 g\nSale 1,1 g');
+    eq(abbrev.trovati, 4, 'le abbreviazioni non si leggono tutte');
+    eq(abbrev.kcal, 411, 'valore energ. non e\' l\'energia');
+    eq(abbrev.grassi, 9.5, 'grassi tot. non sono i grassi');
+    eq(abbrev.saturi, 1.2, 'sat. non sono i saturi');
+    eq(abbrev.carboidrati, 68, 'carboidr. non sono i carboidrati');
+    eq(abbrev.zuccheri, 3.1, 'zucch. non sono gli zuccheri');
+    eq(abbrev.fibre, 5.6, 'fibr. non sono le fibre');
+    eq(abbrev.proteine, 12.5, 'prot. non sono le proteine');
+    // e la variante corta di carboidrati usata sugli sportivi
+    eq(E('Energia 380 kcal Carb. 55 g Prot. 30 g Grassi 5 g').carboidrati, 55,
+      'carb. non sono i carboidrati');
+
     // e due letture della stessa foto si completano, zero sospetto compreso
     const U = a.dom.window.fitmealsProva.etiUnisci;
     const unione = U(
