@@ -493,15 +493,42 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(piero.gusti.celiaco, 'il senza glutine di Piero si e\' perso');
     vero(piero.gusti.esclusi.includes('gorgonzola'), 'gli esclusi di Piero si sono persi');
 
-    // una risposta per una cena che non esiste piu' viene spiegata, non applicata
+    // una risposta di una cena precedente non si perde: entra in quella
+    // aperta, e il toast spiega cos'e' successo
     const c = await app();
     const orfana = await c.dom.window.fitmealsFamiglia.link(
-      { v: 1, tipo: 'cena-risposta', op: 'op-x', cid: 'cena-sparita', da: 'Anna', gusti: {} });
+      { v: 1, tipo: 'cena-risposta', op: 'op-x', cid: 'cena-sparita', nomeCena: 'Vecchia cena',
+        da: 'Anna', gusti: { dieta: 'vegano', celiaco: false, esclusi: [] } });
     await a.dom.window.fitmealsFamiglia.importa(orfana.link);
     await wait(200);
-    vero(a.testo('#toast').includes('non trovo più'), 'la risposta orfana non viene spiegata');
-    vero(!a.dom.window.fitmealsCena.stato().partecipanti.some(p => p.nome === 'Anna'),
-      'la risposta orfana e\' entrata lo stesso');
+    const anna = a.dom.window.fitmealsCena.stato().partecipanti.find(p => p.nome === 'Anna');
+    vero(anna && anna.gusti.dieta === 'vegano', 'la risposta di una cena precedente si e\' persa');
+    vero(a.testo('#toast').includes('cena precedente'), 'il travaso non viene spiegato');
+
+    // e su un telefono SENZA nessuna cena (il link aperto in Safari mentre
+    // la cena vive nell'app): la cena si apre da sola col suo nome
+    const e2 = await app();
+    await e2.dom.window.fitmealsFamiglia.importa(orfana.link);
+    await wait(200);
+    const cenaNuova = e2.dom.window.fitmealsCena.stato();
+    eq(cenaNuova.nome, 'Vecchia cena', 'la cena di ripiego non prende il nome giusto');
+    vero(cenaNuova.partecipanti.some(p => p.nome === 'Anna'), 'i gusti non entrano nella cena di ripiego');
+    vero(e2.testo('#toast').includes('incolla il link'), 'manca il consiglio di incollare nell\'app');
+
+    // il campo "incollalo qui" dentro la cena legge i link come l'apertura diretta
+    a.click('[data-act=cena-apri]');
+    await wait(100);
+    const rispostaBis = await c.dom.window.fitmealsFamiglia.link(
+      { v: 1, tipo: 'cena-risposta', op: 'op-y', cid: a.dom.window.fitmealsCena.stato().id,
+        da: 'Marco', gusti: { dieta: '', celiaco: true, esclusi: [] } });
+    a.d.getElementById('cena-link-in').value = rispostaBis.link;
+    a.click('[data-act=cena-incolla]');
+    await wait(300);
+    vero(a.dom.window.fitmealsCena.stato().partecipanti.some(p => p.nome === 'Marco'),
+      'il link incollato nella cena non viene letto');
+    // e anche la famiglia ha il suo campo per incollare
+    a.tab('view-profile');
+    vero(a.d.getElementById('fam-link-in'), 'manca il campo per incollare i link della famiglia');
   });
 
   // ---------------------------------------------------------------- salute
