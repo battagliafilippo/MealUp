@@ -15354,7 +15354,10 @@ const AIUTO_FAMIGLIA = `<b>Come funziona?</b><br>
   frigo e freezer già aggiornati, con valori e giudizi.<br>
   Tutto viaggia dentro il link, da telefono a telefono: niente account, niente
   server, niente costi. L'aggiornamento arriva quando il link viene aperto,
-  non da solo in tempo reale.`;
+  non da solo in tempo reale.<br>
+  Su iPhone il link a volte si apre in Safari invece che nell'app installata:
+  in quel caso tienilo premuto, copialo e incollalo nel campo «Incollalo qui»,
+  dentro l'app — arriva tutto lo stesso.`;
 
 function renderFamiglia() {
   const el = document.getElementById('famiglia-body');
@@ -15365,7 +15368,12 @@ function renderFamiglia() {
   if (!f) {
     el.innerHTML = `
       <button type="button" class="btn-primary full-width" style="margin-top:0" data-act="famiglia-crea">Crea la famiglia</button>
-      <p class="hint" style="margin-top:8px">Hai ricevuto un invito? Apri il link che ti hanno mandato e sei dentro.</p>
+      <p class="hint" style="margin-top:8px">Hai ricevuto un invito? Apri il link che ti hanno mandato, oppure incollalo qui sotto.</p>
+      <div class="input-group" style="margin-top:8px">
+        <input type="text" id="fam-link-in" placeholder="Incolla qui l'invito ricevuto"
+          autocomplete="off" spellcheck="false">
+        <button type="button" class="btn-primary" data-act="famiglia-incolla">Leggi</button>
+      </div>
       ${aiutoRiquadro('aiuto-famiglia', AIUTO_FAMIGLIA)}`;
     return;
   }
@@ -15377,6 +15385,11 @@ function renderFamiglia() {
     <div class="row">
       <button type="button" class="btn-ghost" data-act="famiglia-invita">Invita in famiglia</button>
       <button type="button" class="btn-primary" data-act="famiglia-manda">Manda a casa la spesa</button>
+    </div>
+    <div class="input-group" style="margin-top:10px">
+      <input type="text" id="fam-link-in" placeholder="Hai ricevuto un link? Incollalo qui"
+        autocomplete="off" spellcheck="false">
+      <button type="button" class="btn-primary" data-act="famiglia-incolla">Leggi</button>
     </div>
     <button type="button" class="chip ${S.ui.perFamiglia ? 'active' : ''}" style="margin-top:12px" data-act="famiglia-tutti">
       ${S.ui.perFamiglia ? '✓ ' : ''}Cucino per tutta la famiglia</button>
@@ -15581,12 +15594,20 @@ function renderCena() {
       <button type="button" class="btn-ghost" data-act="cena-invita">Invita con un link</button>
       <button type="button" class="btn-primary" data-act="cena-trova">Trova la cena giusta</button>
     </div>
+    <div class="input-group" style="margin-top:10px">
+      <input type="text" id="cena-link-in" placeholder="Hai ricevuto una risposta? Incollala qui"
+        autocomplete="off" spellcheck="false">
+      <button type="button" class="btn-primary" data-act="cena-incolla">Leggi</button>
+    </div>
     <div id="cena-proposte"></div>
     ${aiutoRiquadro('aiuto-cena', `<b>Come funziona?</b><br>
       Aggiungi gli amici a mano, oppure tocca «Invita con un link» e mandaglielo
       (Condividi → scegli la chat, o fagli inquadrare il QR): chi lo apre segna
       cosa non mangia e ti rimanda la risposta con un tap. Apri il suo link e i
       suoi gusti entrano da soli.<br>
+      Su iPhone il link a volte si apre in Safari invece che nell'app: in quel
+      caso tienilo premuto, copialo e incollalo nel campo qui sopra, dentro
+      l'app — arriva tutto lo stesso.<br>
       Poi «Trova la cena giusta»: due piatti che vanno bene a tutti, incrociando
       i gusti di ognuno. Se nessun piatto accontenta proprio tutti, te lo dico
       e ti propongo i due che scontentano meno persone.`)}`;
@@ -15640,11 +15661,19 @@ function apriCenaOspite(d) {
 }
 
 function applicaRispostaCena(d) {
-  if (!S.cena || S.cena.id !== d.cid) {
-    toast('Questa risposta è per una cena che non trovo più.');
-    return;
-  }
+  // la risposta di un amico non deve MAI finire in un vicolo cieco.
+  // Se la cena c'e' (anche ricreata nel frattempo), i gusti entrano li';
+  // se non c'e' — capita su iPhone, dove il link puo' aprirsi in Safari
+  // mentre la cena vive nell'app installata — se ne apre una col suo nome.
   const nome = String(d.da || 'Ospite').slice(0, 30);
+  let avviso = '';
+  if (!S.cena) {
+    S.cena = { id: d.cid || 'c' + Date.now().toString(36),
+      nome: String(d.nomeCena || 'La cena').slice(0, 40), partecipanti: [], giro: 0 };
+    avviso = ' Qui non c\'era ancora la cena: l\'ho aperta io. Se la tua vive nell\'app installata, incolla il link li\' dentro.';
+  } else if (S.cena.id !== d.cid) {
+    avviso = ' (La risposta era per una cena precedente: l\'ho messa in quella aperta.)';
+  }
   const gia = S.cena.partecipanti.find(p => norm(p.nome) === norm(nome));
   if (gia) gia.gusti = d.gusti || gia.gusti;
   else S.cena.partecipanti.push({ nome: nome, gusti: d.gusti || {} });
@@ -15652,7 +15681,8 @@ function applicaRispostaCena(d) {
   renderCena();
   openModal('modal-cena');
   const eti = etichetteGusti(d.gusti || {});
-  toast('I gusti di ' + nome + ' sono arrivati: ' + (eti.length ? eti.join(' · ') : 'mangia tutto') + '.');
+  toast('I gusti di ' + nome + ' sono arrivati: '
+    + (eti.length ? eti.join(' · ') : 'mangia tutto') + '.' + avviso);
 }
 
 /* ---------- gruppo ----------
@@ -17521,6 +17551,20 @@ document.addEventListener('click', e => {
         if (d && d.tipo === 'famiglia-invito') entraInFamiglia(d);
       }).catch(() => toast('L\'invito non è leggibile: fattelo rimandare.'));
       break;
+    case 'famiglia-incolla': {
+      // per chi apre i link in Safari mentre la famiglia vive nell'app:
+      // incolli qui e passa dallo stesso identico smistamento
+      const campoFam = F('fam-link-in');
+      if (campoFam && campoFam.value.trim()) { importaLink(campoFam.value); campoFam.value = ''; }
+      else toast('Incolla prima il link ricevuto.');
+      break;
+    }
+    case 'cena-incolla': {
+      const campoCena = F('cena-link-in');
+      if (campoCena && campoCena.value.trim()) { importaLink(campoCena.value); campoCena.value = ''; }
+      else toast('Incolla prima il link ricevuto.');
+      break;
+    }
     case 'condividi-copy': {
       const campoLink = F('condividi-link');
       if (!campoLink) break;
@@ -17603,7 +17647,8 @@ document.addEventListener('click', e => {
       const nomeOspite = (F('cenag-nome').value || '').trim().slice(0, 30);
       if (!nomeOspite) { toast('Scrivi il tuo nome, così sanno di chi sono i gusti.'); F('cenag-nome').focus(); break; }
       const rispostaCena = { v: 1, tipo: 'cena-risposta', op: uid(), cid: cenaOspite.cid,
-        da: nomeOspite, gusti: leggiGustiCena('cenag-chips', 'cenag-no') };
+        nomeCena: cenaOspite.nomeCena || '', da: nomeOspite,
+        gusti: leggiGustiCena('cenag-chips', 'cenag-no') };
       chiudiModal('modal-cena-ospite');
       apriCondivisione('Rimanda la risposta',
         'Manda questo link a ' + (cenaOspite.da || 'chi organizza') + ': i tuoi gusti entrano da soli nella sua cena.',
