@@ -3975,6 +3975,18 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(E('Energia 380 kcal Carb. 55 g Prot. 30 g Grassi 5 g').carboidrati, 55,
       'carb. non sono i carboidrati');
 
+    // il kJ che ha perso l'unita' per strada conferma o corregge le kcal
+    eq(E('Energia 1515 357kcal Grassi 1,7 g Carboidrati 69 g Proteine 15 g').kcal, 357,
+      'le kcal coerenti col kJ senza unita\' non vengono tenute');
+    eq(E('Energia 1515 57kcal Grassi 1,7 g Carboidrati 69 g Proteine 15 g').kcal, 362,
+      'le kcal storte non vengono corrette dal kJ senza unita\'');
+    // la parola Energia illeggibile non serve: bastano le unita' kcal/kJ
+    eq(E('Xyzabc 1720 kJ / 411 kcal\nGrassi 9 g Carboidrati 68 g Proteine 12 g').kcal, 411,
+      'la riga dell\'energia senza la parola Energia si perde');
+    // un numero pescato fra tanti senza unita' non diventa kcal a caso
+    vero(E('Energia 800 090342 12 175\nGrassi 9 g').kcal === null,
+      'un numero a caso e\' diventato kcal');
+
     // e due letture della stessa foto si completano, zero sospetto compreso
     const U = a.dom.window.fitmealsProva.etiUnisci;
     const unione = U(
