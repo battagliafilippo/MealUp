@@ -3313,6 +3313,7 @@ h3{font-weight:600;letter-spacing:-.018em}
             <input type="number" id="f-carbs" inputmode="numeric" min="0" placeholder="Carbo g">
             <input type="number" id="f-fat" inputmode="numeric" min="0" placeholder="Grassi g">
           </div>
+          <p class="hint" id="f-calcolo" hidden></p>
         </div>
 
         <div>
@@ -9763,6 +9764,29 @@ function parseSteps(text) {
   return parts.map(s => /[.!?]$/.test(s) ? s : s + '.');
 }
 
+let formIngIniziale = '';   // per capire se la grammatura e' stata toccata
+
+/* L'anteprima viva sotto i campi dei valori: mentre scrivi gli ingredienti
+   ti dico gia' cosa calcolerei dalla grammatura, senza toccare niente. */
+let _calcoloTimer = null;
+function aggiornaCalcoloForm() {
+  clearTimeout(_calcoloTimer);
+  _calcoloTimer = setTimeout(() => {
+    const el = document.getElementById('f-calcolo');
+    if (!el) return;
+    const testo = ((document.getElementById('f-ing') || {}).value || '').trim();
+    if (!testo) { el.hidden = true; return; }
+    const calcolo = valoriDaGrammatura(parseIngredients(testo));
+    if (calcolo.peso < 50 || calcolo.copertura < 0.7) { el.hidden = true; return; }
+    el.textContent = 'Dalla grammatura calcolo: ' + calcolo.kcal + ' kcal · '
+      + calcolo.pro + ' g proteine · ' + calcolo.carbs + ' g carbo · '
+      + calcolo.fat + ' g grassi, totali'
+      + (calcolo.copertura < 0.995 ? ' (' + Math.round(calcolo.copertura * 100) + '% del peso riconosciuto)' : '')
+      + '. Se cambi la grammatura, al salvataggio li aggiorno io.';
+    el.hidden = false;
+  }, 350);
+}
+
 function openForm(id) {
   editingId = id || null;
   const r = id ? S.recipes.find(x => x.id === id) : null;
@@ -9791,6 +9815,8 @@ function openForm(id) {
   F('ing-suggestions').innerHTML = S.myIngredients.slice(0, 14).map(i =>
     `<button type="button" class="chip" data-act="suggest" data-val="${esc(i)}">+ ${esc(i)}</button>`).join('');
 
+  formIngIniziale = F('f-ing').value;
+  aggiornaCalcoloForm();
   openModal('modal-add');
 }
 
@@ -9821,6 +9847,28 @@ function submitForm() {
     note: F('f-note').value.trim()
   };
 
+  // la grammatura comanda: se hai toccato gli ingredienti di una ricetta
+  // (o hai lasciato i valori vuoti in una nuova), kcal e macro si
+  // ricalcolano da soli dalle tabelle per 100 g, pesate in grammi
+  const eraModifica = !!editingId;   // closeModals piu' avanti lo azzera
+  const grammaturaCambiata = editingId && ingText !== formIngIniziale.trim();
+  let ricalcolati = false;
+  if (grammaturaCambiata || !rec.kcal) {
+    const calcolo = valoriDaGrammatura(rec.ing);
+    if (calcolo.copertura >= 0.7 && calcolo.peso >= 50) {
+      rec.kcal = calcolo.kcal;
+      rec.pro = calcolo.pro;
+      rec.carbs = calcolo.carbs;
+      rec.fat = calcolo.fat;
+      ricalcolati = true;
+    }
+  }
+  if (!rec.kcal) {
+    toast('Da questi ingredienti non riesco a calcolare i valori: scrivili tu.');
+    F('f-kcal').focus();
+    return;
+  }
+
   pushUndo((editingId ? 'Modifica della ricetta ' : 'Aggiunta della ricetta ') + title);
   INGREDIENTI = null;
   rec.mtime = Date.now(); // marca la ricetta come tua: e questa che viaggia nel gruppo
@@ -9838,7 +9886,10 @@ function submitForm() {
   renderAll();
 
   const ban = bannedBy(rec);
-  toast(ban ? 'Salvata, ma nascosta: contiene ' + ban + '.' : (editingId ? 'Ricetta aggiornata.' : 'Ricetta salvata.'));
+  toast(ban ? 'Salvata, ma nascosta: contiene ' + ban + '.'
+    : ricalcolati
+      ? (eraModifica ? 'Ricetta aggiornata' : 'Ricetta salvata') + ': valori ricalcolati dalla grammatura, ' + rec.kcal + ' kcal totali.'
+      : (eraModifica ? 'Ricetta aggiornata.' : 'Ricetta salvata.'));
 }
 
 function deleteRecipe(id, btn) {
@@ -10791,6 +10842,44 @@ function salubritaRicetta(r) {
   });
   _salubritaRicette[chiave] = g;
   return g;
+}
+
+/* ---------- i valori calcolati dalla grammatura ----------
+   Ogni ingrediente pesato in grammi (stessa conversione della dispensa)
+   moltiplicato per la sua tabella per 100 g. La copertura dice quanta
+   parte del peso ha una tabella conosciuta: sotto quella soglia meglio
+   non toccare i numeri scritti a mano. */
+function tabellaAncheFuzzy(nome) {
+  const t = tabellaDi(nome);
+  if (t) return t;
+  for (const k of Object.keys(ING_TAB)) {
+    if (sameIngredient(k, nome)) return ING_TAB[k];
+  }
+  return null;
+}
+
+function valoriDaGrammatura(ing) {
+  let kcal = 0, pro = 0, carbs = 0, fat = 0, peso = 0, pesoNoto = 0;
+  (ing || []).forEach(i => {
+    const g = quantitaRichiesta(i, 1, 'g');
+    if (!isFinite(g) || g <= 0) return;
+    peso += g;
+    const t = tabellaAncheFuzzy(i.n);
+    if (!t) return;
+    pesoNoto += g;
+    kcal += g * (Number(t[0]) || 0) / 100;
+    pro += g * (Number(t[1]) || 0) / 100;
+    carbs += g * (Number(t[2]) || 0) / 100;
+    fat += g * (Number(t[3]) || 0) / 100;
+  });
+  return {
+    kcal: Math.round(kcal),
+    pro: Math.round(pro * 10) / 10,
+    carbs: Math.round(carbs * 10) / 10,
+    fat: Math.round(fat * 10) / 10,
+    peso: Math.round(peso),
+    copertura: peso ? pesoNoto / peso : 0
+  };
 }
 
 /* Il pallino colorato della scala, da mettere accanto a un nome. */
@@ -17615,6 +17704,7 @@ document.addEventListener('input', e => {
     if (campo) { campo.focus(); campo.setSelectionRange(campo.value.length, campo.value.length); }
   }
   if (e.target && e.target.id === 'q-nome') cercaPerQuick(e.target.value);
+  if (e.target && e.target.id === 'f-ing') aggiornaCalcoloForm();
   if (e.target && e.target.id === 'disp-cerca') {
     // Una barra sola: cerca nella credenza, propone, e riordina le ricette.
     renderDispSuggest(e.target.value);
@@ -17804,7 +17894,7 @@ window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
   salubrita: salubrita, salubritaDi: salubritaDi, etiUnisci: etiUnisci,
   etiParoleDaTsv: etiParoleDaTsv, etiZonaValori: etiZonaValori, etiTelaZoom: etiTelaZoom,
   catalogoTrova: catalogoTrova, catalogoRegistra: catalogoRegistra,
-  salubritaRicetta: salubritaRicetta,
+  salubritaRicetta: salubritaRicetta, valoriDaGrammatura: valoriDaGrammatura,
   renderCatalogo: renderCatalogo,
   energia: energy, renderProfilo: renderProfile,
   freschezza: freschezza, scadenze: scadenzeDelGiorno, inventario: inventario,
