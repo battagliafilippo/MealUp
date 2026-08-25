@@ -10851,7 +10851,20 @@ function etiNumeri(pezzo) {
     const pulito = grezzo.replace(/[Oo]/g, '0').replace(/[Il|]/g, '1').replace(',', '.');
     const v = parseFloat(pulito);
     if (!isFinite(v)) continue;
-    fuori.push({ v: v, unita: (m[2] || '').toLowerCase(), pos: m.index });
+    const unita = (m[2] || '').toLowerCase();
+    // La confusione piu' frequente dell'OCR sulle etichette: la "g" dell'unita'
+    // letta come "9" e incollata al numero ("1,2 g" -> "1,29", "68 g" -> "689").
+    // Se il numero non ha unita' e finisce per 9, si offre anche la variante
+    // senza quel 9: per i decimali lunghi viene prima (quasi sempre e' la g),
+    // per gli interi dopo (rete di sicurezza quando l'intero non e' plausibile).
+    const dec = (pulito.split('.')[1] || '').length;
+    const variante = !unita && /9$/.test(pulito) && pulito.replace(/\.?9$/, '') !== '' &&
+      /[0-9]/.test(pulito.replace(/\.?9$/, ''))
+      ? { v: parseFloat(pulito.replace(/9$/, '')), unita: 'g', pos: m.index }
+      : null;
+    if (variante && dec >= 2) fuori.push(variante);
+    fuori.push({ v: v, unita: unita, pos: m.index });
+    if (variante && dec < 2) fuori.push(variante);
   }
   return fuori;
 }
@@ -10859,6 +10872,24 @@ function etiNumeri(pezzo) {
 function etiPlausibile(campo, v) {
   const lim = ETI_LIMITI[campo];
   return lim ? v >= lim[0] && v <= lim[1] : true;
+}
+
+/* Due letture della stessa etichetta si completano: la prima vince, la
+   seconda riempie i buchi. Cosi' il passaggio in grigi e quello in bianco
+   e nero mettono insieme quello che ciascuno ha letto meglio. */
+function etiUnisci(a, b) {
+  const out = Object.assign({}, a);
+  ['kcal', 'grassi', 'saturi', 'carboidrati', 'zuccheri', 'fibre', 'proteine', 'sale', 'sodio']
+    .forEach(k => {
+      if ((out[k] === null || out[k] === undefined) && b[k] != null) out[k] = b[k];
+      // uno zero letto da una passata e un valore pieno dall'altra: quasi
+      // sempre lo zero e' l'OCR che ha perso la cifra, non un vero zero
+      else if (out[k] === 0 && b[k] > 0) out[k] = b[k];
+    });
+  if (out.sale === null && out.sodio != null) out.sale = Math.round(out.sodio * 2.5 * 100) / 100;
+  if (out.grassi !== null && out.saturi !== null && out.saturi > out.grassi) out.saturi = null;
+  out.trovati = ['kcal', 'grassi', 'carboidrati', 'proteine'].filter(k => out[k] !== null).length;
+  return out;
 }
 
 function interpretaEtichetta(testo) {
@@ -10901,6 +10932,13 @@ function interpretaEtichetta(testo) {
         const inKcal = numeri.find(n => n.unita === 'kcal');
         const inKj = numeri.find(n => n.unita === 'kj');
         let v = inKcal ? inKcal.v : (inKj ? Math.round(inKj.v / 4.184) : null);
+        // ci sono tutti e due: devono raccontare la stessa energia. Se le
+        // kcal lette non tornano coi kJ, e' l'OCR che ha perso una cifra,
+        // e la conversione dai kJ e' piu' affidabile della lettura storta
+        if (inKcal && inKj) {
+          const daKj = inKj.v / 4.184;
+          if (daKj > 0 && Math.abs(inKcal.v - daKj) / daKj > 0.25) v = Math.round(daKj);
+        }
         if (v === null) {
           const libero = numeri.find(n => etiPlausibile('kcal', n.v) && n.v >= 40);
           v = libero ? libero.v : null;
@@ -12660,8 +12698,10 @@ function etiFotoSuTela(file) {
     const img = new Image();
     img.onload = () => {
       URL.revokeObjectURL(url);
-      const scala = Math.min(1, 1800 / Math.max(img.naturalWidth, img.naturalHeight));
-      const su = Math.max(img.naturalWidth, img.naturalHeight) < 900 ? 2 : 1;
+      // 2200 e non meno: nelle foto di una confezione intera la tabella occupa
+      // un angolo, e sotto questa misura le sue lettere diventano illeggibili
+      const scala = Math.min(1, 2200 / Math.max(img.naturalWidth, img.naturalHeight));
+      const su = Math.max(img.naturalWidth, img.naturalHeight) < 1100 ? 2 : 1;
       const tela = document.createElement('canvas');
       tela.width = Math.round(img.naturalWidth * scala * su);
       tela.height = Math.round(img.naturalHeight * scala * su);
@@ -12808,6 +12848,15 @@ function preparaEtichetta(file) {
     const box = etiRitaglio(grigio, tela.width, tela.height, soglia) ||
                 { x: 0, y: 0, w: tela.width, h: tela.height };
 
+    // se nel riquadro il buio vince, l'etichetta e' stampata chiara su fondo
+    // scuro: si lavora tutto al contrario fin dall'inizio, senza aspettare
+    // che i primi due passaggi falliscano
+    let neri = 0;
+    for (let y = 0; y < box.h; y++) for (let x = 0; x < box.w; x++) {
+      if (grigio[(y + box.y) * tela.width + (x + box.x)] < soglia) neri++;
+    }
+    const scuro = neri > box.w * box.h * 0.55;
+
     const fai = inverti => {
       const fuori = document.createElement('canvas');
       fuori.width = box.w; fuori.height = box.h;
@@ -12826,7 +12875,26 @@ function preparaEtichetta(file) {
       return fuori;
     };
 
-    return { dritta: fai(false), negativa: fai(true), angolo: angolo, box: box };
+    // la stessa zona anche in scala di grigi, SENZA la nostra soglia: su una
+    // foto vera con luci e ombre la soglia unica affoga meta' del testo,
+    // mentre l'OCR sa fare da solo il bianco e nero pezzo per pezzo
+    const grigia = (() => {
+      const fuori = document.createElement('canvas');
+      fuori.width = box.w; fuori.height = box.h;
+      const ctx = fuori.getContext('2d');
+      const dati = ctx.createImageData(box.w, box.h);
+      for (let y = 0; y < box.h; y++) for (let x = 0; x < box.w; x++) {
+        let g = grigio[(y + box.y) * tela.width + (x + box.x)];
+        if (scuro) g = 255 - g;
+        const i = (y * box.w + x) * 4;
+        dati.data[i] = dati.data[i + 1] = dati.data[i + 2] = g;
+        dati.data[i + 3] = 255;
+      }
+      ctx.putImageData(dati, 0, 0);
+      return fuori;
+    })();
+
+    return { grigia: grigia, dritta: fai(scuro), negativa: fai(!scuro), angolo: angolo, box: box };
   });
 }
 
@@ -12976,12 +13044,26 @@ function leggiEtichetta(file) {
       })
     )
     .then(pronte =>
-      leggi(pronte.dritta).then(prima => {
-        if (prima.letti.trovati >= 2) return prima;
-        // quasi nulla: forse l'etichetta e' chiara su fondo scuro
-        di('Riprovo al negativo…', 55);
-        return leggi(pronte.negativa).then(seconda =>
-          seconda.letti.trovati > prima.letti.trovati ? seconda : prima);
+      // primo giro sui grigi: sulle foto vere, con luci e ombre, l'OCR con la
+      // sua soglia locale legge piu' del nostro bianco e nero secco
+      leggi(pronte.grigia).then(prima => {
+        // ci si ferma solo quando c'e' TUTTO e niente puzza: uno zero su
+        // zuccheri o saturi e' quasi sempre una cifra persa, non un vero zero
+        const l1 = prima.letti;
+        const completa = l1.trovati >= 4 &&
+          l1.saturi !== null && l1.zuccheri !== null && l1.sale !== null &&
+          l1.saturi !== 0 && l1.zuccheri !== 0 && l1.sale !== 0;
+        if (completa) return prima;
+        // secondo giro sul bianco e nero: quello che ha letto in piu' riempie i buchi
+        di('Rileggo in bianco e nero…', 55);
+        return leggi(pronte.dritta).then(seconda => {
+          const insieme = { letti: etiUnisci(prima.letti, seconda.letti) };
+          if (insieme.letti.trovati >= 2) return insieme;
+          // quasi nulla: forse l'etichetta e' chiara su fondo scuro
+          di('Riprovo al negativo…', 75);
+          return leggi(pronte.negativa).then(terza =>
+            ({ letti: etiUnisci(insieme.letti, terza.letti) }));
+        });
       })
     )
     .then(({ letti }) => {
@@ -17347,7 +17429,7 @@ window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
   spezzaElenco: spezzaElencoDettato,
   etichetta: interpretaEtichetta, tabella: tabellaDi,
   preparaEtichetta: preparaEtichetta,
-  salubrita: salubrita, salubritaDi: salubritaDi,
+  salubrita: salubrita, salubritaDi: salubritaDi, etiUnisci: etiUnisci,
   catalogoTrova: catalogoTrova, catalogoRegistra: catalogoRegistra,
   salubritaRicetta: salubritaRicetta,
   renderCatalogo: renderCatalogo,
