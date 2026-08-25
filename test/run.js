@@ -695,6 +695,59 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(a.conta('#view-fridge script'), 0, 'script iniettato');
   });
 
+  await test('cambiare la grammatura ricalcola i valori al salvataggio', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+    const riso = P.tabella('riso');
+    const pollo = P.tabella('petto di pollo');
+
+    // nuova ricetta con i valori scritti a mano: restano quelli
+    a.tab('view-home');
+    a.click('[data-act=open-form]');
+    a.d.getElementById('f-title').value = 'Riso e pollo di prova';
+    ['f-kcal', 'f-pro', 'f-prep', 'f-cook'].forEach((x, i) => a.d.getElementById(x).value = [999, 77, 5, 10][i]);
+    a.d.getElementById('f-ing').value = 'riso:100:g\npetto di pollo:200:g';
+    a.d.getElementById('f-steps').value = 'Cuoci.';
+    a.d.getElementById('form-recipe').dispatchEvent(new a.dom.window.Event('submit', { bubbles: true, cancelable: true }));
+    let r = a.stato().recipes.find(x => x.title === 'Riso e pollo di prova');
+    eq(r.kcal, 999, 'i valori scritti a mano non vengono rispettati');
+
+    // modifico la grammatura: al salvataggio kcal e macro seguono le tabelle
+    const finto = a.d.createElement('button');
+    finto.dataset.act = 'edit'; finto.dataset.val = r.id;
+    a.d.body.appendChild(finto); finto.click();
+    await wait(100);
+    a.d.getElementById('f-ing').value = 'riso:200:g\npetto di pollo:300:g';
+    a.d.getElementById('form-recipe').dispatchEvent(new a.dom.window.Event('submit', { bubbles: true, cancelable: true }));
+    await wait(100);
+    r = a.stato().recipes.find(x => x.title === 'Riso e pollo di prova');
+    eq(r.kcal, Math.round(2 * riso[0] + 3 * pollo[0]), 'le kcal non seguono la grammatura');
+    eq(r.pro, Math.round((2 * riso[1] + 3 * pollo[1]) * 10) / 10, 'le proteine non seguono la grammatura');
+    vero(r.carbs > 0 && r.fat > 0, 'carboidrati e grassi non vengono calcolati');
+    vero(a.testo('#toast').includes('ricalcolati dalla grammatura'), 'il ricalcolo non viene detto');
+    vero(a.testo('#toast').includes('aggiornata'), 'la modifica si presenta come nuova ricetta');
+    eq(a.stato().recipes.filter(x => x.title === 'Riso e pollo di prova').length, 1, 'la modifica ha creato un doppione');
+
+    // ingredienti che le tabelle non conoscono: i valori non si toccano
+    finto.click();
+    await wait(100);
+    a.d.getElementById('f-ing').value = 'gnappole siderali:500:g';
+    a.d.getElementById('form-recipe').dispatchEvent(new a.dom.window.Event('submit', { bubbles: true, cancelable: true }));
+    await wait(100);
+    const r2 = a.stato().recipes.find(x => x.title === 'Riso e pollo di prova');
+    eq(r2.kcal, r.kcal, 'con ingredienti ignoti i valori sono stati riscritti a caso');
+
+    // e l'anteprima viva nel modulo dice cosa verra' calcolato
+    finto.click();
+    await wait(100);
+    a.d.getElementById('f-ing').value = 'riso:100:g';
+    a.d.getElementById('f-ing').dispatchEvent(new a.dom.window.Event('input', { bubbles: true }));
+    await wait(500);
+    const ant = a.d.getElementById('f-calcolo');
+    vero(ant && !ant.hidden && ant.textContent.includes('kcal'), 'l\'anteprima dalla grammatura non compare');
+    a.click('#modal-add [data-act=close-modal]');
+  });
+
   await test('eliminare una ricetta non lascia riferimenti orfani', async () => {
     const a = await app();
     a.apri('bresaola');
