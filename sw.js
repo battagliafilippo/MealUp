@@ -1,7 +1,7 @@
 /* FitMeals service worker — app shell in cache, aggiornamento in background */
 // La versione cambia a ogni pubblicazione: cosi' il telefono butta la cache
 // vecchia e prende subito l'app nuova.
-const CACHE = 'fitmeals-2026-08-24p';
+const CACHE = 'fitmeals-2026-08-24q';
 const SHELL = [
   './',
   './index.html',

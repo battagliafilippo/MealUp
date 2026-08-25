@@ -10810,7 +10810,7 @@ function salutePallino(nome) {
 /* Dal piu' specifico al piu' generico: "di cui saturi" va riconosciuto
    prima che la parola "grassi" al suo interno rubi la riga. */
 const ETI_CAMPI = [
-  { campo: 'saturi',      parole: ['saturi'] },
+  { campo: 'saturi',      parole: ['saturi', 'sat'] },
   { campo: 'zuccheri',    parole: ['zuccheri'] },
   { campo: 'kcal',        parole: ['energia', 'energetico', 'energy'] },
   { campo: 'fibre',       parole: ['fibre', 'fibra'] },
@@ -10829,10 +10829,14 @@ const ETI_LIMITI = {
 };
 
 /* La parola della riga corrisponde alla parola chiave? Esatta, contenuta,
+   abbreviata col troncamento ("prot.", "carboidr.", "zucch.", "energ.")
    o simile abbastanza da essere lei scritta male. */
 function etiParolaCombacia(parola, chiave) {
   if (parola === chiave) return true;
   if (chiave.length >= 5 && parola.indexOf(chiave) >= 0) return true;
+  // le abbreviazioni delle etichette sono troncamenti: la parola stampata
+  // e' l'inizio esatto della parola intera (il punto sparisce gia' prima)
+  if (parola.length >= 4 && chiave.length >= 5 && chiave.indexOf(parola) === 0) return true;
   if (chiave.length >= 5 && parola.length >= chiave.length - 2) {
     return somiglianza(parola, chiave) >= 0.75;
   }
