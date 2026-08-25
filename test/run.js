@@ -3938,6 +3938,38 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'dai consigli non si rifa la foto');
   });
 
+  await test('la g letta come 9 non sporca i numeri, e i kJ correggono le kcal', async () => {
+    const a = await app();
+    const E = a.dom.window.fitmealsProva.etichetta;
+
+    // la confusione piu' comune sulle foto vere: la "g" dell'unita' letta
+    // come "9" e incollata al numero ("1,2 g" -> "1,29", "68 g" -> "689")
+    const incollato = E('Energia 1720 kJ / 41 kcal\nGrassi 9,59\ndi cui saturi 1,29\n'
+      + 'Carboidrati 689\ndi cui zuccheri 3,19\nFibre 5,69\nProteine 12,59\nSale 1,19');
+    eq(incollato.grassi, 9.5, 'la g dei grassi resta attaccata');
+    eq(incollato.saturi, 1.2, 'la g dei saturi resta attaccata');
+    eq(incollato.carboidrati, 68, 'la g dei carboidrati resta attaccata');
+    eq(incollato.zuccheri, 3.1, 'la g degli zuccheri resta attaccata');
+    eq(incollato.fibre, 5.6, 'la g delle fibre resta attaccata');
+    eq(incollato.proteine, 12.5, 'la g delle proteine resta attaccata');
+    eq(incollato.sale, 1.1, 'la g del sale resta attaccata');
+    // le kcal lette male (41) non tornano coi kJ (1720): vince la conversione
+    eq(incollato.kcal, 411, 'i kJ non correggono le kcal storte');
+
+    // ma quando la g arriva davvero come unita', i decimali veri non si toccano
+    eq(E('Energia 411 kcal Sale 1,19 g Grassi 9 g Carboidrati 68 g Proteine 12 g').sale, 1.19,
+      'un valore vero a due decimali e\' stato amputato');
+
+    // e due letture della stessa foto si completano, zero sospetto compreso
+    const U = a.dom.window.fitmealsProva.etiUnisci;
+    const unione = U(
+      E('Energia 411 kcal Grassi 9,5 g Carboidrati 68 g Proteine 12,5 g di cui zuccheri 0 g'),
+      E('di cui zuccheri 3,1 g di cui saturi 1,2 g Sale 1,1 g'));
+    eq(unione.zuccheri, 3.1, 'lo zero sospetto non viene corretto');
+    eq(unione.saturi, 1.2, 'il secondo passaggio non riempie i buchi');
+    eq(unione.trovati, 4, 'il conteggio dopo l\'unione e\' sbagliato');
+  });
+
   await test('la scala di salubrita\' va da sano a grasso e non mente', async () => {
     const a = await app();
     const P = a.dom.window.fitmealsProva;
