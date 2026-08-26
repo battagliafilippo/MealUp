@@ -3258,6 +3258,79 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(giorno.k, 700, 'la giornata non segue la modifica del piatto');
   });
 
+  await test('la quantita\' mangiata si regola nel pasto, la ricetta resta intera', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+    a.tab('view-profile'); a.profiloBase();
+    a.apri('carbonara');
+    a.click('#detail-body [data-act=log-meal]');
+    a.click('#modal-detail [data-act=close-modal]');
+    const orig = clone(a.stato().recipes.find(r => /spaghetti alla carbonara/i.test(r.title)));
+    const base = P.perPortion(orig);
+    const peso = P.istPesoPorzione(orig);
+
+    // apro il piatto mangiato
+    a.tab('view-home');
+    const pasto = a.stato().log[0].meal;
+    a.d.querySelector('#anello-unico .gamba[data-val=' + pasto + ']').click();
+    a.click('#pasto-piatti-body .scheda');
+
+    // il controllo c'e': frazioni rapide, grammi, resoconto vivo
+    eq(a.conta('#ist-quote .chip'), 5, 'mancano le frazioni rapide');
+    vero(a.d.getElementById('ist-grammi'), 'manca il campo dei grammi');
+    vero(a.testo('#ist-conto').includes('kcal'), 'il resoconto vivo non compare');
+
+    // mezza porzione: kcal, proteine e grammi si riscrivono davanti a te
+    a.d.querySelector('#ist-quote [data-val="0.5"]').click();
+    eq(Number(a.d.getElementById('ist-kcal').value), Math.round(base.kcal * 0.5),
+      'le kcal non seguono la mezza porzione');
+    eq(Number(a.d.getElementById('ist-grammi').value), Math.round(peso * 0.5),
+      'i grammi non seguono la mezza porzione');
+    vero(a.testo('#ist-conto').includes('mezza porzione'), 'il resoconto non dice mezza porzione');
+
+    // salvo: pasto e giornata alla quota giusta, ricetta intatta
+    a.click('[data-act=istanza-salva]');
+    const v = a.stato().log[0];
+    eq(v.kcal, Math.round(base.kcal * 0.5), 'il pasto non ha le kcal della quota');
+    eq(v.quota, 0.5, 'la quota non si salva');
+    eq(v.carbs, Math.round((base.carbs || 0) * 0.5), 'i carboidrati non seguono la quota');
+    eq(Object.values(a.stato().daily)[0].k, v.kcal, 'la bilancia della giornata non segue la quota');
+    const dopo = a.stato().recipes.find(r => r.id === orig.id);
+    eq(dopo.kcal, orig.kcal, 'le kcal della ricetta originale sono cambiate');
+    eq(JSON.stringify(dopo.ing), JSON.stringify(orig.ing), 'la grammatura della ricetta e\' cambiata');
+
+    // i grammi scritti a mano: tre quarti di porzione circa
+    const g75 = Math.round(peso * 0.75);
+    a.d.getElementById('ist-grammi').value = String(g75);
+    a.d.getElementById('ist-grammi').dispatchEvent(new a.dom.window.Event('input', { bubbles: true }));
+    await wait(80);
+    eq(Number(a.d.getElementById('ist-kcal').value), Math.round(base.kcal * (g75 / peso)),
+      'le kcal non seguono i grammi scritti a mano');
+    a.click('[data-act=istanza-salva]');
+    eq(a.stato().log[0].grammi, g75, 'i grammi mangiati non si salvano');
+    eq(Object.values(a.stato().daily)[0].k, a.stato().log[0].kcal,
+      'la giornata non segue la seconda correzione');
+
+    // e nel pasto la quantita' si legge accanto all'ora
+    a.click('#modal-detail [data-act=close-modal]');
+    a.d.querySelector('#anello-unico .gamba[data-val=' + pasto + ']').click();
+    vero(/\d+ g,/.test(a.testo('#pasto-piatti-body .quando')), 'la quantita\' non si legge nel pasto');
+
+    // una ricetta a fette mostra il riferimento "1 fetta/porzione su N"
+    const aFette = a.stato().recipes.find(r => Number(r.serves) >= 2 && (r.ing || []).length);
+    P.logMeal(aFette.id, 'cen');
+    const vf = a.stato().log.find(x => x.rid === aFette.id);
+    const finto = a.d.createElement('div');
+    finto.className = 'piatto-del-pasto'; finto.dataset.ts = vf.ts;
+    const bott = a.d.createElement('button');
+    bott.dataset.act = 'detail'; bott.dataset.val = aFette.id;
+    finto.appendChild(bott); a.d.getElementById('pasto-piatti-body').appendChild(finto);
+    bott.click();
+    await wait(80);
+    vero(new RegExp('su ' + Number(aFette.serves)).test(a.testo('.istanza-box')),
+      'manca il riferimento alle fette della ricetta');
+  });
+
   console.log('\nTimer liberi e sveglia');
   await test('la pastiglia nasce in alto e resta anche fuori dalla cucina', async () => {
     const a = await app();
