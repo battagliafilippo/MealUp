@@ -7629,7 +7629,8 @@ function apriPiattiDelPasto(mealId) {
                   <span class="scheda-titolo">${esc(v.title)}</span>
                   <span class="scheda-sotto">${v.kcal} kcal \u00b7 alle ${oraDi(v.ts)} \u00b7 aggiunto a mano</span>
                 </div></div>`}
-          <span class="quando">alle ${oraDi(v.ts)}</span>
+          <span class="quando">alle ${oraDi(v.ts)} \u00b7 ${v.kcal} kcal${r && v.quota && Math.abs(v.quota - 1) > 0.01
+            ? ' \u00b7 ' + (v.grammi ? v.grammi + ' g, ' : '') + istNomeQuota(v.quota, r) : ''}</span>
           <button type="button" class="chip mini" data-act="log-del" data-val="${v.ts}">
             togli da questo pasto</button>
         </div>`;
@@ -9073,6 +9074,66 @@ function personPortion(r, profile) {
   return { mult: k, kcal: Math.round(m.kcal * k), pro: Math.round(m.pro * k) };
 }
 
+/* ---------- quanto ne hai mangiato davvero ----------
+   La quota e' la frazione della porzione standard consumata nel singolo
+   pasto registrato: mezza fetta, 150 grammi, due porzioni. Cambia SOLO il
+   pasto di quel giorno; la ricetta e le sue grammature restano intatte. */
+
+function istPesoPorzione(r) {
+  const c = valoriDaGrammatura((r && r.ing) || []);
+  if (!c.peso || c.peso < 50 || c.copertura < 0.5) return null;
+  return c.peso / servesOf(r);
+}
+
+function istParolaFetta(r) {
+  return portataOf(r) === 'dolce' || /torta|crostata|plumcake|ciambella|cheesecake/i.test(r.title || '')
+    ? 'fetta' : 'porzione';
+}
+
+function istNomeQuota(quota, r) {
+  const nomi = { 0.25: 'un quarto di porzione', 0.5: 'mezza porzione',
+    1: 'una porzione intera', 1.5: 'una porzione e mezza', 2: 'due porzioni' };
+  let testo = nomi[quota] || (Math.round(quota * 100) / 100) + ' porzioni';
+  if (r && servesOf(r) >= 2 && Math.abs(quota - 1) < 0.01) {
+    testo += ' (1 ' + istParolaFetta(r) + ' su ' + servesOf(r) + ')';
+  }
+  return testo;
+}
+
+/* Il ricalcolo vivo: mentre tocchi le frazioni o scrivi i grammi, kcal e
+   proteine del pasto si aggiornano davanti a te. Con applica=false si
+   rinfresca solo il resoconto, senza toccare i numeri gia' scritti. */
+function istQuotaAggiorna(quota, opz) {
+  opz = opz || {};
+  const v = istanzaAperta && S.log.find(x => x.ts === istanzaAperta);
+  const r = v && v.rid && S.recipes.find(x => x.id === v.rid);
+  const nascosto = document.getElementById('ist-quota-val');
+  if (!r || !nascosto) return;
+  if (quota === null || quota === undefined) quota = parseFloat(nascosto.value) || 1;
+  quota = Math.max(0.05, Math.min(6, quota));
+  nascosto.value = quota;
+  const base = perPortion(r);
+  const pesoP = istPesoPorzione(r);
+  if (opz.applica) {
+    if (!opz.daGrammi && pesoP && document.getElementById('ist-grammi')) {
+      document.getElementById('ist-grammi').value = Math.round(quota * pesoP);
+    }
+    F('ist-kcal').value = Math.round(base.kcal * quota);
+    F('ist-pro').value = Math.round(base.pro * quota);
+  }
+  const scatola = document.getElementById('ist-quote');
+  if (scatola) {
+    Array.prototype.forEach.call(scatola.querySelectorAll('.chip'), b => {
+      b.classList.toggle('active', Math.abs(parseFloat(b.dataset.val) - quota) < 0.01);
+    });
+  }
+  const conto = document.getElementById('ist-conto');
+  if (conto) {
+    conto.textContent = '≈ ' + Math.round(base.kcal * quota) + ' kcal · '
+      + Math.round(base.pro * quota) + ' g proteine — ' + istNomeQuota(quota, r) + '.';
+  }
+}
+
 function planFor(r, ids) {
   const per = perPortion(r);
   const share = MEAL_SHARE[portataOf(r)] || 0.30;
@@ -9561,6 +9622,9 @@ function openDetail(id, tornando) {
       if (!v) return '';
       const testoIng = v.ingMod !== undefined ? v.ingMod
         : (r.ing || []).map(i => i.n + (i.q ? ' \u2014 ' + fmtQty(i) : '')).join('\n');
+      const quotaV = v.quota || v.mult || 1;
+      const pesoP = istPesoPorzione(r);
+      const nFette = servesOf(r);
       return `<div class="istanza-box">
         <span class="istanza-titolo">Piatto mangiato alle ${oraDi(v.ts)} \u00b7 le
           modifiche valgono solo per questo pasto, la ricetta originale resta com'\u00e8.</span>
@@ -9571,9 +9635,23 @@ function openDetail(id, tornando) {
             <input type="number" id="ist-kcal" min="0" step="1" value="${v.kcal}"></span>
           <span><label class="field-label" for="ist-pro">proteine</label>
             <input type="number" id="ist-pro" min="0" step="1" value="${v.pro || 0}"></span>
-          <span><label class="field-label" for="ist-porz">porzioni</label>
-            <input type="number" id="ist-porz" min="0.5" step="0.5" value="${v.mult || 1}"></span>
         </div>
+        <span class="field-label" style="margin-top:12px">Quanto ne hai mangiato davvero</span>
+        ${nFette >= 2
+          ? `<p class="hint" style="margin:0 0 8px">La ricetta intera fa ${nFette} ${istParolaFetta(r) === 'fetta' ? 'fette' : 'porzioni'}: una porzione \u00e8 1 ${istParolaFetta(r)} su ${nFette}${pesoP ? ' (\u2248 ' + Math.round(pesoP) + ' g)' : ''}.</p>`
+          : (pesoP ? `<p class="hint" style="margin:0 0 8px">Una porzione intera \u2248 ${Math.round(pesoP)} g.</p>` : '')}
+        <div class="pantry-grid" id="ist-quote">
+          ${[[0.25, '\u00bc'], [0.5, '\u00bd'], [1, '1 porzione'], [1.5, '1\u00bd'], [2, '2']]
+            .map(q => `<button type="button" class="chip mini ${Math.abs(quotaV - q[0]) < 0.01 ? 'active' : ''}"
+              data-act="ist-quota" data-val="${q[0]}">${q[1]}</button>`).join('')}
+        </div>
+        ${pesoP ? `<div class="ist-riga" style="margin-top:8px">
+          <span><label class="field-label" for="ist-grammi">grammi mangiati</label>
+            <input type="number" id="ist-grammi" min="0" step="10" inputmode="numeric"
+              value="${v.grammi || Math.round(quotaV * pesoP)}"></span>
+        </div>` : ''}
+        <p class="hint" id="ist-conto" style="margin:6px 0 0"></p>
+        <input type="hidden" id="ist-quota-val" value="${quotaV}">
         <label class="field-label" for="ist-ing">Gli ingredienti di questo piatto</label>
         <textarea id="ist-ing" rows="4">${esc(testoIng)}</textarea>
         <button type="button" class="btn-primary" data-act="istanza-salva"
@@ -9678,6 +9756,9 @@ function openDetail(id, tornando) {
   }
 
   document.getElementById('modal-detail').classList.toggle('modo-istanza', !!istanzaAperta);
+  // il resoconto della quantita' mangiata parte gia' aggiornato,
+  // senza toccare i numeri salvati
+  if (istanzaAperta) istQuotaAggiorna(null, {});
   openModal('modal-detail');
 }
 
@@ -17072,20 +17153,36 @@ document.addEventListener('click', e => {
 
       const kcal = Math.max(0, Math.round(Number(F('ist-kcal').value) || 0));
       const pro = Math.max(0, Math.round(Number(F('ist-pro').value) || 0));
-      const porz = Math.max(0.5, Number(F('ist-porz').value) || 1);
+      const quota = Math.max(0.05, Math.min(6,
+        parseFloat((F('ist-quota-val') || {}).value) || v.quota || v.mult || 1));
 
       // La giornata segue la differenza, non il valore assoluto.
       bumpDaily(v.pid, v.ts, kcal - v.kcal, pro - (v.pro || 0), 0);
 
       v.title = (F('ist-nome').value || v.title).trim().slice(0, 60);
-      v.kcal = kcal; v.pro = pro; v.mult = porz;
+      v.kcal = kcal; v.pro = pro; v.mult = quota; v.quota = quota;
+      const campoGrammi = F('ist-grammi');
+      const grammi = campoGrammi ? Math.round(Number(campoGrammi.value) || 0) : 0;
+      v.grammi = grammi > 0 ? grammi : null;
+      // anche carboidrati e grassi del pasto seguono la quota mangiata:
+      // cosi' la bilancia della giornata non conta mai la ricetta intera
+      const ricetta = v.rid && S.recipes.find(x => x.id === v.rid);
+      if (ricetta) {
+        const basePorz = perPortion(ricetta);
+        v.carbs = Math.round((basePorz.carbs || 0) * quota);
+        v.fat = Math.round((basePorz.fat || 0) * quota);
+      }
       v.ingMod = F('ist-ing').value;
 
       save(); renderAll();
-      toast('Piatto aggiornato. La ricetta originale non \u00e8 stata toccata.');
+      toast('Piatto aggiornato: ' + kcal + ' kcal in questo pasto. La ricetta originale non \u00e8 stata toccata.');
       openDetail(v.rid, true);
       break;
     }
+    case 'ist-quota':
+      // le frazioni rapide: un tocco e kcal, proteine e grammi si riscrivono
+      istQuotaAggiorna(parseFloat(val), { applica: true });
+      break;
     case 'persone': {
       const r = S.recipes.find(x => x.id === val);
       if (!r) break;
@@ -17750,6 +17847,16 @@ document.addEventListener('input', e => {
   }
   if (e.target && e.target.id === 'q-nome') cercaPerQuick(e.target.value);
   if (e.target && e.target.id === 'f-ing') aggiornaCalcoloForm();
+  if (e.target && e.target.id === 'ist-grammi') {
+    // grammi scritti a mano: la quota e' grammi / peso della porzione
+    const vIst = istanzaAperta && S.log.find(x => x.ts === istanzaAperta);
+    const rIst = vIst && vIst.rid && S.recipes.find(x => x.id === vIst.rid);
+    const pesoIst = rIst && istPesoPorzione(rIst);
+    const gIst = parseFloat(e.target.value);
+    if (pesoIst && isFinite(gIst) && gIst > 0) {
+      istQuotaAggiorna(gIst / pesoIst, { applica: true, daGrammi: true });
+    }
+  }
   if (e.target && e.target.id === 'disp-cerca') {
     // Una barra sola: cerca nella credenza, propone, e riordina le ricette.
     renderDispSuggest(e.target.value);
@@ -17940,6 +18047,7 @@ window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
   etiParoleDaTsv: etiParoleDaTsv, etiZonaValori: etiZonaValori, etiTelaZoom: etiTelaZoom,
   catalogoTrova: catalogoTrova, catalogoRegistra: catalogoRegistra,
   salubritaRicetta: salubritaRicetta, valoriDaGrammatura: valoriDaGrammatura,
+  perPortion: perPortion, istPesoPorzione: istPesoPorzione,
   renderCatalogo: renderCatalogo,
   energia: energy, renderProfilo: renderProfile,
   freschezza: freschezza, scadenze: scadenzeDelGiorno, inventario: inventario,
