@@ -9079,10 +9079,43 @@ function personPortion(r, profile) {
    pasto registrato: mezza fetta, 150 grammi, due porzioni. Cambia SOLO il
    pasto di quel giorno; la ricetta e le sue grammature restano intatte. */
 
+/* Il peso del PIATTO PRONTO, non degli ingredienti crudi: 90 g di riso
+   cotti nel brodo pesano nel piatto il riso piu' il brodo assorbito. Se il
+   liquido di cottura e' gia' fra gli ingredienti si somma e basta; se non
+   c'e' (la pasta asciutta), i secchi da cottura si moltiplicano per la
+   loro resa, perche' e' quello il peso che trovi sulla bilancia. */
+const COTTURA_RESA = [
+  { f: 2.4, k: ['riso', 'risotto'] },
+  { f: 3.0, k: ['quinoa'] },
+  { f: 2.2, k: ['pasta', 'spaghetti', 'penne', 'fusilli', 'rigatoni', 'tagliatelle',
+      'linguine', 'farfalle', 'orzo', 'farro', 'noodles', 'cous cous', 'fregola',
+      'semola', 'polenta'] }
+];
+
+function pesoPiattoPronto(r) {
+  const ing = (r && r.ing) || [];
+  const liquido = ing.some(i => /brodo|acqua|latte/.test(norm(i.n))
+    && quantitaRichiesta(i, 1, 'g') >= 150);
+  let peso = 0;
+  ing.forEach(i => {
+    let g = quantitaRichiesta(i, 1, 'g');
+    if (!isFinite(g) || g <= 0) return;
+    if (!liquido) {
+      const nn = norm(i.n);
+      if (!/sfoglia/.test(nn)) {
+        const resa = COTTURA_RESA.find(c => c.k.some(k => nn.includes(k)));
+        if (resa) g = g * resa.f;
+      }
+    }
+    peso += g;
+  });
+  return peso;
+}
+
 function istPesoPorzione(r) {
   const c = valoriDaGrammatura((r && r.ing) || []);
   if (!c.peso || c.peso < 50 || c.copertura < 0.5) return null;
-  return c.peso / servesOf(r);
+  return pesoPiattoPronto(r) / servesOf(r);
 }
 
 function istParolaFetta(r) {
@@ -9638,15 +9671,15 @@ function openDetail(id, tornando) {
         </div>
         <span class="field-label" style="margin-top:12px">Quanto ne hai mangiato davvero</span>
         ${nFette >= 2
-          ? `<p class="hint" style="margin:0 0 8px">La ricetta intera fa ${nFette} ${istParolaFetta(r) === 'fetta' ? 'fette' : 'porzioni'}: una porzione \u00e8 1 ${istParolaFetta(r)} su ${nFette}${pesoP ? ' (\u2248 ' + Math.round(pesoP) + ' g)' : ''}.</p>`
-          : (pesoP ? `<p class="hint" style="margin:0 0 8px">Una porzione intera \u2248 ${Math.round(pesoP)} g.</p>` : '')}
+          ? `<p class="hint" style="margin:0 0 8px">La ricetta intera fa ${nFette} ${istParolaFetta(r) === 'fetta' ? 'fette' : 'porzioni'}: una porzione \u00e8 1 ${istParolaFetta(r)} su ${nFette}${pesoP ? ' (\u2248 ' + Math.round(pesoP) + ' g di piatto pronto, con tutti gli ingredienti)' : ''}.</p>`
+          : (pesoP ? `<p class="hint" style="margin:0 0 8px">Una porzione intera pesa \u2248 ${Math.round(pesoP)} g di piatto pronto: tutti gli ingredienti insieme, liquidi di cottura compresi.</p>` : '')}
         <div class="pantry-grid" id="ist-quote">
           ${[[0.25, '\u00bc'], [0.5, '\u00bd'], [1, '1 porzione'], [1.5, '1\u00bd'], [2, '2']]
             .map(q => `<button type="button" class="chip mini ${Math.abs(quotaV - q[0]) < 0.01 ? 'active' : ''}"
               data-act="ist-quota" data-val="${q[0]}">${q[1]}</button>`).join('')}
         </div>
         ${pesoP ? `<div class="ist-riga" style="margin-top:8px">
-          <span><label class="field-label" for="ist-grammi">grammi mangiati</label>
+          <span><label class="field-label" for="ist-grammi">grammi mangiati (pesati nel piatto)</label>
             <input type="number" id="ist-grammi" min="0" step="10" inputmode="numeric"
               value="${v.grammi || Math.round(quotaV * pesoP)}"></span>
         </div>` : ''}
