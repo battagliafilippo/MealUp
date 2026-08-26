@@ -4056,6 +4056,51 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     almeno(a.conta('#recipe-list .card-btn'), 1, 'la buddha bowl non si trova');
   });
 
+  await test('piatti semplici, contorni, torte salate e fit col nome ci sono', async () => {
+    const a = await app();
+    const rec = a.stato().recipes;
+
+    // le quindici nuove, complete come le altre
+    const nuove = rec.filter(r => /^sp\d\d$/.test(r.id));
+    eq(nuove.length, 15, 'attese 15 ricette sp');
+    nuove.forEach(r => {
+      vero(r.kcal > 0 && r.ing.length >= 3 && r.steps.length >= 3, r.id + ' incompleta');
+      r.ing.forEach(i => vero(i.n && i.q > 0, r.id + ': ingrediente rotto'));
+    });
+
+    // i piatti semplici in bianco
+    vero(rec.some(r => r.title === 'Pasta in bianco'), 'manca la pasta in bianco');
+    vero(rec.some(r => r.title === 'Riso basmati in bianco'), 'manca il riso basmati');
+    vero(rec.some(r => r.title === 'Pastina in brodo'), 'manca la pastina in brodo');
+
+    // i contorni di patate, nella portata giusta
+    const fritte = rec.find(r => r.title === 'Patatine fritte');
+    const rosti = rec.find(r => /rosti di patate/i.test(r.title));
+    vero(fritte && fritte.portata === 'contorno', 'le patatine fritte non sono un contorno');
+    vero(rosti && rosti.portata === 'contorno', 'il rosti non e\' un contorno');
+
+    // le torte salate si tagliano a fette (serves) e i valori sono per l'intera
+    const torte = nuove.filter(r => /torta salata/i.test(r.title));
+    eq(torte.length, 2, 'attese 2 torte salate nuove');
+    torte.forEach(t => vero(Number(t.serves) >= 6, t.title + ' senza fette'));
+
+    // le fit si trovano scrivendo "fit": il nome lo contiene davvero
+    const fitNome = nuove.filter(r => /fit/i.test(r.title));
+    almeno(fitNome.length, 8, 'ricette con la dicitura fit nel nome');
+    vero(fitNome.every(r => r.cat === 'sano' && (r.tags || []).includes('proteico')),
+      'una fit col nome non e\' sana e proteica');
+    vero(fitNome.every(r => r.pro >= 20), 'una fit col nome ha poche proteine');
+    a.cerca('fit');
+    await wait(150);
+    almeno(a.conta('#recipe-list .card-btn'), 8, 'cercando fit non escono le ricette fit');
+
+    // e chi ha gia' l'app installata le riceve col cambio di versione
+    const b = await app({ storage: { seedVersion: 13, compatto: 1, recipes: [],
+      profiles: [{ id: 'u1', name: 'G' }] } });
+    vero(b.stato().recipes.some(r => r.id === 'sp01'),
+      'una vecchia installazione non riceve le ricette nuove');
+  });
+
   await test('il lettore dell\'etichetta perdona l\'OCR sporco', async () => {
     const a = await app();
     const E = a.dom.window.fitmealsProva.etichetta;
