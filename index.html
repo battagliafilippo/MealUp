@@ -3255,6 +3255,8 @@ h3{font-weight:600;letter-spacing:-.018em}
         </div>
         <button type="button" class="btn-primary full-width" data-act="etichetta-salva">
           Salva e metti in dispensa</button>
+        <button type="button" class="btn-ghost full-width" data-act="etichetta-lista">
+          Salva e metti in lista della spesa</button>
       </div>
     </div>
   </div>
@@ -18368,6 +18370,43 @@ document.addEventListener('click', e => {
       save(); renderAll();
       closeModals();
       toast(nome + ' in dispensa, con i suoi valori e il suo voto.', 'Annulla');
+      break;
+    }
+    case 'etichetta-lista': {
+      // dopo lo scan (codice o foto): il prodotto entra in LISTA della
+      // spesa, coi suoi valori gia' nel sistema; a Fine spesa arrivera'
+      // in dispensa nel posto giusto. Stesso salvataggio, stessa voce
+      // manuale di tastiera e dettatura: niente strade nuove.
+      const nome = (F('eti-nome').value || '').trim().toLowerCase().slice(0, 60);
+      if (!nome) { toast('Dai un nome al prodotto.'); F('eti-nome').focus(); break; }
+      const n = id => { const v = parseFloat(F(id).value); return isFinite(v) && v >= 0 ? v : 0; };
+      const opz = id => { const v = parseFloat(F(id).value); return isFinite(v) && v >= 0 ? v : null; };
+      pushUndo('In lista dall\'etichetta');
+      nascondiInviti();
+      S.ingTabExtra = S.ingTabExtra || {};
+      S.ingTabExtra[nome] = [n('eti-kcal'), n('eti-pro'), n('eti-carb'), n('eti-gra'),
+        opz('eti-sat'), opz('eti-zuc'), opz('eti-fib'), opz('eti-sale')];
+      if (etiProdottoInfo) prodottoRegistraInfo(nome, etiProdottoInfo);
+      _vocabolario = null;
+      if (!S.myIngredients.some(m => norm(m) === norm(nome))) S.myIngredients.push(nome);
+      const vecchiaLi = freschezza()[norm(nome)];
+      catalogoRegistra(nome, vecchiaLi && vecchiaLi.posto);
+      // se e' gia' in lista non si raddoppia: i valori sono comunque salvati
+      const giaInLista = (S.shopExtra || []).some(x => sameIngredient(x.n, nome))
+        || shoppingItems().some(v => sameIngredient(v.n, nome));
+      if (!giaInLista) spesaVoceManuale(nome, null, unitaDi(nome));
+      save(); renderAll();
+      if (etichettaTornaARighe) {
+        etichettaTornaARighe = false;
+        chiudiModal('modal-etichetta');
+        openModal('modal-dettatura');
+        aggiornaChipRighe();
+      } else {
+        closeModals();
+      }
+      const votoLi = votoDi(nome);
+      toast(nome + (giaInLista ? ' era già in lista: valori e voto aggiornati'
+        : ' in lista della spesa') + (votoLi ? ' · ' + votoLi.punteggio + '/100 ' + votoLi.nome : '') + '.', 'Annulla');
       break;
     }
     case 'disp-add': {
