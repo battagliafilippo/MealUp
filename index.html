@@ -880,14 +880,60 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .det-eti:hover{background:color-mix(in srgb, var(--tema, var(--accent-primary)) 12%, transparent)}
 .shop-eti--nota svg{stroke-width:2}
 .targhetta-eti{align-self:flex-start;margin-bottom:4px}
+/* Il voto del prodotto, alla maniera di Yuka: un numero su 100 ben visibile,
+   la fascia a parole, e sotto gli additivi con il loro rischio. */
+.eti-voto-num{flex:0 0 auto;display:inline-flex;align-items:baseline;gap:2px;
+  font-weight:800;font-size:1.35rem;color:var(--salute);line-height:1}
+.eti-voto-num small{font-size:.68rem;font-weight:600;color:var(--text-tertiary)}
+.eti-additivi{display:flex;flex-direction:column;gap:6px;padding:11px 14px;
+  border-radius:14px;font-size:.8rem;line-height:1.35;color:var(--text-secondary);
+  background:color-mix(in srgb, var(--tema, var(--accent-primary)) 7%, transparent);
+  border:1px solid color-mix(in srgb, var(--tema, var(--accent-primary)) 22%, transparent)}
+.eti-additivi b{font-size:.8rem;color:var(--text-primary)}
+.eti-add-riga{display:flex;align-items:center;gap:7px}
+.eti-add-riga em{font-style:normal;margin-left:auto;font-size:.72rem;color:var(--text-tertiary)}
+.add-pallino{display:inline-block;width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+.eti-bio{display:inline-flex;align-items:center;gap:6px}
+/* Il lettore del codice a barre: la camera dentro la finestra, il mirino,
+   e sotto la via manuale che funziona sempre. */
+#modal-codice{z-index:120}
+.codice-inquadra{position:relative;border-radius:14px;overflow:hidden;background:#000;
+  aspect-ratio:4/3;display:none}
+.codice-inquadra.acceso{display:block}
+#codice-video{width:100%;height:100%;object-fit:cover;display:block}
+.codice-mira{position:absolute;left:10%;right:10%;top:38%;bottom:38%;
+  border:2px solid rgba(255,255,255,.85);border-radius:10px;pointer-events:none;
+  box-shadow:0 0 0 999px rgba(0,0,0,.25)}
+.codice-mira::after{content:'';position:absolute;left:6px;right:6px;top:50%;height:2px;
+  background:rgba(255,80,80,.8);border-radius:2px}
+.codice-mano{display:flex;gap:8px;align-items:center;margin-top:10px}
+.codice-mano input{flex:1;min-width:0}
+.scan-codice svg{stroke:#fff}
+.scan-codice{padding:13px 10px}
+/* La schermata Prodotti: la ricerca in alto, le famiglie che scorrono di
+   lato, e su ogni riga i due tocchi per casa e lista. */
+#cat-cerca{width:100%;margin:2px 0 10px}
+.cat-famiglie{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 10px;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cat-famiglie::-webkit-scrollbar{display:none}
+.cat-famiglie .chip{flex:0 0 auto;white-space:nowrap}
+.cat-azione{flex:0 0 30px;width:30px;height:30px;border-radius:9px;display:inline-flex;
+  align-items:center;justify-content:center;background:none;cursor:pointer;
+  border:1px solid color-mix(in srgb, var(--tema, var(--accent-primary)) 30%, transparent);
+  color:var(--text-secondary)}
+.cat-azione svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round}
+.cat-azione:active{transform:scale(.93)}
+.cat-azione.fatta{color:var(--ok, #4c8a6b);border-color:color-mix(in srgb, var(--ok, #4c8a6b) 45%, transparent)}
 .catalogo-riga{display:flex;align-items:center;gap:8px;padding:9px 2px;
   border-bottom:1px solid rgba(255,255,255,.05)}
-.catalogo-nome{flex:1;min-width:0;display:flex;align-items:center;gap:4px;
+.catalogo-nome{flex:1;min-width:0;display:grid;grid-template-columns:auto 1fr;
+  align-items:center;column-gap:6px;row-gap:1px;
   background:none;border:none;color:inherit;font:inherit;font-size:.9rem;
   text-align:left;padding:2px 0;cursor:pointer}
-.catalogo-nome span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.catalogo-nome em{font-style:normal;font-size:.7rem;color:var(--text-tertiary);
-  margin-left:auto;padding-left:8px;flex:0 0 auto}
+.catalogo-nome span{grid-column:2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.catalogo-nome em{grid-column:2;font-style:normal;font-size:.7rem;color:var(--text-tertiary);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .catalogo-riga .chip.mini{flex:0 0 auto}
 .scheda{position:relative}
 .scheda .scheda-titolo{padding-right:26px}
@@ -2623,8 +2669,8 @@ h3{font-weight:600;letter-spacing:-.018em}
             title="Detta di fila quello che hai comprato: lo metto in dispensa">
             <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg>Detta</button>
           <button type="button" class="chip" data-act="catalogo-apri"
-            title="Tutti gli ingredienti gia' valutati, col loro giudizio">
-            <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px"><path d="M5 5.5A1.5 1.5 0 0 1 6.5 4h11A1.5 1.5 0 0 1 19 5.5v14l-3.5-2.3L12 19.5l-3.5-2.3L5 19.5z"/><path d="M8.5 8.5h7M8.5 11.5h5"/></svg>Catalogo</button>
+            title="Tutti i prodotti in un posto solo: cerca, filtra per famiglia, metti in casa o in lista">
+            <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px"><path d="M5 5.5A1.5 1.5 0 0 1 6.5 4h11A1.5 1.5 0 0 1 19 5.5v14l-3.5-2.3L12 19.5l-3.5-2.3L5 19.5z"/><path d="M8.5 8.5h7M8.5 11.5h5"/></svg>Prodotti</button>
           <button type="button" class="chip" id="manda-casa-chip" data-act="famiglia-manda" hidden
             title="Manda la spesa a casa: chi apre il link si ritrova tutto aggiornato">
             <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V19h12V9.5"/></svg>Manda a casa</button>
@@ -3123,9 +3169,16 @@ h3{font-weight:600;letter-spacing:-.018em}
         <h2>Dall'etichetta</h2>
         <button type="button" class="x" data-act="etichetta-chiudi" aria-label="Chiudi">&times;</button>
       </div>
-      <p class="hint">Per un prodotto che le ricette non conoscono: inquadra la tabella
-        dei <b>valori nutrizionali</b> e leggo io i numeri. Sono per 100 g, e li puoi
-        correggere prima di salvare.</p>
+      <p class="hint">Il modo pi&ugrave; veloce: inquadra il <b>codice a barre</b> e trovo da solo
+        nome, valori e additivi nell'archivio libero Open Food Facts (serve internet).
+        Oppure fotografa la tabella dei valori e leggo io i numeri. Tutto per 100 g,
+        e lo puoi correggere prima di salvare.</p>
+      <div class="scan-scelte" style="grid-template-columns:1fr;margin-top:0;margin-bottom:8px">
+        <button type="button" class="btn-primary scan-via scan-codice" data-act="codice-apri">
+          <svg viewBox="0 0 24 24"><path d="M4 7V5.5A1.5 1.5 0 0 1 5.5 4H7M17 4h1.5A1.5 1.5 0 0 1 20 5.5V7M20 17v1.5a1.5 1.5 0 0 1-1.5 1.5H17M7 20H5.5A1.5 1.5 0 0 1 4 18.5V17M7 9v6M10 9v6M13 9v6M16.5 9v6"/></svg>
+          <span>Inquadra il codice a barre</span>
+        </button>
+      </div>
       <div class="scan-scelte" style="margin-bottom:14px">
         <button type="button" class="btn-ghost scan-via" data-act="etichetta-scatta" id="etichetta-scatta">
           <svg viewBox="0 0 24 24"><path d="M4 8.5l1.2-2.1a1.6 1.6 0 0 1 1.4-.8h2.8a1.6 1.6 0 0 1 1.4.8L12 8.5h5.5A1.5 1.5 0 0 1 19 10v8a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 18v-8a1.5 1.5 0 0 1-1.5-1.5z" transform="translate(0.5 -1.5)"/><circle cx="12" cy="13" r="3.4"/></svg>
@@ -3193,7 +3246,9 @@ h3{font-weight:600;letter-spacing:-.018em}
             <input type="number" id="eti-sale" min="0" step="any" inputmode="decimal">
           </div>
         </div>
+        <div id="eti-extra" class="eti-additivi" hidden></div>
         <div id="eti-salute" class="eti-salute" hidden>
+          <span class="eti-voto-num" id="eti-voto-num" hidden></span>
           <span class="eti-salute-scala" aria-hidden="true"></span>
           <b id="eti-salute-nome"></b>
           <span id="eti-salute-nota"></span>
@@ -3206,15 +3261,48 @@ h3{font-weight:600;letter-spacing:-.018em}
   <input type="file" id="etichetta-file" accept="image/*" hidden>
   <input type="file" id="etichetta-foto" accept="image/*" capture="environment" hidden>
 
-  <div id="modal-catalogo" class="modal" role="dialog" aria-modal="true" aria-label="Catalogo ingredienti">
+  <div id="modal-codice" class="modal" role="dialog" aria-modal="true" aria-label="Codice a barre">
     <div class="modal-content">
       <div class="modal-head">
-        <h2>Catalogo</h2>
+        <h2>Il codice a barre</h2>
+        <button type="button" class="x" data-act="codice-chiudi" aria-label="Chiudi">&times;</button>
+      </div>
+      <p class="hint">Tieni il codice dentro il riquadro, a 10&ndash;15 cm: appena lo leggo
+        cerco il prodotto da solo.</p>
+      <div class="codice-inquadra" id="codice-inquadra">
+        <video id="codice-video" playsinline muted autoplay></video>
+        <span class="codice-mira" aria-hidden="true"></span>
+      </div>
+      <p class="scan-passo" id="codice-passo" hidden></p>
+      <div class="scan-scelte" style="margin-top:10px">
+        <button type="button" class="btn-ghost scan-via" data-act="codice-foto">
+          <svg viewBox="0 0 24 24"><path d="M4 8.5l1.2-2.1a1.6 1.6 0 0 1 1.4-.8h2.8a1.6 1.6 0 0 1 1.4.8L12 8.5h5.5A1.5 1.5 0 0 1 19 10v8a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 18v-8a1.5 1.5 0 0 1-1.5-1.5z" transform="translate(0.5 -1.5)"/><circle cx="12" cy="13" r="3.4"/></svg>
+          <span>Scatta una foto del codice</span>
+        </button>
+      </div>
+      <label class="field-label" for="codice-cifre" style="margin-top:12px">Oppure scrivi le cifre
+        stampate sotto le barre</label>
+      <div class="codice-mano">
+        <input type="text" id="codice-cifre" inputmode="numeric" autocomplete="off"
+          maxlength="14" placeholder="es. 8001120000000">
+        <button type="button" class="btn-primary" data-act="codice-cerca">Cerca</button>
+      </div>
+    </div>
+  </div>
+  <input type="file" id="codice-file" accept="image/*" capture="environment" hidden>
+
+  <div id="modal-catalogo" class="modal" role="dialog" aria-modal="true" aria-label="Prodotti">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h2>Prodotti</h2>
         <button type="button" class="x" data-act="close-modal" aria-label="Chiudi">&times;</button>
       </div>
-      <p class="hint">Tutto quello che l'app ha conosciuto almeno una volta: il giudizio
-        sulla scala da sano a grasso e il posto dove va conservato. Tocca il nome per
-        correggere i valori, tocca il posto per cambiarlo.</p>
+      <p class="hint">Tutti i prodotti in un posto solo: cerca per nome, o tocca una
+        famiglia &mdash; una bevanda &egrave; una bevanda, una salsa &egrave; una salsa. Il voto su 100,
+        il posto giusto, e da qui metti in dispensa o in lista con un tocco.</p>
+      <input type="search" id="cat-cerca" autocomplete="off" spellcheck="false"
+        placeholder="Cerca un prodotto&hellip;" aria-label="Cerca un prodotto">
+      <div id="cat-famiglie" class="cat-famiglie" role="tablist" aria-label="Famiglie"></div>
       <div id="catalogo-lista"></div>
     </div>
   </div>
@@ -6283,6 +6371,7 @@ const SEED = {
   shopDone: {},
   shopQta: {},        // per voce della lista: la quantita' DAVVERO comprata
   ingTabExtra: {},    // i valori nutrizionali letti dalle etichette, per 100 g
+  prodottiInfo: {},   // dal codice a barre: additivi, bio, marca — servono al voto
   catalogo: {},       // ogni ingrediente passato di qui: nome e posto giusto, per sempre
   searches: [],
   weights: [],
@@ -6436,6 +6525,7 @@ function load() {
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
@@ -6987,8 +7077,8 @@ function recipeCard(r, extra, n) {
     : `<span class="scheda-dati">
          <span class="dato">${ICONE.tempo}${t}</span>
          <span class="dato">${ICONE.fuoco}${m.kcal}</span>
-         ${(() => { const g = salubritaRicetta(r);
-           return g ? `<span class="dato" title="${esc(g.nome)}${g.parziale ? ' · giudizio parziale' : ''}"><i class="salute-pallino" style="background:${g.colore};margin:0"></i></span>` : ''; })()}
+         ${(() => { const g = votoRicetta(r);
+           return g ? `<span class="dato" title="${g.punteggio}/100 · ${esc(g.nome)}${g.parziale ? ' · voto parziale' : ''}"><i class="salute-pallino" style="background:${g.colore};margin:0"></i></span>` : ''; })()}
        </span>`;
 
   // Il disegno si riempie in proporzione a quanto hai gia' in dispensa, e si
@@ -8573,8 +8663,8 @@ function renderCredenza() {
             ${aperto ? `<span class="targhetta">
               <button type="button" class="chip mini targhetta-eti" data-act="etichetta-apri"
                 data-val="${esc(v.nome)}" data-verso="valori"
-                ${salubritaDi(v.nome) ? `style="color:${salubritaDi(v.nome).colore}"` : ''}>${salubritaDi(v.nome)
-                  ? '\u25cf ' + esc(salubritaDi(v.nome).nome) : 'etichetta'}</button>
+                ${votoDi(v.nome) ? `style="color:${votoDi(v.nome).colore}"` : ''}>${votoDi(v.nome)
+                  ? '\u25cf ' + votoDi(v.nome).punteggio + '/100 ' + esc(votoDi(v.nome).nome) : 'etichetta'}</button>
               <b>preso ${new Date(v.dal).toLocaleDateString('it-IT', { day: '2-digit', month: 'short' })}</b>
               <span>${etaTesto(v.dal)}</span>
               <b>${v.entro
@@ -8630,7 +8720,10 @@ function renderDispSuggest(q) {
         ${esc(v.nome)} <i>${v.qta ? v.qta + (v.unita === 'pz' ? ' pz' : ' g') : 'in dispensa'}</i></button>`).join('')
     + altri.map(n =>
       `<button type="button" class="chip mini" data-act="disp-scegli" data-val="${esc(n)}">
-        ${esc(n)}</button>`).join('');
+        ${esc(n)}</button>`).join('')
+    // la porta verso l'unico posto della ricerca vera, col testo che ti segue
+    + `<button type="button" class="chip mini" data-act="catalogo-apri" data-val="${esc(q || '')}">
+        tutti i prodotti…</button>`;
 }
 
 function aggiornaUnitaDispensa() {
@@ -9616,6 +9709,7 @@ function chiudiModal(id) {
 
 function closeModals() {
   disarm();
+  try { fermaCodice(); } catch (e) {}   // la camera del codice non resta accesa
   scalaDettaglio = [];
   const pag = document.getElementById('pagina-' + PASTI_HOME[pastoCorrente]);
   if (pag) {
@@ -9718,8 +9812,8 @@ function openDetail(id, tornando) {
 
     <p class="detail-meta" style="text-align:center">
       ${esc(PORTATA[portataOf(r)])} · ${(() => {
-        const g = salubritaRicetta(r);
-        return g ? `<b style="color:${g.colore}">${esc(g.nome)}</b>` : esc(r.cat);
+        const g = votoRicetta(r);
+        return g ? `<b style="color:${g.colore}">${esc(g.nome)} ${g.punteggio}/100</b>` : esc(r.cat);
       })()} · ${r.prep + r.cook} min
       · <span class="diff">${rebbi(difficolta(r))}${['facile', 'media', 'impegnativa'][difficolta(r) - 1]}</span>
       ${fuoriStagione(r) ? '· fuori stagione' : ''}
@@ -11086,12 +11180,589 @@ function valoriDaGrammatura(ing) {
   };
 }
 
-/* Il pallino colorato della scala, da mettere accanto a un nome. */
+/* ---------- il voto del prodotto, alla maniera di Yuka ----------
+   Un numero su 100, trasparente e ricalcolabile: il 60% viene dalla
+   qualita' nutrizionale (il metodo Nutri-Score qui sopra), il 30% dagli
+   additivi (classificati sul lavoro pubblico di EFSA e IARC), il 10% dal
+   biologico certificato. Regola dura come nell'originale: un additivo ad
+   alto rischio azzera la sua parte E mette un tetto di 49 al voto totale.
+   Quattro fasce: eccellente, buono, mediocre, scarso. Tutto calcolato qui
+   sul telefono, niente giudizi scritti a mano, niente servizi a pagamento. */
+
+const VOTO_FASCE = [
+  { nome: 'eccellente', colore: '#3f8f5f', da: 75 },
+  { nome: 'buono',      colore: '#8ca24f', da: 50 },
+  { nome: 'mediocre',   colore: '#e4a23c', da: 25 },
+  { nome: 'scarso',     colore: '#c05b35', da: 0 }
+];
+
+/* Gli additivi e il loro rischio: 0 senza rischio, 1 limitato, 2 moderato,
+   3 elevato. La lista copre gli E-numeri che si incontrano davvero sugli
+   scaffali italiani; un additivo mai visto si tratta con prudenza (1). */
+const RISCHIO_NOMI = ['senza rischio', 'rischio limitato', 'rischio moderato', 'rischio elevato'];
+const RISCHIO_COLORI = ['#4c8a6b', '#e4b23c', '#d07a3a', '#b8552e'];
+const ADDITIVI = {
+  // coloranti
+  e100:[0,'curcumina'], e101:[0,'riboflavina'], e102:[3,'tartrazina'],
+  e104:[3,'giallo di chinolina'], e110:[3,'giallo tramonto'], e120:[2,'cocciniglia'],
+  e122:[3,'azorubina'], e124:[3,'rosso cocciniglia A'], e129:[3,'rosso allura'],
+  e131:[2,'blu patent V'], e132:[1,'indigotina'], e133:[1,'blu brillante'],
+  e140:[0,'clorofille'], e141:[0,'clorofille rameiche'], e142:[2,'verde S'],
+  e150a:[1,'caramello semplice'], e150b:[2,'caramello solfito'], e150c:[2,'caramello ammoniacale'],
+  e150d:[2,'caramello solfito-ammoniacale'], e153:[1,'carbone vegetale'], e155:[2,'bruno HT'],
+  e160a:[0,'beta-carotene'], e160b:[1,'annatto'], e160c:[0,'estratto di paprika'],
+  e161b:[0,'luteina'], e162:[0,'rosso di barbabietola'], e163:[0,'antociani'],
+  e170:[0,'carbonato di calcio'], e171:[3,'biossido di titanio'], e172:[1,'ossidi di ferro'],
+  e173:[2,'alluminio'], e174:[1,'argento'], e175:[1,'oro'],
+  // conservanti
+  e200:[1,'acido sorbico'], e202:[1,'sorbato di potassio'], e203:[1,'sorbato di calcio'],
+  e210:[2,'acido benzoico'], e211:[2,'benzoato di sodio'], e212:[2,'benzoato di potassio'],
+  e213:[2,'benzoato di calcio'], e214:[3,'etilparabene'], e215:[3,'etilparabene sodico'],
+  e218:[2,'metilparabene'], e219:[2,'metilparabene sodico'],
+  e220:[2,'anidride solforosa'], e221:[2,'solfito di sodio'], e222:[2,'bisolfito di sodio'],
+  e223:[2,'metabisolfito di sodio'], e224:[2,'metabisolfito di potassio'],
+  e226:[2,'solfito di calcio'], e227:[2,'bisolfito di calcio'], e228:[2,'bisolfito di potassio'],
+  e234:[1,'nisina'], e235:[1,'natamicina'], e239:[3,'esametilentetramina'],
+  e242:[1,'dimetil dicarbonato'], e249:[3,'nitrito di potassio'], e250:[3,'nitrito di sodio'],
+  e251:[3,'nitrato di sodio'], e252:[3,'nitrato di potassio'],
+  e260:[0,'acido acetico'], e261:[0,'acetato di potassio'], e262:[0,'acetati di sodio'],
+  e263:[0,'acetato di calcio'], e270:[0,'acido lattico'], e280:[1,'acido propionico'],
+  e281:[1,'propionato di sodio'], e282:[1,'propionato di calcio'], e283:[1,'propionato di potassio'],
+  e284:[3,'acido borico'], e285:[3,'borace'], e290:[0,'anidride carbonica'],
+  e296:[0,'acido malico'], e297:[0,'acido fumarico'],
+  // antiossidanti e regolatori
+  e300:[0,'acido ascorbico'], e301:[0,'ascorbato di sodio'], e302:[0,'ascorbato di calcio'],
+  e304:[0,'palmitato di ascorbile'], e306:[0,'tocoferoli'], e307:[0,'alfa-tocoferolo'],
+  e308:[0,'gamma-tocoferolo'], e309:[0,'delta-tocoferolo'],
+  e310:[2,'gallato di propile'], e311:[2,'gallato di ottile'], e312:[2,'gallato di dodecile'],
+  e315:[1,'acido eritorbico'], e316:[1,'eritorbato di sodio'], e319:[2,'TBHQ'],
+  e320:[3,'BHA'], e321:[2,'BHT'], e322:[0,'lecitine'],
+  e325:[0,'lattato di sodio'], e326:[0,'lattato di potassio'], e327:[0,'lattato di calcio'],
+  e330:[0,'acido citrico'], e331:[0,'citrati di sodio'], e332:[0,'citrati di potassio'],
+  e333:[0,'citrati di calcio'], e334:[0,'acido tartarico'], e335:[0,'tartrati di sodio'],
+  e336:[0,'tartrati di potassio'], e337:[0,'tartrato misto'],
+  e338:[2,'acido fosforico'], e339:[2,'fosfati di sodio'], e340:[2,'fosfati di potassio'],
+  e341:[2,'fosfati di calcio'], e343:[2,'fosfati di magnesio'],
+  e350:[0,'malati di sodio'], e351:[0,'malato di potassio'], e352:[0,'malati di calcio'],
+  e353:[0,'acido metatartarico'], e354:[0,'tartrato di calcio'], e355:[1,'acido adipico'],
+  e363:[0,'acido succinico'], e380:[1,'citrato triammonico'], e385:[2,'EDTA'],
+  e392:[0,'estratto di rosmarino'],
+  // addensanti, gelificanti, emulsionanti
+  e400:[0,'acido alginico'], e401:[0,'alginato di sodio'], e402:[0,'alginato di potassio'],
+  e404:[0,'alginato di calcio'], e405:[1,'alginato di propilenglicole'],
+  e406:[0,'agar-agar'], e407:[2,'carragenina'], e407a:[2,'alga eucheuma'],
+  e410:[0,'farina di semi di carrube'], e412:[0,'gomma di guar'], e413:[0,'gomma adragante'],
+  e414:[0,'gomma arabica'], e415:[1,'gomma di xantano'], e416:[1,'gomma karaya'],
+  e417:[1,'gomma tara'], e418:[1,'gomma gellano'], e420:[1,'sorbitolo'],
+  e421:[1,'mannitolo'], e422:[1,'glicerolo'], e425:[1,'konjac'], e428:[0,'gelatina'],
+  e432:[2,'polisorbato 20'], e433:[2,'polisorbato 80'], e434:[2,'polisorbato 40'],
+  e435:[2,'polisorbato 60'], e436:[2,'polisorbato 65'], e440:[0,'pectine'],
+  e442:[1,'fosfatidi di ammonio'], e444:[1,'acetato isobutirrato di saccarosio'],
+  e445:[1,'esteri della colofonia'], e450:[2,'difosfati'], e451:[2,'trifosfati'],
+  e452:[2,'polifosfati'], e460:[1,'cellulosa'], e461:[1,'metilcellulosa'],
+  e463:[1,'idrossipropilcellulosa'], e464:[1,'ipromellosa'], e466:[2,'carbossimetilcellulosa'],
+  e470a:[1,'sali degli acidi grassi'], e470b:[1,'sali di magnesio degli acidi grassi'],
+  e471:[1,'mono e digliceridi'], e472a:[1,'esteri acetici'], e472b:[1,'esteri lattici'],
+  e472c:[1,'esteri citrici'], e472e:[1,'esteri tartarici'], e473:[1,'sucroesteri'],
+  e475:[1,'esteri poliglicerici'], e476:[1,'poliricinoleato di poliglicerolo'],
+  e481:[1,'stearoil lattilato di sodio'], e482:[1,'stearoil lattilato di calcio'],
+  e491:[2,'monostearato di sorbitano'], e492:[2,'tristearato di sorbitano'],
+  // minerali e vari
+  e500:[0,'bicarbonato di sodio'], e501:[0,'carbonati di potassio'], e503:[0,'carbonati di ammonio'],
+  e504:[0,'carbonati di magnesio'], e507:[0,'acido cloridrico'], e508:[0,'cloruro di potassio'],
+  e509:[0,'cloruro di calcio'], e511:[0,'cloruro di magnesio'], e513:[1,'acido solforico'],
+  e514:[1,'solfati di sodio'], e524:[0,'idrossido di sodio'], e526:[0,'idrossido di calcio'],
+  e527:[1,'idrossido di ammonio'], e551:[1,'biossido di silicio'], e552:[1,'silicato di calcio'],
+  e553b:[2,'talco'], e554:[2,'silicato di sodio e alluminio'], e555:[2,'silicato di potassio e alluminio'],
+  // esaltatori di sapidita'
+  e620:[2,'acido glutammico'], e621:[2,'glutammato monosodico'], e622:[2,'glutammato monopotassico'],
+  e623:[2,'glutammato di calcio'], e625:[2,'glutammato di magnesio'],
+  e626:[1,'acido guanilico'], e627:[1,'guanilato disodico'], e631:[1,'inosinato disodico'],
+  e635:[1,'ribonucleotidi di sodio'], e640:[0,'glicina'], e650:[1,'acetato di zinco'],
+  // cere e superfici
+  e901:[0,'cera d\'api'], e903:[0,'cera carnauba'], e904:[1,'gommalacca'],
+  e914:[1,'cera polietilenica'], e920:[1,'L-cisteina'], e927b:[1,'carbammide'],
+  e999:[1,'estratto di quillaia'],
+  // dolcificanti
+  e950:[2,'acesulfame K'], e951:[3,'aspartame'], e952:[2,'ciclammato'],
+  e953:[1,'isomalto'], e954:[2,'saccarina'], e955:[2,'sucralosio'],
+  e957:[0,'taumatina'], e959:[1,'neoesperidina DC'], e960:[0,'glicosidi steviolici'],
+  e961:[2,'neotame'], e962:[3,'sale di aspartame-acesulfame'], e965:[1,'maltitolo'],
+  e966:[1,'lattitolo'], e967:[1,'xilitolo'], e968:[1,'eritritolo'],
+  // enzimi e amidi modificati
+  e1103:[0,'invertasi'], e1105:[1,'lisozima'], e1200:[0,'polidestrosio'],
+  e1404:[1,'amido ossidato'], e1410:[1,'fosfato di amido'], e1412:[1,'fosfato di diamido'],
+  e1413:[1,'fosfato di diamido fosfatato'], e1414:[1,'fosfato di diamido acetilato'],
+  e1420:[1,'amido acetilato'], e1422:[1,'adipato di diamido acetilato'],
+  e1440:[1,'amido idrossipropilato'], e1442:[1,'fosfato di diamido idrossipropilato'],
+  e1450:[1,'ottenilsuccinato di amido e sodio'], e1451:[1,'amido ossidato acetilato'],
+  e1505:[2,'citrato di trietile'], e1510:[1,'etanolo'], e1518:[1,'triacetina'],
+  e1520:[2,'glicole propilenico']
+};
+
+/* Da 'en:e322i' (come scrive Open Food Facts) a { codice, rischio, nome }.
+   Le varianti con la lettera in coda (e322i, e150aiv) ereditano il giudizio
+   della famiglia; un codice mai visto si tratta con prudenza. */
+function infoAdditivo(tag) {
+  let c = String(tag || '').toLowerCase().replace(/^[a-z]{2,3}:/, '').replace(/[^a-z0-9]/g, '');
+  if (!/^e\d/.test(c)) return null;
+  let voce = ADDITIVI[c];
+  while (!voce && c.length > 2 && /[ivx]$/.test(c)) { c = c.slice(0, -1); voce = ADDITIVI[c]; }
+  if (!voce && /^e\d+[a-z]$/.test(c)) voce = ADDITIVI[c.replace(/[a-z]$/, '')];
+  return {
+    codice: c.toUpperCase(),
+    rischio: voce ? voce[0] : 1,
+    nome: voce ? voce[1] : 'additivo poco noto',
+    noto: !!voce
+  };
+}
+
+/* La parte nutrizionale del voto: dai punti Nutri-Score (da -15 a 40) a una
+   scala 0-100, lineare dentro ogni classe ufficiale (A, B, C, D, E) cosi'
+   che i confini di classe restino quelli pubblici. */
+function votoNutrizionale(punti) {
+  const p = Math.max(-15, Math.min(40, Number(punti) || 0));
+  if (p <= -1) return Math.round(84 + (-1 - p) * (16 / 14));   // A: 84-100
+  if (p <= 2)  return Math.round(70 + (2 - p) * (10 / 2));     // B: 70-80
+  if (p <= 10) return Math.round(40 + (10 - p) * (25 / 7));    // C: 40-65
+  if (p <= 18) return Math.round(15 + (18 - p) * (20 / 7));    // D: 15-35
+  return Math.round((40 - p) * (12 / 21));                     // E: 0-12
+}
+
+/* Il voto intero. valori: come salubrita(). info (facoltativo):
+   { add: ['e322', ...], bio: true/false, confezionato: true/false }.
+   add assente = additivi mai letti: per un prodotto confezionato il voto
+   si dichiara parziale, per un ingrediente semplice si assume pulito. */
+function voto(valori, info) {
+  const g = salubrita(valori);
+  if (!g) return null;
+  const i = info || {};
+  const addNoti = Array.isArray(i.add) ? i.add.map(infoAdditivo).filter(Boolean) : null;
+  const rischio = addNoti && addNoti.length ? Math.max.apply(null, addNoti.map(a => a.rischio)) : 0;
+  const puntiAdd = [30, 20, 8, 0][rischio];
+  const puntiBio = i.bio ? 10 : 0;
+  let p = Math.round(votoNutrizionale(g.punti) * 0.6 + puntiAdd + puntiBio);
+  if (rischio >= 3) p = Math.min(p, 49);   // la regola dura di Yuka
+  p = Math.max(0, Math.min(100, p));
+
+  const mancanti = g.mancanti.slice();
+  if (!addNoti && i.confezionato) mancanti.push('additivi');
+  const fascia = p >= 75 ? 0 : p >= 50 ? 1 : p >= 25 ? 2 : 3;
+  return {
+    punteggio: p,
+    fascia: fascia,
+    nome: VOTO_FASCE[fascia].nome,
+    colore: VOTO_FASCE[fascia].colore,
+    parziale: mancanti.length > 0,
+    mancanti: mancanti,
+    additivi: addNoti || [],
+    rischio: addNoti ? rischio : null,
+    bio: !!i.bio,
+    gradino: g.gradino,
+    punti: g.punti
+  };
+}
+
+/* Le notizie da codice a barre di un prodotto gia' visto, anche col fuzzy. */
+function prodottoInfoDi(nome) {
+  const box = S.prodottiInfo || {};
+  const k = String(nome || '').toLowerCase().trim();
+  if (box[k]) return box[k];
+  for (const chiave of Object.keys(box)) {
+    if (sameIngredient(chiave, nome)) return box[chiave];
+  }
+  return null;
+}
+
+function prodottoRegistraInfo(nome, info) {
+  if (!nome || !info) return;
+  S.prodottiInfo = S.prodottiInfo || {};
+  S.prodottiInfo[String(nome).toLowerCase().trim()] = {
+    add: Array.isArray(info.add) ? info.add.slice(0, 40) : [],
+    bio: !!info.bio,
+    codice: info.codice || null,
+    marca: info.marca || null,
+    t: Date.now()
+  };
+}
+
+/* Confezionato = e' passata un'etichetta o un codice: la mancanza degli
+   additivi allora pesa (voto parziale). Le tabelle di serie sono
+   ingredienti semplici: li' gli additivi non c'entrano. */
+function eConfezionato(nome) {
+  const extra = S.ingTabExtra || {};
+  const k = String(nome || '').toLowerCase().trim();
+  if (extra[k]) return true;
+  for (const chiave of Object.keys(extra)) {
+    if (sameIngredient(chiave, nome)) return true;
+  }
+  return false;
+}
+
+/* Il voto di un prodotto o ingrediente noto all'app: LA porta unica usata
+   da dispensa, spesa, catalogo, riepiloghi e inviti. */
+function votoDi(nome) {
+  const t = tabellaDi(nome);
+  if (!t) return null;
+  const inf = prodottoInfoDi(nome);
+  return voto({
+    kcal: t[0], proteine: t[1], zuccheri: t.length > 5 ? t[5] : null,
+    grassi: t[3], saturi: t.length > 4 ? t[4] : null,
+    fibre: t.length > 6 ? t[6] : null, sale: t.length > 7 ? t[7] : null
+  }, {
+    add: inf ? inf.add : null,
+    bio: !!(inf && inf.bio),
+    confezionato: eConfezionato(nome)
+  });
+}
+
+/* Lo STESSO voto per una ricetta intera: la parte nutrizionale dai suoi
+   valori per 100 g di piatto, niente additivi (si cucina da ingredienti
+   freschi), niente bonus bio. */
+const _votoRicette = {};
+function votoRicetta(r) {
+  const g = salubritaRicetta(r);
+  if (!g) return null;
+  const chiave = r.id + ':' + (r.mtime || 0);
+  if (_votoRicette[chiave]) return _votoRicette[chiave];
+  // la salubrita' e' gia' calcolata: si riusa il suo punteggio senza rifarlo
+  const puntiN = votoNutrizionale(g.punti);
+  let p = Math.round(puntiN * 0.6 + 30);
+  p = Math.max(0, Math.min(100, p));
+  const fascia = p >= 75 ? 0 : p >= 50 ? 1 : p >= 25 ? 2 : 3;
+  const out = {
+    punteggio: p, fascia: fascia,
+    nome: VOTO_FASCE[fascia].nome, colore: VOTO_FASCE[fascia].colore,
+    parziale: g.parziale, mancanti: g.mancanti,
+    additivi: [], rischio: null, bio: false,
+    gradino: g.gradino, punti: g.punti
+  };
+  _votoRicette[chiave] = out;
+  return out;
+}
+
+/* Il pallino colorato del voto, da mettere accanto a un nome. */
 function salutePallino(nome) {
-  const g = salubritaDi(nome);
+  const g = votoDi(nome);
   if (!g) return '';
   return `<i class="salute-pallino" style="background:${g.colore}"
-    title="${esc(g.nome)}${g.parziale ? ' · giudizio parziale' : ''}"></i>`;
+    title="${g.punteggio}/100 · ${esc(g.nome)}${g.parziale ? ' · voto parziale' : ''}"></i>`;
+}
+
+/* ---------- il riconoscimento del prodotto: codice a barre ----------
+   Il codice si legge col lettore nativo del telefono dove c'e'
+   (BarcodeDetector), altrimenti con una libreria open source caricata al
+   volo; il prodotto si cerca in Open Food Facts, l'archivio libero e
+   gratuito compilato da milioni di persone: nome, valori per 100 g,
+   additivi e certificazione bio arrivano da soli. Senza rete o senza
+   prodotto in archivio si torna con garbo alla lettura della foto. */
+
+const ZXING_FONTI = [
+  'https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js',
+  'https://unpkg.com/@zxing/library@0.21.3/umd/index.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/zxing-library/0.21.3/index.min.js'
+];
+let zxingLibreria = null;
+function caricaZxing() {
+  if (window.ZXing) return Promise.resolve(window.ZXing);
+  if (zxingLibreria) return zxingLibreria;
+  zxingLibreria = new Promise((risolvi, rifiuta) => {
+    let i = 0;
+    const prova = () => {
+      if (i >= ZXING_FONTI.length) { zxingLibreria = null; rifiuta(new Error('zxing-non-raggiungibile')); return; }
+      const sc = document.createElement('script');
+      sc.src = ZXING_FONTI[i++];
+      sc.async = true;
+      sc.onload = () => window.ZXing ? risolvi(window.ZXing) : prova();
+      sc.onerror = () => { sc.remove(); prova(); };
+      document.head.appendChild(sc);
+    };
+    prova();
+  });
+  return zxingLibreria;
+}
+
+/* Un lettore unico, qualunque sia il motore sotto: prende una tela (o un
+   video) e risponde con le cifre del codice, o null. */
+let lettoreCodici = null;
+function caricaLettoreCodici() {
+  if (lettoreCodici) return lettoreCodici;
+  if (typeof window.BarcodeDetector === 'function') {
+    lettoreCodici = window.BarcodeDetector.getSupportedFormats()
+      .then(f => {
+        const voglio = ['ean_13', 'ean_8', 'upc_a', 'upc_e', 'code_128'].filter(x => f.includes(x));
+        if (!voglio.length) throw new Error('formati-mancanti');
+        const det = new window.BarcodeDetector({ formats: voglio });
+        return { leggi: tela => det.detect(tela)
+          .then(r => (r && r[0] && /^\d{6,14}$/.test(r[0].rawValue)) ? r[0].rawValue : null)
+          .catch(() => null) };
+      })
+      .catch(() => { lettoreCodici = null; return caricaLettoreZxing(); });
+    return lettoreCodici;
+  }
+  lettoreCodici = caricaLettoreZxing();
+  return lettoreCodici;
+}
+function caricaLettoreZxing() {
+  return caricaZxing().then(Z => {
+    const hints = new Map();
+    hints.set(Z.DecodeHintType.POSSIBLE_FORMATS, [Z.BarcodeFormat.EAN_13,
+      Z.BarcodeFormat.EAN_8, Z.BarcodeFormat.UPC_A, Z.BarcodeFormat.UPC_E,
+      Z.BarcodeFormat.CODE_128]);
+    hints.set(Z.DecodeHintType.TRY_HARDER, true);
+    const reader = new Z.MultiFormatReader();
+    reader.setHints(hints);
+    return { leggi: tela => {
+      try {
+        const src = new Z.HTMLCanvasElementLuminanceSource(tela);
+        const bmp = new Z.BinaryBitmap(new Z.HybridBinarizer(src));
+        const r = reader.decodeWithState(bmp);
+        const testo = r && r.getText ? r.getText() : null;
+        return Promise.resolve(/^\d{6,14}$/.test(testo || '') ? testo : null);
+      } catch (e) { return Promise.resolve(null); }
+    } };
+  });
+}
+
+/* Dal JSON di Open Food Facts alle cose che servono qui: nome, valori per
+   100 g gia' arrotondati, additivi, bio. Regge i buchi: quello che manca
+   resta null e il voto si dira' parziale. */
+function prodottoDaOff(json) {
+  if (!json || json.status !== 1 || !json.product) return null;
+  const p = json.product;
+  const nu = p.nutriments || {};
+  const num = x => (x === undefined || x === null || x === '' || !isFinite(Number(x)))
+    ? null : Math.round(Number(x) * 10) / 10;
+  let kcal = num(nu['energy-kcal_100g']);
+  if (kcal === null && isFinite(Number(nu['energy-kj_100g']))) {
+    kcal = Math.round(Number(nu['energy-kj_100g']) / 4.184);
+  }
+  if (kcal === null && isFinite(Number(nu.energy_100g)) && Number(nu.energy_100g) > 400) {
+    kcal = Math.round(Number(nu.energy_100g) / 4.184);   // energy_100g in kJ
+  }
+  let sale = num(nu.salt_100g);
+  if (sale === null && isFinite(Number(nu.sodium_100g))) {
+    sale = Math.round(Number(nu.sodium_100g) * 2.5 * 100) / 100;
+  }
+  const etichette = (p.labels_tags || []).join(' ');
+  const nome = (p.product_name_it || p.product_name || '').trim().slice(0, 60);
+  if (!nome) return null;
+  return {
+    nome: nome.toLowerCase(),
+    marca: (p.brands || '').split(',')[0].trim().slice(0, 40) || null,
+    codice: p.code || null,
+    valori: {
+      kcal: kcal, proteine: num(nu.proteins_100g), carboidrati: num(nu.carbohydrates_100g),
+      grassi: num(nu.fat_100g), saturi: num(nu['saturated-fat_100g']),
+      zuccheri: num(nu.sugars_100g), fibre: num(nu.fiber_100g), sale: sale
+    },
+    add: (p.additives_tags || []).map(t => String(t).replace(/^[a-z]{2,3}:/, ''))
+      .filter(t => /^e\d/.test(t)),
+    bio: /(^|\s)(en:organic|en:eu-organic|it:biologico|en:organic-certified|fr:ab-agriculture-biologique)(\s|$)/.test(etichette)
+  };
+}
+
+function cercaProdottoDaCodice(codice) {
+  if (typeof fetch !== 'function') return Promise.reject(new Error('niente-rete'));
+  const url = 'https://world.openfoodfacts.org/api/v2/product/' + encodeURIComponent(codice)
+    + '.json?fields=code,product_name,product_name_it,brands,nutriments,additives_tags,labels_tags';
+  const controllo = typeof AbortController === 'function' ? new AbortController() : null;
+  const timer = controllo ? setTimeout(() => controllo.abort(), 9000) : null;
+  return fetch(url, controllo ? { signal: controllo.signal } : {})
+    .then(r => { if (!r.ok) throw new Error('http-' + r.status); return r.json(); })
+    .then(j => { if (timer) clearTimeout(timer); return prodottoDaOff(j); })
+    .catch(e => { if (timer) clearTimeout(timer); throw e; });
+}
+
+/* Il prodotto trovato entra nel modulo etichetta: nome (se il campo e'
+   libero), tutti i valori, additivi e bio; il voto si rifa' da solo. */
+function applicaProdottoTrovato(p) {
+  const metti = (id, v) => { if (F(id)) F(id).value = v === null ? '' : v; };
+  const nomeCampo = F('eti-nome');
+  if (nomeCampo && !nomeCampo.value.trim()) nomeCampo.value = p.nome;
+  metti('eti-kcal', p.valori.kcal); metti('eti-pro', p.valori.proteine);
+  metti('eti-carb', p.valori.carboidrati); metti('eti-gra', p.valori.grassi);
+  metti('eti-sat', p.valori.saturi); metti('eti-zuc', p.valori.zuccheri);
+  metti('eti-fib', p.valori.fibre); metti('eti-sale', p.valori.sale);
+  etiProdottoInfo = { add: p.add, bio: p.bio, codice: p.codice, marca: p.marca };
+  renderEtiExtra();
+  aggiornaSalubritaEtichetta();
+  const passo = document.getElementById('etichetta-passo');
+  if (passo) {
+    passo.hidden = false;
+    passo.textContent = 'Trovato: ' + p.nome + (p.marca ? ' (' + p.marca + ')' : '')
+      + '. Controlla e salva.';
+  }
+}
+
+/* Il riquadro di additivi e bio nel modulo etichetta. */
+function renderEtiExtra() {
+  const box = document.getElementById('eti-extra');
+  if (!box) return;
+  if (!etiProdottoInfo) { box.hidden = true; box.innerHTML = ''; return; }
+  const addetti = (etiProdottoInfo.add || []).map(infoAdditivo).filter(Boolean);
+  box.hidden = false;
+  box.innerHTML = `
+    <b>Additivi${addetti.length ? ' (' + addetti.length + ')' : ''}</b>
+    ${addetti.length ? addetti.map(a => `
+      <span class="eti-add-riga">
+        <i class="add-pallino" style="background:${RISCHIO_COLORI[a.rischio]}"></i>
+        ${a.codice} · ${esc(a.nome)}<em>${RISCHIO_NOMI[a.rischio]}</em>
+      </span>`).join('')
+    : '<span class="eti-add-riga"><i class="add-pallino" style="background:' + RISCHIO_COLORI[0]
+      + '"></i>nessun additivo segnalato</span>'}
+    <span class="eti-bio">
+      <button type="button" class="chip mini ${etiProdottoInfo.bio ? 'active' : ''}"
+        data-act="eti-bio">${etiProdottoInfo.bio ? '✓ ' : ''}biologico certificato</button>
+      <em style="font-style:normal;font-size:.72rem;color:var(--text-tertiary)">vale il 10% del voto</em>
+    </span>`;
+}
+
+/* La camera che inquadra il codice: un giro di letture finche' non esce
+   un numero buono, poi si cerca il prodotto. Tutto si spegne per bene. */
+let codiceStream = null;
+let codiceTimer = null;
+function fermaCodice() {
+  if (codiceTimer) { clearInterval(codiceTimer); codiceTimer = null; }
+  if (codiceStream) {
+    try { codiceStream.getTracks().forEach(t => t.stop()); } catch (e) {}
+    codiceStream = null;
+  }
+  const video = document.getElementById('codice-video');
+  if (video) { try { video.srcObject = null; } catch (e) {} }
+  const inq = document.getElementById('codice-inquadra');
+  if (inq) inq.classList.remove('acceso');
+}
+
+function codicePasso(testo) {
+  const p = document.getElementById('codice-passo');
+  if (p) { p.hidden = !testo; p.textContent = testo || ''; }
+}
+
+function codiceTrovato(codice) {
+  fermaCodice();
+  chiudiModal('modal-codice');
+  const passo = document.getElementById('etichetta-passo');
+  if (passo) { passo.hidden = false; passo.textContent = 'Codice ' + codice + ': cerco il prodotto…'; }
+  cercaProdottoDaCodice(codice)
+    .then(p => {
+      if (p) { applicaProdottoTrovato(p); return; }
+      if (passo) {
+        passo.textContent = 'Codice letto, ma il prodotto non è nell\'archivio: '
+          + 'fotografa l\'etichetta dei valori e la leggo io.';
+      }
+    })
+    .catch(() => {
+      if (passo) {
+        passo.textContent = 'Non riesco a raggiungere l\'archivio (serve internet): '
+          + 'fotografa l\'etichetta dei valori e la leggo io.';
+      }
+    });
+}
+
+function apriLettoreCodice() {
+  openModal('modal-codice');
+  codicePasso('');
+  const video = document.getElementById('codice-video');
+  const inq = document.getElementById('codice-inquadra');
+  const conCamera = navigator.mediaDevices && navigator.mediaDevices.getUserMedia;
+  if (!conCamera || !video) {
+    codicePasso('Qui la camera non c\'è: scatta una foto del codice, o scrivi le cifre.');
+    return;
+  }
+  Promise.all([
+    caricaLettoreCodici().catch(() => null),
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment',
+      width: { ideal: 1280 }, height: { ideal: 960 } } })
+  ]).then(([lettore, stream]) => {
+    if (!document.getElementById('modal-codice').classList.contains('active')) {
+      try { stream.getTracks().forEach(t => t.stop()); } catch (e) {}
+      return;
+    }
+    if (!lettore) {
+      try { stream.getTracks().forEach(t => t.stop()); } catch (e) {}
+      codicePasso('Il lettore non si carica (serve internet la prima volta): '
+        + 'scrivi le cifre stampate sotto il codice.');
+      return;
+    }
+    codiceStream = stream;
+    video.srcObject = stream;
+    if (inq) inq.classList.add('acceso');
+    const tela = document.createElement('canvas');
+    const ctx = tela.getContext('2d', { willReadFrequently: true });
+    let giro = 0;
+    const dallInizio = Date.now();
+    codiceTimer = setInterval(() => {
+      if (!video.videoWidth) return;
+      giro++;
+      // di solito basta la striscia centrale (il mirino); ogni tanto si
+      // prova il quadro intero, per chi tiene il codice fuori riga
+      const intero = giro % 3 === 0;
+      const vw = video.videoWidth, vh = video.videoHeight;
+      const x = intero ? 0 : Math.round(vw * 0.05);
+      const y = intero ? 0 : Math.round(vh * 0.3);
+      const w = intero ? vw : Math.round(vw * 0.9);
+      const h = intero ? vh : Math.round(vh * 0.4);
+      tela.width = w; tela.height = h;
+      ctx.drawImage(video, x, y, w, h, 0, 0, w, h);
+      lettore.leggi(tela).then(codice => {
+        if (codice && codiceTimer) codiceTrovato(codice);
+      });
+      if (Date.now() - dallInizio > 20000 && !document.getElementById('codice-passo').textContent) {
+        codicePasso('Non lo prendo: prova più vicino e con più luce, '
+          + 'oppure scrivi le cifre qui sotto.');
+      }
+    }, 350);
+  }).catch(() => {
+    codicePasso('La camera non si apre: scatta una foto del codice, o scrivi le cifre.');
+  });
+}
+
+/* Una foto scelta dall'utente come immagine pronta da disegnare su tela. */
+function creaImmagine(file) {
+  return new Promise((risolvi, rifiuta) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => { URL.revokeObjectURL(url); risolvi(img); };
+    img.onerror = () => { URL.revokeObjectURL(url); rifiuta(new Error('foto-illeggibile')); };
+    img.src = url;
+  });
+}
+
+/* La foto del codice, per chi non puo' o non vuole la camera dal vivo:
+   si prova a piu' ritagli e rotazioni, come farebbe una persona. */
+function leggiCodiceDaFoto(file) {
+  if (!file) return;
+  codicePasso('Leggo la foto…');
+  Promise.all([caricaLettoreCodici(), creaImmagine(file)])
+    .then(([lettore, img]) => {
+      const prove = [];
+      const base = Math.min(1600, img.width || img.naturalWidth || 1600);
+      const wI = img.naturalWidth || img.width, hI = img.naturalHeight || img.height;
+      const scala = base / wI;
+      [[0, 0, 1, 1], [0.05, 0.25, 0.9, 0.5], [0.15, 0.15, 0.7, 0.7]].forEach(([fx, fy, fw, fh]) => {
+        [0, 90].forEach(rot => prove.push({ fx, fy, fw, fh, rot }));
+      });
+      const tenta = i => {
+        if (i >= prove.length) { codicePasso('Non trovo un codice in questa foto: riprova più da vicino, o scrivi le cifre.'); return; }
+        const p = prove[i];
+        const sw = Math.round(wI * p.fw), sh = Math.round(hI * p.fh);
+        const tela = document.createElement('canvas');
+        const dw = Math.round(sw * scala), dh = Math.round(sh * scala);
+        if (p.rot === 90) { tela.width = dh; tela.height = dw; } else { tela.width = dw; tela.height = dh; }
+        const ctx = tela.getContext('2d');
+        ctx.save();
+        if (p.rot === 90) { ctx.translate(tela.width, 0); ctx.rotate(Math.PI / 2); }
+        ctx.drawImage(img, Math.round(wI * p.fx), Math.round(hI * p.fy), sw, sh, 0, 0, dw, dh);
+        ctx.restore();
+        lettore.leggi(tela).then(codice => {
+          if (codice) { codiceTrovato(codice); return; }
+          tenta(i + 1);
+        });
+      };
+      tenta(0);
+    })
+    .catch(() => codicePasso('Non riesco a leggere la foto: scrivi le cifre stampate sotto il codice.'));
 }
 
 /* ---------- lettura dell'etichetta nutrizionale ----------
@@ -11907,6 +12578,74 @@ function ingCategoria(nome) {
   return { id: 'disp', nome: 'Dispensa' };
 }
 
+/* ---------- le famiglie dei prodotti ----------
+   La lente fine della ricerca: una bevanda e' una bevanda, una salsa e' una
+   salsa. L'ordine conta — le famiglie piu' specifiche stanno prima, cosi'
+   "succo di mela" e' una bevanda e non un frutto, "salsa di soia" una
+   salsa e non un legume, "latte di mandorla" una bevanda e non un
+   latticino. Un solo classificatore, usato dalla schermata Prodotti. */
+const FAMIGLIE_PRODOTTI = [
+  { id:'bev', nome:'Bevande', voci:['acqua','succo','spremuta','nettare','cola','aranciata','gassosa','gazzosa',
+      'limonata','chinotto','cedrata','birra','vino','prosecco','spumante','amaro','liquore','grappa','rum','gin',
+      'vodka','whisky','aperitivo','spritz','tisana','infuso','camomilla','te verde','te nero','te freddo','the ',
+      'caffe','orzo solubile','ginseng','cappuccino','kombucha','energy','latte di mandorla','latte di soia',
+      'latte di avena','latte di riso','latte di cocco','bevanda'] },
+  { id:'sal', nome:'Salse e sughi', voci:['salsa','sugo','ragu','pesto','passata','maionese','ketchup','senape',
+      'mostarda','tabasco','worcester','guacamole','hummus','tzatziki','tahina','crema di sesamo',
+      'pate','paté','bagna cauda','besciamella','pelati','polpa di pomodoro','concentrato di pomodoro'] },
+  { id:'con', nome:'Olio, aceto e spezie', voci:['olio','aceto','sale ','sale fino','sale grosso','pepe','peperoncino',
+      'curry','paprika','cannella','noce moscata','curcuma','zafferano','zenzero','cumino','dado','spezie','origano',
+      'basilico','prezzemolo','salvia','rosmarino','timo','alloro','menta','erba cipollina','aneto','finocchietto',
+      'vaniglia'] },
+  { id:'dol', nome:'Dolci e snack', voci:['cioccolat','biscott','merendin','torta','crostata','gelato','caramell',
+      'zucchero','miele','marmellata','confettura','crema spalmabile','snack','patatine','wafer','brioche','cornetto',
+      'croissant','budino','plumcake','muffin','pandoro','panettone','colomba','gianduia','liquirizia','cacao',
+      'granola','barretta'] },
+  { id:'fru', nome:'Frutta e frutta secca', voci:['mela','pera','banana','arancia','limone','mandarino','clementine',
+      'pompelmo','uva','pesche','pesca','albicocc','ciliegie','fragole','frutti di bosco','mirtilli','lamponi','more',
+      'melone','anguria','kiwi','ananas','mango','papaya','avocado','fichi','prugn','susine','melograno','cachi',
+      'castagne','cocco','datteri','uvetta','noci','mandorle','nocciole','pistacchi','anacardi','arachidi','pinoli',
+      'semi di','frutta'] },
+  { id:'ver', nome:'Verdure', voci:['patate','carota','carote','sedano','cipoll','scalogno','aglio','porri','porro',
+      'zucchine','zucchina','melanzane','peperoni','pomodor','radicchio','rucola','spinaci','bietole','cavolfiore',
+      'broccoli','cavolo','verza','cime di rapa','carciofi','asparagi','funghi','porcini','champignon','zucca',
+      'fagiolini','cicoria','finocchi','cetrioli','insalata','lattuga','songino','valeriana','olive','capperi','mais',
+      'catalogna','topinambur','rape','ravanelli','germogli','alghe','verdure'] },
+  { id:'car', nome:'Carne e salumi', voci:['pollo','tacchino','manzo','vitello','maiale','agnello','coniglio','anatra',
+      'salsiccia','wurstel','guanciale','pancetta','speck','prosciutto','bresaola','salame','mortadella','coppa',
+      'lardo','nduja','fegato','trippa','costine','lonza','macinato','porchetta','hamburger','polpette','carne',
+      'arrosto','cotoletta'] },
+  { id:'pes', nome:'Pesce', voci:['tonno','salmone','merluzzo','baccala','branzino','orata','sgombro','alici',
+      'acciughe','sarde','polpo','seppie','calamari','gamberi','gamberetti','scampi','cozze','vongole','capesante',
+      'trota','bottarga','gallinella','platessa','sogliola','nasello','surimi','pesce'] },
+  { id:'lat', nome:'Latticini e uova', voci:['latte','yogurt','kefir','ricotta','mozzarella','burrata','stracchino',
+      'stracciatella','scamorza','provola','caciocavallo','fontina','taleggio','gorgonzola','pecorino','parmigiano',
+      'grana','feta','mascarpone','panna','burro','formagg','uova','uovo','albumi','tuorli','skyr','crescenza',
+      'robiola','emmental','asiago','brie','camembert','halloumi'] },
+  { id:'pan', nome:'Pane, pasta e cereali', voci:['pane','pasta','pastina','riso','farro','orzo','cous cous',
+      'couscous','polenta','farina','pangrattato','sfogli','gnocchi','semola','fregola','quinoa','avena','fiocchi',
+      'crackers','cracker','grissini','fette biscottate','piadina','tortilla','wrap','cereali','muesli','bulgur',
+      'miglio','segale','tramezzino','pancarre','baguette','focaccia','pizza'] },
+  { id:'leg', nome:'Legumi', voci:['ceci','lenticchie','fagioli','fave','piselli','soia','edamame','lupini',
+      'azuki','borlotti','cannellini','tofu','tempeh','seitan','legumi'] }
+];
+const FAMIGLIA_ALTRO = { id: 'alt', nome: 'Altro' };
+
+function famigliaDi(nome) {
+  const n = ' ' + norm(nome) + ' ';
+  // l'eccezione che conferma la regola: il lievito "di birra" non e' da bere
+  if (n.includes(' lievito')) return FAMIGLIE_PRODOTTI.find(f => f.id === 'pan');
+  // le parole corte si cercano intere ("mela" non deve prendere "melanzane"),
+  // quelle lunghe anche dentro le parole composte ("cioccolat-o/-ini")
+  const combacia = v => v.length <= 5 && !v.includes(' ')
+    ? n.includes(' ' + v + ' ')
+    : n.includes(v.endsWith(' ') ? ' ' + v : v);
+  for (const f of FAMIGLIE_PRODOTTI) {
+    if (f.voci.some(combacia)) return f;
+  }
+  return FAMIGLIA_ALTRO;
+}
+
 function usoDispensa(ing) { return Number((S.pantryUse || {})[ing]) || 0; }
 
 
@@ -12241,7 +12980,10 @@ function renderShopSuggest(q) {
 
   box.innerHTML = inizio.concat(dentro).slice(0, 6).map(n =>
     `<button type="button" class="chip" data-act="shop-scegli" data-val="${esc(n)}">
-      ${esc(n)} <i>${unitaDi(n) === 'pz' ? 'pz' : 'g'}</i></button>`).join('');
+      ${esc(n)} <i>${unitaDi(n) === 'pz' ? 'pz' : 'g'}</i></button>`).join('')
+    // la stessa porta della dispensa: la ricerca vera sta in un posto solo
+    + `<button type="button" class="chip" data-act="catalogo-apri" data-val="${esc(q || '')}">
+        tutti i prodotti…</button>`;
 }
 
 /* L'UNICO punto che aggiunge una voce manuale alla spesa: ci passano la
@@ -12532,11 +13274,11 @@ function righeDettaturaUna() {
    E' lo stesso identico motore della sezione prodotti: qui c'e' solo
    il bottone che lo chiama. */
 function chipEtichettaRiga(nome) {
-  const g = nome ? salubritaDi(nome) : null;
+  const g = nome ? votoDi(nome) : null;
   return `<span class="det-eti ${g ? 'det-eti--nota' : ''}" data-act="riga-etichetta"
     role="button" ${g ? `style="color:${g.colore}"` : ''}
-    title="${g ? esc(g.nome) + (g.parziale ? ' · giudizio parziale' : '') + ' · tocca per aggiornare'
-              : 'Leggi l\'etichetta per dargli un giudizio'}"
+    title="${g ? g.punteggio + '/100 · ' + esc(g.nome) + (g.parziale ? ' · voto parziale' : '') + ' · tocca per aggiornare'
+              : 'Leggi l\'etichetta o il codice a barre per dargli un voto'}"
     aria-label="Valori nutrizionali${nome ? ' di ' + esc(nome) : ''}">
     <svg viewBox="0 0 24 24"><path d="M4 7V5.5A1.5 1.5 0 0 1 5.5 4H7M17 4h1.5A1.5 1.5 0 0 1 20 5.5V7M20 17v1.5a1.5 1.5 0 0 1-1.5 1.5H17M7 20H5.5A1.5 1.5 0 0 1 4 18.5V17M8 9v6M11 9v6M14.5 9v6M17 9v3"/></svg></span>`;
 }
@@ -12550,13 +13292,13 @@ function invitoEtichetta(nome, dove) {
   const box = document.getElementById('invito-eti-' + (dove === 'freezer' ? 'freezer' : 'dispensa'));
   if (!box) return;
   const pulito = String(nome || '').trim();
-  // lo STESSO motore del giudizio usato ovunque: se sa gia' rispondere,
+  // lo STESSO motore del voto usato ovunque: se sa gia' rispondere,
   // nessun invito, il prodotto e' gia' valutato
-  if (!pulito || salubritaDi(pulito)) { box.hidden = true; box.innerHTML = ''; return; }
+  if (!pulito || votoDi(pulito)) { box.hidden = true; box.innerHTML = ''; return; }
   box.innerHTML = `<div class="invito-eti">
     <svg viewBox="0 0 24 24"><path d="M4 7V5.5A1.5 1.5 0 0 1 5.5 4H7M17 4h1.5A1.5 1.5 0 0 1 20 5.5V7M20 17v1.5a1.5 1.5 0 0 1-1.5 1.5H17M7 20H5.5A1.5 1.5 0 0 1 4 18.5V17M8 9v6M11 9v6M14.5 9v6M17 9v3"/></svg>
-    <span class="testo"><b>${esc(pulito)}</b> non ha ancora un giudizio: se vuoi,
-      inquadro l'etichetta e glielo do io.</span>
+    <span class="testo"><b>${esc(pulito)}</b> non ha ancora un voto: se vuoi,
+      inquadro il codice a barre o l'etichetta e glielo do io.</span>
     <button type="button" class="chip mini" data-act="invito-eti-vai"
       data-val="${esc(pulito)}">Leggi l'etichetta</button>
     <button type="button" class="x" data-act="invito-eti-no" aria-label="Non ora">&times;</button>
@@ -12616,6 +13358,7 @@ var modoInserimento = 'voce';   // 'voce' | 'scontrino': cambia solo le scritte
 var dettaturaDove = 'spesa';    // 'spesa' | 'dispensa': dove finiscono le voci
 var etichettaVerso = 'dispensa'; // 'dispensa' | 'valori': cosa fa il salvataggio
 var etichettaTornaARighe = false; // aperta dal riepilogo: al termine si torna li'
+var etiProdottoInfo = null;       // additivi/bio del prodotto nel modulo aperto
 
 /* Le righe che su uno scontrino non sono mai un prodotto. */
 const SCON_RUMORE = new RegExp(
@@ -13506,70 +14249,137 @@ function etiTelaZoom(sorgente, zona) {
   return fuori;
 }
 
-/* La schermata del catalogo: ogni ingrediente conosciuto, dal piu' sano
-   al piu' grasso, col suo posto. Da qui si corregge tutto a mano. */
+/* La schermata Prodotti: L'UNICO posto dove si cerca un ingrediente.
+   Senza ricerca mostra i tuoi prodotti (catalogo ed etichette lette), dal
+   voto migliore in giu'; scrivendo o toccando una famiglia si cerca in
+   TUTTO quello che l'app conosce, e una bevanda resta una bevanda. Da ogni
+   riga: correggi i valori (tocca il nome), cambia il posto, metti in
+   dispensa o in lista con un tocco — le stesse identiche strade di sempre. */
 const POSTI_CATALOGO = ['frigo', 'dispensa', 'freezer'];
+var catQuery = '';        // cosa c'e' scritto nella ricerca dei Prodotti
+var catFiltro = 'tutti';  // la famiglia scelta ('tutti' = nessun filtro)
+
+function apriProdotti(query) {
+  catQuery = String(query || '').trim();
+  catFiltro = 'tutti';
+  const campo = document.getElementById('cat-cerca');
+  if (campo) campo.value = catQuery;
+  renderCatalogo();
+  openModal('modal-catalogo');
+  if (campo && catQuery) setTimeout(() => campo.focus(), 50);
+}
 
 function renderCatalogo() {
   const box = document.getElementById('catalogo-lista');
   if (!box) return;
+  const query = norm(catQuery);
+  const cercando = query.length > 0 || catFiltro !== 'tutti';
 
-  // l'unione: chi ha un'etichetta letta e chi e' solo passato di qua
-  const chiavi = new Set(Object.keys(S.ingTabExtra || {}).map(norm));
-  Object.keys(S.catalogo || {}).forEach(k => chiavi.add(k));
+  // i "tuoi" prodotti: chi ha un'etichetta letta e chi e' passato dal catalogo
+  const miei = new Set(Object.keys(S.ingTabExtra || {}).map(norm));
+  Object.keys(S.catalogo || {}).forEach(k => miei.add(k));
 
-  const voci = Array.from(chiavi).map(k => {
-    const cat = (S.catalogo || {})[k];
-    const nome = (cat && cat.nome) || k;
-    const giudizio = salubritaDi(nome);
+  // la sorgente: da fermi solo i tuoi; cercando, TUTTO il vocabolario
+  const nomi = new Set();
+  miei.forEach(k => nomi.add(((S.catalogo || {})[k] && S.catalogo[k].nome) || k));
+  if (cercando) vocabolarioIngredienti().forEach(n => nomi.add(n));
+
+  let voci = Array.from(nomi).map(nome => {
+    const cat = (S.catalogo || {})[norm(nome)];
     return {
       nome: nome,
-      giudizio: giudizio,
+      giudizio: votoDi(nome),
+      famiglia: famigliaDi(nome),
       posto: (cat && cat.posto) || dovConservare(nome),
-      letta: !!(S.ingTabExtra || {})[nome] || !!(S.ingTabExtra || {})[k]
+      mio: miei.has(norm(nome)),
+      inCasa: !!freschezza()[norm(nome)]
     };
-  }).sort((a, b) => {
-    const ga = a.giudizio ? a.giudizio.gradino : 9;
-    const gb = b.giudizio ? b.giudizio.gradino : 9;
-    return ga - gb || a.nome.localeCompare(b.nome);
   });
 
-  box.innerHTML = voci.length ? voci.map(v => `
+  if (catFiltro !== 'tutti') voci = voci.filter(v => v.famiglia.id === catFiltro);
+  if (query) {
+    voci = voci.filter(v => norm(v.nome).includes(query));
+    // prima chi inizia con quello che scrivi, poi chi lo contiene
+    voci.sort((a, b) => (norm(b.nome).startsWith(query) - norm(a.nome).startsWith(query))
+      || a.nome.localeCompare(b.nome));
+  } else {
+    voci.sort((a, b) => {
+      const ga = a.giudizio ? a.giudizio.punteggio : -1;
+      const gb = b.giudizio ? b.giudizio.punteggio : -1;
+      return gb - ga || a.nome.localeCompare(b.nome);
+    });
+  }
+
+  const troppi = Math.max(0, voci.length - 60);
+  if (troppi) voci = voci.slice(0, 60);
+
+  // le famiglie: solo quelle che hanno almeno un prodotto, piu' Tutti
+  const chips = document.getElementById('cat-famiglie');
+  if (chips) {
+    chips.innerHTML = `<button type="button" class="chip mini ${catFiltro === 'tutti' ? 'active' : ''}"
+        data-act="cat-famiglia" data-val="tutti">Tutti</button>`
+      + FAMIGLIE_PRODOTTI.concat([FAMIGLIA_ALTRO]).map(f =>
+        `<button type="button" class="chip mini ${catFiltro === f.id ? 'active' : ''}"
+          data-act="cat-famiglia" data-val="${f.id}">${esc(f.nome)}</button>`).join('');
+  }
+
+  box.innerHTML = (voci.length ? voci.map(v => `
     <div class="catalogo-riga">
       <button type="button" class="catalogo-nome" data-act="etichetta-apri"
         data-val="${esc(v.nome)}" data-verso="valori">
         ${v.giudizio ? `<i class="salute-pallino" style="background:${v.giudizio.colore}"></i>` : '<i class="salute-pallino salute-pallino--vuoto"></i>'}
         <span>${esc(v.nome)}</span>
-        <em>${v.giudizio ? esc(v.giudizio.nome) + (v.giudizio.parziale ? ' · parziale' : '') : 'mai letta l’etichetta'}</em>
+        <em>${v.giudizio ? v.giudizio.punteggio + '/100 · ' + esc(v.giudizio.nome) + (v.giudizio.parziale ? ' · parziale' : '')
+             : esc(v.famiglia.nome).toLowerCase()}</em>
       </button>
       <button type="button" class="chip mini" data-act="catalogo-posto"
         data-val="${esc(v.nome)}">${esc(v.posto)}</button>
+      <button type="button" class="cat-azione ${v.inCasa ? 'fatta' : ''}" data-act="cat-in-dispensa"
+        data-val="${esc(v.nome)}" title="${v.inCasa ? 'Già in casa: ne aggiungo ancora' : 'Metti in casa (nel suo posto giusto)'}"
+        aria-label="Metti in casa ${esc(v.nome)}">
+        <svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V19h12V9.5"/></svg></button>
+      <button type="button" class="cat-azione" data-act="cat-in-lista"
+        data-val="${esc(v.nome)}" title="Metti in lista della spesa"
+        aria-label="Metti in lista ${esc(v.nome)}">
+        <svg viewBox="0 0 24 24"><path d="M4 6h2l2.2 9.2a1.5 1.5 0 0 0 1.5 1.1h6.9a1.5 1.5 0 0 0 1.5-1.2L20 8H7"/><circle cx="10.5" cy="19.5" r="1.2"/><circle cx="16.5" cy="19.5" r="1.2"/></svg></button>
     </div>`).join('')
-    : '<p class="miss">Ancora vuoto: leggi la prima etichetta dalla spesa o dalla dispensa, o aggiungi qualcosa.</p>';
+    : cercando
+      ? `<p class="miss">Niente con questo nome${catFiltro !== 'tutti' ? ' in questa famiglia' : ''}.
+          Se e' un prodotto nuovo, leggigli il codice a barre o l'etichetta:
+          <button type="button" class="chip mini" data-act="etichetta-apri" data-val="${esc(catQuery)}">aggiungilo</button></p>`
+      : '<p class="miss">Ancora vuoto: cerca qui sopra fra tutto quello che conosco, o leggi la prima etichetta.</p>')
+    + (troppi ? `<p class="miss">…e altri ${troppi}: scrivi qualche lettera in piu' per stringere.</p>` : '');
 }
 
-/* Il giudizio nel modulo dell'etichetta: si ricalcola DA SOLO a ogni
-   tocco sui campi, e si vede prima di salvare. Coi campi vuoti il calcolo
-   procede lo stesso, ma dice che il giudizio e' parziale. */
+/* Il voto nel modulo dell'etichetta: si ricalcola DA SOLO a ogni tocco
+   sui campi, e si vede prima di salvare. Coi campi vuoti il calcolo
+   procede lo stesso, ma dice che il voto e' parziale. Se il codice a
+   barre ha portato additivi e bio, entrano nel conto qui. */
 function aggiornaSalubritaEtichetta() {
   const box = document.getElementById('eti-salute');
   if (!box) return;
   const leggi = id => { const v = F(id) ? F(id).value : ''; return v === '' ? null : parseFloat(v); };
-  const g = salubrita({
+  const g = voto({
     kcal: leggi('eti-kcal'), proteine: leggi('eti-pro'),
     grassi: leggi('eti-gra'), saturi: leggi('eti-sat'),
     zuccheri: leggi('eti-zuc'), fibre: leggi('eti-fib'), sale: leggi('eti-sale')
+  }, {
+    add: etiProdottoInfo ? etiProdottoInfo.add : null,
+    bio: !!(etiProdottoInfo && etiProdottoInfo.bio),
+    confezionato: true
   });
   if (!g) { box.hidden = true; return; }
   box.hidden = false;
   box.style.setProperty('--salute', g.colore);
+  const num = document.getElementById('eti-voto-num');
+  if (num) { num.hidden = false; num.innerHTML = g.punteggio + '<small>/100</small>'; }
   document.getElementById('eti-salute-nome').textContent = g.nome;
   document.getElementById('eti-salute-nota').textContent = g.parziale
-    ? 'giudizio parziale: mancano ' + g.mancanti.slice(0, 3).join(', ')
-    : 'sulla scala da sano a grasso';
+    ? 'voto parziale: mancano ' + g.mancanti.slice(0, 3).join(', ')
+    : '60% valori nutrizionali · 30% additivi · 10% bio';
   const scala = box.querySelector('.eti-salute-scala');
-  scala.innerHTML = SALUTE_GRADINI.map((x, i) =>
-    `<i style="background:${x.colore}" class="${i === g.gradino ? 'qui' : ''}"></i>`).join('');
+  scala.innerHTML = VOTO_FASCE.map((x, i) =>
+    `<i style="background:${x.colore}" class="${i === g.fascia ? 'qui' : ''}"></i>`).join('');
 }
 
 /* L'UNICA porta d'ingresso del modulo etichetta: la usano la dispensa,
@@ -13586,6 +14396,14 @@ function apriModuloEtichetta(nome, verso) {
     .forEach(id => { if (F(id)) F(id).value = ''; });
   const salBox = document.getElementById('eti-salute');
   if (salBox) salBox.hidden = true;
+  // le notizie del codice a barre: si riparte da quelle gia' salvate, se
+  // il prodotto le ha; una nuova lettura del codice le sostituisce
+  const infoNota = nome ? prodottoInfoDi(nome) : null;
+  etiProdottoInfo = infoNota
+    ? { add: (infoNota.add || []).slice(), bio: !!infoNota.bio,
+        codice: infoNota.codice || null, marca: infoNota.marca || null }
+    : null;
+  renderEtiExtra();
   document.getElementById('etichetta-barra').hidden = true;
   document.getElementById('etichetta-passo').hidden = true;
   const consEti = document.getElementById('etichetta-consigli');
@@ -13770,6 +14588,11 @@ document.addEventListener('input', ev => {
   if (ev.target && /^eti-(kcal|pro|carb|gra|sat|zuc|fib|sale)$/.test(ev.target.id)) {
     aggiornaSalubritaEtichetta();
   }
+  // la ricerca dei Prodotti si aggiorna mentre scrivi, senza tasti in piu'
+  if (ev.target && ev.target.id === 'cat-cerca') {
+    catQuery = ev.target.value || '';
+    renderCatalogo();
+  }
 });
 
 document.addEventListener('change', ev => {
@@ -13778,6 +14601,12 @@ document.addEventListener('change', ev => {
     const foto = t.files && t.files[0];
     t.value = '';
     if (foto) leggiEtichetta(foto);
+    return;
+  }
+  if (t && t.id === 'codice-file') {
+    const foto = t.files && t.files[0];
+    t.value = '';
+    if (foto) leggiCodiceDaFoto(foto);
     return;
   }
   if (!t || (t.id !== 'scontrino-foto' && t.id !== 'scontrino-file' && t.id !== 'scontrino-virtuale')) return;
@@ -13988,9 +14817,9 @@ function renderShopping() {
       </div>`;
     }
     // il codice a barre sta su OGNI riga: per i prodotti mai letti apre lo
-    // scan, per quelli gia' a catalogo mostra il giudizio e permette di
+    // scan, per quelli gia' a catalogo mostra il voto e permette di
     // rifare la lettura se e' cambiato prodotto
-    const giudizioRiga = salubritaDi(v.n);
+    const giudizioRiga = votoDi(v.n);
     return `
     <button type="button" class="shop-item ${done[v.key] ? 'done' : ''} ${v.have && !done[v.key] ? 'have' : ''}"
             data-act="${modifica ? 'shop-reparto' : 'shop-check'}" data-val="${esc(modifica ? v.n : v.key)}">
@@ -14000,7 +14829,7 @@ function renderShopping() {
         data-val="${esc(v.n)}" data-verso="valori" role="button"
         ${giudizioRiga ? `style="color:${giudizioRiga.colore}"` : ''}
         aria-label="Valori nutrizionali di ${esc(v.n)}"
-        title="${giudizioRiga ? esc(giudizioRiga.nome) + (giudizioRiga.parziale ? ' · giudizio parziale' : '') + ' · tocca per aggiornare' : 'Leggi l\'etichetta'}">
+        title="${giudizioRiga ? giudizioRiga.punteggio + '/100 · ' + esc(giudizioRiga.nome) + (giudizioRiga.parziale ? ' · voto parziale' : '') + ' · tocca per aggiornare' : 'Leggi l\'etichetta'}">
         <svg viewBox="0 0 24 24"><path d="M4 7V5.5A1.5 1.5 0 0 1 5.5 4H7M17 4h1.5A1.5 1.5 0 0 1 20 5.5V7M20 17v1.5a1.5 1.5 0 0 1-1.5 1.5H17M7 20H5.5A1.5 1.5 0 0 1 4 18.5V17M8 9v6M11 9v6M14.5 9v6M17 9v3"/></svg></span>` : ''}
       <span class="qty ${corretta ? 'qty--tua' : ''}" data-act="shop-qta-apri" data-val="${esc(v.key)}"
         role="button" aria-label="Correggi la quantit\u00e0 di ${esc(v.n)}">${esc(mostra) || '<i class="qty-vuota">q.t\u00e0?</i>'}</span>
@@ -14037,6 +14866,11 @@ function renderShopping() {
           <path d="M15.3 13.6l.8-1.2h2.9l.8 1.2"/>
           <circle cx="17.5" cy="17" r="4.1"/><circle cx="17.5" cy="17" r="1.6"/></svg>
         <span>Scontrino</span>
+      </button>
+      <button type="button" class="modo-spesa" data-act="catalogo-apri"
+        aria-label="Cerca fra tutti i prodotti" title="Tutti i prodotti in un posto solo: cerca e filtra per famiglia">
+        <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5"/><path d="M14.8 14.8L20 20"/></svg>
+        <span>Prodotti</span>
       </button>
     </div>
     <input type="file" id="scontrino-file" accept="image/*" hidden>
@@ -15444,16 +16278,21 @@ function paccoSpesaFamiglia() {
     });
   });
   if (!voci.length) return null;
-  const eti = {}, cat = {};
+  const eti = {}, cat = {}, info = {};
   voci.forEach(x => {
     Object.keys(S.ingTabExtra || {}).forEach(kk => {
       if (sameIngredient(kk, x.n)) eti[kk] = S.ingTabExtra[kk];
+    });
+    // anche le notizie del codice a barre (additivi, bio) viaggiano:
+    // l'altro eredita il voto intero, non solo i numeri
+    Object.keys(S.prodottiInfo || {}).forEach(kk => {
+      if (sameIngredient(kk, x.n)) info[kk] = S.prodottiInfo[kk];
     });
     const c = catalogoTrova(x.n);
     if (c) cat[x.n] = c.posto;
   });
   return { v: 1, tipo: 'spesa', op: uid(), fid: S.famiglia.id, da: nomeMio(),
-    gusti: gustiDelTelefono(), t: Date.now(), voci: voci, eti: eti, cat: cat };
+    gusti: gustiDelTelefono(), t: Date.now(), voci: voci, eti: eti, cat: cat, info: info };
 }
 
 /* La spesa dell'altro entra in casa tua: STESSO salvataggio della spesa fatta
@@ -15492,6 +16331,13 @@ function applicaPaccoFamiglia(d) {
       S.ingTabExtra[kk] = d.eti[kk].slice(0, 8);
       _vocabolario = null;
     }
+  });
+  // e con loro additivi e bio dal codice a barre, dove qui mancano
+  Object.keys(d.info || {}).forEach(kk => {
+    const suo = d.info[kk];
+    if (!suo || typeof suo !== 'object') return;
+    const gia = Object.keys(S.prodottiInfo || {}).some(mio => sameIngredient(mio, kk));
+    if (!gia) prodottoRegistraInfo(kk, suo);
   });
   Object.keys(d.cat || {}).forEach(nome => {
     if (!catalogoTrova(nome)) catalogoRegistra(nome, d.cat[nome]);
@@ -16135,6 +16981,7 @@ function importBackup(file) {
         shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
         searches: Array.isArray(data.searches) ? data.searches : [],
         weights: Array.isArray(data.weights) ? data.weights : [],
@@ -16189,6 +17036,7 @@ function importBackup(file) {
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
@@ -16206,6 +17054,7 @@ function importBackup(file) {
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
@@ -16225,6 +17074,7 @@ function importBackup(file) {
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
@@ -16247,6 +17097,7 @@ function importBackup(file) {
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
@@ -16271,6 +17122,7 @@ function importBackup(file) {
       shopDone: data.shopDone && typeof data.shopDone === 'object' ? data.shopDone : {},
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
+      prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
@@ -17352,9 +18204,36 @@ document.addEventListener('click', e => {
       break;
     }
     case 'catalogo-apri':
-      renderCatalogo();
-      openModal('modal-catalogo');
+      // l'unico posto della ricerca prodotti: se arrivi da un campo di
+      // ricerca, quello che avevi scritto ti segue
+      apriProdotti(val || '');
       break;
+    case 'cat-famiglia':
+      catFiltro = val === catFiltro ? 'tutti' : val;   // ritoccare = togliere il filtro
+      renderCatalogo();
+      break;
+    case 'cat-in-dispensa': {
+      // LA stessa strada dell'aggiunta diretta: registraAcquisto decide
+      // quantita' e scadenze, il catalogo e la regola generale il posto
+      pushUndo('Aggiunta dai Prodotti');
+      registraAcquisto(val, null, unitaDi(val));
+      if (!S.pantry.some(p => norm(p) === norm(val))) S.pantry.push(val);
+      if (!S.myIngredients.some(m => norm(m) === norm(val))) S.myIngredients.push(val);
+      save(); renderAll(); renderCatalogo();
+      const postoCat = freschezza()[norm(val)].posto;
+      const doveCat = postoCat === 'frigo' ? 'in frigo' : postoCat === 'freezer' ? 'nel freezer' : 'in dispensa';
+      const votoCat = votoDi(val);
+      toast(val + ' ' + doveCat + (votoCat ? ' · ' + votoCat.punteggio + '/100 ' + votoCat.nome : '') + '.', 'Annulla');
+      break;
+    }
+    case 'cat-in-lista': {
+      // LA stessa voce manuale della lista: identica a tastiera e dettatura
+      pushUndo('In lista dai Prodotti');
+      spesaVoceManuale(val, null, unitaDi(val));
+      save(); renderAll(); renderCatalogo();
+      toast(val + ' in lista della spesa.', 'Annulla');
+      break;
+    }
     case 'catalogo-posto': {
       // il posto cicla: frigo, dispensa, freezer. E il catalogo ricorda.
       const voce = catalogoTrova(val) || catalogoRegistra(val);
@@ -17410,6 +18289,36 @@ document.addEventListener('click', e => {
       if (campo) { campo.value = ''; campo.click(); }
       break;
     }
+    case 'codice-apri':
+      apriLettoreCodice();
+      break;
+    case 'codice-chiudi':
+      fermaCodice();
+      chiudiModal('modal-codice');
+      break;
+    case 'codice-foto': {
+      const campo = document.getElementById('codice-file');
+      if (campo) { campo.value = ''; campo.click(); }
+      break;
+    }
+    case 'codice-cerca': {
+      const cifre = (F('codice-cifre').value || '').replace(/\D/g, '');
+      if (cifre.length < 8 || cifre.length > 14) {
+        codicePasso('Le cifre sotto il codice sono 8 o 13: controllale e riprova.');
+        break;
+      }
+      F('codice-cifre').value = '';
+      codiceTrovato(cifre);
+      break;
+    }
+    case 'eti-bio':
+      // il bio si puo' correggere a mano: certificati che l'archivio non
+      // conosce, o l'inverso. Il voto si rifa' subito.
+      if (!etiProdottoInfo) etiProdottoInfo = { add: [], bio: false, codice: null, marca: null };
+      etiProdottoInfo.bio = !etiProdottoInfo.bio;
+      renderEtiExtra();
+      aggiornaSalubritaEtichetta();
+      break;
     case 'etichetta-salva': {
       const nome = (F('eti-nome').value || '').trim().toLowerCase().slice(0, 60);
       if (!nome) { toast('Dai un nome al prodotto.'); F('eti-nome').focus(); break; }
@@ -17422,6 +18331,9 @@ document.addEventListener('click', e => {
       const opz = id => { const v = parseFloat(F(id).value); return isFinite(v) && v >= 0 ? v : null; };
       S.ingTabExtra[nome] = [n('eti-kcal'), n('eti-pro'), n('eti-carb'), n('eti-gra'),
         opz('eti-sat'), opz('eti-zuc'), opz('eti-fib'), opz('eti-sale')];
+      // le notizie del codice a barre (additivi, bio) restano col prodotto:
+      // servono al voto, e viaggiano anche nei link di famiglia
+      if (etiProdottoInfo) prodottoRegistraInfo(nome, etiProdottoInfo);
       _vocabolario = null;   // il vocabolario ora conosce anche questo prodotto
       if (!S.myIngredients.some(m => norm(m) === norm(nome))) S.myIngredients.push(nome);
       if (etichettaVerso === 'valori') {
@@ -17441,7 +18353,7 @@ document.addEventListener('click', e => {
           closeModals();
         }
         toast(nome + (vecchia
-          ? ': valori salvati, giudizio aggiornato.'
+          ? ': valori salvati, voto aggiornato.'
           : ': valori salvati. Entrer\u00e0 in dispensa a fine spesa.'), 'Annulla');
         break;
       }
@@ -17455,7 +18367,7 @@ document.addEventListener('click', e => {
       if (!S.pantry.some(p => norm(p) === norm(nome))) S.pantry.push(nome);
       save(); renderAll();
       closeModals();
-      toast(nome + ' in dispensa, con i suoi valori per 100 g.', 'Annulla');
+      toast(nome + ' in dispensa, con i suoi valori e il suo voto.', 'Annulla');
       break;
     }
     case 'disp-add': {
@@ -17474,13 +18386,13 @@ document.addEventListener('click', e => {
       F('disp-cerca').value = ''; F('disp-qta').value = '';
       document.getElementById('disp-suggest').innerHTML = '';
       save(); renderAll();
-      // se il catalogo lo conosce, il giudizio arriva da solo; se no,
+      // se il catalogo lo conosce, il voto arriva da solo; se no,
       // l'invito discreto a leggere l'etichetta, come nel riepilogo
       const postoDato = freschezza()[norm(nome)].posto;
       const doveDato = postoDato === 'frigo' ? 'in frigo'
         : postoDato === 'freezer' ? 'nel freezer' : 'in dispensa';
-      const giudizio = salubritaDi(nome);
-      toast(nome + ' ' + doveDato + (giudizio ? ' · ' + giudizio.nome : '') + '.', 'Annulla');
+      const giudizio = votoDi(nome);
+      toast(nome + ' ' + doveDato + (giudizio ? ' · ' + giudizio.punteggio + '/100 ' + giudizio.nome : '') + '.', 'Annulla');
       invitoEtichetta(nome, 'dispensa');
       break;
     }
@@ -17574,11 +18486,11 @@ document.addEventListener('click', e => {
       F('freezer-nome').value = '';
       save(); renderFridge();
       // se quello che congeli e' un ingrediente che l'app riconosce, vale
-      // lo stesso motore di giudizio di tutti gli altri punti: giudizio
-      // subito se il catalogo lo conosce, invito discreto se e' nuovo
+      // lo stesso motore del voto di tutti gli altri punti: voto subito
+      // se il catalogo lo conosce, invito discreto se e' nuovo
       const rIng = riconosciIngrediente(nome);
-      const gIng = rIng.punteggio >= 0.72 ? salubritaDi(rIng.nome) : null;
-      toast(nome + ' nel freezer' + (gIng ? ' · ' + gIng.nome : '') + '.', 'Annulla');
+      const gIng = rIng.punteggio >= 0.72 ? votoDi(rIng.nome) : null;
+      toast(nome + ' nel freezer' + (gIng ? ' · ' + gIng.punteggio + '/100 ' + gIng.nome : '') + '.', 'Annulla');
       if (rIng.punteggio >= 0.72 && !gIng) invitoEtichetta(nome, 'freezer');
       break;
     }
@@ -17657,6 +18569,10 @@ document.addEventListener('click', e => {
       // il modale del link sta sopra un altro (es. la cena): chiudendolo
       // si torna a quello sotto, non si butta giu' tutto
       if (finestra && finestra.id === 'modal-condividi') { chiudiModal('modal-condividi'); break; }
+      // stessa cosa per il lettore del codice, che sta sopra l'etichetta
+      if (finestra && finestra.id === 'modal-codice') {
+        fermaCodice(); chiudiModal('modal-codice'); break;
+      }
     } closeModals(); break;
     case 'suggest': {
       const ta = F('f-ing');
@@ -18170,6 +19086,11 @@ window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
   etiParoleDaTsv: etiParoleDaTsv, etiZonaValori: etiZonaValori, etiTelaZoom: etiTelaZoom,
   catalogoTrova: catalogoTrova, catalogoRegistra: catalogoRegistra,
   salubritaRicetta: salubritaRicetta, valoriDaGrammatura: valoriDaGrammatura,
+  voto: voto, votoDi: votoDi, votoRicetta: votoRicetta,
+  prodottoDaOff: prodottoDaOff, infoAdditivo: infoAdditivo,
+  prodottoRegistraInfo: prodottoRegistraInfo, prodottoInfoDi: prodottoInfoDi,
+  applicaProdottoTrovato: applicaProdottoTrovato,
+  famigliaDi: famigliaDi, apriProdotti: apriProdotti,
   perPortion: perPortion, istPesoPorzione: istPesoPorzione,
   renderCatalogo: renderCatalogo,
   energia: energy, renderProfilo: renderProfile,
