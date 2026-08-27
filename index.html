@@ -910,6 +910,20 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .codice-mano input{flex:1;min-width:0}
 .scan-codice svg{stroke:#fff}
 .scan-codice{padding:13px 10px}
+/* Il badge della marca sull'ingrediente della ricetta: piccolo, di vetro,
+   si gira con un tocco. Verde quando il prodotto e' gia' in casa. */
+.marca-chip{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:9px;
+  font:inherit;font-size:.68rem;font-weight:600;cursor:pointer;vertical-align:1px;
+  color:var(--text-secondary);
+  background:color-mix(in srgb, var(--tema, var(--accent-primary)) 10%, transparent);
+  border:1px solid color-mix(in srgb, var(--tema, var(--accent-primary)) 30%, transparent)}
+.marca-chip.in-casa{color:var(--ok, #4c8a6b);
+  border-color:color-mix(in srgb, var(--ok, #4c8a6b) 45%, transparent);
+  background:color-mix(in srgb, var(--ok, #4c8a6b) 10%, transparent)}
+.marca-chip--generico{opacity:.65;font-weight:500}
+.marca-cerca{font-size:.68rem;font-weight:600;color:var(--text-tertiary);
+  padding:1px 7px;border-radius:8px;margin-left:6px;
+  border:1px solid color-mix(in srgb, var(--tema, var(--accent-primary)) 28%, transparent)}
 /* La schermata Prodotti: la ricerca in alto, le famiglie che scorrono di
    lato, e su ogni riga i due tocchi per casa e lista. */
 #cat-cerca{width:100%;margin:2px 0 10px}
@@ -2785,7 +2799,7 @@ h3{font-weight:600;letter-spacing:-.018em}
       </div>
     </header>
 
-    <input type="search" id="search-input" placeholder="Cerca in tutte le ricette…" autocomplete="off">
+    <input type="search" id="search-input" placeholder="Cerca ricette, prodotti o marche…" autocomplete="off">
     <button type="button" class="mic-campo" data-act="voce-campo" data-val="search-input"
       aria-label="Detta la ricerca">
       <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/>
@@ -6374,6 +6388,7 @@ const SEED = {
   shopQta: {},        // per voce della lista: la quantita' DAVVERO comprata
   ingTabExtra: {},    // i valori nutrizionali letti dalle etichette, per 100 g
   prodottiInfo: {},   // dal codice a barre: additivi, bio, marca — servono al voto
+  marcheRicetta: {},  // per ricetta: la marca scelta a mano per un ingrediente
   catalogo: {},       // ogni ingrediente passato di qui: nome e posto giusto, per sempre
   searches: [],
   weights: [],
@@ -6528,6 +6543,7 @@ function load() {
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
       prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
+      marcheRicetta: data.marcheRicetta && typeof data.marcheRicetta === 'object' ? data.marcheRicetta : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
@@ -8353,7 +8369,10 @@ function renderHome() {
     list = list.filter(r => (r.tags || []).includes(tag));
   }
   if (S.ui.noCook) list = list.filter(isNoCook);
-  if (query) list = list.filter(r => matchesQuery(r, query));
+  // la ricerca capisce anche le marche: "scotti" trova le ricette col riso
+  // di quella marca, oltre a tutto quello che il testo gia' trovava
+  const prodTrovati = query ? prodottiCheCombaciano(query) : [];
+  if (query) list = list.filter(r => matchesQuery(r, query) || ricettaUsaProdotti(r, prodTrovati));
 
   renderFiltri();
   const comandi = document.getElementById('comandi-cerca');
@@ -8377,7 +8396,29 @@ function renderHome() {
   const mostrate = list.slice(0, homeLimite);
   const restanti = list.length - mostrate.length;
 
-  el.innerHTML = list.length
+  // la striscia dei prodotti: quando cerchi un nome o una marca che l'app
+  // conosce, sopra le ricette compaiono i prodotti (con la marca come
+  // etichetta) e i pasti gia' registrati che li hanno usati
+  const nqCerca = norm(query);
+  const strisciaProdotti = prodTrovati.length ? (() => {
+    const pasti = S.log.filter(x => x.marche && Object.keys(x.marche).some(kI => {
+      const mm = x.marche[kI];
+      return prodTrovati.some(p => norm(p.nome) === norm(mm.p))
+        || (mm.m && norm(mm.m).includes(nqCerca));
+    })).sort((a, b) => b.ts - a.ts);
+    return `<div class="glass-card cerca-marca" style="margin-bottom:14px">
+      <span class="field-label" style="margin:0 0 8px;display:block">Prodotti che conosco</span>
+      <div class="tags-container">${prodTrovati.slice(0, 6).map(p =>
+        `<button type="button" class="chip mini" data-act="catalogo-apri" data-val="${esc(p.nome)}">
+          ${esc(p.nome)}${p.marca ? `<em class="marca-cerca">${esc(p.marca)}</em>` : ''}</button>`).join('')}</div>
+      ${pasti.length ? `<p class="hint" style="margin:8px 0 0">Già nel piatto ${pasti.length}
+        volt${pasti.length === 1 ? 'a' : 'e'}: ${pasti.slice(0, 3).map(x =>
+          esc(x.title) + ' (' + new Date(x.ts).toLocaleDateString('it-IT',
+            { day: '2-digit', month: 'short' }) + ')').join(', ')}${pasti.length > 3 ? '…' : ''}</p>` : ''}
+    </div>`;
+  })() : '';
+
+  el.innerHTML = strisciaProdotti + (list.length
     ? mostrate.map((r, n) => recipeCard(r, null, n)).join('') +
       (restanti > 0 ? `<button type="button" class="btn-ghost full-width" data-act="home-more">
          Mostra altre ${Math.min(PAGINA, restanti)} \u00b7 ne restano ${restanti}</button>` : '') +
@@ -8385,8 +8426,8 @@ function renderHome() {
     : emptyState(S.ui.fav ? 'Nessuna preferita con questi filtri.<br>Tocca \u2605 nel dettaglio di una ricetta per aggiungerla.'
         : S.ui.freq ? 'Non hai ancora registrato pasti.<br>Usa "Mangiato" e le ricette che ripeti finiranno qui.'
         : query
-        ? 'Nessun risultato per “' + esc(query) + '”.<br>Prova con un ingrediente o allarga i filtri.'
-        : 'Nessuna ricetta con questi filtri.<br>Tocca <b>+</b> in alto per aggiungerne una.');
+        ? 'Nessun risultato per “' + esc(query) + '”.<br>Prova con un ingrediente, una marca, o allarga i filtri.'
+        : 'Nessuna ricetta con questi filtri.<br>Tocca <b>+</b> in alto per aggiungerne una.'));
 }
 
 /* La scheda si divide in tre come il Profilo: dispensa, avanzi, spesa. Il
@@ -9773,12 +9814,25 @@ function openDetail(id, tornando) {
     const have = S.pantry.some(p => sameIngredient(p, i.n));
     const preso = inLista(i.n);
     const disp = disponibilita(i.n);
+    // la marca collegata: quella scelta a mano, o l'automatica (dispensa
+    // prima, poi l'ultima comprata). Un tocco la gira; niente marche in
+    // memoria = niente badge, l'ingrediente resta com'e'
+    const pIng = prodottiPerIngrediente(i.n).length ? prodottoScelto(r.id, i.n) : undefined;
+    const badgeMarca = pIng === undefined ? '' : pIng
+      ? `<button type="button" class="marca-chip ${pIng.inDispensa ? 'in-casa' : ''}"
+          data-act="marca-gira" data-rid="${esc(r.id)}" data-val="${esc(i.n)}"
+          title="Uso i valori di questo prodotto: tocca per cambiare marca o tornare al generico">
+          ${esc(marcaEtichetta(pIng, i.n))}${pIng.inDispensa ? ' \u00b7 in casa' : ''}</button>`
+      : `<button type="button" class="marca-chip marca-chip--generico"
+          data-act="marca-gira" data-rid="${esc(r.id)}" data-val="${esc(i.n)}"
+          title="Valori generici: tocca per usare una marca che conosco">generico</button>`;
     return `<li>
       <span class="${have ? 'have' : ''}">${salutePallino(i.n)}${have ? '\u2713 ' : ''}${esc(i.n)}
         ${disp ? `<em class="ing-eta ${disp.st ? 'stato-' + disp.st.stato : ''}">${
           disp.tipo === 'avanzo' ? 'avanzo' : disp.tipo === 'freezer' ? 'in freezer' : 'in frigo'}${
           disp.dal ? ' ' + etaTesto(disp.dal) : ''}${
           disp.st ? ' \u00b7 ' + etichettaTempo(disp.st.restano) : ''}</em>` : ''}
+        ${badgeMarca}
       </span>
       <span class="qty">${esc(scaleQty(i, fattoreCucina(r)))}</span>
       <button type="button" class="ing-piu ${preso ? 'dentro' : ''}" data-act="spesa-uno"
@@ -9786,6 +9840,19 @@ function openDetail(id, tornando) {
         aria-label="${preso ? 'Gi\u00e0 in lista' : 'Aggiungi alla spesa'}">${preso ? '\u2713' : '+'}</button>
     </li>`;
   }).join('');
+
+  // se le marche collegate cambiano i conti, lo dico: la ricetta resta
+  // quella, ma tu sai cosa mangeresti COI TUOI prodotti
+  const coiTuoi = (() => {
+    const senzaMarche = (r.ing || []).every(i => !prodottiPerIngrediente(i.n).length);
+    if (senzaMarche) return '';
+    const c = valoriDaGrammatura(r.ing, r.id);
+    if (!c.peso || c.peso < 50 || c.copertura < 0.7) return '';
+    const perPorz = Math.round(c.kcal / servesOf(r));
+    if (!perPorz || Math.abs(perPorz - perPortion(r).kcal) < Math.max(8, perPortion(r).kcal * 0.03)) return '';
+    return `<p class="miss coi-tuoi" style="text-align:center;margin:-6px 0 12px">
+      Coi tuoi prodotti: <b>${perPorz} kcal</b> \u00b7 ${Math.round(c.pro / servesOf(r))} g proteine a porzione.</p>`;
+  })();
 
   const mancanti = (r.ing || []).filter(i => !S.pantry.some(p => sameIngredient(p, i.n))).length;
 
@@ -9829,6 +9896,7 @@ function openDetail(id, tornando) {
       <div class="macro-box"><span>Carbo</span><b>${m.carbs}g</b></div>
       <div class="macro-box"><span>Grassi</span><b>${m.fat}g</b></div>
     </div>
+    ${coiTuoi}
     ${leftoverOf(r.id) ? `<p class="miss" style="margin:-8px 0 12px;color:var(--ok)">Ne hai ${leftoverOf(r.id).n} porzion${leftoverOf(r.id).n === 1 ? 'e' : 'i'} gi\u00e0 pronte in frigo.</p>` : ''}
     ${timesCooked(r.id) ? `<p class="miss" style="margin:-8px 0 12px">Cucinata ${timesCooked(r.id)} volt${timesCooked(r.id) === 1 ? 'a' : 'e'}${(() => {
       const ultima = S.log.filter(x => x.rid === r.id).sort((a, b) => b.ts - a.ts)[0];
@@ -9847,6 +9915,10 @@ function openDetail(id, tornando) {
       return `<div class="istanza-box">
         <span class="istanza-titolo">Piatto mangiato alle ${oraDi(v.ts)} \u00b7 le
           modifiche valgono solo per questo pasto, la ricetta originale resta com'\u00e8.</span>
+        ${v.marche && Object.keys(v.marche).length ? `<p class="hint" style="margin:0 0 8px">
+          Fatto allora con: ${Object.keys(v.marche).map(kM =>
+            esc(v.marche[kM].m || v.marche[kM].p)).join(', ')} \u2014 resta cos\u00ec anche se
+          oggi cambi marca o ricetta.</p>` : ''}
         <label class="field-label" for="ist-nome">Come lo chiami</label>
         <input type="text" id="ist-nome" maxlength="60" value="${esc(v.title)}">
         <div class="ist-riga">
@@ -10076,7 +10148,7 @@ function aggiornaCalcoloForm() {
     if (!el) return;
     const testo = ((document.getElementById('f-ing') || {}).value || '').trim();
     if (!testo) { el.hidden = true; return; }
-    const calcolo = valoriDaGrammatura(parseIngredients(testo));
+    const calcolo = valoriDaGrammatura(parseIngredients(testo), editingId);
     if (calcolo.peso < 50 || calcolo.copertura < 0.7) { el.hidden = true; return; }
     el.textContent = 'Dalla grammatura calcolo: ' + calcolo.kcal + ' kcal · '
       + calcolo.pro + ' g proteine · ' + calcolo.carbs + ' g carbo · '
@@ -10154,7 +10226,7 @@ function submitForm() {
   const grammaturaCambiata = editingId && ingText !== formIngIniziale.trim();
   let ricalcolati = false;
   if (grammaturaCambiata || !rec.kcal) {
-    const calcolo = valoriDaGrammatura(rec.ing);
+    const calcolo = valoriDaGrammatura(rec.ing, editingId);
     if (calcolo.copertura >= 0.7 && calcolo.peso >= 50) {
       rec.kcal = calcolo.kcal;
       rec.pro = calcolo.pro;
@@ -10685,7 +10757,11 @@ function consumaIngredienti(r, porzioni) {
   const aperte = [];    // le confezioni aperte adesso
 
   (r.ing || []).forEach(i => {
-    const k = Object.keys(freschezza()).find(x => sameIngredient(x, i.n));
+    // se per questa ricetta c'e' una marca collegata ED e' in casa, il
+    // dosaggio si scala dalla SUA scorta; se no si va per somiglianza
+    const pScelto = prodottoScelto(r.id, i.n);
+    const k = (pScelto && freschezza()[norm(pScelto.nome)]) ? norm(pScelto.nome)
+      : Object.keys(freschezza()).find(x => sameIngredient(x, i.n));
     if (!k) return;
     const v = freschezza()[k];
     if (!v || !v.qta) return;
@@ -11158,13 +11234,15 @@ function tabellaAncheFuzzy(nome) {
   return null;
 }
 
-function valoriDaGrammatura(ing) {
+function valoriDaGrammatura(ing, rid) {
   let kcal = 0, pro = 0, carbs = 0, fat = 0, peso = 0, pesoNoto = 0;
   (ing || []).forEach(i => {
     const g = quantitaRichiesta(i, 1, 'g');
     if (!isFinite(g) || g <= 0) return;
     peso += g;
-    const t = tabellaAncheFuzzy(i.n);
+    // se per questo ingrediente c'e' una marca (scelta o ultima comprata),
+    // vale la SUA tabella; il generico e' il ripiego, mai il contrario
+    const t = tabellaScelta(rid, i.n);
     if (!t) return;
     pesoNoto += g;
     kcal += g * (Number(t[0]) || 0) / 100;
@@ -11180,6 +11258,130 @@ function valoriDaGrammatura(ing) {
     peso: Math.round(peso),
     copertura: peso ? pesoNoto / peso : 0
   };
+}
+
+/* ---------- le marche dentro le ricette ----------
+   La memoria dell'app conosce i prodotti veri (etichette lette, codici a
+   barre): qui si collegano agli ingredienti generici delle ricette. La
+   regola, semplice: se un prodotto adatto e' IN DISPENSA vince lui; se no
+   vince l'ultima marca comprata; se non c'e' niente, si resta sul valore
+   generico. Il tocco sul badge nella ricetta cambia marca a mano, e la
+   scelta resta scritta (S.marcheRicetta) solo per quella ricetta.
+   Ogni ricetta nuova eredita questa logica da sola: le scelte automatiche
+   non si salvano, si ricalcolano — cosi' seguono la dispensa che cambia. */
+
+function prodottiPerIngrediente(nome) {
+  const base = norm(nome);
+  if (!base) return [];
+  const candidati = new Set(Object.keys(S.ingTabExtra || {}));
+  Object.keys(S.prodottiInfo || {}).forEach(k => candidati.add(k));
+  const famBase = famigliaDi(nome).id;
+  const visti = new Set();
+  const fuori = [];
+  candidati.forEach(k => {
+    const kk = norm(k);
+    if (kk === base || visti.has(kk)) return;
+    if (!sameIngredient(k, nome)) return;
+    // la famiglia fa da guardiano: il latte di mandorla (bevanda) non deve
+    // proporsi nelle ricette col latte (latticino)
+    if (famigliaDi(k).id !== famBase) return;
+    visti.add(kk);
+    const info = (S.prodottiInfo || {})[kk] || (S.prodottiInfo || {})[k] || null;
+    const viva = freschezza()[kk];
+    const cat = (S.catalogo || {})[kk];
+    fuori.push({
+      nome: k,
+      marca: (info && info.marca) || null,
+      inDispensa: !!viva,
+      qta: viva && isFinite(viva.qta) ? viva.qta : null,
+      unita: viva ? (viva.unita || 'g') : null,
+      ultima: Math.max(viva ? (viva.dal || 0) : 0, info ? (info.t || 0) : 0,
+                       cat ? (cat.dal || 0) : 0)
+    });
+  });
+  fuori.sort((a, b) => (b.inDispensa - a.inDispensa) || (b.ultima - a.ultima)
+    || a.nome.localeCompare(b.nome));
+  return fuori;
+}
+
+/* Il prodotto che vale per QUESTO ingrediente in QUESTA ricetta:
+   la scelta a mano se c'e' (stringa vuota = generico voluto),
+   altrimenti l'automatica (dispensa, poi ultima comprata). */
+function prodottoScelto(rid, ingNome) {
+  const scelte = (rid && (S.marcheRicetta || {})[rid]) || {};
+  const chiave = norm(ingNome);
+  if (Object.prototype.hasOwnProperty.call(scelte, chiave)) {
+    if (!scelte[chiave]) return null;   // generico, per scelta
+    const c = prodottiPerIngrediente(ingNome)
+      .find(x => norm(x.nome) === norm(scelte[chiave]));
+    if (c) return c;
+    // il prodotto scelto non esiste piu' in memoria: si torna all'automatico
+  }
+  return prodottiPerIngrediente(ingNome)[0] || null;
+}
+
+/* La tabella per 100 g giusta per una ricetta: quella della marca se il
+   prodotto ne ha una, il generico come ripiego. */
+function tabellaScelta(rid, ingNome) {
+  const p = prodottoScelto(rid, ingNome);
+  const t = p ? tabellaDi(p.nome) : null;
+  return t || tabellaAncheFuzzy(ingNome);
+}
+
+/* Il tocco sul badge: si gira fra le marche disponibili e il generico. */
+function marcaGira(rid, ingNome) {
+  const lista = prodottiPerIngrediente(ingNome);
+  if (!lista.length) return null;
+  S.marcheRicetta = S.marcheRicetta || {};
+  S.marcheRicetta[rid] = S.marcheRicetta[rid] || {};
+  const chiave = norm(ingNome);
+  const attuale = prodottoScelto(rid, ingNome);
+  const idx = attuale ? lista.findIndex(x => norm(x.nome) === norm(attuale.nome)) : -1;
+  // dopo l'ultima marca viene il generico; dopo il generico si ricomincia
+  const prossimo = idx < 0 ? lista[0].nome
+    : idx + 1 < lista.length ? lista[idx + 1].nome : '';
+  S.marcheRicetta[rid][chiave] = prossimo;
+  save();
+  return prossimo ? lista[idx + 1 < lista.length ? idx + 1 : 0] : null;
+}
+
+/* Nome corto da mostrare sul badge: la marca se c'e', se no il nome del
+   prodotto senza ripetere l'ingrediente ("riso scotti" su riso → "scotti"). */
+function marcaEtichetta(p, ingNome) {
+  if (!p) return '';
+  if (p.marca) return p.marca;
+  const resto = tokens(p.nome).filter(t => !tokens(ingNome).includes(t)).join(' ');
+  return resto || p.nome;
+}
+
+/* La ricerca che capisce le marche: dato quel che scrivi, i prodotti in
+   memoria che combaciano per nome O per marca ("scotti" trova il riso
+   Scotti). Serve alla barra di ricerca e alla schermata Prodotti. */
+function prodottiCheCombaciano(query) {
+  const nq = norm(query);
+  if (nq.length < 2) return [];
+  const visti = new Set();
+  const fuori = [];
+  const guarda = k => {
+    const kk = norm(k);
+    if (visti.has(kk)) return;
+    const info = (S.prodottiInfo || {})[kk] || (S.prodottiInfo || {})[k] || null;
+    const marca = info && info.marca;
+    if (kk.includes(nq) || (marca && norm(marca).includes(nq))) {
+      visti.add(kk);
+      fuori.push({ nome: k, marca: marca || null });
+    }
+  };
+  Object.keys(S.ingTabExtra || {}).forEach(guarda);
+  Object.keys(S.prodottiInfo || {}).forEach(guarda);
+  return fuori;
+}
+
+/* Una ricetta "usa" un prodotto se un suo ingrediente gli somiglia:
+   cosi' cercando la marca saltano fuori anche le ricette da cucinare. */
+function ricettaUsaProdotti(r, prodotti) {
+  if (!prodotti.length) return false;
+  return prodotti.some(p => (r.ing || []).some(i => sameIngredient(p.nome, i.n)));
 }
 
 /* ---------- il voto del prodotto, alla maniera di Yuka ----------
@@ -14288,8 +14490,10 @@ function renderCatalogo() {
 
   let voci = Array.from(nomi).map(nome => {
     const cat = (S.catalogo || {})[norm(nome)];
+    const info = (S.prodottiInfo || {})[norm(nome)];
     return {
       nome: nome,
+      marca: (info && info.marca) || null,
       giudizio: votoDi(nome),
       famiglia: famigliaDi(nome),
       posto: (cat && cat.posto) || dovConservare(nome),
@@ -14300,7 +14504,9 @@ function renderCatalogo() {
 
   if (catFiltro !== 'tutti') voci = voci.filter(v => v.famiglia.id === catFiltro);
   if (query) {
-    voci = voci.filter(v => norm(v.nome).includes(query));
+    // il nome O la marca: "scotti" trova il riso di quella marca
+    voci = voci.filter(v => norm(v.nome).includes(query)
+      || (v.marca && norm(v.marca).includes(query)));
     // prima chi inizia con quello che scrivi, poi chi lo contiene
     voci.sort((a, b) => (norm(b.nome).startsWith(query) - norm(a.nome).startsWith(query))
       || a.nome.localeCompare(b.nome));
@@ -14330,7 +14536,7 @@ function renderCatalogo() {
       <button type="button" class="catalogo-nome" data-act="etichetta-apri"
         data-val="${esc(v.nome)}" data-verso="valori">
         ${v.giudizio ? `<i class="salute-pallino" style="background:${v.giudizio.colore}"></i>` : '<i class="salute-pallino salute-pallino--vuoto"></i>'}
-        <span>${esc(v.nome)}</span>
+        <span>${esc(v.nome)}${v.marca ? ` <em class="marca-cerca">${esc(v.marca)}</em>` : ''}</span>
         <em>${v.giudizio ? v.giudizio.punteggio + '/100 · ' + esc(v.giudizio.nome) + (v.giudizio.parziale ? ' · parziale' : '')
              : esc(v.famiglia.nome).toLowerCase()}</em>
       </button>
@@ -14969,6 +15175,14 @@ function logMeal(recipeId, meal) {
   const entry = { ts: Date.now(), rid: r.id, title: r.title, pid: p.id,
                   meal: pastoPerIlDiario(meal),
                   kcal: plan.kcal, pro: plan.pro, mult: plan.mult };
+  // le marche usate ADESSO restano scritte nel pasto: se domani cambi
+  // marca o ricetta, questo pasto non si muove — e' storia, non calcolo
+  const marcheOra = {};
+  (r.ing || []).forEach(i => {
+    const pi = prodottoScelto(r.id, i.n);
+    if (pi) marcheOra[i.n] = { p: pi.nome, m: pi.marca || null };
+  });
+  if (Object.keys(marcheOra).length) entry.marche = marcheOra;
   S.log.push(entry);
 
   const daAvanzi = eatLeftover(r.id);
@@ -16984,6 +17198,7 @@ function importBackup(file) {
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
       prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
+      marcheRicetta: data.marcheRicetta && typeof data.marcheRicetta === 'object' ? data.marcheRicetta : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
         searches: Array.isArray(data.searches) ? data.searches : [],
         weights: Array.isArray(data.weights) ? data.weights : [],
@@ -17039,6 +17254,7 @@ function importBackup(file) {
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
       prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
+      marcheRicetta: data.marcheRicetta && typeof data.marcheRicetta === 'object' ? data.marcheRicetta : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
@@ -17057,6 +17273,7 @@ function importBackup(file) {
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
       prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
+      marcheRicetta: data.marcheRicetta && typeof data.marcheRicetta === 'object' ? data.marcheRicetta : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
@@ -17077,6 +17294,7 @@ function importBackup(file) {
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
       prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
+      marcheRicetta: data.marcheRicetta && typeof data.marcheRicetta === 'object' ? data.marcheRicetta : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
@@ -17100,6 +17318,7 @@ function importBackup(file) {
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
       prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
+      marcheRicetta: data.marcheRicetta && typeof data.marcheRicetta === 'object' ? data.marcheRicetta : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
@@ -17125,6 +17344,7 @@ function importBackup(file) {
       shopQta: data.shopQta && typeof data.shopQta === 'object' ? data.shopQta : {},
       ingTabExtra: data.ingTabExtra && typeof data.ingTabExtra === 'object' ? data.ingTabExtra : {},
       prodottiInfo: data.prodottiInfo && typeof data.prodottiInfo === 'object' ? data.prodottiInfo : {},
+      marcheRicetta: data.marcheRicetta && typeof data.marcheRicetta === 'object' ? data.marcheRicetta : {},
       catalogo: data.catalogo && typeof data.catalogo === 'object' ? data.catalogo : {},
       searches: Array.isArray(data.searches) ? data.searches : [],
       weights: Array.isArray(data.weights) ? data.weights : [],
@@ -18236,6 +18456,20 @@ document.addEventListener('click', e => {
       toast(val + ' in lista della spesa.', 'Annulla');
       break;
     }
+    case 'marca-gira': {
+      // il badge sull'ingrediente della ricetta: gira fra le marche che
+      // l'app conosce e il generico. Vale solo per questa ricetta, e i
+      // pasti gia' registrati non si toccano.
+      const ridM = t.dataset.rid;
+      if (!ridM) break;
+      marcaGira(ridM, val);
+      const pM = prodottoScelto(ridM, val);
+      if (currentDetailId === ridM) openDetail(ridM);
+      toast(val + ': ' + (pM
+        ? 'valori di ' + (pM.marca || pM.nome) + (pM.inDispensa ? ' (in casa)' : '')
+        : 'valori generici') + '.');
+      break;
+    }
     case 'catalogo-posto': {
       // il posto cicla: frigo, dispensa, freezer. E il catalogo ricorda.
       const voce = catalogoTrova(val) || catalogoRegistra(val);
@@ -19130,6 +19364,9 @@ window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
   prodottoRegistraInfo: prodottoRegistraInfo, prodottoInfoDi: prodottoInfoDi,
   applicaProdottoTrovato: applicaProdottoTrovato,
   famigliaDi: famigliaDi, apriProdotti: apriProdotti,
+  prodottiPerIngrediente: prodottiPerIngrediente, prodottoScelto: prodottoScelto,
+  tabellaScelta: tabellaScelta, marcaGira: marcaGira,
+  prodottiCheCombaciano: prodottiCheCombaciano,
   perPortion: perPortion, istPesoPorzione: istPesoPorzione,
   renderCatalogo: renderCatalogo,
   energia: energy, renderProfilo: renderProfile,
