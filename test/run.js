@@ -4240,6 +4240,295 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'pallini della scala nel dettaglio');
   });
 
+  await test('il voto su 100 pesa valori, additivi e bio, con la regola dura', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+    const yogurt = { kcal:57, proteine:10, grassi:0.4, saturi:0.2, zuccheri:4, fibre:0, sale:0.1 };
+    const merendina = { kcal:440, proteine:6.4, grassi:30, saturi:12, zuccheri:28, fibre:1, sale:0.4 };
+
+    // il 60% nutrizionale ordina il mondo come il Nutri-Score
+    const vY = P.voto(yogurt, { add: [], bio: false, confezionato: true });
+    const vM = P.voto(merendina, { add: [], bio: false, confezionato: true });
+    vero(vY.punteggio >= 75 && vY.nome === 'eccellente', 'lo yogurt non e\' eccellente: ' + vY.punteggio);
+    vero(!vY.parziale, 'coi valori e gli additivi noti il voto si dice parziale');
+    vero(vM.fascia >= 2, 'la merendina non puo\' stare sopra mediocre: ' + vM.punteggio);
+
+    // il bio vale 10 punti esatti, come nell'originale
+    const vBio = P.voto(yogurt, { add: [], bio: true, confezionato: true });
+    eq(vBio.punteggio - vY.punteggio, 10, 'il bio non vale 10 punti');
+
+    // un additivo innocuo non toglie niente; uno ad alto rischio azzera la
+    // sua parte E mette il tetto a 49, qualunque siano i valori
+    const vCitrico = P.voto(yogurt, { add: ['e330'], bio: false, confezionato: true });
+    eq(vCitrico.punteggio, vY.punteggio, 'l\'acido citrico non doveva togliere punti');
+    const vNitrito = P.voto(yogurt, { add: ['e330', 'e250'], bio: true, confezionato: true });
+    vero(vNitrito.punteggio <= 49 && vNitrito.rischio === 3,
+      'l\'additivo peggiore non comanda: ' + vNitrito.punteggio);
+
+    // gli E-numeri si normalizzano come li scrive Open Food Facts, e un
+    // codice mai visto si tratta con prudenza
+    const lec = P.infoAdditivo('en:e322i');
+    eq(lec.codice, 'E322', 'la variante e322i non torna alla famiglia');
+    eq(lec.rischio, 0, 'le lecitine non sono senza rischio');
+    eq(P.infoAdditivo('en:e9999').rischio, 1, 'l\'ignoto non si tratta con prudenza');
+
+    // additivi mai letti su un prodotto confezionato: voto parziale, onesto
+    const vSenza = P.voto(yogurt, { add: null, bio: false, confezionato: true });
+    vero(vSenza.parziale && vSenza.mancanti.includes('additivi'),
+      'la mancanza degli additivi non si dichiara');
+    // su un ingrediente semplice invece non c\'entrano
+    const vSpin = P.votoDi('spinaci');
+    vero(vSpin && !vSpin.mancanti.includes('additivi'),
+      'gli spinaci non devono lamentare additivi');
+
+    // il JSON di Open Food Facts si legge con tutti i suoi buchi
+    const off = P.prodottoDaOff({ status: 1, product: { code: '123',
+      product_name: 'Nutella', brands: 'Ferrero, Altro',
+      nutriments: { 'energy-kcal_100g': 539, proteins_100g: 6.3, carbohydrates_100g: 57.5,
+        sugars_100g: 56.3, fat_100g: 30.9, 'saturated-fat_100g': 10.6, sodium_100g: 0.0428 },
+      additives_tags: ['en:e322', 'en:e322i'], labels_tags: ['en:no-gluten'] } });
+    eq(off.nome, 'nutella', 'il nome non arriva');
+    eq(off.marca, 'Ferrero', 'la marca non si pulisce');
+    eq(off.valori.kcal, 539, 'le kcal non arrivano');
+    eq(off.valori.sale, 0.11, 'il sale non si ricava dal sodio');
+    eq(off.add.join(','), 'e322,e322i', 'gli additivi non si normalizzano');
+    vero(!off.bio, 'il bio non deve inventarsi');
+    const offBio = P.prodottoDaOff({ status: 1, product: { product_name: 'Yogurt Bio',
+      nutriments: { 'energy-kj_100g': 240 }, additives_tags: [], labels_tags: ['en:organic'] } });
+    eq(offBio.valori.kcal, 57, 'le kcal non si ricavano dai kJ');
+    vero(offBio.bio, 'il bio certificato non si riconosce');
+    eq(P.prodottoDaOff({ status: 0 }), null, 'il prodotto mancante non torna null');
+  });
+
+  await test('il codice a barre trova il prodotto e il voto arriva da solo', async () => {
+    const rispostaOff = { status: 1, product: { code: '3017620422003',
+      product_name_it: 'Nutella', brands: 'Ferrero',
+      nutriments: { 'energy-kcal_100g': 539, proteins_100g: 6.3, carbohydrates_100g: 57.5,
+        sugars_100g: 56.3, fat_100g: 30.9, 'saturated-fat_100g': 10.6, salt_100g: 0.107 },
+      additives_tags: ['en:e322'], labels_tags: [] } };
+    const a = await app({ fetch: url => Promise.resolve({
+      ok: true, json: () => Promise.resolve(rispostaOff) }) });
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    a.click('[data-act=etichetta-apri]');
+    await wait(100);
+
+    // il tasto del codice sta nel modulo etichetta, davanti a tutto
+    const tasto = a.d.querySelector('#modal-etichetta [data-act=codice-apri]');
+    vero(tasto, 'manca il tasto del codice a barre');
+    tasto.click();
+    await wait(100);
+    vero(a.d.getElementById('modal-codice').classList.contains('active'),
+      'il lettore non si apre');
+    // senza camera (qui non c\'e\') resta la via manuale, spiegata con garbo
+    vero(a.d.getElementById('codice-cifre'), 'manca la via manuale');
+
+    // le cifre scritte a mano: si cerca il prodotto e si compila tutto
+    a.set('codice-cifre', '3017620422003');
+    a.click('[data-act=codice-cerca]');
+    await wait(500);
+    vero(!a.d.getElementById('modal-codice').classList.contains('active'),
+      'il lettore non si chiude a codice trovato');
+    eq(a.d.getElementById('eti-nome').value, 'nutella', 'il nome non si compila');
+    eq(a.d.getElementById('eti-kcal').value, '539', 'le kcal non si compilano');
+    eq(a.d.getElementById('eti-zuc').value, '56.3', 'gli zuccheri non si compilano');
+    const extra = a.d.getElementById('eti-extra');
+    vero(!extra.hidden && extra.textContent.includes('lecitine'),
+      'gli additivi non si mostrano');
+    vero(!a.d.getElementById('eti-salute').hidden
+      && a.d.getElementById('eti-voto-num').textContent.includes('/100'),
+      'il voto su 100 non compare');
+    vero(a.d.getElementById('etichetta-passo').textContent.includes('Trovato'),
+      'il passo non racconta cosa ha trovato');
+
+    // al salvataggio additivi e bio restano col prodotto, e il voto li usa
+    a.click('[data-act=etichetta-salva]');
+    await wait(200);
+    const P = a.dom.window.fitmealsProva;
+    const info = P.prodottoInfoDi('nutella');
+    vero(info && info.add.includes('e322'), 'le notizie del codice non si salvano');
+    vero(a.salvato().prodottiInfo && a.salvato().prodottiInfo['nutella'],
+      'le notizie non finiscono su disco');
+    const v = P.votoDi('nutella');
+    vero(v && v.rischio === 0 && !v.mancanti.includes('additivi'),
+      'il voto non usa gli additivi salvati');
+
+    // riaprendo il modulo, additivi e bio tornano da soli col resto
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    a.set('disp-cerca', 'nutella');
+    a.click('[data-act=etichetta-apri]');
+    await wait(100);
+    vero(!a.d.getElementById('eti-extra').hidden
+      && a.d.getElementById('eti-extra').textContent.includes('lecitine'),
+      'gli additivi non si ripresentano dal catalogo');
+    a.click('[data-act=etichetta-chiudi]');
+    await wait(100);
+
+    // senza rete: nessun voto inventato, un messaggio onesto e la via foto
+    const b = await app({ fetch: () => Promise.reject(new Error('giu')) });
+    b.tab('view-fridge');
+    b.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    b.click('[data-act=etichetta-apri]');
+    await wait(100);
+    b.click('[data-act=codice-apri]');
+    await wait(100);
+    b.set('codice-cifre', '3017620422003');
+    b.click('[data-act=codice-cerca]');
+    await wait(300);
+    vero(b.d.getElementById('etichetta-passo').textContent.includes('archivio'),
+      'la mancanza di rete non si spiega');
+    eq(b.d.getElementById('eti-kcal').value, '', 'senza rete niente numeri inventati');
+
+    // e il prodotto fuori archivio si dice, senza fingere
+    const c = await app({ fetch: () => Promise.resolve({
+      ok: true, json: () => Promise.resolve({ status: 0 }) }) });
+    c.tab('view-fridge');
+    c.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    c.click('[data-act=etichetta-apri]');
+    await wait(100);
+    c.click('[data-act=codice-apri]');
+    await wait(100);
+    c.set('codice-cifre', '20000000');
+    c.click('[data-act=codice-cerca]');
+    await wait(300);
+    vero(c.d.getElementById('etichetta-passo').textContent.includes('non è nell\'archivio'),
+      'il prodotto sconosciuto non si spiega');
+  });
+
+  await test('additivi e bio viaggiano nel link di famiglia col resto della spesa', async () => {
+    const a = await app();
+    const b = await app();
+    a.dom.window.fitmealsFamiglia.crea('Casa voto');
+    const invito = await a.dom.window.fitmealsFamiglia.link(a.dom.window.fitmealsFamiglia.paccoInvito());
+    await b.dom.window.fitmealsFamiglia.importa(invito.link);
+    await wait(200);
+    b.d.getElementById('toast').querySelector('button').click();
+    await wait(200);
+
+    // A legge un\'etichetta col codice: valori + additivi + bio
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    a.click('[data-act=etichetta-apri]');
+    await wait(100);
+    a.d.getElementById('eti-nome').value = 'wurstel di pollo';
+    a.set('eti-kcal', '240'); a.set('eti-pro', '13'); a.set('eti-gra', '20');
+    a.dom.window.fitmealsProva.prodottoRegistraInfo('wurstel di pollo',
+      { add: ['e250'], bio: false, codice: '8000000000000' });
+    a.click('[data-act=etichetta-salva]');
+    await wait(200);
+
+    const pacco = a.dom.window.fitmealsFamiglia.paccoSpesa();
+    vero(pacco.info && pacco.info['wurstel di pollo']
+      && pacco.info['wurstel di pollo'].add.includes('e250'),
+      'gli additivi non salgono sul pacco');
+    const linkSpesa = await a.dom.window.fitmealsFamiglia.link(pacco);
+    await b.dom.window.fitmealsFamiglia.importa(linkSpesa.link);
+    await wait(300);
+    const vB = b.dom.window.fitmealsProva.votoDi('wurstel di pollo');
+    vero(vB && vB.rischio === 3 && vB.punteggio <= 49,
+      'il voto intero non arriva a casa dell\'altro');
+  });
+
+  await test('i prodotti si cercano in un posto solo, famiglia per famiglia', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+
+    // il classificatore: una bevanda e' una bevanda, una salsa e' una salsa
+    const f = n => P.famigliaDi(n).id;
+    eq(f('coca cola'), 'bev', 'la cola non e\' una bevanda');
+    eq(f('succo di pera'), 'bev', 'il succo non e\' una bevanda');
+    eq(f('latte'), 'lat', 'il latte non e\' un latticino');
+    eq(f('latte di mandorla'), 'bev', 'il latte vegetale non e\' una bevanda');
+    eq(f('salsa di soia'), 'sal', 'la salsa di soia non e\' una salsa');
+    eq(f('maionese'), 'sal', 'la maionese non e\' una salsa');
+    eq(f('pesto alla genovese'), 'sal', 'il pesto non e\' una salsa');
+    eq(f('mela'), 'fru', 'la mela non e\' frutta');
+    eq(f('melanzane'), 'ver', 'le melanzane non sono verdura');
+    eq(f('lievito di birra'), 'pan', 'il lievito di birra non sta col pane');
+    eq(f('gnappole croccanti'), 'alt', 'l\'ignoto non finisce in Altro');
+
+    // l'hub: si apre, cerca, filtra; i tuoi prodotti da fermi
+    P.catalogoRegistra('coca cola', 'dispensa');
+    P.catalogoRegistra('maionese', 'frigo');
+    P.apriProdotti('');
+    await wait(100);
+    vero(a.d.getElementById('modal-catalogo').classList.contains('active'), 'i Prodotti non si aprono');
+    vero(a.d.getElementById('cat-cerca'), 'manca la ricerca');
+    eq(a.d.querySelectorAll('#catalogo-lista .catalogo-riga').length, 2,
+      'da fermi si mostrano solo i tuoi prodotti');
+
+    // il filtro famiglia: solo bevande, niente maionese ne' latte
+    a.d.querySelector('#cat-famiglie [data-val=bev]').click();
+    await wait(50);
+    let nomi = [...a.d.querySelectorAll('#catalogo-lista .catalogo-nome span')].map(x => x.textContent.trim());
+    vero(nomi.includes('coca cola'), 'la cola non compare fra le bevande');
+    vero(!nomi.includes('maionese') && !nomi.includes('latte'),
+      'fra le bevande c\'e\' altro che bevande');
+    vero(nomi.every(n => P.famigliaDi(n).id === 'bev'), 'una riga non e\' una bevanda');
+
+    // ritoccare il chip toglie il filtro
+    a.d.querySelector('#cat-famiglie [data-val=bev]').click();
+    await wait(50);
+    eq(a.d.querySelectorAll('#catalogo-lista .catalogo-riga').length, 2,
+      'il secondo tocco non toglie il filtro');
+
+    // ricerca + famiglia insieme: "ma" fra le salse e' solo la maionese
+    a.set('cat-cerca', 'ma');
+    await wait(50);
+    a.d.querySelector('#cat-famiglie [data-val=sal]').click();
+    await wait(50);
+    nomi = [...a.d.querySelectorAll('#catalogo-lista .catalogo-nome span')].map(x => x.textContent.trim());
+    eq(nomi.join(','), 'maionese', 'la ricerca dentro la famiglia non stringe');
+
+    // dalle righe si mette in casa e in lista, per le stesse strade di sempre
+    a.set('cat-cerca', 'maionese');
+    await wait(50);
+    const riga = a.d.querySelector('#catalogo-lista .catalogo-riga');
+    riga.querySelector('[data-act=cat-in-dispensa]').click();
+    await wait(100);
+    eq(P.freschezza()['maionese'] && P.freschezza()['maionese'].posto, 'frigo',
+      'la maionese non va nel posto che il catalogo ricorda');
+    a.d.querySelector('#catalogo-lista [data-act=cat-in-lista]').click();
+    await wait(100);
+    vero(a.stato().shopExtra.some(x => x.n === 'maionese'), 'la maionese non entra in lista');
+
+    // un nome mai visto invita a leggergli codice o etichetta, senza vicoli ciechi
+    a.set('cat-cerca', 'sbrodolino');
+    await wait(50);
+    const invito = a.d.querySelector('#catalogo-lista [data-act=etichetta-apri]');
+    vero(invito, 'il prodotto nuovo non ha la sua porta');
+    eq(invito.dataset.val, 'sbrodolino', 'il nome scritto non segue nell\'etichetta');
+
+    // le porte verso l'unico posto: dai suggerimenti della dispensa...
+    a.d.querySelector('#modal-catalogo [data-act=close-modal]').click();
+    await wait(400);
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    a.set('disp-cerca', 'cola');
+    await wait(50);
+    const porta = a.d.querySelector('#disp-suggest [data-act=catalogo-apri]');
+    vero(porta, 'manca la porta nei suggerimenti della dispensa');
+    porta.click();
+    await wait(100);
+    eq(a.d.getElementById('cat-cerca').value, 'cola', 'quello che scrivevi non ti segue');
+    vero([...a.d.querySelectorAll('#catalogo-lista .catalogo-nome span')]
+      .some(x => x.textContent.trim() === 'coca cola'), 'la ricerca portata non trova');
+
+    // ...e dalla vista spesa, col suo tasto grande
+    a.d.querySelector('#modal-catalogo [data-act=close-modal]').click();
+    await wait(400);
+    a.tab('view-spesa');
+    await wait(100);
+    vero(a.d.querySelector('#view-spesa .modo-spesa[data-act=catalogo-apri]'),
+      'manca il tasto Prodotti nella spesa');
+  });
+
   await test('l\'aggiunta diretta in dispensa parla col catalogo come la spesa', async () => {
     const a = await app();
     const w = a.dom.window;
@@ -4405,19 +4694,24 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.tab('view-fridge');
     await wait(100);
 
-    // 4. le ricette si giudicano col Nutri-Score, presente e futuro
+    // 4. le ricette si giudicano col Nutri-Score dentro il voto su 100
     const R = a.stato().recipes;
     const g = t => { const r = R.find(x => x.title.toLowerCase().includes(t));
       const s = P.salubritaRicetta(r); return s ? s.nome : null; };
     eq(g('carbonara'), 'da limitare', 'la carbonara non e\' da limitare');
     vero(['sano', 'equilibrato'].includes(g('insalata di farro')),
       'l\'insalata di farro deve stare nella parte sana della scala');
+    const vCarb = P.votoRicetta(R.find(x => x.title.toLowerCase().includes('carbonara')));
+    const vFarro = P.votoRicetta(R.find(x => x.title.toLowerCase().includes('insalata di farro')));
+    vero(vCarb.fascia >= 2, 'la carbonara non puo\' stare sopra mediocre');
+    vero(vFarro.punteggio > vCarb.punteggio, 'il farro deve battere la carbonara');
 
-    // nel dettaglio il gradino sostituisce la vecchia categoria a mano
+    // nel dettaglio il voto su 100 sostituisce la vecchia categoria a mano
     a.apri('carbonara');
     await wait(150);
     const meta = a.d.querySelector('#detail-body .detail-meta');
-    vero(meta.textContent.includes('da limitare'), 'il dettaglio non mostra il gradino');
+    vero(meta.textContent.includes(vCarb.nome) && meta.textContent.includes(vCarb.punteggio + '/100'),
+      'il dettaglio non mostra il voto su 100');
     vero(!/·\s*sgarro\s*·/.test(meta.textContent.split('facile')[0]),
       'il dettaglio mostra ancora la vecchia categoria');
   });
