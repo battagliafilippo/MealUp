@@ -4529,6 +4529,53 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'manca il tasto Prodotti nella spesa');
   });
 
+  await test('dallo scan del prodotto si va in lista, e a fine spesa in dispensa', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    a.click('[data-act=etichetta-apri]');
+    await wait(100);
+
+    // il modulo offre TUTTE e due le strade: dispensa subito, o lista
+    vero(a.d.querySelector('#modal-etichetta [data-act=etichetta-salva]'), 'manca la via dispensa');
+    vero(a.d.querySelector('#modal-etichetta [data-act=etichetta-lista]'), 'manca la via lista');
+
+    a.d.getElementById('eti-nome').value = 'succo bio prova';
+    a.set('eti-kcal', '45'); a.set('eti-zuc', '10');
+    a.click('[data-act=etichetta-lista]');
+    await wait(150);
+
+    // in lista, coi valori gia' nel sistema; NON ancora in casa
+    vero(a.stato().shopExtra.some(x => x.n === 'succo bio prova'), 'il prodotto non e\' in lista');
+    vero(P.tabella('succo bio prova'), 'i valori non sono entrati nel sistema');
+    vero(P.catalogoTrova('succo bio prova'), 'il catalogo non lo conosce');
+    vero(!P.freschezza()['succo bio prova'], 'e\' finito in dispensa invece che in lista');
+
+    // rifarlo non raddoppia la voce: aggiorna e basta
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    a.set('disp-cerca', 'succo bio prova');
+    a.click('[data-act=etichetta-apri]');
+    await wait(100);
+    a.click('[data-act=etichetta-lista]');
+    await wait(150);
+    eq(a.stato().shopExtra.filter(x => x.n === 'succo bio prova').length, 1,
+      'la seconda volta ha raddoppiato la voce');
+    vero(a.testo('#toast').includes('era già in lista'), 'il doppione non viene spiegato');
+
+    // a fine spesa arriva in dispensa per la strada di sempre
+    a.tab('view-spesa');
+    await wait(100);
+    a.click('[data-act=shop-tutti]');
+    a.click('[data-act=shop-bought]');
+    await wait(50);
+    a.click('[data-act=conferma-si]');
+    await wait(150);
+    vero(P.freschezza()['succo bio prova'], 'fine spesa non lo porta in casa');
+  });
+
   await test('l\'aggiunta diretta in dispensa parla col catalogo come la spesa', async () => {
     const a = await app();
     const w = a.dom.window;
