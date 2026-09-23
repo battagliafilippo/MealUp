@@ -46,8 +46,11 @@ function boot(opts = {}) {
 
       Object.defineProperty(w, 'crypto', { value: require('crypto').webcrypto, configurable: true });
       Object.defineProperty(w, 'isSecureContext', { value: true, configurable: true });
-      w.CompressionStream = global.CompressionStream;
-      w.DecompressionStream = global.DecompressionStream;
+      // un "telefono vecchio": browser senza compressione nativa dei link
+      if (!opts.senzaCompressione) {
+        w.CompressionStream = global.CompressionStream;
+        w.DecompressionStream = global.DecompressionStream;
+      }
       if (opts.storage) w.localStorage.setItem('fitmeals.v2', JSON.stringify(opts.storage));
       if (opts.fetch) w.fetch = opts.fetch;
     }

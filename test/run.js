@@ -4925,6 +4925,74 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'i 50 cl in lista non diventano 500 ml');
   });
 
+  await test('i link si aprono ovunque: app aperta, chat che spezzano, telefoni vecchi', async () => {
+    const a = await app();
+    a.dom.window.fitmealsFamiglia.crea('Casa link');
+    const invito = await a.dom.window.fitmealsFamiglia.link(a.dom.window.fitmealsFamiglia.paccoInvito());
+
+    // gli inviti (piccoli) restano in chiaro: si aprono su QUALUNQUE
+    // telefono, anche vecchio, anche nel browser dentro una chat
+    vero(invito.link.includes('#fm=j'), 'l\'invito piccolo non resta in chiaro');
+    // un pacco grosso viaggia lo stesso (nel browser vero si comprime:
+    // la compressione nativa qui nel banco di prova non c'e', e il
+    // ripiego in chiaro e' proprio il comportamento giusto)
+    const grosso = await a.dom.window.fitmealsFamiglia.link(
+      { v: 1, tipo: 'spesa', prova: 'contenuto lungo '.repeat(200) });
+    vero(grosso.link.includes('#fm='), 'il pacco grosso non fa il link');
+
+    // app GIA' aperta: il link cambia solo il frammento (niente ricarica),
+    // e il pacco va letto lo stesso — prima veniva ignorato in silenzio
+    const b = await app();
+    b.dom.window.location.hash = '#' + invito.link.split('#')[1];
+    b.dom.window.dispatchEvent(new b.dom.window.HashChangeEvent('hashchange'));
+    await wait(400);
+    vero(b.testo('#toast').includes('invita nella famiglia'),
+      'ad app gia\' aperta il link viene ignorato');
+    b.d.getElementById('toast').querySelector('button').click();
+    await wait(300);
+    vero(b.dom.window.fitmealsFamiglia.stato(), 'l\'entrata dal link ad app aperta non va');
+
+    // incollato con l'a-capo in mezzo (le chat spezzano i link lunghi)
+    const c = await app();
+    const spezzato = invito.link.slice(0, 60) + '\n ' + invito.link.slice(60);
+    await c.dom.window.fitmealsFamiglia.importa(spezzato);
+    await wait(300);
+    vero(c.testo('#toast').includes('invita nella famiglia'),
+      'il link con l\'a-capo dentro non si ricuce');
+
+    // telefono vecchio (niente compressione): l'invito si apre lo stesso,
+    // e i SUOI link nascono sempre in chiaro
+    const d = await app({ senzaCompressione: true });
+    await d.dom.window.fitmealsFamiglia.importa(invito.link);
+    await wait(300);
+    vero(d.testo('#toast').includes('invita nella famiglia'),
+      'l\'invito in chiaro non si apre sul telefono vecchio');
+    d.dom.window.fitmealsFamiglia.crea('Casa vecchia');
+    const daVecchio = await d.dom.window.fitmealsFamiglia.link(
+      d.dom.window.fitmealsFamiglia.paccoInvito());
+    vero(daVecchio.link.includes('#fm=j'), 'il telefono vecchio non scrive in chiaro');
+
+    // link troncato dalla chat: un messaggio onesto, mai dati rovinati
+    const e2 = await app();
+    await e2.dom.window.fitmealsFamiglia.importa(grosso.link.slice(0, Math.round(grosso.link.length * 0.7)));
+    await wait(300);
+    vero(/spezzato|non leggibile|non riesce/.test(e2.testo('#toast')),
+      'il link troncato non viene spiegato con garbo');
+    vero(!e2.dom.window.fitmealsFamiglia.stato(), 'il link rotto ha sporcato lo stato');
+
+    // e una spesa arrivata dove la famiglia non c'e' spiega la strada
+    // giusta (PWA e Safari hanno memorie separate, capita spesso su iPhone)
+    const f = await app();
+    a.tab('view-fridge');
+    a.set('disp-cerca', 'pane');
+    a.click('[data-act=disp-add]');
+    const linkSpesa = await a.dom.window.fitmealsFamiglia.link(a.dom.window.fitmealsFamiglia.paccoSpesa());
+    await f.dom.window.fitmealsFamiglia.importa(linkSpesa.link);
+    await wait(300);
+    vero(/app installata|incolla/i.test(f.testo('#toast')),
+      'la spesa senza famiglia non spiega dove incollare il link');
+  });
+
   await test('l\'aggiunta diretta in dispensa parla col catalogo come la spesa', async () => {
     const a = await app();
     const w = a.dom.window;
