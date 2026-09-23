@@ -3481,7 +3481,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(righe.length, 5, 'le voci non si separano');
     vero(righe[0].sicuro && righe[0].nome === 'pomodori', 'pomodori non riconosciuti');
     const latte = righe.find(r => r.nome === 'latte');
-    vero(latte && latte.q === 2 && latte.u === 'kg', 'due litri di latte non diventano 2 kg');
+    vero(latte && latte.q === 2 && latte.u === 'l', 'due litri di latte non restano 2 litri');
     vero(righe.some(r => /yogurt/.test(r.nome)), 'iogurt non trova lo yogurt');
     vero(righe.some(r => r.nome === 'parmigiano'), 'parmiggiano non trova il parmigiano');
     // un pasticcio resta modificabile, non riconosciuto a forza
@@ -3518,9 +3518,10 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'la voce dettata ha una struttura diversa dal manuale');
     eq(dettata.qta, 2000, 'i litri non sono diventati grammi come nel manuale');
 
-    // spuntata e portata in dispensa, la scadenza segue le stesse regole
+    // spuntata e portata in dispensa, la scadenza segue le stesse regole;
+    // e la voce si ricorda liquida, cosi' si legge in ml e litri
     const voce = a.dom.window.fitmealsDebug().shopExtra.find(x => x.n === 'latte');
-    vero(voce.unita === 'g', 'l\'unita interna non e\' quella di casa');
+    vero(voce.unita === 'ml', 'il liquido non si ricorda liquido');
   });
 
   await test('lo scontrino passa dallo stesso salvataggio di voce e manuale', async () => {
@@ -3844,7 +3845,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.d.getElementById('shopqta-campo').value = '700';
     a.click('[data-act=shopqta-salva]');
     await wait(100);
-    vero(a.testo('#shopping-body').includes('700 g'), 'la correzione non si vede in lista');
+    vero(a.testo('#shopping-body').includes('700 ml'), 'la correzione non si vede in lista');
 
     // chiudo la spesa: in freschezza entra la MIA quantita'
     a.click('[data-act=shop-tutti]');
@@ -4846,6 +4847,82 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.click('[data-act=mangia-salva]');
     await wait(150);
     vero(!P.freschezza()['latte'], 'la scorta finita resta in giro');
+  });
+
+  await test('i liquidi si misurano in ml, cl e litri, dovunque si scrivano', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+    a.tab('view-profile'); a.profiloBase();
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+
+    // il bottone dell'unita' gira per tutte: g, kg, ml, cl, L, un.
+    const b = a.d.getElementById('disp-unita');
+    const giro = [b.textContent.trim()];
+    for (let i = 0; i < 6; i++) { a.click('[data-act=disp-unita]'); giro.push(b.textContent.trim()); }
+    ['g', 'kg', 'ml', 'cl', 'L', 'un.'].forEach(u =>
+      vero(giro.includes(u), 'nel giro delle unita\' manca ' + u));
+    eq(giro[0], giro[6], 'il giro non torna al punto di partenza');
+
+    // il latte e' un liquido: unita' proposta ml, e un litro e mezzo
+    // entra in frigo come 1500 ml, mostrato "1.5 L"
+    a.set('disp-cerca', 'latte');
+    eq(b.textContent.trim(), 'ml', 'il latte non propone i millilitri');
+    while (b.textContent.trim() !== 'L') a.click('[data-act=disp-unita]');
+    a.d.getElementById('disp-qta').value = '1.5';
+    a.click('[data-act=disp-add]');
+    await wait(100);
+    eq(P.freschezza()['latte'].qta, 1500, 'un litro e mezzo non fa 1500');
+    eq(P.freschezza()['latte'].unita, 'ml', 'la scorta non si ricorda liquida');
+    a.set('disp-cerca', 'lat');
+    await wait(50);
+    vero(/1\.5 L/.test(a.d.querySelector('#disp-suggest [data-act=disp-scegli]').textContent),
+      'millecinquecento ml non si leggono come 1.5 L');
+
+    // la dettatura capisce litri e centilitri, e la riga li mostra
+    a.dom.window.fitmealsVoce.daTesto('due litri di latte e 50 cl di aranciata', 'dispensa');
+    await wait(150);
+    const unitaRighe = [...a.d.querySelectorAll('#dettatura-lista .det-u')].map(x => x.textContent.trim());
+    vero(unitaRighe.includes('L') && unitaRighe.includes('cl'),
+      'le righe dettate non parlano di litri e cl: ' + unitaRighe.join(','));
+    a.click('[data-act=detta-salva]');
+    await wait(150);
+    eq(P.freschezza()['latte'].qta, 3500, 'i due litri dettati non si sommano');
+    eq(P.freschezza()['aranciata'].qta, 500, 'i 50 cl non fanno 500 ml');
+
+    // il mangiato di un liquido parla in ml, con le sue porzioni pronte
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    a.set('disp-cerca', 'lat');
+    await wait(50);
+    a.d.querySelector('#disp-suggest [data-act=mangia-apri]').click();
+    await wait(100);
+    eq(a.d.getElementById('mangia-unita').textContent, 'ml', 'il mangiato non parla in ml');
+    vero([...a.d.querySelectorAll('#mangia-svelti .chip')].some(x => /330 ml/.test(x.textContent)),
+      'mancano le porzioni da bicchiere e lattina');
+    a.set('mangia-qta', '330');
+    a.click('[data-act=mangia-salva]');
+    await wait(150);
+    eq(P.freschezza()['latte'].qta, 3170, 'i 330 ml non si scalano dal frigo');
+
+    // le ricette accettano litri e centilitri nella grammatura
+    const c = P.valoriDaGrammatura([{ n: 'latte', q: 1, u: 'l' }]);
+    eq(c.peso, 1000, 'un litro in ricetta non pesa mille');
+
+    // e in lista della spesa mezzo litro resta scritto da liquido
+    a.tab('view-spesa');
+    await wait(100);
+    a.set('shop-add', 'succo di pera');
+    const bs = a.d.getElementById('shop-unita');
+    eq(bs.textContent.trim(), 'ml', 'il succo non propone i millilitri in lista');
+    while (bs.textContent.trim() !== 'cl') a.click('[data-act=shop-unita]');
+    a.d.getElementById('shop-qta').value = '50';
+    a.click('[data-act=shop-extra]');
+    await wait(100);
+    const voceL = a.stato().shopExtra.find(x => x.n === 'succo di pera');
+    vero(voceL && voceL.qta === 500 && voceL.unita === 'ml' && voceL.qty === '500 ml',
+      'i 50 cl in lista non diventano 500 ml');
   });
 
   await test('l\'aggiunta diretta in dispensa parla col catalogo come la spesa', async () => {
