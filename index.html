@@ -9,7 +9,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="FitMeals">
-<meta name="theme-color" content="#f3efe8">
+<meta name="theme-color" content="#ff6115">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
@@ -104,9 +104,9 @@ h4{font-size:1rem;font-weight:700;letter-spacing:-.2px}
 .pager::-webkit-scrollbar{display:none}
 .pagina{flex:0 0 100%;scroll-snap-align:center;padding:0 16px;
   --tema:var(--accent-primary);--tema2:var(--accent-primary)}
-#pagina-col{--tema:#e0a75f;--tema2:#d4735a}
-#pagina-pra{--tema:#8fbd86;--tema2:#5f9e8f}
-#pagina-cen{--tema:#9d90cc;--tema2:#5f6bab}
+#pagina-col{--tema:#ff6115;--tema2:#e04c00}
+#pagina-pra{--tema:#d84a00;--tema2:#b83c00}
+#pagina-cen{--tema:#a63a05;--tema2:#8a2e00}
 
 /* ---------- anello della giornata ---------- */
 .anello-box{margin-bottom:14px}
@@ -128,30 +128,30 @@ h4{font-size:1rem;font-weight:700;letter-spacing:-.2px}
   stroke-linejoin:round}
 .bilancia .basamento{fill:color-mix(in srgb, var(--tema, var(--accent-primary)) 22%, #fff);
   stroke:color-mix(in srgb, var(--tema, var(--accent-primary)) 55%, transparent);stroke-width:2}
-.bilancia .bottone{fill:#e4b23c;stroke:rgba(60,45,30,.35);stroke-width:1.5}
+.bilancia .bottone{fill:#ff8a3d;stroke:rgba(140,42,0,.45);stroke-width:1.5}
 .bilancia .collo{fill:color-mix(in srgb, var(--tema, var(--accent-primary)) 16%, #fff);
   stroke:color-mix(in srgb, var(--tema, var(--accent-primary)) 55%, transparent);stroke-width:2;
   stroke-linejoin:round}
-.bilancia .piedino{fill:rgba(60,45,30,.3)}
-.bilancia .cifra{font-size:7px;fill:rgba(60,45,30,.5);text-anchor:middle;
+.bilancia .piedino{fill:rgba(140,42,0,.3)}
+.bilancia .cifra{font-size:7px;fill:rgba(140,42,0,.5);text-anchor:middle;
   font-variant-numeric:tabular-nums}
-.bilancia .braccio{stroke:rgba(60,45,30,.4);stroke-width:4;stroke-linecap:round}
-.bilancia .impugnatura{fill:rgba(255,255,255,.7);stroke:rgba(60,45,30,.35);stroke-width:2}
-.bilancia .righetta{stroke:rgba(60,45,30,.25);stroke-width:1.4;stroke-linecap:round}
-.bilancia .telaio{stroke:rgba(60,45,30,.35);stroke-width:3.5;stroke-linecap:round;fill:none}
-.bilancia .piatto{fill:rgba(255,255,255,.6);stroke:rgba(60,45,30,.4);stroke-width:2.2;
+.bilancia .braccio{stroke:rgba(140,42,0,.4);stroke-width:4;stroke-linecap:round}
+.bilancia .impugnatura{fill:rgba(255,255,255,.7);stroke:rgba(140,42,0,.35);stroke-width:2}
+.bilancia .righetta{stroke:rgba(140,42,0,.25);stroke-width:1.4;stroke-linecap:round}
+.bilancia .telaio{stroke:rgba(255,252,244,.85);stroke-width:3.5;stroke-linecap:round;fill:none}
+.bilancia .piatto{fill:rgba(255,252,244,.8);stroke:rgba(140,38,0,.5);stroke-width:2.2;
   stroke-linejoin:round}
 .bilancia .sul-piatto{color:var(--tema, var(--accent-primary));opacity:.85;
   animation:posaCibo .45s cubic-bezier(.22,.8,.28,1) both}
 .bilancia .sul-piatto path,.bilancia .sul-piatto circle,.bilancia .sul-piatto ellipse,
 .bilancia .sul-piatto rect,.bilancia .sul-piatto g{stroke:currentColor;stroke-width:2.4;fill:none}
 @keyframes posaCibo{from{opacity:0;transform:translateY(-14px) scale(.5)}to{opacity:.85}}
-.bilancia .quadrante{fill:rgba(252,247,236,.96);stroke:rgba(60,45,30,.12);stroke-width:1.2;stroke-linejoin:round}
-.bilancia .tacca{stroke:rgba(60,45,30,.22);stroke-width:1.2;stroke-linecap:round;fill:none}
-.bilancia .tacca.grande{stroke:rgba(60,45,30,.38);stroke-width:2}
+.bilancia .quadrante{fill:rgba(255,252,244,.97);stroke:rgba(179,63,0,.16);stroke-width:1.2;stroke-linejoin:round}
+.bilancia .tacca{stroke:rgba(179,63,0,.32);stroke-width:1.2;stroke-linecap:round;fill:none}
+.bilancia .tacca.grande{stroke:rgba(179,63,0,.55);stroke-width:2}
 .bilancia .ago{stroke:var(--tema, var(--accent-primary));stroke-width:2.6;stroke-linecap:round;fill:none;
   transition:d .8s cubic-bezier(.22,.8,.28,1)}
-.bilancia .ago.f-col{stroke:#c2803a}.bilancia .ago.f-pra{stroke:#4c8a6b}.bilancia .ago.f-cen{stroke:#5a58a0}
+.bilancia .ago.f-col{stroke:#ff6115}.bilancia .ago.f-pra{stroke:#d84a00}.bilancia .ago.f-cen{stroke:#a63a05}
 .bilancia .ago.oltre{stroke:var(--danger)}
 .gruppo-ago{transform-box:view-box;transform-origin:100px 92px}
 .gruppo-piatto{transform-box:view-box}
@@ -171,16 +171,16 @@ h4{font-size:1rem;font-weight:700;letter-spacing:-.2px}
   49%{transform:rotate(-2deg)} 61%{transform:rotate(1.1deg)} 76%{transform:rotate(-.5deg)}
   100%{transform:rotate(0)}}
 .bilancia .perno{fill:var(--carta);stroke:currentColor;stroke-width:2.2}
-.bilancia .perno.f-col{stroke:#c2803a}.bilancia .perno.f-pra{stroke:#4c8a6b}.bilancia .perno.f-cen{stroke:#5a58a0}
+.bilancia .perno.f-col{stroke:#ff6115}.bilancia .perno.f-pra{stroke:#d84a00}.bilancia .perno.f-cen{stroke:#a63a05}
 .anello svg{width:100%;height:100%;transform:rotate(0deg)}
 .anello circle{fill:none}
 .anello .tracciato,.anello .riempito{fill:none;stroke-linecap:round;stroke-width:9}
-.anello .tracciato{stroke:rgba(60,45,30,.10)}
-.anello .tracciato.qui{stroke:rgba(60,45,30,.16)}
+.anello .tracciato{stroke:rgba(255,252,244,.30)}
+.anello .tracciato.qui{stroke:rgba(255,252,244,.46)}
 .anello .riempito{transition:stroke-dasharray .8s cubic-bezier(.22,.8,.28,1)}
-.anello .riempito.f-col{stroke:#c2803a}
-.anello .riempito.f-pra{stroke:#4c8a6b}
-.anello .riempito.f-cen{stroke:#5a58a0}
+.anello .riempito.f-col{stroke:#fffcf4}
+.anello .riempito.f-pra{stroke:#ffddb2}
+.anello .riempito.f-cen{stroke:#ffbb80}
 .anello .qui.riempito{stroke-width:11}
 .matita{position:absolute;top:2px;right:2px;width:34px;height:34px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -199,7 +199,7 @@ h4{font-size:1rem;font-weight:700;letter-spacing:-.2px}
 /* Il conta-calorie a palette, come i vecchi flip clock: ogni cifra nella sua
    cella nera, con la riga del ribaltamento a meta'. */
 .flip{display:flex;align-items:center;gap:1.5px;padding:2px 4px;border-radius:4px;
-  background:#15120e;box-shadow:inset 0 1px 3px rgba(0,0,0,.6), 0 1px 2px rgba(60,45,30,.3)}
+  background:#3a1200;box-shadow:inset 0 1px 3px rgba(0,0,0,.6), 0 1px 2px rgba(140,42,0,.3)}
 .flip i{font-style:normal;font-family:'SF Mono',ui-monospace,Menlo,monospace;
   font-size:.56rem;font-weight:600;line-height:1;color:#f4efe6;
   background:linear-gradient(#2b2620 48%, rgba(0,0,0,.55) 48%, #221d18 52%);
@@ -208,7 +208,7 @@ h4{font-size:1rem;font-weight:700;letter-spacing:-.2px}
   letter-spacing:.04em;margin:0 2px 0 3px}
 /* La striscia dei pasti sotto il flip: ogni colore largo quanto le sue
    calorie, sul binario dell'intera giornata. */
-.bilancia .striscia-fondo{fill:rgba(60,45,30,.12)}
+.bilancia .striscia-fondo{fill:rgba(140,42,0,.12)}
 .bilancia .striscia-seg{transition:width .8s cubic-bezier(.22,.8,.28,1)}
 .bilancia .striscia-seg.f-col{fill:#c2803a}
 .bilancia .striscia-seg.f-pra{fill:#4c8a6b}
@@ -252,7 +252,7 @@ h4{font-size:1rem;font-weight:700;letter-spacing:-.2px}
 .sugg{padding-right:34px}
 .sugg-x{position:absolute;top:50%;right:8px;transform:translateY(-50%);
   width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:.9rem;line-height:1;color:var(--text-tertiary);background:rgba(60,45,30,.07)}
+  font-size:.9rem;line-height:1;color:var(--text-tertiary);background:rgba(140,42,0,.07)}
 .scheda.con-x .sugg-x{top:8px;right:8px;transform:none}
 .piatto-del-pasto{margin-bottom:6px}
 .piatto-del-pasto .quando{display:block;font-size:.66rem;color:var(--text-tertiary);
@@ -377,7 +377,7 @@ h4{font-size:1rem;font-weight:700;letter-spacing:-.2px}
 .conf-col > span{font-size:.68rem;color:var(--text-tertiary)}
 .conf-col .x{position:absolute;top:2px;right:2px;min-width:26px;min-height:26px;margin:0}
 .conf-riga{position:relative;display:grid;gap:10px;align-items:center;padding:24px 0 11px;
-  border-bottom:1px solid rgba(255,255,255,.5);box-shadow:0 1px 0 rgba(60,45,30,.045);
+  border-bottom:1px solid rgba(255,255,255,.5);box-shadow:0 1px 0 rgba(140,42,0,.045);
   text-align:center;font-size:.9rem;font-variant-numeric:tabular-nums}
 .conf-nome{position:absolute;top:6px;left:0;font-size:.66rem;color:var(--text-tertiary);
   text-transform:uppercase;letter-spacing:.1em}
@@ -625,8 +625,8 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .cerca-sez{margin-bottom:12px;font-size:.85rem;padding-top:10px;padding-bottom:10px}
 .cons{display:flex;align-items:center;gap:9px;margin-top:9px}
 .cons-track{position:relative;flex:1;height:6px;border-radius:3px;
-  background:rgba(60,45,30,.10);overflow:hidden;
-  box-shadow:inset 0 1px 2px rgba(60,45,30,.10)}
+  background:rgba(140,42,0,.10);overflow:hidden;
+  box-shadow:inset 0 1px 2px rgba(140,42,0,.10)}
 .cons-track::after{content:'';position:absolute;inset:0;
   background:repeating-linear-gradient(90deg,
     transparent 0 calc(25% - 1px), rgba(255,255,255,.85) calc(25% - 1px) 25%)}
@@ -708,8 +708,8 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .cerca-sez{margin-bottom:12px;font-size:.85rem;padding-top:10px;padding-bottom:10px}
 .cons{display:flex;align-items:center;gap:9px;margin-top:9px}
 .cons-track{position:relative;flex:1;height:6px;border-radius:3px;
-  background:rgba(60,45,30,.10);overflow:hidden;
-  box-shadow:inset 0 1px 2px rgba(60,45,30,.10)}
+  background:rgba(140,42,0,.10);overflow:hidden;
+  box-shadow:inset 0 1px 2px rgba(140,42,0,.10)}
 .cons-track::after{content:'';position:absolute;inset:0;
   background:repeating-linear-gradient(90deg,
     transparent 0 calc(25% - 1px), rgba(255,255,255,.85) calc(25% - 1px) 25%)}
@@ -1078,8 +1078,8 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .grafico.basso{height:90px}
 .grafico .barra{fill:color-mix(in srgb, var(--tema, var(--accent-primary)) 55%, transparent)}
 .grafico .barra.oltre{fill:color-mix(in srgb, var(--danger) 65%, transparent)}
-.grafico .barra.vuota{fill:rgba(60,45,30,.08)}
-.grafico .obiettivo{stroke:rgba(60,45,30,.4);stroke-width:1;stroke-dasharray:4 4}
+.grafico .barra.vuota{fill:rgba(140,42,0,.08)}
+.grafico .obiettivo{stroke:rgba(140,42,0,.4);stroke-width:1;stroke-dasharray:4 4}
 .grafico .obiettivo-t{font-size:8px;fill:var(--text-tertiary);text-anchor:end}
 .grafico .asse{font-size:7.5px;fill:var(--text-tertiary);text-anchor:middle}
 .grafico .filo{fill:none;stroke:color-mix(in srgb, var(--tema, var(--accent-primary)) 60%, transparent);stroke-width:1.6}
@@ -1127,7 +1127,7 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
    Uso details/summary nativi, cosi' funzionano anche da tastiera e con i
    lettori di schermo senza codice in piu'. */
 .sezione{margin-top:18px;border-top:1px solid rgba(255,255,255,.55);
-  box-shadow:0 -1px 0 rgba(60,45,30,.05)}
+  box-shadow:0 -1px 0 rgba(140,42,0,.05)}
 .sezione summary{list-style:none;cursor:pointer;padding:14px 2px 12px;
   display:flex;align-items:center;gap:10px;font-size:.98rem;font-weight:600;
   letter-spacing:-.018em;color:var(--text-primary)}
@@ -1198,9 +1198,9 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .coperchio{fill:#d9d4cb;stroke:#8a857c;stroke-width:2.5}
 .manico,.pomello{stroke:#7c2f28;stroke-width:4;stroke-linecap:round;fill:none}
 .pomello-t{fill:#8a857c}
-.vapore{fill:none;stroke:rgba(60,45,30,.30);stroke-width:2.2;stroke-linecap:round;
+.vapore{fill:none;stroke:rgba(140,42,0,.30);stroke-width:2.2;stroke-linecap:round;
   animation:sale .6s ease .5s both}
-.fornello .griglia-f{stroke:rgba(60,45,30,.35);stroke-width:3;stroke-linecap:round;fill:none;
+.fornello .griglia-f{stroke:rgba(140,42,0,.35);stroke-width:3;stroke-linecap:round;fill:none;
   animation:veloIn .3s ease .25s both}
 .fiammella{fill:#c0632e;opacity:0;transform-box:fill-box;transform-origin:50% 100%;
   animation:fiammaSu .45s cubic-bezier(.22,.8,.28,1) both}
@@ -1210,7 +1210,7 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
   to{opacity:.95;transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){ #fornelli{display:none} }
 
-.cook-barra{height:2px;border-radius:2px;background:rgba(60,45,30,.10);margin-bottom:18px;overflow:hidden;flex:0 0 auto}
+.cook-barra{height:2px;border-radius:2px;background:rgba(140,42,0,.10);margin-bottom:18px;overflow:hidden;flex:0 0 auto}
 .cook-barra > i{display:block;height:100%;width:0;background:var(--tema, var(--accent-primary));
   border-radius:2px;transition:width .5s cubic-bezier(.22,.8,.28,1)}
 .passo-chip.tutti{border-style:dashed;color:var(--tema, var(--accent-primary));font-weight:600}
@@ -1258,7 +1258,7 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .tpill i{font-style:normal;font-weight:500;font-size:.7rem;letter-spacing:.02em;
   color:var(--text-secondary);max-width:70px;overflow:hidden;text-overflow:ellipsis}
 .tpill b{font-size:.86rem;font-weight:700;font-variant-numeric:tabular-nums}
-.tpill-x{width:24px;height:24px;border-radius:50%;background:rgba(60,45,30,.08);
+.tpill-x{width:24px;height:24px;border-radius:50%;background:rgba(140,42,0,.08);
   border:none;color:var(--text-tertiary);font-size:.85rem;line-height:1;
   display:inline-flex;align-items:center;justify-content:center}
 .tpill.finito{color:var(--ok);
@@ -1388,31 +1388,55 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
   font-weight:700;padding:2px 2px;white-space:nowrap}
 
 /* ==========================================================================
-   TEMA CHIARO · vetro
-   Fondo caldo di carta, schede in vetro traslucido con luce sul bordo alto e
-   ombra morbida sotto. I colori sono una sola famiglia: ogni accento nasce
-   dalla stessa base calda e si sposta di tinta secondo il pasto e
-   l'ingrediente, senza mai cambiare temperatura.
+   TEMA NEON · porcellana su arancio
+   Fondo Neon Orange #FF6115 pieno; ogni finestra (schede, modali, chip,
+   barre) e' porcellana #FFFCF4. Dentro le finestre le scritte sono della
+   stessa famiglia dell'arancio: il neon puro sul bianco non regge la
+   lettura minuta (contrasto ~2.9:1), quindi il TESTO corrente usa un
+   arancio bruciato #B33F00 (5.7:1) e il neon #FF6115 resta per titoli,
+   numeri grandi, accenti e comandi — stessa fiamma, due intensita'.
+   Sul fondo arancione le scritte sono porcellana. Ombre e aloni scendono
+   dal rosso-bruciato, mai dal grigio: il buio di questo tema e' fiamma
+   spenta, non fumo.
    ========================================================================== */
 :root{
-  --bg-main:#f3efe8;
-  --carta:#fbf8f3;
-  --vetro:rgba(255,255,255,.66);
-  --vetro-forte:rgba(255,255,255,.86);
-  --bordo:rgba(38,30,22,.10);
-  --bordo-luce:rgba(255,255,255,.85);
+  --neon:#ff6115;
+  --porcellana:#fffcf4;
+  --bruciato:#b33f00;
+  --bg-main:var(--neon);
+  --carta:var(--porcellana);
+  --vetro:rgba(255,252,244,.94);
+  --vetro-forte:rgba(255,252,244,.97);
+  --bordo:rgba(179,63,0,.14);
+  --bordo-luce:rgba(255,255,255,.92);
   --glass-bg:var(--vetro);
   --glass-border:var(--bordo);
   --glass-card:var(--vetro);
-  --accent-primary:#a9762f;
-  --accent-primary-contrast:#fffdf9;
-  --danger:#b4452f;
-  --ok:#4a8a52;
-  --text-primary:#231e18;
-  --text-secondary:rgba(35,30,24,.66);
-  --text-tertiary:rgba(35,30,24,.46);
-  --ombra:0 1px 2px rgba(60,45,30,.06), 0 10px 26px -12px rgba(60,45,30,.28);
-  --ombra-alta:0 2px 4px rgba(60,45,30,.07), 0 22px 44px -18px rgba(60,45,30,.38);
+  --accent-primary:var(--neon);
+  --accent-primary-contrast:var(--porcellana);
+  --danger:#c03018;
+  --ok:#3e8a4e;
+  /* sul FONDO arancione: scritte porcellana (le finestre li ridefiniscono) */
+  --text-primary:var(--porcellana);
+  --text-secondary:rgba(255,252,244,.85);
+  --text-tertiary:rgba(255,252,244,.62);
+  --ombra:0 1px 2px rgba(140,38,0,.14), 0 10px 26px -12px rgba(122,30,0,.45);
+  --ombra-alta:0 2px 4px rgba(140,38,0,.16), 0 22px 44px -18px rgba(100,24,0,.55);
+}
+
+/* Dentro OGNI finestra di porcellana le scritte tornano alla famiglia
+   dell'arancio: corrente bruciato, accenti neon. Una regola sola, e tutto
+   quello che sta dentro — etichette, icone, righe — si veste da solo. */
+.glass-card,.card-btn,.modal-content,.tab-bar,.icon-btn,.chip,.btn-ghost,
+.sugg,.shop-item,.modo-spesa,.barattolo,.banner-doppio,.invito-eti,
+.cal-giorno,.frecce button,
+#timer-bar,input,select,textarea{
+  --text-primary:var(--bruciato);
+  --text-secondary:rgba(179,63,0,.74);
+  --text-tertiary:rgba(179,63,0,.52);
+  /* il colore si eredita dal BODY (porcellana): qui dentro riparte
+     dall'arancio bruciato, e tutto cio' che sta dentro lo segue */
+  color:var(--text-primary);
 }
 
 body{background:var(--bg-main);color:var(--text-primary)}
@@ -1432,101 +1456,117 @@ body{background:var(--bg-main);color:var(--text-primary)}
 #sfondo.on{opacity:.85}
 
 
-.ambient-mesh{filter:blur(90px) saturate(120%);opacity:.5}
-.blob-1{background:#e9c9a0}.blob-2{background:#c9dcc9}.blob-3{background:#e6d3c2}
+.ambient-mesh{filter:blur(90px) saturate(130%);opacity:.55}
+.blob-1{background:#ff9448}.blob-2{background:#ffd9ae}.blob-3{background:#e04c00}
 
-/* ---- vetro ---- */
+/* ---- porcellana ---- */
 .glass-card{
-  background:linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.58));
-  backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);
+  background:linear-gradient(180deg, rgba(255,252,244,.985), rgba(255,250,238,.955));
+  backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);
   border:1px solid var(--bordo-luce);
-  box-shadow:var(--ombra), inset 0 1px 0 rgba(255,255,255,.9);
+  box-shadow:var(--ombra), inset 0 1px 0 rgba(255,255,255,.95);
   border-radius:22px}
-.card-btn{background:linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.62));
-  box-shadow:var(--ombra), inset 0 1px 0 rgba(255,255,255,.95);transition:transform .18s ease, box-shadow .25s ease}
-.card-btn:active{transform:scale(.985);box-shadow:0 1px 2px rgba(60,45,30,.08)}
+.card-btn{background:linear-gradient(180deg, rgba(255,252,244,.99), rgba(255,249,236,.965));
+  box-shadow:var(--ombra), inset 0 1px 0 rgba(255,255,255,.98);transition:transform .18s ease, box-shadow .25s ease}
+.card-btn:active{transform:scale(.985);box-shadow:0 1px 2px rgba(140,38,0,.18)}
 .chip{background:var(--vetro);border:1px solid var(--bordo);color:var(--text-primary);
-  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
-  box-shadow:0 1px 2px rgba(60,45,30,.05)}
+  backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);
+  box-shadow:0 1px 2px rgba(140,38,0,.10)}
 .chip.active{background:var(--tema, var(--accent-primary));border-color:transparent;
-  color:#fff;box-shadow:0 4px 12px -4px color-mix(in srgb, var(--tema, var(--accent-primary)) 60%, transparent)}
+  color:var(--porcellana);box-shadow:0 4px 12px -4px color-mix(in srgb, var(--tema, var(--accent-primary)) 70%, transparent)}
 .icon-btn{background:var(--vetro-forte);border:1px solid var(--bordo-luce);color:var(--accent-primary);
   box-shadow:var(--ombra)}
-.btn-primary{background:var(--tema, var(--accent-primary));color:#fff;
-  box-shadow:0 6px 16px -6px color-mix(in srgb, var(--tema, var(--accent-primary)) 70%, transparent)}
+.btn-primary{background:var(--tema, var(--accent-primary));color:var(--porcellana);
+  box-shadow:0 6px 16px -6px color-mix(in srgb, var(--tema, var(--accent-primary)) 80%, transparent)}
 .btn-ghost{background:var(--vetro-forte);border:1px solid var(--bordo);color:var(--text-primary);
-  box-shadow:0 1px 2px rgba(60,45,30,.05)}
-.btn-danger{background:rgba(180,69,47,.10);border:1px solid rgba(180,69,47,.28);color:#93382a}
+  box-shadow:0 1px 2px rgba(140,38,0,.10)}
+.btn-danger{background:rgba(192,48,24,.10);border:1px solid rgba(192,48,24,.30);color:#a02812}
 
-input,textarea,select{background:rgba(255,255,255,.72);border:1px solid var(--bordo);
-  color:var(--text-primary);box-shadow:inset 0 1px 2px rgba(60,45,30,.05)}
+input,textarea,select{background:rgba(255,254,249,.93);border:1px solid var(--bordo);
+  color:var(--text-primary);box-shadow:inset 0 1px 2px rgba(140,38,0,.06)}
 input:focus,textarea:focus,select:focus{border-color:var(--tema, var(--accent-primary));
   background:#fff}
 input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
 
 /* ---- navigazione ---- */
-.tab-bar{background:rgba(251,248,243,.82);backdrop-filter:blur(30px) saturate(180%);
-  -webkit-backdrop-filter:blur(30px) saturate(180%);border-top:1px solid var(--bordo);
-  box-shadow:0 -8px 30px -20px rgba(60,45,30,.5)}
+.tab-bar{background:rgba(255,252,244,.90);backdrop-filter:blur(30px) saturate(160%);
+  -webkit-backdrop-filter:blur(30px) saturate(160%);border-top:1px solid rgba(255,255,255,.7);
+  box-shadow:0 -8px 30px -20px rgba(100,24,0,.7)}
 .tab-item{color:var(--text-tertiary)}
 .tab-item .icon{fill:var(--text-tertiary)}
 .tab-item.active,.tab-item.active .icon{color:var(--accent-primary);fill:var(--accent-primary)}
 
 /* ---- modali ---- */
-.modal{background:rgba(60,48,36,.28);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-.modal-content{background:linear-gradient(180deg, rgba(255,255,255,.94), rgba(252,249,244,.88));
-  backdrop-filter:blur(34px) saturate(180%);-webkit-backdrop-filter:blur(34px) saturate(180%);
+.modal{background:rgba(122,32,0,.40);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.modal-content{background:linear-gradient(180deg, rgba(255,253,247,.99), rgba(255,250,238,.95));
+  backdrop-filter:blur(34px) saturate(160%);-webkit-backdrop-filter:blur(34px) saturate(160%);
   border:1px solid var(--bordo-luce);box-shadow:var(--ombra-alta)}
-.close-btn{background:rgba(35,30,24,.08);color:var(--text-primary)}
+.close-btn{background:rgba(179,63,0,.10);color:var(--text-primary)}
 
 /* ---- dettagli minori ---- */
-.macro-box,.note-box,.sugg{background:rgba(255,255,255,.6);border:1px solid var(--bordo)}
-.note-box{box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
-.progress,.timer-track{background:rgba(35,30,24,.08)}
-.divider,.split-row,.ing-list li,.shop-item,.meal-row,.cook-check{border-color:rgba(35,30,24,.08)}
+.macro-box,.note-box,.sugg{background:rgba(255,255,255,.65);border:1px solid var(--bordo)}
+.note-box{box-shadow:inset 0 1px 0 rgba(255,255,255,.85)}
+.progress,.timer-track{background:rgba(179,63,0,.12)}
+.divider,.split-row,.ing-list li,.shop-item,.meal-row,.cook-check{border-color:rgba(179,63,0,.12)}
 .badge{background:color-mix(in srgb, var(--tema, var(--accent-primary)) 14%, transparent);
   color:var(--tema, var(--accent-primary))}
-#toast{background:rgba(35,30,24,.92);color:#fbf8f3;box-shadow:var(--ombra-alta)}
-#toast button{color:#f0c98a}
-#timer-bar{background:rgba(251,248,243,.92);border-top:1px solid var(--bordo)}
+#toast{background:rgba(112,30,0,.96);color:var(--porcellana);box-shadow:var(--ombra-alta)}
+#toast button{color:#ffc190}
+#timer-bar{background:rgba(255,252,244,.95);border-top:1px solid var(--bordo)}
 #cook-mode{background-color:var(--bg-main);background-repeat:no-repeat;
   background-position:118% 88%, 50% 50%;background-size:78vw auto, 100% 100%;
   transition:background-image .8s ease}
 @media (min-width:700px){ #cook-mode{background-size:42vw auto} }
-.cook-top button{background:rgba(35,30,24,.08);color:var(--text-primary)}
+.cook-top button{background:rgba(255,252,244,.9);color:var(--bruciato)}
 .cook-check .box{border-color:var(--bordo)}
 .step-timer{background:color-mix(in srgb, var(--tema, var(--accent-primary)) 12%, transparent);
   border-color:color-mix(in srgb, var(--tema, var(--accent-primary)) 34%, transparent);
   color:var(--tema, var(--accent-primary))}
 .energy-big,.pagina-budget b,.sugg-t,.macro-row b,.ing-list .qty,.meal-head b,.split-row b{color:var(--tema, var(--accent-primary))}
 .steps li::marker{color:var(--tema, var(--accent-primary))}
-.search-hist .chip{background:rgba(255,255,255,.7)}
-.chip.ban{background:rgba(180,69,47,.10);border-color:rgba(180,69,47,.3);color:#93382a}
+.search-hist .chip{background:rgba(255,255,255,.75)}
+.chip.ban{background:rgba(192,48,24,.10);border-color:rgba(192,48,24,.3);color:#a02812}
 
-/* ---- pagine dei pasti, in chiaro ---- */
-#pagina-col{--tema:#c2803a;--tema2:#b05f3f}
-#pagina-pra{--tema:#4c8a6b;--tema2:#3f7f8f}
-#pagina-cen{--tema:#5a58a0;--tema2:#7a5a9e}
+/* ---- pagine dei pasti: la stessa fiamma, tre intensita' ---- */
+#pagina-col{--tema:#ff6115;--tema2:#e04c00}
+#pagina-pra{--tema:#d84a00;--tema2:#b83c00}
+#pagina-cen{--tema:#a63a05;--tema2:#8a2e00}
+
+/* ---- scritte e comandi appoggiati DIRETTAMENTE sul fondo arancione:
+   qui il tema scuro non si vede, si sta in porcellana ---- */
+.pasto-tab.active{color:var(--porcellana)}
+.pasto-barra{background:var(--porcellana) !important}
+.results-line button{color:var(--porcellana);text-decoration:underline;text-underline-offset:2px}
+.sezione-titolo{color:rgba(255,252,244,.85)}
+.svuota-tutto{color:rgba(255,252,244,.88);border-color:rgba(255,252,244,.5)}
+/* l'invito della bilancia e' una finestra di porcellana come le altre */
+.invito-bilancia{background:var(--vetro-forte);border:1px solid var(--bordo-luce);
+  box-shadow:var(--ombra);
+  --text-primary:var(--bruciato);--text-secondary:rgba(179,63,0,.74);
+  --text-tertiary:rgba(179,63,0,.58);color:var(--text-secondary)}
+/* un comando neon appoggiato sul fondo neon si distingue per il bordo
+   di luce, non per il colore */
+.btn-primary{border:1px solid rgba(255,255,255,.55)}
 /* ---------- anello della giornata ---------- */
 .anello-box{margin-bottom:14px}
 .anello{position:relative;width:200px;height:180px;margin:2px auto 2px}
 .bilancia .cassa{fill:color-mix(in srgb, var(--tema, var(--accent-primary)) 16%, #fff);
   stroke:color-mix(in srgb, var(--tema, var(--accent-primary)) 55%, transparent);stroke-width:2;
   stroke-linejoin:round}
-.bilancia .telaio{stroke:rgba(60,45,30,.35);stroke-width:3.5;stroke-linecap:round;fill:none}
-.bilancia .piatto{fill:rgba(255,255,255,.6);stroke:rgba(60,45,30,.4);stroke-width:2.2;
+.bilancia .telaio{stroke:rgba(255,252,244,.85);stroke-width:3.5;stroke-linecap:round;fill:none}
+.bilancia .piatto{fill:rgba(255,252,244,.8);stroke:rgba(140,38,0,.5);stroke-width:2.2;
   stroke-linejoin:round}
 .bilancia .sul-piatto{color:var(--tema, var(--accent-primary));opacity:.85;
   animation:posaCibo .45s cubic-bezier(.22,.8,.28,1) both}
 .bilancia .sul-piatto path,.bilancia .sul-piatto circle,.bilancia .sul-piatto ellipse,
 .bilancia .sul-piatto rect,.bilancia .sul-piatto g{stroke:currentColor;stroke-width:2.4;fill:none}
 @keyframes posaCibo{from{opacity:0;transform:translateY(-14px) scale(.5)}to{opacity:.85}}
-.bilancia .quadrante{fill:rgba(252,247,236,.96);stroke:rgba(60,45,30,.12);stroke-width:1.2;stroke-linejoin:round}
-.bilancia .tacca{stroke:rgba(60,45,30,.22);stroke-width:1.2;stroke-linecap:round;fill:none}
-.bilancia .tacca.grande{stroke:rgba(60,45,30,.38);stroke-width:2}
+.bilancia .quadrante{fill:rgba(255,252,244,.97);stroke:rgba(179,63,0,.16);stroke-width:1.2;stroke-linejoin:round}
+.bilancia .tacca{stroke:rgba(179,63,0,.32);stroke-width:1.2;stroke-linecap:round;fill:none}
+.bilancia .tacca.grande{stroke:rgba(179,63,0,.55);stroke-width:2}
 .bilancia .ago{stroke:var(--tema, var(--accent-primary));stroke-width:2.6;stroke-linecap:round;fill:none;
   transition:d .8s cubic-bezier(.22,.8,.28,1)}
-.bilancia .ago.f-col{stroke:#c2803a}.bilancia .ago.f-pra{stroke:#4c8a6b}.bilancia .ago.f-cen{stroke:#5a58a0}
+.bilancia .ago.f-col{stroke:#ff6115}.bilancia .ago.f-pra{stroke:#d84a00}.bilancia .ago.f-cen{stroke:#a63a05}
 .bilancia .ago.oltre{stroke:var(--danger)}
 .gruppo-ago{transform-box:view-box;transform-origin:100px 92px}
 .gruppo-piatto{transform-box:view-box}
@@ -1546,16 +1586,16 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
   49%{transform:rotate(-2deg)} 61%{transform:rotate(1.1deg)} 76%{transform:rotate(-.5deg)}
   100%{transform:rotate(0)}}
 .bilancia .perno{fill:var(--carta);stroke:currentColor;stroke-width:2.2}
-.bilancia .perno.f-col{stroke:#c2803a}.bilancia .perno.f-pra{stroke:#4c8a6b}.bilancia .perno.f-cen{stroke:#5a58a0}
+.bilancia .perno.f-col{stroke:#ff6115}.bilancia .perno.f-pra{stroke:#d84a00}.bilancia .perno.f-cen{stroke:#a63a05}
 .anello svg{width:100%;height:100%;transform:rotate(0deg)}
 .anello circle{fill:none}
 .anello .tracciato,.anello .riempito{fill:none;stroke-linecap:round;stroke-width:9}
-.anello .tracciato{stroke:rgba(60,45,30,.10)}
-.anello .tracciato.qui{stroke:rgba(60,45,30,.16)}
+.anello .tracciato{stroke:rgba(255,252,244,.30)}
+.anello .tracciato.qui{stroke:rgba(255,252,244,.46)}
 .anello .riempito{transition:stroke-dasharray .8s cubic-bezier(.22,.8,.28,1)}
-.anello .riempito.f-col{stroke:#c2803a}
-.anello .riempito.f-pra{stroke:#4c8a6b}
-.anello .riempito.f-cen{stroke:#5a58a0}
+.anello .riempito.f-col{stroke:#fffcf4}
+.anello .riempito.f-pra{stroke:#ffddb2}
+.anello .riempito.f-cen{stroke:#ffbb80}
 .anello .qui.riempito{stroke-width:11}
 .matita{position:absolute;top:2px;right:2px;width:34px;height:34px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -1574,7 +1614,7 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
 /* Il conta-calorie a palette, come i vecchi flip clock: ogni cifra nella sua
    cella nera, con la riga del ribaltamento a meta'. */
 .flip{display:flex;align-items:center;gap:1.5px;padding:2px 4px;border-radius:4px;
-  background:#15120e;box-shadow:inset 0 1px 3px rgba(0,0,0,.6), 0 1px 2px rgba(60,45,30,.3)}
+  background:#3a1200;box-shadow:inset 0 1px 3px rgba(0,0,0,.6), 0 1px 2px rgba(140,42,0,.3)}
 .flip i{font-style:normal;font-family:'SF Mono',ui-monospace,Menlo,monospace;
   font-size:.56rem;font-weight:600;line-height:1;color:#f4efe6;
   background:linear-gradient(#2b2620 48%, rgba(0,0,0,.55) 48%, #221d18 52%);
@@ -1583,7 +1623,7 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
   letter-spacing:.04em;margin:0 2px 0 3px}
 /* La striscia dei pasti sotto il flip: ogni colore largo quanto le sue
    calorie, sul binario dell'intera giornata. */
-.bilancia .striscia-fondo{fill:rgba(60,45,30,.12)}
+.bilancia .striscia-fondo{fill:rgba(140,42,0,.12)}
 .bilancia .striscia-seg{transition:width .8s cubic-bezier(.22,.8,.28,1)}
 .bilancia .striscia-seg.f-col{fill:#c2803a}
 .bilancia .striscia-seg.f-pra{fill:#4c8a6b}
@@ -1627,7 +1667,7 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
 .sugg{padding-right:34px}
 .sugg-x{position:absolute;top:50%;right:8px;transform:translateY(-50%);
   width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:.9rem;line-height:1;color:var(--text-tertiary);background:rgba(60,45,30,.07)}
+  font-size:.9rem;line-height:1;color:var(--text-tertiary);background:rgba(140,42,0,.07)}
 .scheda.con-x .sugg-x{top:8px;right:8px;transform:none}
 .piatto-del-pasto{margin-bottom:6px}
 .piatto-del-pasto .quando{display:block;font-size:.66rem;color:var(--text-tertiary);
@@ -1696,23 +1736,23 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
    ========================================================================== */
 :root{
   /* livello 1 · appoggiato: chip, riquadri interni, righe */
-  --v1-fondo:linear-gradient(180deg, rgba(255,255,255,.52), rgba(255,255,255,.34));
+  --v1-fondo:linear-gradient(180deg, rgba(255,252,244,.88), rgba(255,250,238,.78));
   --v1-blur:blur(14px) saturate(160%);
   --v1-bordo:1px solid rgba(255,255,255,.55);
-  --v1-ombra:0 1px 2px rgba(60,45,30,.05), inset 0 1px 0 rgba(255,255,255,.75);
+  --v1-ombra:0 1px 2px rgba(140,42,0,.05), inset 0 1px 0 rgba(255,255,255,.75);
 
   /* livello 2 · sollevato: schede, ricette, testate */
-  --v2-fondo:linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.42));
+  --v2-fondo:linear-gradient(180deg, rgba(255,252,244,.92), rgba(255,250,238,.84));
   --v2-blur:blur(26px) saturate(180%);
   --v2-bordo:1px solid rgba(255,255,255,.72);
-  --v2-ombra:0 1px 2px rgba(60,45,30,.06), 0 12px 28px -14px rgba(60,45,30,.32),
+  --v2-ombra:0 1px 2px rgba(140,42,0,.06), 0 12px 28px -14px rgba(140,42,0,.32),
              inset 0 1px 0 rgba(255,255,255,.9);
 
   /* livello 3 · in primo piano: modali, barre, avvisi */
-  --v3-fondo:linear-gradient(180deg, rgba(255,255,255,.80), rgba(253,250,246,.66));
+  --v3-fondo:linear-gradient(180deg, rgba(255,252,244,.94), rgba(255,250,238,.88));
   --v3-blur:blur(40px) saturate(200%);
   --v3-bordo:1px solid rgba(255,255,255,.88);
-  --v3-ombra:0 2px 6px rgba(60,45,30,.08), 0 28px 56px -22px rgba(60,45,30,.45),
+  --v3-ombra:0 2px 6px rgba(140,42,0,.08), 0 28px 56px -22px rgba(140,42,0,.45),
              inset 0 1px 0 rgba(255,255,255,.95);
 }
 
@@ -1723,20 +1763,20 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
 .bilancia .cassa{fill:color-mix(in srgb, var(--tema, var(--accent-primary)) 16%, #fff);
   stroke:color-mix(in srgb, var(--tema, var(--accent-primary)) 55%, transparent);stroke-width:2;
   stroke-linejoin:round}
-.bilancia .telaio{stroke:rgba(60,45,30,.35);stroke-width:3.5;stroke-linecap:round;fill:none}
-.bilancia .piatto{fill:rgba(255,255,255,.6);stroke:rgba(60,45,30,.4);stroke-width:2.2;
+.bilancia .telaio{stroke:rgba(255,252,244,.85);stroke-width:3.5;stroke-linecap:round;fill:none}
+.bilancia .piatto{fill:rgba(255,252,244,.8);stroke:rgba(140,38,0,.5);stroke-width:2.2;
   stroke-linejoin:round}
 .bilancia .sul-piatto{color:var(--tema, var(--accent-primary));opacity:.85;
   animation:posaCibo .45s cubic-bezier(.22,.8,.28,1) both}
 .bilancia .sul-piatto path,.bilancia .sul-piatto circle,.bilancia .sul-piatto ellipse,
 .bilancia .sul-piatto rect,.bilancia .sul-piatto g{stroke:currentColor;stroke-width:2.4;fill:none}
 @keyframes posaCibo{from{opacity:0;transform:translateY(-14px) scale(.5)}to{opacity:.85}}
-.bilancia .quadrante{fill:rgba(252,247,236,.96);stroke:rgba(60,45,30,.12);stroke-width:1.2;stroke-linejoin:round}
-.bilancia .tacca{stroke:rgba(60,45,30,.22);stroke-width:1.2;stroke-linecap:round;fill:none}
-.bilancia .tacca.grande{stroke:rgba(60,45,30,.38);stroke-width:2}
+.bilancia .quadrante{fill:rgba(255,252,244,.97);stroke:rgba(179,63,0,.16);stroke-width:1.2;stroke-linejoin:round}
+.bilancia .tacca{stroke:rgba(179,63,0,.32);stroke-width:1.2;stroke-linecap:round;fill:none}
+.bilancia .tacca.grande{stroke:rgba(179,63,0,.55);stroke-width:2}
 .bilancia .ago{stroke:var(--tema, var(--accent-primary));stroke-width:2.6;stroke-linecap:round;fill:none;
   transition:d .8s cubic-bezier(.22,.8,.28,1)}
-.bilancia .ago.f-col{stroke:#c2803a}.bilancia .ago.f-pra{stroke:#4c8a6b}.bilancia .ago.f-cen{stroke:#5a58a0}
+.bilancia .ago.f-col{stroke:#ff6115}.bilancia .ago.f-pra{stroke:#d84a00}.bilancia .ago.f-cen{stroke:#a63a05}
 .bilancia .ago.oltre{stroke:var(--danger)}
 .gruppo-ago{transform-box:view-box;transform-origin:100px 92px}
 .gruppo-piatto{transform-box:view-box}
@@ -1756,16 +1796,16 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
   49%{transform:rotate(-2deg)} 61%{transform:rotate(1.1deg)} 76%{transform:rotate(-.5deg)}
   100%{transform:rotate(0)}}
 .bilancia .perno{fill:var(--carta);stroke:currentColor;stroke-width:2.2}
-.bilancia .perno.f-col{stroke:#c2803a}.bilancia .perno.f-pra{stroke:#4c8a6b}.bilancia .perno.f-cen{stroke:#5a58a0}
+.bilancia .perno.f-col{stroke:#ff6115}.bilancia .perno.f-pra{stroke:#d84a00}.bilancia .perno.f-cen{stroke:#a63a05}
 .anello svg{width:100%;height:100%;transform:rotate(0deg)}
 .anello circle{fill:none}
 .anello .tracciato,.anello .riempito{fill:none;stroke-linecap:round;stroke-width:9}
-.anello .tracciato{stroke:rgba(60,45,30,.10)}
-.anello .tracciato.qui{stroke:rgba(60,45,30,.16)}
+.anello .tracciato{stroke:rgba(255,252,244,.30)}
+.anello .tracciato.qui{stroke:rgba(255,252,244,.46)}
 .anello .riempito{transition:stroke-dasharray .8s cubic-bezier(.22,.8,.28,1)}
-.anello .riempito.f-col{stroke:#c2803a}
-.anello .riempito.f-pra{stroke:#4c8a6b}
-.anello .riempito.f-cen{stroke:#5a58a0}
+.anello .riempito.f-col{stroke:#fffcf4}
+.anello .riempito.f-pra{stroke:#ffddb2}
+.anello .riempito.f-cen{stroke:#ffbb80}
 .anello .qui.riempito{stroke-width:11}
 .matita{position:absolute;top:2px;right:2px;width:34px;height:34px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -1784,7 +1824,7 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
 /* Il conta-calorie a palette, come i vecchi flip clock: ogni cifra nella sua
    cella nera, con la riga del ribaltamento a meta'. */
 .flip{display:flex;align-items:center;gap:1.5px;padding:2px 4px;border-radius:4px;
-  background:#15120e;box-shadow:inset 0 1px 3px rgba(0,0,0,.6), 0 1px 2px rgba(60,45,30,.3)}
+  background:#3a1200;box-shadow:inset 0 1px 3px rgba(0,0,0,.6), 0 1px 2px rgba(140,42,0,.3)}
 .flip i{font-style:normal;font-family:'SF Mono',ui-monospace,Menlo,monospace;
   font-size:.56rem;font-weight:600;line-height:1;color:#f4efe6;
   background:linear-gradient(#2b2620 48%, rgba(0,0,0,.55) 48%, #221d18 52%);
@@ -1793,7 +1833,7 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
   letter-spacing:.04em;margin:0 2px 0 3px}
 /* La striscia dei pasti sotto il flip: ogni colore largo quanto le sue
    calorie, sul binario dell'intera giornata. */
-.bilancia .striscia-fondo{fill:rgba(60,45,30,.12)}
+.bilancia .striscia-fondo{fill:rgba(140,42,0,.12)}
 .bilancia .striscia-seg{transition:width .8s cubic-bezier(.22,.8,.28,1)}
 .bilancia .striscia-seg.f-col{fill:#c2803a}
 .bilancia .striscia-seg.f-pra{fill:#4c8a6b}
@@ -1837,7 +1877,7 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
 .sugg{padding-right:34px}
 .sugg-x{position:absolute;top:50%;right:8px;transform:translateY(-50%);
   width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:.9rem;line-height:1;color:var(--text-tertiary);background:rgba(60,45,30,.07)}
+  font-size:.9rem;line-height:1;color:var(--text-tertiary);background:rgba(140,42,0,.07)}
 .scheda.con-x .sugg-x{top:8px;right:8px;transform:none}
 .piatto-del-pasto{margin-bottom:6px}
 .piatto-del-pasto .quando{display:block;font-size:.66rem;color:var(--text-tertiary);
@@ -1893,27 +1933,27 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
   backdrop-filter:var(--v2-blur);-webkit-backdrop-filter:var(--v2-blur);
   border:var(--v2-bordo);box-shadow:var(--v2-ombra)}
 .card-btn:active{transform:scale(.985);
-  box-shadow:0 1px 2px rgba(60,45,30,.08), inset 0 1px 0 rgba(255,255,255,.9)}
+  box-shadow:0 1px 2px rgba(140,42,0,.08), inset 0 1px 0 rgba(255,255,255,.9)}
 /* ---------- anello della giornata ---------- */
 .anello-box{margin-bottom:14px}
 .anello{position:relative;width:200px;height:180px;margin:2px auto 2px}
 .bilancia .cassa{fill:color-mix(in srgb, var(--tema, var(--accent-primary)) 16%, #fff);
   stroke:color-mix(in srgb, var(--tema, var(--accent-primary)) 55%, transparent);stroke-width:2;
   stroke-linejoin:round}
-.bilancia .telaio{stroke:rgba(60,45,30,.35);stroke-width:3.5;stroke-linecap:round;fill:none}
-.bilancia .piatto{fill:rgba(255,255,255,.6);stroke:rgba(60,45,30,.4);stroke-width:2.2;
+.bilancia .telaio{stroke:rgba(255,252,244,.85);stroke-width:3.5;stroke-linecap:round;fill:none}
+.bilancia .piatto{fill:rgba(255,252,244,.8);stroke:rgba(140,38,0,.5);stroke-width:2.2;
   stroke-linejoin:round}
 .bilancia .sul-piatto{color:var(--tema, var(--accent-primary));opacity:.85;
   animation:posaCibo .45s cubic-bezier(.22,.8,.28,1) both}
 .bilancia .sul-piatto path,.bilancia .sul-piatto circle,.bilancia .sul-piatto ellipse,
 .bilancia .sul-piatto rect,.bilancia .sul-piatto g{stroke:currentColor;stroke-width:2.4;fill:none}
 @keyframes posaCibo{from{opacity:0;transform:translateY(-14px) scale(.5)}to{opacity:.85}}
-.bilancia .quadrante{fill:rgba(252,247,236,.96);stroke:rgba(60,45,30,.12);stroke-width:1.2;stroke-linejoin:round}
-.bilancia .tacca{stroke:rgba(60,45,30,.22);stroke-width:1.2;stroke-linecap:round;fill:none}
-.bilancia .tacca.grande{stroke:rgba(60,45,30,.38);stroke-width:2}
+.bilancia .quadrante{fill:rgba(255,252,244,.97);stroke:rgba(179,63,0,.16);stroke-width:1.2;stroke-linejoin:round}
+.bilancia .tacca{stroke:rgba(179,63,0,.32);stroke-width:1.2;stroke-linecap:round;fill:none}
+.bilancia .tacca.grande{stroke:rgba(179,63,0,.55);stroke-width:2}
 .bilancia .ago{stroke:var(--tema, var(--accent-primary));stroke-width:2.6;stroke-linecap:round;fill:none;
   transition:d .8s cubic-bezier(.22,.8,.28,1)}
-.bilancia .ago.f-col{stroke:#c2803a}.bilancia .ago.f-pra{stroke:#4c8a6b}.bilancia .ago.f-cen{stroke:#5a58a0}
+.bilancia .ago.f-col{stroke:#ff6115}.bilancia .ago.f-pra{stroke:#d84a00}.bilancia .ago.f-cen{stroke:#a63a05}
 .bilancia .ago.oltre{stroke:var(--danger)}
 .gruppo-ago{transform-box:view-box;transform-origin:100px 92px}
 .gruppo-piatto{transform-box:view-box}
@@ -1933,16 +1973,16 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
   49%{transform:rotate(-2deg)} 61%{transform:rotate(1.1deg)} 76%{transform:rotate(-.5deg)}
   100%{transform:rotate(0)}}
 .bilancia .perno{fill:var(--carta);stroke:currentColor;stroke-width:2.2}
-.bilancia .perno.f-col{stroke:#c2803a}.bilancia .perno.f-pra{stroke:#4c8a6b}.bilancia .perno.f-cen{stroke:#5a58a0}
+.bilancia .perno.f-col{stroke:#ff6115}.bilancia .perno.f-pra{stroke:#d84a00}.bilancia .perno.f-cen{stroke:#a63a05}
 .anello svg{width:100%;height:100%;transform:rotate(0deg)}
 .anello circle{fill:none}
 .anello .tracciato,.anello .riempito{fill:none;stroke-linecap:round;stroke-width:9}
-.anello .tracciato{stroke:rgba(60,45,30,.10)}
-.anello .tracciato.qui{stroke:rgba(60,45,30,.16)}
+.anello .tracciato{stroke:rgba(255,252,244,.30)}
+.anello .tracciato.qui{stroke:rgba(255,252,244,.46)}
 .anello .riempito{transition:stroke-dasharray .8s cubic-bezier(.22,.8,.28,1)}
-.anello .riempito.f-col{stroke:#c2803a}
-.anello .riempito.f-pra{stroke:#4c8a6b}
-.anello .riempito.f-cen{stroke:#5a58a0}
+.anello .riempito.f-col{stroke:#fffcf4}
+.anello .riempito.f-pra{stroke:#ffddb2}
+.anello .riempito.f-cen{stroke:#ffbb80}
 .anello .qui.riempito{stroke-width:11}
 .matita{position:absolute;top:2px;right:2px;width:34px;height:34px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -1961,7 +2001,7 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
 /* Il conta-calorie a palette, come i vecchi flip clock: ogni cifra nella sua
    cella nera, con la riga del ribaltamento a meta'. */
 .flip{display:flex;align-items:center;gap:1.5px;padding:2px 4px;border-radius:4px;
-  background:#15120e;box-shadow:inset 0 1px 3px rgba(0,0,0,.6), 0 1px 2px rgba(60,45,30,.3)}
+  background:#3a1200;box-shadow:inset 0 1px 3px rgba(0,0,0,.6), 0 1px 2px rgba(140,42,0,.3)}
 .flip i{font-style:normal;font-family:'SF Mono',ui-monospace,Menlo,monospace;
   font-size:.56rem;font-weight:600;line-height:1;color:#f4efe6;
   background:linear-gradient(#2b2620 48%, rgba(0,0,0,.55) 48%, #221d18 52%);
@@ -1970,7 +2010,7 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
   letter-spacing:.04em;margin:0 2px 0 3px}
 /* La striscia dei pasti sotto il flip: ogni colore largo quanto le sue
    calorie, sul binario dell'intera giornata. */
-.bilancia .striscia-fondo{fill:rgba(60,45,30,.12)}
+.bilancia .striscia-fondo{fill:rgba(140,42,0,.12)}
 .bilancia .striscia-seg{transition:width .8s cubic-bezier(.22,.8,.28,1)}
 .bilancia .striscia-seg.f-col{fill:#c2803a}
 .bilancia .striscia-seg.f-pra{fill:#4c8a6b}
@@ -2014,7 +2054,7 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
 .sugg{padding-right:34px}
 .sugg-x{position:absolute;top:50%;right:8px;transform:translateY(-50%);
   width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:.9rem;line-height:1;color:var(--text-tertiary);background:rgba(60,45,30,.07)}
+  font-size:.9rem;line-height:1;color:var(--text-tertiary);background:rgba(140,42,0,.07)}
 .scheda.con-x .sugg-x{top:8px;right:8px;transform:none}
 .piatto-del-pasto{margin-bottom:6px}
 .piatto-del-pasto .quando{display:block;font-size:.66rem;color:var(--text-tertiary);
@@ -2089,7 +2129,7 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;height:
 input,textarea,select,.pasto-search{
   background:rgba(255,255,255,.46);
   backdrop-filter:var(--v1-blur);-webkit-backdrop-filter:var(--v1-blur);
-  border:var(--v1-bordo);box-shadow:inset 0 1px 2px rgba(60,45,30,.05)}
+  border:var(--v1-bordo);box-shadow:inset 0 1px 2px rgba(140,42,0,.05)}
 input:focus,textarea:focus,select:focus{background:rgba(255,255,255,.78);
   border-color:color-mix(in srgb, var(--tema, var(--accent-primary)) 55%, rgba(255,255,255,.7))}
 
@@ -2098,7 +2138,7 @@ input:focus,textarea:focus,select:focus{background:rgba(255,255,255,.78);
   background:var(--v3-fondo);
   backdrop-filter:var(--v3-blur);-webkit-backdrop-filter:var(--v3-blur);
   border:var(--v3-bordo);box-shadow:var(--v3-ombra)}
-.tab-bar{border:none;border-top:var(--v3-bordo);box-shadow:0 -10px 34px -22px rgba(60,45,30,.55)}
+.tab-bar{border:none;border-top:var(--v3-bordo);box-shadow:0 -10px 34px -22px rgba(140,42,0,.55)}
 #timer-bar{border:none;border-top:var(--v3-bordo)}
 #toast{background:linear-gradient(180deg, rgba(40,33,26,.90), rgba(30,25,20,.86));
   border:1px solid rgba(255,255,255,.16);color:#fbf8f3}
@@ -2111,11 +2151,11 @@ input:focus,textarea:focus,select:focus{background:rgba(255,255,255,.78);
 
 /* Nessun bordo scuro sopravvive: il vetro si chiude sempre con la luce. */
 .divider{border-top:1px solid rgba(255,255,255,.6);
-  box-shadow:0 -1px 0 rgba(60,45,30,.06)}
+  box-shadow:0 -1px 0 rgba(140,42,0,.06)}
 .split-row,.ing-list li,.meal-row,.cook-check,.meal-item{
-  border-color:rgba(255,255,255,.5);box-shadow:0 1px 0 rgba(60,45,30,.045)}
-.progress,.timer-track{background:rgba(60,45,30,.10);
-  box-shadow:inset 0 1px 2px rgba(60,45,30,.10)}
+  border-color:rgba(255,255,255,.5);box-shadow:0 1px 0 rgba(140,42,0,.045)}
+.progress,.timer-track{background:rgba(140,42,0,.10);
+  box-shadow:inset 0 1px 2px rgba(140,42,0,.10)}
 .close-btn,.cook-top button{background:rgba(255,255,255,.55);
   backdrop-filter:var(--v1-blur);-webkit-backdrop-filter:var(--v1-blur);
   border:var(--v1-bordo);color:var(--text-primary);box-shadow:var(--v1-ombra)}
@@ -2129,20 +2169,20 @@ input:focus,textarea:focus,select:focus{background:rgba(255,255,255,.78);
 .bilancia .cassa{fill:color-mix(in srgb, var(--tema, var(--accent-primary)) 16%, #fff);
   stroke:color-mix(in srgb, var(--tema, var(--accent-primary)) 55%, transparent);stroke-width:2;
   stroke-linejoin:round}
-.bilancia .telaio{stroke:rgba(60,45,30,.35);stroke-width:3.5;stroke-linecap:round;fill:none}
-.bilancia .piatto{fill:rgba(255,255,255,.6);stroke:rgba(60,45,30,.4);stroke-width:2.2;
+.bilancia .telaio{stroke:rgba(255,252,244,.85);stroke-width:3.5;stroke-linecap:round;fill:none}
+.bilancia .piatto{fill:rgba(255,252,244,.8);stroke:rgba(140,38,0,.5);stroke-width:2.2;
   stroke-linejoin:round}
 .bilancia .sul-piatto{color:var(--tema, var(--accent-primary));opacity:.85;
   animation:posaCibo .45s cubic-bezier(.22,.8,.28,1) both}
 .bilancia .sul-piatto path,.bilancia .sul-piatto circle,.bilancia .sul-piatto ellipse,
 .bilancia .sul-piatto rect,.bilancia .sul-piatto g{stroke:currentColor;stroke-width:2.4;fill:none}
 @keyframes posaCibo{from{opacity:0;transform:translateY(-14px) scale(.5)}to{opacity:.85}}
-.bilancia .quadrante{fill:rgba(252,247,236,.96);stroke:rgba(60,45,30,.12);stroke-width:1.2;stroke-linejoin:round}
-.bilancia .tacca{stroke:rgba(60,45,30,.22);stroke-width:1.2;stroke-linecap:round;fill:none}
-.bilancia .tacca.grande{stroke:rgba(60,45,30,.38);stroke-width:2}
+.bilancia .quadrante{fill:rgba(255,252,244,.97);stroke:rgba(179,63,0,.16);stroke-width:1.2;stroke-linejoin:round}
+.bilancia .tacca{stroke:rgba(179,63,0,.32);stroke-width:1.2;stroke-linecap:round;fill:none}
+.bilancia .tacca.grande{stroke:rgba(179,63,0,.55);stroke-width:2}
 .bilancia .ago{stroke:var(--tema, var(--accent-primary));stroke-width:2.6;stroke-linecap:round;fill:none;
   transition:d .8s cubic-bezier(.22,.8,.28,1)}
-.bilancia .ago.f-col{stroke:#c2803a}.bilancia .ago.f-pra{stroke:#4c8a6b}.bilancia .ago.f-cen{stroke:#5a58a0}
+.bilancia .ago.f-col{stroke:#ff6115}.bilancia .ago.f-pra{stroke:#d84a00}.bilancia .ago.f-cen{stroke:#a63a05}
 .bilancia .ago.oltre{stroke:var(--danger)}
 .gruppo-ago{transform-box:view-box;transform-origin:100px 92px}
 .gruppo-piatto{transform-box:view-box}
@@ -2162,16 +2202,16 @@ input:focus,textarea:focus,select:focus{background:rgba(255,255,255,.78);
   49%{transform:rotate(-2deg)} 61%{transform:rotate(1.1deg)} 76%{transform:rotate(-.5deg)}
   100%{transform:rotate(0)}}
 .bilancia .perno{fill:var(--carta);stroke:currentColor;stroke-width:2.2}
-.bilancia .perno.f-col{stroke:#c2803a}.bilancia .perno.f-pra{stroke:#4c8a6b}.bilancia .perno.f-cen{stroke:#5a58a0}
+.bilancia .perno.f-col{stroke:#ff6115}.bilancia .perno.f-pra{stroke:#d84a00}.bilancia .perno.f-cen{stroke:#a63a05}
 .anello svg{width:100%;height:100%;transform:rotate(0deg)}
 .anello circle{fill:none}
 .anello .tracciato,.anello .riempito{fill:none;stroke-linecap:round;stroke-width:9}
-.anello .tracciato{stroke:rgba(60,45,30,.10)}
-.anello .tracciato.qui{stroke:rgba(60,45,30,.16)}
+.anello .tracciato{stroke:rgba(255,252,244,.30)}
+.anello .tracciato.qui{stroke:rgba(255,252,244,.46)}
 .anello .riempito{transition:stroke-dasharray .8s cubic-bezier(.22,.8,.28,1)}
-.anello .riempito.f-col{stroke:#c2803a}
-.anello .riempito.f-pra{stroke:#4c8a6b}
-.anello .riempito.f-cen{stroke:#5a58a0}
+.anello .riempito.f-col{stroke:#fffcf4}
+.anello .riempito.f-pra{stroke:#ffddb2}
+.anello .riempito.f-cen{stroke:#ffbb80}
 .anello .qui.riempito{stroke-width:11}
 .matita{position:absolute;top:2px;right:2px;width:34px;height:34px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -2190,7 +2230,7 @@ input:focus,textarea:focus,select:focus{background:rgba(255,255,255,.78);
 /* Il conta-calorie a palette, come i vecchi flip clock: ogni cifra nella sua
    cella nera, con la riga del ribaltamento a meta'. */
 .flip{display:flex;align-items:center;gap:1.5px;padding:2px 4px;border-radius:4px;
-  background:#15120e;box-shadow:inset 0 1px 3px rgba(0,0,0,.6), 0 1px 2px rgba(60,45,30,.3)}
+  background:#3a1200;box-shadow:inset 0 1px 3px rgba(0,0,0,.6), 0 1px 2px rgba(140,42,0,.3)}
 .flip i{font-style:normal;font-family:'SF Mono',ui-monospace,Menlo,monospace;
   font-size:.56rem;font-weight:600;line-height:1;color:#f4efe6;
   background:linear-gradient(#2b2620 48%, rgba(0,0,0,.55) 48%, #221d18 52%);
@@ -2199,7 +2239,7 @@ input:focus,textarea:focus,select:focus{background:rgba(255,255,255,.78);
   letter-spacing:.04em;margin:0 2px 0 3px}
 /* La striscia dei pasti sotto il flip: ogni colore largo quanto le sue
    calorie, sul binario dell'intera giornata. */
-.bilancia .striscia-fondo{fill:rgba(60,45,30,.12)}
+.bilancia .striscia-fondo{fill:rgba(140,42,0,.12)}
 .bilancia .striscia-seg{transition:width .8s cubic-bezier(.22,.8,.28,1)}
 .bilancia .striscia-seg.f-col{fill:#c2803a}
 .bilancia .striscia-seg.f-pra{fill:#4c8a6b}
@@ -2243,7 +2283,7 @@ input:focus,textarea:focus,select:focus{background:rgba(255,255,255,.78);
 .sugg{padding-right:34px}
 .sugg-x{position:absolute;top:50%;right:8px;transform:translateY(-50%);
   width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:.9rem;line-height:1;color:var(--text-tertiary);background:rgba(60,45,30,.07)}
+  font-size:.9rem;line-height:1;color:var(--text-tertiary);background:rgba(140,42,0,.07)}
 .scheda.con-x .sugg-x{top:8px;right:8px;transform:none}
 .piatto-del-pasto{margin-bottom:6px}
 .piatto-del-pasto .quando{display:block;font-size:.66rem;color:var(--text-tertiary);
@@ -2365,20 +2405,20 @@ h3{font-weight:600;letter-spacing:-.018em}
 .bilancia .cassa{fill:color-mix(in srgb, var(--tema, var(--accent-primary)) 16%, #fff);
   stroke:color-mix(in srgb, var(--tema, var(--accent-primary)) 55%, transparent);stroke-width:2;
   stroke-linejoin:round}
-.bilancia .telaio{stroke:rgba(60,45,30,.35);stroke-width:3.5;stroke-linecap:round;fill:none}
-.bilancia .piatto{fill:rgba(255,255,255,.6);stroke:rgba(60,45,30,.4);stroke-width:2.2;
+.bilancia .telaio{stroke:rgba(255,252,244,.85);stroke-width:3.5;stroke-linecap:round;fill:none}
+.bilancia .piatto{fill:rgba(255,252,244,.8);stroke:rgba(140,38,0,.5);stroke-width:2.2;
   stroke-linejoin:round}
 .bilancia .sul-piatto{color:var(--tema, var(--accent-primary));opacity:.85;
   animation:posaCibo .45s cubic-bezier(.22,.8,.28,1) both}
 .bilancia .sul-piatto path,.bilancia .sul-piatto circle,.bilancia .sul-piatto ellipse,
 .bilancia .sul-piatto rect,.bilancia .sul-piatto g{stroke:currentColor;stroke-width:2.4;fill:none}
 @keyframes posaCibo{from{opacity:0;transform:translateY(-14px) scale(.5)}to{opacity:.85}}
-.bilancia .quadrante{fill:rgba(252,247,236,.96);stroke:rgba(60,45,30,.12);stroke-width:1.2;stroke-linejoin:round}
-.bilancia .tacca{stroke:rgba(60,45,30,.22);stroke-width:1.2;stroke-linecap:round;fill:none}
-.bilancia .tacca.grande{stroke:rgba(60,45,30,.38);stroke-width:2}
+.bilancia .quadrante{fill:rgba(255,252,244,.97);stroke:rgba(179,63,0,.16);stroke-width:1.2;stroke-linejoin:round}
+.bilancia .tacca{stroke:rgba(179,63,0,.32);stroke-width:1.2;stroke-linecap:round;fill:none}
+.bilancia .tacca.grande{stroke:rgba(179,63,0,.55);stroke-width:2}
 .bilancia .ago{stroke:var(--tema, var(--accent-primary));stroke-width:2.6;stroke-linecap:round;fill:none;
   transition:d .8s cubic-bezier(.22,.8,.28,1)}
-.bilancia .ago.f-col{stroke:#c2803a}.bilancia .ago.f-pra{stroke:#4c8a6b}.bilancia .ago.f-cen{stroke:#5a58a0}
+.bilancia .ago.f-col{stroke:#ff6115}.bilancia .ago.f-pra{stroke:#d84a00}.bilancia .ago.f-cen{stroke:#a63a05}
 .bilancia .ago.oltre{stroke:var(--danger)}
 .gruppo-ago{transform-box:view-box;transform-origin:100px 92px}
 .gruppo-piatto{transform-box:view-box}
@@ -2398,16 +2438,16 @@ h3{font-weight:600;letter-spacing:-.018em}
   49%{transform:rotate(-2deg)} 61%{transform:rotate(1.1deg)} 76%{transform:rotate(-.5deg)}
   100%{transform:rotate(0)}}
 .bilancia .perno{fill:var(--carta);stroke:currentColor;stroke-width:2.2}
-.bilancia .perno.f-col{stroke:#c2803a}.bilancia .perno.f-pra{stroke:#4c8a6b}.bilancia .perno.f-cen{stroke:#5a58a0}
+.bilancia .perno.f-col{stroke:#ff6115}.bilancia .perno.f-pra{stroke:#d84a00}.bilancia .perno.f-cen{stroke:#a63a05}
 .anello svg{width:100%;height:100%;transform:rotate(0deg)}
 .anello circle{fill:none}
 .anello .tracciato,.anello .riempito{fill:none;stroke-linecap:round;stroke-width:9}
-.anello .tracciato{stroke:rgba(60,45,30,.10)}
-.anello .tracciato.qui{stroke:rgba(60,45,30,.16)}
+.anello .tracciato{stroke:rgba(255,252,244,.30)}
+.anello .tracciato.qui{stroke:rgba(255,252,244,.46)}
 .anello .riempito{transition:stroke-dasharray .8s cubic-bezier(.22,.8,.28,1)}
-.anello .riempito.f-col{stroke:#c2803a}
-.anello .riempito.f-pra{stroke:#4c8a6b}
-.anello .riempito.f-cen{stroke:#5a58a0}
+.anello .riempito.f-col{stroke:#fffcf4}
+.anello .riempito.f-pra{stroke:#ffddb2}
+.anello .riempito.f-cen{stroke:#ffbb80}
 .anello .qui.riempito{stroke-width:11}
 .matita{position:absolute;top:2px;right:2px;width:34px;height:34px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -2426,7 +2466,7 @@ h3{font-weight:600;letter-spacing:-.018em}
 /* Il conta-calorie a palette, come i vecchi flip clock: ogni cifra nella sua
    cella nera, con la riga del ribaltamento a meta'. */
 .flip{display:flex;align-items:center;gap:1.5px;padding:2px 4px;border-radius:4px;
-  background:#15120e;box-shadow:inset 0 1px 3px rgba(0,0,0,.6), 0 1px 2px rgba(60,45,30,.3)}
+  background:#3a1200;box-shadow:inset 0 1px 3px rgba(0,0,0,.6), 0 1px 2px rgba(140,42,0,.3)}
 .flip i{font-style:normal;font-family:'SF Mono',ui-monospace,Menlo,monospace;
   font-size:.56rem;font-weight:600;line-height:1;color:#f4efe6;
   background:linear-gradient(#2b2620 48%, rgba(0,0,0,.55) 48%, #221d18 52%);
@@ -2435,7 +2475,7 @@ h3{font-weight:600;letter-spacing:-.018em}
   letter-spacing:.04em;margin:0 2px 0 3px}
 /* La striscia dei pasti sotto il flip: ogni colore largo quanto le sue
    calorie, sul binario dell'intera giornata. */
-.bilancia .striscia-fondo{fill:rgba(60,45,30,.12)}
+.bilancia .striscia-fondo{fill:rgba(140,42,0,.12)}
 .bilancia .striscia-seg{transition:width .8s cubic-bezier(.22,.8,.28,1)}
 .bilancia .striscia-seg.f-col{fill:#c2803a}
 .bilancia .striscia-seg.f-pra{fill:#4c8a6b}
@@ -2479,7 +2519,7 @@ h3{font-weight:600;letter-spacing:-.018em}
 .sugg{padding-right:34px}
 .sugg-x{position:absolute;top:50%;right:8px;transform:translateY(-50%);
   width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:.9rem;line-height:1;color:var(--text-tertiary);background:rgba(60,45,30,.07)}
+  font-size:.9rem;line-height:1;color:var(--text-tertiary);background:rgba(140,42,0,.07)}
 .scheda.con-x .sugg-x{top:8px;right:8px;transform:none}
 .piatto-del-pasto{margin-bottom:6px}
 .piatto-del-pasto .quando{display:block;font-size:.66rem;color:var(--text-tertiary);
@@ -7705,13 +7745,16 @@ function applicaSfondo(chiave, chiaveArte, colore) {
   stratoAttivo = 1 - stratoAttivo;
   const nuovo = strati[stratoAttivo], vecchio = strati[1 - stratoAttivo];
 
-  const c = colore || '#a9762f';
+  // sul fondo neon i disegni sono filigrana di porcellana e l'alone e'
+  // arancio bruciato: qualunque sia il tema, il fondale resta nella fiamma
+  const arte = 'rgba(255,252,244,0.55)';
+  const alone = '#8a2e00';
   // L'alone si scalda al mattino e si fa piu' profondo la sera: la stessa
   // pagina cambia umore secondo l'ora, senza cambiare colore.
   const h = new Date().getHours();
-  const forza = h < 11 ? '18' : (h < 17 ? '1f' : '2b');
-  nuovo.style.backgroundImage = svgFondale(chiaveArte || 'piatto', c) + ', ' +
-    'radial-gradient(120% 90% at 82% 82%, ' + c + forza + ' 0%, transparent ' +
+  const forza = h < 11 ? '26' : (h < 17 ? '33' : '44');
+  nuovo.style.backgroundImage = svgFondale(chiaveArte || 'piatto', arte) + ', ' +
+    'radial-gradient(120% 90% at 82% 82%, ' + alone + forza + ' 0%, transparent ' +
     (h < 11 ? '68%' : h < 17 ? '62%' : '56%') + ')';
   nuovo.style.opacity = '';
   nuovo.classList.add('viva');
@@ -7736,8 +7779,8 @@ function applicaTema(pagina, tema) {
   const attiva = document.querySelector('.pasto-tab.active');
   if (attiva && pagina.dataset.pasto === PASTI_HOME[pastoCorrente]) {
     const barra = document.querySelector('.pasto-barra');
-    if (barra) barra.style.background = tema ? tema.c : '';
-    attiva.style.color = tema ? tema.c : '';
+    if (barra) barra.style.background = '';
+    attiva.style.color = '';
   }
 }
 
