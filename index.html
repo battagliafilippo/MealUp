@@ -16568,10 +16568,62 @@ async function comprimi(testo) {
     return new Uint8Array(await new Response(stream).arrayBuffer());
   } catch (e) { return null; }
 }
+
+/* La decompressione DEVE funzionare anche sui telefoni vecchi e nei browser
+   dentro le chat, che spesso non hanno DecompressionStream: prima si prova
+   quella di casa, poi una libreria open source caricata al volo. Se manca
+   pure la rete, l'errore lo dice con parole vere, non con un "link rotto". */
+const PAKO_FONTI = [
+  'https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako_inflate.min.js',
+  'https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako_inflate.min.js',
+  'https://unpkg.com/pako@2.1.0/dist/pako_inflate.min.js'
+];
+let pakoLibreria = null;
+function caricaPako() {
+  if (window.pako) return Promise.resolve(window.pako);
+  if (pakoLibreria) return pakoLibreria;
+  pakoLibreria = new Promise((risolvi, rifiuta) => {
+    let i = 0;
+    // se la rete non risponde non si resta appesi: dopo un po' si molla
+    const tempo = setTimeout(() => { pakoLibreria = null; rifiuta(new Error('pako-non-raggiungibile')); }, 6000);
+    const prova = () => {
+      if (i >= PAKO_FONTI.length) {
+        clearTimeout(tempo); pakoLibreria = null;
+        rifiuta(new Error('pako-non-raggiungibile')); return;
+      }
+      const sc = document.createElement('script');
+      sc.src = PAKO_FONTI[i++];
+      sc.async = true;
+      sc.onload = () => { if (window.pako) { clearTimeout(tempo); risolvi(window.pako); } else prova(); };
+      sc.onerror = () => { sc.remove(); prova(); };
+      document.head.appendChild(sc);
+    };
+    prova();
+  });
+  return pakoLibreria;
+}
+
 async function decomprimi(bytes) {
-  const ds = new DecompressionStream('deflate-raw');
-  const stream = new Blob([bytes]).stream().pipeThrough(ds);
-  return new TextDecoder().decode(await new Response(stream).arrayBuffer());
+  const nativa = typeof DecompressionStream !== 'undefined';
+  if (nativa) {
+    try {
+      const ds = new DecompressionStream('deflate-raw');
+      const stream = new Blob([bytes]).stream().pipeThrough(ds);
+      return new TextDecoder().decode(await new Response(stream).arrayBuffer());
+    } catch (e) {
+      // la decompressione c'e' e ha rifiutato i dati: sono rovinati,
+      // inutile scomodare la rete
+      throw new Error('dati-rovinati');
+    }
+  }
+  // browser senza decompressione (capita dentro le chat e sui telefoni
+  // datati): una libreria open source caricata al volo fa lo stesso lavoro
+  let pako = null;
+  try { pako = await caricaPako(); } catch (e) { pako = null; }
+  if (pako) return pako.inflateRaw(bytes, { to: 'string' });
+  const err = new Error('niente-decompressione');
+  err.codice = 'niente-decompressione';
+  throw err;
 }
 
 function paccoGruppo() {
@@ -16588,8 +16640,18 @@ function paccoGruppo() {
 
 async function creaLinkPacco(obj) {
   const testo = JSON.stringify(obj);
-  const z = await comprimi(testo);
-  const payload = z ? 'z' + b64urlEnc(z) : 'j' + b64urlEnc(new TextEncoder().encode(testo));
+  const chiaro = 'j' + b64urlEnc(new TextEncoder().encode(testo));
+  // i pacchi piccoli (inviti, risposte) restano in chiaro: si aprono su
+  // QUALUNQUE telefono, anche vecchio, anche nel browser di una chat.
+  // La compressione entra solo quando accorcia davvero un pacco grosso.
+  let payload = chiaro;
+  if (chiaro.length > 900) {
+    const z = await comprimi(testo);
+    if (z) {
+      const compresso = 'z' + b64urlEnc(z);
+      if (compresso.length < chiaro.length) payload = compresso;
+    }
+  }
   const base = location.origin + location.pathname;
   return { link: base + '#fm=' + payload, kb: Math.round(payload.length / 1024 * 10) / 10 };
 }
@@ -16632,7 +16694,10 @@ function unisciPacco(d) {
 }
 
 async function importaLink(testo) {
-  const m = String(testo || '').match(/#fm=([A-Za-z0-9\-_]+)/) || String(testo || '').match(/^([zj][A-Za-z0-9\-_]+)$/);
+  // le chat vanno a capo dentro i link lunghi: gli spazi e gli a-capo
+  // si tolgono prima di leggere, il contenuto vero non ne ha mai
+  const pulito = String(testo || '').replace(/\s+/g, '');
+  const m = pulito.match(/#fm=([A-Za-z0-9\-_]+)/) || pulito.match(/^([zj][A-Za-z0-9\-_]+)$/);
   if (!m) { toast('Non sembra un link di FitMeals.'); return; }
   try {
     const d = await leggiPacco(m[1]);
@@ -16643,7 +16708,9 @@ async function importaLink(testo) {
     save(); renderAll();
     toast('Uniti: ' + r.np + ' profili e ' + r.nr + ' ricette nuove.', 'Annulla');
   } catch (e) {
-    toast('Link non leggibile: forse si \u00e8 spezzato nell\'invio.');
+    toast(e && e.codice === 'niente-decompressione'
+      ? 'Questo browser non riesce ad aprire il link (serve internet la prima volta): riprova con Chrome o Safari aggiornati.'
+      : 'Link non leggibile: forse si \u00e8 spezzato nell\'invio. Fattelo rimandare, o incollalo tutto intero.');
   }
 }
 
@@ -16735,7 +16802,9 @@ function paccoSpesaFamiglia() {
    volte non conta due volte. */
 function applicaPaccoFamiglia(d) {
   if (!S.famiglia) {
-    toast('Per ricevere la spesa entra prima in famiglia: fatti mandare l\'invito.');
+    toast('Questa è una spesa di famiglia, ma qui la famiglia non c\'è. '
+      + 'Se ce l\'hai nell\'app installata, apri L\'APP e incolla lì il link '
+      + '(Profilo › Famiglia); se no fatti mandare prima l\'invito.');
     return false;
   }
   if (d.fid !== S.famiglia.id) {
@@ -19727,7 +19796,11 @@ aggiornaCampanella();
 })();
 
 // Se l'app è stata aperta da un link di condivisione, propongo l'unione.
-(function () {
+// E se l'app era GIA' aperta quando il link arriva — succede con l'app
+// installata e con le schede riusate: il browser cambia solo il frammento,
+// SENZA ricaricare la pagina — il pacco si legge lo stesso: prima questo
+// mancava, e il link sembrava non fare niente.
+function gestisciHashPacco() {
   const m = (location.hash || '').match(/#fm=([A-Za-z0-9\-_]+)/);
   if (!m) return;
   history.replaceState(null, '', location.pathname);   // il link non resta nella barra
@@ -19737,8 +19810,12 @@ aggiornaCampanella();
     const chi = d.da || 'un altro telefono';
     toast('Dati ricevuti da ' + chi + '. Vuoi unirli ai tuoi?', 'Unisci',
           { act: 'link-merge', val: m[1] });
-  }).catch(() => toast('Il link ricevuto non \u00e8 leggibile.'));
-})();
+  }).catch(e => toast(e && e.codice === 'niente-decompressione'
+    ? 'Questo browser non riesce ad aprire il link (serve internet la prima volta): riprova con Chrome o Safari aggiornati.'
+    : 'Il link ricevuto non \u00e8 leggibile: forse si \u00e8 spezzato nell\'invio.'));
+}
+gestisciHashPacco();
+window.addEventListener('hashchange', gestisciHashPacco);
 
 // Timer: riprendo quelli in corso e ricalcolo dall'orario di fine, non dal
 // tempo trascorso, cosi la pausa del telefono non li falsa.
