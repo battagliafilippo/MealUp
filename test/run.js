@@ -600,13 +600,16 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(alfa >= 45, 'testo terziario troppo tenue: .' + alfa);
   });
 
-  await test('il tema chiaro e\' quello attivo', async () => {
+  await test('la palette neon e\' quella attiva: fondo arancio, finestre porcellana', async () => {
     const a = await app();
     const css = a.d.querySelector('style').textContent;
-    const bg = [...css.matchAll(/--bg-main:\s*(#[0-9a-f]{6})/gi)].pop();
-    vero(bg, 'fondo non definito');
-    const [r, g, b] = [1, 3, 5].map(i => parseInt(bg[1].substr(i, 2), 16));
-    vero((r + g + b) / 3 > 180, 'il fondo non e\' chiaro: ' + bg[1]);
+    vero(/--neon:\s*#ff6115/i.test(css), 'manca il Neon Orange #FF6115');
+    vero(/--porcellana:\s*#fffcf4/i.test(css), 'manca la Porcelain #FFFCF4');
+    vero(/--bg-main:\s*var\(--neon\)/i.test(css), 'il fondo non e\' il neon');
+    vero(/--bruciato:\s*#b33f00/i.test(css), 'manca l\'arancio bruciato per le scritte');
+    // dentro le finestre le scritte ripartono dalla famiglia dell\'arancio
+    vero(/--text-primary:var\(--bruciato\)/.test(css.replace(/\s+/g, '')),
+      'le finestre non ridefiniscono il colore delle scritte');
   });
 
   await test('il fondale cambia con l\'ingrediente cercato', async () => {
@@ -3101,7 +3104,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
     const css = a.d.querySelector('style').textContent;
-    vero(/\.flip\{[^}]*background:#15120e/.test(css), 'manca la finestrella nera del flip clock');
+    vero(/\.flip\{[^}]*background:#3a1200/.test(css), 'manca la finestrella scura del flip clock');
     vero(/\.flip i\{[^}]*monospace/.test(css), 'le cifre non sono da flip clock');
     vero(/linear-gradient/.test(css.match(/\.flip i\{[^}]*\}/)[0]), 'manca la riga del ribaltamento');
     const box = a.d.getElementById('anello-unico');
