@@ -908,6 +908,16 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
   background:rgba(255,80,80,.8);border-radius:2px}
 .codice-mano{display:flex;gap:8px;align-items:center;margin-top:10px}
 .codice-mano input{flex:1;min-width:0}
+/* Il trovato in casa: nome + forchetta, insieme. E il conto del mangiato. */
+.disp-trovato{display:inline-flex;align-items:center;gap:4px}
+.mangia-b{flex:0 0 26px;width:26px;height:26px;border-radius:9px;display:inline-flex;
+  align-items:center;justify-content:center;background:none;cursor:pointer;
+  border:1px solid color-mix(in srgb, var(--tema, var(--accent-primary)) 32%, transparent);
+  color:var(--text-secondary)}
+.mangia-b svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round}
+.mangia-b:active{transform:scale(.93)}
+#mangia-conto b{color:var(--tema, var(--accent-primary))}
 .scan-codice svg{stroke:#fff}
 .scan-codice{padding:13px 10px}
 /* Il badge della marca sull'ingrediente della ricetta: piccolo, di vetro,
@@ -3049,6 +3059,35 @@ h3{font-weight:600;letter-spacing:-.018em}
   </div>
 </div>
 
+<!-- ============ MANGIATO DALLA DISPENSA ============ -->
+<div id="modal-mangia" class="modal centro" role="dialog" aria-modal="true" aria-label="L'ho mangiato">
+  <div class="modal-content conferma-box" style="text-align:left;max-width:380px">
+    <div class="modal-head">
+      <h2 id="mangia-titolo">L'ho mangiato</h2>
+      <button type="button" class="x" data-act="close-modal" aria-label="Chiudi">&times;</button>
+    </div>
+    <p class="hint" id="mangia-sotto"></p>
+    <div class="stack">
+      <div>
+        <label class="field-label" for="mangia-qta">Quanto ne hai mangiato</label>
+        <div class="row" style="align-items:center">
+          <input type="number" id="mangia-qta" min="0" step="any" inputmode="decimal"
+            style="flex:1" placeholder="quanto">
+          <b id="mangia-unita" style="flex:0 0 34px;text-align:center">g</b>
+        </div>
+        <div class="tags-container" id="mangia-svelti" style="margin-top:8px"></div>
+        <p class="hint" id="mangia-conto" style="margin:8px 0 0"></p>
+      </div>
+      <div>
+        <label class="field-label">In quale pasto</label>
+        <div class="tags-container" id="mangia-pasti"></div>
+      </div>
+    </div>
+    <button type="button" class="btn-primary full-width" data-act="mangia-salva"
+      style="margin-top:14px">Registra e scala dalla scorta</button>
+  </div>
+</div>
+
 <!-- ============ CONFRONTO ============ -->
 <div id="modal-confronto" class="modal" role="dialog" aria-modal="true" aria-label="Confronta">
   <div class="modal-content glass-card">
@@ -3216,9 +3255,15 @@ h3{font-weight:600;letter-spacing:-.018em}
         </div>
       </div>
       <div class="stack" style="margin-top:6px">
-        <div>
-          <label class="field-label" for="eti-nome">Prodotto</label>
-          <input type="text" id="eti-nome" maxlength="60" autocomplete="off" placeholder="Es. crackers di segale">
+        <div class="row">
+          <div style="flex:1.4">
+            <label class="field-label" for="eti-nome">Prodotto</label>
+            <input type="text" id="eti-nome" maxlength="60" autocomplete="off" placeholder="Es. crackers di segale">
+          </div>
+          <div>
+            <label class="field-label" for="eti-marca">Marca</label>
+            <input type="text" id="eti-marca" maxlength="40" autocomplete="off" placeholder="Es. Scotti">
+          </div>
         </div>
         <div class="row">
           <div>
@@ -8233,6 +8278,12 @@ function renderPasto(id) {
   // --- elenco ---
   const ammesse = PORTATE_PAGINA[id];
   let piatti = visibleRecipes().filter(r => ammesse.includes(portataOf(r)));
+  // a colazione le bibite non c'entrano: fra le bevande restano solo i
+  // succhi di frutta (e le spremute). Cola e compagnia stanno altrove.
+  if (id === 'col') {
+    piatti = piatti.filter(r => portataOf(r) !== 'bevanda'
+      || /succo|spremuta|estratto|centrifugat/i.test(r.title));
+  }
   if (query) piatti = piatti.filter(r => matchesQuery(r, query));
 
   // Gli stessi filtri della scheda Cerca valgono anche qui: sono le stesse
@@ -8743,27 +8794,40 @@ function renderDispensaScorte() {
     ${x.voci.map(schedaConservazione).join('')}`).join('');
 }
 
-/* Suggerimenti mentre scrivi: prima quello che hai gia' in dispensa, poi tutto
-   il resto che l'app conosce. */
+/* La ricerca della dispensa guarda SOLO in casa tua: dispensa, frigo e
+   freezer, anche per marca. Ogni cosa trovata ha due tocchi: il nome la
+   rimette nella barra, la forchetta registra che l'hai mangiata (quanto e
+   in quale pasto) e la scala dalla scorta. Per tutto il resto c'e' la
+   porta dei Prodotti. */
 function renderDispSuggest(q) {
   const box = document.getElementById('disp-suggest');
   if (!box) return;
   const query = norm(q || '');
   if (query.length < 1) { box.innerHTML = ''; return; }
 
-  const mie = Object.keys(freschezza()).map(k => freschezza()[k])
-    .filter(v => v.posto === 'dispensa' && norm(v.nome).includes(query));
+  const POSTO_NOME = { dispensa: 'dispensa', frigo: 'frigo', freezer: 'freezer' };
+  const inCasa = Object.keys(freschezza()).map(k => ({ k: k, v: freschezza()[k] }))
+    .filter(x => {
+      if (norm(x.v.nome).includes(query)) return true;
+      const info = prodottoInfoDi(x.v.nome);
+      return !!(info && info.marca && norm(info.marca).includes(query));
+    })
+    .sort((a, b) => (norm(b.v.nome).startsWith(query) - norm(a.v.nome).startsWith(query))
+      || a.v.nome.localeCompare(b.v.nome))
+    .slice(0, 8);
 
-  const altri = vocabolarioIngredienti()
-    .filter(n => norm(n).includes(query) && !mie.some(v => sameIngredient(v.nome, n)))
-    .slice(0, 5);
-
-  box.innerHTML = mie.slice(0, 4).map(v =>
-      `<button type="button" class="chip mini active" data-act="disp-scegli" data-val="${esc(v.nome)}">
-        ${esc(v.nome)} <i>${v.qta ? v.qta + (v.unita === 'pz' ? ' pz' : ' g') : 'in dispensa'}</i></button>`).join('')
-    + altri.map(n =>
-      `<button type="button" class="chip mini" data-act="disp-scegli" data-val="${esc(n)}">
-        ${esc(n)}</button>`).join('')
+  box.innerHTML = inCasa.map(x =>
+      `<span class="disp-trovato">
+        <button type="button" class="chip mini active" data-act="disp-scegli" data-val="${esc(x.v.nome)}">
+          ${esc(x.v.nome)} <i>${POSTO_NOME[x.v.posto] || 'dispensa'}${
+            x.v.qta ? ' · ' + fmtScorta(x.v.qta, x.v.unita) : ''}</i></button>
+        <button type="button" class="mangia-b" data-act="mangia-apri" data-val="${esc(x.k)}"
+          title="L'ho mangiato: quanto e a che pasto" aria-label="Ho mangiato ${esc(x.v.nome)}">
+          <svg viewBox="0 0 24 24"><path d="M7 3v7a2 2 0 0 0 2 2v9M9 3v5M11 3v5"/><path d="M16.5 3c-1.4 1.2-2 3-2 5.5 0 2 .8 3 2 3v9.5"/></svg>
+        </button>
+      </span>`).join('')
+    + (inCasa.length ? '' : `<span class="hint" style="font-size:.78rem;align-self:center">niente
+        in casa con questo nome —</span>`)
     // la porta verso l'unico posto della ricerca vera, col testo che ti segue
     + `<button type="button" class="chip mini" data-act="catalogo-apri" data-val="${esc(q || '')}">
         tutti i prodotti…</button>`;
@@ -11582,7 +11646,9 @@ function prodottoRegistraInfo(nome, info) {
   if (!nome || !info) return;
   S.prodottiInfo = S.prodottiInfo || {};
   S.prodottiInfo[String(nome).toLowerCase().trim()] = {
-    add: Array.isArray(info.add) ? info.add.slice(0, 40) : [],
+    // add=null vuol dire "additivi mai letti": il voto resta onesto e
+    // parziale finche' un codice a barre non li porta davvero
+    add: Array.isArray(info.add) ? info.add.slice(0, 40) : null,
     bio: !!info.bio,
     codice: info.codice || null,
     marca: info.marca || null,
@@ -11784,6 +11850,7 @@ function applicaProdottoTrovato(p) {
   const metti = (id, v) => { if (F(id)) F(id).value = v === null ? '' : v; };
   const nomeCampo = F('eti-nome');
   if (nomeCampo && !nomeCampo.value.trim()) nomeCampo.value = p.nome;
+  if (F('eti-marca') && p.marca) F('eti-marca').value = p.marca;
   metti('eti-kcal', p.valori.kcal); metti('eti-pro', p.valori.proteine);
   metti('eti-carb', p.valori.carboidrati); metti('eti-gra', p.valori.grassi);
   metti('eti-sat', p.valori.saturi); metti('eti-zuc', p.valori.zuccheri);
@@ -14631,6 +14698,8 @@ function apriModuloEtichetta(nome, verso) {
       passoEti.textContent = 'Già a catalogo: valori riapplicati. Rifai la foto solo se hai cambiato prodotto.'; }
   }
   F('eti-nome').value = nome || '';
+  // la marca: quella gia' nota torna da sola, e si corregge a mano
+  if (F('eti-marca')) F('eti-marca').value = (infoNota && infoNota.marca) || '';
   cameraProbabile().then(ok => {
     const b = document.getElementById('etichetta-scatta');
     if (b) b.style.display = ok ? '' : 'none';
@@ -14801,6 +14870,8 @@ document.addEventListener('input', ev => {
     catQuery = ev.target.value || '';
     renderCatalogo();
   }
+  // e il conto del mangiato si rifa' a ogni ritocco della quantita'
+  if (ev.target && ev.target.id === 'mangia-qta') mangiaConto();
 });
 
 document.addEventListener('change', ev => {
@@ -15291,6 +15362,122 @@ function salvaQuick() {
   closeModals();
   renderAll();
   toast('Registrato: ' + kcal + ' kcal.', 'Annulla', { act: 'log-del', val: String(entry.ts) });
+}
+
+/* ---------- mangiato dalla dispensa ----------
+   Dalla ricerca di casa (dispensa, frigo, freezer) alla giornata in due
+   tocchi: quanto ne hai mangiato e a che pasto. Le calorie arrivano dalla
+   tabella del prodotto (marca compresa, se c'e'), si sommano al pasto e
+   la quantita' si scala dalla scorta — le stesse identiche strade di
+   quando cucini una ricetta, comprese le confezioni aperte e l'Annulla. */
+var mangiaChiave = null;
+var mangiaPasto = null;
+
+function apriMangia(k) {
+  const v = freschezza()[k];
+  if (!v) { toast('Questa scorta non c\'è più.'); return; }
+  const t = tabellaAncheFuzzy(v.nome);
+  if (!t) {
+    // senza valori niente conti inventati: prima il codice o l'etichetta
+    toast(v.nome + ' non ha ancora i valori: leggigli il codice a barre o l\'etichetta.');
+    apriModuloEtichetta(v.nome, 'valori');
+    return;
+  }
+  mangiaChiave = k;
+  mangiaPasto = guessMeal();
+  const pz = v.unita === 'pz';
+  document.getElementById('mangia-titolo').textContent = v.nome;
+  const g = votoDi(v.nome);
+  document.getElementById('mangia-sotto').innerHTML =
+    (v.posto === 'frigo' ? 'In frigo' : v.posto === 'freezer' ? 'Nel freezer' : 'In dispensa')
+    + (isFinite(v.qta) && v.qta > 0 ? ': ne hai ' + fmtScorta(v.qta, v.unita) : '')
+    + (g ? ' · <b style="color:' + g.colore + '">' + g.punteggio + '/100 ' + esc(g.nome) + '</b>' : '')
+    + '. Quello che mangi si somma al pasto e si scala da lì.';
+  document.getElementById('mangia-unita').textContent = pz ? 'pz' : 'g';
+  F('mangia-qta').value = pz ? 1 : 100;
+  document.getElementById('mangia-svelti').innerHTML = (pz ? [1, 2, 3] : [30, 50, 100, 150, 200])
+    .map(x => `<button type="button" class="chip mini" data-act="mangia-svelto"
+      data-val="${x}">${x}${pz ? ' pz' : ' g'}</button>`).join('');
+  mangiaPastiRender();
+  mangiaConto();
+  openModal('modal-mangia');
+}
+
+function mangiaPastiRender() {
+  document.getElementById('mangia-pasti').innerHTML = S.meals.map(m =>
+    `<button type="button" class="chip mini ${m.id === mangiaPasto ? 'active' : ''}"
+      data-act="mangia-pasto" data-val="${esc(m.id)}">${esc(m.name)}</button>`).join('');
+}
+
+/* La quantita' scritta, portata in grammi: i pezzi passano dalla stessa
+   conversione delle ricette (un uovo, una mela: pesi noti). */
+function mangiaGrammi() {
+  const v = freschezza()[mangiaChiave];
+  if (!v) return 0;
+  const q = parseFloat(F('mangia-qta').value);
+  if (!isFinite(q) || q <= 0) return 0;
+  return v.unita === 'pz' ? quantitaRichiesta({ n: v.nome, q: q, u: 'pz' }, 1, 'g') : q;
+}
+
+function mangiaConto() {
+  const el = document.getElementById('mangia-conto');
+  if (!el || !mangiaChiave) return;
+  const v = freschezza()[mangiaChiave];
+  const t = v && tabellaAncheFuzzy(v.nome);
+  const g = mangiaGrammi();
+  if (!t || !g) { el.textContent = ''; return; }
+  el.innerHTML = 'Sono <b>' + Math.round(g * (Number(t[0]) || 0) / 100) + ' kcal</b> · '
+    + (Math.round(g * (Number(t[1]) || 0) / 100 * 10) / 10) + ' g di proteine.';
+}
+
+function mangiaSalva() {
+  const v = freschezza()[mangiaChiave];
+  if (!v) { closeModals(); return; }
+  const q = parseFloat(F('mangia-qta').value);
+  if (!isFinite(q) || q <= 0) { toast('Scrivi quanto ne hai mangiato.'); F('mangia-qta').focus(); return; }
+  const t = tabellaAncheFuzzy(v.nome);
+  const g = mangiaGrammi();
+  const kcal = Math.round(g * (Number(t[0]) || 0) / 100);
+  const pro = Math.round(g * (Number(t[1]) || 0) / 100 * 10) / 10;
+  const carbs = Math.round(g * (Number(t[2]) || 0) / 100 * 10) / 10;
+  const fat = Math.round(g * (Number(t[3]) || 0) / 100 * 10) / 10;
+
+  pushUndo('Mangiato ' + v.nome);
+  apriConfezione(mangiaChiave);
+  // il prelievo dalla scorta, con la pezza d'appoggio per l'Annulla:
+  // stessa forma di quando cucini (restituisciIngredienti la capisce)
+  let scalato = null;
+  if (isFinite(v.qta) && v.qta > 0) {
+    const preso = Math.min(v.qta, q);
+    scalato = [{ k: mangiaChiave, qta: preso, voce: clone(v) }];
+    v.qta = Math.max(0, Math.round((v.qta - q) * 10) / 10);
+    if (v.qta === 0) {
+      // finita: esce di casa, come quando la consuma una ricetta
+      S.pantry = S.pantry.filter(p => norm(p) !== mangiaChiave);
+      delete freschezza()[mangiaChiave];
+    }
+  }
+
+  const p = activeProfile();
+  const pastoScelto = pastoPerIlDiario(mangiaPasto);
+  const entry = { ts: Date.now(), rid: null, title: v.nome, pid: p.id,
+                  meal: pastoScelto, kcal: kcal, pro: pro, carbs: carbs, fat: fat,
+                  grammi: Math.round(g), mult: 1, manuale: true };
+  if (scalato) entry.scalato = scalato;
+  const info = prodottoInfoDi(v.nome);
+  if (info && info.marca) entry.marche = { [v.nome]: { p: v.nome, m: info.marca } };
+  S.log.push(entry);
+  bumpDaily(p.id, entry.ts, kcal, pro, 1);
+  aggiornaCampanella();
+  mangiaChiave = null;
+  save();
+  closeModals();
+  renderAll();
+  const nomeP = (S.meals.find(m => m.id === pastoScelto) || {}).name || 'pasto';
+  const dove = v.posto === 'frigo' ? 'dal frigo' : v.posto === 'freezer' ? 'dal freezer' : 'dalla dispensa';
+  toast('Registrato a ' + nomeP.toLowerCase() + ': ' + kcal + ' kcal'
+    + (scalato ? ' · scalat' + (v.unita === 'pz' ? 'i ' : 'i ') + fmtScorta(q, v.unita) + ' ' + dove : '')
+    + '.', 'Annulla', { act: 'log-del', val: String(entry.ts) });
 }
 
 function todayLog() {
@@ -17670,6 +17857,16 @@ document.addEventListener('click', e => {
       break;
     }
     case 'quick-save': salvaQuick(); break;
+    case 'mangia-apri': apriMangia(val); break;
+    case 'mangia-svelto':
+      if (F('mangia-qta')) F('mangia-qta').value = val;
+      mangiaConto();
+      break;
+    case 'mangia-pasto':
+      mangiaPasto = val;
+      mangiaPastiRender();
+      break;
+    case 'mangia-salva': mangiaSalva(); break;
     case 'quick-ricetta': {
       const r = S.recipes.find(x => x.id === val);
       if (!r) break;
@@ -18569,7 +18766,13 @@ document.addEventListener('click', e => {
         opz('eti-sat'), opz('eti-zuc'), opz('eti-fib'), opz('eti-sale')];
       // le notizie del codice a barre (additivi, bio) restano col prodotto:
       // servono al voto, e viaggiano anche nei link di famiglia
-      if (etiProdottoInfo) prodottoRegistraInfo(nome, etiProdottoInfo);
+      const marcaScritta = ((F('eti-marca') || {}).value || '').trim().slice(0, 40);
+      if (etiProdottoInfo || marcaScritta) prodottoRegistraInfo(nome, {
+        add: etiProdottoInfo ? etiProdottoInfo.add : null,
+        bio: !!(etiProdottoInfo && etiProdottoInfo.bio),
+        codice: etiProdottoInfo ? etiProdottoInfo.codice : null,
+        marca: marcaScritta || null
+      });
       _vocabolario = null;   // il vocabolario ora conosce anche questo prodotto
       if (!S.myIngredients.some(m => norm(m) === norm(nome))) S.myIngredients.push(nome);
       if (etichettaVerso === 'valori') {
@@ -18620,7 +18823,13 @@ document.addEventListener('click', e => {
       S.ingTabExtra = S.ingTabExtra || {};
       S.ingTabExtra[nome] = [n('eti-kcal'), n('eti-pro'), n('eti-carb'), n('eti-gra'),
         opz('eti-sat'), opz('eti-zuc'), opz('eti-fib'), opz('eti-sale')];
-      if (etiProdottoInfo) prodottoRegistraInfo(nome, etiProdottoInfo);
+      const marcaScritta = ((F('eti-marca') || {}).value || '').trim().slice(0, 40);
+      if (etiProdottoInfo || marcaScritta) prodottoRegistraInfo(nome, {
+        add: etiProdottoInfo ? etiProdottoInfo.add : null,
+        bio: !!(etiProdottoInfo && etiProdottoInfo.bio),
+        codice: etiProdottoInfo ? etiProdottoInfo.codice : null,
+        marca: marcaScritta || null
+      });
       _vocabolario = null;
       if (!S.myIngredients.some(m => norm(m) === norm(nome))) S.myIngredients.push(nome);
       const vecchiaLi = freschezza()[norm(nome)];
@@ -19364,6 +19573,7 @@ window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
   prodottoRegistraInfo: prodottoRegistraInfo, prodottoInfoDi: prodottoInfoDi,
   applicaProdottoTrovato: applicaProdottoTrovato,
   famigliaDi: famigliaDi, apriProdotti: apriProdotti,
+  apriMangia: apriMangia, mangiaSalva: mangiaSalva,
   prodottiPerIngrediente: prodottiPerIngrediente, prodottoScelto: prodottoScelto,
   tabellaScelta: tabellaScelta, marcaGira: marcaGira,
   prodottiCheCombaciano: prodottiCheCombaciano,
