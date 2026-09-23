@@ -4576,6 +4576,278 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(P.freschezza()['succo bio prova'], 'fine spesa non lo porta in casa');
   });
 
+  // il registro di un prodotto vero via modulo etichetta, con la marca
+  const registraMarca = async (a, nome, kcal, marca) => {
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(80);
+    a.click('[data-act=etichetta-apri]:not([data-verso])');
+    await wait(80);
+    a.d.getElementById('eti-nome').value = nome;
+    a.d.getElementById('eti-marca').value = marca || '';
+    a.set('eti-kcal', String(kcal)); a.set('eti-pro', '8');
+    a.set('eti-carb', '75'); a.set('eti-gra', '1');
+    a.click('[data-act=etichetta-salva]');
+    await wait(120);
+  };
+
+  await test('la marca si collega alla ricetta: dispensa prima, poi l\'ultima comprata', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+
+    // due risi veri in memoria; li tolgo dalla dispensa per la prima prova
+    await registraMarca(a, 'riso gran riserva', 350, 'Scotti');
+    await wait(30);
+    await registraMarca(a, 'riso classico', 356, 'Curtiriso');
+    delete P.freschezza()['riso gran riserva'];
+    delete P.freschezza()['riso classico'];
+
+    // il campo Marca del modulo salva la marca senza codice a barre
+    eq(P.prodottoInfoDi('riso gran riserva').marca, 'Scotti', 'la marca scritta non si salva');
+    // e senza codice l\'onesta' resta: additivi mai letti, voto parziale
+    vero(P.votoDi('riso gran riserva').mancanti.includes('additivi'),
+      'la marca a mano non deve inventare gli additivi');
+
+    // senza niente in casa comanda l\'ultima comprata
+    const lista = P.prodottiPerIngrediente('riso');
+    eq(lista.length, 2, 'i candidati per il riso non sono due');
+    eq(lista[0].nome, 'riso classico', 'l\'ultima marca comprata non e\' la prima');
+    eq((P.prodottoScelto('rX', 'riso') || {}).nome, 'riso classico',
+      'il default non e\' l\'ultima comprata');
+
+    // appena la Scotti entra in dispensa, comanda lei
+    a.set('disp-cerca', 'riso gran riserva');
+    a.d.getElementById('disp-qta').value = '1000';
+    a.click('[data-act=disp-add]');
+    await wait(100);
+    const scelto = P.prodottoScelto('rX', 'riso');
+    vero(scelto && scelto.nome === 'riso gran riserva' && scelto.inDispensa,
+      'la dispensa non vince sull\'ultima comprata');
+
+    // la tabella della marca vince sul generico; il generico resta il ripiego
+    eq(P.tabellaScelta('rX', 'riso')[0], 350, 'la tabella della marca non comanda');
+    eq(P.tabellaScelta('rX', 'spinaci')[0], P.tabella('spinaci')[0],
+      'senza marche il generico deve restare');
+    // e la grammatura delle ricette (nuove comprese) usa la marca da sola
+    eq(P.valoriDaGrammatura([{ n: 'riso', q: 100, u: 'g' }]).kcal, 350,
+      'la grammatura non si adatta alla marca in dispensa');
+
+    // la famiglia fa da guardiano: il latte di mandorla non e\' "latte"
+    await registraMarca(a, 'latte di mandorla', 24, 'AlproProva');
+    vero(!P.prodottiPerIngrediente('latte').some(x => x.nome === 'latte di mandorla'),
+      'il latte di mandorla si propone nelle ricette col latte');
+
+    // il tocco gira: marca, altra marca, generico, e si ricomincia
+    eq((P.marcaGira('rX', 'riso') || {}).nome, 'riso classico', 'il primo giro non cambia marca');
+    eq(P.marcaGira('rX', 'riso'), null, 'dopo le marche non viene il generico');
+    eq((P.prodottoScelto('rX', 'riso')), null, 'il generico voluto non resta');
+    eq((P.marcaGira('rX', 'riso') || {}).nome, 'riso gran riserva', 'il giro non ricomincia');
+    vero(a.salvato().marcheRicetta && a.salvato().marcheRicetta['rX'],
+      'la scelta a mano non si salva su disco');
+
+    // il badge nella ricetta: si vede, dice la marca, e si tocca
+    const conRiso = a.stato().recipes.find(r => (r.ing || []).some(i => i.n === 'riso'));
+    a.apri(conRiso.title.toLowerCase().slice(0, 12));
+    await wait(150);
+    const badge = a.d.querySelector('#detail-body .marca-chip');
+    vero(badge, 'manca il badge della marca sull\'ingrediente');
+    vero(/scotti/i.test(badge.textContent) && badge.classList.contains('in-casa'),
+      'il badge non dice la marca in casa');
+    badge.click();
+    await wait(150);
+    vero(/curtiriso/i.test((a.d.querySelector('#detail-body .marca-chip') || {}).textContent || ''),
+      'il tocco sul badge non gira la marca');
+  });
+
+  await test('il pasto registrato resta com\'era: le modifiche valgono solo da domani', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+    a.tab('view-profile'); a.profiloBase();
+    await registraMarca(a, 'riso gran riserva', 350, 'Scotti');
+    // scorta piena, cosi' il consumo si misura
+    P.freschezza()['riso gran riserva'].qta = 1000;
+    P.freschezza()['riso gran riserva'].unita = 'g';
+
+    const conRiso = a.stato().recipes.find(r => (r.ing || [])
+      .some(i => i.n === 'riso' && i.u === 'g' && Number(i.q) > 0));
+    P.logMeal(conRiso.id, 'pra');
+    await wait(100);
+
+    const voce = a.stato().log[0];
+    vero(voce.marche && voce.marche.riso && voce.marche.riso.p === 'riso gran riserva'
+      && voce.marche.riso.m === 'Scotti', 'il pasto non ricorda la marca usata');
+    const kcalAllora = voce.kcal;
+    // il dosaggio e' sceso dalla scorta DELLA MARCA
+    vero(P.freschezza()['riso gran riserva'].qta < 1000,
+      'il consumo non scala dalla scorta della marca');
+
+    // il mondo cambia: la marca gira, i valori del prodotto pure,
+    // e la ricetta stessa viene modificata
+    P.marcaGira(conRiso.id, 'riso');
+    await registraMarca(a, 'riso gran riserva', 999, 'Scotti');
+    a.apri(conRiso.title.toLowerCase().slice(0, 12));
+    await wait(150);
+    a.click('#detail-body [data-act=edit]');
+    await wait(100);
+    a.d.getElementById('f-kcal').value = String((Number(conRiso.kcal) || 400) + 111);
+    a.d.getElementById('form-recipe').dispatchEvent(
+      new a.dom.window.Event('submit', { bubbles: true, cancelable: true }));
+    await wait(150);
+
+    // il pasto di prima non si muove: e\' storia, non calcolo
+    const dopo = a.stato().log[0];
+    eq(dopo.kcal, kcalAllora, 'le kcal del pasto registrato sono cambiate');
+    eq(dopo.marche.riso.p, 'riso gran riserva', 'la marca del pasto registrato e\' cambiata');
+    eq(dopo.marche.riso.m, 'Scotti', 'la marca del pasto registrato si e\' persa');
+
+    // e il riquadro del piatto lo dice, a chiare lettere
+    a.tab('view-home');
+    const pasto = a.stato().log[0].meal;
+    a.d.querySelector('#anello-unico .gamba[data-val=' + pasto + ']').click();
+    a.click('#pasto-piatti-body .scheda');
+    await wait(150);
+    const box = a.d.querySelector('.istanza-box');
+    vero(box, 'manca il riquadro del piatto mangiato');
+    vero(/Fatto allora con/i.test(box.textContent) && /Scotti/.test(box.textContent),
+      'il piatto non racconta con cosa fu fatto');
+  });
+
+  await test('cercando la marca si trova tutto: prodotti, ricette e pasti fatti', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+    a.tab('view-profile'); a.profiloBase();
+    await registraMarca(a, 'riso gran riserva', 350, 'Scotti');
+    const conRiso = a.stato().recipes.find(r => (r.ing || []).some(i => i.n === 'riso'));
+    P.logMeal(conRiso.id, 'pra');
+    await wait(100);
+
+    // la barra di casa: scrivendo la marca escono i prodotti (con la marca
+    // come etichetta), i pasti gia' fatti, e le ricette che la userebbero
+    a.tab('view-home');
+    a.set('search-input', 'scotti');
+    await wait(400);
+    const striscia = a.d.querySelector('.cerca-marca');
+    vero(striscia, 'manca la striscia dei prodotti');
+    vero(striscia.querySelector('.marca-cerca') &&
+      /Scotti/.test(striscia.querySelector('.marca-cerca').textContent),
+      'la marca non compare come etichetta');
+    vero(/Già nel piatto/.test(striscia.textContent) &&
+      striscia.textContent.includes(conRiso.title),
+      'i pasti gia\' fatti non si trovano dalla marca');
+    almeno(a.d.querySelectorAll('#recipe-list .scheda, #recipe-list .card-btn').length, 1,
+      'le ricette col riso non escono cercando la marca');
+
+    // la schermata Prodotti capisce la marca allo stesso modo (fra i
+    // risultati c'e' anche chi ha "scotti" nel nome, tipo i biscotti:
+    // conta che la riga della marca ci sia, con la sua etichetta)
+    P.apriProdotti('scotti');
+    await wait(100);
+    const righe = [...a.d.querySelectorAll('#catalogo-lista .catalogo-nome')];
+    const rigaMarca = righe.find(x => /riso gran riserva/.test(x.textContent));
+    vero(rigaMarca && /Scotti/.test(rigaMarca.textContent),
+      'la ricerca Prodotti non capisce la marca');
+
+    // chi non ha quella marca non c\'entra
+    vero(!P.prodottiCheCombaciano('scotti').some(x => x.nome === 'latte'),
+      'la ricerca per marca trova cose d\'altre marche');
+  });
+
+  await test('a colazione niente bibite: fra le bevande restano solo i succhi', async () => {
+    const a = await app();
+
+    // cercando "cola" a colazione le bibite non escono; a pranzo si'
+    a.set('cerca-col', 'cola');
+    await wait(100);
+    vero(!/lattina di cola/i.test(a.testo('#lista-col')),
+      'la cola compare ancora a colazione');
+    a.set('cerca-pra', 'cola');
+    await wait(100);
+    vero(/lattina di cola/i.test(a.testo('#lista-pra')),
+      'la cola deve restare a pranzo');
+
+    // i succhi di frutta e le spremute invece a colazione ci sono
+    a.set('cerca-col', 'succo');
+    await wait(100);
+    vero(/succo/i.test(a.testo('#lista-col')), 'i succhi spariti dalla colazione');
+    a.set('cerca-col', 'aranciata');
+    await wait(100);
+    vero(!/lattina di aranciata/i.test(a.testo('#lista-col')),
+      'l\'aranciata compare ancora a colazione');
+    a.set('cerca-col', '');
+    await wait(100);
+  });
+
+  await test('la dispensa cerca solo in casa, e il mangiato si somma al pasto', async () => {
+    const a = await app();
+    const P = a.dom.window.fitmealsProva;
+    a.tab('view-profile'); a.profiloBase();
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=dispensa]');
+    await wait(100);
+    const metti = (n, q) => {
+      a.set('disp-cerca', n);
+      a.d.getElementById('disp-qta').value = q;
+      a.click('[data-act=disp-add]');
+    };
+    metti('latte', '500');
+    metti('riso', '900');
+
+    // quello che NON hai non viene suggerito: resta solo la porta Prodotti
+    a.set('disp-cerca', 'tonno');
+    await wait(50);
+    vero(!a.d.querySelector('#disp-suggest [data-act=disp-scegli]'),
+      'suggerisce cose che non possiedi');
+    vero(a.d.querySelector('#disp-suggest [data-act=catalogo-apri]'),
+      'manca la porta verso tutti i prodotti');
+
+    // quello che hai si trova, ovunque stia: il latte dice "frigo"
+    a.set('disp-cerca', 'lat');
+    await wait(50);
+    const chip = a.d.querySelector('#disp-suggest [data-act=disp-scegli]');
+    vero(chip && /latte/.test(chip.textContent) && /frigo/.test(chip.textContent),
+      'il latte in frigo non si trova col suo posto');
+    const forchetta = a.d.querySelector('#disp-suggest [data-act=mangia-apri]');
+    vero(forchetta, 'manca la forchetta del mangiato');
+
+    // la forchetta chiede quanto e a che pasto, col conto vivo
+    forchetta.click();
+    await wait(100);
+    vero(a.d.getElementById('modal-mangia').classList.contains('active'),
+      'il mangiato non si apre');
+    vero(/frigo/i.test(a.d.getElementById('mangia-sotto').textContent),
+      'non dice dove sta la scorta');
+    a.set('mangia-qta', '200');
+    vero(/kcal/.test(a.d.getElementById('mangia-conto').textContent),
+      'il conto vivo non si aggiorna');
+    a.d.querySelector('#mangia-pasti [data-val=col]').click();
+    a.click('[data-act=mangia-salva]');
+    await wait(150);
+
+    // nel diario: pasto giusto, kcal dalla tabella, grammi scritti
+    const voce = a.stato().log[0];
+    const tab = P.tabella('latte');
+    eq(voce.meal, 'col', 'il pasto scelto non resta');
+    eq(voce.kcal, Math.round(200 * tab[0] / 100), 'le kcal non seguono la tabella');
+    eq(voce.grammi, 200, 'i grammi mangiati non si salvano');
+
+    // la giornata lo somma, il frigo cala, e l\'Annulla ha la sua pezza
+    const giorno = Object.values(a.stato().daily)[0];
+    eq(giorno.k, voce.kcal, 'la giornata non somma il mangiato');
+    eq(P.freschezza()['latte'].qta, 300, 'il frigo non cala di quanto mangiato');
+    vero(voce.scalato && voce.scalato[0].k === 'latte',
+      'manca la pezza d\'appoggio per l\'Annulla');
+
+    // finirlo lo fa uscire di casa, come quando lo cucina una ricetta
+    a.set('disp-cerca', 'lat');
+    await wait(50);
+    a.d.querySelector('#disp-suggest [data-act=mangia-apri]').click();
+    await wait(100);
+    a.set('mangia-qta', '300');
+    a.click('[data-act=mangia-salva]');
+    await wait(150);
+    vero(!P.freschezza()['latte'], 'la scorta finita resta in giro');
+  });
+
   await test('l\'aggiunta diretta in dispensa parla col catalogo come la spesa', async () => {
     const a = await app();
     const w = a.dom.window;
