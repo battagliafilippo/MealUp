@@ -7358,7 +7358,8 @@ const PESI_PEZZO = {
   'fiori': 12, 'filetti': 6, 'acciughe': 6, 'alici': 6, 'sarde': 15
 };
 const UNITA_G = {
-  'g': 1, 'ml': 1, 'kg': 1000, 'cucchiaio': 12, 'cucchiai': 12, 'cucchiaino': 5,
+  'g': 1, 'ml': 1, 'cl': 10, 'dl': 100, 'l': 1000, 'litro': 1000, 'litri': 1000,
+  'kg': 1000, 'cucchiaio': 12, 'cucchiai': 12, 'cucchiaino': 5,
   'cucchiaini': 5, 'pizzico': 0.5, 'bustina': 0.2, 'rametto': 2, 'spicchio': 3,
   'spicchi': 3, 'filetti': 6, 'fette': 15, 'foglie': 1
 };
@@ -8554,7 +8555,9 @@ function schedaConservazione(v) {
           <input type="number" id="scorta-qta" min="0" step="any" inputmode="decimal"
             value="${v.unita === 'pz' ? v.qta : (v.qta >= 1000 ? Math.round(v.qta / 100) / 10 : v.qta)}">
           <button type="button" class="chip mini" data-act="scorta-unita" id="scorta-unita">${
-            v.unita === 'pz' ? 'un.' : (v.qta >= 1000 ? 'kg' : 'g')}</button>
+            v.unita === 'pz' ? 'un.'
+            : v.unita === 'ml' ? (v.qta >= 1000 ? 'L' : 'ml')
+            : (v.qta >= 1000 ? 'kg' : 'g')}</button>
           <button type="button" class="chip mini active" data-act="scorta-salva" data-val="${esc(v.k)}">salva</button>
           <em>a zero lo togli</em>
         </div>` : ''}
@@ -8568,7 +8571,7 @@ function schedaConservazione(v) {
         ${cuociAperto === v.k ? `
           <span class="cuoci-riga">
             <input type="number" id="cuoci-qta" min="1" max="${v.qta}" value="${Math.round(v.qta / 2)}"
-              inputmode="numeric"><em>${v.unita === 'pz' ? 'pz' : 'g'}</em>
+              inputmode="numeric"><em>${v.unita === 'pz' ? 'pz' : v.unita === 'ml' ? 'ml' : 'g'}</em>
             <button type="button" class="chip mini active" data-act="cuoci-fai"
               data-val="${esc(v.k)}">sposta</button>
           </span>` : ''}
@@ -8841,7 +8844,7 @@ function aggiornaUnitaDispensa() {
   if (!nome) { b.textContent = 'g'; return; }
   const gia = Object.keys(freschezza()).map(k => freschezza()[k])
     .find(v => sameIngredient(v.nome, nome));
-  b.textContent = gia ? (gia.unita === 'pz' ? 'un.' : 'g') : (unitaDi(nome) === 'pz' ? 'un.' : 'g');
+  b.textContent = gia ? unitaEtichetta(gia.unita || 'g') : unitaEtichetta(unitaDi(nome));
 }
 
 /* Ricette che mettono insieme quello che hai gia', avanzi compresi, partendo
@@ -10141,7 +10144,8 @@ const A_SPANNE = ['q.b.', 'qb', 'quanto basta', 'a piacere', 'un pizzico', 'un f
   'una spolverata', 'un mazzetto', 'una manciata', 'un ciuffo', 'un rametto'];
 
 const UNITA_SCRITTE = {
-  g: 'g', gr: 'g', grammi: 'g', ml: 'ml', l: 'l', kg: 'kg',
+  g: 'g', gr: 'g', grammi: 'g', ml: 'ml', cl: 'cl', dl: 'dl',
+  l: 'l', litro: 'l', litri: 'l', kg: 'kg',
   cucchiaio: 'cucchiaio', cucchiai: 'cucchiaio',
   cucchiaino: 'cucchiaino', cucchiaini: 'cucchiaino',
   spicchio: 'spicchio', spicchi: 'spicchio', fetta: 'fette', fette: 'fette',
@@ -10780,6 +10784,13 @@ const FRESCHI = [
    scritte nelle ricette: se compaiono senza unita' di misura, si contano. */
 let _unitaCache = null;
 function unitaDi(nome) {
+  // i liquidi si comprano in litri e millilitri: le bevande e i liquidi
+  // di casa partono da ml; per tutto il resto decidono ricette e pesi
+  const nl = norm(nome);
+  if (famigliaDi(nome).id === 'bev'
+      || ['latte', 'olio', 'aceto', 'brodo'].some(k => nl === k || nl.startsWith(k + ' '))) {
+    return 'ml';
+  }
   if (!_unitaCache) {
     _unitaCache = {};
     S.recipes.forEach(r => (r.ing || []).forEach(i => {
@@ -12327,19 +12338,34 @@ function freschiInScadenza() {
    dispensa, freezer e avanzi. Da qui nascono l'ordine FIFO e i suggerimenti. */
 /* A schermo i pezzi si chiamano "unita'", abbreviato "un." dove lo spazio e'
    poco; dentro l'app il valore resta 'pz', cosi' i dati salvati non cambiano. */
-function unitaEtichetta(u) { return u === 'pz' ? 'un.' : u; }
+function unitaEtichetta(u) { return u === 'pz' ? 'un.' : u === 'l' ? 'L' : u; }
 function unitaValore(label) {
   const t = String(label || '').trim().toLowerCase().replace(/\.$/, '');
-  return (t === 'un' || t === 'unita' || t === 'unit\u00e0' || t === 'pz') ? 'pz' : t;
+  if (t === 'un' || t === 'unita' || t === 'unit\u00e0' || t === 'pz') return 'pz';
+  if (t === 'l' || t === 'lt' || t === 'litro' || t === 'litri') return 'l';
+  return t;
 }
+/* Il giro delle unita', liquidi compresi: g, kg, ml, cl, L, un. */
+const UNITA_GIRO = ['g', 'kg', 'ml', 'cl', 'l', 'pz'];
 function prossimaUnita(label) {
   const u = unitaValore(label);
-  return unitaEtichetta(u === 'g' ? 'kg' : (u === 'kg' ? 'pz' : 'g'));
+  return unitaEtichetta(UNITA_GIRO[(UNITA_GIRO.indexOf(u) + 1) % UNITA_GIRO.length]);
+}
+/* Dentro l'app tutto vive in grammi (un millilitro conta come un grammo,
+   l'approssimazione di cucina); la scorta pero' ricorda di essere liquida
+   e si mostra in ml e litri. */
+const UNITA_FATTORE = { g: 1, kg: 1000, ml: 1, cl: 10, l: 1000, pz: 1 };
+function inGrammi(q, u) { return isFinite(q) ? q * (UNITA_FATTORE[u] || 1) : q; }
+function unitaScorta(u) {
+  return u === 'pz' ? 'pz' : (u === 'ml' || u === 'cl' || u === 'l') ? 'ml' : 'g';
 }
 
-/* Mille grammi si leggono meglio come un chilo. */
+/* Mille grammi si leggono meglio come un chilo; mille millilitri, un litro. */
 function fmtScorta(qta, unita) {
   if (unita === 'pz') return qta + ' un.';
+  if (unita === 'ml') {
+    return qta >= 1000 ? (Math.round(qta / 100) / 10) + ' L' : qta + ' ml';
+  }
   if (qta >= 1000) return (Math.round(qta / 100) / 10) + ' kg';
   return qta + ' g';
 }
@@ -13251,7 +13277,7 @@ function renderShopSuggest(q) {
 
   box.innerHTML = inizio.concat(dentro).slice(0, 6).map(n =>
     `<button type="button" class="chip" data-act="shop-scegli" data-val="${esc(n)}">
-      ${esc(n)} <i>${unitaDi(n) === 'pz' ? 'pz' : 'g'}</i></button>`).join('')
+      ${esc(n)} <i>${unitaEtichetta(unitaDi(n))}</i></button>`).join('')
     // la stessa porta della dispensa: la ricerca vera sta in un posto solo
     + `<button type="button" class="chip" data-act="catalogo-apri" data-val="${esc(q || '')}">
         tutti i prodotti…</button>`;
@@ -13306,8 +13332,8 @@ const NUMERI_DETTI = { 'un': 1, 'uno': 1, 'una': 1, 'due': 2, 'tre': 3, 'quattro
   'cinque': 5, 'sei': 6, 'sette': 7, 'otto': 8, 'nove': 9, 'dieci': 10,
   'dozzina': 12, 'mezzo': 0.5, 'mezza': 0.5 };
 
-/* "due litri di latte" -> { q: 2, u: 'kg', resto: 'latte' } (i liquidi si
-   tengono in grammi come tutto il resto: un litro conta mille). */
+/* "due litri di latte" -> { q: 2, u: 'l', resto: 'latte' } (i litri restano
+   litri sulla riga; al salvataggio contano mille, come tutto il resto). */
 function staccaQuantita(seg) {
   const t = seg.trim().toLowerCase()
     .replace(/^(e|poi|piu|pi\u00f9|anche|prendi|compra|serve|servono)\s+/, '');
@@ -13321,11 +13347,12 @@ function staccaQuantita(seg) {
   let q = NUMERI_DETTI[m[1]] !== undefined ? NUMERI_DETTI[m[1]] : parseFloat(m[1].replace(',', '.'));
   const unita = m[2] || '';
   let u = 'pz';
-  if (/^(kg|chili|chilo|litri|litro|l)$/.test(unita)) u = 'kg';
+  if (/^(kg|chili|chilo)$/.test(unita)) u = 'kg';
+  else if (/^(litri|litro|l)$/.test(unita)) u = 'l';
   else if (/^(hg|etti|etto)$/.test(unita)) { u = 'g'; q = q * 100; }
   else if (/^(grammi|gr|g)$/.test(unita)) u = 'g';
-  else if (/^ml$/.test(unita)) u = 'g';
-  else if (/^cl$/.test(unita)) { u = 'g'; q = q * 10; }
+  else if (/^ml$/.test(unita)) u = 'ml';
+  else if (/^cl$/.test(unita)) u = 'cl';
   return { q: q, u: u, resto: m[3].trim() };
 }
 
@@ -15025,13 +15052,15 @@ const micCampo = id =>
 
 function spesaVoceManuale(nome, q, u) {
   const buona = isFinite(q) && q > 0;
-  const etichetta = buona ? (u === 'pz' ? String(q) : u === 'kg' ? q + ' kg' : q + ' g') : '';
   let qta = q;
-  if (u === 'kg' && buona) qta = q * 1000;      // dentro si tiene tutto in grammi
+  if (buona) qta = inGrammi(q, u);   // dentro si tiene tutto in grammi (ml compresi)
+  const etichetta = buona
+    ? (u === 'pz' ? String(q) : fmtScorta(qta, unitaScorta(u)))
+    : '';
   S.shopExtra = S.shopExtra || [];
   S.shopExtra.push({ id: 'x' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
     n: String(nome).trim().toLowerCase(),
-    qta: buona ? qta : null, unita: u === 'pz' ? 'pz' : 'g', qty: etichetta });
+    qta: buona ? qta : null, unita: unitaScorta(u), qty: etichetta });
 }
 
 function aggiornaUnitaSpesa() {
@@ -15040,7 +15069,7 @@ function aggiornaUnitaSpesa() {
   if (!b || !inp) return;
   const nome = (inp.value || '').trim();
   if (!nome) { b.textContent = 'g'; return; }
-  b.textContent = unitaDi(nome) === 'pz' ? 'un.' : 'g';
+  b.textContent = unitaEtichetta(unitaDi(nome));
 }
 
 /* Se in lista finisce qualcosa che hai gia', lo dico: poi decidi tu. Non tolgo
@@ -15086,6 +15115,7 @@ function renderShopping() {
       const q0 = corretta ? (corretta.unita === 'pz' ? corretta.qta
         : corretta.qta >= 1000 ? Math.round(corretta.qta / 100) / 10 : corretta.qta) : '';
       const u0 = corretta ? (corretta.unita === 'pz' ? 'un.'
+        : corretta.unita === 'ml' ? (corretta.qta >= 1000 ? 'L' : 'ml')
         : corretta.qta >= 1000 ? 'kg' : 'g') : unitaEtichetta(unitaDi(v.n));
       return `<div class="shop-item shop-item--qta">
         <span class="txt">${esc(v.n)}</span>
@@ -15386,6 +15416,7 @@ function apriMangia(k) {
   mangiaChiave = k;
   mangiaPasto = guessMeal();
   const pz = v.unita === 'pz';
+  const liquido = v.unita === 'ml';
   document.getElementById('mangia-titolo').textContent = v.nome;
   const g = votoDi(v.nome);
   document.getElementById('mangia-sotto').innerHTML =
@@ -15393,11 +15424,12 @@ function apriMangia(k) {
     + (isFinite(v.qta) && v.qta > 0 ? ': ne hai ' + fmtScorta(v.qta, v.unita) : '')
     + (g ? ' · <b style="color:' + g.colore + '">' + g.punteggio + '/100 ' + esc(g.nome) + '</b>' : '')
     + '. Quello che mangi si somma al pasto e si scala da lì.';
-  document.getElementById('mangia-unita').textContent = pz ? 'pz' : 'g';
-  F('mangia-qta').value = pz ? 1 : 100;
-  document.getElementById('mangia-svelti').innerHTML = (pz ? [1, 2, 3] : [30, 50, 100, 150, 200])
+  document.getElementById('mangia-unita').textContent = pz ? 'pz' : liquido ? 'ml' : 'g';
+  F('mangia-qta').value = pz ? 1 : liquido ? 200 : 100;
+  document.getElementById('mangia-svelti').innerHTML =
+    (pz ? [1, 2, 3] : liquido ? [100, 200, 250, 330, 500] : [30, 50, 100, 150, 200])
     .map(x => `<button type="button" class="chip mini" data-act="mangia-svelto"
-      data-val="${x}">${x}${pz ? ' pz' : ' g'}</button>`).join('');
+      data-val="${x}">${x}${pz ? ' pz' : liquido ? ' ml' : ' g'}</button>`).join('');
   mangiaPastiRender();
   mangiaConto();
   openModal('modal-mangia');
@@ -16719,7 +16751,7 @@ function applicaPaccoFamiglia(d) {
   pushUndo('Spesa di ' + (d.da || 'famiglia'));
   voci.forEach(x => {
     const n = String(x.n).slice(0, 60).toLowerCase();
-    registraAcquisto(n, isFinite(x.q) && x.q > 0 ? x.q : null, x.u === 'pz' ? 'pz' : 'g');
+    registraAcquisto(n, isFinite(x.q) && x.q > 0 ? x.q : null, unitaScorta(x.u));
     const v = freschezza()[norm(n)];
     if (v && x.posto) { v.posto = x.posto; catalogoRegistra(n, x.posto); }
     if (!S.pantry.some(p => norm(p) === norm(n))) S.pantry.push(n);
@@ -18127,8 +18159,8 @@ document.addEventListener('click', e => {
       if (!isFinite(q) || q <= 0) {
         delete S.shopQta[val];    // campo vuoto: torna la stima
       } else {
-        if (u === 'kg') q = q * 1000;
-        S.shopQta[val] = { qta: Math.round(q * 10) / 10, unita: u === 'pz' ? 'pz' : 'g' };
+        q = inGrammi(q, u);
+        S.shopQta[val] = { qta: Math.round(q * 10) / 10, unita: unitaScorta(u) };
         // per le voci aggiunte a mano la correzione vale anche sulla voce stessa
         if (val.startsWith('x:')) {
           const extra = (S.shopExtra || []).find(x => 'x:' + x.id === val);
@@ -18497,10 +18529,10 @@ document.addEventListener('click', e => {
         pushUndo('Dispensa dettata: ' + righe.length + (righe.length === 1 ? ' voce' : ' voci'));
         righe.forEach(r => {
           let q = r.q;
-          if (r.u === 'kg' && isFinite(q)) q = q * 1000;
+          if (isFinite(q)) q = inGrammi(q, r.u);
           // il posto lo decide la stessa regola di tutti gli altri flussi:
           // scorta esistente, memoria del catalogo, e poi la regola generale
-          registraAcquisto(r.nome, isFinite(q) && q > 0 ? q : null, r.u === 'pz' ? 'pz' : 'g');
+          registraAcquisto(r.nome, isFinite(q) && q > 0 ? q : null, unitaScorta(r.u));
           if (!S.pantry.some(x => norm(x) === norm(r.nome))) S.pantry.push(r.nome);
           if (!S.myIngredients.some(m => norm(m) === norm(r.nome))) S.myIngredients.push(r.nome);
         });
@@ -18857,12 +18889,12 @@ document.addEventListener('click', e => {
       if (!nome) { F('disp-cerca').focus(); break; }
       let q = parseFloat(F('disp-qta').value);
       const u = unitaValore(F('disp-unita').textContent);
-      if (u === 'kg' && isFinite(q)) q = q * 1000;
+      q = inGrammi(q, u);
       pushUndo('Aggiunta in dispensa');
       // lo STESSO salvataggio di spesa, dettatura e scontrino: il posto lo
       // decidono, nell'ordine, la scorta gia' in casa, la memoria del
       // catalogo e la regola generale. Niente logica a parte.
-      registraAcquisto(nome, isFinite(q) && q > 0 ? q : null, u === 'pz' ? 'pz' : 'g');
+      registraAcquisto(nome, isFinite(q) && q > 0 ? q : null, unitaScorta(u));
       if (!S.pantry.some(p => norm(p) === norm(nome))) S.pantry.push(nome);
       if (!S.myIngredients.some(m => norm(m) === norm(nome))) S.myIngredients.push(nome);
       F('disp-cerca').value = ''; F('disp-qta').value = '';
@@ -18888,7 +18920,7 @@ document.addEventListener('click', e => {
       if (!v) break;
       let q = parseFloat(F('scorta-qta').value);
       const u = unitaValore(F('scorta-unita').textContent);
-      if (u === 'kg' && isFinite(q)) q = q * 1000;
+      q = inGrammi(q, u);
       pushUndo('Scorta corretta');
       if (!isFinite(q) || q <= 0) {
         delete freschezza()[val];
@@ -18896,7 +18928,7 @@ document.addEventListener('click', e => {
         toast(v.nome + ': tolto dalla dispensa.', 'Annulla');
       } else {
         v.qta = Math.round(q * 10) / 10;
-        v.unita = u === 'pz' ? 'pz' : 'g';
+        v.unita = unitaScorta(u);
         toast(v.nome + ': ' + fmtScorta(v.qta, v.unita) + '.', 'Annulla');
       }
       scortaAperta = null;
