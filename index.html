@@ -17,7 +17,7 @@
 :root{
   /* I token veri stanno nel blocco TEMA CHIARO in fondo al foglio:
      qui restano solo quelli che non dipendono dal tema. */
-  --font-system:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  --font-system:"Segoe UI Variable", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
   --r-lg:22px; --r-md:12px; --r-sm:8px;
 }
 *{box-sizing:border-box;margin:0;padding:0;font-family:var(--font-system);-webkit-tap-highlight-color:transparent}
@@ -26,10 +26,10 @@
 /* Caratteri piu' grandi in tutta l'app: sul telefono si deve leggere
    senza strizzare gli occhi. */
 html{font-size:122%}
-body{font-size:1rem}
+body{font-size:1rem;font-weight:500}
 button,input,select,textarea{font-size:1rem}
 button,.chip,.tab-item,a{touch-action:manipulation;cursor:pointer}
-:focus-visible{outline:2px solid var(--accent-primary);outline-offset:2px}
+:focus-visible{outline:2px solid #fff;outline-offset:2px}
 body{
   background-color:var(--bg-main);color:var(--text-primary);
   min-height:100vh;min-height:100dvh;overflow-x:hidden;
@@ -55,7 +55,7 @@ body.locked{overflow:hidden}
 /* ---------- header ---------- */
 .header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
 .subtitle{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:1.4px;color:var(--text-secondary);font-weight:600}
-h1{font-size:1.9rem;font-weight:700;letter-spacing:-.5px;line-height:1.15}
+h1{font-size:1.9rem;font-weight:800;letter-spacing:-.5px;line-height:1.15}
 h3{font-size:.98rem;font-weight:700;letter-spacing:-.2px}
 h4{font-size:1rem;font-weight:700;letter-spacing:-.2px}
 .icon-btn{background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--accent-primary);
@@ -230,7 +230,7 @@ h4{font-size:1rem;font-weight:700;letter-spacing:-.2px}
   box-shadow:var(--v1-ombra);transition:color .3s, border-color .3s}
 .allenamento .pallino-all{width:8px;height:8px;border-radius:50%;background:var(--text-tertiary);
   transition:background .3s, box-shadow .3s}
-.allenamento.on{color:var(--tema, var(--accent-primary));
+.allenamento.on{color:var(--tema2, var(--azione));
   border-color:color-mix(in srgb, var(--tema, var(--accent-primary)) 40%, transparent)}
 .allenamento.on .pallino-all{background:var(--tema, var(--accent-primary));
   box-shadow:0 0 0 4px color-mix(in srgb, var(--tema, var(--accent-primary)) 18%, transparent)}
@@ -266,8 +266,8 @@ h4{font-size:1rem;font-weight:700;letter-spacing:-.2px}
   padding:11px 6px;border-radius:16px;
   background:var(--v1-fondo);border:var(--v1-bordo);box-shadow:var(--v1-ombra)}
 .macro-giorno > span{display:flex;flex-direction:column;align-items:center;gap:1px;position:relative}
-.macro-giorno b{font-size:1.15rem;font-weight:600;letter-spacing:-.03em;line-height:1;
-  color:var(--tema, var(--accent-primary));font-variant-numeric:tabular-nums}
+.macro-giorno b{font-size:1.15rem;font-weight:700;letter-spacing:-.03em;line-height:1;
+  color:var(--tema2, var(--azione));font-variant-numeric:tabular-nums}
 .macro-giorno em{font-style:normal;font-size:.63rem;text-transform:uppercase;letter-spacing:.07em;
   color:var(--text-tertiary)}
 .macro-giorno i{font-style:normal;font-size:.6rem;color:var(--text-tertiary);opacity:.8}
@@ -313,16 +313,16 @@ h4{font-size:1rem;font-weight:700;letter-spacing:-.2px}
   border:1px solid color-mix(in srgb, var(--tema) 30%, transparent);
   transition:background .5s ease, border-color .5s ease}
 .pagina-ora{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:1.6px;
-  color:var(--tema);font-weight:700;margin-bottom:6px;transition:color .5s}
+  color:#fff;font-weight:700;margin-bottom:6px;transition:color .5s}
 .pagina-budget{font-size:.95rem;line-height:1.45;color:var(--text-primary);margin:0}
-.pagina-budget b{color:var(--tema);font-size:1.5rem;font-weight:700;letter-spacing:-.5px;
+.pagina-budget b{color:#fff;font-size:1.5rem;font-weight:800;letter-spacing:-.5px;
   display:block;margin-bottom:2px;transition:color .5s}
 .pasto-search{margin-bottom:12px;border-color:color-mix(in srgb, var(--tema) 28%, var(--glass-border));
   transition:border-color .5s}
 .pasto-search:focus{border-color:var(--tema)}
 
 /* Dentro una pagina, tutto quello che era oro prende il colore del momento. */
-.pagina .badge{background:color-mix(in srgb, var(--tema) 20%, transparent);color:var(--tema)}
+.pagina .badge{background:color-mix(in srgb, var(--tema) 20%, transparent);color:var(--tema2)}
 .pagina .macro-row b,.pagina .sugg-t{color:var(--tema2, var(--tema))}
 .pagina .progress > i{background:var(--tema)}
 .pagina .sugg{border-color:color-mix(in srgb, var(--tema) 35%, transparent);
@@ -519,7 +519,7 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 .meal-mod:active{text-decoration-color:var(--tema, var(--accent-primary))}
 .meal-modes{display:flex;gap:6px;flex-wrap:wrap}
 .meal-modes .chip{padding:6px 12px;font-size:.7rem;text-transform:lowercase}
-.lnk{background:none;border:none;color:var(--accent-primary);font-size:.75rem;font-weight:700;padding:0}
+.lnk{background:none;border:none;color:var(--azione);font-size:.75rem;font-weight:700;padding:0}
 .sugg{display:block;width:100%;text-align:left;background:rgba(0,0,0,.25);border:1px solid var(--glass-border);
   border-radius:var(--r-md);padding:11px 13px;margin-top:8px;color:inherit}
 /* Gli avanzi hanno la stessa forma delle ricette, con una fascia di stato che
@@ -1402,44 +1402,49 @@ input:focus,textarea:focus,select:focus{border-color:rgba(184,147,94,.55)}
 :root{
   --neon:#ff6115;
   --porcellana:#fffcf4;
-  --bruciato:#b33f00;
+  --bruciato:#b8420c;
+  --azione:#b8420c;
+  --testo:#2a1810;
+  --testo-2:#6b4a3a;
   --bg-main:var(--neon);
   --carta:var(--porcellana);
-  --vetro:rgba(255,252,244,.94);
-  --vetro-forte:rgba(255,252,244,.97);
+  --vetro:rgba(255,252,244,.84);
+  --vetro-forte:rgba(255,252,244,.90);
   --bordo:rgba(179,63,0,.14);
-  --bordo-luce:rgba(255,255,255,.92);
+  --bordo-luce:rgba(255,255,255,.55);
   --glass-bg:var(--vetro);
   --glass-border:var(--bordo);
   --glass-card:var(--vetro);
   --accent-primary:var(--neon);
   --accent-primary-contrast:var(--porcellana);
   --danger:#c03018;
-  --ok:#3e8a4e;
+  --ok:#3f6b1f;
   /* sul FONDO arancione: scritte porcellana (le finestre li ridefiniscono) */
-  --text-primary:var(--porcellana);
-  --text-secondary:rgba(255,252,244,.85);
-  --text-tertiary:rgba(255,252,244,.62);
-  --ombra:0 1px 2px rgba(140,38,0,.14), 0 10px 26px -12px rgba(122,30,0,.45);
-  --ombra-alta:0 2px 4px rgba(140,38,0,.16), 0 22px 44px -18px rgba(100,24,0,.55);
+  --text-primary:#fff;
+  --text-secondary:rgba(255,255,255,.92);
+  --text-tertiary:rgba(255,255,255,.8);
+  --ombra:inset 0 1px 0 rgba(255,255,255,.8), 0 8px 24px rgba(90,35,0,.18);
+  --ombra-alta:inset 0 1px 0 rgba(255,255,255,.8), 0 14px 34px rgba(90,35,0,.26);
 }
 
-/* Dentro OGNI finestra di porcellana le scritte tornano alla famiglia
-   dell'arancio: corrente bruciato, accenti neon. Una regola sola, e tutto
-   quello che sta dentro — etichette, icone, righe — si veste da solo. */
+/* Dentro OGNI finestra di porcellana le scritte sono BRUNO SCURO, ben
+   staccate dal chiaro; i legami e le azioni in arancio d'azione. Una
+   regola sola, e tutto quello che sta dentro si veste da solo. */
 .glass-card,.card-btn,.modal-content,.tab-bar,.icon-btn,.chip,.btn-ghost,
 .sugg,.shop-item,.modo-spesa,.barattolo,.banner-doppio,.invito-eti,
 .cal-giorno,.frecce button,.gamba,.allenamento,.macro-giorno,.campanella,
 #timer-bar,input,select,textarea{
-  --text-primary:var(--bruciato);
-  --text-secondary:rgba(179,63,0,.74);
-  --text-tertiary:rgba(179,63,0,.52);
-  /* il colore si eredita dal BODY (porcellana): qui dentro riparte
-     dall'arancio bruciato, e tutto cio' che sta dentro lo segue */
+  --text-primary:var(--testo);
+  --text-secondary:var(--testo-2);
+  --text-tertiary:rgba(107,74,58,.78);
+  /* il colore si eredita dal BODY (bianco): qui dentro riparte dal bruno
+     scuro, e l'ombra del fondo si spegne */
   color:var(--text-primary);
+  text-shadow:none;
 }
 
-body{background:var(--bg-main);color:var(--text-primary)}
+body{background:var(--bg-main);color:var(--text-primary);
+  text-shadow:0 1px 2px rgba(80,30,0,.35)}
 
 /* Il fondale cambia con il piatto scelto: motivi disegnati, non fotografie. */
 /* Un disegno solo, grande e spostato di lato: riempie l'angolo senza mettersi
@@ -1461,13 +1466,15 @@ body{background:var(--bg-main);color:var(--text-primary)}
 
 /* ---- porcellana ---- */
 .glass-card{
-  background:linear-gradient(180deg, rgba(255,252,244,.985), rgba(255,250,238,.955));
-  backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);
-  border:1px solid var(--bordo-luce);
-  box-shadow:var(--ombra), inset 0 1px 0 rgba(255,255,255,.95);
+  background:linear-gradient(180deg, rgba(255,252,244,.85), rgba(255,250,238,.80));
+  backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:var(--ombra);
   border-radius:22px}
-.card-btn{background:linear-gradient(180deg, rgba(255,252,244,.99), rgba(255,249,236,.965));
-  box-shadow:var(--ombra), inset 0 1px 0 rgba(255,255,255,.98);transition:transform .18s ease, box-shadow .25s ease}
+.card-btn{background:linear-gradient(180deg, rgba(255,252,244,.85), rgba(255,249,236,.80));
+  backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:var(--ombra);transition:transform .18s ease, box-shadow .25s ease}
 .card-btn:active{transform:scale(.985);box-shadow:0 1px 2px rgba(140,38,0,.18)}
 .chip{background:var(--vetro);border:1px solid var(--bordo);color:var(--text-primary);
   backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);
@@ -1498,9 +1505,9 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
 
 /* ---- modali ---- */
 .modal{background:rgba(122,32,0,.40);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-.modal-content{background:linear-gradient(180deg, rgba(255,253,247,.99), rgba(255,250,238,.95));
-  backdrop-filter:blur(34px) saturate(160%);-webkit-backdrop-filter:blur(34px) saturate(160%);
-  border:1px solid var(--bordo-luce);box-shadow:var(--ombra-alta)}
+.modal-content{background:linear-gradient(180deg, rgba(255,253,247,.92), rgba(255,250,238,.87));
+  backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
+  border:1px solid rgba(255,255,255,.55);box-shadow:var(--ombra-alta)}
 .close-btn{background:rgba(179,63,0,.10);color:var(--text-primary)}
 
 /* ---- dettagli minori ---- */
@@ -1509,7 +1516,7 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
 .progress,.timer-track{background:rgba(179,63,0,.12)}
 .divider,.split-row,.ing-list li,.shop-item,.meal-row,.cook-check{border-color:rgba(179,63,0,.12)}
 .badge{background:color-mix(in srgb, var(--tema, var(--accent-primary)) 14%, transparent);
-  color:var(--tema, var(--accent-primary))}
+  color:var(--tema2, var(--azione))}
 #toast{background:rgba(112,30,0,.96);color:var(--porcellana);box-shadow:var(--ombra-alta)}
 #toast button{color:#ffc190}
 #timer-bar{background:rgba(255,252,244,.95);border-top:1px solid var(--bordo)}
@@ -1645,7 +1652,7 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
   box-shadow:var(--v1-ombra);transition:color .3s, border-color .3s}
 .allenamento .pallino-all{width:8px;height:8px;border-radius:50%;background:var(--text-tertiary);
   transition:background .3s, box-shadow .3s}
-.allenamento.on{color:var(--tema, var(--accent-primary));
+.allenamento.on{color:var(--tema2, var(--azione));
   border-color:color-mix(in srgb, var(--tema, var(--accent-primary)) 40%, transparent)}
 .allenamento.on .pallino-all{background:var(--tema, var(--accent-primary));
   box-shadow:0 0 0 4px color-mix(in srgb, var(--tema, var(--accent-primary)) 18%, transparent)}
@@ -1681,8 +1688,8 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
   padding:11px 6px;border-radius:16px;
   background:var(--v1-fondo);border:var(--v1-bordo);box-shadow:var(--v1-ombra)}
 .macro-giorno > span{display:flex;flex-direction:column;align-items:center;gap:1px;position:relative}
-.macro-giorno b{font-size:1.15rem;font-weight:600;letter-spacing:-.03em;line-height:1;
-  color:var(--tema, var(--accent-primary));font-variant-numeric:tabular-nums}
+.macro-giorno b{font-size:1.15rem;font-weight:700;letter-spacing:-.03em;line-height:1;
+  color:var(--tema2, var(--azione));font-variant-numeric:tabular-nums}
 .macro-giorno em{font-style:normal;font-size:.63rem;text-transform:uppercase;letter-spacing:.07em;
   color:var(--text-tertiary)}
 .macro-giorno i{font-style:normal;font-size:.6rem;color:var(--text-tertiary);opacity:.8}
@@ -1736,20 +1743,20 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
    ========================================================================== */
 :root{
   /* livello 1 · appoggiato: chip, riquadri interni, righe */
-  --v1-fondo:linear-gradient(180deg, rgba(255,252,244,.88), rgba(255,250,238,.78));
-  --v1-blur:blur(14px) saturate(160%);
+  --v1-fondo:linear-gradient(180deg, rgba(255,252,244,.80), rgba(255,250,238,.72));
+  --v1-blur:blur(12px) saturate(140%);
   --v1-bordo:1px solid rgba(255,255,255,.55);
   --v1-ombra:0 1px 2px rgba(140,42,0,.05), inset 0 1px 0 rgba(255,255,255,.75);
 
   /* livello 2 · sollevato: schede, ricette, testate */
-  --v2-fondo:linear-gradient(180deg, rgba(255,252,244,.92), rgba(255,250,238,.84));
-  --v2-blur:blur(26px) saturate(180%);
+  --v2-fondo:linear-gradient(180deg, rgba(255,252,244,.84), rgba(255,250,238,.78));
+  --v2-blur:blur(16px) saturate(140%);
   --v2-bordo:1px solid rgba(255,255,255,.72);
   --v2-ombra:0 1px 2px rgba(140,42,0,.06), 0 12px 28px -14px rgba(140,42,0,.32),
              inset 0 1px 0 rgba(255,255,255,.9);
 
   /* livello 3 · in primo piano: modali, barre, avvisi */
-  --v3-fondo:linear-gradient(180deg, rgba(255,252,244,.94), rgba(255,250,238,.88));
+  --v3-fondo:linear-gradient(180deg, rgba(255,252,244,.88), rgba(255,250,238,.84));
   --v3-blur:blur(40px) saturate(200%);
   --v3-bordo:1px solid rgba(255,255,255,.88);
   --v3-ombra:0 2px 6px rgba(140,42,0,.08), 0 28px 56px -22px rgba(140,42,0,.45),
@@ -1855,7 +1862,7 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
   box-shadow:var(--v1-ombra);transition:color .3s, border-color .3s}
 .allenamento .pallino-all{width:8px;height:8px;border-radius:50%;background:var(--text-tertiary);
   transition:background .3s, box-shadow .3s}
-.allenamento.on{color:var(--tema, var(--accent-primary));
+.allenamento.on{color:var(--tema2, var(--azione));
   border-color:color-mix(in srgb, var(--tema, var(--accent-primary)) 40%, transparent)}
 .allenamento.on .pallino-all{background:var(--tema, var(--accent-primary));
   box-shadow:0 0 0 4px color-mix(in srgb, var(--tema, var(--accent-primary)) 18%, transparent)}
@@ -1891,8 +1898,8 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
   padding:11px 6px;border-radius:16px;
   background:var(--v1-fondo);border:var(--v1-bordo);box-shadow:var(--v1-ombra)}
 .macro-giorno > span{display:flex;flex-direction:column;align-items:center;gap:1px;position:relative}
-.macro-giorno b{font-size:1.15rem;font-weight:600;letter-spacing:-.03em;line-height:1;
-  color:var(--tema, var(--accent-primary));font-variant-numeric:tabular-nums}
+.macro-giorno b{font-size:1.15rem;font-weight:700;letter-spacing:-.03em;line-height:1;
+  color:var(--tema2, var(--azione));font-variant-numeric:tabular-nums}
 .macro-giorno em{font-style:normal;font-size:.63rem;text-transform:uppercase;letter-spacing:.07em;
   color:var(--text-tertiary)}
 .macro-giorno i{font-style:normal;font-size:.6rem;color:var(--text-tertiary);opacity:.8}
@@ -2032,7 +2039,7 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
   box-shadow:var(--v1-ombra);transition:color .3s, border-color .3s}
 .allenamento .pallino-all{width:8px;height:8px;border-radius:50%;background:var(--text-tertiary);
   transition:background .3s, box-shadow .3s}
-.allenamento.on{color:var(--tema, var(--accent-primary));
+.allenamento.on{color:var(--tema2, var(--azione));
   border-color:color-mix(in srgb, var(--tema, var(--accent-primary)) 40%, transparent)}
 .allenamento.on .pallino-all{background:var(--tema, var(--accent-primary));
   box-shadow:0 0 0 4px color-mix(in srgb, var(--tema, var(--accent-primary)) 18%, transparent)}
@@ -2068,8 +2075,8 @@ input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
   padding:11px 6px;border-radius:16px;
   background:var(--v1-fondo);border:var(--v1-bordo);box-shadow:var(--v1-ombra)}
 .macro-giorno > span{display:flex;flex-direction:column;align-items:center;gap:1px;position:relative}
-.macro-giorno b{font-size:1.15rem;font-weight:600;letter-spacing:-.03em;line-height:1;
-  color:var(--tema, var(--accent-primary));font-variant-numeric:tabular-nums}
+.macro-giorno b{font-size:1.15rem;font-weight:700;letter-spacing:-.03em;line-height:1;
+  color:var(--tema2, var(--azione));font-variant-numeric:tabular-nums}
 .macro-giorno em{font-style:normal;font-size:.63rem;text-transform:uppercase;letter-spacing:.07em;
   color:var(--text-tertiary)}
 .macro-giorno i{font-style:normal;font-size:.6rem;color:var(--text-tertiary);opacity:.8}
@@ -2261,7 +2268,7 @@ input:focus,textarea:focus,select:focus{background:rgba(255,255,255,.78);
   box-shadow:var(--v1-ombra);transition:color .3s, border-color .3s}
 .allenamento .pallino-all{width:8px;height:8px;border-radius:50%;background:var(--text-tertiary);
   transition:background .3s, box-shadow .3s}
-.allenamento.on{color:var(--tema, var(--accent-primary));
+.allenamento.on{color:var(--tema2, var(--azione));
   border-color:color-mix(in srgb, var(--tema, var(--accent-primary)) 40%, transparent)}
 .allenamento.on .pallino-all{background:var(--tema, var(--accent-primary));
   box-shadow:0 0 0 4px color-mix(in srgb, var(--tema, var(--accent-primary)) 18%, transparent)}
@@ -2297,8 +2304,8 @@ input:focus,textarea:focus,select:focus{background:rgba(255,255,255,.78);
   padding:11px 6px;border-radius:16px;
   background:var(--v1-fondo);border:var(--v1-bordo);box-shadow:var(--v1-ombra)}
 .macro-giorno > span{display:flex;flex-direction:column;align-items:center;gap:1px;position:relative}
-.macro-giorno b{font-size:1.15rem;font-weight:600;letter-spacing:-.03em;line-height:1;
-  color:var(--tema, var(--accent-primary));font-variant-numeric:tabular-nums}
+.macro-giorno b{font-size:1.15rem;font-weight:700;letter-spacing:-.03em;line-height:1;
+  color:var(--tema2, var(--azione));font-variant-numeric:tabular-nums}
 .macro-giorno em{font-style:normal;font-size:.63rem;text-transform:uppercase;letter-spacing:.07em;
   color:var(--text-tertiary)}
 .macro-giorno i{font-style:normal;font-size:.6rem;color:var(--text-tertiary);opacity:.8}
@@ -2497,7 +2504,7 @@ h3{font-weight:600;letter-spacing:-.018em}
   box-shadow:var(--v1-ombra);transition:color .3s, border-color .3s}
 .allenamento .pallino-all{width:8px;height:8px;border-radius:50%;background:var(--text-tertiary);
   transition:background .3s, box-shadow .3s}
-.allenamento.on{color:var(--tema, var(--accent-primary));
+.allenamento.on{color:var(--tema2, var(--azione));
   border-color:color-mix(in srgb, var(--tema, var(--accent-primary)) 40%, transparent)}
 .allenamento.on .pallino-all{background:var(--tema, var(--accent-primary));
   box-shadow:0 0 0 4px color-mix(in srgb, var(--tema, var(--accent-primary)) 18%, transparent)}
@@ -2533,8 +2540,8 @@ h3{font-weight:600;letter-spacing:-.018em}
   padding:11px 6px;border-radius:16px;
   background:var(--v1-fondo);border:var(--v1-bordo);box-shadow:var(--v1-ombra)}
 .macro-giorno > span{display:flex;flex-direction:column;align-items:center;gap:1px;position:relative}
-.macro-giorno b{font-size:1.15rem;font-weight:600;letter-spacing:-.03em;line-height:1;
-  color:var(--tema, var(--accent-primary));font-variant-numeric:tabular-nums}
+.macro-giorno b{font-size:1.15rem;font-weight:700;letter-spacing:-.03em;line-height:1;
+  color:var(--tema2, var(--azione));font-variant-numeric:tabular-nums}
 .macro-giorno em{font-style:normal;font-size:.63rem;text-transform:uppercase;letter-spacing:.07em;
   color:var(--text-tertiary)}
 .macro-giorno i{font-style:normal;font-size:.6rem;color:var(--text-tertiary);opacity:.8}
