@@ -606,9 +606,10 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(/--neon:\s*#ff6115/i.test(css), 'manca il Neon Orange #FF6115');
     vero(/--porcellana:\s*#fffcf4/i.test(css), 'manca la Porcelain #FFFCF4');
     vero(/--bg-main:\s*var\(--neon\)/i.test(css), 'il fondo non e\' il neon');
-    vero(/--bruciato:\s*#b33f00/i.test(css), 'manca l\'arancio bruciato per le scritte');
-    // dentro le finestre le scritte ripartono dalla famiglia dell\'arancio
-    vero(/--text-primary:var\(--bruciato\)/.test(css.replace(/\s+/g, '')),
+    vero(/--testo:\s*#2a1810/i.test(css), 'manca il bruno scuro per le scritte su card');
+    vero(/--azione:\s*#b8420c/i.test(css), 'manca il colore delle azioni');
+    // dentro le finestre le scritte ripartono dal bruno scuro
+    vero(/--text-primary:var\(--testo\)/.test(css.replace(/\s+/g, '')),
       'le finestre non ridefiniscono il colore delle scritte');
   });
 
