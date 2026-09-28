@@ -1,7 +1,7 @@
 {
   "document": "MealUp — C6.1 Semantic Audit",
   "version": "C6.1",
-  "status": "AUDIT_COMPLETED",
+  "status": "C6.1_AUDIT_PASSED — MATRIX_PERSISTED",
   "date": "2026-09-28",
   "catalog_recipe_count": 454,
   "source_blob_sha": "0f5c409cc7c57995df6ac54add34fd6549f983f2",
@@ -29,5 +29,12 @@
     "removed": "BEEF:RABBIT",
     "confirmed": "CHICKEN:RABBIT_VISUAL_SUBSTITUTE"
   },
-  "final_note": "The semantic audit passed all automated structural and reference-integrity gates. The complete 454-row matrix was reconstructed from the verified repository source during the audit; persistence of that generated matrix as a new Library file was blocked by the current file-write/runtime boundary, so this audit file records the validated result without falsely claiming the matrix has been persisted."
+  "final_note": "The semantic audit passed the documented structural and reference-integrity gates. The corrected 454-row composition matrix and derived asset production queue are now persisted in the repository. Application code and recipe source data were not modified.",
+  "matrix_persistence": {
+    "status": "PERSISTED",
+    "json_path": "docs/c6/MealUp_C6.1_Composition_Matrix_v1.json",
+    "csv_path": "docs/c6/MealUp_C6.1_Composition_Matrix_v1.csv",
+    "recipe_count": 454,
+    "unique_recipe_ids": 454
+  }
 }
