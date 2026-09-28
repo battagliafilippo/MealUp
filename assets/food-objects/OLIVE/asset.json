@@ -1,0 +1,31 @@
+{
+  "asset_key": "OLIVE",
+  "master_id": "OLIVE",
+  "variant_id": null,
+  "object_type": "Food Object",
+  "status": "GENERATED_UNREGISTERED",
+  "batch_id": "C6.2-B01",
+  "asset_family": "approved_additions",
+  "recipe_count": 16,
+  "recipe_ids": [
+    "p08",
+    "a13",
+    "a32",
+    "a41",
+    "a55",
+    "c30",
+    "d02",
+    "d09",
+    "d10",
+    "d25",
+    "f19",
+    "f23",
+    "f38",
+    "n16",
+    "ft13",
+    "ft20"
+  ],
+  "visual_spec": "Single whole green olive, MealUp Toy, isolated, transparent background, centered, no vessel/context.",
+  "binary_file": null,
+  "registration_blocker": "Actual image binary is not currently exposed as an attachable repository file."
+}
