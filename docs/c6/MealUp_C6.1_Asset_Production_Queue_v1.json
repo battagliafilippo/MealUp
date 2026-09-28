@@ -1,9 +1,9 @@
 {
   "document": "MealUp — C6.1 Asset Production Queue",
-  "version": "C6.1.1",
-  "status": "DERIVED_FROM_MATRIX",
+  "version": "C6.1.2",
+  "status": "DERIVED_FROM_PERSISTED_MATRIX",
   "source_matrix": "MealUp_C6.1_Composition_Matrix_v1.json",
-  "unique_asset_instantiations": 171,
+  "unique_asset_instantiations": 184,
   "queue": [
     {
       "master_id": "AGRODOLCE",
@@ -11,13 +11,21 @@
       "recipe_count": 8,
       "recipe_ids": [
         "a24",
-        "s14",
         "o01",
         "o04",
         "o05",
         "o12",
+        "s14",
         "s34",
         "s35"
+      ]
+    },
+    {
+      "master_id": "AGRODOLCE",
+      "variant_id": "TERIYAKI_SOY_SWEET_GLAZE_VISUAL_VARIANT",
+      "recipe_count": 1,
+      "recipe_ids": [
+        "s36"
       ]
     },
     {
@@ -33,8 +41,6 @@
       "variant_id": null,
       "recipe_count": 15,
       "recipe_ids": [
-        "p08",
-        "p14",
         "a03",
         "a04",
         "a09",
@@ -45,6 +51,8 @@
         "b40",
         "c04",
         "d04",
+        "p08",
+        "p14",
         "s03",
         "s11",
         "s19"
@@ -55,13 +63,13 @@
       "variant_id": null,
       "recipe_count": 7,
       "recipe_ids": [
-        "f26",
-        "n08",
-        "v12",
-        "w09",
         "do06",
         "do17",
-        "ft03"
+        "f26",
+        "ft03",
+        "n08",
+        "v12",
+        "w09"
       ]
     },
     {
@@ -80,16 +88,16 @@
       "variant_id": null,
       "recipe_count": 11,
       "recipe_ids": [
-        "r1",
-        "r7",
         "a12",
         "c05",
         "f11",
         "f22",
         "f29",
         "f36",
-        "n30",
         "ft20",
+        "n30",
+        "r1",
+        "r7",
         "sp14"
       ]
     },
@@ -110,27 +118,32 @@
       "variant_id": null,
       "recipe_count": 6,
       "recipe_ids": [
-        "r2",
         "a11",
         "f21",
-        "w14",
         "ft02",
-        "sp13"
+        "r2",
+        "sp13",
+        "w14"
       ]
     },
     {
       "master_id": "BANANA",
       "variant_id": null,
-      "recipe_count": 8,
+      "recipe_count": 5,
       "recipe_ids": [
-        "w02",
-        "w03",
-        "w07",
         "do02",
-        "do05",
         "do10",
         "ft03",
-        "sp11"
+        "w02",
+        "w07"
+      ]
+    },
+    {
+      "master_id": "BANANA_BREAD",
+      "variant_id": null,
+      "recipe_count": 1,
+      "recipe_ids": [
+        "do10"
       ]
     },
     {
@@ -138,11 +151,6 @@
       "variant_id": null,
       "recipe_count": 34,
       "recipe_ids": [
-        "p07",
-        "p10",
-        "p13",
-        "p19",
-        "p22",
         "a01",
         "a05",
         "a06",
@@ -162,16 +170,21 @@
         "d36",
         "d38",
         "f12",
+        "ft05",
+        "ft10",
+        "n09",
+        "n21",
+        "p07",
+        "p10",
+        "p13",
+        "p19",
+        "p22",
         "s04",
         "s06",
         "s10",
         "s12",
         "s13",
-        "s30",
-        "n09",
-        "n21",
-        "ft05",
-        "ft10"
+        "s30"
       ]
     },
     {
@@ -179,8 +192,6 @@
       "variant_id": null,
       "recipe_count": 11,
       "recipe_ids": [
-        "p10",
-        "p15",
         "b18",
         "b21",
         "b23",
@@ -189,19 +200,24 @@
         "d44",
         "f37",
         "n12",
+        "p10",
+        "p15",
         "sp12"
       ]
     },
     {
       "master_id": "BEEF",
-      "variant_id": null,
-      "recipe_count": 30,
+      "variant_id": "LIVER",
+      "recipe_count": 1,
       "recipe_ids": [
-        "r1",
-        "p11",
-        "p12",
-        "p18",
-        "p28",
+        "c35"
+      ]
+    },
+    {
+      "master_id": "BEEF",
+      "variant_id": null,
+      "recipe_count": 29,
+      "recipe_ids": [
         "a03",
         "a10",
         "a34",
@@ -218,7 +234,6 @@
         "c10",
         "c11",
         "c12",
-        "c35",
         "c37",
         "c43",
         "f11",
@@ -226,6 +241,11 @@
         "f36",
         "o03",
         "o09",
+        "p11",
+        "p12",
+        "p18",
+        "p28",
+        "r1",
         "sp12"
       ]
     },
@@ -256,10 +276,8 @@
     {
       "master_id": "BEVERAGE_BOTTLE",
       "variant_id": "BIRRA",
-      "recipe_count": 3,
+      "recipe_count": 1,
       "recipe_ids": [
-        "a37",
-        "a54",
         "v15"
       ]
     },
@@ -274,28 +292,9 @@
     {
       "master_id": "BEVERAGE_BOTTLE",
       "variant_id": "COLA",
-      "recipe_count": 20,
+      "recipe_count": 1,
       "recipe_ids": [
-        "r1",
-        "r7",
-        "a12",
-        "c05",
-        "c07",
-        "f11",
-        "f22",
-        "f29",
-        "f36",
-        "n30",
-        "v01",
-        "k08",
-        "k09",
-        "k10",
-        "do12",
-        "do14",
-        "do15",
-        "do18",
-        "do19",
-        "sp14"
+        "v01"
       ]
     },
     {
@@ -332,14 +331,6 @@
     },
     {
       "master_id": "BEVERAGE_BOTTLE",
-      "variant_id": null,
-      "recipe_count": 1,
-      "recipe_ids": [
-        "a20"
-      ]
-    },
-    {
-      "master_id": "BEVERAGE_BOTTLE",
       "variant_id": "TE_FREDDO",
       "recipe_count": 1,
       "recipe_ids": [
@@ -357,87 +348,18 @@
     {
       "master_id": "BEVERAGE_JUICE_BOX",
       "variant_id": "ACE",
-      "recipe_count": 22,
+      "recipe_count": 1,
       "recipe_ids": [
-        "a15",
-        "a16",
-        "a24",
-        "a25",
-        "a40",
-        "c35",
-        "d43",
-        "f37",
-        "s03",
-        "s10",
-        "s14",
-        "s15",
-        "n01",
-        "n17",
-        "n19",
-        "v10",
-        "o05",
-        "o11",
-        "o12",
-        "o14",
-        "s35",
-        "s36"
-      ]
-    },
-    {
-      "master_id": "BEVERAGE_JUICE_BOX",
-      "variant_id": "ARANCIA",
-      "recipe_count": 4,
-      "recipe_ids": [
-        "d15",
-        "v08",
-        "v09",
-        "ft12"
-      ]
-    },
-    {
-      "master_id": "BEVERAGE_JUICE_BOX",
-      "variant_id": "MELA",
-      "recipe_count": 13,
-      "recipe_ids": [
-        "p13",
-        "a26",
-        "a53",
-        "b44",
-        "d32",
-        "d34",
-        "d38",
-        "d41",
-        "n08",
-        "v12",
-        "do06",
-        "do17",
-        "ft03"
+        "v10"
       ]
     },
     {
       "master_id": "BEVERAGE_JUICE_BOX",
       "variant_id": null,
-      "recipe_count": 10,
-      "recipe_ids": [
-        "a23",
-        "a55",
-        "c05",
-        "d09",
-        "f11",
-        "f19",
-        "f38",
-        "n16",
-        "n30",
-        "v03"
-      ]
-    },
-    {
-      "master_id": "BEVERAGE_JUICE_BOX",
-      "variant_id": "PERA",
       "recipe_count": 2,
       "recipe_ids": [
-        "v11",
-        "do07"
+        "n30",
+        "v03"
       ]
     },
     {
@@ -445,15 +367,6 @@
       "variant_id": null,
       "recipe_count": 55,
       "recipe_ids": [
-        "p01",
-        "p02",
-        "p03",
-        "p04",
-        "p05",
-        "p06",
-        "p09",
-        "p14",
-        "p26",
         "a04",
         "a08",
         "a18",
@@ -485,11 +398,8 @@
         "f28",
         "f29",
         "f36",
-        "s10",
-        "s15",
-        "s23",
-        "s26",
-        "s29",
+        "ft07",
+        "ft17",
         "n03",
         "n09",
         "n11",
@@ -498,8 +408,20 @@
         "o10",
         "o11",
         "o12",
-        "ft07",
-        "ft17"
+        "p01",
+        "p02",
+        "p03",
+        "p04",
+        "p05",
+        "p06",
+        "p09",
+        "p14",
+        "p26",
+        "s10",
+        "s15",
+        "s23",
+        "s26",
+        "s29"
       ]
     },
     {
@@ -512,8 +434,16 @@
     },
     {
       "master_id": "BREAD",
+      "variant_id": "BISCUIT_FROLLINO_VISUAL_VARIANT",
+      "recipe_count": 1,
+      "recipe_ids": [
+        "do19"
+      ]
+    },
+    {
+      "master_id": "BREAD",
       "variant_id": null,
-      "recipe_count": 38,
+      "recipe_count": 28,
       "recipe_ids": [
         "a01",
         "a02",
@@ -524,6 +454,7 @@
         "a30",
         "a36",
         "a40",
+        "a54",
         "b14",
         "b20",
         "b22",
@@ -533,26 +464,15 @@
         "b27",
         "b48",
         "b49",
-        "c04",
-        "c08",
         "c09",
         "d30",
         "d40",
         "d45",
-        "s31",
-        "w01",
-        "w05",
-        "w09",
-        "k03",
-        "k04",
-        "k05",
-        "k06",
-        "k07",
         "k11",
-        "k13",
-        "k14",
-        "ft02",
-        "sp14"
+        "s31",
+        "sp14",
+        "w01",
+        "w09"
       ]
     },
     {
@@ -560,10 +480,22 @@
       "variant_id": null,
       "recipe_count": 4,
       "recipe_ids": [
-        "r7",
-        "r6",
         "f29",
+        "r6",
+        "r7",
         "w05"
+      ]
+    },
+    {
+      "master_id": "BRIOCHE",
+      "variant_id": null,
+      "recipe_count": 5,
+      "recipe_ids": [
+        "k03",
+        "k04",
+        "k05",
+        "k06",
+        "k07"
       ]
     },
     {
@@ -573,10 +505,10 @@
       "recipe_ids": [
         "b34",
         "f05",
+        "ft14",
         "n03",
         "o06",
-        "o15",
-        "ft14"
+        "o15"
       ]
     },
     {
@@ -626,20 +558,6 @@
         "c35",
         "d23",
         "d31",
-        "s22",
-        "s24",
-        "s25",
-        "s26",
-        "s27",
-        "s28",
-        "s29",
-        "s32",
-        "k01",
-        "n06",
-        "n10",
-        "n14",
-        "n24",
-        "k11",
         "do08",
         "do12",
         "do13",
@@ -649,6 +567,20 @@
         "do17",
         "do19",
         "do20",
+        "k01",
+        "k11",
+        "n06",
+        "n10",
+        "n14",
+        "n24",
+        "s22",
+        "s24",
+        "s25",
+        "s26",
+        "s27",
+        "s28",
+        "s29",
+        "s32",
         "sp05"
       ]
     },
@@ -680,13 +612,22 @@
       ]
     },
     {
+      "master_id": "CAKE",
+      "variant_id": null,
+      "recipe_count": 5,
+      "recipe_ids": [
+        "a47",
+        "a48",
+        "do12",
+        "do17",
+        "sp06"
+      ]
+    },
+    {
       "master_id": "CARROT",
       "variant_id": null,
       "recipe_count": 35,
       "recipe_ids": [
-        "p15",
-        "p17",
-        "p18",
         "a09",
         "a42",
         "a43",
@@ -710,6 +651,8 @@
         "f14",
         "f24",
         "f30",
+        "ft04",
+        "ft09",
         "n01",
         "n23",
         "o02",
@@ -717,8 +660,9 @@
         "o10",
         "o14",
         "o15",
-        "ft04",
-        "ft09"
+        "p15",
+        "p17",
+        "p18"
       ]
     },
     {
@@ -730,9 +674,9 @@
         "a49",
         "a55",
         "b24",
+        "ft18",
         "n10",
-        "n28",
-        "ft18"
+        "n28"
       ]
     },
     {
@@ -740,8 +684,6 @@
       "variant_id": null,
       "recipe_count": 12,
       "recipe_ids": [
-        "p17",
-        "p18",
         "a09",
         "a14",
         "a42",
@@ -750,8 +692,10 @@
         "c02",
         "c03",
         "c17",
+        "ft04",
         "n23",
-        "ft04"
+        "p17",
+        "p18"
       ]
     },
     {
@@ -760,6 +704,15 @@
       "recipe_count": 1,
       "recipe_ids": [
         "s32"
+      ]
+    },
+    {
+      "master_id": "CHEESECAKE",
+      "variant_id": null,
+      "recipe_count": 2,
+      "recipe_ids": [
+        "do08",
+        "do20"
       ]
     },
     {
@@ -787,21 +740,20 @@
         "f13",
         "f21",
         "f40",
-        "s06",
-        "n01",
         "ft09",
         "ft10",
         "ft19",
         "ft20",
+        "n01",
+        "s06",
         "sp10"
       ]
     },
     {
       "master_id": "CHICKEN",
       "variant_id": null,
-      "recipe_count": 32,
+      "recipe_count": 28,
       "recipe_ids": [
-        "r4",
         "c22",
         "c23",
         "c24",
@@ -809,10 +761,7 @@
         "c26",
         "c27",
         "c28",
-        "c30",
         "c39",
-        "c41",
-        "d42",
         "f01",
         "f02",
         "f03",
@@ -820,26 +769,27 @@
         "f05",
         "f06",
         "f09",
-        "f12",
         "f13",
         "f32",
         "f33",
         "f39",
+        "ft11",
         "o01",
         "o08",
         "o11",
-        "w04",
-        "w08",
-        "ft11",
+        "r4",
         "sp08",
-        "sp10"
+        "sp10",
+        "w04",
+        "w08"
       ]
     },
     {
       "master_id": "CHICKEN",
       "variant_id": "RABBIT_VISUAL_SUBSTITUTE",
-      "recipe_count": 1,
+      "recipe_count": 2,
       "recipe_ids": [
+        "c30",
         "c31"
       ]
     },
@@ -848,19 +798,19 @@
       "variant_id": null,
       "recipe_count": 14,
       "recipe_ids": [
-        "r5",
-        "p16",
         "a30",
         "a31",
         "b20",
         "d45",
         "f12",
         "f31",
-        "s09",
-        "n27",
         "ft04",
         "ft10",
         "ft19",
+        "n27",
+        "p16",
+        "r5",
+        "s09",
         "sp15"
       ]
     },
@@ -874,16 +824,24 @@
       ]
     },
     {
+      "master_id": "CIAMBELLA",
+      "variant_id": null,
+      "recipe_count": 1,
+      "recipe_ids": [
+        "k14"
+      ]
+    },
+    {
       "master_id": "CLAM",
       "variant_id": null,
       "recipe_count": 6,
       "recipe_ids": [
-        "p09",
-        "p24",
         "b03",
         "b08",
         "b38",
-        "b48"
+        "b48",
+        "p09",
+        "p24"
       ]
     },
     {
@@ -927,31 +885,38 @@
       "variant_id": null,
       "recipe_count": 16,
       "recipe_ids": [
-        "p20",
-        "p27",
         "a50",
         "c06",
         "d31",
+        "do09",
+        "do18",
+        "do20",
+        "k06",
+        "k07",
+        "p20",
+        "p27",
         "s05",
         "s09",
         "s13",
         "s20",
         "s26",
-        "s27",
-        "k06",
-        "k07",
-        "do09",
-        "do18",
-        "do20"
+        "s27"
       ]
     },
     {
       "master_id": "CREAM_CHEESE",
       "variant_id": null,
-      "recipe_count": 2,
+      "recipe_count": 1,
       "recipe_ids": [
-        "do08",
         "do20"
+      ]
+    },
+    {
+      "master_id": "CROISSANT",
+      "variant_id": null,
+      "recipe_count": 1,
+      "recipe_ids": [
+        "k08"
       ]
     },
     {
@@ -959,9 +924,9 @@
       "variant_id": null,
       "recipe_count": 3,
       "recipe_ids": [
-        "s02",
         "n25",
-        "o14"
+        "o14",
+        "s02"
       ]
     },
     {
@@ -977,24 +942,20 @@
       "variant_id": null,
       "recipe_count": 3,
       "recipe_ids": [
-        "o13",
         "ft06",
+        "o13",
         "sp13"
       ]
     },
     {
       "master_id": "EGG",
       "variant_id": null,
-      "recipe_count": 56,
+      "recipe_count": 49,
       "recipe_ids": [
-        "r5",
-        "p11",
         "a33",
         "a35",
         "a36",
         "a45",
-        "a47",
-        "a48",
         "a49",
         "a50",
         "b10",
@@ -1019,30 +980,27 @@
         "d37",
         "d38",
         "d39",
+        "do11",
+        "do12",
+        "do14",
+        "do15",
+        "do17",
+        "do19",
         "f25",
         "f26",
         "f27",
-        "f28",
         "f37",
         "f40",
-        "s21",
-        "o02",
-        "o08",
-        "w09",
-        "do10",
-        "do11",
-        "do12",
-        "do13",
-        "do14",
-        "do15",
-        "do16",
-        "do17",
-        "do19",
-        "do20",
         "ft02",
         "ft16",
+        "o02",
+        "o08",
+        "p11",
+        "r5",
+        "s21",
         "sp06",
-        "sp07"
+        "sp07",
+        "w09"
       ]
     },
     {
@@ -1050,7 +1008,8 @@
       "variant_id": null,
       "recipe_count": 18,
       "recipe_ids": [
-        "r5",
+        "do05",
+        "do18",
         "f08",
         "f09",
         "f10",
@@ -1061,29 +1020,29 @@
         "f27",
         "f28",
         "f30",
-        "s03",
-        "w09",
-        "do05",
-        "do18",
         "ft16",
+        "r5",
+        "s03",
         "sp09",
-        "sp11"
+        "sp11",
+        "w09"
       ]
     },
     {
       "master_id": "EGGPLANT",
       "variant_id": null,
-      "recipe_count": 9,
+      "recipe_count": 10,
       "recipe_ids": [
-        "p13",
         "a23",
         "a26",
         "a53",
         "d32",
+        "d33",
         "d34",
         "d38",
         "d41",
-        "n08"
+        "n08",
+        "p13"
       ]
     },
     {
@@ -1102,14 +1061,14 @@
       "variant_id": null,
       "recipe_count": 8,
       "recipe_ids": [
-        "p23",
         "a42",
         "c45",
         "f19",
         "f24",
         "f38",
+        "ft12",
         "n16",
-        "ft12"
+        "p23"
       ]
     },
     {
@@ -1117,9 +1076,9 @@
       "variant_id": null,
       "recipe_count": 3,
       "recipe_ids": [
+        "ft20",
         "r1",
-        "r5",
-        "ft20"
+        "r5"
       ]
     },
     {
@@ -1159,30 +1118,18 @@
       "variant_id": null,
       "recipe_count": 5,
       "recipe_ids": [
+        "do13",
         "k01",
         "k04",
         "k05",
-        "k11",
-        "do13"
+        "k11"
       ]
     },
     {
       "master_id": "GARLIC",
       "variant_id": null,
-      "recipe_count": 82,
+      "recipe_count": 81,
       "recipe_ids": [
-        "r4",
-        "p05",
-        "p06",
-        "p07",
-        "p09",
-        "p10",
-        "p13",
-        "p14",
-        "p16",
-        "p19",
-        "p21",
-        "p25",
         "a01",
         "a02",
         "a15",
@@ -1228,6 +1175,30 @@
         "f33",
         "f35",
         "f39",
+        "ft04",
+        "n02",
+        "n03",
+        "n04",
+        "n07",
+        "n08",
+        "n11",
+        "n13",
+        "n22",
+        "n28",
+        "o03",
+        "o06",
+        "p05",
+        "p06",
+        "p07",
+        "p09",
+        "p10",
+        "p13",
+        "p14",
+        "p16",
+        "p19",
+        "p21",
+        "p25",
+        "r4",
         "s01",
         "s02",
         "s04",
@@ -1239,20 +1210,7 @@
         "s18",
         "s27",
         "s30",
-        "s31",
-        "n02",
-        "n03",
-        "n04",
-        "n07",
-        "n08",
-        "n11",
-        "n13",
-        "n22",
-        "n25",
-        "n28",
-        "o03",
-        "o06",
-        "ft04"
+        "s31"
       ]
     },
     {
@@ -1271,8 +1229,8 @@
       "variant_id": null,
       "recipe_count": 4,
       "recipe_ids": [
-        "p26",
         "b04",
+        "p26",
         "s23",
         "s24"
       ]
@@ -1282,13 +1240,13 @@
       "variant_id": null,
       "recipe_count": 7,
       "recipe_ids": [
-        "r7",
         "c05",
         "f11",
         "f35",
-        "n30",
         "ft08",
-        "ft16"
+        "ft16",
+        "n30",
+        "r7"
       ]
     },
     {
@@ -1296,21 +1254,21 @@
       "variant_id": null,
       "recipe_count": 15,
       "recipe_ids": [
-        "r3",
-        "r6",
+        "do01",
+        "do08",
+        "do09",
         "f01",
         "f03",
+        "ft01",
+        "n25",
+        "r3",
+        "r6",
         "s01",
         "s02",
         "s08",
         "s11",
         "s16",
-        "n25",
-        "w06",
-        "do01",
-        "do08",
-        "do09",
-        "ft01"
+        "w06"
       ]
     },
     {
@@ -1318,9 +1276,9 @@
       "variant_id": null,
       "recipe_count": 3,
       "recipe_ids": [
-        "p10",
         "b18",
-        "n12"
+        "n12",
+        "p10"
       ]
     },
     {
@@ -1335,11 +1293,8 @@
     {
       "master_id": "GROUND_BEEF",
       "variant_id": null,
-      "recipe_count": 21,
+      "recipe_count": 20,
       "recipe_ids": [
-        "p11",
-        "p12",
-        "p28",
         "a32",
         "a34",
         "b19",
@@ -1354,16 +1309,18 @@
         "f08",
         "f09",
         "f10",
-        "f17",
         "f18",
         "f30",
+        "p11",
+        "p12",
+        "p28",
         "sp12"
       ]
     },
     {
       "master_id": "HAM",
       "variant_id": null,
-      "recipe_count": 13,
+      "recipe_count": 12,
       "recipe_ids": [
         "a07",
         "a08",
@@ -1376,8 +1333,7 @@
         "c15",
         "c40",
         "f26",
-        "n24",
-        "sp06"
+        "n24"
       ]
     },
     {
@@ -1411,10 +1367,10 @@
       "variant_id": null,
       "recipe_count": 4,
       "recipe_ids": [
-        "p12",
         "b17",
         "b18",
-        "b19"
+        "b19",
+        "p12"
       ]
     },
     {
@@ -1422,8 +1378,6 @@
       "variant_id": null,
       "recipe_count": 70,
       "recipe_ids": [
-        "r1",
-        "r7",
         "a10",
         "a11",
         "a12",
@@ -1462,6 +1416,19 @@
         "f29",
         "f33",
         "f34",
+        "ft02",
+        "ft04",
+        "ft06",
+        "ft08",
+        "ft10",
+        "ft11",
+        "ft18",
+        "n02",
+        "n12",
+        "n13",
+        "n26",
+        "r1",
+        "r7",
         "s01",
         "s05",
         "s07",
@@ -1475,23 +1442,12 @@
         "s19",
         "s20",
         "s29",
-        "n02",
-        "n12",
-        "n13",
-        "n26",
+        "sp02",
         "v07",
         "v14",
         "w04",
         "w08",
-        "w10",
-        "ft02",
-        "ft04",
-        "ft06",
-        "ft08",
-        "ft10",
-        "ft11",
-        "ft18",
-        "sp02"
+        "w10"
       ]
     },
     {
@@ -1504,8 +1460,27 @@
         "c36",
         "d46",
         "f30",
-        "n23",
-        "ft09"
+        "ft09",
+        "n23"
+      ]
+    },
+    {
+      "master_id": "LETTUCE",
+      "variant_id": null,
+      "recipe_count": 12,
+      "recipe_ids": [
+        "a14",
+        "a44",
+        "a55",
+        "d42",
+        "f12",
+        "f21",
+        "f38",
+        "n01",
+        "n16",
+        "n21",
+        "n25",
+        "o14"
       ]
     },
     {
@@ -1559,11 +1534,11 @@
         "c34",
         "d28",
         "d37",
-        "s02",
-        "s05",
         "n08",
         "n17",
         "n25",
+        "s02",
+        "s05",
         "v14"
       ]
     },
@@ -1572,13 +1547,22 @@
       "variant_id": null,
       "recipe_count": 7,
       "recipe_ids": [
-        "r3",
-        "k01",
-        "w06",
-        "w12",
-        "k05",
         "do05",
-        "ft01"
+        "ft01",
+        "k01",
+        "k05",
+        "r3",
+        "w06",
+        "w12"
+      ]
+    },
+    {
+      "master_id": "MOUSSE",
+      "variant_id": null,
+      "recipe_count": 2,
+      "recipe_ids": [
+        "do01",
+        "do18"
       ]
     },
     {
@@ -1586,8 +1570,6 @@
       "variant_id": null,
       "recipe_count": 10,
       "recipe_ids": [
-        "r6",
-        "p19",
         "a05",
         "a29",
         "a33",
@@ -1595,7 +1577,27 @@
         "a36",
         "b11",
         "d32",
-        "d33"
+        "d33",
+        "p19",
+        "r6"
+      ]
+    },
+    {
+      "master_id": "MUFFIN",
+      "variant_id": null,
+      "recipe_count": 2,
+      "recipe_ids": [
+        "do15",
+        "f28"
+      ]
+    },
+    {
+      "master_id": "MUFFIN",
+      "variant_id": "PACKAGED_CHOCOLATE_SNACK_CAKE_VARIANT",
+      "recipe_count": 2,
+      "recipe_ids": [
+        "k09",
+        "k10"
       ]
     },
     {
@@ -1603,7 +1605,6 @@
       "variant_id": null,
       "recipe_count": 10,
       "recipe_ids": [
-        "p21",
         "a02",
         "b02",
         "b45",
@@ -1611,8 +1612,9 @@
         "b55",
         "c16",
         "c29",
-        "s27",
-        "n22"
+        "n22",
+        "p21",
+        "s27"
       ]
     },
     {
@@ -1620,14 +1622,14 @@
       "variant_id": null,
       "recipe_count": 8,
       "recipe_ids": [
-        "p24",
         "a14",
         "a18",
         "b03",
         "b33",
         "b48",
         "b49",
-        "d22"
+        "d22",
+        "p24"
       ]
     },
     {
@@ -1650,20 +1652,18 @@
     {
       "master_id": "NOODLES",
       "variant_id": null,
-      "recipe_count": 2,
+      "recipe_count": 1,
       "recipe_ids": [
-        "o03",
-        "o08"
+        "o03"
       ]
     },
     {
       "master_id": "OCTOPUS",
       "variant_id": null,
-      "recipe_count": 5,
+      "recipe_count": 4,
       "recipe_ids": [
         "a12",
         "a13",
-        "a14",
         "b49",
         "d16"
       ]
@@ -1671,25 +1671,12 @@
     {
       "master_id": "OLIVE",
       "variant_id": "GENERIC_OLIVE",
-      "recipe_count": 18,
+      "recipe_count": 5,
       "recipe_ids": [
-        "p08",
-        "a23",
-        "a41",
-        "a55",
-        "b51",
-        "c23",
-        "c30",
-        "d02",
-        "d05",
-        "d09",
         "d10",
         "d25",
         "d35",
-        "f19",
         "f23",
-        "f38",
-        "n16",
         "ft13"
       ]
     },
@@ -1708,12 +1695,6 @@
       "variant_id": null,
       "recipe_count": 62,
       "recipe_ids": [
-        "p15",
-        "p17",
-        "p18",
-        "p23",
-        "p27",
-        "p28",
         "a03",
         "a16",
         "a24",
@@ -1756,8 +1737,7 @@
         "f03",
         "f04",
         "f30",
-        "s14",
-        "s21",
+        "ft17",
         "n09",
         "n15",
         "n17",
@@ -1768,7 +1748,14 @@
         "o09",
         "o11",
         "o12",
-        "ft17",
+        "p15",
+        "p17",
+        "p18",
+        "p23",
+        "p27",
+        "p28",
+        "s14",
+        "s21",
         "sp15"
       ]
     },
@@ -1780,11 +1767,21 @@
         "d15",
         "f19",
         "f38",
+        "ft12",
         "n16",
         "v03",
         "v08",
-        "v09",
-        "ft12"
+        "v09"
+      ]
+    },
+    {
+      "master_id": "PANCAKE",
+      "variant_id": null,
+      "recipe_count": 3,
+      "recipe_ids": [
+        "do05",
+        "do16",
+        "sp11"
       ]
     },
     {
@@ -1792,10 +1789,6 @@
       "variant_id": null,
       "recipe_count": 83,
       "recipe_ids": [
-        "p10",
-        "p12",
-        "p19",
-        "p28",
         "a21",
         "a32",
         "a33",
@@ -1860,6 +1853,14 @@
         "f26",
         "f27",
         "f28",
+        "n06",
+        "n10",
+        "n14",
+        "n18",
+        "p10",
+        "p12",
+        "p19",
+        "p28",
         "s04",
         "s05",
         "s13",
@@ -1867,14 +1868,10 @@
         "s24",
         "s30",
         "s31",
-        "n06",
-        "n10",
-        "n14",
-        "n18",
-        "w09",
         "sp01",
         "sp03",
-        "sp06"
+        "sp06",
+        "w09"
       ]
     },
     {
@@ -1882,13 +1879,6 @@
       "variant_id": null,
       "recipe_count": 79,
       "recipe_ids": [
-        "p05",
-        "p06",
-        "p08",
-        "p09",
-        "p21",
-        "p24",
-        "p25",
         "a02",
         "a12",
         "a13",
@@ -1951,15 +1941,22 @@
         "f23",
         "f32",
         "f34",
+        "n05",
+        "n07",
+        "n13",
+        "n22",
+        "p05",
+        "p06",
+        "p08",
+        "p09",
+        "p21",
+        "p24",
+        "p25",
         "s03",
         "s12",
         "s15",
         "s21",
         "s27",
-        "n05",
-        "n07",
-        "n13",
-        "n22",
         "w10"
       ]
     },
@@ -1968,14 +1965,14 @@
       "variant_id": null,
       "recipe_count": 8,
       "recipe_ids": [
-        "p11",
         "b15",
         "b16",
         "b17",
         "b39",
         "b41",
         "b42",
-        "b43"
+        "b43",
+        "p11"
       ]
     },
     {
@@ -1983,6 +1980,7 @@
       "variant_id": null,
       "recipe_count": 10,
       "recipe_ids": [
+        "o10",
         "p01",
         "p02",
         "p04",
@@ -1991,17 +1989,18 @@
         "p08",
         "p09",
         "p22",
-        "p24",
-        "o10"
+        "p24"
       ]
     },
     {
       "master_id": "PASTA_SHORT",
       "variant_id": null,
-      "recipe_count": 5,
+      "recipe_count": 7,
       "recipe_ids": [
+        "b44",
         "p03",
         "p06",
+        "p13",
         "p14",
         "p19",
         "sp03"
@@ -2018,10 +2017,10 @@
         "b30",
         "b35",
         "d17",
-        "s05",
+        "ft08",
         "n24",
         "o02",
-        "ft08"
+        "s05"
       ]
     },
     {
@@ -2029,8 +2028,8 @@
       "variant_id": null,
       "recipe_count": 2,
       "recipe_ids": [
-        "v11",
-        "do07"
+        "do07",
+        "v11"
       ]
     },
     {
@@ -2038,16 +2037,16 @@
       "variant_id": null,
       "recipe_count": 11,
       "recipe_ids": [
+        "b37",
+        "b43",
+        "c10",
+        "c34",
         "p01",
         "p02",
         "p03",
         "p04",
         "p10",
         "p20",
-        "b37",
-        "b43",
-        "c10",
-        "c34",
         "s30"
       ]
     },
@@ -2065,15 +2064,15 @@
         "d35",
         "f04",
         "f28",
-        "s10",
+        "ft07",
+        "ft17",
         "n09",
         "o05",
         "o06",
         "o10",
         "o11",
         "o12",
-        "ft07",
-        "ft17"
+        "s10"
       ]
     },
     {
@@ -2081,18 +2080,10 @@
       "variant_id": null,
       "recipe_count": 4,
       "recipe_ids": [
-        "p10",
         "b18",
+        "p10",
         "s04",
         "s30"
-      ]
-    },
-    {
-      "master_id": "PIADINA",
-      "variant_id": null,
-      "recipe_count": 1,
-      "recipe_ids": [
-        "sp10"
       ]
     },
     {
@@ -2120,6 +2111,14 @@
       ]
     },
     {
+      "master_id": "PLUMCAKE",
+      "variant_id": null,
+      "recipe_count": 1,
+      "recipe_ids": [
+        "k13"
+      ]
+    },
+    {
       "master_id": "POLENTA",
       "variant_id": null,
       "recipe_count": 4,
@@ -2144,9 +2143,6 @@
       "variant_id": null,
       "recipe_count": 15,
       "recipe_ids": [
-        "p01",
-        "p02",
-        "p03",
         "a32",
         "b15",
         "b30",
@@ -2158,22 +2154,31 @@
         "c39",
         "c45",
         "o12",
+        "p01",
+        "p02",
+        "p03",
         "sp07"
+      ]
+    },
+    {
+      "master_id": "PORRIDGE",
+      "variant_id": null,
+      "recipe_count": 2,
+      "recipe_ids": [
+        "do07",
+        "w03"
       ]
     },
     {
       "master_id": "POTATO",
       "variant_id": null,
-      "recipe_count": 43,
+      "recipe_count": 34,
       "recipe_ids": [
-        "p10",
-        "p17",
         "a02",
         "a03",
         "a04",
         "a13",
         "a35",
-        "a44",
         "b10",
         "b11",
         "b12",
@@ -2187,25 +2192,19 @@
         "b36",
         "b43",
         "c11",
-        "c18",
-        "c21",
-        "c22",
-        "c32",
         "d02",
         "d05",
-        "d12",
         "d19",
         "d29",
         "d36",
-        "f18",
-        "f33",
-        "s10",
+        "ft17",
         "n04",
         "n05",
         "n06",
         "n29",
-        "w10",
-        "ft17",
+        "p10",
+        "p17",
+        "s10",
         "sp04",
         "sp05",
         "sp07"
@@ -2228,10 +2227,10 @@
       "variant_id": null,
       "recipe_count": 5,
       "recipe_ids": [
-        "p17",
-        "p22",
         "a46",
         "b31",
+        "p17",
+        "p22",
         "s24"
       ]
     },
@@ -2250,9 +2249,8 @@
     {
       "master_id": "QUINOA",
       "variant_id": null,
-      "recipe_count": 3,
+      "recipe_count": 2,
       "recipe_ids": [
-        "f13",
         "ft07",
         "ft19"
       ]
@@ -2281,19 +2279,17 @@
       "recipe_ids": [
         "d43",
         "f04",
-        "s14",
-        "n21",
         "ft17",
+        "n21",
+        "s14",
         "sp15"
       ]
     },
     {
       "master_id": "RICE",
       "variant_id": null,
-      "recipe_count": 36,
+      "recipe_count": 30,
       "recipe_ids": [
-        "r2",
-        "r4",
         "a33",
         "a34",
         "b01",
@@ -2311,6 +2307,7 @@
         "d26",
         "d35",
         "d36",
+        "ft08",
         "o02",
         "o05",
         "o10",
@@ -2318,32 +2315,11 @@
         "o12",
         "o14",
         "o15",
+        "r2",
+        "r4",
         "s35",
         "s36",
-        "w02",
-        "w04",
-        "w08",
-        "w14",
-        "ft08",
-        "sp02",
-        "sp08",
-        "sp13"
-      ]
-    },
-    {
-      "master_id": "RICE_BASMATI",
-      "variant_id": null,
-      "recipe_count": 1,
-      "recipe_ids": [
         "sp02"
-      ]
-    },
-    {
-      "master_id": "RICE_INTEGRAL",
-      "variant_id": null,
-      "recipe_count": 1,
-      "recipe_ids": [
-        "r4"
       ]
     },
     {
@@ -2357,15 +2333,15 @@
         "b16",
         "c40",
         "d37",
+        "do03",
         "f02",
         "f06",
         "f10",
         "f17",
         "f29",
         "s04",
-        "w11",
-        "do03",
-        "sp14"
+        "sp14",
+        "w11"
       ]
     },
     {
@@ -2397,8 +2373,6 @@
       "variant_id": null,
       "recipe_count": 34,
       "recipe_ids": [
-        "p15",
-        "p16",
         "a31",
         "b05",
         "b20",
@@ -2425,12 +2399,14 @@
         "f33",
         "f36",
         "f39",
-        "s28",
+        "ft11",
         "n04",
         "n20",
         "n27",
         "n29",
-        "ft11"
+        "p15",
+        "p16",
+        "s28"
       ]
     },
     {
@@ -2444,8 +2420,8 @@
         "c15",
         "d44",
         "f39",
-        "s22",
-        "ft15"
+        "ft15",
+        "s22"
       ]
     },
     {
@@ -2463,15 +2439,15 @@
       "variant_id": null,
       "recipe_count": 9,
       "recipe_ids": [
-        "p27",
         "d06",
         "d07",
         "f16",
         "f18",
-        "o04",
-        "w14",
         "ft12",
-        "sp13"
+        "o04",
+        "p27",
+        "sp13",
+        "w14"
       ]
     },
     {
@@ -2479,9 +2455,9 @@
       "variant_id": null,
       "recipe_count": 3,
       "recipe_ids": [
-        "p23",
         "a16",
-        "d15"
+        "d15",
+        "p23"
       ]
     },
     {
@@ -2489,12 +2465,12 @@
       "variant_id": null,
       "recipe_count": 6,
       "recipe_ids": [
-        "p20",
-        "p21",
         "b37",
         "c20",
         "c21",
-        "c39"
+        "c39",
+        "p20",
+        "p21"
       ]
     },
     {
@@ -2548,10 +2524,9 @@
       "variant_id": null,
       "recipe_count": 19,
       "recipe_ids": [
-        "r2",
         "a11",
         "d08",
-        "s09",
+        "ft14",
         "o01",
         "o02",
         "o03",
@@ -2564,17 +2539,17 @@
         "o12",
         "o14",
         "o15",
+        "r2",
+        "s09",
         "s36",
-        "w14",
-        "ft14"
+        "w14"
       ]
     },
     {
       "master_id": "SHRIMP",
       "variant_id": null,
-      "recipe_count": 13,
+      "recipe_count": 12,
       "recipe_ids": [
-        "p24",
         "a14",
         "a19",
         "a20",
@@ -2585,8 +2560,16 @@
         "d20",
         "d21",
         "f20",
-        "f21",
-        "o05"
+        "o05",
+        "p24"
+      ]
+    },
+    {
+      "master_id": "SMOOTHIE",
+      "variant_id": null,
+      "recipe_count": 1,
+      "recipe_ids": [
+        "ft03"
       ]
     },
     {
@@ -2594,7 +2577,6 @@
       "variant_id": null,
       "recipe_count": 13,
       "recipe_ids": [
-        "r4",
         "a48",
         "b16",
         "c40",
@@ -2603,26 +2585,29 @@
         "f02",
         "f27",
         "f28",
-        "n02",
         "ft03",
         "ft16",
+        "n02",
+        "r4",
         "sp09"
       ]
     },
     {
       "master_id": "SQUID",
       "variant_id": null,
-      "recipe_count": 9,
+      "recipe_count": 11,
       "recipe_ids": [
-        "p24",
         "a14",
         "a38",
         "b03",
         "b48",
         "b54",
+        "d17",
         "d18",
         "d19",
-        "d21"
+        "d21",
+        "f22",
+        "p24"
       ]
     },
     {
@@ -2651,6 +2636,14 @@
       ]
     },
     {
+      "master_id": "TART",
+      "variant_id": null,
+      "recipe_count": 1,
+      "recipe_ids": [
+        "do13"
+      ]
+    },
+    {
       "master_id": "TARTAR_SAUCE",
       "variant_id": null,
       "recipe_count": 1,
@@ -2673,33 +2666,29 @@
       ]
     },
     {
+      "master_id": "TOAST",
+      "variant_id": null,
+      "recipe_count": 1,
+      "recipe_ids": [
+        "ft02"
+      ]
+    },
+    {
       "master_id": "TOFU",
       "variant_id": null,
       "recipe_count": 4,
       "recipe_ids": [
+        "ft14",
         "o06",
         "o07",
-        "o15",
-        "ft14"
+        "o15"
       ]
     },
     {
       "master_id": "TOMATO",
       "variant_id": null,
-      "recipe_count": 86,
+      "recipe_count": 83,
       "recipe_ids": [
-        "p02",
-        "p06",
-        "p07",
-        "p08",
-        "p12",
-        "p13",
-        "p15",
-        "p16",
-        "p19",
-        "p21",
-        "p25",
-        "p28",
         "a01",
         "a05",
         "a06",
@@ -2740,14 +2729,12 @@
         "d10",
         "d12",
         "d16",
-        "d17",
         "d18",
         "d19",
         "d25",
         "d26",
         "d30",
         "d32",
-        "d33",
         "d34",
         "d35",
         "d36",
@@ -2762,16 +2749,27 @@
         "f21",
         "f23",
         "f40",
-        "s06",
-        "s20",
-        "n01",
-        "n18",
-        "n21",
         "ft05",
         "ft09",
         "ft10",
         "ft13",
         "ft19",
+        "n01",
+        "n18",
+        "p02",
+        "p06",
+        "p07",
+        "p08",
+        "p12",
+        "p13",
+        "p15",
+        "p16",
+        "p19",
+        "p21",
+        "p25",
+        "p28",
+        "s06",
+        "s20",
         "sp10",
         "sp12"
       ]
@@ -2781,19 +2779,6 @@
       "variant_id": null,
       "recipe_count": 92,
       "recipe_ids": [
-        "p02",
-        "p06",
-        "p07",
-        "p08",
-        "p11",
-        "p12",
-        "p13",
-        "p15",
-        "p16",
-        "p19",
-        "p21",
-        "p25",
-        "p28",
         "a01",
         "a05",
         "a06",
@@ -2860,17 +2845,30 @@
         "f23",
         "f37",
         "f40",
-        "s06",
-        "s20",
-        "n01",
-        "n11",
-        "n18",
-        "n21",
         "ft05",
         "ft09",
         "ft10",
         "ft13",
         "ft19",
+        "n01",
+        "n11",
+        "n18",
+        "n21",
+        "p02",
+        "p06",
+        "p07",
+        "p08",
+        "p11",
+        "p12",
+        "p13",
+        "p15",
+        "p16",
+        "p19",
+        "p21",
+        "p25",
+        "p28",
+        "s06",
+        "s20",
         "sp10",
         "sp12"
       ]
@@ -2903,46 +2901,45 @@
     {
       "master_id": "TUNA",
       "variant_id": null,
-      "recipe_count": 19,
+      "recipe_count": 17,
       "recipe_ids": [
-        "r2",
-        "p25",
         "a09",
         "a11",
-        "a16",
         "a45",
         "b51",
         "d08",
         "d09",
-        "d15",
         "d43",
         "f17",
         "f19",
         "f37",
         "f40",
+        "p25",
+        "r2",
         "s11",
         "s19",
-        "w10",
-        "sp15"
+        "sp15",
+        "w10"
       ]
     },
     {
       "master_id": "TUNA",
       "variant_id": "SARDINE_VISUAL_SUBSTITUTE",
-      "recipe_count": 1,
+      "recipe_count": 3,
       "recipe_ids": [
+        "a16",
+        "d15",
         "p23"
       ]
     },
     {
       "master_id": "TURKEY",
       "variant_id": null,
-      "recipe_count": 10,
+      "recipe_count": 9,
       "recipe_ids": [
         "c29",
         "c40",
         "f07",
-        "f08",
         "f10",
         "f11",
         "f34",
@@ -2956,9 +2953,9 @@
       "variant_id": null,
       "recipe_count": 3,
       "recipe_ids": [
-        "p14",
         "c20",
-        "f27"
+        "f27",
+        "p14"
       ]
     },
     {
@@ -3032,24 +3029,30 @@
     {
       "master_id": "YOGURT",
       "variant_id": null,
-      "recipe_count": 16,
+      "recipe_count": 14,
       "recipe_ids": [
-        "r3",
-        "r6",
+        "do08",
+        "do09",
         "f01",
         "f03",
+        "ft01",
+        "k02",
+        "n25",
+        "r6",
         "s01",
         "s02",
         "s08",
         "s11",
         "s16",
-        "k02",
-        "n25",
-        "w06",
-        "do01",
-        "do08",
-        "do09",
-        "ft01"
+        "w06"
+      ]
+    },
+    {
+      "master_id": "YOGURT_BOWL",
+      "variant_id": null,
+      "recipe_count": 1,
+      "recipe_ids": [
+        "r3"
       ]
     },
     {
@@ -3066,7 +3069,6 @@
       "variant_id": null,
       "recipe_count": 30,
       "recipe_ids": [
-        "p22",
         "a25",
         "a29",
         "a39",
@@ -3087,15 +3089,16 @@
         "f14",
         "f20",
         "f24",
-        "s13",
-        "n07",
-        "n17",
-        "w08",
         "ft07",
         "ft15",
         "ft17",
+        "n07",
+        "n17",
+        "p22",
+        "s13",
         "sp06",
-        "sp08"
+        "sp08",
+        "w08"
       ]
     }
   ]
