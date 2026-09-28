@@ -1,21 +1,20 @@
 {
   "document": "MealUp — C6.1 Semantic Audit",
-  "version": "C6.1",
-  "status": "C6.1_AUDIT_PASSED — MATRIX_PERSISTED",
+  "version": "C6.1.2",
+  "status": "C6.1_AUDIT_PASSED",
   "date": "2026-09-28",
   "catalog_recipe_count": 454,
   "source_blob_sha": "0f5c409cc7c57995df6ac54add34fd6549f983f2",
   "checks": {
     "recipe_count": 454,
     "unique_recipe_ids": 454,
-    "exactly_one_primary": "PASS",
-    "secondary_max_4": "PASS",
-    "details_max_2": "PASS",
-    "beverage_vessel_free": "PASS",
-    "master_reference_integrity": "PASS",
-    "variant_reference_integrity": "PASS",
-    "no_new_masters": "PASS",
-    "technical_ingredients_excluded": "PASS"
+    "exactly_one_primary": true,
+    "secondary_max_4": true,
+    "details_max_2": true,
+    "beverage_vessel_free": true,
+    "master_reference_integrity": true,
+    "variant_reference_integrity": true,
+    "no_new_masters": true
   },
   "semantic_corrections": {
     "r2": "TUNA primary; RICE + AVOCADO secondary; SESAME detail; VESSEL_BOWL.",
@@ -23,18 +22,21 @@
     "a32": "OLIVE primary; GROUND_BEEF + PORK secondary; PARMESAN detail; VESSEL_PLATE.",
     "b39": "PASTA_EGG primary; PARMESAN secondary; TRUFFLE detail; BUTTER_SAGE sauce; VESSEL_BOWL.",
     "v15": "BEVERAGE_BOTTLE:BIRRA; VESSEL_FREE.",
-    "ft20": "FARRO primary; FETA + CHERRY_TOMATO + ARUGULA + OLIVE secondary; VESSEL_BOWL."
+    "ft20": "FARRO primary; FETA + CHERRY_TOMATO + ARUGULA + OLIVE secondary; VESSEL_BOWL.",
+    "s33": "AGRODOLCE with approved teriyaki/soy-sweet-glaze variant; VESSEL_RAMEKIN.",
+    "w13": "BREAD with approved biscuit/frollino variant; VESSEL_PLATE.",
+    "k12": "BREAD with approved biscuit/frollino variant; VESSEL_PLATE."
   },
   "catalog_correction": {
     "removed": "BEEF:RABBIT",
     "confirmed": "CHICKEN:RABBIT_VISUAL_SUBSTITUTE"
   },
-  "final_note": "The semantic audit passed the documented structural and reference-integrity gates. The corrected 454-row composition matrix and derived asset production queue are now persisted in the repository. Application code and recipe source data were not modified.",
   "matrix_persistence": {
     "status": "PERSISTED",
     "json_path": "docs/c6/MealUp_C6.1_Composition_Matrix_v1.json",
     "csv_path": "docs/c6/MealUp_C6.1_Composition_Matrix_v1.csv",
     "recipe_count": 454,
     "unique_recipe_ids": 454
-  }
+  },
+  "next_substage": "C6.2 — Asset production batch planning"
 }
