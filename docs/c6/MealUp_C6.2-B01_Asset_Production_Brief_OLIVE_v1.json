@@ -1,0 +1,71 @@
+{
+  "document": "MealUp — C6.2-B01 Asset Production Brief",
+  "version": "C6.2-B01.1",
+  "status": "READY_FOR_GENERATION",
+  "batch_id": "C6.2-B01",
+  "source_batch_plan": "docs/c6/MealUp_C6.2_Asset_Production_Batch_Plan_v1.json",
+  "source_queue": "docs/c6/MealUp_C6.1_Asset_Production_Queue_v1.json",
+  "asset": {
+    "master_id": "OLIVE",
+    "variant_id": null,
+    "asset_key": "OLIVE",
+    "recipe_count": 16,
+    "recipe_ids": [
+      "p08",
+      "a13",
+      "a32",
+      "a41",
+      "a55",
+      "c30",
+      "d02",
+      "d09",
+      "d10",
+      "d25",
+      "f19",
+      "f23",
+      "f38",
+      "n16",
+      "ft13",
+      "ft20"
+    ],
+    "priority": "P0",
+    "asset_family": "approved_additions"
+  },
+  "production_spec": {
+    "object_type": "Food Object",
+    "subject": "single whole green olive",
+    "quantity": 1,
+    "visual_direction": "MealUp Toy",
+    "composition": "isolated single object, centered, generous transparent margin",
+    "background": "fully transparent",
+    "vessel": "none",
+    "garnish": "none",
+    "brine": "none",
+    "additional_food": "none",
+    "surface": "whole olive with natural pitted-olive form; pit not visible",
+    "color_direction": "natural green olive, clean and appetizing, not neon",
+    "material_direction": "soft stylized 3D food-object appearance with controlled highlights and subtle shading",
+    "camera": "three-quarter product view, slight top visibility",
+    "lighting": "soft studio lighting, consistent with MealUp Food Object family",
+    "shadow": "subtle contained contact shading only; no ground plane",
+    "framing": "object fully inside canvas, no clipping",
+    "consistency": [
+      "Do not create a recipe composition.",
+      "Do not add plate, bowl, cutlery or other food.",
+      "Do not create multiple olives.",
+      "Do not create a new Master or variant.",
+      "Keep the asset reusable across all 16 mapped recipes."
+    ]
+  },
+  "acceptance_gates": [
+    "Asset key exactly matches OLIVE/null.",
+    "Single green olive only.",
+    "Transparent background.",
+    "No vessel or recipe-specific context.",
+    "No new Master or variant.",
+    "Reusable Food Object rather than recipe composition.",
+    "Visual treatment follows MealUp Toy direction.",
+    "Object is fully visible and centered."
+  ],
+  "next_step": "GENERATE_AND_REVIEW"
+}
