@@ -1,6 +1,6 @@
 {
   "document": "MealUp — C6.2 Visual Coverage Audit",
-  "version": "1.0",
+  "version": "1.1",
   "status": "PARTIAL_CONFIRMED",
   "source_images": [
     "/mnt/data/28DA4800-50FE-4016-8B76-FDD653AE2E71.jpeg",
@@ -101,5 +101,12 @@
     "CONFIRMED means visual presence in the supplied sheet, not repository registration or production approval.",
     "Existing catalog coverage should be used to prioritize extraction/registration before generating new art."
   ],
-  "next_action": "Use the confirmed set as the first extraction/registration wave; keep all other queue entries unchanged until visually verified."
+  "next_action": "Use the confirmed set as the first extraction/registration wave; keep all other queue entries unchanged until visually verified.",
+  "total_queue_entries": 186,
+  "queue_entries_with_visual_catalog_coverage": 67,
+  "queue_entries_without_visual_catalog_coverage": 119,
+  "linked_recipe_uses_across_covered_queue_entries": 961,
+  "interpretation": "Catalog presence is visual coverage evidence only; it does not mean the corresponding individual PNG has been extracted, approved, or registered.",
+  "extraction_rule": "Do not register a catalog crop as final unless the isolated object passes the same C6.2 review gates as a newly generated asset.",
+  "next_priority": "Use catalog-covered queue entries as the first extraction/review wave, starting with OLIVE."
 }
