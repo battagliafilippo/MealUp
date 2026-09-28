@@ -1,0 +1,43 @@
+{
+  "document": "MealUp — C6.2 Visual Source Audit",
+  "version": "1.0",
+  "status": "SOURCE_AVAILABLE_FOR_ASSET_AUDIT",
+  "source_images": [
+    "28DA4800-50FE-4016-8B76-FDD653AE2E71.jpeg",
+    "02EC423A-F86B-466F-BB8A-0B62FCDC7F01.jpeg",
+    "223DF227-5A22-4564-BC20-24042447B68C.jpeg"
+  ],
+  "source_type": "User-provided visual catalog sheets",
+  "source_dimensions": "1536x1024 each",
+  "use": "Visual reference and candidate asset inventory for C6.2. These sheets show the established MealUp Toy Food Object/Kitchen Object visual language.",
+  "confirmed_visible_asset_examples": [
+    "OLIVE",
+    "BREAD / PANIFICATI",
+    "BRIOCHE",
+    "CROISSANT",
+    "MUFFIN",
+    "NUTS_AND_SEEDS",
+    "OILS",
+    "BUTTER",
+    "MAYONNAISE",
+    "KETCHUP",
+    "PESTO",
+    "MUSTARD",
+    "HERBS_AND_SPICES",
+    "DESSERTS",
+    "CHEESES",
+    "SALUMI",
+    "EGG",
+    "CHICKEN",
+    "BEEF",
+    "FISH",
+    "SHRIMP",
+    "VEGETABLES",
+    "FRUIT",
+    "BEVERAGES",
+    "KITCHEN_OBJECTS"
+  ],
+  "important_distinction": "The sheets are reference/catalog images, not automatically individual transparent production assets. Individual assets must still be extracted/generated, reviewed, and registered with their own binary PNG plus metadata.",
+  "png_answer": "Saving/uploading the source as PNG is useful, especially when an individual object has transparency. However, PNG alone does not make the whole catalog a set of registered assets: individual object files are still required.",
+  "current_operational_effect": "The previously assumed 'no usable visual source' blocker is removed. The catalog can now be used to audit existing visual coverage and to drive consistent extraction/generation of individual C6.2 assets."
+}
