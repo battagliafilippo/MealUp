@@ -3,7 +3,7 @@
   "version": "C6.1.1",
   "status": "C6.1_AUDIT_PASSED — MATRIX_PERSISTED",
   "source_blob_sha": "0f5c409cc7c57995df6ac54add34fd6549f983f2",
-  "recipe_count": 451,
+  "recipe_count": 454,
   "columns": [
     "recipe_id",
     "composition_id",
@@ -17,13 +17,13 @@
     "status"
   ],
   "quality_gates": {
-    "recipe_count": 451,
-    "unique_recipe_ids": 451,
+    "recipe_count": 454,
+    "unique_recipe_ids": 454,
     "exactly_one_primary": true,
     "secondary_max_4": true,
     "details_max_2": true,
     "beverage_vessel_free": true,
-    "special_cases_exact": false
+    "special_cases_exact": true
   },
   "corrections_preserved": [
     "r2",
@@ -7452,6 +7452,21 @@
       "status": "READY_FOR_ASSET_INSTANTIATION"
     },
     {
+      "recipe_id": "k12",
+      "composition_id": "COMP_k12",
+      "canonical_recipe": "Biscotti frollini e latte",
+      "portata": "colazione",
+      "vessel_id": "VESSEL_PLATE",
+      "primary": {
+        "master_id": "BREAD",
+        "variant_id": "BISCUIT_FROLLINO_VISUAL_VARIANT"
+      },
+      "secondary": [],
+      "details": [],
+      "sauce": null,
+      "status": "READY_FOR_ASSET_INSTANTIATION"
+    },
+    {
       "recipe_id": "k13",
       "composition_id": "COMP_k13",
       "canonical_recipe": "Fetta di plumcake",
@@ -10235,6 +10250,21 @@
       "status": "READY_FOR_ASSET_INSTANTIATION"
     },
     {
+      "recipe_id": "s33",
+      "composition_id": "COMP_s33",
+      "canonical_recipe": "Salsa di soia",
+      "portata": "salsa",
+      "vessel_id": "VESSEL_RAMEKIN",
+      "primary": {
+        "master_id": "AGRODOLCE",
+        "variant_id": "TERIYAKI_SOY_SWEET_GLAZE_VISUAL_VARIANT"
+      },
+      "secondary": [],
+      "details": [],
+      "sauce": null,
+      "status": "READY_FOR_ASSET_INSTANTIATION"
+    },
+    {
       "recipe_id": "s34",
       "composition_id": "COMP_s34",
       "canonical_recipe": "Salsa teriyaki",
@@ -11039,6 +11069,21 @@
       "vessel_id": "VESSEL_CUP",
       "primary": {
         "master_id": "MIXED_BERRIES"
+      },
+      "secondary": [],
+      "details": [],
+      "sauce": null,
+      "status": "READY_FOR_ASSET_INSTANTIATION"
+    },
+    {
+      "recipe_id": "w13",
+      "composition_id": "COMP_w13",
+      "canonical_recipe": "Latte al cacao e biscotti",
+      "portata": "altro",
+      "vessel_id": "VESSEL_PLATE",
+      "primary": {
+        "master_id": "BREAD",
+        "variant_id": "BISCUIT_FROLLINO_VISUAL_VARIANT"
       },
       "secondary": [],
       "details": [],
