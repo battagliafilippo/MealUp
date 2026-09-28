@@ -1,0 +1,1722 @@
+{
+  "document": "MealUp — C6 Asset Catalog & Composition Instantiation",
+  "version": "C6.0.1",
+  "status": "CORRECTED",
+  "catalog_recipe_count": 454,
+  "source_blob_sha": "0f5c409cc7c57995df6ac54add34fd6549f983f2",
+  "purpose": "Turn the approved C5 Master/Variant specification into a producible reusable asset catalog and a deterministic recipe composition contract, without modifying app code.",
+  "scope": [
+    "Define one stable asset family per approved Master.",
+    "Attach visual variants to the Master asset family.",
+    "Define deterministic composition instantiation: vessel + 1 primary + 0–4 secondary + 0–2 details + optional sauce.",
+    "Preserve MealUp Toy visual direction.",
+    "Prepare the 454-recipe matrix for deterministic instantiation."
+  ],
+  "asset_catalog": [
+    {
+      "asset_family": "protein",
+      "master_id": "CHICKEN",
+      "food_object_id": "CHICKEN",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "RABBIT_VISUAL_SUBSTITUTE"
+      ]
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "TURKEY",
+      "food_object_id": "TURKEY",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "BEEF",
+      "food_object_id": "BEEF",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "LIVER",
+        "TRIPE_WHEN_RECIPE_REQUIRES_A_BEEF_LIKE_VISUAL_SUBSTITUTE"
+      ]
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "GROUND_BEEF",
+      "food_object_id": "GROUND_BEEF",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "PORK",
+      "food_object_id": "PORK",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "PANCETTA",
+        "GUANCIALE",
+        "COSTINE"
+      ]
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "VEAL",
+      "food_object_id": "VEAL",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "LAMB",
+      "food_object_id": "LAMB",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "SAUSAGE",
+      "food_object_id": "SAUSAGE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "HAM",
+      "food_object_id": "HAM",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "PROSCIUTTO",
+      "food_object_id": "PROSCIUTTO",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "BRESAOLA",
+      "food_object_id": "BRESAOLA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "MORTADELLA",
+      "food_object_id": "MORTADELLA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "SALAMI",
+      "food_object_id": "SALAMI",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "SALMON",
+      "food_object_id": "SALMON",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "TUNA",
+      "food_object_id": "TUNA",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "SARDINE_VISUAL_SUBSTITUTE"
+      ]
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "COD",
+      "food_object_id": "COD",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "SEA_BASS",
+      "food_object_id": "SEA_BASS",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "SEA_BREAM",
+      "food_object_id": "SEA_BREAM",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "SWORDFISH",
+      "food_object_id": "SWORDFISH",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "MACKEREL",
+      "food_object_id": "MACKEREL",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "TROUT",
+      "food_object_id": "TROUT",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "ANCHOVY",
+      "food_object_id": "ANCHOVY",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "SARDINE",
+      "food_object_id": "SARDINE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "OCTOPUS",
+      "food_object_id": "OCTOPUS",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "SQUID",
+      "food_object_id": "SQUID",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "MUSSEL",
+      "food_object_id": "MUSSEL",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "CLAM",
+      "food_object_id": "CLAM",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "SHRIMP",
+      "food_object_id": "SHRIMP",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "SCALLOP",
+      "food_object_id": "SCALLOP",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "EGG",
+      "food_object_id": "EGG",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "EGG_WHITE",
+      "food_object_id": "EGG_WHITE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "OMELETTE",
+      "food_object_id": "OMELETTE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "FRITTATA",
+      "food_object_id": "FRITTATA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "TOFU",
+      "food_object_id": "TOFU",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "CHICKPEA",
+      "food_object_id": "CHICKPEA",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "PANELLE_STYLE_CHICKPEA_PREPARATION"
+      ]
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "LENTIL",
+      "food_object_id": "LENTIL",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "BEAN",
+      "food_object_id": "BEAN",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "protein",
+      "master_id": "EDAMAME",
+      "food_object_id": "EDAMAME",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "PASTA_LONG",
+      "food_object_id": "PASTA_LONG",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "PASTA_SHORT",
+      "food_object_id": "PASTA_SHORT",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "PASTINA"
+      ]
+    },
+    {
+      "asset_family": "base",
+      "master_id": "PASTA_EGG",
+      "food_object_id": "PASTA_EGG",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "FILLED_PASTA",
+      "food_object_id": "FILLED_PASTA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "LASAGNA",
+      "food_object_id": "LASAGNA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "GNOCCHI",
+      "food_object_id": "GNOCCHI",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "GNOCCHI_ALLA_ROMANA_STYLE_VARIANT"
+      ]
+    },
+    {
+      "asset_family": "base",
+      "master_id": "RICE",
+      "food_object_id": "RICE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "RICE_BASMATI",
+      "food_object_id": "RICE_BASMATI",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "RICE_INTEGRAL",
+      "food_object_id": "RICE_INTEGRAL",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "RISOTTO",
+      "food_object_id": "RISOTTO",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "FARRO",
+      "food_object_id": "FARRO",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "QUINOA",
+      "food_object_id": "QUINOA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "COUSCOUS",
+      "food_object_id": "COUSCOUS",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "FREGOLA_VISUAL_SUBSTITUTE"
+      ]
+    },
+    {
+      "asset_family": "base",
+      "master_id": "POLENTA",
+      "food_object_id": "POLENTA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "NOODLES",
+      "food_object_id": "NOODLES",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "POTATO",
+      "food_object_id": "POTATO",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "FRIES",
+        "ROSTI",
+        "POTATO_BASED_PREPARATION"
+      ]
+    },
+    {
+      "asset_family": "base",
+      "master_id": "SWEET_POTATO",
+      "food_object_id": "SWEET_POTATO",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "BREAD",
+      "food_object_id": "BREAD",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "BISCUIT_FROLLINO_VISUAL_VARIANT",
+        "RICE_CAKE_LIKE_SIMPLE_SNACK_VARIANT"
+      ]
+    },
+    {
+      "asset_family": "base",
+      "master_id": "TOAST",
+      "food_object_id": "TOAST",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "BRUSCHETTA",
+      "food_object_id": "BRUSCHETTA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "CROSTINO",
+      "food_object_id": "CROSTINO",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "PIADINA",
+      "food_object_id": "PIADINA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "base",
+      "master_id": "PIZZA",
+      "food_object_id": "PIZZA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "TOMATO",
+      "food_object_id": "TOMATO",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "DRIED_TOMATO",
+        "SUN_DRIED_TOMATO"
+      ]
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "CHERRY_TOMATO",
+      "food_object_id": "CHERRY_TOMATO",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "TOMATO_SAUCE",
+      "food_object_id": "TOMATO_SAUCE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "ZUCCHINI",
+      "food_object_id": "ZUCCHINI",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "EGGPLANT",
+      "food_object_id": "EGGPLANT",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "PEPPER",
+      "food_object_id": "PEPPER",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "CARROT",
+      "food_object_id": "CARROT",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "BROCCOLI",
+      "food_object_id": "BROCCOLI",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "CAULIFLOWER",
+      "food_object_id": "CAULIFLOWER",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "SPINACH",
+      "food_object_id": "SPINACH",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "LETTUCE",
+      "food_object_id": "LETTUCE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "ARUGULA",
+      "food_object_id": "ARUGULA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "MUSHROOM",
+      "food_object_id": "MUSHROOM",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "PORCINI",
+      "food_object_id": "PORCINI",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "ONION",
+      "food_object_id": "ONION",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "RED_ONION",
+      "food_object_id": "RED_ONION",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "GARLIC",
+      "food_object_id": "GARLIC",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "CELERY",
+      "food_object_id": "CELERY",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "FENNEL",
+      "food_object_id": "FENNEL",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "ARTICHOKE",
+      "food_object_id": "ARTICHOKE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "ASPARAGUS",
+      "food_object_id": "ASPARAGUS",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "GREEN_BEAN",
+      "food_object_id": "GREEN_BEAN",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "PEA",
+      "food_object_id": "PEA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "CABBAGE",
+      "food_object_id": "CABBAGE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "SAVOY_CABBAGE",
+      "food_object_id": "SAVOY_CABBAGE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "RADICCHIO",
+      "food_object_id": "RADICCHIO",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "CHICORY",
+      "food_object_id": "CHICORY",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "TURNIP_GREENS",
+      "food_object_id": "TURNIP_GREENS",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "PUMPKIN",
+      "food_object_id": "PUMPKIN",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "CUCUMBER",
+      "food_object_id": "CUCUMBER",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "AVOCADO",
+      "food_object_id": "AVOCADO",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "vegetable",
+      "master_id": "CORN",
+      "food_object_id": "CORN",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "MOZZARELLA",
+      "food_object_id": "MOZZARELLA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "BUFFALO_MOZZARELLA",
+      "food_object_id": "BUFFALO_MOZZARELLA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "BURRATA",
+      "food_object_id": "BURRATA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "FETA",
+      "food_object_id": "FETA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "RICOTTA",
+      "food_object_id": "RICOTTA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "RICOTTA_SALATA",
+      "food_object_id": "RICOTTA_SALATA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "PARMESAN",
+      "food_object_id": "PARMESAN",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "GRANA",
+      "food_object_id": "GRANA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "PECORINO",
+      "food_object_id": "PECORINO",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "FONTINA",
+      "food_object_id": "FONTINA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "GORGONZOLA",
+      "food_object_id": "GORGONZOLA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "PROVOLA",
+      "food_object_id": "PROVOLA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "SCAMORZA",
+      "food_object_id": "SCAMORZA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "CACIOCAVALLO",
+      "food_object_id": "CACIOCAVALLO",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "STRACCHINO",
+      "food_object_id": "STRACCHINO",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "CREAM_CHEESE",
+      "food_object_id": "CREAM_CHEESE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "COTTAGE_CHEESE",
+      "food_object_id": "COTTAGE_CHEESE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "YOGURT",
+      "food_object_id": "YOGURT",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "GREEK_YOGURT",
+      "food_object_id": "GREEK_YOGURT",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "MASCARPONE",
+      "food_object_id": "MASCARPONE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "CREAM",
+      "food_object_id": "CREAM",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "dairy",
+      "master_id": "BUTTER",
+      "food_object_id": "BUTTER",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "APPLE",
+      "food_object_id": "APPLE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "BANANA",
+      "food_object_id": "BANANA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "ORANGE",
+      "food_object_id": "ORANGE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "LEMON",
+      "food_object_id": "LEMON",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "PEAR",
+      "food_object_id": "PEAR",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "PEACH",
+      "food_object_id": "PEACH",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "MELON",
+      "food_object_id": "MELON",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "FIG",
+      "food_object_id": "FIG",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "GRAPE",
+      "food_object_id": "GRAPE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "KIWI",
+      "food_object_id": "KIWI",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "PINEAPPLE",
+      "food_object_id": "PINEAPPLE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "MANGO",
+      "food_object_id": "MANGO",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "STRAWBERRY",
+      "food_object_id": "STRAWBERRY",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "BLUEBERRY",
+      "food_object_id": "BLUEBERRY",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "RASPBERRY",
+      "food_object_id": "RASPBERRY",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "MIXED_BERRIES",
+      "food_object_id": "MIXED_BERRIES",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "fruit",
+      "master_id": "DATE",
+      "food_object_id": "DATE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "PESTO",
+      "food_object_id": "PESTO",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "RAGU",
+      "food_object_id": "RAGU",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "YOGURT_SAUCE",
+      "food_object_id": "YOGURT_SAUCE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "HUMMUS",
+      "food_object_id": "HUMMUS",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "MAYONNAISE",
+      "food_object_id": "MAYONNAISE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "AIOLI",
+      "food_object_id": "AIOLI",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "ROSA_SAUCE",
+      "food_object_id": "ROSA_SAUCE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "TARTAR_SAUCE",
+      "food_object_id": "TARTAR_SAUCE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "TONNATO_SAUCE",
+      "food_object_id": "TONNATO_SAUCE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "MUSTARD_SAUCE",
+      "food_object_id": "MUSTARD_SAUCE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "GREEN_SAUCE",
+      "food_object_id": "GREEN_SAUCE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "AGRODOLCE",
+      "food_object_id": "AGRODOLCE",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "TERIYAKI_SOY_SWEET_GLAZE_VISUAL_VARIANT"
+      ]
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "VINAIGRETTE",
+      "food_object_id": "VINAIGRETTE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "BESCIAMELLA",
+      "food_object_id": "BESCIAMELLA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "CHEESE_CREAM",
+      "food_object_id": "CHEESE_CREAM",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "GORGONZOLA_CREAM",
+      "food_object_id": "GORGONZOLA_CREAM",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "BUTTER_SAGE",
+      "food_object_id": "BUTTER_SAGE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "CHOCOLATE_CREAM",
+      "food_object_id": "CHOCOLATE_CREAM",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "COFFEE_CREAM",
+      "food_object_id": "COFFEE_CREAM",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "FRUIT_JAM",
+      "food_object_id": "FRUIT_JAM",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "HAZELNUT_CREAM",
+      "food_object_id": "HAZELNUT_CREAM",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "PISTACHIO_CREAM",
+      "food_object_id": "PISTACHIO_CREAM",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "HONEY",
+      "food_object_id": "HONEY",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "sauce_cream",
+      "master_id": "MAPLE",
+      "food_object_id": "MAPLE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "PANCAKE",
+      "food_object_id": "PANCAKE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "PORRIDGE",
+      "food_object_id": "PORRIDGE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "YOGURT_BOWL",
+      "food_object_id": "YOGURT_BOWL",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "OVERNIGHT_OATS",
+      "food_object_id": "OVERNIGHT_OATS",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "ACAI_BOWL",
+      "food_object_id": "ACAI_BOWL",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "SMOOTHIE",
+      "food_object_id": "SMOOTHIE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "TOAST",
+      "food_object_id": "TOAST",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "BRIOCHE",
+      "food_object_id": "BRIOCHE",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "PLAIN",
+        "APRICOT_JAM",
+        "MIXED_BERRY_JAM",
+        "HAZELNUT_CREAM",
+        "PISTACHIO_CREAM"
+      ]
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "CROISSANT",
+      "food_object_id": "CROISSANT",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "CHOCOLATE_FILLED_VARIANT"
+      ]
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "PLUMCAKE",
+      "food_object_id": "PLUMCAKE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "CIAMBELLA",
+      "food_object_id": "CIAMBELLA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "BANANA_BREAD",
+      "food_object_id": "BANANA_BREAD",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "MUFFIN",
+      "food_object_id": "MUFFIN",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "PACKAGED_CHOCOLATE_SNACK_CAKE_VARIANT"
+      ]
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "CHEESECAKE",
+      "food_object_id": "CHEESECAKE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "TIRAMISU",
+      "food_object_id": "TIRAMISU",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "BROWNIE",
+      "food_object_id": "BROWNIE",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "DATE_AND_ALMOND_ENERGY_BALL_SALAME_STYLE_DESSERT_REPRESENTATION"
+      ]
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "CAKE",
+      "food_object_id": "CAKE",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "APPLE",
+        "CHOCOLATE"
+      ]
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "TART",
+      "food_object_id": "TART",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "SWEET_JAM",
+        "SAVORY_ZUCCHINI_HAM_POTATO_VARIANTS"
+      ]
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "MOUSSE",
+      "food_object_id": "MOUSSE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "PUDDING",
+      "food_object_id": "PUDDING",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "prepared",
+      "master_id": "ICE_CREAM",
+      "food_object_id": "ICE_CREAM",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "BANANA_NICE_CREAM"
+      ]
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "BASIL",
+      "food_object_id": "BASIL",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "ROSEMARY",
+      "food_object_id": "ROSEMARY",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "PARSLEY",
+      "food_object_id": "PARSLEY",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "MINT",
+      "food_object_id": "MINT",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "THYME",
+      "food_object_id": "THYME",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "SAGE",
+      "food_object_id": "SAGE",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "CHIVES",
+      "food_object_id": "CHIVES",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "DILL",
+      "food_object_id": "DILL",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "PARMESAN_FLAKES",
+      "food_object_id": "PARMESAN_FLAKES",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "CHEESE_FLAKES",
+      "food_object_id": "CHEESE_FLAKES",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "SESAME",
+      "food_object_id": "SESAME",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "PINE_NUTS",
+      "food_object_id": "PINE_NUTS",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "ALMONDS",
+      "food_object_id": "ALMONDS",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "WALNUTS",
+      "food_object_id": "WALNUTS",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "PISTACHIOS",
+      "food_object_id": "PISTACHIOS",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "PEANUTS",
+      "food_object_id": "PEANUTS",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "SEEDS",
+      "food_object_id": "SEEDS",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "BLACK_PEPPER",
+      "food_object_id": "BLACK_PEPPER",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "CHILI",
+      "food_object_id": "CHILI",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "PAPRIKA",
+      "food_object_id": "PAPRIKA",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "NUTMEG",
+      "food_object_id": "NUTMEG",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "CINNAMON",
+      "food_object_id": "CINNAMON",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "SAFFRON",
+      "food_object_id": "SAFFRON",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "detail",
+      "master_id": "LEMON_ZEST",
+      "food_object_id": "LEMON_ZEST",
+      "asset_status": "CATALOGED",
+      "variant_ids": []
+    },
+    {
+      "asset_family": "approved_additions",
+      "master_id": "WHITE_FISH",
+      "food_object_id": "WHITE_FISH",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "BACCALA",
+        "MERLUZZO",
+        "BRANZINO",
+        "ORATA",
+        "RANA_PESCATRICE_GENERIC_WHITE_FISH_APPEARANCE"
+      ]
+    },
+    {
+      "asset_family": "approved_additions",
+      "master_id": "BEVERAGE_BOTTLE",
+      "food_object_id": "BEVERAGE_BOTTLE",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "COLA",
+        "COLA_ZERO",
+        "ARANCIATA",
+        "CHINOTTO",
+        "TONICA",
+        "GASSOSA",
+        "TE_FREDDO",
+        "ENERGY",
+        "LIMONATA",
+        "BIRRA"
+      ]
+    },
+    {
+      "asset_family": "approved_additions",
+      "master_id": "BEVERAGE_JUICE_BOX",
+      "food_object_id": "BEVERAGE_JUICE_BOX",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "ARANCIA",
+        "ACE",
+        "PERA",
+        "MELA"
+      ]
+    },
+    {
+      "asset_family": "approved_additions",
+      "master_id": "OLIVE",
+      "food_object_id": "OLIVE",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "GREEN",
+        "BLACK",
+        "TAGGIASCA",
+        "GENERIC_OLIVE"
+      ]
+    },
+    {
+      "asset_family": "approved_additions",
+      "master_id": "TRUFFLE",
+      "food_object_id": "TRUFFLE",
+      "asset_status": "CATALOGED",
+      "variant_ids": [
+        "WHITE_TRUFFLE_SHAVINGS_QUANTITY_PORTION_DOES_NOT_CREATE_A_NEW_MASTER"
+      ]
+    }
+  ],
+  "vessel_catalog": {
+    "VESSEL_BOWL": "pasta, risotto, soups served as individual bowls, salads, poke/yogurt bowls",
+    "VESSEL_PLATE": "plated mains, antipasti, simple sides",
+    "VESSEL_PAN": "omelette, frittata, skillet presentation",
+    "VESSEL_POT": "stews, soups, braises and pot-served preparations",
+    "VESSEL_OVEN_TRAY": "roasted/oven preparations presented on a tray",
+    "VESSEL_BAKING_DISH": "lasagna, parmigiana, baked pasta, gratins",
+    "VESSEL_DESSERT_MOLD": "cakes, cheesecake, tart, pudding-style molded desserts",
+    "VESSEL_RAMEKIN": "small creams/desserts/sauces",
+    "VESSEL_GLASS": "drinks only when the drink object itself does not already contain its own container",
+    "VESSEL_CUP": "coffee, tea, hot chocolate",
+    "VESSEL_JAR": "overnight oats, preserves, layered jar desserts",
+    "VESSEL_PLATTER": "shared antipasti/seafood",
+    "VESSEL_BREAD_SURFACE": "bruschetta, crostini, toast-style bread presentation",
+    "VESSEL_PIZZA_SURFACE": "pizza/focaccia",
+    "VESSEL_FREE": "beverage bottle/carton objects and objects whose geometry is self-contained"
+  },
+  "composition_contract": {
+    "composition_id_pattern": "COMP_<recipe_id>",
+    "required": [
+      "vessel_id",
+      "primary",
+      "secondary",
+      "details",
+      "sauce"
+    ],
+    "primary": {
+      "count": 1
+    },
+    "secondary": {
+      "min": 0,
+      "max": 4
+    },
+    "details": {
+      "min": 0,
+      "max": 2
+    },
+    "sauce": {
+      "optional": true
+    },
+    "variant_rule": "Variant is selected on the Master asset; it does not create a new Master.",
+    "beverage_rule": "BEVERAGE_BOTTLE and BEVERAGE_JUICE_BOX contain their own geometry and therefore use VESSEL_FREE.",
+    "no_new_master_in_c6": true
+  },
+  "sample_instantiations": [
+    {
+      "recipe_id": "p01",
+      "composition_id": "COMP_p01",
+      "canonical_recipe": "Carbonara",
+      "vessel_id": "VESSEL_BOWL",
+      "primary": {
+        "master_id": "PASTA_LONG"
+      },
+      "secondary": [
+        {
+          "master_id": "PORK",
+          "variant_id": "GUANCIALE"
+        }
+      ],
+      "details": [
+        {
+          "master_id": "PECORINO"
+        },
+        {
+          "master_id": "BLACK_PEPPER"
+        }
+      ],
+      "sauce": null,
+      "status": "READY_FOR_ASSET_INSTANTIATION"
+    },
+    {
+      "recipe_id": "a32",
+      "composition_id": "COMP_a32",
+      "canonical_recipe": "Olive ascolane",
+      "vessel_id": "VESSEL_PLATE",
+      "primary": {
+        "master_id": "OLIVE"
+      },
+      "secondary": [
+        {
+          "master_id": "GROUND_BEEF"
+        },
+        {
+          "master_id": "PORK"
+        }
+      ],
+      "details": [
+        {
+          "master_id": "PARMESAN"
+        }
+      ],
+      "sauce": null,
+      "status": "READY_FOR_ASSET_INSTANTIATION"
+    },
+    {
+      "recipe_id": "b39",
+      "composition_id": "COMP_b39",
+      "canonical_recipe": "Tajarin burro tartufo",
+      "vessel_id": "VESSEL_BOWL",
+      "primary": {
+        "master_id": "PASTA_EGG"
+      },
+      "secondary": [
+        {
+          "master_id": "PARMESAN"
+        }
+      ],
+      "details": [
+        {
+          "master_id": "TRUFFLE"
+        }
+      ],
+      "sauce": {
+        "master_id": "BUTTER_SAGE"
+      },
+      "status": "READY_FOR_ASSET_INSTANTIATION"
+    },
+    {
+      "recipe_id": "v15",
+      "composition_id": "COMP_v15",
+      "canonical_recipe": "Birra",
+      "vessel_id": "VESSEL_FREE",
+      "primary": {
+        "master_id": "BEVERAGE_BOTTLE",
+        "variant_id": "BIRRA"
+      },
+      "secondary": [],
+      "details": [],
+      "sauce": null,
+      "status": "READY_FOR_ASSET_INSTANTIATION"
+    },
+    {
+      "recipe_id": "ft20",
+      "composition_id": "COMP_ft20",
+      "canonical_recipe": "Insalata farro feta",
+      "vessel_id": "VESSEL_BOWL",
+      "primary": {
+        "master_id": "FARRO"
+      },
+      "secondary": [
+        {
+          "master_id": "FETA"
+        },
+        {
+          "master_id": "TOMATO"
+        },
+        {
+          "master_id": "ARUGULA"
+        },
+        {
+          "master_id": "OLIVE"
+        }
+      ],
+      "details": [],
+      "sauce": null,
+      "status": "READY_FOR_ASSET_INSTANTIATION"
+    }
+  ],
+  "approved_special_rules": {
+    "OLIVE": "One Master for green, black, Taggiasca and generic olive variants.",
+    "TRUFFLE": "One Master for white truffle; shavings/portion differences do not create new Masters.",
+    "BEVERAGE_BOTTLE": "Bottle geometry is intrinsic to the Food Object; final vessel is VESSEL_FREE.",
+    "BEVERAGE_JUICE_BOX": "Carton geometry is intrinsic to the Food Object; final vessel is VESSEL_FREE.",
+    "alias_before_new_master": true
+  },
+  "quality_gates": [
+    "Exactly 1 primary per composition.",
+    "Maximum 4 secondary components.",
+    "Maximum 2 detail components.",
+    "Sauce is separate only when visually significant.",
+    "Vessel must match final presentation.",
+    "No new Masters introduced during C6.",
+    "All referenced master_id values must exist in asset_catalog.",
+    "All variant_id values must belong to the referenced Master.",
+    "Composition must remain visually recognizable and MealUp Toy-like.",
+    "Recipe data and app code remain untouched."
+  ],
+  "next_substage": "C6.1 — Complete 454-row composition instantiation matrix and asset production queue",
+  "corrections_applied": [
+    "Removed RABBIT from BEEF variants.",
+    "Confirmed CONIGLIO -> CHICKEN:RABBIT_VISUAL_SUBSTITUTE.",
+    "Confirmed TRIPPA -> BEEF:TRIPE_WHEN_RECIPE_REQUIRES_A_BEEF_LIKE_VISUAL_SUBSTITUTE."
+  ]
+}
