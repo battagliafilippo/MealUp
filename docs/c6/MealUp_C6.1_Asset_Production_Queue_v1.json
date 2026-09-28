@@ -1,6 +1,6 @@
 {
   "document": "MealUp — C6.1 Asset Production Queue",
-  "version": "C6.1.2",
+  "version": "C6.1.3",
   "status": "DERIVED_FROM_PERSISTED_MATRIX",
   "source_matrix": "MealUp_C6.1_Composition_Matrix_v1.json",
   "unique_asset_instantiations": 184,
@@ -23,8 +23,9 @@
     {
       "master_id": "AGRODOLCE",
       "variant_id": "TERIYAKI_SOY_SWEET_GLAZE_VISUAL_VARIANT",
-      "recipe_count": 1,
+      "recipe_count": 2,
       "recipe_ids": [
+        "s33",
         "s36"
       ]
     },
@@ -435,9 +436,11 @@
     {
       "master_id": "BREAD",
       "variant_id": "BISCUIT_FROLLINO_VISUAL_VARIANT",
-      "recipe_count": 1,
+      "recipe_count": 3,
       "recipe_ids": [
-        "do19"
+        "do19",
+        "k12",
+        "w13"
       ]
     },
     {
