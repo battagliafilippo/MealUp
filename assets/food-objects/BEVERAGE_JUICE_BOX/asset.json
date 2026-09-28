@@ -1,0 +1,20 @@
+{
+  "asset_key": "BEVERAGE_JUICE_BOX",
+  "master_id": "BEVERAGE_JUICE_BOX",
+  "variant_id": null,
+  "object_type": "Food Object / beverage carton",
+  "status": "GENERATED_UNREGISTERED",
+  "batch_id": "C6.2-B07",
+  "asset_family": "approved_additions",
+  "recipe_count": 0,
+  "recipe_ids": [],
+  "visual_spec": "MealUp Toy self-contained juice carton, transparent background.",
+  "known_queue_variants": [
+    "ACE",
+    "ARANCIA",
+    "MELA",
+    "PERA"
+  ],
+  "binary_file": null,
+  "registration_blocker": "Actual image binaries and exact variant-to-image mapping are not currently exposed as attachable repository files."
+}
