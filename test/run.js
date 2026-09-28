@@ -202,7 +202,9 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     const prima = a.stato().myIngredients.length;
     a.click('[data-act=shop-bought]'); a.click('[data-act=conferma-si]');
     almeno(a.stato().myIngredients.length, prima + 1, 'dispensa non aggiornata');
-    eq(a.stato().shopping.length, 0, 'lista non svuotata');
+    // NUOVO CONTRATTO (audit finale): 3 voci comprate su tante — la ricetta
+    // resta in lista finche' ha ingredienti ancora da prendere
+    eq(a.stato().shopping.length, 1, 'la ricetta con voci da prendere non deve staccarsi');
   });
 
   await test('il timer si avvia e sopravvive alla chiusura', async () => {
@@ -593,8 +595,9 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
   await test('i testi secondari hanno contrasto sufficiente', async () => {
     const a = await app();
     const css = a.d.querySelector('style').textContent;
-    // Prendo l'ultima definizione: vale quella del tema in uso.
-    const tutte = [...css.matchAll(/--text-tertiary:rgba\([\d,\s]+\.(\d+)\)/g)];
+    // Prendo l'ultima definizione: vale quella del tema in uso. Il tema neon
+    // la tiene nel token --testo-3 (cosi' il laboratorio tema puo' girarla).
+    const tutte = [...css.matchAll(/--(?:text-tertiary|testo-3):rgba\([\d,\s]+\.(\d+)\)/g)];
     vero(tutte.length, 'token non trovato');
     const alfa = Number(tutte[tutte.length - 1][1]);
     vero(alfa >= 45, 'testo terziario troppo tenue: .' + alfa);
@@ -1632,8 +1635,9 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     const icona = nome => [...a.d.querySelectorAll('.tab-item')]
       .find(t => t.textContent.includes(nome)).querySelector('.icon').innerHTML;
     vero(/M12 7\.5v13/.test(icona('Ricette')), 'le ricette non hanno il dorso del libro');
-    vero(/M5 9h14/.test(icona('Frigo')), 'il frigo non ha la divisione del freezer');
-    vero(/M16\.5 11v5/.test(icona('Frigo')), 'manca la maniglia verticale');
+    // la scheda ora si chiama Conservazione, l'icona resta il frigo
+    vero(/M5 9h14/.test(icona('Conservazione')), 'il frigo non ha la divisione del freezer');
+    vero(/M16\.5 11v5/.test(icona('Conservazione')), 'manca la maniglia verticale');
   });
 
   await test('gli avanzi hanno una sezione sempre raggiungibile', async () => {
@@ -1847,8 +1851,10 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(a.testo('#shop-unita'), 'g', 'il pollo si pesa');
     a.set('shop-add', 'uovo');
     eq(a.testo('#shop-unita'), 'un.', 'le uova si contano');
-    a.click('[data-act=shop-unita]');
-    eq(a.testo('#shop-unita'), 'g', 'l\'unita non si puo\' correggere a mano');
+    a.click('[data-act=shop-unita]');       // apre la rotella
+    vero(!a.d.getElementById('rotella-velo').hidden, 'la rotella delle unita\' non si apre');
+    a.dom.window.fitmealsProva.rotellaScegli(null, 'g');
+    eq(a.testo('#shop-unita'), 'g', 'l\'unita non si corregge dalla rotella');
   });
 
   await test('la dispensa tiene il conto di quanto resta', async () => {
@@ -1910,7 +1916,9 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       if (!it) break;
       it.click();
     }
-    eq(a.testo('[data-act=shop-bought]').trim(), 'Fine spesa', 'il tasto non si chiama Fine spesa');
+    // il tasto ora porta anche il conto del carrello (gerarchia 6A)
+    vero(/^Fine spesa( \u00b7 \d+)?$/.test(a.testo('[data-act=shop-bought]').trim()),
+      'il tasto non si chiama Fine spesa');
     a.click('[data-act=shop-bought]');
     a.click('[data-act=conferma-si]');
 
@@ -2206,12 +2214,12 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.tab('view-fridge');
     const metti = (n, q, u) => {
       a.set('disp-cerca', n);
-      const b = a.d.getElementById('disp-unita');
-      let giri = 0;
-      while (b.textContent.trim() !== u && giri++ < 4) b.click();
-      a.d.getElementById('disp-qta').value = q;
+      a.click('[data-act=disp-unita]');       // apre la rotella
+      a.dom.window.fitmealsProva.rotellaScegli(Number(q), unitaTest(u));
       a.click('[data-act=disp-add]');
     };
+    // le etichette dei test parlano come i bottoni ('kg', 'L', 'un.')
+    const unitaTest = et => ({ 'un.': 'pz', 'L': 'l' })[et] || et;
     metti('riso', '1', 'kg');
     metti('pasta', '500', 'g');
     metti('uovo', '6', 'un.');
@@ -2287,10 +2295,8 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.tab('view-profile'); a.profiloBase();
     a.tab('view-fridge');
     a.set('disp-cerca', 'riso');
-    const b = a.d.getElementById('disp-unita');
-    let giri = 0;
-    while (b.textContent.trim() !== 'kg' && giri++ < 4) b.click();
-    a.d.getElementById('disp-qta').value = '1';
+    a.click('[data-act=disp-unita]');       // apre la rotella
+    a.dom.window.fitmealsProva.rotellaScegli(1, 'kg');
     a.click('[data-act=disp-add]');
     eq(a.stato().freschezza['riso'].qta, 1000, 'partenza sbagliata');
 
@@ -2330,10 +2336,8 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.tab('view-fridge');
     a.click('[data-act=frigo-sez][data-val=spesa]');
     a.set('shop-add', 'riso');
-    const b = a.d.getElementById('shop-unita');
-    let giri = 0;
-    while (b.textContent.trim() !== 'kg' && giri++ < 4) b.click();
-    a.d.getElementById('shop-qta').value = '2';
+    a.click('[data-act=shop-unita]');       // apre la rotella
+    a.dom.window.fitmealsProva.rotellaScegli(2, 'kg');
     a.click('[data-act=shop-extra]');
     const x = a.stato().shopExtra[0];
     eq(x.qty, '2 kg', 'in lista non si legge in chili');
@@ -2348,9 +2352,9 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(a.conta('#view-home .bilancia'), 1, 'la bilancia deve essere una');
     const box = a.d.getElementById('anello-unico');
     vero(box.querySelector('svg') && box.querySelector('.ago'), 'manca la bilancia');
-    eq(box.querySelectorAll('.tracciato').length, 3, 'servono i tre settori dei pasti');
+    vero(!box.querySelector('.tracciato'), 'sul quadrante non vanno i settori dei pasti');
     eq(box.querySelectorAll('.gamba').length, 3, 'servono le tre gambe');
-    almeno(box.querySelectorAll('.cifra').length, 5, 'mancano le cifre della scala');
+    almeno(box.querySelectorAll('.cifra').length, 3, 'mancano le cifre della scala');
     a.click('[data-act=pasto-vai][data-val="0"]');
     vero(box.querySelector('.gamba.qui.f-col'), 'a colazione l\'evidenza non si sposta');
     a.click('[data-act=pasto-vai][data-val="2"]');
@@ -2802,11 +2806,13 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
     const ago = () => a.d.querySelector('#anello-unico .ago');
-    const punta = () => ago().getAttribute('d');
+    // nuovo rendering: l'ago e' un pezzo fisso che RUOTA (transform sul gruppo)
+    const punta = () => a.d.querySelector('#anello-unico .gruppo-ago').dataset.g;
 
     const digiuno = punta();
     vero(a.conta('#anello-unico .tacca') >= 5, 'il quadrante non ha le tacche');
-    vero(ago().className.baseVal.includes('f-col'), 'a digiuno l\'ago non e\' sul primo pasto');
+    vero(!ago().className.baseVal.includes('f-col'),
+      'l\'ago non deve piu\' colorarsi per pasto: e\' un pezzo meccanico arancione');
 
     const mangia = (pasto, kcal) => {
       a.click('[data-act=quick-open][data-val=' + pasto + ']');
@@ -2818,7 +2824,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     mangia('col', 450);
     vero(punta() !== digiuno, 'l\'ago non si e\' mosso');
     mangia('pra', 800);
-    vero(ago().className.baseVal.includes('f-pra'), 'l\'ago non passa al colore del pranzo');
+    vero(punta() !== digiuno, 'l\'ago non segue il pranzo');
     mangia('cen', 1500);
     vero(ago().className.baseVal.includes('oltre'), 'oltre il fabbisogno l\'ago non lo segnala');
   });
@@ -2915,15 +2921,18 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     almeno(box.querySelectorAll('.chip.mini').length, 2, 'nessuna ricetta per usarli');
   });
 
-  await test('il piatto della bilancia resta libero', async () => {
+  await test('niente piatto: restano i due contrappesi sull\'asta', async () => {
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
     a.apri('carbonara');
     a.click('#detail-body [data-act=log-meal]');
     a.click('#modal-detail [data-act=close-modal]');
     a.tab('view-home');
-    eq(a.conta('#anello-unico .sul-piatto'), 0, 'sul piatto non deve posarsi niente');
-    vero(a.d.querySelector('#anello-unico .piatto'), 'il piatto della bilancia deve esserci');
+    eq(a.conta('#anello-unico .sul-piatto'), 0, 'sulla bilancia non deve posarsi niente');
+    vero(!a.d.querySelector('#anello-unico .piatto'), 'il piatto non esiste piu\'');
+    vero(a.d.querySelector('#anello-unico .impugnatura'), 'manca il contrappeso zigrinato');
+    vero(a.d.querySelector('#anello-unico .contrappeso'), 'manca il contrappeso liscio');
+    almeno(a.conta('#anello-unico .ghiera'), 2, 'mancano i raccordi metallici');
   });
 
   await test('ogni calendario vede solo la sua sezione', async () => {
@@ -3105,18 +3114,24 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
     const css = a.d.querySelector('style').textContent;
-    vero(/\.flip\{[^}]*background:#3a1200/.test(css), 'manca la finestrella scura del flip clock');
+    vero(/\.flip i\{[^}]*linear-gradient\(#3/.test(css), 'mancano le tessere scure del flip clock');
     vero(/\.flip i\{[^}]*monospace/.test(css), 'le cifre non sono da flip clock');
     vero(/linear-gradient/.test(css.match(/\.flip i\{[^}]*\}/)[0]), 'manca la riga del ribaltamento');
     const box = a.d.getElementById('anello-unico');
     almeno(box.querySelectorAll('.flip i').length, 1, 'mancano le celle delle cifre');
-    vero(a.d.querySelector('#anello-unico .striscia-fondo'), 'manca la striscia dei pasti');
+    vero(!a.d.querySelector('#anello-unico .striscia-fondo'),
+      'la base deve restare pulita: niente striscia dei pasti');
     vero(!a.d.querySelector('#anello-unico .sotto-flip'), 'la cifra sotto doveva sparire');
-    // le cifre piccole dentro il quadrante, come sulla bilancia vera
-    almeno(box.querySelectorAll('.cifra').length, 5, 'mancano le cifre nel quadrante');
-    eq(box.querySelector('.cifra').textContent, '0', 'la scala non parte da zero');
+    // RENDERING DALLA FOTO: un terzo, due terzi, obiettivo, e il fondo
+    // scala piccolo a destra — quattro cifre crescenti
+    almeno(box.querySelectorAll('.cifra').length, 4, 'mancano le cifre nel quadrante');
+    const cifre = [...box.querySelectorAll('.cifra')].map(x => Number(x.textContent));
+    vero(cifre.every((v, i) => !i || v > cifre[i - 1]),
+      'la scala non cresce: ' + cifre.join(','));
+    vero(cifre[0] > 0 && Math.abs(cifre[1] - cifre[0] * 2) <= 20 && cifre[3] > cifre[2],
+      'la scala non e\' terzo/due terzi/obiettivo/fondo: ' + cifre.join(','));
     vero(box.querySelector('.collo'), 'manca il collo della bilancia');
-    almeno(box.querySelectorAll('.piedino').length, 3, 'mancano i piedini');
+    almeno(box.querySelectorAll('.piedino').length, 2, 'mancano i piedini');
   });
 
   console.log('\nUltimo giro: mezzi piatti, frecce, salse');
@@ -3435,12 +3450,37 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       a.d.getElementById('q-kcal').value = String(k);
       a.click('[data-act=quick-save]');
     });
-    const seg = [...a.d.querySelectorAll('#anello-unico .striscia-seg')];
-    eq(seg.length, 2, 'servono due segmenti');
-    const [wp, wc] = seg.map(x => parseFloat(x.getAttribute('width')));
-    vero(Math.abs(wc / wp - 900 / 600) < 0.05, 'le proporzioni non tornano: ' + wp + ' vs ' + wc);
-    vero(a.d.querySelector('#anello-unico .striscia-fondo'), 'manca il binario');
-    vero(!a.d.querySelector('#anello-unico .sotto-flip'), 'la cifra sotto doveva sparire');
+    vero(!a.d.querySelector('#anello-unico .striscia-seg'),
+      'la base della bilancia deve restare crema, senza i colori dei pasti');
+    const kPra = a.d.querySelector('#anello-unico .gamba.f-pra b').textContent;
+    const kCen = a.d.querySelector('#anello-unico .gamba.f-cen b').textContent;
+    eq(kPra, '600', 'la card del pranzo non tiene il conto');
+    eq(kCen, '900', 'la card della cena non tiene il conto');
+    vero(a.d.querySelector('#anello-unico .gamba.f-pra .gamba-pieno'),
+      'manca la barretta di progresso del pasto');
+  });
+
+  await test('i piu e meno delle card ritoccano il registro vero', async () => {
+    const a = await app();
+    a.tab('view-profile'); a.profiloBase();
+    a.tab('view-home');
+    a.click('.gamba.f-col [data-act=pasto-piu]');
+    a.click('.gamba.f-col [data-act=pasto-piu]');
+    eq(a.testo('#anello-unico .gamba.f-col b'), '100', 'due + non fanno 100');
+    eq(Number(a.d.querySelector('#anello-unico .conta-kcal').dataset.valore), 100,
+      'il flip clock non segue il totale');
+    vero(a.d.querySelector('#anello-unico .giorno-traccia .f-col'),
+      'manca il segmento dorato nella barra del giorno');
+    vero(/\d+%$/.test(a.testo('#anello-unico .giorno-cento').trim()),
+      'manca la percentuale del giorno');
+    const punta = a.d.querySelector('#anello-unico .gruppo-ago').dataset.g;
+    a.click('.gamba.f-col [data-act=pasto-meno]');
+    eq(a.testo('#anello-unico .gamba.f-col b'), '50', 'il meno non toglie i 50');
+    vero(a.d.querySelector('#anello-unico .gruppo-ago').dataset.g !== punta,
+      'l\'ago non torna indietro col meno');
+    // nel diario resta UNA voce di ritocco per pasto, non una per clic
+    eq(a.stato().log.filter(v => v.title === 'Ritocco').length, 1,
+      'i ritocchi non si fondono in una voce sola');
   });
 
   await test('ogni suggerimento si toglie dalla vista con la sua x', async () => {
@@ -4861,20 +4901,21 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.click('[data-act=frigo-sez][data-val=dispensa]');
     await wait(100);
 
-    // il bottone dell'unita' gira per tutte: g, kg, ml, cl, L, un.
+    // la rotella offre tutte le unita': g, kg, ml, cl, l, pz
     const b = a.d.getElementById('disp-unita');
-    const giro = [b.textContent.trim()];
-    for (let i = 0; i < 6; i++) { a.click('[data-act=disp-unita]'); giro.push(b.textContent.trim()); }
-    ['g', 'kg', 'ml', 'cl', 'L', 'un.'].forEach(u =>
-      vero(giro.includes(u), 'nel giro delle unita\' manca ' + u));
-    eq(giro[0], giro[6], 'il giro non torna al punto di partenza');
+    a.click('[data-act=disp-unita]');         // apre la rotella
+    vero(!a.d.getElementById('rotella-velo').hidden, 'la rotella non si apre dalla dispensa');
+    const giro = a.dom.window.fitmealsProva.rotellaUnita();
+    ['g', 'kg', 'ml', 'cl', 'l', 'pz'].forEach(u =>
+      vero(giro.includes(u), 'nella rotella manca ' + u));
+    a.dom.window.fitmealsProva.rotellaScegli(null, 'g');
 
     // il latte e' un liquido: unita' proposta ml, e un litro e mezzo
     // entra in frigo come 1500 ml, mostrato "1.5 L"
     a.set('disp-cerca', 'latte');
     eq(b.textContent.trim(), 'ml', 'il latte non propone i millilitri');
-    while (b.textContent.trim() !== 'L') a.click('[data-act=disp-unita]');
-    a.d.getElementById('disp-qta').value = '1.5';
+    a.click('[data-act=disp-unita]');
+    a.dom.window.fitmealsProva.rotellaScegli(1.5, 'l');
     a.click('[data-act=disp-add]');
     await wait(100);
     eq(P.freschezza()['latte'].qta, 1500, 'un litro e mezzo non fa 1500');
@@ -4920,8 +4961,8 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.set('shop-add', 'succo di pera');
     const bs = a.d.getElementById('shop-unita');
     eq(bs.textContent.trim(), 'ml', 'il succo non propone i millilitri in lista');
-    while (bs.textContent.trim() !== 'cl') a.click('[data-act=shop-unita]');
-    a.d.getElementById('shop-qta').value = '50';
+    a.click('[data-act=shop-unita]');
+    a.dom.window.fitmealsProva.rotellaScegli(50, 'cl');
     a.click('[data-act=shop-extra]');
     await wait(100);
     const voceL = a.stato().shopExtra.find(x => x.n === 'succo di pera');
@@ -5204,6 +5245,438 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(a.d.getElementById('search-input').value, 'latte', 'Ricette non apre la ricerca');
     a.click('[data-act=notifica-via]');
     vero(!a.d.querySelector('.notifica'), 'la x non cancella la notifica');
+  });
+
+  await test('la lista e\' universale: entra anche cio\' che non e\' in ricetta', async () => {
+    const a = await app();
+    a.tab('view-profile'); a.profiloBase();
+    a.tab('view-spesa');
+    const aggiungi = (n, q) => {
+      a.set('shop-add', n);
+      if (q) a.d.getElementById('shop-qta').value = q;
+      a.click('[data-act=shop-extra]');
+    };
+    aggiungi('acqua frizzante', '1500');
+    aggiungi('detersivo per piatti', '');
+    aggiungi('carta da cucina', '');
+    almeno(a.conta('#shopping-body .shop-item'), 3, 'le voci libere non entrano in lista');
+    let giri = 0;
+    while (a.d.querySelector('button.shop-item:not(.done)[data-act=shop-check]') && giri++ < 6)
+      a.d.querySelector('button.shop-item:not(.done)[data-act=shop-check]').click();
+    a.click('[data-act=shop-bought]'); a.click('[data-act=conferma-si]');
+    await wait(250);
+    const f = a.stato().freschezza;
+    vero(f['detersivo per piatti'], 'il detersivo non arriva in casa');
+    vero(f['carta da cucina'], 'la carta da cucina non arriva in casa');
+    vero(f['acqua frizzante'] && f['acqua frizzante'].qta === 1500,
+      'l\'acqua non tiene la quantita\': ' + JSON.stringify(f['acqua frizzante']));
+  });
+
+  await test('l\'ingrediente resta generico, il prodotto vero ha nome e marca sua', async () => {
+    const a = await app();
+    a.tab('view-profile'); a.profiloBase();
+    a.tab('view-spesa');
+    a.set('shop-add', 'latte');
+    a.d.getElementById('shop-qta').value = '500';
+    a.click('[data-act=shop-extra]');
+    // apro la riga e dico che cosa compro DAVVERO
+    a.click('[data-act=shop-qta-apri]');
+    a.d.getElementById('shopqta-prodotto').value = 'Parmalat Zymil Latte Intero';
+    a.d.getElementById('shopqta-marca').value = 'Parmalat';
+    a.click('[data-act=shopqta-unita]');             // apre la rotella
+    a.dom.window.fitmealsProva.rotellaScegli(1, 'l');
+    a.click('[data-act=shopqta-salva]');
+    // la riga tiene entrambe le verita': ingrediente sopra, prodotto sotto
+    vero(/latte/.test(a.testo('#shopping-body .shop-item .txt')), 'l\'ingrediente sparisce');
+    vero(/Parmalat/.test(a.testo('.prodotto-vero')), 'la riga non mostra il prodotto vero');
+    a.click('[data-act=shop-check]');
+    a.click('[data-act=shop-bought]'); a.click('[data-act=conferma-si]');
+    await wait(250);
+    // la scorta vive sotto l'ingrediente, con la quantita' DAVVERO comprata
+    const f = a.stato().freschezza['latte'];
+    vero(f && f.qta === 1000 && f.unita === 'ml',
+      'un litro vero non fa 1000 ml: ' + JSON.stringify(f));
+    // il prodotto entra nei dati con la sua identita'...
+    const info = a.stato().prodottiInfo['parmalat zymil latte intero'];
+    vero(info && info.marca === 'Parmalat', 'il prodotto vero non entra nei dati');
+    // ...si propone per l'ingrediente, ma non vincola nessuna ricetta
+    const proposte = a.dom.window.fitmealsProva.prodottiPerIngrediente('latte');
+    vero(proposte.some(p => /zymil/i.test(p.nome)), 'il prodotto non si propone per il latte');
+    eq(Object.keys(a.stato().marcheRicetta || {}).length, 0,
+      'la marca non deve vincolare le ricette');
+  });
+
+  await test('la spesa ha due stati: da prendere e nel carrello, coi conteggi', async () => {
+    const a = await app();
+    a.tab('view-spesa');
+    ['latte', 'pasta', 'pomodori'].forEach(n => { a.set('shop-add', n); a.click('[data-act=shop-extra]'); });
+
+    // i due cartelli, coi loro numeri
+    const conta = () => [...a.d.querySelectorAll('.spesa-stato .spesa-conta')].map(x => x.textContent);
+    const testi = () => [...a.d.querySelectorAll('.spesa-stato b')].map(x => x.textContent);
+    vero(testi().join('|') === 'Da prendere|Nel carrello', 'mancano i due stati: ' + testi().join('|'));
+    eq(conta().join('/'), '3/0', 'conteggi iniziali sbagliati: ' + conta().join('/'));
+
+    // un tocco: la voce passa nel carrello, i conteggi si aggiornano da soli
+    const presa = a.d.querySelector('[data-act=shop-check] .txt').textContent.trim();
+    a.click('[data-act=shop-check]');
+    eq(conta().join('/'), '2/1', 'dopo un tocco i conteggi non si aggiornano: ' + conta().join('/'));
+    vero(a.d.querySelector('.shop-item.done .box').textContent.includes('\u2713'),
+      'la voce nel carrello non ha la spunta');
+    // la voce appena mossa porta la classe dell'animazione (una volta sola)
+    vero(a.d.querySelector('.shop-item.appena.done'), 'manca l\'arrivo animato nel carrello');
+    const css = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+    vero(/@keyframes spesa-arrivo/.test(css) && /@keyframes spesa-spunta/.test(css),
+      'mancano le microanimazioni del passaggio');
+
+    // quel che resta in Da prendere NON e' comprato: a fine spesa passa solo il carrello
+    a.click('[data-act=shop-bought]'); a.click('[data-act=conferma-si]');
+    await wait(250);
+    eq(Object.keys(a.stato().freschezza).length, 1, 'in dispensa deve entrare solo il carrello');
+    const rimasti = a.testo('#shopping-body');
+    ['latte', 'pasta', 'pomodori'].filter(n => n !== presa).forEach(n =>
+      vero(rimasti.includes(n), 'la voce non comprata "' + n + '" deve restare in lista'));
+    vero(!Object.keys(a.stato().freschezza).some(k => k !== presa),
+      'in dispensa e\' entrata una voce mai messa nel carrello');
+  });
+
+  await test('nel carrello la voce diventa il prodotto vero', async () => {
+    const a = await app();
+    a.tab('view-spesa');
+    a.set('shop-add', 'latte'); a.click('[data-act=shop-extra]');
+    a.click('[data-act=shop-qta-apri]');
+    a.d.getElementById('shopqta-prodotto').value = 'Zymil Latte Intero 1 L';
+    a.d.getElementById('shopqta-marca').value = 'Parmalat';
+    a.click('[data-act=shopqta-salva]');
+    // da prendere: comanda l'ingrediente, il prodotto sta sotto
+    vero(/latte/.test(a.testo('.shop-item .txt')) && /Zymil/.test(a.testo('.prodotto-vero')),
+      'prima del carrello comanda l\'ingrediente');
+    a.click('[data-act=shop-check]');
+    // nel carrello: comanda il prodotto vero, per esteso e senza barrato
+    const vero_ = a.d.querySelector('.shop-item.done .txt--vero');
+    vero(vero_ && /Parmalat \u00b7 Zymil Latte Intero 1 L/.test(vero_.textContent),
+      'nel carrello non compare il prodotto vero: ' + (vero_ ? vero_.textContent : 'niente'));
+    vero(/per: latte/.test(vero_.textContent), 'nel carrello si perde l\'ingrediente di partenza');
+  });
+
+  await test('il prodotto letto dall\'etichetta si aggancia alla voce in lista', async () => {
+    const a = await app();
+    a.tab('view-spesa');
+    a.set('shop-add', 'latte'); a.click('[data-act=shop-extra]');
+    // scan/etichetta: il prodotto vero entra dal modulo, non dalla riga
+    a.click('.shop-eti[data-act=etichetta-apri]');
+    a.d.getElementById('eti-nome').value = 'latte intero zymil';
+    a.d.getElementById('eti-marca').value = 'Parmalat';
+    a.d.getElementById('eti-kcal').value = '64';
+    a.click('[data-act=etichetta-salva]');
+    await wait(150);
+    const agganciati = Object.values(a.stato().shopProdotto || {});
+    vero(agganciati.some(p => /zymil/i.test(p.nome) && p.marca === 'Parmalat'),
+      'il prodotto scansionato non si aggancia alla voce: ' + JSON.stringify(agganciati));
+    // la voce in lista lo mostra gia', prima ancora del carrello
+    vero(/Zymil/i.test(a.testo('.prodotto-vero')), 'la riga non mostra il prodotto agganciato');
+  });
+
+  await test('scan: codice mai visto, prodotto scritto a mano, dritto nel carrello', async () => {
+    const a = await app();
+    a.tab('view-spesa');
+    // niente rete in prova: il lettore ripiega sul "non riconosciuto"
+    a.d.getElementById('codice-cifre').value = '80012345';
+    a.click('[data-act=codice-cerca]');
+    await wait(150);
+    eq(a.d.getElementById('scan-esito-titolo').textContent, 'Prodotto non riconosciuto',
+      'senza archivio deve aprirsi la scheda manuale');
+    vero(a.d.getElementById('modal-scan-esito').classList.contains('active'), 'la scheda esito non si apre');
+    // il flusso non si blocca: nome, marca, formato, e via nel carrello
+    a.d.getElementById('scan-nome').value = 'Zymil Latte Intero';
+    a.d.getElementById('scan-marca').value = 'Parmalat';
+    a.d.getElementById('scan-qta').value = '1';
+    a.d.getElementById('scan-unita').textContent = 'L';
+    a.click('[data-act=scan-carrello]');
+    await wait(100);
+    const info = a.stato().prodottiInfo['zymil latte intero'];
+    vero(info && info.codice === '80012345' && info.marca === 'Parmalat',
+      'il codice non resta col prodotto: ' + JSON.stringify(info));
+    vero(info.conf && info.conf.qta === 1000 && info.conf.unita === 'ml',
+      'il formato 1 L non diventa la confezione: ' + JSON.stringify(info.conf));
+    eq(a.d.querySelectorAll('#shopping-body .shop-item.done').length, 1,
+      'il prodotto scansionato non arriva nel carrello');
+  });
+
+  await test('scan: il codice gia\' visto torna dalla memoria, senza internet', async () => {
+    const a = await app();
+    a.tab('view-spesa');
+    // prima lettura: entra in memoria dalla scheda manuale
+    a.d.getElementById('codice-cifre').value = '80012345';
+    a.click('[data-act=codice-cerca]');
+    await wait(150);
+    a.d.getElementById('scan-nome').value = 'Zymil Latte Intero';
+    a.d.getElementById('scan-qta').value = '1';
+    a.d.getElementById('scan-unita').textContent = 'L';
+    a.click('[data-act=scan-carrello]');
+    await wait(100);
+    // seconda lettura dello stesso codice: riconosciuto subito, zero rete
+    a.d.getElementById('codice-cifre').value = '80012345';
+    a.click('[data-act=codice-cerca]');
+    await wait(150);
+    eq(a.d.getElementById('scan-esito-titolo').textContent, 'Prodotto riconosciuto',
+      'la memoria del codice non risponde');
+    vero(/memoria, senza internet/.test(a.testo('#scan-esito-corpo')),
+      'la scheda non dice che viene dalla memoria');
+    vero(/1 L/.test((a.d.querySelector('.scan-formato') || {}).textContent || ''),
+      'il formato non torna dalla memoria');
+    // e niente doppioni: sempre lo stesso Product
+    eq(Object.keys(a.stato().prodottiInfo).filter(k => /zymil/.test(k)).length, 1,
+      'la seconda lettura non deve creare un secondo prodotto');
+  });
+
+  await test('scan: il prodotto vero veste l\'ingrediente generico e finisce nel suo carrello', async () => {
+    const a = await app();
+    a.tab('view-spesa');
+    a.set('shop-add', 'latte'); a.click('[data-act=shop-extra]');
+    a.d.getElementById('codice-cifre').value = '80099887';
+    a.click('[data-act=codice-cerca]');
+    await wait(150);
+    a.d.getElementById('scan-nome').value = 'Zymil Latte Intero';
+    a.d.getElementById('scan-marca').value = 'Parmalat';
+    a.d.getElementById('scan-qta').value = '1';
+    a.d.getElementById('scan-unita').textContent = 'L';
+    a.click('[data-act=scan-carrello]');
+    await wait(100);
+    const S = a.stato();
+    // la voce generica "latte" e' passata nel carrello vestita del prodotto
+    eq((S.shopExtra || []).map(x => x.n).join(','), 'latte', 'non deve nascere una seconda voce');
+    const k = Object.keys(S.shopDone || {})[0];
+    vero(k && S.shopProdotto[k] && /zymil/.test(S.shopProdotto[k].nome),
+      'la voce non ricorda il prodotto vero');
+    vero(S.shopQta[k] && S.shopQta[k].qta === 1000 && S.shopQta[k].unita === 'ml',
+      'la quantita\' della confezione non arriva sulla voce');
+    const riga = a.d.querySelector('.shop-item.done .txt--vero');
+    vero(riga && /Parmalat/.test(riga.textContent) && /per: latte/.test(riga.textContent),
+      'nel carrello non si leggono prodotto vero e ingrediente');
+    // la ricetta non si tocca: nessuna marca vincolata
+    eq(Object.keys(S.marcheRicetta || {}).length, 0, 'lo scan non deve vincolare le ricette');
+  });
+
+  await test('quantita scritte come parla la gente: 500gr, 1,5 kg, 6 x 1,5 L', async () => {
+    const a = await app();
+    const f = a.dom.window.fitmealsProva.formatoDaTesto;
+    eq(JSON.stringify([f('500 g').qta, f('500 g').unita]), '[500,"g"]', '500 g');
+    eq(JSON.stringify([f('500gr').qta, f('500gr').unita]), '[500,"g"]', '500gr attaccato');
+    eq(JSON.stringify([f('1,5 kg').qta, f('1,5 kg').scritta]), '[1500,"kg"]', 'virgola decimale');
+    eq(JSON.stringify([f('750 ml').qta, f('750 ml').unita]), '[750,"ml"]', '750 ml');
+    eq(JSON.stringify([f('1 L').qta, f('1 L').unita]), '[1000,"ml"]', '1 L');
+    eq(f('6 pz').qta, 6, '6 pz');
+    // il multipack non si collassa: pezzi e formato del singolo restano
+    const sei = f('6 x 1,5 L');
+    eq(JSON.stringify([sei.qta, sei.pezzi, sei.diUno]), '[9000,6,1500]', '6 x 1,5 L');
+    // "2 confezioni" senza formato noto non si trasforma in nulla
+    eq(f('2 confezioni'), null, 'confezioni senza formato non si inventano');
+    // la quantita' scritta nel campo di ricerca si separa dal nome
+    const t = a.dom.window.fitmealsProva.spesaTestoQuantita('acqua frizzante 6 x 1,5 L');
+    vero(t && t.nome === 'acqua frizzante' && t.conf.qta === 9000, 'il testo con quantita');
+    // unita' contestuali: dedotte quando affidabili
+    a.tab('view-spesa');
+    for (const [nome, attesa] of [['pasta', 'g'], ['latte', 'ml'], ['uova', 'un.'],
+                                  ['olio', 'ml'], ['acqua', 'ml']]) {
+      a.set('shop-add', nome);
+      a.d.getElementById('shop-add').dispatchEvent(new a.dom.window.Event('input', { bubbles: true }));
+      await wait(40);
+      eq(a.d.getElementById('shop-unita').textContent, attesa, 'unita di ' + nome);
+    }
+    // e la ricerca con la quantita' nel testo crea la voce giusta
+    a.set('shop-add', 'acqua 6 x 1,5 l');
+    a.click('[data-act=shop-extra]');
+    const ex = a.stato().shopExtra.slice(-1)[0];
+    vero(ex.n === 'acqua' && ex.qta === 9000 && /6 \u00d7 1.5 L/.test(ex.qty),
+      'la voce dal testo: ' + JSON.stringify(ex));
+  });
+
+  await test('le confezioni restano confezioni: 2 x 500 g, non un chilo anonimo', async () => {
+    const a = await app();
+    a.tab('view-spesa');
+    // il prodotto col suo formato entra dallo scan
+    a.d.getElementById('codice-cifre').value = '80070005';
+    a.click('[data-act=codice-cerca]');
+    await wait(150);
+    a.d.getElementById('scan-nome').value = 'Barilla Spaghetti n.5';
+    a.d.getElementById('scan-qta').value = '500';
+    a.d.getElementById('scan-unita').textContent = 'g';
+    a.click('[data-act=scan-carrello]');
+    await wait(100);
+    let S = a.stato();
+    let k = Object.keys(S.shopQta)[0];
+    eq(JSON.stringify(S.shopQta[k].conf), '{"qta":500,"unita":"g"}', 'il formato non resta nel modello');
+    eq(S.shopQta[k].n, 1, 'una confezione');
+    // seconda scansione dello stesso codice: 2 confezioni, zero doppioni
+    a.d.getElementById('codice-cifre').value = '80070005';
+    a.click('[data-act=codice-cerca]');
+    await wait(150);
+    a.click('[data-act=scan-carrello]');
+    await wait(100);
+    S = a.stato();
+    eq(S.shopQta[k].n, 2, 'la seconda scansione non aggiunge la confezione');
+    eq(S.shopQta[k].qta, 1000, 'il totale per le automazioni');
+    eq((S.shopExtra || []).length, 1, 'la seconda scansione crea un doppione');
+    vero(/2 \u00d7 500 g/.test(a.d.querySelector('.shop-item.done .qty').textContent),
+      'la riga non mostra 2 x 500 g');
+    // l'editor parte dalle confezioni e dice quanto vale una
+    a.d.querySelector('.shop-item.done .qty').click();
+    await wait(50);
+    eq(a.d.getElementById('shopqta-unita').textContent, 'conf.', 'l\'unita non parte da conf.');
+    eq(a.d.getElementById('shopqta-campo').value, '2', 'il numero non parte dalle confezioni');
+    vero(/1 confezione = 500 g/.test((a.d.querySelector('.conf-nota') || {}).textContent || ''),
+      'manca la nota del formato');
+    // la rotella offre conf. e 3 confezioni fanno 1500 g totali
+    a.click('[data-act=shopqta-unita]');
+    vero(a.dom.window.fitmealsProva.rotellaUnita().includes('conf'), 'la rotella non offre conf.');
+    a.dom.window.fitmealsProva.rotellaScegli(3, 'conf');
+    a.click('[data-act=shopqta-salva]');
+    await wait(50);
+    S = a.stato();
+    eq(JSON.stringify([S.shopQta[k].n, S.shopQta[k].qta]), '[3,1500]', '3 confezioni da 500');
+    // fine spesa: in dispensa arriva il contenuto vero, con le automazioni di sempre
+    a.click('[data-act=shop-bought]'); a.click('[data-act=conferma-si]');
+    await wait(250);
+    const fr = a.stato().freschezza['barilla spaghetti n.5'];
+    vero(fr && fr.qta === 1500 && fr.unita === 'g',
+      'in dispensa non arriva il totale: ' + JSON.stringify(fr));
+  });
+
+  await test('ogni sezione cerca nel suo contesto, coi suoi placeholder', async () => {
+    const a = await app({ storage: conAvanzi(ora => [
+      { rid: 'c25', title: 'Pollo al curry', n: 2, kcal: 400, pro: 45, ts: ora - 3600000, pasto: 'pra' },
+      { rid: 'p07', title: 'Risotto ai funghi', n: 1, kcal: 600, pro: 15, ts: ora - 7200000, pasto: 'cen' }
+    ]) });
+    a.tab('view-spesa');
+    const ph = id => (a.d.getElementById(id) || {}).placeholder || '';
+    eq(ph('shop-add'), 'Cerca un prodotto o ingrediente\u2026', 'placeholder spesa');
+    eq(ph('cerca-frigo'), 'Cerca nel Frigo\u2026', 'placeholder frigo');
+    eq(ph('cerca-freezer'), 'Cerca nel Freezer\u2026', 'placeholder freezer');
+    eq(ph('cerca-avanzi'), 'Cerca tra gli avanzi\u2026', 'placeholder avanzi');
+    eq(ph('disp-cerca'), 'Cerca nella Dispensa\u2026', 'placeholder dispensa');
+    eq(ph('search-input'), 'Cerca una ricetta\u2026', 'placeholder ricette');
+
+    // la barra degli avanzi FILTRA gli avanzi (prima non ascoltava nessuno)
+    const cercaA = (t) => {
+      a.d.getElementById('cerca-avanzi').value = t;
+      a.d.getElementById('cerca-avanzi').dispatchEvent(new a.dom.window.Event('input', { bubbles: true }));
+    };
+    cercaA('pollo');
+    let corpo = a.testo('#leftovers-body');
+    vero(corpo.includes('Pollo al curry') && !corpo.includes('Risotto'),
+      'cercare pollo deve lasciare solo il pollo');
+    cercaA('stinco');
+    vero(/tra gli avanzi/.test(a.testo('#leftovers-body')), 'manca il vuoto onesto degli avanzi');
+    cercaA('');
+    corpo = a.testo('#leftovers-body');
+    vero(corpo.includes('Pollo al curry') && corpo.includes('Risotto ai funghi'),
+      'senza ricerca tornano tutti');
+  });
+
+  await test('la stessa parola, sezioni diverse: la marca trova il prodotto dove sta', async () => {
+    const a = await app();
+    a.tab('view-spesa');
+    // il prodotto entra dallo scan e a fine spesa va al suo posto da solo
+    a.d.getElementById('codice-cifre').value = '80012377';
+    a.click('[data-act=codice-cerca]');
+    await wait(150);
+    a.d.getElementById('scan-nome').value = 'Zymil Latte Intero';
+    a.d.getElementById('scan-marca').value = 'Parmalat';
+    a.d.getElementById('scan-qta').value = '1';
+    a.d.getElementById('scan-unita').textContent = 'L';
+    a.click('[data-act=scan-carrello]');
+    await wait(100);
+    a.click('[data-act=shop-bought]'); a.click('[data-act=conferma-si]');
+    await wait(250);
+    const posto = a.stato().freschezza['zymil latte intero'].posto;
+    // nella sezione dove l'automazione l'ha messo, si trova anche per MARCA
+    const campo = posto === 'frigo' ? 'cerca-frigo' : 'disp-cerca';
+    const corpo = posto === 'frigo' ? '#frigo-body' : '#credenza-ripiani';
+    a.d.getElementById(campo).value = 'parmalat';
+    a.d.getElementById(campo).dispatchEvent(new a.dom.window.Event('input', { bubbles: true }));
+    await wait(80);
+    vero(a.testo(corpo).toLowerCase().includes('zymil'),
+      'la marca non trova il prodotto in ' + posto);
+    // e i suggerimenti della spesa propongono il prodotto con marca e formato
+    a.d.getElementById(campo).value = '';
+    a.set('shop-add', 'parmalat');
+    a.d.getElementById('shop-add').dispatchEvent(new a.dom.window.Event('input', { bubbles: true }));
+    await wait(80);
+    const sug = a.testo('#shop-suggest');
+    vero(/Parmalat/.test(sug) && /zymil/.test(sug) && /1 L/.test(sug),
+      'il suggerimento non porta marca e formato: ' + sug.slice(0, 80));
+    // una battitura sbagliata non lascia il vuoto
+    a.set('shop-add', 'pomodri');
+    a.d.getElementById('shop-add').dispatchEvent(new a.dom.window.Event('input', { bubbles: true }));
+    await wait(80);
+    vero(/pomodori/.test(a.testo('#shop-suggest')), 'niente perdono per la battitura');
+    // le cifre sono un codice: stesso lettore, stessa memoria
+    a.set('shop-add', '80012377');
+    a.d.getElementById('shop-add').dispatchEvent(new a.dom.window.Event('input', { bubbles: true }));
+    await wait(80);
+    vero(a.d.querySelector('[data-act=codice-da-testo]'), 'le cifre non offrono il codice');
+    a.click('[data-act=codice-da-testo]');
+    await wait(150);
+    eq(a.d.getElementById('scan-esito-titolo').textContent, 'Prodotto riconosciuto',
+      'il codice scritto non passa dalla memoria');
+  });
+
+  await test('fine spesa a meta: quel che resta da prendere non sparisce', async () => {
+    const a = await app();
+    a.tab('view-profile'); a.profiloBase();
+    const r = a.stato().recipes.find(x => (x.ing || []).some(i => i.n === 'latte'));
+    const btn = a.d.createElement('button');
+    btn.dataset.act = 'shop-add'; btn.dataset.val = r.id;
+    a.d.body.appendChild(btn); btn.click(); btn.remove();
+    a.tab('view-spesa');
+    await wait(100);
+    const prima = a.d.querySelectorAll('#shopping-body [data-act=shop-check]').length;
+    vero(prima >= 3, 'la ricetta non riempie la lista');
+    // compro SOLO il latte: la ricetta resta, con quel che manca ancora
+    [...a.d.querySelectorAll('[data-act=shop-check]')].find(x => /latte/.test(x.textContent)).click();
+    a.click('[data-act=shop-bought]'); a.click('[data-act=conferma-si]');
+    await wait(250);
+    eq(a.stato().shopping.length, 1, 'la ricetta sparisce con la spesa a meta\'');
+    vero(a.stato().freschezza['latte'], 'il latte comprato non arriva in dispensa');
+    vero(a.d.querySelectorAll('#shopping-body [data-act=shop-check]').length >= 3,
+      'gli ingredienti da prendere spariscono');
+    // tutto preso: adesso si', la lista si chiude
+    a.click('[data-act=shop-tutti]');
+    a.click('[data-act=shop-bought]'); a.click('[data-act=conferma-si]');
+    await wait(250);
+    eq(a.stato().shopping.length, 0, 'a spesa completa la ricetta deve staccarsi');
+  });
+
+  await test('Invio con le cifre apre il lettore, non una voce-numero', async () => {
+    const a = await app();
+    a.tab('view-spesa');
+    a.set('shop-add', '80012388');
+    a.click('[data-act=shop-extra]');   // stesso gesto dell'Invio
+    await wait(150);
+    eq((a.stato().shopExtra || []).length, 0, 'le cifre non devono diventare una voce');
+    vero(a.d.getElementById('modal-scan-esito').classList.contains('active'),
+      'le cifre non passano dal lettore');
+  });
+
+  await test('dai Prodotti alla dispensa: anche il catalogo converge nello stesso flusso', async () => {
+    const a = await app();
+    a.tab('view-spesa');
+    // dal catalogo alla lista: LA stessa voce manuale di tutte le strade
+    const btn = a.d.createElement('button');
+    btn.dataset.act = 'cat-in-lista'; btn.dataset.val = 'latte';
+    a.d.body.appendChild(btn); btn.click(); btn.remove();
+    await wait(100);
+    const voce = (a.stato().shopExtra || []).find(x => x.n === 'latte');
+    vero(voce && voce.unita === 'ml', 'la voce dal catalogo non ha l\'unita\' contestuale');
+    vero(a.testo('#shopping-body').includes('latte'), 'la voce non compare in Da prendere');
+    // stesso flusso di tutte le altre: carrello e poi dispensa automatica
+    a.click('[data-act=shop-check]');
+    vero(a.d.querySelector('.shop-item.done'), 'la voce non passa nel carrello');
+    a.click('[data-act=shop-bought]'); a.click('[data-act=conferma-si]');
+    await wait(250);
+    const f = a.stato().freschezza['latte'];
+    vero(f && f.posto === 'frigo', 'l\'automazione non porta il latte in frigo: ' + JSON.stringify(f));
   });
 
   await test('fine spesa chiede Si o No al centro, non il doppio tocco', async () => {
