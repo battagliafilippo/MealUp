@@ -1,0 +1,16 @@
+{
+  "asset_key": "TRUFFLE",
+  "master_id": "TRUFFLE",
+  "variant_id": null,
+  "object_type": "Food Object",
+  "status": "GENERATED_UNREGISTERED",
+  "batch_id": "C6.2-B09",
+  "asset_family": "approved_additions",
+  "recipe_count": 1,
+  "recipe_ids": [
+    "b39"
+  ],
+  "visual_spec": "White truffle presented as a small quantity of shavings/slices, isolated, no plate or surrounding food.",
+  "binary_file": null,
+  "registration_blocker": "Actual image binary is not currently exposed as an attachable repository file."
+}
