@@ -1,0 +1,28 @@
+{
+  "document": "MealUp — C6.2 Batch Execution Status",
+  "version": "C6.2.0",
+  "status": "IN_PROGRESS",
+  "source_batch_plan": "docs/c6/MealUp_C6.2_Asset_Production_Batch_Plan_v1.json",
+  "total_batches": 23,
+  "total_unique_asset_instantiations": 186,
+  "current_batch": "C6.2-B01",
+  "current_item": {
+    "master_id": "OLIVE",
+    "variant_id": null,
+    "priority": "P0",
+    "recipe_count": 16
+  },
+  "completed_batches": [],
+  "blocked_batches": [],
+  "generated_unregistered": {
+    "masters": [
+      "OLIVE",
+      "TRUFFLE",
+      "BEVERAGE_BOTTLE",
+      "BEVERAGE_JUICE_BOX"
+    ],
+    "note": "Visuals were previously generated/seen in ChatGPT, but their binary files are not currently available as repository attachments."
+  },
+  "next_action": "Generate/retrieve OLIVE binary, review against C6.2-B01 brief, then register PNG and metadata in assets/food-objects/OLIVE/.",
+  "registration_gate": "REGISTERED only after actual binary image plus metadata are committed."
+}
