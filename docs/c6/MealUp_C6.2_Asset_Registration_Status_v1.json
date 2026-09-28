@@ -1,0 +1,49 @@
+{
+  "document": "MealUp — C6.2 Asset Registration Status Ledger",
+  "version": "v1",
+  "status": "INITIALIZED",
+  "source_queue": "docs/c6/MealUp_C6.1_Asset_Production_Queue_v1.json",
+  "queue_instantiations": 186,
+  "purpose": "Track the distinction between planned, generated, reviewed, approved, and repository-registered assets.",
+  "status_definitions": {
+    "QUEUED": "Planned by the validated C6 queue; no repository asset file verified.",
+    "GENERATED_UNREGISTERED": "Asset was generated/seen in ChatGPT, but the binary file is not currently available to register in GitHub.",
+    "REVIEWED": "Binary asset is available and has passed visual review, but approval/registration is not yet complete.",
+    "APPROVED": "Binary asset is explicitly approved for use.",
+    "REGISTERED": "Approved binary asset and metadata are committed to the repository."
+  },
+  "current_ledger": {
+    "OLIVE": {
+      "variant_id": null,
+      "status": "GENERATED_UNREGISTERED",
+      "evidence": "Approved production brief C6.2-B01 and prior ChatGPT generation; binary asset not currently exposed as a file in the repository/file workspace.",
+      "recipe_count": 16,
+      "next_action": "When the binary image is available, review against C6.2-B01 and register under assets/food-objects/olive/."
+    },
+    "TRUFFLE": {
+      "variant_id": null,
+      "status": "GENERATED_UNREGISTERED",
+      "evidence": "Prior ChatGPT generation of white truffle shavings; binary asset not currently exposed as a file in the repository/file workspace.",
+      "recipe_count": 1,
+      "next_action": "When the binary image is available, review against the approved visual direction and register under assets/food-objects/truffle/."
+    },
+    "BEVERAGE_BOTTLE": {
+      "status": "GENERATED_UNREGISTERED",
+      "evidence": "Prior ChatGPT generations of beverage bottle/packaging assets; binary files are not currently exposed as repository assets.",
+      "next_action": "Map each generated bottle variant to the queue variant_id before registration."
+    },
+    "BEVERAGE_JUICE_BOX": {
+      "status": "GENERATED_UNREGISTERED",
+      "evidence": "Prior ChatGPT generation of juice-box assets; binary files are not currently exposed as repository assets.",
+      "next_action": "Map each generated juice-box variant to the queue variant_id before registration."
+    }
+  },
+  "remaining_queue_status": {
+    "status": "QUEUED",
+    "count": 186,
+    "note": "This is a planning status, not a claim that 186 images are missing if previously generated assets become available for verification."
+  },
+  "repository_asset_root": "assets/",
+  "registration_rule": "Never mark an asset REGISTERED without an actual binary asset file plus metadata committed to GitHub.",
+  "next_batch": "C6.2-B01 / OLIVE"
+}
