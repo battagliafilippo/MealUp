@@ -1,0 +1,29 @@
+{
+  "asset_key": "BEVERAGE_BOTTLE",
+  "master_id": "BEVERAGE_BOTTLE",
+  "variant_id": null,
+  "object_type": "Food Object / beverage object",
+  "status": "GENERATED_UNREGISTERED",
+  "batch_id": "C6.2-B05",
+  "asset_family": "approved_additions",
+  "recipe_count": 2,
+  "recipe_ids": [
+    "a37",
+    "a54"
+  ],
+  "visual_spec": "MealUp Toy self-contained beverage bottle, transparent background.",
+  "known_queue_variants": [
+    "ARANCIATA",
+    "BIRRA",
+    "CHINOTTO",
+    "COLA",
+    "COLA_ZERO",
+    "ENERGY",
+    "GASSOSA",
+    "LIMONATA",
+    "TE_FREDDO",
+    "TONICA"
+  ],
+  "binary_file": null,
+  "registration_blocker": "Actual image binaries and exact variant-to-image mapping are not currently exposed as attachable repository files."
+}
