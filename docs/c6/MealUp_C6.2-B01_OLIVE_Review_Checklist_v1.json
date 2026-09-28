@@ -1,0 +1,32 @@
+{
+  "document": "MealUp — C6.2-B01 OLIVE Review Checklist",
+  "version": "1.0",
+  "batch_id": "C6.2-B01",
+  "asset_key": "OLIVE",
+  "variant_id": null,
+  "status": "READY_FOR_REVIEW",
+  "source_brief": "docs/c6/MealUp_C6.2-B01_Asset_Production_Brief_OLIVE_v1.json",
+  "checks": [
+    "single whole green olive",
+    "natural green, not neon",
+    "MealUp Toy soft stylized 3D treatment",
+    "three-quarter product view with slight top visibility",
+    "transparent background",
+    "no vessel, plate, garnish, brine or additional food",
+    "fully inside canvas with generous transparent margin",
+    "centered composition",
+    "soft studio lighting and controlled highlights",
+    "no ground plane; only subtle contained contact shading",
+    "pit not visible",
+    "asset remains reusable and recipe-agnostic"
+  ],
+  "acceptance": {
+    "asset_key_exact": true,
+    "variant_id_exact": null,
+    "binary_required": true,
+    "transparency_required": true,
+    "centered_required": true
+  },
+  "current_blocker": "No binary image file is currently available to attach/register from the prior chat generation.",
+  "next_action": "Attach/provide the actual OLIVE image binary when available, then run visual review and commit PNG + metadata."
+}
