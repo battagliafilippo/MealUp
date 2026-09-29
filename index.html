@@ -3313,6 +3313,37 @@ body{font-family:"Satoshi","General Sans","Segoe UI Variable",system-ui,sans-ser
   .mealup-tab-bar .tab-item{font-size:.52rem!important}
 }
 
+
+/* ---- MealUp frozen shell · preview completion ---- */
+body::after{
+  content:"MealUp";position:fixed;right:-1.5rem;top:42%;z-index:-1;pointer-events:none;
+  transform:rotate(-90deg);transform-origin:center;font-weight:900;font-size:5rem;letter-spacing:-.08em;
+  color:transparent;-webkit-text-stroke:1px rgba(126,48,9,.11);
+  text-shadow:1px 1px 0 rgba(255,255,255,.07);opacity:.65;
+}
+.home-greeting{display:block;color:rgba(255,252,244,.94);font-size:.86rem;font-weight:760;
+  letter-spacing:-.01em;margin-bottom:2px;text-shadow:0 1px 2px rgba(88,29,3,.2)}
+#view-home .header .subtitle{font-size:.62rem;letter-spacing:.08em;opacity:.83}
+#view-home .header h1{font-size:2rem;letter-spacing:-.055em}
+.riga-comandi .sorpresa{
+  background:linear-gradient(180deg,#ff843e,#ff6115);color:#fff8ef;border-color:rgba(255,255,255,.55);
+  box-shadow:0 8px 20px rgba(132,48,8,.19),inset 0 1px 1px rgba(255,255,255,.4);
+  padding:10px 15px;border-radius:18px;font-weight:800
+}
+.riga-comandi .sorpresa svg{stroke:currentColor}
+.glass-card,.card-btn,.invito-bilancia,.macro-giorno,.gamba,.allenamento,
+.shop-item,.barattolo,.cal-giorno,.sugg,.pagina-testa,.storico,.fresco{
+  border-radius:24px;
+}
+input,select,textarea{border-radius:18px}
+.campanella,.icon-btn,.tool-like{
+  background:linear-gradient(180deg,rgba(255,249,240,.98),rgba(242,224,204,.94))!important;
+  border-color:rgba(255,255,255,.58)!important;
+}
+@media (min-width:700px){
+  .mealup-tab-bar{max-width:720px;left:50%!important;right:auto!important;transform:translateX(-50%)}
+}
+
 </style>
 </head>
 <body>
@@ -3331,6 +3362,7 @@ body{font-family:"Satoshi","General Sans","Segoe UI Variable",system-ui,sans-ser
   <section id="view-home" class="view active">
     <header class="header">
       <div>
+        <span class="home-greeting" id="home-greeting">Ciao</span>
         <span class="subtitle" id="home-sub">I tuoi pasti su misura</span>
         <h1>MealUp</h1>
       </div>
@@ -8959,7 +8991,7 @@ function rigaComandi(dove) {
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 3l1.9 4.6L19 9l-4 3.3 1.2 5.2L12 15l-4.2 2.5L9 12.3 5 9l5.1-1.4z"/>
       </svg>
-      sorprendimi
+      ${['col','pra','cen'].includes(dove) ? 'Dimmi tu' : 'sorprendimi'}
     </button>
     <button type="button" class="filtri-mini ${n ? 'on' : ''}" data-act="filtri-apri">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4"/></svg>
@@ -9114,6 +9146,11 @@ function vaiAlPasto(i, animato) {
 }
 
 function renderHome() {
+  const prof = activeProfile();
+  const ora = new Date().getHours();
+  const saluto = ora < 12 ? 'Buongiorno' : ora < 18 ? 'Buon pomeriggio' : 'Buonasera';
+  const g = document.getElementById('home-greeting');
+  if (g) g.textContent = saluto + (prof && prof.name ? ' ' + prof.name : '');
   const e = energy();
   const ex = (e && !e.invalid) ? extraTraining(activeProfile()) : 0;
   document.getElementById('home-sub').innerHTML =
