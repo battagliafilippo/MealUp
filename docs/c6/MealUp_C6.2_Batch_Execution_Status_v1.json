@@ -8,7 +8,7 @@
   "source_strategy": "BOARD_EXTRACTION_FIRST",
   "generation_policy": "Generate only when no board candidate survives quality review.",
   "current_batch": "C6.2-B02",
-  "current_item": "INTEGRATION_QA",
+  "current_item": "VISUAL_QA",
   "blocked_batches": [
     "C6.2-B01"
   ],
@@ -20,8 +20,8 @@
     }
   ],
   "completed_batches": [],
-  "note": "Candidate coverage comes from the supplied visual boards and is not approval. Each candidate still requires crop/isolation, transparency cleanup, normalization, visual QA, metadata registration, and integration validation. B01 OLIVE is intentionally deferred so no generation slot is consumed now.",
-  "next_action": "Run repository integration/visual QA for CAKE, BRIOCHE and MUFFIN before advancing to C6.2-B03.",
+  "note": "B02 assets are extracted, registered, and wired into the Recipe Window/card renderer. Static repository validation passed; final visual QA still requires the published/runtime app.",
+  "next_action": "Run visual validation of CAKE, BRIOCHE and MUFFIN in the Recipe Window before advancing to C6.2-B03.",
   "source_candidate_batches": [
     "C6.2-B02",
     "C6.2-B04",
@@ -45,9 +45,9 @@
   "batch_progress": {
     "C6.2-B01": "DEFERRED_GENERATION",
     "C6.2-B02": {
-      "CAKE": "EXTRACTED",
-      "BRIOCHE": "EXTRACTED_REVIEW_REQUIRED",
-      "MUFFIN": "EXTRACTED"
+      "CAKE": "INTEGRATED",
+      "BRIOCHE": "INTEGRATED",
+      "MUFFIN": "INTEGRATED"
     }
   }
 }
