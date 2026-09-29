@@ -3234,114 +3234,184 @@ h1{font-family:"General Sans","Segoe UI Variable",system-ui,sans-serif;
   font-weight:700;letter-spacing:-.02em;line-height:1.05}
 
 /* ============================================================
-   MEALUP REDESIGN PREVIEW — frozen visual layer
-   No business logic is changed by these rules.
+   MEALUP REDESIGN PREVIEW v2 — frozen material + home corrections
+   Visual layer only: business logic stays untouched.
    ============================================================ */
 :root{
   --mealup-orange:#ff6115;
-  --mealup-cream:#f5e8d7;
+  --mealup-orange-deep:#dd4f08;
+  --mealup-cream:#f4e5d3;
   --mealup-cream-hi:#fff8ee;
+  --mealup-cream-low:#e6d0b8;
   --mealup-anthracite:#352b25;
+  --mealup-muted:#745f52;
+  --mealup-shadow:0 10px 26px rgba(92,49,24,.16);
+  --mealup-inset:inset 1px 1px 1px rgba(255,255,255,.82),inset -1px -2px 3px rgba(117,78,51,.08);
 }
-body{font-family:"Satoshi","General Sans","Segoe UI Variable",system-ui,sans-serif}
-#view-home .header h1{color:var(--mealup-anthracite)}
+html,body{background:var(--mealup-orange)!important}
+body{
+  font-family:"Satoshi","Avenir Next","General Sans","Segoe UI Variable",system-ui,sans-serif!important;
+  color:var(--mealup-anthracite)!important;
+  text-shadow:none!important;
+}
+.ambient-mesh,#sfondo{display:none!important}
+#app{position:relative;z-index:1}
+
+/* HOME EMBOSSED WORDMARK — large, tone-on-tone, behind content only. */
+#view-home{position:relative;isolation:isolate}
+#view-home::before{
+  content:"MealUp";position:fixed;z-index:0;pointer-events:none;
+  left:50%;top:42%;transform:translate(-50%,-50%) rotate(-8deg);
+  font-family:"Satoshi","Avenir Next","General Sans",system-ui,sans-serif;
+  font-size:clamp(5.8rem,25vw,10.5rem);font-weight:900;letter-spacing:-.075em;
+  color:rgba(217,72,4,.40);
+  text-shadow:-2px -2px 2px rgba(255,148,83,.26),2px 2px 3px rgba(150,47,0,.25);
+  opacity:.72;white-space:nowrap;
+}
+#view-home>*{position:relative;z-index:1}
+#view-home .header h1,.header h1{color:#fff7ef!important}
+#view-home .subtitle,.subtitle{color:rgba(255,248,239,.82)!important}
+
+/* MOLDED CREAM MATERIAL — windows and controls share the nav reference surface. */
+.glass-card,.card-btn,.modal-content,.icon-btn,.chip,.btn-ghost,.sugg,.shop-item,
+.modo-spesa,.barattolo,.banner-doppio,.invito-eti,.cal-giorno,.frecce button,.gamba,
+.allenamento,.macro-giorno,.campanella,.sorpresa,.filtri-mini,.pagina-testa,.storico,
+.fresco,.invito-bilancia,.voce-oggi,#timer-bar,input,select,textarea,.porz-mini .passo,
+.cal-espandi,.cal-freccia,.torna{
+  background:linear-gradient(145deg,var(--mealup-cream-hi),var(--mealup-cream))!important;
+  border:0!important;
+  color:var(--mealup-anthracite)!important;
+  box-shadow:var(--mealup-shadow),var(--mealup-inset)!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+.glass-card,.card-btn,.modal-content,.pagina-testa,.storico,.fresco,.invito-bilancia{
+  border-radius:26px!important;
+}
+input,select,textarea{
+  border-radius:18px!important;
+  caret-color:var(--mealup-orange)!important;
+}
+input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
+.section-desc,.detail-meta,.miss,.empty,.field-label{color:var(--mealup-muted)!important}
+.sezione-titolo{color:rgba(255,248,239,.90)!important}
+.btn-primary{
+  background:var(--mealup-orange)!important;color:#fff9f2!important;border:0!important;
+  box-shadow:0 8px 20px rgba(139,49,5,.20),inset 0 1px 1px rgba(255,255,255,.28)!important;
+}
+.chip.active,.pasto-tab.active{
+  background:var(--mealup-cream)!important;color:var(--mealup-orange)!important;
+  box-shadow:var(--mealup-shadow),inset 0 0 18px rgba(255,117,39,.18),var(--mealup-inset)!important;
+}
+.pasto-tab{color:rgba(255,248,239,.72)!important}
+.pasto-tab.active{border-radius:18px!important}
+.pasto-barra{display:none!important}
+
+/* LIVE SCALE — cream only, no silver, no fake image frame. */
 .bilancia-reference{
   width:min(100%,560px)!important;height:auto!important;min-height:0!important;
-  margin:2px auto 10px!important;position:relative!important;overflow:visible;
-  filter:drop-shadow(0 12px 20px rgba(112,42,8,.13));
+  margin:4px auto 6px!important;position:relative!important;overflow:visible!important;
+  filter:none!important;
 }
-.bilancia-reference-img{
-  display:block;width:100%;height:auto;aspect-ratio:1000/563;object-fit:contain;
-  user-select:none;-webkit-user-drag:none;
+.mealup-scale-svg{display:block;width:100%;height:auto;overflow:visible}
+.mu-scale-shell,.mu-scale-neck,.mu-scale-base{
+  fill:url(#muCream);stroke:rgba(255,255,255,.72);stroke-width:2.2;
 }
-.bilancia-reference-stato{
-  display:flex;align-items:baseline;justify-content:center;gap:8px;
-  width:max-content;max-width:90%;margin:-2px auto 0;padding:6px 12px;
-  border-radius:999px;background:rgba(255,248,238,.72);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
-  color:var(--mealup-anthracite);font-size:.68rem;
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+.mu-scale-face{
+  fill:url(#muFace);stroke:rgba(176,123,84,.12);stroke-width:1.8;
 }
-.bilancia-reference-stato b{font-size:.78rem;color:var(--mealup-orange)}
-.bilancia-reference-stato span{opacity:.72}
+.mu-scale-tick{fill:none;stroke:rgba(82,56,43,.42);stroke-width:2;stroke-linecap:round}
+.mu-scale-tick.major{stroke:rgba(82,56,43,.72);stroke-width:3.1}
+.mu-scale-progress{
+  fill:none;stroke:#f7a044;stroke-width:16;stroke-linecap:round;
+  filter:drop-shadow(0 2px 2px rgba(192,84,12,.10));
+}
+.mu-scale-label{
+  font:700 26px/1 "Satoshi","Avenir Next","General Sans",system-ui,sans-serif;
+  fill:#6b4a38;text-anchor:middle;
+}
+.mu-scale-label-small{font-size:23px}
+.mu-scale-needle{
+  fill:var(--mealup-orange);transition:transform .8s cubic-bezier(.22,.8,.28,1);
+  filter:drop-shadow(0 2px 2px rgba(139,49,5,.16));
+}
+.mu-flip rect{fill:#363531;stroke:#262522;stroke-width:1}
+.mu-flip-hinge{stroke:#171715;stroke-width:1.1;opacity:.8}
+.mu-flip text{
+  fill:#f0ece6;text-anchor:middle;
+  font:500 32px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+.mu-scale-kcal{
+  fill:#6b4a38;font:700 27px/1 "Satoshi","Avenir Next","General Sans",system-ui,sans-serif;
+}
+.mu-scale-button-ring{fill:#d7b99c;stroke:rgba(122,70,37,.18);stroke-width:1}
+.mu-scale-button{fill:var(--mealup-orange);stroke:#8e3108;stroke-width:2}
+.mu-scale-slot{fill:#ead6c0;stroke:rgba(112,71,45,.16);stroke-width:1.4}
+.mu-scale-foot{fill:#6f4932}
 
-/* One continuous molded rubber navigation surface. */
-#velo-fondo{height:calc(106px + env(safe-area-inset-bottom))}
+/* HOME data windows: same rubber family as the approved navigation. */
+.anello-gambe,.macro-giorno,.menu-oggi,.riepilogo{position:relative;z-index:2}
+.gamba,.macro-giorno,.allenamento,.voce-oggi{
+  box-shadow:0 6px 15px rgba(90,55,31,.13),inset 1px 1px 1px rgba(255,255,255,.80),inset -1px -2px 3px rgba(118,80,54,.08)!important;
+}
+.gamba.qu i,.gamba.qui{box-shadow:0 7px 16px rgba(90,55,31,.14),inset 0 0 16px rgba(255,116,37,.16),var(--mealup-inset)!important}
+
+/* BOTTOM NAV — one molded piece; buttons are raised from the same rubber. */
+#velo-fondo{
+  height:calc(112px + env(safe-area-inset-bottom))!important;
+  background:linear-gradient(to top,var(--mealup-orange) 0 56%,transparent)!important;
+}
 .mealup-tab-bar{
-  left:10px!important;right:10px!important;bottom:calc(8px + env(safe-area-inset-bottom))!important;
-  height:72px!important;padding:7px 7px!important;box-sizing:border-box;
-  border:0!important;border-radius:27px!important;
-  background:linear-gradient(180deg,var(--mealup-cream-hi),var(--mealup-cream))!important;
-  box-shadow:0 10px 24px rgba(76,47,28,.18),inset 0 1px 1px rgba(255,255,255,.95),inset 0 -1px 2px rgba(105,71,48,.08)!important;
+  left:12px!important;right:12px!important;bottom:calc(10px + env(safe-area-inset-bottom))!important;
+  height:78px!important;padding:8px 8px!important;box-sizing:border-box;
+  border:0!important;border-radius:31px!important;
+  background:linear-gradient(145deg,var(--mealup-cream-hi),var(--mealup-cream))!important;
+  box-shadow:0 15px 31px rgba(78,43,23,.20),inset 1px 1px 1px rgba(255,255,255,.92),inset -2px -3px 4px rgba(111,73,49,.08)!important;
   backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
   align-items:center!important;justify-content:space-between!important;gap:4px!important;
 }
 .mealup-tab-bar .tab-item{
-  position:relative!important;width:20%!important;height:58px!important;min-width:0;
-  padding:4px 2px!important;border:0!important;border-radius:21px!important;
+  position:relative!important;width:20%!important;height:62px!important;min-width:0;
+  padding:5px 2px!important;border:0!important;border-radius:24px!important;
   background:transparent!important;color:var(--mealup-anthracite)!important;
-  text-transform:none!important;letter-spacing:0!important;font-size:.56rem!important;font-weight:700!important;
+  text-transform:none!important;letter-spacing:0!important;font-size:.56rem!important;font-weight:750!important;
   gap:2px!important;overflow:visible;
   transition:transform .18s cubic-bezier(.22,.8,.28,1),filter .22s ease!important;
 }
 .mealup-tab-bar .tab-item::before{
   content:""!important;position:absolute!important;inset:1px!important;width:auto!important;
-  transform:none!important;border-radius:20px!important;z-index:0!important;
-  background:radial-gradient(ellipse at 50% 24%,rgba(255,255,255,.72),rgba(255,255,255,.18) 46%,rgba(255,255,255,0) 74%)!important;
-  box-shadow:0 5px 8px rgba(92,61,40,.10),inset 0 1px 1px rgba(255,255,255,.75)!important;
-  opacity:.72;
+  transform:none!important;border-radius:23px!important;z-index:0!important;
+  background:linear-gradient(145deg,var(--mealup-cream-hi),var(--mealup-cream))!important;
+  box-shadow:0 7px 11px rgba(87,56,37,.13),inset 1px 1px 2px rgba(255,255,255,.88),inset -1px -2px 3px rgba(106,70,48,.07)!important;
+  opacity:1!important;
 }
 .mealup-tab-bar .tab-item .icon,.mealup-tab-bar .tab-item span{position:relative;z-index:2}
 .mealup-tab-bar .tab-item .icon{
-  width:25px!important;height:25px!important;fill:none!important;stroke:currentColor!important;
-  stroke-width:1.8!important;stroke-linecap:round!important;stroke-linejoin:round!important;
+  width:27px!important;height:27px!important;fill:none!important;stroke:currentColor!important;
+  stroke-width:1.85!important;stroke-linecap:round!important;stroke-linejoin:round!important;
 }
-.mealup-tab-bar .tab-item.active{color:var(--mealup-orange)!important;filter:drop-shadow(0 0 7px rgba(255,97,21,.34))}
+.mealup-tab-bar .tab-item.active{
+  color:var(--mealup-orange)!important;
+  filter:drop-shadow(0 0 8px rgba(255,104,28,.26));
+}
 .mealup-tab-bar .tab-item.active::before{
-  background:radial-gradient(circle at 50% 45%,rgba(255,174,112,.42),rgba(255,136,61,.16) 47%,rgba(255,255,255,.08) 72%)!important;
-  box-shadow:0 5px 9px rgba(92,61,40,.09),inset 0 1px 1px rgba(255,255,255,.78),0 0 14px rgba(255,111,35,.18)!important;
-  opacity:1;
+  background:linear-gradient(145deg,#fff5e8,#f5e1cb)!important;
+  box-shadow:0 7px 11px rgba(87,56,37,.10),inset 0 0 20px rgba(255,129,52,.27),
+    inset 1px 1px 2px rgba(255,255,255,.9),0 0 17px rgba(255,112,34,.20)!important;
 }
 .mealup-tab-bar .tab-item:active{transform:translateY(2px) scale(.985)!important}
 .mealup-tab-bar .tab-item:active::before{
-  box-shadow:inset 0 3px 7px rgba(110,68,38,.10),0 2px 4px rgba(92,61,40,.06)!important;
+  box-shadow:inset 0 4px 9px rgba(112,73,48,.12),inset 0 0 16px rgba(255,129,52,.18),0 2px 4px rgba(87,56,37,.05)!important;
 }
-.mealup-tab-bar .tab-item span{font-weight:750!important}
+
+/* Keep secondary views in the same material family while Ricette structure remains provisional. */
+#view-search,#view-spesa,#view-fridge,#view-profile{color:var(--mealup-anthracite)}
+#view-search .header h1,#view-spesa .header h1,#view-fridge .header h1,#view-profile .header h1{color:#fff8ef!important}
+
 @media(max-width:390px){
-  .mealup-tab-bar{left:6px!important;right:6px!important}
-  .mealup-tab-bar .tab-item .icon{width:23px!important;height:23px!important}
-  .mealup-tab-bar .tab-item{font-size:.52rem!important}
-}
-
-
-/* ---- MealUp frozen shell · preview completion ---- */
-body::after{
-  content:"MealUp";position:fixed;right:-1.5rem;top:42%;z-index:-1;pointer-events:none;
-  transform:rotate(-90deg);transform-origin:center;font-weight:900;font-size:5rem;letter-spacing:-.08em;
-  color:transparent;-webkit-text-stroke:1px rgba(126,48,9,.11);
-  text-shadow:1px 1px 0 rgba(255,255,255,.07);opacity:.65;
-}
-.home-greeting{display:block;color:rgba(255,252,244,.94);font-size:.86rem;font-weight:760;
-  letter-spacing:-.01em;margin-bottom:2px;text-shadow:0 1px 2px rgba(88,29,3,.2)}
-#view-home .header .subtitle{font-size:.62rem;letter-spacing:.08em;opacity:.83}
-#view-home .header h1{font-size:2rem;letter-spacing:-.055em}
-.riga-comandi .sorpresa{
-  background:linear-gradient(180deg,#ff843e,#ff6115);color:#fff8ef;border-color:rgba(255,255,255,.55);
-  box-shadow:0 8px 20px rgba(132,48,8,.19),inset 0 1px 1px rgba(255,255,255,.4);
-  padding:10px 15px;border-radius:18px;font-weight:800
-}
-.riga-comandi .sorpresa svg{stroke:currentColor}
-.glass-card,.card-btn,.invito-bilancia,.macro-giorno,.gamba,.allenamento,
-.shop-item,.barattolo,.cal-giorno,.sugg,.pagina-testa,.storico,.fresco{
-  border-radius:24px;
-}
-input,select,textarea{border-radius:18px}
-.campanella,.icon-btn,.tool-like{
-  background:linear-gradient(180deg,rgba(255,249,240,.98),rgba(242,224,204,.94))!important;
-  border-color:rgba(255,255,255,.58)!important;
-}
-@media (min-width:700px){
-  .mealup-tab-bar{max-width:720px;left:50%!important;right:auto!important;transform:translateX(-50%)}
+  .mealup-tab-bar{left:7px!important;right:7px!important}
+  .mealup-tab-bar .tab-item .icon{width:24px!important;height:24px!important}
+  .mealup-tab-bar .tab-item{font-size:.51rem!important}
+  #view-home::before{font-size:clamp(5rem,27vw,7.4rem)}
 }
 
 </style>
@@ -8757,9 +8827,9 @@ function anelloGiornata(mealId) {
     const fondo = T * 4 / 3;                     // il quadrante respira oltre l'obiettivo
     const oltre = valore > T;
     const frazione = Math.max(0, Math.min(1, valore / fondo));
-    const DA = -36, SPAN = 72;                   // arco piatto e largo, come in foto
+    const DA = -58, SPAN = 116;                  // arco e lancetta condividono la stessa scala
     const gAgo = (DA + frazione * SPAN).toFixed(2);
-    const CX = 380, CY = 510;                    // il perno sta sotto il quadrante: non si vede
+    const CX = 380, CY = 330;                    // fulcro ottico del nuovo quadrante crema
 
     const rad = g => g * Math.PI / 180;
     const px = (g, r) => (CX + Math.sin(rad(g)) * r).toFixed(1);
@@ -8794,12 +8864,74 @@ function anelloGiornata(mealId) {
       : '';
 
     return `
-    <div class="anello bilancia bilancia-reference" aria-label="${valore} kcal su ${T}">
-      <img src="assets/mealup-home-scale.webp" alt="" class="bilancia-reference-img" draggable="false">
-      <div class="bilancia-reference-stato" aria-hidden="true">
-        <b>${valore} kcal</b>
-        <span>su ${T} kcal · ${Math.round(valore / T * 100)}%</span>
-      </div>
+    <div class="anello bilancia bilancia-reference bilancia-live" aria-label="${valore} kcal su ${T}">
+      <svg class="mealup-scale-svg" viewBox="0 0 760 620" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="muCream" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff9f0"/>
+            <stop offset=".58" stop-color="#f4e5d3"/>
+            <stop offset="1" stop-color="#e7d2ba"/>
+          </linearGradient>
+          <linearGradient id="muFace" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff8ee"/>
+            <stop offset="1" stop-color="#f5e6d5"/>
+          </linearGradient>
+          <filter id="muSoftShadow" x="-25%" y="-25%" width="150%" height="170%">
+            <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#853006" flood-opacity=".20"/>
+          </filter>
+          <filter id="muTinyShadow" x="-25%" y="-25%" width="150%" height="160%">
+            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#7c4f35" flood-opacity=".14"/>
+          </filter>
+        </defs>
+
+        <ellipse cx="380" cy="594" rx="210" ry="13" fill="#8d2d05" opacity=".16"/>
+
+        <!-- Head: cream body, subtle integrated rim, no metallic outer frame. -->
+        <g filter="url(#muSoftShadow)">
+          <path class="mu-scale-shell" d="M128 82 Q138 43 181 38 Q380 14 579 38 Q622 43 632 82 L606 315 Q600 349 565 354 Q380 372 195 354 Q160 349 154 315 Z"/>
+          <path class="mu-scale-face" d="M147 88 Q156 58 188 54 Q380 34 572 54 Q604 58 613 88 L589 302 Q584 329 557 333 Q380 349 203 333 Q176 329 171 302 Z"/>
+        </g>
+
+        <!-- Ticks + colored calorie arc. The same gAgo drives both arc and needle. -->
+        ${Array.from({length:25},(_,i)=>{
+          const g = DA + (i/24)*SPAN;
+          const major = i%4===0;
+          return '<path class="mu-scale-tick '+(major?'major':'')+'" d="M'+px(g, major?244:250)+' '+py(g, major?244:250)+' L'+px(g,263)+' '+py(g,263)+'"/>';
+        }).join('')}
+        ${frazione > .01 ? '<path class="mu-scale-progress" d="'+arcoP(DA, Number(gAgo), 230)+'"/>' : ''}
+
+        <text class="mu-scale-label" x="205" y="202">${tonda(T/3)}</text>
+        <text class="mu-scale-label" x="332" y="180">${tonda(T*2/3)}</text>
+        <text class="mu-scale-label" x="468" y="202">${tonda(T)}</text>
+        <text class="mu-scale-label mu-scale-label-small" x="565" y="248">${tonda(fondo)}</text>
+
+        <g class="mu-scale-needle" style="transform-origin:380px 330px;transform:rotate(${gAgo}deg)">
+          <path d="M376.5 333 L383.5 333 L382 105 Q380 92 378 105 Z"/>
+        </g>
+
+        <!-- Dynamic flip counter: same real calorie value, no second source of truth. -->
+        ${String(Math.round(valore)).padStart(4,'0').slice(-4).split('').map((d,i)=>{
+          const x = 278 + i*54;
+          return '<g class="mu-flip" transform="translate('+x+' 246)">'
+            + '<rect width="46" height="55" rx="7"/>'
+            + '<path d="M2 27.5H44" class="mu-flip-hinge"/>'
+            + '<text x="23" y="38">'+d+'</text></g>';
+        }).join('')}
+        <text class="mu-scale-kcal" x="505" y="282">kcal</text>
+
+        <!-- Cream neck + orange button. -->
+        <path class="mu-scale-neck" d="M329 356 Q380 364 431 356 L449 466 L311 466 Z"/>
+        <circle class="mu-scale-button-ring" cx="380" cy="424" r="21"/>
+        <circle class="mu-scale-button" cx="380" cy="424" r="16"/>
+
+        <!-- Wide cream base with the recessed pill slot from the approved render. -->
+        <g filter="url(#muSoftShadow)">
+          <path class="mu-scale-base" d="M183 474 Q190 459 213 457 H547 Q570 459 577 474 L590 545 Q592 566 566 570 H194 Q168 566 170 545 Z"/>
+          <rect class="mu-scale-slot" x="210" y="515" width="340" height="31" rx="15.5"/>
+        </g>
+        <ellipse class="mu-scale-foot" cx="238" cy="579" rx="20" ry="11"/>
+        <ellipse class="mu-scale-foot" cx="522" cy="579" rx="20" ry="11"/>
+      </svg>
     </div>
     <div class="anello-gambe">
       ${archi.map(a => S.ui.gambeRidotte

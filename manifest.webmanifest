@@ -1,7 +1,7 @@
 {
-  "name": "FitMeals",
-  "short_name": "FitMeals",
-  "description": "Le tue ricette fit, sempre a portata di mano.",
+  "name": "MealUp",
+  "short_name": "MealUp",
+  "description": "MealUp — ricette, scorte e cucina in un unico posto.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
