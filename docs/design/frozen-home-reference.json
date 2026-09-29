@@ -1,0 +1,1389 @@
+{
+  "title": "MealUp frozen Home reference — Phase 0/6",
+  "status": "reference measurements only; no UI modification",
+  "coordinate_convention": "Origin at top-left; x right, y down; xyxy endpoints exclusive; colors sRGB HEX from PNG pixels.",
+  "measurement_method": {
+    "pixel_threshold_mask": "Thresholded RGB within component crop; precise for color-separated portions but can omit anti-aliasing, rim and shadow. Edge tolerance ±3 px.",
+    "visual_measurement": "Landmarks estimated from full-resolution reference where gradients merge adjacent parts. Edge tolerance listed per box (usually ±5–12 px).",
+    "palette": "Median per indicated crop, not arbitrary design choices. Masked swatches use stated category masks; source contains baked lighting and shadows."
+  },
+  "prerequisites": {
+    "remote_repository": "battagliafilippo/MealUp",
+    "remote_branch": "mealup-redesign-preview",
+    "remote_head_sha": "708ac3dfcc6170f1d18fac08e98a2833dd968e02",
+    "remote_parent_sha": "e8e9dbfabcb694d365ad758411cf5f4542daec2c",
+    "local_analysis_checkout": "detached read-only analysis worktree at remote HEAD; pre-existing local preview commits were not used as the visual baseline",
+    "browser_font": {
+      "browser": "headless Chrome",
+      "face": "Satoshi",
+      "status": "loaded",
+      "weight": "300 900",
+      "document_fonts_check": true,
+      "computed_font_family": "Satoshi, sans-serif",
+      "text_probe": "MealUp 0123456789 at 700 42px",
+      "satoshi_width_px": 408.36590576171875,
+      "sans_serif_width_px": 394.611328125,
+      "page_errors": 0
+    },
+    "scale_reference_accessible": true,
+    "nav_reference_accessible": true
+  },
+  "references": {
+    "scale": {
+      "path": "C:\\Users\\Ramona\\Downloads\\Immagine ChatGPT 29 set 2026, 16_36_49.png",
+      "size": [
+        1672,
+        941
+      ],
+      "sha256": "802e5bbe43c4139c9f6cc6937550cca245b11a8551d7ef2b0bf5b4ead73443dd"
+    },
+    "nav": {
+      "path": "C:\\Users\\Ramona\\Downloads\\426BD302-1A67-4B88-B280-4B45AC60FBFA.PNG",
+      "size": [
+        1536,
+        1024
+      ],
+      "sha256": "46f6bfa963bb17aa2efd64421b3bbcf9ce3ddab4ea5801d0deed84d3b68648d9"
+    }
+  },
+  "palette": {
+    "scale_reference_source_of_truth": {
+      "home_orange_top": {
+        "sample_key": "orange_top_left",
+        "median_hex": "#eb6217",
+        "sample_rect_xyxy_px": [
+          30,
+          30,
+          350,
+          350
+        ]
+      },
+      "home_orange_lower_variation": {
+        "sample_key": "orange_bottom_left",
+        "median_hex": "#e65c14",
+        "sample_rect_xyxy_px": [
+          30,
+          700,
+          350,
+          890
+        ]
+      },
+      "dial_cream": {
+        "sample_key": "dial_face",
+        "median_hex": "#f2dbc6",
+        "sample_rect_xyxy_px": [
+          740,
+          260,
+          810,
+          320
+        ]
+      },
+      "shell_highlight": {
+        "sample_key": "shell_upper",
+        "median_hex": "#f6e3d0",
+        "sample_rect_xyxy_px": [
+          790,
+          78,
+          900,
+          92
+        ]
+      },
+      "neck_cream": {
+        "sample_key": "neck",
+        "median_hex": "#efd3bc",
+        "sample_rect_xyxy_px": [
+          790,
+          620,
+          805,
+          670
+        ]
+      },
+      "base_front_cream": {
+        "sample_key": "base_front",
+        "median_hex": "#ebccb3",
+        "sample_rect_xyxy_px": [
+          750,
+          790,
+          795,
+          805
+        ]
+      },
+      "recessed_slot_cream": {
+        "sample_key": "base_slot",
+        "median_hex": "#eacbb2",
+        "sample_rect_xyxy_px": [
+          725,
+          768,
+          775,
+          784
+        ]
+      },
+      "flip_anthracite": {
+        "sample_key": "flip_black",
+        "median_hex": "#33302a",
+        "sample_rect_xyxy_px": [
+          735,
+          360,
+          751,
+          375
+        ]
+      },
+      "dial_ink_brown_masked": {
+        "sample_key": "masked_dial_ink_median",
+        "median_hex": "#745438",
+        "sample_rect_xyxy_px": null
+      },
+      "flip_digit_gray_masked": {
+        "sample_key": "masked_flip_digit_median",
+        "median_hex": "#9c9996",
+        "sample_rect_xyxy_px": null
+      },
+      "arc_amber_masked": {
+        "sample_key": "masked_arc_median",
+        "median_hex": "#f7ae61",
+        "sample_rect_xyxy_px": null
+      },
+      "needle_orange": {
+        "sample_key": "needle_orange",
+        "median_hex": "#ed5408",
+        "sample_rect_xyxy_px": [
+          876,
+          234,
+          884,
+          252
+        ]
+      },
+      "button_orange": {
+        "sample_key": "button_orange",
+        "median_hex": "#e06206",
+        "sample_rect_xyxy_px": [
+          820,
+          548,
+          842,
+          570
+        ]
+      },
+      "foot_brown": {
+        "sample_key": "base_foot",
+        "median_hex": "#5c341c",
+        "sample_rect_xyxy_px": [
+          567,
+          829,
+          595,
+          840
+        ]
+      },
+      "ground_shadow_warm": {
+        "sample_key": "shadow_ground",
+        "median_hex": "#b43b03",
+        "sample_rect_xyxy_px": [
+          730,
+          834,
+          930,
+          858
+        ]
+      }
+    },
+    "nav_material_reference": {
+      "surround_beige": {
+        "sample_key": "background_top",
+        "median_hex": "#eee5db",
+        "sample_rect_xyxy_px": [
+          50,
+          18,
+          120,
+          75
+        ]
+      },
+      "unselected_key_cream": {
+        "sample_key": "inactive_key_face",
+        "median_hex": "#e3d7ca",
+        "sample_rect_xyxy_px": [
+          728,
+          106,
+          744,
+          119
+        ]
+      },
+      "active_key_warm_face": {
+        "sample_key": "active_key_face",
+        "median_hex": "#fcca87",
+        "sample_rect_xyxy_px": [
+          477,
+          170,
+          492,
+          180
+        ]
+      },
+      "active_key_diffused_light": {
+        "sample_key": "active_key_glow",
+        "median_hex": "#fed79b",
+        "sample_rect_xyxy_px": [
+          518,
+          229,
+          533,
+          241
+        ]
+      },
+      "icon_dark": {
+        "sample_key": "icon_dark",
+        "median_hex": "#41382f",
+        "sample_rect_xyxy_px": [
+          747,
+          153,
+          767,
+          164
+        ]
+      },
+      "selected_icon_orange_masked": {
+        "sample_key": "masked_selected_icon_orange_median",
+        "median_hex": "#fb7825",
+        "sample_rect_xyxy_px": null
+      },
+      "side_shadow": {
+        "sample_key": "bottom_bar_shadow",
+        "median_hex": "#c3b09d",
+        "sample_rect_xyxy_px": [
+          100,
+          874,
+          122,
+          883
+        ]
+      }
+    }
+  },
+  "sample_provenance": {
+    "scale": {
+      "orange_top_left": {
+        "rect": [
+          30,
+          30,
+          350,
+          350
+        ],
+        "median": "#eb6217",
+        "p05": "#e85e15",
+        "p95": "#ed6318",
+        "center_pixel": "#ec6317"
+      },
+      "orange_top_right": {
+        "rect": [
+          1350,
+          30,
+          1610,
+          350
+        ],
+        "median": "#ec6217",
+        "p05": "#e95f16",
+        "p95": "#ef6419",
+        "center_pixel": "#eb6317"
+      },
+      "orange_bottom_left": {
+        "rect": [
+          30,
+          700,
+          350,
+          890
+        ],
+        "median": "#e65c14",
+        "p05": "#da530e",
+        "p95": "#ea6016",
+        "center_pixel": "#df5611"
+      },
+      "orange_bottom_right": {
+        "rect": [
+          1350,
+          700,
+          1610,
+          890
+        ],
+        "median": "#e95f14",
+        "p05": "#e65c12",
+        "p95": "#eb6116",
+        "center_pixel": "#e85d13"
+      },
+      "dial_face": {
+        "rect": [
+          740,
+          260,
+          810,
+          320
+        ],
+        "median": "#f2dbc6",
+        "p05": "#f1d9c4",
+        "p95": "#f4ddc8",
+        "center_pixel": "#f3ddc7"
+      },
+      "dial_face_left": {
+        "rect": [
+          575,
+          285,
+          615,
+          330
+        ],
+        "median": "#f3dbc5",
+        "p05": "#f2dac4",
+        "p95": "#f4ddc7",
+        "center_pixel": "#f2dcc6"
+      },
+      "shell_upper": {
+        "rect": [
+          790,
+          78,
+          900,
+          92
+        ],
+        "median": "#f6e3d0",
+        "p05": "#f5e1cd",
+        "p95": "#fbf2e8",
+        "center_pixel": "#f6e3d0"
+      },
+      "shell_side": {
+        "rect": [
+          455,
+          180,
+          470,
+          260
+        ],
+        "median": "#e9b094",
+        "p05": "#d15f14",
+        "p95": "#f5e1ce",
+        "center_pixel": "#d8af92"
+      },
+      "neck": {
+        "rect": [
+          790,
+          620,
+          805,
+          670
+        ],
+        "median": "#efd3bc",
+        "p05": "#eed2ba",
+        "p95": "#f0d5bf",
+        "center_pixel": "#efd3bc"
+      },
+      "base_top": {
+        "rect": [
+          756,
+          722,
+          790,
+          741
+        ],
+        "median": "#f0dfd1",
+        "p05": "#cdbaa7",
+        "p95": "#faefe3",
+        "center_pixel": "#f6e8dc"
+      },
+      "base_front": {
+        "rect": [
+          750,
+          790,
+          795,
+          805
+        ],
+        "median": "#ebccb3",
+        "p05": "#dfc8b1",
+        "p95": "#f6e3d2",
+        "center_pixel": "#ebccb3"
+      },
+      "base_slot": {
+        "rect": [
+          725,
+          768,
+          775,
+          784
+        ],
+        "median": "#eacbb2",
+        "p05": "#e9c8ae",
+        "p95": "#ebcdb4",
+        "center_pixel": "#ebcbb2"
+      },
+      "flip_black": {
+        "rect": [
+          735,
+          360,
+          751,
+          375
+        ],
+        "median": "#33302a",
+        "p05": "#1f1d18",
+        "p95": "#a4a2a0",
+        "center_pixel": "#252320"
+      },
+      "flip_digit": {
+        "rect": [
+          741,
+          364,
+          753,
+          386
+        ],
+        "median": "#34322d",
+        "p05": "#1e1b16",
+        "p95": "#a5a3a0",
+        "center_pixel": "#a8a8a5"
+      },
+      "needle_orange": {
+        "rect": [
+          876,
+          234,
+          884,
+          252
+        ],
+        "median": "#ed5408",
+        "p05": "#c84e02",
+        "p95": "#f0ab8e",
+        "center_pixel": "#ec5003"
+      },
+      "arc_orange": {
+        "rect": [
+          682,
+          187,
+          704,
+          205
+        ],
+        "median": "#f6a654",
+        "p05": "#f5a551",
+        "p95": "#f7e0cc",
+        "center_pixel": "#f6a654"
+      },
+      "button_orange": {
+        "rect": [
+          820,
+          548,
+          842,
+          570
+        ],
+        "median": "#e06206",
+        "p05": "#db5b02",
+        "p95": "#f28840",
+        "center_pixel": "#dd5d03"
+      },
+      "dial_text_brown": {
+        "rect": [
+          616,
+          249,
+          642,
+          266
+        ],
+        "median": "#eed7be",
+        "p05": "#694b30",
+        "p95": "#fae9d3",
+        "center_pixel": "#f0d9c0"
+      },
+      "base_foot": {
+        "rect": [
+          567,
+          829,
+          595,
+          840
+        ],
+        "median": "#5c341c",
+        "p05": "#4b2711",
+        "p95": "#65412b",
+        "center_pixel": "#613922"
+      },
+      "shadow_ground": {
+        "rect": [
+          730,
+          834,
+          930,
+          858
+        ],
+        "median": "#b43b03",
+        "p05": "#862701",
+        "p95": "#de540f",
+        "center_pixel": "#a43301"
+      }
+    },
+    "nav": {
+      "background_top": {
+        "rect": [
+          50,
+          18,
+          120,
+          75
+        ],
+        "median": "#eee5db",
+        "p05": "#ede4da",
+        "p95": "#efe7dd",
+        "center_pixel": "#ede5db"
+      },
+      "background_mid": {
+        "rect": [
+          30,
+          280,
+          130,
+          320
+        ],
+        "median": "#e6dcd1",
+        "p05": "#ddd1c5",
+        "p95": "#ece3d9",
+        "center_pixel": "#e5dcd2"
+      },
+      "bar_top": {
+        "rect": [
+          630,
+          60,
+          900,
+          75
+        ],
+        "median": "#efe5da",
+        "p05": "#ece1d5",
+        "p95": "#f3eadf",
+        "center_pixel": "#efe6db"
+      },
+      "bar_body": {
+        "rect": [
+          610,
+          235,
+          880,
+          252
+        ],
+        "median": "#d2c0ad",
+        "p05": "#c2ac98",
+        "p95": "#ddc9b9",
+        "center_pixel": "#c6b19e"
+      },
+      "inactive_key_face": {
+        "rect": [
+          728,
+          106,
+          744,
+          119
+        ],
+        "median": "#e3d7ca",
+        "p05": "#e0d4c6",
+        "p95": "#e5d9cc",
+        "center_pixel": "#e3d7c9"
+      },
+      "inactive_key_shadow": {
+        "rect": [
+          715,
+          230,
+          738,
+          243
+        ],
+        "median": "#c6b19e",
+        "p05": "#c2ac98",
+        "p95": "#d3c2b1",
+        "center_pixel": "#c6b29e"
+      },
+      "active_key_face": {
+        "rect": [
+          477,
+          170,
+          492,
+          180
+        ],
+        "median": "#fcca87",
+        "p05": "#f26a1f",
+        "p95": "#ffe7b1",
+        "center_pixel": "#ef631a"
+      },
+      "active_key_glow": {
+        "rect": [
+          518,
+          229,
+          533,
+          241
+        ],
+        "median": "#fed79b",
+        "p05": "#fdd397",
+        "p95": "#ffd9a0",
+        "center_pixel": "#fed69b"
+      },
+      "icon_dark": {
+        "rect": [
+          747,
+          153,
+          767,
+          164
+        ],
+        "median": "#41382f",
+        "p05": "#3d352c",
+        "p95": "#443b31",
+        "center_pixel": "#40382f"
+      },
+      "icon_orange": {
+        "rect": [
+          498,
+          130,
+          508,
+          145
+        ],
+        "median": "#fedead",
+        "p05": "#f2742c",
+        "p95": "#ffe7b7",
+        "center_pixel": "#feddab"
+      },
+      "bottom_bar_face": {
+        "rect": [
+          85,
+          784,
+          96,
+          793
+        ],
+        "median": "#e4d9cc",
+        "p05": "#e2d7ca",
+        "p95": "#e6dbcf",
+        "center_pixel": "#e5d9cc"
+      },
+      "bottom_bar_shadow": {
+        "rect": [
+          100,
+          874,
+          122,
+          883
+        ],
+        "median": "#c3b09d",
+        "p05": "#c0ac99",
+        "p95": "#c6b3a1",
+        "center_pixel": "#c3b09d"
+      },
+      "selected_orange": {
+        "rect": [
+          257,
+          813,
+          269,
+          825
+        ],
+        "median": "#fedcae",
+        "p05": "#fdd9a6",
+        "p95": "#ffddb0",
+        "center_pixel": "#fedcaf"
+      }
+    }
+  },
+  "geometry": {
+    "scale": {
+      "visible_object_including_feet": {
+        "xyxy_px": [
+          449,
+          73,
+          1218,
+          844
+        ],
+        "width_px": 769,
+        "height_px": 771,
+        "center_px": [
+          833.5,
+          458.5
+        ],
+        "aspect_width_over_height": 0.9974,
+        "xyxy_normalized": [
+          0.268541,
+          0.077577,
+          0.728469,
+          0.896918
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 4,
+        "note": "The photographic ground shadow is excluded."
+      },
+      "head_outer": {
+        "xyxy_px": [
+          449,
+          73,
+          1218,
+          488
+        ],
+        "width_px": 769,
+        "height_px": 415,
+        "center_px": [
+          833.5,
+          280.5
+        ],
+        "aspect_width_over_height": 1.853,
+        "xyxy_normalized": [
+          0.268541,
+          0.077577,
+          0.728469,
+          0.518597
+        ],
+        "method": "pixel_threshold_mask",
+        "edge_tolerance_px": 3,
+        "note": "Outer cream silhouette; blue>112, green>134, red>187 in the head crop."
+      },
+      "dial_recess": {
+        "xyxy_px": [
+          483,
+          94,
+          1185,
+          460
+        ],
+        "width_px": 702,
+        "height_px": 366,
+        "center_px": [
+          834.0,
+          277.0
+        ],
+        "aspect_width_over_height": 1.918,
+        "xyxy_normalized": [
+          0.288876,
+          0.099894,
+          0.708732,
+          0.488842
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 6,
+        "note": "Inner bevel is visually measured; pixel mask merges it with the shell."
+      },
+      "neck_narrow": {
+        "xyxy_px": [
+          762,
+          486,
+          904,
+          626
+        ],
+        "width_px": 142,
+        "height_px": 140,
+        "center_px": [
+          833.0,
+          556.0
+        ],
+        "aspect_width_over_height": 1.0143,
+        "xyxy_normalized": [
+          0.455742,
+          0.516472,
+          0.54067,
+          0.66525
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 7
+      },
+      "neck_flare": {
+        "xyxy_px": [
+          647,
+          603,
+          1018,
+          729
+        ],
+        "width_px": 371,
+        "height_px": 126,
+        "center_px": [
+          832.5,
+          666.0
+        ],
+        "aspect_width_over_height": 2.9444,
+        "xyxy_normalized": [
+          0.386962,
+          0.640808,
+          0.608852,
+          0.774708
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 8
+      },
+      "base_outer": {
+        "xyxy_px": [
+          509,
+          710,
+          1148,
+          814
+        ],
+        "width_px": 639,
+        "height_px": 104,
+        "center_px": [
+          828.5,
+          762.0
+        ],
+        "aspect_width_over_height": 6.1442,
+        "xyxy_normalized": [
+          0.304426,
+          0.754516,
+          0.686603,
+          0.865037
+        ],
+        "method": "pixel_threshold_mask",
+        "edge_tolerance_px": 3,
+        "note": "Cream threshold includes only the main raised base, not its feet."
+      },
+      "base_recessed_slot": {
+        "xyxy_px": [
+          553,
+          756,
+          1105,
+          794
+        ],
+        "width_px": 552,
+        "height_px": 38,
+        "center_px": [
+          829.0,
+          775.0
+        ],
+        "aspect_width_over_height": 14.5263,
+        "xyxy_normalized": [
+          0.330742,
+          0.803401,
+          0.660885,
+          0.843783
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 5,
+        "note": "Long horizontal physical recess, not a progress indicator."
+      },
+      "left_foot": {
+        "xyxy_px": [
+          558,
+          816,
+          637,
+          844
+        ],
+        "width_px": 79,
+        "height_px": 28,
+        "center_px": [
+          597.5,
+          830.0
+        ],
+        "aspect_width_over_height": 2.8214,
+        "xyxy_normalized": [
+          0.333732,
+          0.867163,
+          0.380981,
+          0.896918
+        ],
+        "method": "pixel_threshold_mask",
+        "edge_tolerance_px": 3
+      },
+      "right_foot": {
+        "xyxy_px": [
+          1023,
+          816,
+          1101,
+          844
+        ],
+        "width_px": 78,
+        "height_px": 28,
+        "center_px": [
+          1062.0,
+          830.0
+        ],
+        "aspect_width_over_height": 2.7857,
+        "xyxy_normalized": [
+          0.611842,
+          0.867163,
+          0.658493,
+          0.896918
+        ],
+        "method": "pixel_threshold_mask",
+        "edge_tolerance_px": 3
+      },
+      "dial_ticks_span": {
+        "xyxy_px": [
+          532,
+          120,
+          1132,
+          256
+        ],
+        "width_px": 600,
+        "height_px": 136,
+        "center_px": [
+          832.0,
+          188.0
+        ],
+        "aspect_width_over_height": 4.4118,
+        "xyxy_normalized": [
+          0.318182,
+          0.127524,
+          0.677033,
+          0.272051
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 12,
+        "note": "Visible stroke envelope of the upper tick arc."
+      },
+      "amber_arc_visible_state": {
+        "xyxy_px": [
+          648,
+          167,
+          847,
+          230
+        ],
+        "width_px": 199,
+        "height_px": 63,
+        "center_px": [
+          747.5,
+          198.5
+        ],
+        "aspect_width_over_height": 3.1587,
+        "xyxy_normalized": [
+          0.38756,
+          0.177471,
+          0.506579,
+          0.244421
+        ],
+        "method": "pixel_threshold_mask",
+        "edge_tolerance_px": 3,
+        "note": "Appearance of this one reference state; its endpoint does not define a data mapping."
+      },
+      "needle_visible_state": {
+        "xyxy_px": [
+          842,
+          219,
+          894,
+          344
+        ],
+        "width_px": 52,
+        "height_px": 125,
+        "center_px": [
+          868.0,
+          281.5
+        ],
+        "aspect_width_over_height": 0.416,
+        "xyxy_normalized": [
+          0.503589,
+          0.232731,
+          0.534689,
+          0.365569
+        ],
+        "method": "pixel_threshold_mask",
+        "edge_tolerance_px": 3,
+        "note": "Tip and lower hidden segment are bounded by this orange mask; no pivot is visible."
+      },
+      "flip_four_tiles": {
+        "xyxy_px": [
+          724,
+          344,
+          928,
+          402
+        ],
+        "width_px": 204,
+        "height_px": 58,
+        "center_px": [
+          826.0,
+          373.0
+        ],
+        "aspect_width_over_height": 3.5172,
+        "xyxy_normalized": [
+          0.433014,
+          0.365569,
+          0.555024,
+          0.427205
+        ],
+        "method": "pixel_threshold_mask",
+        "edge_tolerance_px": 3,
+        "note": "Dark tile mask, excluding side hinge highlights."
+      },
+      "kcal_word": {
+        "xyxy_px": [
+          952,
+          364,
+          1007,
+          387
+        ],
+        "width_px": 55,
+        "height_px": 23,
+        "center_px": [
+          979.5,
+          375.5
+        ],
+        "aspect_width_over_height": 2.3913,
+        "xyxy_normalized": [
+          0.569378,
+          0.386823,
+          0.602273,
+          0.411265
+        ],
+        "method": "pixel_threshold_mask",
+        "edge_tolerance_px": 3
+      },
+      "round_orange_button": {
+        "xyxy_px": [
+          809,
+          535,
+          858,
+          588
+        ],
+        "width_px": 49,
+        "height_px": 53,
+        "center_px": [
+          833.5,
+          561.5
+        ],
+        "aspect_width_over_height": 0.9245,
+        "xyxy_normalized": [
+          0.483852,
+          0.568544,
+          0.513158,
+          0.624867
+        ],
+        "method": "pixel_threshold_mask",
+        "edge_tolerance_px": 3,
+        "note": "Includes the orange face and some dark rim pixels."
+      },
+      "label_730": {
+        "xyxy_px": [
+          608,
+          239,
+          672,
+          271
+        ],
+        "width_px": 64,
+        "height_px": 32,
+        "center_px": [
+          640.0,
+          255.0
+        ],
+        "aspect_width_over_height": 2.0,
+        "xyxy_normalized": [
+          0.363636,
+          0.253985,
+          0.401914,
+          0.287991
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 8
+      },
+      "label_1470": {
+        "xyxy_px": [
+          792,
+          207,
+          871,
+          241
+        ],
+        "width_px": 79,
+        "height_px": 34,
+        "center_px": [
+          831.5,
+          224.0
+        ],
+        "aspect_width_over_height": 2.3235,
+        "xyxy_normalized": [
+          0.473684,
+          0.219979,
+          0.520933,
+          0.256111
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 8
+      },
+      "label_2200": {
+        "xyxy_px": [
+          970,
+          242,
+          1052,
+          273
+        ],
+        "width_px": 82,
+        "height_px": 31,
+        "center_px": [
+          1011.0,
+          257.5
+        ],
+        "aspect_width_over_height": 2.6452,
+        "xyxy_normalized": [
+          0.580144,
+          0.257173,
+          0.629187,
+          0.290117
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 8
+      },
+      "label_80": {
+        "xyxy_px": [
+          1072,
+          314,
+          1119,
+          344
+        ],
+        "width_px": 47,
+        "height_px": 30,
+        "center_px": [
+          1095.5,
+          329.0
+        ],
+        "aspect_width_over_height": 1.5667,
+        "xyxy_normalized": [
+          0.641148,
+          0.333688,
+          0.669258,
+          0.365569
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 8
+      }
+    },
+    "nav": {
+      "top_integrated_bar": {
+        "xyxy_px": [
+          147,
+          50,
+          1383,
+          273
+        ],
+        "width_px": 1236,
+        "height_px": 223,
+        "center_px": [
+          765.0,
+          161.5
+        ],
+        "aspect_width_over_height": 5.5426,
+        "xyxy_normalized": [
+          0.095703,
+          0.048828,
+          0.900391,
+          0.266602
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 8
+      },
+      "top_key_home": {
+        "xyxy_px": [
+          202,
+          73,
+          389,
+          253
+        ],
+        "width_px": 187,
+        "height_px": 180,
+        "center_px": [
+          295.5,
+          163.0
+        ],
+        "aspect_width_over_height": 1.0389,
+        "xyxy_normalized": [
+          0.13151,
+          0.071289,
+          0.253255,
+          0.24707
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 10
+      },
+      "top_key_recipes_active": {
+        "xyxy_px": [
+          434,
+          72,
+          628,
+          255
+        ],
+        "width_px": 194,
+        "height_px": 183,
+        "center_px": [
+          531.0,
+          163.5
+        ],
+        "aspect_width_over_height": 1.0601,
+        "xyxy_normalized": [
+          0.282552,
+          0.070312,
+          0.408854,
+          0.249023
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 10
+      },
+      "top_key_shopping": {
+        "xyxy_px": [
+          677,
+          73,
+          863,
+          253
+        ],
+        "width_px": 186,
+        "height_px": 180,
+        "center_px": [
+          770.0,
+          163.0
+        ],
+        "aspect_width_over_height": 1.0333,
+        "xyxy_normalized": [
+          0.440755,
+          0.071289,
+          0.561849,
+          0.24707
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 10
+      },
+      "top_key_pantry": {
+        "xyxy_px": [
+          913,
+          73,
+          1099,
+          253
+        ],
+        "width_px": 186,
+        "height_px": 180,
+        "center_px": [
+          1006.0,
+          163.0
+        ],
+        "aspect_width_over_height": 1.0333,
+        "xyxy_normalized": [
+          0.594401,
+          0.071289,
+          0.715495,
+          0.24707
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 10
+      },
+      "top_key_profile": {
+        "xyxy_px": [
+          1147,
+          73,
+          1333,
+          253
+        ],
+        "width_px": 186,
+        "height_px": 180,
+        "center_px": [
+          1240.0,
+          163.0
+        ],
+        "aspect_width_over_height": 1.0333,
+        "xyxy_normalized": [
+          0.746745,
+          0.071289,
+          0.867839,
+          0.24707
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 10
+      },
+      "pressed_key_sample": {
+        "xyxy_px": [
+          657,
+          365,
+          859,
+          545
+        ],
+        "width_px": 202,
+        "height_px": 180,
+        "center_px": [
+          758.0,
+          455.0
+        ],
+        "aspect_width_over_height": 1.1222,
+        "xyxy_normalized": [
+          0.427734,
+          0.356445,
+          0.559245,
+          0.532227
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 12,
+        "note": "Inset physical press sample in the middle detail row."
+      },
+      "detail_inactive_sample": {
+        "xyxy_px": [
+          60,
+          361,
+          269,
+          553
+        ],
+        "width_px": 209,
+        "height_px": 192,
+        "center_px": [
+          164.5,
+          457.0
+        ],
+        "aspect_width_over_height": 1.0885,
+        "xyxy_normalized": [
+          0.039062,
+          0.352539,
+          0.17513,
+          0.540039
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 12
+      },
+      "detail_active_sample": {
+        "xyxy_px": [
+          350,
+          360,
+          567,
+          554
+        ],
+        "width_px": 217,
+        "height_px": 194,
+        "center_px": [
+          458.5,
+          457.0
+        ],
+        "aspect_width_over_height": 1.1186,
+        "xyxy_normalized": [
+          0.227865,
+          0.351562,
+          0.369141,
+          0.541016
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 12
+      },
+      "bottom_frontal_bar": {
+        "xyxy_px": [
+          51,
+          754,
+          828,
+          894
+        ],
+        "width_px": 777,
+        "height_px": 140,
+        "center_px": [
+          439.5,
+          824.0
+        ],
+        "aspect_width_over_height": 5.55,
+        "xyxy_normalized": [
+          0.033203,
+          0.736328,
+          0.539062,
+          0.873047
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 10
+      },
+      "bottom_side_profile": {
+        "xyxy_px": [
+          899,
+          804,
+          1504,
+          875
+        ],
+        "width_px": 605,
+        "height_px": 71,
+        "center_px": [
+          1201.5,
+          839.5
+        ],
+        "aspect_width_over_height": 8.5211,
+        "xyxy_normalized": [
+          0.585286,
+          0.785156,
+          0.979167,
+          0.854492
+        ],
+        "method": "visual_measurement",
+        "edge_tolerance_px": 12
+      }
+    }
+  },
+  "reference_state": {
+    "scale_flip_text": "1282",
+    "scale_flip_digits": 4,
+    "dial_labels_as_seen": [
+      "730",
+      "1470",
+      "2200",
+      "80"
+    ],
+    "nav_active_item": "Ricette",
+    "nav_items_order": [
+      "Home",
+      "Ricette",
+      "Spesa",
+      "Scorte",
+      "Profilo"
+    ],
+    "note": "Numbers and indicator positions record only this rendered frame; no calorie-to-angle formula has been inferred."
+  },
+  "fixed_visual_constraints": [
+    "Scale object sits directly on orange, with no external UI card or rectangular backplate.",
+    "No extra pan, metal arms, chrome, side supports or UI progress indicator in the base slot.",
+    "Navigation is one cream molded surface with five raised keys; selected Ricette has diffused internal amber/orange light.",
+    "Scale photograph is RGB with baked orange background, not a transparent cutout; static reuse would require explicit extraction in a later phase."
+  ]
+}
