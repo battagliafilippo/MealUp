@@ -1,0 +1,95 @@
+{
+  "document": "MealUp — C6.2 Visual Source Board Audit",
+  "version": "C6.2.1",
+  "status": "SOURCE_MAPPING_COMPLETE",
+  "scope": {
+    "source_boards": 4,
+    "source_files": [
+      "28DA4800-50FE-4016-8B76-FDD653AE2E71(2).jpeg",
+      "02EC423A-F86B-466F-BB8A-0B62FCDC7F01(2).jpeg",
+      "223DF227-5A22-4564-BC20-24042447B68C(2).jpeg",
+      "5DF686A7-6FFD-43C0-B00B-F98DF7DF9FE6(3).jpeg"
+    ],
+    "queue_reference": "docs/c6/MealUp_C6.1_Asset_Production_Queue_v1.json"
+  },
+  "coverage": {
+    "unique_master_ids_in_queue": 165,
+    "unique_asset_instantiations_in_queue": 186,
+    "master_ids_with_plausible_board_candidate": 150,
+    "master_ids_without_direct_board_candidate": 15,
+    "candidate_master_coverage_percent": 90.91,
+    "important_note": "Board presence is only source coverage. It does not mean the extracted asset is approved, production-ready, or morphologically exact."
+  },
+  "direct_board_gaps": [
+    "AGRODOLCE",
+    "ARTICHOKE",
+    "ARUGULA",
+    "ASPARAGUS",
+    "BANANA_BREAD",
+    "BEVERAGE_JUICE_BOX",
+    "BUFFALO_MOZZARELLA",
+    "BURRATA",
+    "CABBAGE",
+    "CACIOCAVALLO",
+    "FENNEL",
+    "GREEN_BEAN",
+    "MACKEREL",
+    "OMELETTE",
+    "OVERNIGHT_OATS"
+  ],
+  "review_before_extraction": [
+    "BEEF",
+    "GROUND_BEEF",
+    "CHICKEN",
+    "PORK",
+    "VEAL",
+    "WHITE_FISH",
+    "TUNA",
+    "SALMON",
+    "SHRIMP",
+    "SQUID",
+    "OCTOPUS",
+    "MUSSEL",
+    "CLAM",
+    "MOUSSE",
+    "RISOTTO",
+    "TOFU",
+    "PORRIDGE",
+    "YOGURT_BOWL",
+    "TOMATO_SAUCE",
+    "PESTO",
+    "GREEN_SAUCE",
+    "TONNATO_SAUCE",
+    "YOGURT_SAUCE"
+  ],
+  "olive": {
+    "master_id": "OLIVE",
+    "board_candidate": "02EC423A-F86B-466F-BB8A-0B62FCDC7F01(2).jpeg / Altri alimenti / olive",
+    "status": "SOURCE_CANDIDATE_ONLY",
+    "decision": "DO_NOT_APPROVE_AS_MASTER_YET",
+    "reason": [
+      "Board contains a group of olives rather than one isolated olive.",
+      "Individual olive is too small in the board for safe master extraction at final Food Object quality without testing.",
+      "The three separately supplied olive-container images are not valid substitutes: they depict a stylized container-like olive with a red inserted element, not a single whole green olive."
+    ],
+    "recommended_next_step": "Attempt high-quality extraction from the board candidate only if the crop survives resolution/edge inspection; otherwise spend one generation on the C6.2-B01 brief."
+  },
+  "production_strategy": {
+    "rule": "Use board candidates first; generate only when the board source fails quality or exact-shape review.",
+    "asset_pipeline": [
+      "source selection",
+      "crop/isolation",
+      "transparent background cleanup",
+      "normalization",
+      "quality review",
+      "asset registration",
+      "Recipe Window integration"
+    ],
+    "generation_policy": "Do not consume image generations for assets that can be extracted cleanly from the supplied boards."
+  },
+  "next_batch": {
+    "batch_id": "C6.2-B01",
+    "master_id": "OLIVE",
+    "current_status": "READY_FOR_SOURCE_TEST_OR_GENERATION"
+  }
+}
