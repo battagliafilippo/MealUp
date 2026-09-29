@@ -2372,7 +2372,7 @@ h3{font-weight:600;letter-spacing:-.018em}
 .scheda[data-verso="spesa"]{box-shadow:0 0 0 2px color-mix(in srgb, var(--ok) 55%, transparent), var(--v2-ombra)}
 /* Il livello di riempimento e' un velo dietro il disegno, tagliato a cerchio:
    sale quanto sale la copertura della dispensa. */
-.scheda-arte::before{content:'';position:absolute;inset:0;border-radius:50%;
+.scheda-arte::before{content:'';position:absolute;inset:0;border-radius:50%;z-index:0;pointer-events:none;
   background:linear-gradient(to top,
     color-mix(in srgb, var(--tema, var(--accent-primary)) 22%, transparent) var(--riempi, 0%),
     transparent var(--riempi, 0%));
@@ -2384,8 +2384,11 @@ h3{font-weight:600;letter-spacing:-.018em}
 .diff{white-space:nowrap}
 .scheda-arte{position:relative;flex:0 0 58px;width:58px;height:58px;color:var(--tema, var(--accent-primary));
   opacity:.82;transition:transform .4s cubic-bezier(.22,.8,.28,1), opacity .3s}
-.scheda-arte svg{width:100%;height:100%;display:block}
+.scheda-arte svg{width:100%;height:100%;display:block;position:relative;z-index:1}
+.scheda-arte .food-object-card{position:relative;z-index:1;width:100%;height:100%;display:block;object-fit:contain;transform:scale(1.08);filter:drop-shadow(0 3px 3px rgba(70,32,10,.12))}
 .scheda:active .scheda-arte{transform:scale(.92) rotate(-3deg)}
+.scheda-arte .food-object-card{animation:foodObjectCardIn .38s cubic-bezier(.22,.8,.28,1) both}
+@keyframes foodObjectCardIn{from{opacity:0;transform:scale(.88) translateY(4px)}to{opacity:1;transform:scale(1.08) translateY(0)}}
 .scheda-testo{flex:1;min-width:0;display:flex;flex-direction:column;gap:9px}
 .scheda-titolo{font-size:1.02rem;font-weight:500;line-height:1.3;letter-spacing:-.022em;
   color:var(--text-primary);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -2595,6 +2598,8 @@ h3{font-weight:600;letter-spacing:-.018em}
 .dettaglio-arte{width:96px;height:96px;margin:4px auto 18px;display:block;
   color:var(--tema, var(--accent-primary));opacity:.9}
 .dettaglio-arte svg{width:100%;height:100%}
+.dettaglio-arte .food-object-detail{width:100%;height:100%;display:block;object-fit:contain;filter:drop-shadow(0 6px 6px rgba(70,32,10,.14));animation:foodObjectDetailIn .48s cubic-bezier(.22,.8,.28,1) both}
+@keyframes foodObjectDetailIn{from{opacity:0;transform:translateY(8px) scale(.9) rotate(-2deg)}to{opacity:1;transform:translateY(0) scale(1) rotate(0)}}
 .dettaglio-arte path,.dettaglio-arte circle,.dettaglio-arte ellipse,.dettaglio-arte rect{
   --len:400;stroke-dasharray:var(--len);animation:disegna 1s cubic-bezier(.4,0,.2,1) both}
 .sugg{animation:sale .4s cubic-bezier(.22,.8,.28,1) both}
@@ -7401,7 +7406,7 @@ function recipeCard(r, extra, n) {
     <button type="button" class="glass-card card-btn scheda con-stella ${fuori ? 'fuori-stagione' : ''}"
       data-act="detail" data-val="${esc(r.id)}"${ritardo}
       ${fuori ? 'title="Fuori stagione"' : ''}>
-      <span class="scheda-arte" ${copertura ? `style="--riempi:${copertura}%"` : ''}>${arteRicetta(r)}</span>
+      <span class="scheda-arte" ${copertura ? `style="--riempi:${copertura}%"` : ''}>${foodObjectMarkup(r, 'card')}</span>
       <span class="scheda-testo">
         <span class="scheda-titolo">${esc(r.title)}</span>
         ${piede}
@@ -7838,6 +7843,36 @@ const PESCI = ['pesce', 'salmone', 'tonno', 'orata', 'branzino', 'merluzzo', 'ba
   'spada', 'sogliola', 'trota'];
 const GASSATE = ['cola', 'sprite', 'fanta', 'aranciata', 'gassosa', 'gazzosa', 'chinotto',
   'tonica', 'cedrata', 'spuma', 'soda'];
+
+/* ---------- MealUp Food Objects / C6.2 ----------
+   B02 usa asset reali estratti dalle board fornite, non generati.
+   Il registro resta separato dalla vecchia iconografia line-art: se un Food
+   Object non e' disponibile, la ricetta continua a usare il disegno esistente. */
+const FOOD_OBJECTS = Object.freeze({
+  CAKE:    { masterId:'CAKE',    src:'assets/food-objects/CAKE/cake.png' },
+  BRIOCHE: { masterId:'BRIOCHE', src:'assets/food-objects/BRIOCHE/brioche.png' },
+  MUFFIN:  { masterId:'MUFFIN',  src:'assets/food-objects/MUFFIN/muffin.png' }
+});
+
+const FOOD_OBJECT_RULES = [
+  { masterId:'CAKE',    terms:['torta','cake'] },
+  { masterId:'BRIOCHE', terms:['brioche','brioches','cornetto','croissant'] },
+  { masterId:'MUFFIN',  terms:['muffin'] }
+];
+
+function foodObjectForRecipe(r) {
+  if (!r) return null;
+  const testo = norm([r.title, ...ingNames(r)].join(' '));
+  const rule = FOOD_OBJECT_RULES.find(x => x.terms.some(t => testo.includes(t)));
+  return rule ? FOOD_OBJECTS[rule.masterId] : null;
+}
+
+function foodObjectMarkup(r, variant) {
+  const obj = foodObjectForRecipe(r);
+  if (!obj) return arteRicetta(r);
+  const cls = variant === 'detail' ? 'food-object-detail' : 'food-object-card';
+  return '<img class="' + cls + '" src="' + obj.src + '" alt="" aria-hidden="true" data-food-object="' + obj.masterId + '" loading="eager" decoding="async">';
+}
 
 function arteRicetta(r) {
   const t = norm(r.title);
@@ -9879,7 +9914,7 @@ function anteprimaRicetta(id) {
   const cov = S.pantry.length ? coverage(r) : null;
   document.getElementById('detail-body').innerHTML = `
 
-    <span class="dettaglio-arte">${arteRicetta(r)}</span>
+    <span class="dettaglio-arte">${foodObjectMarkup(r, 'detail')}</span>
     <h2 style="text-align:center">${esc(r.title)}</h2>
     ${porzioniCucina(r) > 1 ? `<p class="in-tutto">In tutto per ${porzioniCucina(r)}:
       ${Math.round(perPortion(r).kcal * porzioniCucina(r))} kcal \u00b7
@@ -10190,7 +10225,7 @@ function openDetail(id, tornando) {
     ${daDove ? `<button type="button" class="torna" data-act="detail-indietro">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
       ${esc(daDove.title)}</button>` : ''}
-    <span class="dettaglio-arte">${arteRicetta(r)}</span>
+    <span class="dettaglio-arte">${foodObjectMarkup(r, 'detail')}</span>
     <h2 style="text-align:center">${esc(r.title)}</h2>
     ${porzioniCucina(r) > 1 ? `<p class="in-tutto">In tutto per ${porzioniCucina(r)}:
       ${Math.round(perPortion(r).kcal * porzioniCucina(r))} kcal \u00b7
