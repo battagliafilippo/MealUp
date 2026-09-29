@@ -1,0 +1,24 @@
+{
+  "document":"MealUp — C6.2 Batch Execution Status",
+  "version":"C6.2.2",
+  "status":"IN_PROGRESS_SOURCE_FIRST",
+  "source_batch_plan":"docs/c6/MealUp_C6.2_Asset_Production_Batch_Plan_v1.json",
+  "total_batches":23,
+  "total_unique_asset_instantiations":186,
+  "source_strategy":"BOARD_EXTRACTION_FIRST",
+  "generation_policy":"Generate only when no board candidate survives quality review.",
+  "current_batch":"C6.2-B02",
+  "current_item":"CAKE",
+  "blocked_batches":["C6.2-B01"],
+  "blocked_items":[
+    {
+      "master_id":"OLIVE",
+      "reason":"Available board candidate is a group of olives and too small for reliable final Food Object extraction. Supplied standalone olive-container visuals do not match the OLIVE master brief.",
+      "action":"defer_generation"
+    }
+  ],
+  "completed_batches":[],
+  "source_ready_batches":["C6.2-B02","C6.2-B04","C6.2-B06","C6.2-B08","C6.2-B10","C6.2-B11","C6.2-B12","C6.2-B13","C6.2-B14","C6.2-B15","C6.2-B16","C6.2-B17","C6.2-B18","C6.2-B19","C6.2-B20","C6.2-B21","C6.2-B22","C6.2-B23"],
+  "note":"Source-ready means a plausible candidate exists in the supplied visual boards; each asset still requires extraction, transparency cleanup, normalization, visual QA, metadata registration, and integration validation.",
+  "next_action":"Process source-board assets in batch order, skipping blocked generation-only items until a generation slot is available."
+}
