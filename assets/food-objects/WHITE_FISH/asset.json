@@ -1,0 +1,13 @@
+{
+  "master_id": "WHITE_FISH",
+  "variant_id": null,
+  "asset_key": "white_fish",
+  "path": "assets/food-objects/WHITE_FISH/white_fish.png",
+  "source": "5DF686A7-6FFD-43C0-B00B-F98DF7DF9FE6(3).jpeg",
+  "source_label": "pesce bianco",
+  "status": "EXTRACTED_PENDING_INTEGRATION",
+  "background": "transparent",
+  "canvas_px": 128,
+  "generation_consumed": 0,
+  "note": "Exact board label matches the approved WHITE_FISH master; extracted from the supplied visual board, no generation required."
+}
