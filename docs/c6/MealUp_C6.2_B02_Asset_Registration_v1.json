@@ -1,0 +1,15 @@
+{
+  "document":"MealUp — C6.2 B02 Asset Registration",
+  "version":"C6.2.1",
+  "batch_id":"C6.2-B02",
+  "status":"EXTRACTED_PENDING_INTEGRATION",
+  "source_strategy":"BOARD_EXTRACTION_FIRST",
+  "source_board":"223DF227-5A22-4564-BC20-24042447B68C(2).jpeg",
+  "assets":[
+    {"master_id":"CAKE","variant_id":null,"path":"assets/food-objects/c6.2/cake.png","source_label":"torta","canvas_px":128,"background":"transparent","qa":"passed_alpha_and_shape_check"},
+    {"master_id":"BRIOCHE","variant_id":null,"path":"assets/food-objects/c6.2/brioche.png","source_label":"croissant","canvas_px":128,"background":"transparent","qa":"passed_alpha_and_shape_check","note":"Board source label is croissant; C6.2 master key is BRIOCHE. Requires semantic acceptance during integration QA."},
+    {"master_id":"MUFFIN","variant_id":null,"path":"assets/food-objects/c6.2/muffin.png","source_label":"muffin","canvas_px":128,"background":"transparent","qa":"passed_alpha_and_shape_check"}
+  ],
+  "generation_consumed":0,
+  "next_action":"Integrate B02 assets into the Food Object registry/Recipe Window and run visual validation."
+}
