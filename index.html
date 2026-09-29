@@ -13,6 +13,8 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@1&amp;display=swap">
 <style>
 /* General Sans Bold (Fontshare, licenza gratuita ITF) incorporato nel file:
    niente rete, niente lampeggio — vale solo per i titoli delle schermate. */
@@ -26,7 +28,7 @@
 :root{
   /* I token veri stanno nel blocco TEMA CHIARO in fondo al foglio:
      qui restano solo quelli che non dipendono dal tema. */
-  --font-system:"Segoe UI Variable", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --font-system:"Satoshi",sans-serif;
   --r-lg:22px; --r-md:12px; --r-sm:8px; --raggio:var(--r-lg);
 }
 *{box-sizing:border-box;margin:0;padding:0;font-family:var(--font-system);-webkit-tap-highlight-color:transparent}
@@ -3057,14 +3059,14 @@ input[type=number]{-moz-appearance:textfield;appearance:textfield}
 .bilancia .cassa{fill:url(#bilf-body);stroke:#e8d7c2;stroke-width:7}
 .bilancia .tacca{stroke:#7c685a;stroke-width:2;stroke-opacity:.55;stroke-linecap:round;fill:none}
 .bilancia .tacca.grande{stroke-width:3;stroke-opacity:.85}
-.bilancia .cifra,.bilancia .cifra.grande{fill:#6b5847;font:600 26px "General Sans","Segoe UI Variable",system-ui,sans-serif;
+.bilancia .cifra,.bilancia .cifra.grande{fill:#6b5847;font:600 26px "Satoshi",sans-serif;
   text-anchor:middle;stroke:none;letter-spacing:.01em}
 .bilancia .cifra.fine-scala{font-size:19px;opacity:.7}
 .bilancia .riempito.ambra{stroke:#ecc084;stroke-width:16;stroke-linecap:round;fill:none;opacity:.9}
 .bilancia .ago{fill:#f25c0a;stroke:#c84408;stroke-width:.8}
 .bilancia .ago.oltre{fill:#c92f1e;stroke:#a02114}
 .bilancia .gruppo-ago{transition:transform .18s cubic-bezier(.22,.8,.24,1)}
-.bilancia .unita-kcal{fill:#5c4a38;font:700 26px "General Sans","Segoe UI Variable",system-ui,sans-serif}
+.bilancia .unita-kcal{fill:#5c4a38;font:700 26px "Satoshi",sans-serif}
 .bilancia .collo{fill:url(#bilf-body);stroke:#dfccb7;stroke-width:3}
 .bilancia .bottone{fill:#ef5b0a;stroke:#b94b13;stroke-width:2}
 .bilancia .asta{fill:url(#bilf-metal);stroke:#8f8780;stroke-width:1.5}
@@ -3229,8 +3231,8 @@ input[type=number]{-moz-appearance:textfield;appearance:textfield}
 .cal-cella.fuori{opacity:.42}
 .cal-cella b{font-size:.8rem}
 
-/* --- titoli di schermata (MealUp, Dispensa, Spesa...): General Sans --- */
-h1{font-family:"General Sans","Segoe UI Variable",system-ui,sans-serif;
+/* --- titoli di schermata (MealUp, Dispensa, Spesa...): Satoshi --- */
+h1{font-family:"Satoshi",sans-serif;
   font-weight:700;letter-spacing:-.02em;line-height:1.05}
 
 /* ============================================================
@@ -3250,7 +3252,7 @@ h1{font-family:"General Sans","Segoe UI Variable",system-ui,sans-serif;
 }
 html,body{background:var(--mealup-orange)!important}
 body{
-  font-family:"Satoshi","Avenir Next","General Sans","Segoe UI Variable",system-ui,sans-serif!important;
+  font-family:"Satoshi",sans-serif!important;
   color:var(--mealup-anthracite)!important;
   text-shadow:none!important;
 }
@@ -3262,7 +3264,7 @@ body{
 #view-home::before{
   content:"MealUp";position:fixed;z-index:0;pointer-events:none;
   left:50%;top:42%;transform:translate(-50%,-50%) rotate(-8deg);
-  font-family:"Satoshi","Avenir Next","General Sans",system-ui,sans-serif;
+  font-family:"Satoshi",sans-serif;
   font-size:clamp(5.8rem,25vw,10.5rem);font-weight:900;letter-spacing:-.075em;
   color:rgba(217,72,4,.40);
   text-shadow:-2px -2px 2px rgba(255,148,83,.26),2px 2px 3px rgba(150,47,0,.25);
@@ -3326,7 +3328,7 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
   filter:drop-shadow(0 2px 2px rgba(192,84,12,.10));
 }
 .mu-scale-label{
-  font:700 26px/1 "Satoshi","Avenir Next","General Sans",system-ui,sans-serif;
+  font:700 26px/1 "Satoshi",sans-serif;
   fill:#6b4a38;text-anchor:middle;
 }
 .mu-scale-label-small{font-size:23px}
@@ -3341,7 +3343,7 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
   font:500 32px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 .mu-scale-kcal{
-  fill:#6b4a38;font:700 27px/1 "Satoshi","Avenir Next","General Sans",system-ui,sans-serif;
+  fill:#6b4a38;font:700 27px/1 "Satoshi",sans-serif;
 }
 .mu-scale-button-ring{fill:#d7b99c;stroke:rgba(122,70,37,.18);stroke-width:1}
 .mu-scale-button{fill:var(--mealup-orange);stroke:#8e3108;stroke-width:2}
