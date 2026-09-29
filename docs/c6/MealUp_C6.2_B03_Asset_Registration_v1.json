@@ -1,0 +1,24 @@
+{
+  "document": "MealUp — C6.2 B03 Asset Registration",
+  "version": "C6.2.1",
+  "batch_id": "C6.2-B03",
+  "status": "INTEGRATED_PENDING_VISUAL_QA",
+  "source_strategy": "BOARD_EXTRACTION_FIRST",
+  "source_board": "5DF686A7-6FFD-43C0-B00B-F98DF7DF9FE6(3).jpeg",
+  "assets": [
+    {
+      "master_id": "WHITE_FISH",
+      "variant_id": null,
+      "asset_key": "white_fish",
+      "path": "assets/food-objects/WHITE_FISH/white_fish.png",
+      "source_label": "pesce bianco",
+      "canvas_px": 128,
+      "background": "transparent",
+      "qa": "passed_alpha_and_shape_check",
+      "generation_consumed": 0,
+      "note": "Exact board label matches the approved WHITE_FISH master; no generation required."
+    }
+  ],
+  "generation_consumed": 0,
+  "next_action": "Run visual validation of WHITE_FISH in the Recipe Window/card renderer before advancing to C6.2-B04."
+}
