@@ -2,7 +2,7 @@
   "document": "MealUp — C6.2 B02 Asset Registration",
   "version": "C6.2.1",
   "batch_id": "C6.2-B02",
-  "status": "EXTRACTED_PENDING_INTEGRATION",
+  "status": "INTEGRATED_PENDING_VISUAL_QA",
   "source_strategy": "BOARD_EXTRACTION_FIRST",
   "source_board": "223DF227-5A22-4564-BC20-24042447B68C(2).jpeg + 28DA4800-50FE-4016-8B76-FDD653AE2E71(2).jpeg",
   "assets": [
@@ -36,5 +36,5 @@
     }
   ],
   "generation_consumed": 0,
-  "next_action": "Integrate B02 assets into the Food Object registry/Recipe Window and run visual validation."
+  "next_action": "Run visual validation in the published app/Recipe Window; no image generation required for B02."
 }
