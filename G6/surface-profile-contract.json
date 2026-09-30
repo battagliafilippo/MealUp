@@ -1,0 +1,1546 @@
+{
+  "schema": "MealUp_G6_SurfaceProfiles_1",
+  "version": "1.0",
+  "status": "G6_CONTRACT_PASS_FROZEN",
+  "scope": "Deterministic responsive Surface Profile Contract and neutral geometry QA; production renderer and actual GaugeState belong to G7/G8/G9.",
+  "upstream_G5_freeze_sha256": "1608f7364f533d70b1a2b9c4c6e3fc5f23d221283868e49f5456732936665320",
+  "profiles": [
+    {
+      "id": "HOME_DIMMI_TU",
+      "label": "Home / Dimmi tu",
+      "layout": "stack",
+      "projection": "full",
+      "max_art_side_em": 24,
+      "art_width_fraction": 0.92,
+      "split_art_fraction": 0.3,
+      "min_text_column_em": 8,
+      "gap_em": 0.75,
+      "scene_settled_uniform_scale": 0.94,
+      "gauge_policy": {
+        "required_state": true,
+        "recipe_binding": "SAME_recipe_id_AS_FOOD_AND_CARD",
+        "body": "IMMUTABLE_G0",
+        "independent_layer": true,
+        "min_side_em": 3,
+        "inline_scene_min_side_em": 12,
+        "compact_mode": "SEPARATE_FLOW_DOCK",
+        "layer_zIndex": 800
+      },
+      "motion": {
+        "kind": "book",
+        "input": "SHARED_CARD_PROGRESS",
+        "duration_ms": null,
+        "reduced_motion": "SETTLED_STATIC; immediate identity update; no decorative occlusion",
+        "loop": false,
+        "bounce": false,
+        "non_uniform_flatten": false
+      },
+      "controls_reserved": true,
+      "art_pointer_events": "NONE",
+      "art_zIndex_ceiling": 800,
+      "critical_UI_zIndex_min": 1000,
+      "text_policy": "WRAP_IN_MEASURED_FLOW; no ellipsis hides required action/step; height grows and scrolls",
+      "portion_policy": "FO_GEOMETRY_STABLE; only same-recipe GaugeState and nutrition UI change",
+      "min_split_art_side_em": 0
+    },
+    {
+      "id": "SEARCH_CARD",
+      "label": "Search / risultati",
+      "layout": "adaptive",
+      "projection": "full",
+      "max_art_side_em": 13,
+      "art_width_fraction": 0.92,
+      "split_art_fraction": 0.3,
+      "min_text_column_em": 8,
+      "gap_em": 0.75,
+      "scene_settled_uniform_scale": 0.94,
+      "gauge_policy": {
+        "required_state": true,
+        "recipe_binding": "SAME_recipe_id_AS_FOOD_AND_CARD",
+        "body": "IMMUTABLE_G0",
+        "independent_layer": true,
+        "min_side_em": 3,
+        "inline_scene_min_side_em": 12,
+        "compact_mode": "SEPARATE_FLOW_DOCK",
+        "layer_zIndex": 800
+      },
+      "motion": {
+        "kind": "static",
+        "input": "NONE",
+        "duration_ms": null,
+        "reduced_motion": "SETTLED_STATIC; immediate identity update; no decorative occlusion",
+        "loop": false,
+        "bounce": false,
+        "non_uniform_flatten": false
+      },
+      "controls_reserved": false,
+      "art_pointer_events": "NONE",
+      "art_zIndex_ceiling": 800,
+      "critical_UI_zIndex_min": 1000,
+      "text_policy": "WRAP_IN_MEASURED_FLOW; no ellipsis hides required action/step; height grows and scrolls",
+      "portion_policy": "FO_GEOMETRY_STABLE; only same-recipe GaugeState and nutrition UI change",
+      "min_split_art_side_em": 0
+    },
+    {
+      "id": "RECIPE_CARD",
+      "label": "Ricette / card",
+      "layout": "stack",
+      "projection": "full",
+      "max_art_side_em": 18,
+      "art_width_fraction": 0.92,
+      "split_art_fraction": 0.3,
+      "min_text_column_em": 8,
+      "gap_em": 0.75,
+      "scene_settled_uniform_scale": 0.94,
+      "gauge_policy": {
+        "required_state": true,
+        "recipe_binding": "SAME_recipe_id_AS_FOOD_AND_CARD",
+        "body": "IMMUTABLE_G0",
+        "independent_layer": true,
+        "min_side_em": 3,
+        "inline_scene_min_side_em": 12,
+        "compact_mode": "SEPARATE_FLOW_DOCK",
+        "layer_zIndex": 800
+      },
+      "motion": {
+        "kind": "book",
+        "input": "SHARED_CARD_PROGRESS",
+        "duration_ms": null,
+        "reduced_motion": "SETTLED_STATIC; immediate identity update; no decorative occlusion",
+        "loop": false,
+        "bounce": false,
+        "non_uniform_flatten": false
+      },
+      "controls_reserved": true,
+      "art_pointer_events": "NONE",
+      "art_zIndex_ceiling": 800,
+      "critical_UI_zIndex_min": 1000,
+      "text_policy": "WRAP_IN_MEASURED_FLOW; no ellipsis hides required action/step; height grows and scrolls",
+      "portion_policy": "FO_GEOMETRY_STABLE; only same-recipe GaugeState and nutrition UI change",
+      "min_split_art_side_em": 0
+    },
+    {
+      "id": "RECIPE_LIST",
+      "label": "Ricette / lista",
+      "layout": "adaptive",
+      "projection": "full",
+      "max_art_side_em": 8,
+      "art_width_fraction": 0.92,
+      "split_art_fraction": 0.3,
+      "min_text_column_em": 8,
+      "gap_em": 0.75,
+      "scene_settled_uniform_scale": 0.94,
+      "gauge_policy": {
+        "required_state": true,
+        "recipe_binding": "SAME_recipe_id_AS_FOOD_AND_CARD",
+        "body": "IMMUTABLE_G0",
+        "independent_layer": true,
+        "min_side_em": 3,
+        "inline_scene_min_side_em": 12,
+        "compact_mode": "SEPARATE_FLOW_DOCK",
+        "layer_zIndex": 800
+      },
+      "motion": {
+        "kind": "static",
+        "input": "NONE",
+        "duration_ms": null,
+        "reduced_motion": "SETTLED_STATIC; immediate identity update; no decorative occlusion",
+        "loop": false,
+        "bounce": false,
+        "non_uniform_flatten": false
+      },
+      "controls_reserved": false,
+      "art_pointer_events": "NONE",
+      "art_zIndex_ceiling": 800,
+      "critical_UI_zIndex_min": 1000,
+      "text_policy": "WRAP_IN_MEASURED_FLOW; no ellipsis hides required action/step; height grows and scrolls",
+      "portion_policy": "FO_GEOMETRY_STABLE; only same-recipe GaugeState and nutrition UI change",
+      "min_split_art_side_em": 0
+    },
+    {
+      "id": "RECIPE_WHEEL",
+      "label": "Ricette / wheel",
+      "layout": "adaptive",
+      "projection": "full",
+      "max_art_side_em": 12,
+      "art_width_fraction": 0.92,
+      "split_art_fraction": 0.38,
+      "min_text_column_em": 8,
+      "gap_em": 0.75,
+      "scene_settled_uniform_scale": 0.94,
+      "gauge_policy": {
+        "required_state": true,
+        "recipe_binding": "SAME_recipe_id_AS_FOOD_AND_CARD",
+        "body": "IMMUTABLE_G0",
+        "independent_layer": true,
+        "min_side_em": 3,
+        "inline_scene_min_side_em": 12,
+        "compact_mode": "SEPARATE_FLOW_DOCK",
+        "layer_zIndex": 800
+      },
+      "motion": {
+        "kind": "wheel",
+        "input": "SHARED_WHEEL_DISTANCE",
+        "duration_ms": null,
+        "reduced_motion": "SETTLED_STATIC; immediate identity update; no decorative occlusion",
+        "loop": false,
+        "bounce": false,
+        "non_uniform_flatten": false
+      },
+      "controls_reserved": false,
+      "art_pointer_events": "NONE",
+      "art_zIndex_ceiling": 800,
+      "critical_UI_zIndex_min": 1000,
+      "text_policy": "WRAP_IN_MEASURED_FLOW; no ellipsis hides required action/step; height grows and scrolls",
+      "portion_policy": "FO_GEOMETRY_STABLE; only same-recipe GaugeState and nutrition UI change",
+      "min_split_art_side_em": 12
+    },
+    {
+      "id": "RECIPE_DETAIL",
+      "label": "Recipe Detail",
+      "layout": "stack",
+      "projection": "full",
+      "max_art_side_em": 26,
+      "art_width_fraction": 0.92,
+      "split_art_fraction": 0.3,
+      "min_text_column_em": 8,
+      "gap_em": 0.75,
+      "scene_settled_uniform_scale": 0.94,
+      "gauge_policy": {
+        "required_state": true,
+        "recipe_binding": "SAME_recipe_id_AS_FOOD_AND_CARD",
+        "body": "IMMUTABLE_G0",
+        "independent_layer": true,
+        "min_side_em": 3,
+        "inline_scene_min_side_em": 12,
+        "compact_mode": "SEPARATE_FLOW_DOCK",
+        "layer_zIndex": 800
+      },
+      "motion": {
+        "kind": "open",
+        "input": "OPEN_PROGRESS",
+        "duration_ms": 1800,
+        "reduced_motion": "SETTLED_STATIC; immediate identity update; no decorative occlusion",
+        "loop": false,
+        "bounce": false,
+        "non_uniform_flatten": false
+      },
+      "controls_reserved": true,
+      "art_pointer_events": "NONE",
+      "art_zIndex_ceiling": 800,
+      "critical_UI_zIndex_min": 1000,
+      "text_policy": "WRAP_IN_MEASURED_FLOW; no ellipsis hides required action/step; height grows and scrolls",
+      "portion_policy": "FO_GEOMETRY_STABLE; only same-recipe GaugeState and nutrition UI change",
+      "min_split_art_side_em": 0
+    },
+    {
+      "id": "TITLE_MICRO",
+      "label": "Accanto al titolo",
+      "layout": "adaptive",
+      "projection": "primary",
+      "max_art_side_em": 3,
+      "art_width_fraction": 0.92,
+      "split_art_fraction": 0.3,
+      "min_text_column_em": 8,
+      "gap_em": 0.75,
+      "scene_settled_uniform_scale": 0.98,
+      "gauge_policy": {
+        "required_state": true,
+        "recipe_binding": "SAME_recipe_id_AS_FOOD_AND_CARD",
+        "body": "IMMUTABLE_G0",
+        "independent_layer": true,
+        "min_side_em": 3,
+        "inline_scene_min_side_em": 12,
+        "compact_mode": "SEPARATE_FLOW_DOCK",
+        "layer_zIndex": 800
+      },
+      "motion": {
+        "kind": "static",
+        "input": "NONE",
+        "duration_ms": null,
+        "reduced_motion": "SETTLED_STATIC; immediate identity update; no decorative occlusion",
+        "loop": false,
+        "bounce": false,
+        "non_uniform_flatten": false
+      },
+      "controls_reserved": false,
+      "art_pointer_events": "NONE",
+      "art_zIndex_ceiling": 800,
+      "critical_UI_zIndex_min": 1000,
+      "text_policy": "WRAP_IN_MEASURED_FLOW; no ellipsis hides required action/step; height grows and scrolls",
+      "portion_policy": "FO_GEOMETRY_STABLE; only same-recipe GaugeState and nutrition UI change",
+      "min_split_art_side_em": 0
+    },
+    {
+      "id": "KITCHEN_MODE",
+      "label": "Kitchen Mode",
+      "layout": "adaptive",
+      "projection": "full",
+      "max_art_side_em": 22,
+      "art_width_fraction": 0.92,
+      "split_art_fraction": 0.38,
+      "min_text_column_em": 10,
+      "gap_em": 0.75,
+      "scene_settled_uniform_scale": 0.94,
+      "gauge_policy": {
+        "required_state": true,
+        "recipe_binding": "SAME_recipe_id_AS_FOOD_AND_CARD",
+        "body": "IMMUTABLE_G0",
+        "independent_layer": true,
+        "min_side_em": 3,
+        "inline_scene_min_side_em": 12,
+        "compact_mode": "SEPARATE_FLOW_DOCK",
+        "layer_zIndex": 800
+      },
+      "motion": {
+        "kind": "static",
+        "input": "NONE",
+        "duration_ms": null,
+        "reduced_motion": "SETTLED_STATIC; immediate identity update; no decorative occlusion",
+        "loop": false,
+        "bounce": false,
+        "non_uniform_flatten": false
+      },
+      "controls_reserved": true,
+      "art_pointer_events": "NONE",
+      "art_zIndex_ceiling": 800,
+      "critical_UI_zIndex_min": 1000,
+      "text_policy": "WRAP_IN_MEASURED_FLOW; no ellipsis hides required action/step; height grows and scrolls",
+      "portion_policy": "FO_GEOMETRY_STABLE; only same-recipe GaugeState and nutrition UI change",
+      "min_split_art_side_em": 16
+    }
+  ],
+  "coordinates": {
+    "stored": "dimensionless normalized scene coefficients and em ratios",
+    "measurement": "host width, font size, actual UI block heights are runtime measurements; no device-specific positions",
+    "uniform_physical_scale": "Convert scene once into CSS length units; host-normalized x/y coefficients differ only because host aspect ratio differs."
+  },
+  "layout_inputs": [
+    "host_width",
+    "font_em",
+    "measured_header_height",
+    "measured_title_height",
+    "measured_metadata_height",
+    "measured_controls_height",
+    "recipe_id",
+    "resolved_G5_recipe_geometry",
+    "same_recipe_GaugeState",
+    "motion_progress_or_distance",
+    "prefers_reduced_motion"
+  ],
+  "responsive_policy": {
+    "header_outside_art": true,
+    "search_filters_history_outside_art": true,
+    "safe_area_and_keyboard": "Host must be measured in safe content area below headers and above fixed navigation/keyboard. Remeasure on resize, font-scale, keyboard and content change. Never overlay critical UI.",
+    "overflow": "Vertical flow/scroll; no maximum block height or hiding controls.",
+    "future_imports": "Use the destination profile only after resolver and composition pass; missing key or state fails closed, no guessed fallback. A new source occupying an existing slot must pass G5 footprint QA; key parity alone is insufficient.",
+    "wheel": {
+      "visible_instances": 3,
+      "valid_interactive_instance": "CENTRAL_ONLY",
+      "neighbours": "Distinct recipes, inert and aria-hidden; their own GaugeState remains bound.",
+      "distance_domain": [
+        -1,
+        1
+      ],
+      "alternative": "Standard list for broad browsing or reduced motion.",
+      "viewport_fit": "3 visible instances only when the entire central card and neighbour peeks fit the measured safe viewport; otherwise standard list. Neighbour cards never overlap the central card.",
+      "reduced_motion": "Use the standard RECIPE_LIST profile; no wheel transition or decorative cover."
+    },
+    "home": "Only the current suggested recipe is actionable; suggestion logic is untouched. Profile covers the recipe scene, not the separate Home scale hero.",
+    "motion_occlusion": "Registered decorative cover only inside art stage during book/open transition; never an asset crop, never critical UI. Settled/reduced motion has no cover.",
+    "animation_frame_atomicity": "One progress value per instance controls card pose, food pose, reveal and Gauge association. No independent food clock."
+  },
+  "hard_stops": [
+    "UPSTREAM_G5_HASH_CHANGED",
+    "UNKNOWN_SURFACE_OR_TEMPLATE",
+    "RECIPE_GEOMETRY_OR_PRIMARY_MISSING",
+    "GAUGE_STATE_MISSING_OR_DIFFERENT_RECIPE",
+    "NON_UNIFORM_SCALE_OR_ASSET_FILTER",
+    "VISIBLE_SCENE_OUTSIDE_ART_STAGE",
+    "FO_OR_GAUGE_OVERLAP_CRITICAL_UI",
+    "INTERACTIVE_WHEEL_NEIGHBOUR",
+    "UNREGISTERED_MOTION_OCCLUSION",
+    "PROTECTED_APP_LOGIC_OR_REMOTE_WRITE"
+  ],
+  "registered_occlusion": {
+    "book": {
+      "progress_domain": [
+        0,
+        1
+      ],
+      "exit": "Use 1-shared_progress for outgoing, shared_progress for incoming; reverse direction on reverse swipe.",
+      "cover_domain": "ART_RECT_ONLY",
+      "cover_zIndex": 900,
+      "cover_reveal": "smoothstep(shared_progress)",
+      "settled_cover": 0,
+      "card_translation": "direction*(1-progress)*host_width; food, Gauge and UI belong to the same recipe/card parent.",
+      "interaction": "Only settled current card is actionable; adjacent peek is inert.",
+      "peek_width_fraction": 0.04,
+      "cover_rect": "art_x, art_y + art_side*reveal, art_side, art_side*(1-reveal)",
+      "cover_coordinate_space": "Local art-stage rectangle; z=900 below critical UI (>=1000)."
+    },
+    "wheel": {
+      "clipping": "Parent safe viewport may reveal partial inactive neighbour cards only; active central card and its controls must fit completely. Canonical asset and settled local scene never cropped.",
+      "gap_em": 0.75
+    }
+  },
+  "validated_slot_sources": {
+    "VESSEL_PLATE|P1|S3|D0|A0|primary|0": [
+      "ANCHOVY",
+      "BEAN",
+      "BEEF",
+      "BREAD",
+      "BRESAOLA",
+      "CAKE",
+      "CAULIFLOWER",
+      "CHERRY_TOMATO",
+      "CHICKEN",
+      "EGG",
+      "EGGPLANT",
+      "EGG_WHITE",
+      "HAM",
+      "LENTIL",
+      "MACKEREL",
+      "PEPPER",
+      "POTATO",
+      "RICE",
+      "SHRIMP",
+      "SQUID",
+      "TOAST",
+      "WHITE_FISH",
+      "ZUCCHINI"
+    ],
+    "VESSEL_PLATE|P1|S3|D0|A0|secondary|0": [
+      "ANCHOVY",
+      "ARUGULA",
+      "BEEF",
+      "BEVERAGE_BOTTLE",
+      "BREAD",
+      "BRESAOLA",
+      "CARROT",
+      "CHERRY_TOMATO",
+      "CHICKEN",
+      "CHICKPEA",
+      "EGG",
+      "EGGPLANT",
+      "EGG_WHITE",
+      "GARLIC",
+      "GROUND_BEEF",
+      "HAM",
+      "ONION",
+      "PEA",
+      "PIADINA",
+      "POTATO",
+      "RICE",
+      "ROSA_SAUCE",
+      "SPINACH",
+      "TOMATO",
+      "ZUCCHINI"
+    ],
+    "VESSEL_PLATE|P1|S3|D0|A0|secondary|1": [
+      "ARUGULA",
+      "ASPARAGUS",
+      "BREAD",
+      "BUTTER",
+      "CARROT",
+      "CELERY",
+      "CHERRY_TOMATO",
+      "EGG",
+      "EGG_WHITE",
+      "FETA",
+      "GARLIC",
+      "GRANA",
+      "GREEK_YOGURT",
+      "LEMON",
+      "MOZZARELLA",
+      "MUSHROOM",
+      "ONION",
+      "PARMESAN",
+      "PEA",
+      "PEPPER",
+      "PROSCIUTTO",
+      "PROVOLA",
+      "PUMPKIN",
+      "RICOTTA",
+      "SPINACH",
+      "TOMATO",
+      "ZUCCHINI"
+    ],
+    "VESSEL_PLATE|P1|S3|D0|A0|secondary|2": [
+      "BURRATA",
+      "BUTTER",
+      "CELERY",
+      "CUCUMBER",
+      "FENNEL",
+      "FETA",
+      "GARLIC",
+      "GRANA",
+      "GREEK_YOGURT",
+      "LEMON",
+      "MOZZARELLA",
+      "MUSTARD_SAUCE",
+      "OLIVE",
+      "ONION",
+      "PARMESAN",
+      "RICOTTA",
+      "SPINACH",
+      "STRACCHINO",
+      "ZUCCHINI"
+    ],
+    "VESSEL_BOWL|P1|S2|D1|A0|primary|0": [
+      "OCTOPUS",
+      "TUNA"
+    ],
+    "VESSEL_BOWL|P1|S2|D1|A0|secondary|0": [
+      "POTATO",
+      "RICE"
+    ],
+    "VESSEL_BOWL|P1|S2|D1|A0|secondary|1": [
+      "AVOCADO",
+      "OLIVE"
+    ],
+    "VESSEL_BOWL|P1|S2|D1|A0|detail|0": [
+      "PARSLEY",
+      "SESAME"
+    ],
+    "VESSEL_BOWL|P1|S2|D0|A0|primary|0": [
+      "ANCHOVY",
+      "CHICKEN",
+      "CUCUMBER",
+      "FENNEL",
+      "GREEK_YOGURT",
+      "MUSHROOM",
+      "PASTA_LONG",
+      "PASTA_SHORT",
+      "PORRIDGE",
+      "QUINOA",
+      "RICE",
+      "TUNA"
+    ],
+    "VESSEL_BOWL|P1|S2|D0|A0|secondary|0": [
+      "BANANA",
+      "BEAN",
+      "CAULIFLOWER",
+      "CHICKEN",
+      "CHICKPEA",
+      "CLAM",
+      "GARLIC",
+      "MIXED_BERRIES",
+      "ONION",
+      "ORANGE",
+      "PARMESAN",
+      "PORK",
+      "POTATO",
+      "RICE",
+      "ROSA_SAUCE",
+      "TUNA",
+      "ZUCCHINI"
+    ],
+    "VESSEL_BOWL|P1|S2|D0|A0|secondary|1": [
+      "BUTTER",
+      "CHICORY",
+      "GARLIC",
+      "GREEK_YOGURT",
+      "LEMON",
+      "MUSTARD_SAUCE",
+      "OLIVE",
+      "ONION",
+      "PARMESAN",
+      "PECORINO",
+      "PEPPER",
+      "PROVOLA",
+      "ZUCCHINI"
+    ],
+    "VESSEL_BOWL|P1|S3|D0|A0|primary|0": [
+      "BREAD",
+      "CHICKEN",
+      "COUSCOUS",
+      "FARRO",
+      "FILLED_PASTA",
+      "GNOCCHI",
+      "MACKEREL",
+      "MUSHROOM",
+      "PASTA_LONG",
+      "PASTA_SHORT",
+      "POLENTA",
+      "PORRIDGE",
+      "POTATO",
+      "PUMPKIN",
+      "RICE",
+      "RISOTTO",
+      "SHRIMP",
+      "TUNA"
+    ],
+    "VESSEL_BOWL|P1|S3|D0|A0|secondary|0": [
+      "ANCHOVY",
+      "BREAD",
+      "CHERRY_TOMATO",
+      "CHICKPEA",
+      "CLAM",
+      "EGG",
+      "FENNEL",
+      "GREEK_YOGURT",
+      "MUSSEL",
+      "ONION",
+      "PARMESAN",
+      "PEA",
+      "PORK",
+      "POTATO",
+      "RICE",
+      "ROSA_SAUCE",
+      "SALMON",
+      "SAUSAGE",
+      "TUNA"
+    ],
+    "VESSEL_BOWL|P1|S3|D0|A0|secondary|1": [
+      "AVOCADO",
+      "BEEF",
+      "BLUEBERRY",
+      "BREAD",
+      "BROCCOLI",
+      "CAULIFLOWER",
+      "CHERRY_TOMATO",
+      "CLAM",
+      "CORN",
+      "FONTINA",
+      "GARLIC",
+      "GRANA",
+      "MOZZARELLA",
+      "MUSHROOM",
+      "ONION",
+      "ORANGE",
+      "PARMESAN",
+      "PECORINO",
+      "PROSCIUTTO",
+      "PUMPKIN",
+      "ROSA_SAUCE",
+      "SPINACH",
+      "TOMATO",
+      "ZUCCHINI"
+    ],
+    "VESSEL_BOWL|P1|S3|D0|A0|secondary|2": [
+      "BESCIAMELLA",
+      "BUTTER",
+      "EGG",
+      "GARLIC",
+      "GREEN_BEAN",
+      "LEMON",
+      "MIXED_BERRIES",
+      "MORTADELLA",
+      "MUSHROOM",
+      "OLIVE",
+      "ONION",
+      "PARMESAN",
+      "PECORINO",
+      "PEPPER",
+      "PROVOLA",
+      "SHRIMP",
+      "TURNIP_GREENS"
+    ],
+    "VESSEL_PIZZA_SURFACE|P1|S3|D0|A0|primary|0": [
+      "PIZZA"
+    ],
+    "VESSEL_PIZZA_SURFACE|P1|S3|D0|A0|secondary|0": [
+      "BRESAOLA"
+    ],
+    "VESSEL_PIZZA_SURFACE|P1|S3|D0|A0|secondary|1": [
+      "MOZZARELLA"
+    ],
+    "VESSEL_PIZZA_SURFACE|P1|S3|D0|A0|secondary|2": [
+      "GREEK_YOGURT"
+    ],
+    "VESSEL_BOWL|P1|S1|D0|A0|primary|0": [
+      "ANCHOVY",
+      "CHERRY_TOMATO",
+      "EGG",
+      "PASTA_LONG",
+      "PASTA_SHORT",
+      "RICE",
+      "TOMATO"
+    ],
+    "VESSEL_BOWL|P1|S1|D0|A0|secondary|0": [
+      "BREAD",
+      "CARROT",
+      "GARLIC",
+      "GORGONZOLA",
+      "LEMON",
+      "ONION",
+      "PARMESAN",
+      "PECORINO"
+    ],
+    "VESSEL_BOWL|P1|S4|D0|A0|primary|0": [
+      "BEAN",
+      "CHICKEN",
+      "CHICKPEA",
+      "COUSCOUS",
+      "FARRO",
+      "FILLED_PASTA",
+      "GNOCCHI",
+      "GROUND_BEEF",
+      "LASAGNA",
+      "LENTIL",
+      "OCTOPUS",
+      "PASTA_LONG",
+      "PASTA_SHORT",
+      "POTATO",
+      "QUINOA",
+      "RICE",
+      "RISOTTO",
+      "SAUSAGE",
+      "SQUID"
+    ],
+    "VESSEL_BOWL|P1|S4|D0|A0|secondary|0": [
+      "ANCHOVY",
+      "BEAN",
+      "BEEF",
+      "BREAD",
+      "CHERRY_TOMATO",
+      "CHICKPEA",
+      "EGG",
+      "FETA",
+      "GARLIC",
+      "GROUND_BEEF",
+      "LENTIL",
+      "MUSSEL",
+      "PORK",
+      "POTATO",
+      "QUINOA",
+      "RICE",
+      "ROSA_SAUCE",
+      "SAUSAGE",
+      "SQUID",
+      "TUNA",
+      "ZUCCHINI"
+    ],
+    "VESSEL_BOWL|P1|S4|D0|A0|secondary|1": [
+      "BEEF",
+      "BREAD",
+      "CABBAGE",
+      "CARROT",
+      "CHERRY_TOMATO",
+      "CLAM",
+      "MUSSEL",
+      "ONION",
+      "POTATO",
+      "ROSA_SAUCE",
+      "SHRIMP",
+      "SQUID",
+      "TOMATO",
+      "ZUCCHINI"
+    ],
+    "VESSEL_BOWL|P1|S4|D0|A0|secondary|2": [
+      "ARUGULA",
+      "ASPARAGUS",
+      "CARROT",
+      "CELERY",
+      "CLAM",
+      "CORN",
+      "EGGPLANT",
+      "FONTINA",
+      "GARLIC",
+      "MUSSEL",
+      "ONION",
+      "PARMESAN",
+      "PEA",
+      "PORK",
+      "PUMPKIN",
+      "RADICCHIO",
+      "ROSA_SAUCE",
+      "SHRIMP",
+      "SPINACH",
+      "TOMATO",
+      "ZUCCHINI"
+    ],
+    "VESSEL_BOWL|P1|S4|D0|A0|secondary|3": [
+      "AVOCADO",
+      "BREAD",
+      "BUTTER",
+      "CARROT",
+      "CELERY",
+      "CLAM",
+      "EGGPLANT",
+      "FONTINA",
+      "GARLIC",
+      "GORGONZOLA",
+      "LEMON",
+      "MOZZARELLA",
+      "MUSHROOM",
+      "OLIVE",
+      "PARMESAN",
+      "PECORINO",
+      "SALAMI",
+      "SHRIMP",
+      "TOMATO"
+    ],
+    "VESSEL_BOWL|P1|S4|D0|A1|primary|0": [
+      "PASTA_LONG",
+      "POTATO"
+    ],
+    "VESSEL_BOWL|P1|S4|D0|A1|secondary|0": [
+      "GARLIC",
+      "RICE"
+    ],
+    "VESSEL_BOWL|P1|S4|D0|A1|secondary|1": [
+      "GREEN_BEAN",
+      "PEPPER"
+    ],
+    "VESSEL_BOWL|P1|S4|D0|A1|secondary|2": [
+      "CARROT",
+      "PARMESAN"
+    ],
+    "VESSEL_BOWL|P1|S4|D0|A1|secondary|3": [
+      "CABBAGE",
+      "PECORINO"
+    ],
+    "VESSEL_BOWL|P1|S4|D0|A1|sauce|0": [
+      "MUSTARD_SAUCE",
+      "PESTO"
+    ],
+    "VESSEL_BOWL|P1|S3|D0|A1|primary|0": [
+      "BEEF",
+      "FILLED_PASTA",
+      "PASTA_LONG",
+      "RICE",
+      "SALMON"
+    ],
+    "VESSEL_BOWL|P1|S3|D0|A1|secondary|0": [
+      "CARROT",
+      "EGG",
+      "GROUND_BEEF",
+      "RICE",
+      "TOFU"
+    ],
+    "VESSEL_BOWL|P1|S3|D0|A1|secondary|1": [
+      "BEEF",
+      "CARROT",
+      "EDAMAME",
+      "GARLIC",
+      "SPINACH"
+    ],
+    "VESSEL_BOWL|P1|S3|D0|A1|secondary|2": [
+      "AVOCADO",
+      "BROCCOLI",
+      "CABBAGE",
+      "EGG",
+      "PEA",
+      "RICOTTA"
+    ],
+    "VESSEL_BOWL|P1|S3|D0|A1|sauce|0": [
+      "BUTTER",
+      "MUSTARD_SAUCE",
+      "ROSA_SAUCE"
+    ],
+    "VESSEL_BAKING_DISH|P1|S4|D0|A0|primary|0": [
+      "EGGPLANT",
+      "LASAGNA",
+      "PASTA_LONG",
+      "ZUCCHINI"
+    ],
+    "VESSEL_BAKING_DISH|P1|S4|D0|A0|secondary|0": [
+      "GROUND_BEEF",
+      "ROSA_SAUCE"
+    ],
+    "VESSEL_BAKING_DISH|P1|S4|D0|A0|secondary|1": [
+      "BEEF",
+      "TOMATO"
+    ],
+    "VESSEL_BAKING_DISH|P1|S4|D0|A0|secondary|2": [
+      "MOZZARELLA",
+      "ROSA_SAUCE"
+    ],
+    "VESSEL_BAKING_DISH|P1|S4|D0|A0|secondary|3": [
+      "PARMESAN",
+      "TOMATO"
+    ],
+    "VESSEL_PLATE|P1|S2|D0|A0|primary|0": [
+      "ARTICHOKE",
+      "ASPARAGUS",
+      "BEEF",
+      "CAULIFLOWER",
+      "CHICKEN",
+      "EGG",
+      "EGGPLANT",
+      "MUSSEL",
+      "MUSTARD_SAUCE",
+      "OCTOPUS",
+      "PANCAKE",
+      "PORK",
+      "POTATO",
+      "RICE",
+      "SALMON",
+      "SAUSAGE",
+      "SCALLOP",
+      "SPINACH",
+      "SQUID",
+      "TOAST",
+      "TUNA",
+      "WHITE_FISH",
+      "ZUCCHINI"
+    ],
+    "VESSEL_PLATE|P1|S2|D0|A0|secondary|0": [
+      "ARUGULA",
+      "ASPARAGUS",
+      "BANANA",
+      "BESCIAMELLA",
+      "BREAD",
+      "BUTTER",
+      "CAULIFLOWER",
+      "CHERRY_TOMATO",
+      "EGG",
+      "EGG_WHITE",
+      "FENNEL",
+      "GARLIC",
+      "MUSHROOM",
+      "ONION",
+      "PARMESAN",
+      "PEPPER",
+      "POLENTA",
+      "POTATO",
+      "PROSCIUTTO",
+      "SHRIMP",
+      "TOMATO",
+      "ZUCCHINI"
+    ],
+    "VESSEL_PLATE|P1|S2|D0|A0|secondary|1": [
+      "ARTICHOKE",
+      "BANANA",
+      "BESCIAMELLA",
+      "BUTTER",
+      "GARLIC",
+      "GRANA",
+      "GREEK_YOGURT",
+      "LEMON",
+      "MOZZARELLA",
+      "MUSTARD_SAUCE",
+      "OLIVE",
+      "ONION",
+      "ORANGE",
+      "PARMESAN",
+      "TURNIP_GREENS"
+    ],
+    "VESSEL_PLATE|P1|S4|D0|A0|primary|0": [
+      "ANCHOVY",
+      "BEEF",
+      "BESCIAMELLA",
+      "CAKE",
+      "CHICKEN",
+      "CHICKPEA",
+      "EGG",
+      "GROUND_BEEF",
+      "LENTIL",
+      "POTATO",
+      "RICE",
+      "ROSA_SAUCE",
+      "SQUID",
+      "SWORDFISH",
+      "TOAST",
+      "TOMATO",
+      "TUNA",
+      "WHITE_FISH"
+    ],
+    "VESSEL_PLATE|P1|S4|D0|A0|secondary|0": [
+      "BEEF",
+      "BREAD",
+      "CARROT",
+      "CHERRY_TOMATO",
+      "CHICKEN",
+      "CHICKPEA",
+      "EGG",
+      "GROUND_BEEF",
+      "HAM",
+      "LENTIL",
+      "MUFFIN",
+      "PEPPER",
+      "POLENTA",
+      "PORK",
+      "POTATO",
+      "ROSA_SAUCE",
+      "SALAMI",
+      "SALMON",
+      "SPINACH",
+      "TOMATO",
+      "TUNA",
+      "ZUCCHINI"
+    ],
+    "VESSEL_PLATE|P1|S4|D0|A0|secondary|1": [
+      "ANCHOVY",
+      "BEAN",
+      "BEEF",
+      "BREAD",
+      "CARROT",
+      "CHERRY_TOMATO",
+      "EGG",
+      "EGGPLANT",
+      "EGG_WHITE",
+      "HAM",
+      "ONION",
+      "PARMESAN",
+      "ROSA_SAUCE",
+      "SAUSAGE",
+      "SPINACH",
+      "TOMATO"
+    ],
+    "VESSEL_PLATE|P1|S4|D0|A0|secondary|2": [
+      "ARUGULA",
+      "AVOCADO",
+      "BESCIAMELLA",
+      "BREAD",
+      "CARROT",
+      "CELERY",
+      "EGG",
+      "FENNEL",
+      "GARLIC",
+      "MOZZARELLA",
+      "ONION",
+      "PARMESAN",
+      "PEA",
+      "PEPPER",
+      "POTATO",
+      "RICOTTA",
+      "ROSA_SAUCE",
+      "TOMATO",
+      "ZUCCHINI"
+    ],
+    "VESSEL_PLATE|P1|S4|D0|A0|secondary|3": [
+      "BREAD",
+      "BUTTER",
+      "CARROT",
+      "CELERY",
+      "CORN",
+      "GARLIC",
+      "LEMON",
+      "MOZZARELLA",
+      "OLIVE",
+      "ONION",
+      "PARMESAN",
+      "PEA",
+      "PECORINO",
+      "PROVOLA",
+      "RICOTTA",
+      "ROSA_SAUCE",
+      "SPINACH",
+      "TOMATO"
+    ],
+    "VESSEL_PLATE|P1|S1|D0|A0|primary|0": [
+      "ARTICHOKE",
+      "ARUGULA",
+      "BEEF",
+      "BROCCOLI",
+      "CABBAGE",
+      "CAULIFLOWER",
+      "CHERRY_TOMATO",
+      "CHICKEN",
+      "CHICKPEA",
+      "CHICORY",
+      "EDAMAME",
+      "EGGPLANT",
+      "GARLIC",
+      "GREEN_BEAN",
+      "MUSHROOM",
+      "PEPPER",
+      "PORK",
+      "POTATO",
+      "PROSCIUTTO",
+      "PROVOLA",
+      "RICOTTA",
+      "SALMON",
+      "SAUSAGE",
+      "SHRIMP",
+      "SQUID",
+      "SWORDFISH",
+      "TOMATO",
+      "TUNA",
+      "WHITE_FISH",
+      "ZUCCHINI"
+    ],
+    "VESSEL_PLATE|P1|S1|D0|A0|secondary|0": [
+      "ARUGULA",
+      "BEVERAGE_BOTTLE",
+      "BREAD",
+      "BUTTER",
+      "FIG",
+      "GARLIC",
+      "GRANA",
+      "LEMON",
+      "MELON",
+      "MOZZARELLA",
+      "MUSHROOM",
+      "MUSTARD_SAUCE",
+      "ONION",
+      "ORANGE",
+      "PARMESAN",
+      "POTATO",
+      "RICOTTA",
+      "ZUCCHINI"
+    ],
+    "VESSEL_PLATE|P1|S4|D0|A1|primary|0": [
+      "BEEF"
+    ],
+    "VESSEL_PLATE|P1|S4|D0|A1|secondary|0": [
+      "ANCHOVY",
+      "TUNA"
+    ],
+    "VESSEL_PLATE|P1|S4|D0|A1|secondary|1": [
+      "ANCHOVY",
+      "BREAD"
+    ],
+    "VESSEL_PLATE|P1|S4|D0|A1|secondary|2": [
+      "CARROT"
+    ],
+    "VESSEL_PLATE|P1|S4|D0|A1|secondary|3": [
+      "CELERY",
+      "ONION"
+    ],
+    "VESSEL_PLATE|P1|S4|D0|A1|sauce|0": [
+      "MAYONNAISE",
+      "PESTO"
+    ],
+    "VESSEL_PLATE|P1|S1|D0|A1|primary|0": [
+      "BEEF",
+      "BREAD",
+      "BRIOCHE",
+      "CHICKEN",
+      "SALMON",
+      "TOFU",
+      "TUNA",
+      "WHITE_FISH"
+    ],
+    "VESSEL_PLATE|P1|S1|D0|A1|secondary|0": [
+      "BROCCOLI",
+      "BUTTER",
+      "EGG",
+      "LEMON",
+      "MIXED_BERRIES",
+      "MUSTARD_SAUCE",
+      "ONION"
+    ],
+    "VESSEL_PLATE|P1|S1|D0|A1|sauce|0": [
+      "MAYONNAISE",
+      "MUSTARD_SAUCE",
+      "ROSA_SAUCE"
+    ],
+    "VESSEL_PLATE|P1|S2|D0|A1|primary|0": [
+      "CHICKEN",
+      "PORK",
+      "SHRIMP",
+      "TUNA"
+    ],
+    "VESSEL_PLATE|P1|S2|D0|A1|secondary|0": [
+      "AVOCADO",
+      "BROCCOLI",
+      "GARLIC",
+      "TOMATO"
+    ],
+    "VESSEL_PLATE|P1|S2|D0|A1|secondary|1": [
+      "GARLIC",
+      "LEMON",
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_PLATE|P1|S2|D0|A1|sauce|0": [
+      "MAYONNAISE",
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_PLATE|P1|S0|D0|A0|primary|0": [
+      "BANANA",
+      "BEEF",
+      "BREAD",
+      "BRIOCHE",
+      "CHICKPEA",
+      "CROISSANT",
+      "EDAMAME",
+      "LEMON",
+      "MUFFIN",
+      "ORANGE",
+      "PLUMCAKE",
+      "POTATO",
+      "PUMPKIN",
+      "RADICCHIO",
+      "RICOTTA"
+    ],
+    "VESSEL_PLATE|P1|S2|D1|A0|primary|0": [
+      "OLIVE"
+    ],
+    "VESSEL_PLATE|P1|S2|D1|A0|secondary|0": [
+      "GROUND_BEEF"
+    ],
+    "VESSEL_PLATE|P1|S2|D1|A0|secondary|1": [
+      "PORK"
+    ],
+    "VESSEL_PLATE|P1|S2|D1|A0|detail|0": [
+      "PARMESAN"
+    ],
+    "VESSEL_BOWL|P1|S2|D0|A1|primary|0": [
+      "GNOCCHI",
+      "POTATO",
+      "RICE",
+      "SALMON"
+    ],
+    "VESSEL_BOWL|P1|S2|D0|A1|secondary|0": [
+      "CARROT",
+      "POTATO",
+      "RICE"
+    ],
+    "VESSEL_BOWL|P1|S2|D0|A1|secondary|1": [
+      "AVOCADO",
+      "CUCUMBER",
+      "PARMESAN",
+      "PEA"
+    ],
+    "VESSEL_BOWL|P1|S2|D0|A1|sauce|0": [
+      "BUTTER",
+      "MAYONNAISE",
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_BAKING_DISH|P1|S3|D0|A0|primary|0": [
+      "LASAGNA"
+    ],
+    "VESSEL_BAKING_DISH|P1|S3|D0|A0|secondary|0": [
+      "EGG"
+    ],
+    "VESSEL_BAKING_DISH|P1|S3|D0|A0|secondary|1": [
+      "ROSA_SAUCE"
+    ],
+    "VESSEL_BAKING_DISH|P1|S3|D0|A0|secondary|2": [
+      "TOMATO"
+    ],
+    "VESSEL_BAKING_DISH|P1|S4|D0|A1|primary|0": [
+      "LASAGNA"
+    ],
+    "VESSEL_BAKING_DISH|P1|S4|D0|A1|secondary|0": [
+      "POTATO"
+    ],
+    "VESSEL_BAKING_DISH|P1|S4|D0|A1|secondary|1": [
+      "GREEN_BEAN"
+    ],
+    "VESSEL_BAKING_DISH|P1|S4|D0|A1|secondary|2": [
+      "PARMESAN"
+    ],
+    "VESSEL_BAKING_DISH|P1|S4|D0|A1|secondary|3": [
+      "BUTTER"
+    ],
+    "VESSEL_BAKING_DISH|P1|S4|D0|A1|sauce|0": [
+      "PESTO"
+    ],
+    "VESSEL_BOWL|P1|S1|D1|A1|primary|0": [
+      "PASTA_LONG"
+    ],
+    "VESSEL_BOWL|P1|S1|D1|A1|secondary|0": [
+      "PARMESAN"
+    ],
+    "VESSEL_BOWL|P1|S1|D1|A1|detail|0": [
+      "TRUFFLE"
+    ],
+    "VESSEL_BOWL|P1|S1|D1|A1|sauce|0": [
+      "BUTTER"
+    ],
+    "VESSEL_PLATE|P1|S3|D0|A1|primary|0": [
+      "CHICKEN",
+      "PORK",
+      "SHRIMP",
+      "TOFU"
+    ],
+    "VESSEL_PLATE|P1|S3|D0|A1|secondary|0": [
+      "PEPPER",
+      "RICE",
+      "ZUCCHINI"
+    ],
+    "VESSEL_PLATE|P1|S3|D0|A1|secondary|1": [
+      "BROCCOLI",
+      "PEPPER"
+    ],
+    "VESSEL_PLATE|P1|S3|D0|A1|secondary|2": [
+      "GARLIC",
+      "ONION",
+      "PINEAPPLE"
+    ],
+    "VESSEL_PLATE|P1|S3|D0|A1|sauce|0": [
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_PLATE|P1|S0|D0|A1|primary|0": [
+      "BEEF",
+      "BRIOCHE",
+      "CHICKEN",
+      "TUNA"
+    ],
+    "VESSEL_PLATE|P1|S0|D0|A1|sauce|0": [
+      "MAYONNAISE",
+      "MUSTARD_SAUCE",
+      "PESTO",
+      "ROSA_SAUCE"
+    ],
+    "VESSEL_RAMEKIN|P1|S2|D0|A0|primary|0": [
+      "BREAD",
+      "CHICKPEA",
+      "GREEK_YOGURT",
+      "MAYONNAISE",
+      "MUSTARD_SAUCE",
+      "PEA",
+      "PESTO",
+      "STRACCHINO",
+      "TIRAMISU",
+      "ZUCCHINI"
+    ],
+    "VESSEL_RAMEKIN|P1|S2|D0|A0|secondary|0": [
+      "ANCHOVY",
+      "EGG",
+      "EGG_WHITE",
+      "FONTINA",
+      "GARLIC",
+      "GREEK_YOGURT",
+      "ONION",
+      "PARMESAN"
+    ],
+    "VESSEL_RAMEKIN|P1|S2|D0|A0|secondary|1": [
+      "BESCIAMELLA",
+      "BUTTER",
+      "EGG_WHITE",
+      "GREEK_YOGURT",
+      "LEMON",
+      "MUSTARD_SAUCE",
+      "PARMESAN"
+    ],
+    "VESSEL_RAMEKIN|P1|S3|D0|A0|primary|0": [
+      "GREEK_YOGURT",
+      "MAYONNAISE",
+      "MUSHROOM",
+      "MUSTARD_SAUCE",
+      "PESTO"
+    ],
+    "VESSEL_RAMEKIN|P1|S3|D0|A0|secondary|0": [
+      "EGG",
+      "GARLIC",
+      "GREEK_YOGURT",
+      "TUNA"
+    ],
+    "VESSEL_RAMEKIN|P1|S3|D0|A0|secondary|1": [
+      "ANCHOVY",
+      "BESCIAMELLA",
+      "CUCUMBER",
+      "LEMON",
+      "ONION",
+      "PARMESAN",
+      "RICOTTA"
+    ],
+    "VESSEL_RAMEKIN|P1|S3|D0|A0|secondary|2": [
+      "BUTTER",
+      "GREEK_YOGURT",
+      "LEMON",
+      "MUSTARD_SAUCE",
+      "PARMESAN",
+      "PECORINO"
+    ],
+    "VESSEL_RAMEKIN|P1|S1|D0|A0|primary|0": [
+      "BESCIAMELLA",
+      "BUTTER",
+      "CHERRY_TOMATO",
+      "MUSTARD_SAUCE",
+      "PEPPER"
+    ],
+    "VESSEL_RAMEKIN|P1|S1|D0|A0|secondary|0": [
+      "BUTTER",
+      "GARLIC",
+      "LEMON",
+      "MUSTARD_SAUCE",
+      "PARMESAN",
+      "RICE"
+    ],
+    "VESSEL_RAMEKIN|P1|S2|D0|A1|primary|0": [
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_RAMEKIN|P1|S2|D0|A1|secondary|0": [
+      "LEMON"
+    ],
+    "VESSEL_RAMEKIN|P1|S2|D0|A1|secondary|1": [
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_RAMEKIN|P1|S2|D0|A1|sauce|0": [
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_RAMEKIN|P1|S0|D0|A0|primary|0": [
+      "BUTTER",
+      "GARLIC",
+      "GORGONZOLA",
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_RAMEKIN|P1|S1|D0|A1|primary|0": [
+      "MAYONNAISE"
+    ],
+    "VESSEL_RAMEKIN|P1|S1|D0|A1|secondary|0": [
+      "LEMON"
+    ],
+    "VESSEL_RAMEKIN|P1|S1|D0|A1|sauce|0": [
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_RAMEKIN|P1|S3|D0|A1|primary|0": [
+      "ROSA_SAUCE"
+    ],
+    "VESSEL_RAMEKIN|P1|S3|D0|A1|secondary|0": [
+      "TOMATO"
+    ],
+    "VESSEL_RAMEKIN|P1|S3|D0|A1|secondary|1": [
+      "BESCIAMELLA"
+    ],
+    "VESSEL_RAMEKIN|P1|S3|D0|A1|secondary|2": [
+      "LEMON"
+    ],
+    "VESSEL_RAMEKIN|P1|S3|D0|A1|sauce|0": [
+      "MAYONNAISE"
+    ],
+    "VESSEL_RAMEKIN|P1|S4|D0|A0|primary|0": [
+      "PARMESAN"
+    ],
+    "VESSEL_RAMEKIN|P1|S4|D0|A0|secondary|0": [
+      "FONTINA"
+    ],
+    "VESSEL_RAMEKIN|P1|S4|D0|A0|secondary|1": [
+      "GORGONZOLA"
+    ],
+    "VESSEL_RAMEKIN|P1|S4|D0|A0|secondary|2": [
+      "PROVOLA"
+    ],
+    "VESSEL_RAMEKIN|P1|S4|D0|A0|secondary|3": [
+      "BUTTER"
+    ],
+    "VESSEL_CUP|P1|S2|D0|A0|primary|0": [
+      "RICOTTA",
+      "ROSA_SAUCE"
+    ],
+    "VESSEL_CUP|P1|S2|D0|A0|secondary|0": [
+      "BUTTER",
+      "MIXED_BERRIES"
+    ],
+    "VESSEL_CUP|P1|S2|D0|A0|secondary|1": [
+      "MIXED_BERRIES",
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_BOWL|P1|S0|D0|A0|primary|0": [
+      "GREEK_YOGURT",
+      "TOFU"
+    ],
+    "VESSEL_FREE|P1|S0|D0|A0|primary|0": [
+      "BEVERAGE_BOTTLE",
+      "BEVERAGE_JUICE_BOX"
+    ],
+    "VESSEL_FREE|P1|S1|D0|A0|primary|0": [
+      "BEVERAGE_BOTTLE",
+      "BEVERAGE_JUICE_BOX"
+    ],
+    "VESSEL_FREE|P1|S1|D0|A0|secondary|0": [
+      "APPLE",
+      "LEMON",
+      "ORANGE"
+    ],
+    "VESSEL_BOWL|P1|S1|D0|A1|primary|0": [
+      "CHICKEN"
+    ],
+    "VESSEL_BOWL|P1|S1|D0|A1|secondary|0": [
+      "EGG"
+    ],
+    "VESSEL_BOWL|P1|S1|D0|A1|sauce|0": [
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_CUP|P1|S1|D0|A0|primary|0": [
+      "BREAD"
+    ],
+    "VESSEL_CUP|P1|S1|D0|A0|secondary|0": [
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_CUP|P1|S0|D0|A0|primary|0": [
+      "CIAMBELLA"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S0|D0|A0|primary|0": [
+      "BANANA",
+      "DATE"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S1|D0|A0|primary|0": [
+      "APPLE",
+      "GREEK_YOGURT",
+      "PORRIDGE",
+      "RICOTTA"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S1|D0|A0|secondary|0": [
+      "APPLE",
+      "GREEK_YOGURT",
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S3|D0|A0|primary|0": [
+      "CAKE",
+      "CHEESECAKE",
+      "PANCAKE",
+      "PLUMCAKE"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S3|D0|A0|secondary|0": [
+      "EGG",
+      "EGG_WHITE",
+      "STRACCHINO"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S3|D0|A0|secondary|1": [
+      "BANANA",
+      "BUTTER",
+      "GREEK_YOGURT"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S3|D0|A0|secondary|2": [
+      "APPLE",
+      "BUTTER",
+      "MIXED_BERRIES",
+      "MUSTARD_SAUCE"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S2|D0|A0|primary|0": [
+      "BREAD",
+      "CAKE",
+      "MUFFIN"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S2|D0|A0|secondary|0": [
+      "EGG"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S2|D0|A0|secondary|1": [
+      "BUTTER"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S2|D0|A1|primary|0": [
+      "TART"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S2|D0|A1|secondary|0": [
+      "EGG"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S2|D0|A1|secondary|1": [
+      "BUTTER"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S2|D0|A1|sauce|0": [
+      "ROSA_SAUCE"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S4|D0|A0|primary|0": [
+      "BROWNIE",
+      "CHEESECAKE"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S4|D0|A0|secondary|0": [
+      "EGG",
+      "SALAMI"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S4|D0|A0|secondary|1": [
+      "BREAD",
+      "EGG"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S4|D0|A0|secondary|2": [
+      "BREAD",
+      "STRACCHINO"
+    ],
+    "VESSEL_DESSERT_MOLD|P1|S4|D0|A0|secondary|3": [
+      "BESCIAMELLA",
+      "BUTTER"
+    ],
+    "VESSEL_GLASS|P1|S3|D0|A0|primary|0": [
+      "GREEK_YOGURT"
+    ],
+    "VESSEL_GLASS|P1|S3|D0|A0|secondary|0": [
+      "SPINACH"
+    ],
+    "VESSEL_GLASS|P1|S3|D0|A0|secondary|1": [
+      "APPLE"
+    ],
+    "VESSEL_GLASS|P1|S3|D0|A0|secondary|2": [
+      "BANANA"
+    ]
+  },
+  "frozen_at": "2026-09-30",
+  "G7_allowed": true
+}

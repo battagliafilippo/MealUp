@@ -1,0 +1,59 @@
+{
+  "asset_key": "CHICORY",
+  "master_id": "CHICORY",
+  "variant_id": null,
+  "object_type": "Food Object",
+  "status": "REGISTERED_CANONICAL",
+  "registration_stage": "C6.3-G2",
+  "asset_family": "LOCKED_GENERATED",
+  "binary_file": "CHICORY.png",
+  "binary_sha256": "ac7cae4d1f0eeb55f83d2edf0b738de80eeb1b93537d6bdda17b04d920aec3b8",
+  "binary_bytes": 197680,
+  "image": {
+    "width": 512,
+    "height": 512,
+    "mode": "RGBA",
+    "transparent_background": true
+  },
+  "immutable": true,
+  "redraw_allowed": false,
+  "style_standard": "MealUp Toys / approved vessel design language",
+  "recipe_link_contract": {
+    "source": "docs/c6/MealUp_C6.1_Composition_Matrix_v1.json",
+    "key": "CHICORY",
+    "match": [
+      "primary.master_id",
+      "secondary[].master_id",
+      "details[].master_id",
+      "sauce.master_id"
+    ],
+    "reason": "Recipe links stay normalized in the composition matrix to avoid duplicated/stale lists."
+  },
+  "vessel_contract": {
+    "independent": true,
+    "embedded_in_food_object": false
+  },
+  "gauge_contract": {
+    "component": "MEALUP_GAUGE",
+    "independent": true,
+    "embedded_in_food_object": false,
+    "state": "recipe/portion driven"
+  },
+  "render_transform_policy": {
+    "allowed": [
+      "scale_at_render_time",
+      "position",
+      "approved_rotation",
+      "z_index"
+    ],
+    "forbidden": [
+      "regenerate",
+      "redraw",
+      "repaint",
+      "filter",
+      "distort",
+      "replace_with_svg",
+      "replace_with_similar_asset"
+    ]
+  }
+}
