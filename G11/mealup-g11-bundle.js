@@ -461,7 +461,21 @@ const digest=async bytes=>Array.from(new Uint8Array(await crypto.subtle.digest('
 const canvas=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
 async function createG11Runtime({fontFamily='Satoshi'}={}){
  await document.fonts.ready;if(!document.fonts.check(`700 16px ${fontFamily}`))throw Error('G11_S6_FONT_NOT_LOADED');
- const readBytes=async path=>{const r=await fetch(new URL(path,new URL('../G8/',__MEALUP_G11_SCRIPT_BASE)));if(!r.ok)throw Error('G11_S1_FETCH');return new Uint8Array(await r.arrayBuffer());};
+ const readBytes=async path=>{
+  if(path==='../G5/recipe-geometry.json'){
+   const files=['transport/recipe-geometry.part1.txt','transport/recipe-geometry.part2.txt','transport/recipe-geometry.part3.txt'];
+   const chunks=[];
+   for(const file of files){
+    const r=await fetch(new URL(file,__MEALUP_G11_SCRIPT_BASE),{cache:'no-store'});
+    if(!r.ok)throw Error('G11_S1_FETCH_RECIPE_GEOMETRY_SHARD');
+    chunks.push(await r.text());
+   }
+   return new TextEncoder().encode(chunks.join(''));
+  }
+  const r=await fetch(new URL(path,new URL('../G8/',__MEALUP_G11_SCRIPT_BASE)));
+  if(!r.ok)throw Error('G11_S1_FETCH');
+  return new Uint8Array(await r.arrayBuffer());
+ };
  const kit=await loadVerifiedKit({readBytes,sha256:digest}),compiler=createSceneCompiler(kit),cache=new Map(),versions=new WeakMap();
  async function assetsFor(plan){const out={};for(const a of requiredAssets(plan)){if(!cache.has(a.key)){const bytes=await readBytes(a.path);if(await digest(bytes)!==a.sha256)throw Error('G11_S1_HASH');const image=await createImageBitmap(new Blob([bytes],{type:'image/png'}));cache.set(a.key,{image,sha256:a.sha256,...(a.mask?{alphaMask:luminanceMaskToAlpha(image,{createCanvas:canvas})}:{})});}out[a.key]=cache.get(a.key);}return out;}
  async function render({surfaceEl,artHost,valueHost,recipe_id,surfaceId,kcal_value,context_id='g11-app',revision=0,cook_people=1,hostWidth,fontEm=19.52,measurements,motion={}}){
