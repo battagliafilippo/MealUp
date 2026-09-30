@@ -43,6 +43,28 @@
         put('json '+path,r.status+' len='+t.length+' parse='+parsed);
       }catch(e){put('json '+path,'ERROR '+e.message);}
     }
+    try{
+      const shardPaths=[
+        './G11/transport/recipe-geometry.part1.txt',
+        './G11/transport/recipe-geometry.part2.txt',
+        './G11/transport/recipe-geometry.part3.txt'
+      ];
+      const chunks=[];
+      for(const p of shardPaths){
+        const r=await fetch(p,{cache:'no-store'});
+        const t=await r.text();
+        put('shard '+p,r.status+' len='+t.length);
+        chunks.push(t);
+      }
+      const joined=chunks.join('');
+      let parse='PASS'; try{JSON.parse(joined);}catch(e){parse='FAIL '+e.message;}
+      const bytes=new TextEncoder().encode(joined);
+      const digest=await crypto.subtle.digest('SHA-256',bytes);
+      const sha=Array.from(new Uint8Array(digest),x=>x.toString(16).padStart(2,'0')).join('');
+      put('shard rejoin','len='+joined.length+' parse='+parse);
+      put('shard sha256',sha);
+      put('shard canonical sha',sha==='a0639a031655462a828d6bac0af7de66df8ddebf46e4b0bb58596025bcd2878a');
+    }catch(e){put('shard diagnostic','ERROR '+e.message);}
     await checkFetch('./assets/food-objects/BEEF/BEEF.png');
     await checkFetch('./G5/vessels/VESSEL_PLATE/food-clip.png');
     await checkFetch('./G7_Completed/assets/MEALUP_GAUGE_SHELL_v2.png');
