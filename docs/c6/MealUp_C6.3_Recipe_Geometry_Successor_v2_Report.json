@@ -1,0 +1,15 @@
+{
+  "document": "MealUp C6.3 — Recipe Geometry Successor Correction",
+  "date": "2026-09-30",
+  "status": "VALIDATED_SUCCESSOR_CREATED",
+  "successor_path": "G5/recipe-geometry.v2.corrected.json",
+  "recipe_count": 454,
+  "unique_recipe_ids": 454,
+  "healthy_prefix_recipes_compared": 72,
+  "healthy_prefix_mismatches": 0,
+  "invariant_errors": 0,
+  "validated_slot_source_failures": 0,
+  "original_path_preserved": "G5/recipe-geometry.json",
+  "original_modified": false,
+  "note": "Successor is deterministic from frozen inputs; original corrupted file remains untouched for traceability. SHA-256 will be recorded after byte-level verification of the committed successor."
+}
