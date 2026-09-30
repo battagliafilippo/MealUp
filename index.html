@@ -21462,7 +21462,13 @@ document.addEventListener('visibilitychange', () => {
 if (S.group && S.group.url && S.group.code) setTimeout(() => groupSync(true), 800);
 
 
+window.MealUpVisualData=Object.freeze({
+ recipe:id=>{const r=S.recipes.find(x=>x.id===id);return r?{recipe_id:r.id,title:r.title,kcal:perPortion(r).kcal,people:porzioniCucina(r)}:null;},
+ suggestions:mealId=>{const row=dayPlan().meals.find(x=>x.m.id===mealId);return suggestFor(mealId,row?.budget??null,row?.budgetP??null).map(o=>({...window.MealUpVisualData.recipe(o.r.id),kcal:o.kcal}));},
+ current:()=>({detail:currentDetailId?window.MealUpVisualData.recipe(currentDetailId):null,cook:COOK?window.MealUpVisualData.recipe(COOK.id):null})
+});
 })();
 </script>
+  <script type="module" src="./G11/bootstrap.mjs"></script>
 </body>
 </html>

@@ -1,0 +1,581 @@
+{
+  "document": "MealUp — canonical Food Object mappings",
+  "version": "C6.3-G2-v1",
+  "status": "REGISTERED_MAPPING_SET",
+  "count": 47,
+  "no_synthetic_fallback": true,
+  "source": "MealUp_C6.3_G0_Mapping_Manifest_v1.json",
+  "entries": [
+    {
+      "master_id": "AGRODOLCE",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "MUSTARD_SAUCE"
+      ],
+      "variant": "amber-red, slightly translucent",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "07b7eb6850627f9dd3aee95e1061d5e92562ef0490c22251f7c789067a392ccc"
+    },
+    {
+      "master_id": "AIOLI",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "MAYONNAISE"
+      ],
+      "variant": "aioli/off-white",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "73ec37ec8ccbaf32ce8d73a8b245db8be1f2826c38a0aee8caf18b27c21cd1c4"
+    },
+    {
+      "master_id": "BANANA_BREAD",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "PLUMCAKE"
+      ],
+      "variant": "banana-bread crumb/tint",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "6337a0da698ebac6072bbefe45bbe32a96c2395464adfaefd6161b9e393aa39b"
+    },
+    {
+      "master_id": "BRUSCHETTA",
+      "registration": "MAPPED_COMPOSITION",
+      "mapping_type": "composition",
+      "base": [
+        "TOAST",
+        "TOMATO"
+      ],
+      "variant": "optional GARLIC; no monolithic asset",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "58cf69ec89a315b073ac629406b9484c2aa1f8917a1bad08950df603f5675cac"
+    },
+    {
+      "master_id": "BUFFALO_MOZZARELLA",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "MOZZARELLA"
+      ],
+      "variant": "buffalo mozzarella",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "4c5bef199c43b948e6c68eab2e28b14deeabb0f648361eb62d69863643396a97"
+    },
+    {
+      "master_id": "BUTTER_SAGE",
+      "registration": "MAPPED_COMPOSITION",
+      "mapping_type": "composition",
+      "base": [
+        "BUTTER",
+        "PARSLEY"
+      ],
+      "variant": "green-herb butter; parsley used as generic herb fallback",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "1c6e1cbd28f9bb770c46493161ab9474d4eeb252b6e54e1a3e1788dcfe8e1ba5"
+    },
+    {
+      "master_id": "CACIOCAVALLO",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "PROVOLA"
+      ],
+      "variant": "caciocavallo cheese",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "b7686dc2010c8afd4fd92ee60b9cd28006578681c805eaff82964fc719fe7708"
+    },
+    {
+      "master_id": "CHEESE_CREAM",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "STRACCHINO"
+      ],
+      "variant": "smooth cream-cheese state",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "31fa0390d7394671d00a9225f4f2b471fdf1aeb4d85ede169c14c3e7adfb1aeb"
+    },
+    {
+      "master_id": "COD",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "WHITE_FISH"
+      ],
+      "variant": "cod/white-fish neutral",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "e2f60629e1ca32b278c0badaef60a22f94ae02e505c18bce978b4b8dd2e31bc8"
+    },
+    {
+      "master_id": "COFFEE_CREAM",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "GREEK_YOGURT"
+      ],
+      "variant": "coffee/tan cream",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "1bbc4434bedafc95dec77e4245d3ba116cd966d7d67ac49eacf8a53becbec77f"
+    },
+    {
+      "master_id": "COTTAGE_CHEESE",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "RICOTTA"
+      ],
+      "variant": "small curd",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "d2fb1cca23f95f05de2760f0d4638d190a7099c37c8cf8be19d1af95dda67836"
+    },
+    {
+      "master_id": "CREAM",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "BESCIAMELLA"
+      ],
+      "variant": "plain cream, lighter/thinner",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "4ee4c30dfea3e0fdae6537a66b4c5841224027ea966bda55b052f84e839a33ca"
+    },
+    {
+      "master_id": "CREAM_CHEESE",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "STRACCHINO"
+      ],
+      "variant": "cream-cheese",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "37eed9c9c86bc256967aa99cd9ed95d814f3481d6045a76781a75906b79cc1df"
+    },
+    {
+      "master_id": "CROSTINO",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "TOAST"
+      ],
+      "variant": "small toasted bread portion",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "76deae71efcfc6a3f62bd1f17b6df92e1868717ca32e5467c987f8307741f5cb"
+    },
+    {
+      "master_id": "FRUIT_JAM",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "ROSA_SAUCE"
+      ],
+      "variant": "deep fruit-red glossy spread",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "c6adf8fd09d59138faa6f75b243f32004d511e780f1c6bfac87846fa69d31483"
+    },
+    {
+      "master_id": "GREEN_SAUCE",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "PESTO"
+      ],
+      "variant": "generic green sauce",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "bab2d74401bc958e707e1d65ff3765e9741239503de9fba3066f3ad3770263a4"
+    },
+    {
+      "master_id": "HAZELNUT_CREAM",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "MAYONNAISE"
+      ],
+      "variant": "brown hazelnut-cream tint",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "d3376508e38e8e34afcc2a820e35b3fed1822800704bc170fbd3f6c24c0b4de3"
+    },
+    {
+      "master_id": "HONEY",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "MUSTARD_SAUCE"
+      ],
+      "variant": "amber/translucent honey",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "3820ef6351c0f61454316c79d3836d469c94b0301e2c5e3cf61a4c030d757ab1"
+    },
+    {
+      "master_id": "HUMMUS",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "BESCIAMELLA"
+      ],
+      "variant": "beige hummus tint/texture",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "2ef89f3387be308140c101e85896b71b7192ea31830d0c180ac1dc11559241be"
+    },
+    {
+      "master_id": "LAMB",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "BEEF"
+      ],
+      "variant": "generic red-meat reuse; reuse test PASS",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "3d44dc805a2b30a4293bf80bc0417f4c883cd565086c9959661977ad3419a819"
+    },
+    {
+      "master_id": "MASCARPONE",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "GREEK_YOGURT"
+      ],
+      "variant": "mascarpone cream",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "46e707a68b01748810c0cfe16584dbae6bc0139fbfd3a948eaf866f2b76bf4a5"
+    },
+    {
+      "master_id": "MOUSSE",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "GREEK_YOGURT"
+      ],
+      "variant": "mousse/flavor tint",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "7ae0acedabaab59189caa61f7a55bbb24c62132adfa12befb5c863b1a42ba638"
+    },
+    {
+      "master_id": "OMELETTE",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "EGG_WHITE"
+      ],
+      "variant": "golden omelette tint",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "cdc90920fa920369dec61c5e075c175c9b1c07090af08d04a7f8fbaf21f1e47a"
+    },
+    {
+      "master_id": "OVERNIGHT_OATS",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "PORRIDGE"
+      ],
+      "variant": "overnight oats",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "3339b19bc0d29e294a189ebc5cb38ffc8bc944223166d31c9a61d505d64b961e"
+    },
+    {
+      "master_id": "PASTA_EGG",
+      "registration": "MAPPED_CONTEXTUAL_VARIANT",
+      "mapping_type": "contextual_variant",
+      "base": [
+        "PASTA_LONG",
+        "PASTA_SHORT"
+      ],
+      "variant": "choose shape from recipe",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "4c6b4c73788c95c2e05ee8d28aaafbc728700f3db3f3af104af009b6ef71db0a"
+    },
+    {
+      "master_id": "PEAR",
+      "registration": "MAPPED_FALLBACK",
+      "mapping_type": "fallback",
+      "base": [
+        "APPLE"
+      ],
+      "variant": "nearest pome-fruit fallback; no new generation",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "9f075086f42716e2d52f01cbca2d0327353118eb5709288083dbc9ea930c1c32"
+    },
+    {
+      "master_id": "PISTACHIO_CREAM",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "PESTO"
+      ],
+      "variant": "pale pistachio cream",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "246841263c36e4416d2c81ecd229d10257f7bdf38cd514a6891583cba229516b"
+    },
+    {
+      "master_id": "PORCINI",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "MUSHROOM"
+      ],
+      "variant": "porcini mushroom",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "e81d6cba1332c0672f31645d27d0bc7dfd603502c15103f1acf07e69c6de892e"
+    },
+    {
+      "master_id": "RAGU",
+      "registration": "MAPPED_COMPOSITION",
+      "mapping_type": "composition",
+      "base": [
+        "ROSA_SAUCE",
+        "GROUND_BEEF"
+      ],
+      "variant": "red tomato/meat sauce",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "66f9e36c483305e51ecb20e7fc9852cbc5c34383ff150d20cb1972ad6e50369b"
+    },
+    {
+      "master_id": "RED_ONION",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "ONION"
+      ],
+      "variant": "purple/red tint",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "b640cacb0bddda22eff0d43e57f5e4d339c38cdcadd7ce68fe8f83564609b98d"
+    },
+    {
+      "master_id": "RICE_BASMATI",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "RICE"
+      ],
+      "variant": "basmati grain",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "74a48de207b59c7aca2b65419ab6f88b069629055160eabd8ccc9285c16819ac"
+    },
+    {
+      "master_id": "RICE_INTEGRAL",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "RICE"
+      ],
+      "variant": "brown-rice tint",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "14a8ab31bbfec2ee7de5b4f78e1227dfada699223de8bfd298bc16f83d519e0a"
+    },
+    {
+      "master_id": "SARDINE",
+      "registration": "MAPPED_FALLBACK",
+      "mapping_type": "fallback",
+      "base": [
+        "TUNA"
+      ],
+      "variant": "nearest canned-fish visual fallback",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "551ad564e6834fdddca3e7d281251824bfdc6aae75a5882d5b26f88217189b60"
+    },
+    {
+      "master_id": "SCAMORZA",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "PROVOLA"
+      ],
+      "variant": "scamorza",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "d7cf82419f840d8a4999967d84fb10797130da21bd41964e0a2b1845f8cf1a8b"
+    },
+    {
+      "master_id": "SEA_BASS",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "WHITE_FISH"
+      ],
+      "variant": "neutral white-fish",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "de3a0e201804f16840a4b77fe2bcf1aa4bffc8de5d91781c1180aa84ff6fa74a"
+    },
+    {
+      "master_id": "SEA_BREAM",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "WHITE_FISH"
+      ],
+      "variant": "neutral white-fish",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "fb2299fe5bc593669563505b240b2e9ffed09b6a323fc8cb21b3b05c790f683c"
+    },
+    {
+      "master_id": "SMOOTHIE",
+      "registration": "MAPPED_COMPOSITION",
+      "mapping_type": "composition",
+      "base": [
+        "GREEK_YOGURT",
+        "VESSEL_GLASS"
+      ],
+      "variant": "fruit tint/content in glass",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "ad0725c2050da0a5ba79c42a1addceb86bb5f6715c873f287b695d78bee2daea"
+    },
+    {
+      "master_id": "TARTAR_SAUCE",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "MAYONNAISE"
+      ],
+      "variant": "herb/pickle speckles",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "2f9559d8b9a1f5702aff991cd33ee2796a33ae0802077d417e4a120bb1fe2def"
+    },
+    {
+      "master_id": "TOMATO_SAUCE",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "ROSA_SAUCE"
+      ],
+      "variant": "tomato-red sauce",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "29104821f29cb3e265f0abe7a8d4563ff5d09cda609f75f581fa6f1fde6fbb48"
+    },
+    {
+      "master_id": "TONNATO_SAUCE",
+      "registration": "MAPPED_COMPOSITION",
+      "mapping_type": "composition",
+      "base": [
+        "MAYONNAISE",
+        "TUNA"
+      ],
+      "variant": "tonnato",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "7689b02edc78bfa8b909ecac0b7f7a046ca984d7bf44d605162d9d22e659090f"
+    },
+    {
+      "master_id": "TROUT",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "WHITE_FISH"
+      ],
+      "variant": "neutral white-fish",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "1c072a1be9517b59a72439d91466086d84b24f3b4786a15f551a5627f4c3bc23"
+    },
+    {
+      "master_id": "TURKEY",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "CHICKEN"
+      ],
+      "variant": "turkey/poultry",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "93a69589f75a09b14b08512765f17679838073139ec15872b70cec249cf15964"
+    },
+    {
+      "master_id": "VEAL",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "BEEF"
+      ],
+      "variant": "veal/red-meat",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "c907c36b1d6db64f60ab5a77ebe8e5fa2536fd106a8439e80a98bb77b3c88fc0"
+    },
+    {
+      "master_id": "VINAIGRETTE",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "MUSTARD_SAUCE"
+      ],
+      "variant": "thin/translucent vinaigrette",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "b6ab4a55c3c0048f0c93566eda1daa6988c369bf6b54469ff7fc932dda414996"
+    },
+    {
+      "master_id": "YOGURT",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "GREEK_YOGURT"
+      ],
+      "variant": "plain yogurt",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "89c77c0efd2d0b959f09735e14bef7fecac544a3445383c85cdbfb23e4cb69a7"
+    },
+    {
+      "master_id": "YOGURT_BOWL",
+      "registration": "MAPPED_COMPOSITION",
+      "mapping_type": "composition",
+      "base": [
+        "GREEK_YOGURT",
+        "VESSEL_BOWL"
+      ],
+      "variant": "yogurt content + standard bowl",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "324e56045ce42650ebe8f9ba8db0b08025038fa0502e913ed173916eb8afa615"
+    },
+    {
+      "master_id": "YOGURT_SAUCE",
+      "registration": "MAPPED_VARIANT",
+      "mapping_type": "variant",
+      "base": [
+        "GREEK_YOGURT"
+      ],
+      "variant": "savory yogurt sauce",
+      "new_image_required": false,
+      "style_standard": "MealUp Toys / approved vessel design language",
+      "sha256": "8db35ad8445f7441e756ac97b1d9cd20ff035a9ce42198eba06d4f41af378ca7"
+    }
+  ]
+}
