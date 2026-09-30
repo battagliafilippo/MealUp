@@ -1,11 +1,19 @@
 {
-  "schema": "MealUp_C6.3_G11_G12_G13_Review/1.1",
+  "schema": "MealUp_C6.3_G11_G12_G13_Review/1.2",
   "approved_by_user": true,
   "approval_date": "2026-09-30",
+  "freeze_date": "2026-09-30",
   "gates": {
     "G11": "PASS_FROZEN",
     "G12": "PASS_FROZEN",
-    "G13": "APPROVED_BRANCH_REVIEW"
+    "G13": "PASS_FROZEN_USER_WAIVER_TESTER"
+  },
+  "g13_closure": {
+    "tester_human_report": "NOT_RECEIVED",
+    "tester_requirement_waived_by_user": true,
+    "waiver_scope": "G13 human tester PASS only",
+    "technical_baseline_commit": "6932e427bf9db317ab6580990a24d851832ccb9d",
+    "technical_baseline_verified": true
   },
   "upstream_main": "120104b633d6676a6bb04f91b2e7e3e285198424",
   "remote_main_modified": false,
@@ -15,6 +23,7 @@
   "bounds_alpha_checks": 33639,
   "app_interactions": 69,
   "g12_dom_cases": 3632,
+  "canonical_png_assets_verified": 118,
   "legacy_svg_after": 0,
   "artifacts": [
     {
