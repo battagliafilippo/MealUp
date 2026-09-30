@@ -21,8 +21,28 @@
     put('document.fonts',!!document.fonts);
     try{put('font Satoshi 700',document.fonts?document.fonts.check('700 16px Satoshi'):'N/A');}catch(e){put('font check','ERROR '+e.message);}
     put('bundle tag',!!document.querySelector('script[src*="mealup-g11-bundle.js"]'));
-    await checkFetch('./G8/composition-matrix.json');
-    await checkFetch('./G5/recipe-geometry.json');
+    const jsons=[
+      './G5/assets/food-objects/catalog.json',
+      './G5/assets/food-objects/mappings.json',
+      './G5/assets/food-objects/ingredient-aliases.json',
+      './G8/composition-matrix.json',
+      './G5/recipe-geometry.json',
+      './G5/templates.json',
+      './G5/vessel-geometry.json',
+      './G6/asset-reference-metrics.json',
+      './G6/surface-profile-contract.json',
+      './G7_Completed/gauge-contract.json',
+      './G5/geometry-contract-G4-v1.1.json'
+    ];
+    for(const path of jsons){
+      try{
+        const r=await fetch(path,{cache:'no-store'});
+        const t=await r.text();
+        let parsed='PASS';
+        try{JSON.parse(t);}catch(e){parsed='FAIL '+e.message;}
+        put('json '+path,r.status+' len='+t.length+' parse='+parsed);
+      }catch(e){put('json '+path,'ERROR '+e.message);}
+    }
     await checkFetch('./assets/food-objects/BEEF/BEEF.png');
     await checkFetch('./G5/vessels/VESSEL_PLATE/food-clip.png');
     await checkFetch('./G7_Completed/assets/MEALUP_GAUGE_SHELL_v2.png');
