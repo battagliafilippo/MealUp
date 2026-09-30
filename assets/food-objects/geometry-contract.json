@@ -1,0 +1,330 @@
+{
+  "document": "MealUp C6.3 — G4 Geometry Contract",
+  "version": "1.0",
+  "status": "G4_PASS_CONTRACT_FROZEN",
+  "scope": "Defines geometry mathematics, layer semantics, alpha-normalized scaling, z-order, vessel occlusion requirements, Gauge separation, mapping render behavior and QA hard-stops. G5 supplies exact per-vessel/cardinality slot templates.",
+  "coordinate_system": {
+    "storage_unit": "normalized_0_1",
+    "logical_reference_canvas": 1000,
+    "origin": "top_left",
+    "x_axis": "right",
+    "y_axis": "down",
+    "rotation_positive": "clockwise_degrees",
+    "pixel_coordinates_in_contract": "FORBIDDEN",
+    "non_uniform_scaling": "FORBIDDEN",
+    "mirror_or_flip": "FORBIDDEN"
+  },
+  "alpha_normalized_transform": {
+    "anchor_definition": "Desired center of the visible alpha bbox, not center of 512x512 source canvas.",
+    "span_definition": "Target maximum visible alpha extent relative to the active reference frame.",
+    "formula": [
+      "bbox_extent = max(alpha_bbox_width_norm, alpha_bbox_height_norm)",
+      "raw_image_side = target_span * reference_short_side / bbox_extent",
+      "raw_image_center = target_anchor - center_offset_norm * raw_image_side",
+      "rotation occurs around visible alpha-bbox center"
+    ],
+    "why": "Equalizes perceived size despite transparent padding and prevents two 512x512 PNGs from appearing arbitrarily different in scale."
+  },
+  "canonical_scene_defaults": {
+    "purpose": "Neutral base scene before G6 surface profiles.",
+    "scene_safe_margin": 0.03,
+    "vessel_anchor": [
+      0.46,
+      0.61
+    ],
+    "vessel_outer_max_span": 0.82,
+    "gauge_anchor": [
+      0.82,
+      0.2
+    ],
+    "gauge_max_span": 0.27,
+    "gauge_may_overlap_vessel_outer": true,
+    "gauge_may_overlap_food_inner": false,
+    "minimum_gauge_to_food_gap": 0.02
+  },
+  "role_span_contract": {
+    "reference": "VESSEL_INNER_SHORT_SIDE, except VESSEL_FREE uses SCENE_SHORT_SIDE",
+    "primary": {
+      "default": 0.58,
+      "min": 0.46,
+      "max": 0.68,
+      "rotation_default": 0,
+      "rotation_limit_abs_deg": 6
+    },
+    "secondary": {
+      "default": 0.28,
+      "min": 0.2,
+      "max": 0.36,
+      "rotation_default": 0,
+      "rotation_limit_abs_deg": 10
+    },
+    "detail": {
+      "default": 0.13,
+      "min": 0.08,
+      "max": 0.18,
+      "rotation_default": 0,
+      "rotation_limit_abs_deg": 14
+    },
+    "sauce": {
+      "default": 0.72,
+      "min": 0.55,
+      "max": 0.92,
+      "rotation_default": 0,
+      "rotation_limit_abs_deg": 0
+    }
+  },
+  "fixed_container_objects": {
+    "masters": [
+      "BEVERAGE_BOTTLE",
+      "BEVERAGE_JUICE_BOX"
+    ],
+    "vessel_id": "VESSEL_FREE",
+    "rotation_limit_abs_deg": 2,
+    "geometry_is_intrinsic": true
+  },
+  "layer_stack": {
+    "VESSEL_BACK": 100,
+    "SAUCE_UNDERLAY": 160,
+    "PRIMARY": 220,
+    "SECONDARY_BASE": 300,
+    "DETAIL_BASE": 400,
+    "SAUCE_OVERLAY": 460,
+    "VESSEL_FRONT_OCCLUDER": 600,
+    "MEALUP_GAUGE": 800,
+    "INTERACTIVE_UI_MIN": 1000
+  },
+  "vessel_geometry_requirements_for_G5": {
+    "required_per_vessel": [
+      "outer_bbox_norm",
+      "inner_safe_region",
+      "food_clip_mask_or_equivalent_geometry",
+      "front_occluder_mask_or_equivalent_geometry",
+      "rim_horizon",
+      "handle_exclusion_regions_if_any",
+      "content_anchor",
+      "slot_template_set"
+    ],
+    "depth_rule": "Food layers render between VESSEL_BACK and VESSEL_FRONT_OCCLUDER. A single flat vessel image placed only behind food is not sufficient for deep vessels.",
+    "mask_rule": "Masks/layers must be derived from the approved vessel source; no vessel redraw.",
+    "vessel_free_rule": "No vessel mask or occluder."
+  },
+  "containment_and_collision": {
+    "food_alpha_must_remain_inside_inner_safe_region": true,
+    "rim_crossing_allowed_only_by_explicit_template": true,
+    "max_rim_crossing_scene_units": 0.04,
+    "gauge_must_not_cover_food_inner_region": true,
+    "gauge_must_not_cover_interactive_UI": true,
+    "clipped_alpha_at_scene_edge": "HARD_STOP",
+    "unregistered_overlap_exception": "HARD_STOP"
+  },
+  "recipe_geometry_fields": [
+    "recipe_id",
+    "composition_id",
+    "resolved_vessel_id",
+    "template_key",
+    "role",
+    "slot_index",
+    "logical_master_id",
+    "render_source_master_id",
+    "variant_id",
+    "anchor_ref",
+    "anchor_x",
+    "anchor_y",
+    "target_span",
+    "rotation_deg",
+    "z_index",
+    "fit_mode",
+    "gauge_profile",
+    "animation_profile"
+  ],
+  "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+  "mapping_render_defaults": {
+    "variant": "ONE_LOGICAL_LAYER_USING_ONE_BASE_ASSET",
+    "fallback": "ONE_LOGICAL_LAYER_USING_ONE_BASE_ASSET",
+    "contextual_variant": "EXACTLY_ONE_CONTEXT_SELECTED_BASE; NEVER ALL CANDIDATES",
+    "composition": "USE_EXPLICIT_COMPOSITION_RENDER_POLICY; NEVER BLIND_RECURSIVE_EXPANSION"
+  },
+  "composition_render_policy": {
+    "BRUSCHETTA": {
+      "render_base": "TOAST",
+      "strategy": "VIRTUAL_SINGLE_SOURCE_PLUS_MATRIX_COMPONENTS",
+      "suppress_logical_if_present": [
+        "BREAD"
+      ],
+      "reason": "Toast is the structural base; TOMATO/GARLIC remain matrix components. Do not render a second bread object."
+    },
+    "BUTTER_SAGE": {
+      "render_base": "BUTTER",
+      "strategy": "VIRTUAL_SINGLE_SOURCE_PLUS_MATRIX_COMPONENTS",
+      "suppress_logical_if_present": [
+        "BUTTER"
+      ],
+      "reason": "Butter is the visual carrier; herb semantics do not spawn a duplicate object."
+    },
+    "RAGU": {
+      "render_base": "ROSA_SAUCE",
+      "strategy": "VIRTUAL_SINGLE_SOURCE_PLUS_MATRIX_COMPONENTS",
+      "suppress_logical_if_present": [
+        "TOMATO_SAUCE"
+      ],
+      "reason": "Ragù occupies one sauce layer; meat already represented by matrix components must not be duplicated."
+    },
+    "SMOOTHIE": {
+      "render_base": "GREEK_YOGURT",
+      "strategy": "VIRTUAL_CONTENT_IN_FORCED_VESSEL",
+      "force_vessel_id": "VESSEL_GLASS",
+      "suppress_logical_if_present": [],
+      "reason": "Smoothie is liquid content; canonical vessel is glass, not a plate."
+    },
+    "TONNATO_SAUCE": {
+      "render_base": "MAYONNAISE",
+      "strategy": "VIRTUAL_SINGLE_SOURCE_PLUS_MATRIX_COMPONENTS",
+      "suppress_logical_if_present": [
+        "MAYONNAISE"
+      ],
+      "reason": "One sauce visual layer; tuna/anchovy ingredients remain separate only when the matrix requires them."
+    },
+    "YOGURT_BOWL": {
+      "render_base": "GREEK_YOGURT",
+      "strategy": "VIRTUAL_CONTENT_IN_MATRIX_VESSEL",
+      "required_vessel_id": "VESSEL_BOWL",
+      "suppress_logical_if_present": [
+        "GREEK_YOGURT",
+        "YOGURT"
+      ],
+      "reason": "The bowl is supplied by the vessel system; yogurt content is represented once."
+    }
+  },
+  "contextual_resolution": {
+    "PASTA_EGG": {
+      "p11": {
+        "render_base": "PASTA_LONG",
+        "action": "RENDER",
+        "reason": "Tagliatelle"
+      },
+      "b39": {
+        "render_base": "PASTA_LONG",
+        "action": "RENDER",
+        "reason": "Tajarin"
+      },
+      "b42": {
+        "render_base": "FILLED_PASTA",
+        "action": "RENDER",
+        "reason": "Casoncelli"
+      },
+      "b43": {
+        "render_base": "FILLED_PASTA",
+        "action": "RENDER",
+        "reason": "Culurgiones"
+      },
+      "b15": {
+        "action": "SUPPRESS",
+        "reason": "FILLED_PASTA primary already represents Tortellini"
+      },
+      "b16": {
+        "action": "SUPPRESS",
+        "reason": "FILLED_PASTA primary already represents Ravioli"
+      },
+      "b17": {
+        "action": "SUPPRESS",
+        "reason": "LASAGNA primary already represents Cannelloni/baked pasta geometry"
+      },
+      "b41": {
+        "action": "SUPPRESS",
+        "reason": "FILLED_PASTA primary already represents Agnolotti"
+      }
+    }
+  },
+  "collapse_families": {
+    "families": {
+      "RICE_FAMILY": [
+        "RICE",
+        "RICE_BASMATI",
+        "RICE_INTEGRAL"
+      ],
+      "YOGURT_FAMILY": [
+        "GREEK_YOGURT",
+        "YOGURT"
+      ],
+      "ONION_FAMILY": [
+        "ONION",
+        "RED_ONION"
+      ],
+      "MOZZARELLA_FAMILY": [
+        "MOZZARELLA",
+        "BUFFALO_MOZZARELLA"
+      ],
+      "MUSHROOM_FAMILY": [
+        "MUSHROOM",
+        "PORCINI"
+      ],
+      "EGG_WHITE_PREP_FAMILY": [
+        "EGG_WHITE",
+        "OMELETTE"
+      ],
+      "WHITE_FISH_FAMILY": [
+        "WHITE_FISH",
+        "COD",
+        "SEA_BASS",
+        "SEA_BREAM",
+        "TROUT"
+      ],
+      "PROVOLA_FAMILY": [
+        "PROVOLA",
+        "SCAMORZA",
+        "CACIOCAVALLO"
+      ],
+      "BEEF_FAMILY": [
+        "BEEF",
+        "VEAL",
+        "LAMB"
+      ],
+      "MAYO_PREP_FAMILY": [
+        "MAYONNAISE",
+        "TARTAR_SAUCE",
+        "AIOLI"
+      ]
+    },
+    "winner_rule": [
+      "higher role priority wins: primary > sauce > secondary > detail",
+      "if role equal, more specific mapped logical Master wins over its generic base",
+      "if still tied, lower slot index wins"
+    ],
+    "important": "Collapse applies only to explicit families above. Different logical variants that merely reuse the same physical PNG are NOT automatically collapsed."
+  },
+  "recipe_corrections": {
+    "ft03": {
+      "field": "vessel_id",
+      "from": "VESSEL_PLATE",
+      "to": "VESSEL_GLASS",
+      "reason": "SMOOTHIE is liquid content; frozen SMOOTHIE mapping explicitly requires VESSEL_GLASS."
+    }
+  },
+  "gauge_geometry": {
+    "component": "MEALUP_GAUGE",
+    "independent_scene_sibling": true,
+    "inside_food_group": false,
+    "inside_vessel_group": false,
+    "body_geometry": "FROZEN_G0_REFERENCE",
+    "dynamic_only": [
+      "kcal_value",
+      "needle_angle"
+    ],
+    "portion_rule": "Food geometry remains unchanged when portions change; GaugeState updates.",
+    "surface_specific_scale_and_offset": "G6",
+    "runtime_componentization": "G7"
+  },
+  "hard_stops": [
+    "raw 512 canvas used for perceived size instead of alpha bbox",
+    "non-uniform scale, mirror or arbitrary crop",
+    "deep vessel rendered as one flat back layer with food covering front rim",
+    "mapping composition recursively exploded without explicit G4 policy",
+    "contextual variant renders more than one candidate",
+    "unknown geometry template at render time",
+    "Gauge baked into Food Object or vessel",
+    "Gauge overlaps food inner safe region or critical UI",
+    "ft03 rendered in VESSEL_PLATE",
+    "pixel-hardcoded device-specific coordinates"
+  ],
+  "next_gate": "G5_VESSEL_AND_CARDINALITY_TEMPLATES"
+}
