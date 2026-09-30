@@ -1,22 +1,47 @@
 # MealUp C6.3 — Tester preview sync
 
-Stato al 30 settembre 2026: il branch ufficiale di test `mealup-redesign-preview` contiene il payload congelato della PR #1, integrato preservando le modifiche Home specifiche del tester.
+Stato finale al 30 settembre 2026: il branch ufficiale di test `mealup-redesign-preview` contiene il payload C6.3/G13 congelato, integrato preservando le modifiche Home specifiche del tester.
+
+## Stato
+
+- G11: PASS / FROZEN.
+- G12: PASS / FROZEN.
+- G13: PASS / FROZEN con eccezione esplicita sul report umano del tester.
+- Tester branch: `mealup-redesign-preview`.
+- Stato tester: `READY_FOR_MANUAL_TEST`.
+- `main`: non modificato.
+- Deploy produzione: non eseguito.
 
 ## Integrazione
 
-- Commit di sync: `d1300440cca578b9cf7a3b0ce70116c788645903`.
-- Sono stati applicati i 289 percorsi della PR #1 (288 file più `index.html`), incluse le dipendenze G5–G9/G11 e i 118 asset canonici con i relativi metadati.
-- `index.html` è stato unito in modo puntuale: l’adapter `MealUpVisualData` e `G11/bootstrap.mjs` sono stati inseriti nel file del tester. Rimuovendo quei due blocchi aggiunti, l’HTML risultante è identico byte per byte all’`index.html` esistente sul tester; le variazioni Home sono quindi preservate.
-- La PR #1 resta aperta; il branch `main` non è stato modificato. Il branch storico `preview/cooking-mode-redesign` è ancora presente.
+- Commit di sync iniziale: `d1300440cca578b9cf7a3b0ce70116c788645903`.
+- Sono stati applicati i 289 percorsi della PR #1, incluse le dipendenze G5–G9/G11 e i 118 asset canonici con i relativi metadati.
+- `index.html` è stato unito in modo puntuale preservando le modifiche Home del tester.
+- Le modifiche successive al sync hanno riguardato documentazione di chiusura e l'allineamento del digest atteso di `recipe-geometry.json`; il payload runtime validato non è stato modificato.
 
-## Verifiche sul merge tester
+## Verifiche finali
 
-- Browser Chromium 154 sull’app reale: 69/69 controlli d’interazione PASS, inclusi Home/Dimmi tu, Ricette/lista/ricerca, dettaglio, Kitchen Mode, cambio porzioni e Gauge.
-- G12 DOM reale: 3.632/3.632 casi PASS (454 ricette × 8 superfici), canvas verificato e nessuno SVG/marker legacy residuo negli host migrati.
+- Browser Chromium 154 sull'app reale: 69/69 controlli d'interazione PASS.
+- G11 runtime: 10.896/10.896 casi PASS; 33.639 controlli bounds/alpha PASS.
+- G12 DOM reale: 3.632/3.632 casi PASS.
 - 118/118 asset PNG verificati rispetto allo SHA-256 del catalogo.
-- `index.html` locale verificato con lo stesso Git blob SHA del file caricato sul branch: `e76b98825dff56279d3cabe53f7896a4f0df6f27`.
+- 0 SVG/marker legacy residui negli host ricetta migrati.
+- Funzioni protette byte-identiche.
+- `index.html` sul branch tester mantiene il Git blob verificato: `e76b98825dff56279d3cabe53f7896a4f0df6f27`.
+- `G11/bootstrap.mjs`: `29edb3d4d77263b4ac70c2e2001d2ddcf0979b08`.
+- `G11/app-wiring.mjs`: `9f027e8fb9c8337447a051d13e13734d5fb9d905`.
 
-## Pubblicazione del tester
+## Freeze G13
 
-Non è stata avviata una pubblicazione web. Nel repository non è stata trovata una procedura di preview sicura: `pubblica.yml` si attiva solo su modifiche a `MealUp.zip`, poi estrae il pacchetto e fa push sul branch. Il commit di sync non include `MealUp.zip`. La configurazione Pages e un URL browser dedicato non sono stati reperiti; non è stato creato un nuovo hosting. Il branch verificabile è:
+G13 è chiuso e congelato. Il report umano PASS/FAIL del tester non è stato ricevuto; Filippo ha autorizzato esplicitamente la chiusura senza attendere tale report. L'eccezione è limitata a quel requisito e non sostituisce le verifiche tecniche sopra elencate.
+
+## Tester
+
+Il branch è pronto per il test manuale MealUp.
+
+Branch verificabile:
 https://github.com/battagliafilippo/MealUp/tree/mealup-redesign-preview
+
+Non esiste nel repository una workflow isolata e verificata per pubblicare questo branch come URL web separato. `pubblica.yml` non è stata usata perché opera sul branch corrente tramite `MealUp.zip` e non costituisce un meccanismo di preview isolato.
+
+Non effettuare merge su `main` o deploy produzione come conseguenza automatica del test.
