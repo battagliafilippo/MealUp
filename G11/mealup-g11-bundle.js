@@ -357,7 +357,7 @@ const {needleBounds,needleSweptBounds,compileGauge,drawGauge,loadBrowserAssets}=
 
 /* source: G8/expected-inputs.mjs @ 2cfa8149ef1491085d70f3e8302011756bf7dae5 */
 const __m6=(()=>{
-const EXPECTED_INPUTS=Object.freeze({"catalog": {"path": "../G5/assets/food-objects/catalog.json", "sha256": "7a1130f8788e232f41b2d82e55bb7f805c6eb1e3ae0d5b518bd46ffa0f842699"}, "mappings": {"path": "../G5/assets/food-objects/mappings.json", "sha256": "cb37e68057f5b2b52c896e5d46d22b311b3981c0709b024e98d8154d195d1cdb"}, "aliases": {"path": "../G5/assets/food-objects/ingredient-aliases.json", "sha256": "38956c69425ec3d8f66ab2aaa1a139e3dc5eae20bbee58c4eba2942d646d1e1c"}, "matrix": {"path": "composition-matrix.json", "sha256": "c660c39aee281f7ae516dde8ebfdf38b7fd67852437f32ce0173a66900f5a239"}, "recipes": {"path": "../G5/recipe-geometry.json", "sha256": "a0639a031655462a828d6bac0af7de66df8ddebf46e4b0bb58596025bcd2878a"}, "templates": {"path": "../G5/templates.json", "sha256": "bf6eafa12984fcdf1d1587cb7c63a8ac8a3ae30b6033325d74998d9444feef48"}, "vessels": {"path": "../G5/vessel-geometry.json", "sha256": "8d767229a4772141b55fc50c6514d540a52b8040fc46111b066d72218fe9722c"}, "metrics": {"path": "../G6/asset-reference-metrics.json", "sha256": "76957a0291fac402394e70b058d34b2fdacc509710db476a6eb3c4aef6ec9be0"}, "surface": {"path": "../G6/surface-profile-contract.json", "sha256": "fbe054ceaa5ef1b45a74699b290882cedfe387d9e2e67795c51b5641b60e26c9"}, "gauge": {"path": "../G7_Completed/gauge-contract.json", "sha256": "25696322f865c686f52f64fc0db00e33a723c4276391a504c2305f3e3f362854"}, "geometry": {"path": "../G5/geometry-contract-G4-v1.1.json", "sha256": "51d4e4ae42a215a2ae9431134ed6ac3edcbcbd6f5d565c5d20da6cd36a600a7d"}});
+const EXPECTED_INPUTS=Object.freeze({"catalog": {"path": "../G5/assets/food-objects/catalog.json", "sha256": "7a1130f8788e232f41b2d82e55bb7f805c6eb1e3ae0d5b518bd46ffa0f842699"}, "mappings": {"path": "../G5/assets/food-objects/mappings.json", "sha256": "cb37e68057f5b2b52c896e5d46d22b311b3981c0709b024e98d8154d195d1cdb"}, "aliases": {"path": "../G5/assets/food-objects/ingredient-aliases.json", "sha256": "38956c69425ec3d8f66ab2aaa1a139e3dc5eae20bbee58c4eba2942d646d1e1c"}, "matrix": {"path": "composition-matrix.json", "sha256": "c660c39aee281f7ae516dde8ebfdf38b7fd67852437f32ce0173a66900f5a239"}, "recipes": {"path": "../G5/recipe-geometry.v2.corrected.json", "sha256": "02e0fdd7ec1490a329eab73755f6c882995708e2cddcec712d2a92623f192ad6"}, "templates": {"path": "../G5/templates.json", "sha256": "bf6eafa12984fcdf1d1587cb7c63a8ac8a3ae30b6033325d74998d9444feef48"}, "vessels": {"path": "../G5/vessel-geometry.json", "sha256": "8d767229a4772141b55fc50c6514d540a52b8040fc46111b066d72218fe9722c"}, "metrics": {"path": "../G6/asset-reference-metrics.json", "sha256": "76957a0291fac402394e70b058d34b2fdacc509710db476a6eb3c4aef6ec9be0"}, "surface": {"path": "../G6/surface-profile-contract.json", "sha256": "fbe054ceaa5ef1b45a74699b290882cedfe387d9e2e67795c51b5641b60e26c9"}, "gauge": {"path": "../G7_Completed/gauge-contract.json", "sha256": "25696322f865c686f52f64fc0db00e33a723c4276391a504c2305f3e3f362854"}, "geometry": {"path": "../G5/geometry-contract-G4-v1.1.json", "sha256": "51d4e4ae42a215a2ae9431134ed6ac3edcbcbd6f5d565c5d20da6cd36a600a7d"}});
 
 return {EXPECTED_INPUTS};
 })();
@@ -462,12 +462,12 @@ const canvas=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height
 async function createG11Runtime({fontFamily='Satoshi'}={}){
  await document.fonts.ready;if(!document.fonts.check(`700 16px ${fontFamily}`))throw Error('G11_S6_FONT_NOT_LOADED');
  const readBytes=async path=>{
-  if(path==='../G5/recipe-geometry.json'){
-   const files=['transport/recipe-geometry.part1.txt','transport/recipe-geometry.part2.txt','transport/recipe-geometry.part3.txt'];
+  if(path==='../G5/recipe-geometry.v2.corrected.json'){
+   const files=["transport/recipe-geometry-v2.part01.txt","transport/recipe-geometry-v2.part02.txt","transport/recipe-geometry-v2.part03.txt","transport/recipe-geometry-v2.part04.txt","transport/recipe-geometry-v2.part05.txt","transport/recipe-geometry-v2.part06.txt","transport/recipe-geometry-v2.part07.txt","transport/recipe-geometry-v2.part08.txt","transport/recipe-geometry-v2.part09.txt","transport/recipe-geometry-v2.part10.txt","transport/recipe-geometry-v2.part11.txt","transport/recipe-geometry-v2.part12.txt"];
    const chunks=[];
    for(const file of files){
     const r=await fetch(new URL(file,__MEALUP_G11_SCRIPT_BASE),{cache:'no-store'});
-    if(!r.ok)throw Error('G11_S1_FETCH_RECIPE_GEOMETRY_SHARD');
+    if(!r.ok)throw Error('G11_S1_FETCH_RECIPE_GEOMETRY_V2_SHARD');
     chunks.push(await r.text());
    }
    return new TextEncoder().encode(chunks.join(''));
