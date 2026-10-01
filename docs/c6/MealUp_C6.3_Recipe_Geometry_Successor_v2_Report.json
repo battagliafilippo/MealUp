@@ -11,7 +11,7 @@
   "validated_slot_source_failures": 0,
   "original_path_preserved": "G5/recipe-geometry.json",
   "original_modified": false,
-  "note": "Successor is deterministic from frozen inputs; original corrupted file remains untouched for traceability. SHA-256 will be recorded after byte-level verification of the committed successor.",
+  "note": "Successor deterministically rebuilt from frozen inputs; original corrupted file preserved unchanged for traceability. SHA-256 and committed blob were byte-verified; repository-side recovery is complete. Fresh browser/runtime validation remains pending.",
   "sha256": "02e0fdd7ec1490a329eab73755f6c882995708e2cddcec712d2a92623f192ad6",
   "committed_blob_sha": "2452be2b78593cea0a258da22a925b553798d4a2",
   "committed_blob_chars": 2035393,
@@ -34,5 +34,7 @@
     "manual_ios_visual_test": "PENDING"
   },
   "main_modified": false,
-  "deployment": "NOT_PERFORMED"
+  "deployment": "NOT_PERFORMED",
+  "repository_side_recovery": "COMPLETE",
+  "post_correction_runtime_validation": "PENDING"
 }
