@@ -1,7 +1,7 @@
 /* FitMeals service worker — app shell in cache, aggiornamento in background */
 // La versione cambia a ogni pubblicazione: cosi' il telefono butta la cache
 // vecchia e prende subito l'app nuova.
-const CACHE = 'fitmeals-2026-09-28a';
+const CACHE = 'fitmeals-2026-10-01b';
 const SHELL = [
   './',
   './index.html',
@@ -27,10 +27,8 @@ self.addEventListener('activate', e => {
   );
 });
 
-// Cache-first con revalidate: parte offline, si aggiorna quando c'è rete.
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET' || !e.request.url.startsWith(self.location.origin)) return;
-
   e.respondWith(
     caches.match(e.request).then(cached => {
       const network = fetch(e.request).then(res => {
@@ -40,7 +38,6 @@ self.addEventListener('fetch', e => {
         }
         return res;
       }).catch(() => cached);
-
       return cached || network;
     })
   );
