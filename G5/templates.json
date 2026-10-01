@@ -1,0 +1,5160 @@
+{
+  "schema": "MealUp_G5_Templates_1",
+  "status": "G5_PASS_FROZEN",
+  "expected_keys": 46,
+  "constructed_keys": 46,
+  "templates": [
+    {
+      "template_key": "VESSEL_PLATE|P1|S3|D0|A0",
+      "recipe_count": 57,
+      "vessel_id": "VESSEL_PLATE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.16074285714285713,
+            0.2557272727272727
+          ],
+          "scene_bbox_envelope": [
+            0.37655614617940203,
+            0.5265561461794019,
+            0.5298225913621262,
+            0.6798225913621262
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18181818181818182,
+          "anchorY": 0.6597938144329897,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2515946843853821,
+          "scene_anchorY": 0.6467774086378737,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.2145993355481728,
+            0.6097820598006645,
+            0.28859003322259136,
+            0.6837727574750831
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8225108225108225,
+          "anchorY": 0.6804123711340206,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6547840531561462,
+          "scene_anchorY": 0.6522259136212625,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.6177887043189368,
+            0.6152305647840531,
+            0.6917794019933554,
+            0.6892212624584717
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18181818181818182,
+          "anchorY": 0.28865979381443296,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2515946843853821,
+          "scene_anchorY": 0.5487043189368771,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.2145993355481728,
+            0.5117089700996678,
+            0.28859003322259136,
+            0.5856996677740864
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_PLATE|P1|S1|D0|A0",
+      "recipe_count": 55,
+      "vessel_id": "VESSEL_PLATE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.16074285714285713,
+            0.2557272727272727
+          ],
+          "scene_bbox_envelope": [
+            0.37655614617940203,
+            0.5265561461794019,
+            0.5298225913621262,
+            0.6798225913621262
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18181818181818182,
+          "anchorY": 0.6804123711340206,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2515946843853821,
+          "scene_anchorY": 0.6522259136212625,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.2145993355481728,
+            0.6152305647840531,
+            0.28859003322259136,
+            0.6892212624584717
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_PLATE|P1|S4|D0|A0",
+      "recipe_count": 44,
+      "vessel_id": "VESSEL_PLATE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.16074285714285713,
+            0.2557272727272727
+          ],
+          "scene_bbox_envelope": [
+            0.37655614617940203,
+            0.5265561461794019,
+            0.5298225913621262,
+            0.6798225913621262
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18181818181818182,
+          "anchorY": 0.6597938144329897,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2515946843853821,
+          "scene_anchorY": 0.6467774086378737,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.2145993355481728,
+            0.6097820598006645,
+            0.28859003322259136,
+            0.6837727574750831
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8225108225108225,
+          "anchorY": 0.6804123711340206,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6547840531561462,
+          "scene_anchorY": 0.6522259136212625,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.6177887043189368,
+            0.6152305647840531,
+            0.6917794019933554,
+            0.6892212624584717
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18181818181818182,
+          "anchorY": 0.28865979381443296,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2515946843853821,
+          "scene_anchorY": 0.5487043189368771,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.2145993355481728,
+            0.5117089700996678,
+            0.28859003322259136,
+            0.5856996677740864
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8138528138528138,
+          "anchorY": 0.35051546391752575,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 303,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6493355481727574,
+          "scene_anchorY": 0.5650498338870431,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.6123401993355482,
+            0.5280544850498339,
+            0.6863308970099667,
+            0.6020451827242526
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_PLATE|P1|S2|D0|A0",
+      "recipe_count": 45,
+      "vessel_id": "VESSEL_PLATE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.16074285714285713,
+            0.2557272727272727
+          ],
+          "scene_bbox_envelope": [
+            0.37655614617940203,
+            0.5265561461794019,
+            0.5298225913621262,
+            0.6798225913621262
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18181818181818182,
+          "anchorY": 0.6597938144329897,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2515946843853821,
+          "scene_anchorY": 0.6467774086378737,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.2145993355481728,
+            0.6097820598006645,
+            0.28859003322259136,
+            0.6837727574750831
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8225108225108225,
+          "anchorY": 0.6804123711340206,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6547840531561462,
+          "scene_anchorY": 0.6522259136212625,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.6177887043189368,
+            0.6152305647840531,
+            0.6917794019933554,
+            0.6892212624584717
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_BOWL|P1|S4|D0|A0",
+      "recipe_count": 41,
+      "vessel_id": "VESSEL_BOWL",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.13096774193548386,
+            0.14880110018988818
+          ],
+          "scene_bbox_envelope": [
+            0.4135132947976879,
+            0.4004681028927368,
+            0.5329664739884393,
+            0.5164856543326968
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18461538461538463,
+          "anchorY": 0.6142857142857143,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2908236994219654,
+          "scene_anchorY": 0.482014450867052,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.2619901734104047,
+            0.45318092485549133,
+            0.31965722543352604,
+            0.5108479768786127
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8205128205128205,
+          "anchorY": 0.6714285714285714,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6556560693641619,
+          "scene_anchorY": 0.49378323699421967,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.07134414795349403
+          ],
+          "scene_bbox_envelope": [
+            0.6268225433526011,
+            0.46597036012512416,
+            0.6844895953757226,
+            0.5215961138633152
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18461538461538463,
+          "anchorY": 0.2714285714285714,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2908236994219654,
+          "scene_anchorY": 0.41140173410404623,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.2619901734104047,
+            0.3825682080924856,
+            0.31965722543352604,
+            0.440235260115607
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8205128205128205,
+          "anchorY": 0.32857142857142857,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 303,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6556560693641619,
+          "scene_anchorY": 0.42317052023121393,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.6268225433526011,
+            0.3943369942196532,
+            0.6844895953757226,
+            0.45200404624277457
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_BOWL|P1|S3|D0|A0",
+      "recipe_count": 33,
+      "vessel_id": "VESSEL_BOWL",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.13096774193548386,
+            0.14303891098769597
+          ],
+          "scene_bbox_envelope": [
+            0.4135132947976879,
+            0.4027144407266608,
+            0.5329664739884393,
+            0.5142393164987727
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18461538461538463,
+          "anchorY": 0.6142857142857143,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2908236994219654,
+          "scene_anchorY": 0.482014450867052,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.2619901734104047,
+            0.45318092485549133,
+            0.31965722543352604,
+            0.5108479768786127
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8205128205128205,
+          "anchorY": 0.6714285714285714,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6556560693641619,
+          "scene_anchorY": 0.49378323699421967,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.6268225433526011,
+            0.46494971098265897,
+            0.6844895953757226,
+            0.5226167630057803
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18461538461538463,
+          "anchorY": 0.2714285714285714,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2908236994219654,
+          "scene_anchorY": 0.41140173410404623,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.2619901734104047,
+            0.3825682080924856,
+            0.31965722543352604,
+            0.440235260115607
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_PLATE|P1|S0|D0|A0",
+      "recipe_count": 20,
+      "vessel_id": "VESSEL_PLATE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.16074285714285713,
+            0.2557272727272727
+          ],
+          "scene_bbox_envelope": [
+            0.37655614617940203,
+            0.5265561461794019,
+            0.5298225913621262,
+            0.6798225913621262
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_BOWL|P1|S2|D0|A0",
+      "recipe_count": 20,
+      "vessel_id": "VESSEL_BOWL",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.13096774193548386,
+            0.12744695005008724
+          ],
+          "scene_bbox_envelope": [
+            0.4135132947976879,
+            0.4087928270014277,
+            0.5329664739884393,
+            0.5081609302240059
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18461538461538463,
+          "anchorY": 0.6428571428571429,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2908236994219654,
+          "scene_anchorY": 0.4878988439306359,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.2619901734104047,
+            0.4590653179190752,
+            0.31965722543352604,
+            0.5167323699421966
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8205128205128205,
+          "anchorY": 0.6714285714285714,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6556560693641619,
+          "scene_anchorY": 0.49378323699421967,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.6268225433526011,
+            0.46494971098265897,
+            0.6844895953757226,
+            0.5226167630057803
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_BOWL|P1|S1|D0|A0",
+      "recipe_count": 12,
+      "vessel_id": "VESSEL_BOWL",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.13096774193548386,
+            0.1532075471698113
+          ],
+          "scene_bbox_envelope": [
+            0.4135132947976879,
+            0.3987502890173411,
+            0.5329664739884393,
+            0.5182034682080925
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18461538461538463,
+          "anchorY": 0.6428571428571429,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2908236994219654,
+          "scene_anchorY": 0.4878988439306359,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.2619901734104047,
+            0.4590653179190752,
+            0.31965722543352604,
+            0.5167323699421966
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_RAMEKIN|P1|S2|D0|A0",
+      "recipe_count": 12,
+      "vessel_id": "VESSEL_RAMEKIN",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5038759689922481,
+          "anchorY": 0.48936170212765956,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4691546762589928,
+          "scene_anchorY": 0.4397230215827338,
+          "conservative_footprint_norm": [
+            0.12115555555555554,
+            0.1298095238095238
+          ],
+          "scene_bbox_envelope": [
+            0.419243381294964,
+            0.38981172661870506,
+            0.5190659712230216,
+            0.48963431654676254
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.17829457364341086,
+          "anchorY": 0.6170212765957447,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.31535611510791367,
+          "scene_anchorY": 0.4616942446043165,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.06266666666666668
+          ],
+          "scene_bbox_envelope": [
+            0.29126100719424464,
+            0.4375991366906475,
+            0.33945122302158276,
+            0.4857893525179856
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.813953488372093,
+          "anchorY": 0.6595744680851063,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6156294964028777,
+          "scene_anchorY": 0.46901798561151076,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.054548487947830765
+          ],
+          "scene_bbox_envelope": [
+            0.5915343884892086,
+            0.4480442882131524,
+            0.6397246043165468,
+            0.48999168300986917
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_PLATE|P1|S1|D0|A1",
+      "recipe_count": 9,
+      "vessel_id": "VESSEL_PLATE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.16074285714285713,
+            0.2557272727272727
+          ],
+          "scene_bbox_envelope": [
+            0.37655614617940203,
+            0.5265561461794019,
+            0.5298225913621262,
+            0.6798225913621262
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18181818181818182,
+          "anchorY": 0.6597938144329897,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2515946843853821,
+          "scene_anchorY": 0.6467774086378737,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.2145993355481728,
+            0.6097820598006645,
+            0.28859003322259136,
+            0.6837727574750831
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.19954285714285716,
+            0.14501899013708905
+          ],
+          "scene_bbox_envelope": [
+            0.3580584717607973,
+            0.5597318507961282,
+            0.5483202657807309,
+            0.6466468867454
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_RAMEKIN|P1|S1|D0|A0",
+      "recipe_count": 10,
+      "vessel_id": "VESSEL_RAMEKIN",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5038759689922481,
+          "anchorY": 0.48936170212765956,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4691546762589928,
+          "scene_anchorY": 0.4397230215827338,
+          "conservative_footprint_norm": [
+            0.12115555555555554,
+            0.10768294081400323
+          ],
+          "scene_bbox_envelope": [
+            0.419243381294964,
+            0.39831931818845756,
+            0.5190659712230216,
+            0.48112672497701003
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.17829457364341086,
+          "anchorY": 0.6170212765957447,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.31535611510791367,
+          "scene_anchorY": 0.4616942446043165,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.06266666666666668
+          ],
+          "scene_bbox_envelope": [
+            0.29126100719424464,
+            0.4375991366906475,
+            0.33945122302158276,
+            0.4857893525179856
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_FREE|P1|S0|D0|A0",
+      "recipe_count": 9,
+      "vessel_id": "VESSEL_FREE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "SCENE_SHORT_SIDE",
+          "anchorX": 0.4,
+          "anchorY": 0.65,
+          "scale": 0.58,
+          "scale_semantics": "alpha_bbox_max_span",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "clipping": "NONE",
+          "occlusion": "NONE"
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": []
+    },
+    {
+      "template_key": "VESSEL_RAMEKIN|P1|S3|D0|A0",
+      "recipe_count": 9,
+      "vessel_id": "VESSEL_RAMEKIN",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5038759689922481,
+          "anchorY": 0.48936170212765956,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4691546762589928,
+          "scene_anchorY": 0.4397230215827338,
+          "conservative_footprint_norm": [
+            0.12115555555555554,
+            0.09529199848889122
+          ],
+          "scene_bbox_envelope": [
+            0.419243381294964,
+            0.4030835909407281,
+            0.5190659712230216,
+            0.4763624522247395
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.17829457364341086,
+          "anchorY": 0.6170212765957447,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.31535611510791367,
+          "scene_anchorY": 0.4616942446043165,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.06266666666666668
+          ],
+          "scene_bbox_envelope": [
+            0.29126100719424464,
+            0.4375991366906475,
+            0.33945122302158276,
+            0.4857893525179856
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.813953488372093,
+          "anchorY": 0.6595744680851063,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6156294964028777,
+          "scene_anchorY": 0.46901798561151076,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.054548487947830765
+          ],
+          "scene_bbox_envelope": [
+            0.5915343884892086,
+            0.4480442882131524,
+            0.6397246043165468,
+            0.48999168300986917
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1937984496124031,
+          "anchorY": 0.2765957446808511,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.3226798561151079,
+          "scene_anchorY": 0.4031043165467626,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.054548487947830765
+          ],
+          "scene_bbox_envelope": [
+            0.2985847482014389,
+            0.3821306191484042,
+            0.346774964028777,
+            0.42407801394512096
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_BOWL|P1|S3|D0|A1",
+      "recipe_count": 6,
+      "vessel_id": "VESSEL_BOWL",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.13096774193548386,
+            0.11212003803244246
+          ],
+          "scene_bbox_envelope": [
+            0.4135132947976879,
+            0.4147678863294625,
+            0.5329664739884393,
+            0.5021858708959711
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18461538461538463,
+          "anchorY": 0.6142857142857143,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2908236994219654,
+          "scene_anchorY": 0.482014450867052,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.2619901734104047,
+            0.45318092485549133,
+            0.31965722543352604,
+            0.5108479768786127
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8205128205128205,
+          "anchorY": 0.6714285714285714,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6556560693641619,
+          "scene_anchorY": 0.49378323699421967,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.6268225433526011,
+            0.46494971098265897,
+            0.6844895953757226,
+            0.5226167630057803
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18461538461538463,
+          "anchorY": 0.2714285714285714,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2908236994219654,
+          "scene_anchorY": 0.41140173410404623,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.2619901734104047,
+            0.3825682080924856,
+            0.31965722543352604,
+            0.440235260115607
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.1625806451612903,
+            0.12967407001404072
+          ],
+          "scene_bbox_envelope": [
+            0.39909653179190757,
+            0.4079246042374455,
+            0.5473832369942196,
+            0.5090291529879881
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_PLATE|P1|S0|D0|A1",
+      "recipe_count": 6,
+      "vessel_id": "VESSEL_PLATE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.16074285714285713,
+            0.21271855829902586
+          ],
+          "scene_bbox_envelope": [
+            0.37655614617940203,
+            0.5394444718984315,
+            0.5298225913621262,
+            0.6669342656430968
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.19954285714285716,
+            0.14646196216751625
+          ],
+          "scene_bbox_envelope": [
+            0.3580584717607973,
+            0.5592994385797011,
+            0.5483202657807309,
+            0.647079298961827
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_PLATE|P1|S3|D0|A1",
+      "recipe_count": 5,
+      "vessel_id": "VESSEL_PLATE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.16074285714285713,
+            0.2557272727272727
+          ],
+          "scene_bbox_envelope": [
+            0.37655614617940203,
+            0.5265561461794019,
+            0.5298225913621262,
+            0.6798225913621262
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18181818181818182,
+          "anchorY": 0.6804123711340206,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2515946843853821,
+          "scene_anchorY": 0.6522259136212625,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.1024111954289917
+          ],
+          "scene_bbox_envelope": [
+            0.2145993355481728,
+            0.6215365786455314,
+            0.28859003322259136,
+            0.6829152485969936
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8225108225108225,
+          "anchorY": 0.6804123711340206,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6547840531561462,
+          "scene_anchorY": 0.6522259136212625,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.10925181013676591
+          ],
+          "scene_bbox_envelope": [
+            0.6177887043189368,
+            0.6194866668626702,
+            0.6917794019933554,
+            0.6849651603798548
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18181818181818182,
+          "anchorY": 0.28865979381443296,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2515946843853821,
+          "scene_anchorY": 0.5487043189368771,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.2145993355481728,
+            0.5117089700996678,
+            0.28859003322259136,
+            0.5856996677740864
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.19954285714285716,
+            0.14501899013708905
+          ],
+          "scene_bbox_envelope": [
+            0.3580584717607973,
+            0.5597318507961282,
+            0.5483202657807309,
+            0.6466468867454
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_FREE|P1|S1|D0|A0",
+      "recipe_count": 5,
+      "vessel_id": "VESSEL_FREE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "SCENE_SHORT_SIDE",
+          "anchorX": 0.32,
+          "anchorY": 0.65,
+          "scale": 0.46,
+          "scale_semantics": "alpha_bbox_max_span",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "clipping": "NONE",
+          "occlusion": "NONE"
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "SCENE_SHORT_SIDE",
+          "anchorX": 0.7,
+          "anchorY": 0.65,
+          "scale": 0.2,
+          "scale_semantics": "alpha_bbox_max_span",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "clipping": "NONE",
+          "occlusion": "NONE"
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": []
+    },
+    {
+      "template_key": "VESSEL_BAKING_DISH|P1|S4|D0|A0",
+      "recipe_count": 4,
+      "vessel_id": "VESSEL_BAKING_DISH",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.45201298701298703,
+          "scene_anchorY": 0.5381168831168831,
+          "conservative_footprint_norm": [
+            0.15890410958904108,
+            0.18750223265050728
+          ],
+          "scene_bbox_envelope": [
+            0.3748051948051948,
+            0.4769655867865472,
+            0.5292207792207793,
+            0.599268179447219
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1810344827586207,
+          "anchorY": 0.68,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.255,
+          "scene_anchorY": 0.586038961038961,
+          "conservative_footprint_norm": [
+            0.07671232876712329,
+            0.06805196073435893
+          ],
+          "scene_bbox_envelope": [
+            0.21772727272727277,
+            0.5638447420267326,
+            0.2922727272727273,
+            0.6082331800511894
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8103448275862069,
+          "anchorY": 0.6,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6437012987012987,
+          "scene_anchorY": 0.5647402597402598,
+          "conservative_footprint_norm": [
+            0.07671232876712329,
+            0.09818183201653088
+          ],
+          "scene_bbox_envelope": [
+            0.6064285714285713,
+            0.532719594071232,
+            0.680974025974026,
+            0.5967609254092874
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.19827586206896552,
+          "anchorY": 0.36,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2656493506493507,
+          "scene_anchorY": 0.5008441558441559,
+          "conservative_footprint_norm": [
+            0.07671232876712329,
+            0.09064934961924441
+          ],
+          "scene_bbox_envelope": [
+            0.2283766233766234,
+            0.4712801065933341,
+            0.3029220779220779,
+            0.5304082050949777
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8189655172413793,
+          "anchorY": 0.3,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 303,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6490259740259741,
+          "scene_anchorY": 0.4848701298701299,
+          "conservative_footprint_norm": [
+            0.07671232876712329,
+            0.09818183201653088
+          ],
+          "scene_bbox_envelope": [
+            0.6117532467532467,
+            0.45284946420110217,
+            0.6862987012987012,
+            0.5168907955391575
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_PLATE|P1|S2|D0|A1",
+      "recipe_count": 4,
+      "vessel_id": "VESSEL_PLATE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.16074285714285713,
+            0.21271855829902586
+          ],
+          "scene_bbox_envelope": [
+            0.37655614617940203,
+            0.5394444718984315,
+            0.5298225913621262,
+            0.6669342656430968
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18181818181818182,
+          "anchorY": 0.6804123711340206,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2515946843853821,
+          "scene_anchorY": 0.6522259136212625,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.2145993355481728,
+            0.6152305647840531,
+            0.28859003322259136,
+            0.6892212624584717
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8225108225108225,
+          "anchorY": 0.6804123711340206,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6547840531561462,
+          "scene_anchorY": 0.6522259136212625,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.12345454545454547
+          ],
+          "scene_bbox_envelope": [
+            0.6177887043189368,
+            0.6152305647840531,
+            0.6917794019933554,
+            0.6892212624584717
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.19954285714285716,
+            0.14501899013708905
+          ],
+          "scene_bbox_envelope": [
+            0.3580584717607973,
+            0.5597318507961282,
+            0.5483202657807309,
+            0.6466468867454
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_RAMEKIN|P1|S0|D0|A0",
+      "recipe_count": 4,
+      "vessel_id": "VESSEL_RAMEKIN",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5038759689922481,
+          "anchorY": 0.48936170212765956,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4691546762589928,
+          "scene_anchorY": 0.4397230215827338,
+          "conservative_footprint_norm": [
+            0.12115555555555554,
+            0.1298095238095238
+          ],
+          "scene_bbox_envelope": [
+            0.419243381294964,
+            0.38981172661870506,
+            0.5190659712230216,
+            0.48963431654676254
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_DESSERT_MOLD|P1|S1|D0|A0",
+      "recipe_count": 4,
+      "vessel_id": "VESSEL_DESSERT_MOLD",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1708542713567839,
+          "anchorY": 0.5051546391752577,
+          "scale": 0.5,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.24350974025974031,
+          "scene_anchorY": 0.5174545454545454,
+          "conservative_footprint_norm": [
+            0.17017543859649123,
+            0.19795918367346937
+          ],
+          "scene_bbox_envelope": [
+            0.1633587662337663,
+            0.43730357142857146,
+            0.3236607142857143,
+            0.5976055194805194
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.7839195979899497,
+          "anchorY": 0.4845360824742268,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6467435064935064,
+          "scene_anchorY": 0.5108441558441559,
+          "conservative_footprint_norm": [
+            0.0952982456140351,
+            0.11085714285714288
+          ],
+          "scene_bbox_envelope": [
+            0.601858961038961,
+            0.4659596103896104,
+            0.691628051948052,
+            0.5557287012987013
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_BOWL|P1|S4|D0|A1",
+      "recipe_count": 2,
+      "vessel_id": "VESSEL_BOWL",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.13096774193548386,
+            0.1138888041891556
+          ],
+          "scene_bbox_envelope": [
+            0.4135132947976879,
+            0.4140783486905947,
+            0.5329664739884393,
+            0.5028754085348389
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18461538461538463,
+          "anchorY": 0.6428571428571429,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2908236994219654,
+          "scene_anchorY": 0.4878988439306359,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.2619901734104047,
+            0.4590653179190752,
+            0.31965722543352604,
+            0.5167323699421966
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8205128205128205,
+          "anchorY": 0.6714285714285714,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6556560693641619,
+          "scene_anchorY": 0.49378323699421967,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.06135508304246147
+          ],
+          "scene_bbox_envelope": [
+            0.6268225433526011,
+            0.46986450758328785,
+            0.6844895953757226,
+            0.5177019664051514
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18461538461538463,
+          "anchorY": 0.2714285714285714,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2908236994219654,
+          "scene_anchorY": 0.41140173410404623,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.07134414795349403
+          ],
+          "scene_bbox_envelope": [
+            0.2619901734104047,
+            0.3835888572349508,
+            0.31965722543352604,
+            0.43921461097314174
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8205128205128205,
+          "anchorY": 0.3,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 303,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6556560693641619,
+          "scene_anchorY": 0.4172861271676301,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.05866552248943553
+          ],
+          "scene_bbox_envelope": [
+            0.6268225433526011,
+            0.3944158988410766,
+            0.6844895953757226,
+            0.4401563554941836
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.1625806451612903,
+            0.08774612788872788
+          ],
+          "scene_bbox_envelope": [
+            0.39909653179190757,
+            0.42426983682002584,
+            0.5473832369942196,
+            0.4926839204054077
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_BOWL|P1|S2|D0|A1",
+      "recipe_count": 4,
+      "vessel_id": "VESSEL_BOWL",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.13096774193548386,
+            0.1138888041891556
+          ],
+          "scene_bbox_envelope": [
+            0.4135132947976879,
+            0.4140783486905947,
+            0.5329664739884393,
+            0.5028754085348389
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18461538461538463,
+          "anchorY": 0.6428571428571429,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2908236994219654,
+          "scene_anchorY": 0.4878988439306359,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.07134414795349403
+          ],
+          "scene_bbox_envelope": [
+            0.2619901734104047,
+            0.46008596706154037,
+            0.31965722543352604,
+            0.5157117207997313
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8205128205128205,
+          "anchorY": 0.6714285714285714,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6556560693641619,
+          "scene_anchorY": 0.49378323699421967,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.07009604660442949
+          ],
+          "scene_bbox_envelope": [
+            0.6268225433526011,
+            0.4664569212536461,
+            0.6844895953757226,
+            0.5211095527347933
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.1625806451612903,
+            0.12967407001404072
+          ],
+          "scene_bbox_envelope": [
+            0.39909653179190757,
+            0.4079246042374455,
+            0.5473832369942196,
+            0.5090291529879881
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_DESSERT_MOLD|P1|S2|D0|A0",
+      "recipe_count": 3,
+      "vessel_id": "VESSEL_DESSERT_MOLD",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1708542713567839,
+          "anchorY": 0.5051546391752577,
+          "scale": 0.5,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.24350974025974031,
+          "scene_anchorY": 0.5174545454545454,
+          "conservative_footprint_norm": [
+            0.17017543859649123,
+            0.17906302117492218
+          ],
+          "scene_bbox_envelope": [
+            0.1633587662337663,
+            0.44495436994929005,
+            0.3236607142857143,
+            0.5899547209598008
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.7839195979899497,
+          "anchorY": 0.5051546391752577,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6467435064935064,
+          "scene_anchorY": 0.5174545454545454,
+          "conservative_footprint_norm": [
+            0.09161630259649124,
+            0.11085714285714288
+          ],
+          "scene_bbox_envelope": [
+            0.6035931203371429,
+            0.47257,
+            0.6898938926498701,
+            0.5623390909090908
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.2814070351758794,
+          "anchorY": 0.15463917525773196,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.316224025974026,
+          "scene_anchorY": 0.4050779220779221,
+          "conservative_footprint_norm": [
+            0.0952982456140351,
+            0.07558439840614323
+          ],
+          "scene_bbox_envelope": [
+            0.2713394805194806,
+            0.3744748298596166,
+            0.36110857142857145,
+            0.4356810142962276
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_BOWL|P1|S2|D1|A0",
+      "recipe_count": 2,
+      "vessel_id": "VESSEL_BOWL",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.13096774193548386,
+            0.14880110018988818
+          ],
+          "scene_bbox_envelope": [
+            0.4135132947976879,
+            0.4004681028927368,
+            0.5329664739884393,
+            0.5164856543326968
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18461538461538463,
+          "anchorY": 0.6428571428571429,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2908236994219654,
+          "scene_anchorY": 0.4878988439306359,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.05498080202235099
+          ],
+          "scene_bbox_envelope": [
+            0.2619901734104047,
+            0.4664650708647838,
+            0.31965722543352604,
+            0.5093326169964879
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8205128205128205,
+          "anchorY": 0.6714285714285714,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6556560693641619,
+          "scene_anchorY": 0.49378323699421967,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.07009604660442949
+          ],
+          "scene_bbox_envelope": [
+            0.6268225433526011,
+            0.4664569212536461,
+            0.6844895953757226,
+            0.5211095527347933
+          ]
+        },
+        {
+          "role": "detail",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.4512820512820513,
+          "anchorY": 0.5571428571428572,
+          "scale": 0.13,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 400,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.44381791907514456,
+          "scene_anchorY": 0.47024566473988444,
+          "conservative_footprint_norm": [
+            0.02935483870967742,
+            0.019901374474212797
+          ],
+          "scene_bbox_envelope": [
+            0.43043092485549134,
+            0.4624872922082249,
+            0.45720491329479773,
+            0.47800403727154395
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_PLATE|P1|S4|D0|A1",
+      "recipe_count": 2,
+      "vessel_id": "VESSEL_PLATE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.16074285714285713,
+            0.18714581672882685
+          ],
+          "scene_bbox_envelope": [
+            0.37655614617940203,
+            0.5471077984420591,
+            0.5298225913621262,
+            0.659270939099469
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18181818181818182,
+          "anchorY": 0.6804123711340206,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2515946843853821,
+          "scene_anchorY": 0.6522259136212625,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.10269171779952975
+          ],
+          "scene_bbox_envelope": [
+            0.2145993355481728,
+            0.6214525151311708,
+            0.28859003322259136,
+            0.6829993121113541
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8225108225108225,
+          "anchorY": 0.6804123711340206,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6547840531561462,
+          "scene_anchorY": 0.6522259136212625,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.077720230976743
+          ],
+          "scene_bbox_envelope": [
+            0.6177887043189368,
+            0.6289356650029827,
+            0.6917794019933554,
+            0.6755161622395423
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18181818181818182,
+          "anchorY": 0.28865979381443296,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2515946843853821,
+          "scene_anchorY": 0.5487043189368771,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.11908450150289379
+          ],
+          "scene_bbox_envelope": [
+            0.2145993355481728,
+            0.5130185314433189,
+            0.28859003322259136,
+            0.5843901064304353
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8225108225108225,
+          "anchorY": 0.32989690721649484,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 303,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6547840531561462,
+          "scene_anchorY": 0.5596013289036545,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.10187733368862865
+          ],
+          "scene_bbox_envelope": [
+            0.6177887043189368,
+            0.5290719750873278,
+            0.6917794019933554,
+            0.590130682719981
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.19954285714285716,
+            0.14646196216751625
+          ],
+          "scene_bbox_envelope": [
+            0.3580584717607973,
+            0.5592994385797011,
+            0.5483202657807309,
+            0.647079298961827
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_RAMEKIN|P1|S1|D0|A1",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_RAMEKIN",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5038759689922481,
+          "anchorY": 0.48936170212765956,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4691546762589928,
+          "scene_anchorY": 0.4397230215827338,
+          "conservative_footprint_norm": [
+            0.12115555555555554,
+            0.059299343236932735
+          ],
+          "scene_bbox_envelope": [
+            0.419243381294964,
+            0.41692263741512325,
+            0.5190659712230216,
+            0.4625234057503444
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1937984496124031,
+          "anchorY": 0.6595744680851063,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.3226798561151079,
+          "scene_anchorY": 0.46901798561151076,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.054548487947830765
+          ],
+          "scene_bbox_envelope": [
+            0.2985847482014389,
+            0.4480442882131524,
+            0.346774964028777,
+            0.48999168300986917
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5038759689922481,
+          "anchorY": 0.48936170212765956,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4691546762589928,
+          "scene_anchorY": 0.4397230215827338,
+          "conservative_footprint_norm": [
+            0.15039999999999998,
+            0.07361297781136478
+          ],
+          "scene_bbox_envelope": [
+            0.4071958273381295,
+            0.41141909640914825,
+            0.531113525179856,
+            0.46802694675631934
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_RAMEKIN|P1|S3|D0|A1",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_RAMEKIN",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5038759689922481,
+          "anchorY": 0.48936170212765956,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4691546762589928,
+          "scene_anchorY": 0.4397230215827338,
+          "conservative_footprint_norm": [
+            0.12115555555555554,
+            0.059299343236932735
+          ],
+          "scene_bbox_envelope": [
+            0.419243381294964,
+            0.41692263741512325,
+            0.5190659712230216,
+            0.4625234057503444
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1937984496124031,
+          "anchorY": 0.6595744680851063,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.3226798561151079,
+          "scene_anchorY": 0.46901798561151076,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.05383637122239777
+          ],
+          "scene_bbox_envelope": [
+            0.2985847482014389,
+            0.4483180945325104,
+            0.346774964028777,
+            0.4897178766905111
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.813953488372093,
+          "anchorY": 0.6595744680851063,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6156294964028777,
+          "scene_anchorY": 0.46901798561151076,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.02805756995476016
+          ],
+          "scene_bbox_envelope": [
+            0.5915343884892086,
+            0.4582299508904161,
+            0.6397246043165468,
+            0.47980602033260544
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.17829457364341086,
+          "anchorY": 0.2765957446808511,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.31535611510791367,
+          "scene_anchorY": 0.4031043165467626,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.054548487947830765
+          ],
+          "scene_bbox_envelope": [
+            0.29126100719424464,
+            0.3821306191484042,
+            0.33945122302158276,
+            0.42407801394512096
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5038759689922481,
+          "anchorY": 0.48936170212765956,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4691546762589928,
+          "scene_anchorY": 0.4397230215827338,
+          "conservative_footprint_norm": [
+            0.15039999999999998,
+            0.07361297781136478
+          ],
+          "scene_bbox_envelope": [
+            0.4071958273381295,
+            0.41141909640914825,
+            0.531113525179856,
+            0.46802694675631934
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_CUP|P1|S2|D0|A0",
+      "recipe_count": 2,
+      "vessel_id": "VESSEL_CUP",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5039370078740157,
+          "anchorY": 0.4888888888888889,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_CUP/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.3304672897196262,
+          "scene_anchorY": 0.3509345794392523,
+          "conservative_footprint_norm": [
+            0.09157894736842105,
+            0.07506445189145163
+          ],
+          "scene_bbox_envelope": [
+            0.2865607476635514,
+            0.3162085012277863,
+            0.37437383177570094,
+            0.3856606576507182
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1889763779527559,
+          "anchorY": 0.6222222222222222,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_CUP/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.1958878504672897,
+          "scene_anchorY": 0.37112149532710276,
+          "conservative_footprint_norm": [
+            0.04421052631578948,
+            0.033322314049586785
+          ],
+          "scene_bbox_envelope": [
+            0.17469158878504673,
+            0.3557060322854715,
+            0.2170841121495327,
+            0.38653695836873403
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8188976377952756,
+          "anchorY": 0.6666666666666666,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_CUP/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4650467289719626,
+          "scene_anchorY": 0.3778504672897196,
+          "conservative_footprint_norm": [
+            0.04421052631578948,
+            0.033322314049586785
+          ],
+          "scene_bbox_envelope": [
+            0.4438504672897196,
+            0.36243500424808833,
+            0.4862429906542057,
+            0.3932659303313508
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_BOWL|P1|S0|D0|A0",
+      "recipe_count": 2,
+      "vessel_id": "VESSEL_BOWL",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.13096774193548386,
+            0.1532075471698113
+          ],
+          "scene_bbox_envelope": [
+            0.4135132947976879,
+            0.3987502890173411,
+            0.5329664739884393,
+            0.5182034682080925
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_DESSERT_MOLD|P1|S0|D0|A0",
+      "recipe_count": 2,
+      "vessel_id": "VESSEL_DESSERT_MOLD",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.16080402010050251,
+          "anchorY": 0.5051546391752577,
+          "scale": 0.52,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2368993506493507,
+          "scene_anchorY": 0.5174545454545454,
+          "conservative_footprint_norm": [
+            0.1769824561403509,
+            0.17262743542779058
+          ],
+          "scene_bbox_envelope": [
+            0.15354233766233774,
+            0.44756005086031614,
+            0.3202563636363637,
+            0.5873490400487748
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_DESSERT_MOLD|P1|S4|D0|A0",
+      "recipe_count": 2,
+      "vessel_id": "VESSEL_DESSERT_MOLD",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1708542713567839,
+          "anchorY": 0.4845360824742268,
+          "scale": 0.5,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.24350974025974031,
+          "scene_anchorY": 0.5108441558441559,
+          "conservative_footprint_norm": [
+            0.17017543859649123,
+            0.19795918367346937
+          ],
+          "scene_bbox_envelope": [
+            0.1633587662337663,
+            0.43069318181818184,
+            0.3236607142857143,
+            0.5909951298701299
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.7939698492462312,
+          "anchorY": 0.5670103092783505,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.653353896103896,
+          "scene_anchorY": 0.5372857142857143,
+          "conservative_footprint_norm": [
+            0.0952982456140351,
+            0.11085714285714288
+          ],
+          "scene_bbox_envelope": [
+            0.6084693506493506,
+            0.49240116883116886,
+            0.6982384415584415,
+            0.5821702597402597
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.7537688442211056,
+          "anchorY": 0.29896907216494845,
+          "scale": 0.2,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6269123376623377,
+          "scene_anchorY": 0.45135064935064934,
+          "conservative_footprint_norm": [
+            0.0680701754385965,
+            0.07918367346938776
+          ],
+          "scene_bbox_envelope": [
+            0.5948519480519481,
+            0.41929025974025974,
+            0.6589727272727272,
+            0.483411038961039
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.2914572864321608,
+          "anchorY": 0.15463917525773196,
+          "scale": 0.21333333333333335,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.3228344155844156,
+          "scene_anchorY": 0.4050779220779221,
+          "conservative_footprint_norm": [
+            0.07260818713450293,
+            0.08446258503401362
+          ],
+          "scene_bbox_envelope": [
+            0.2886366666666667,
+            0.3708801731601732,
+            0.3570321645021645,
+            0.439275670995671
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.7939698492462312,
+          "anchorY": 0.8144329896907216,
+          "scale": 0.22666666666666668,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 303,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.653353896103896,
+          "scene_anchorY": 0.6166103896103896,
+          "conservative_footprint_norm": [
+            0.07714619883040937,
+            0.06118737013830643
+          ],
+          "scene_bbox_envelope": [
+            0.6170187878787878,
+            0.5918364578146185,
+            0.6896890043290043,
+            0.6413843214061608
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_PIZZA_SURFACE|P1|S3|D0|A0",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_PIZZA_SURFACE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PIZZA_SURFACE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4748192771084338,
+          "scene_anchorY": 0.5754216867469879,
+          "conservative_footprint_norm": [
+            0.16484210526315787,
+            0.16090398034423278
+          ],
+          "scene_bbox_envelope": [
+            0.3974626506024097,
+            0.5326997413634214,
+            0.5521759036144578,
+            0.6181436321305545
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1814814814814815,
+          "anchorY": 0.6851851851851852,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PIZZA_SURFACE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.26240963855421695,
+          "scene_anchorY": 0.6248192771084338,
+          "conservative_footprint_norm": [
+            0.07957894736842105,
+            0.07575983431043644
+          ],
+          "scene_bbox_envelope": [
+            0.2250650602409639,
+            0.6047041283299248,
+            0.29975421686746995,
+            0.6449344258869427
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8185185185185185,
+          "anchorY": 0.6851851851851852,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PIZZA_SURFACE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6872289156626505,
+          "scene_anchorY": 0.6248192771084338,
+          "conservative_footprint_norm": [
+            0.07957894736842105,
+            0.11156194376396311
+          ],
+          "scene_bbox_envelope": [
+            0.6498843373493977,
+            0.5951982369192972,
+            0.7245734939759036,
+            0.6544403172975704
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1814814814814815,
+          "anchorY": 0.2777777777777778,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PIZZA_SURFACE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.26240963855421695,
+          "scene_anchorY": 0.516144578313253,
+          "conservative_footprint_norm": [
+            0.07957894736842105,
+            0.06489132248515225
+          ],
+          "scene_bbox_envelope": [
+            0.2250650602409639,
+            0.49891515037028256,
+            0.29975421686746995,
+            0.5333740062562233
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_PLATE|P1|S2|D1|A0",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_PLATE",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5021645021645021,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4531893687707641,
+          "scene_anchorY": 0.6031893687707641,
+          "conservative_footprint_norm": [
+            0.16074285714285713,
+            0.19924383670391618
+          ],
+          "scene_bbox_envelope": [
+            0.37655614617940203,
+            0.5434824117252717,
+            0.5298225913621262,
+            0.6628963258162566
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18181818181818182,
+          "anchorY": 0.6804123711340206,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2515946843853821,
+          "scene_anchorY": 0.6522259136212625,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.07351158394782
+          ],
+          "scene_bbox_envelope": [
+            0.2145993355481728,
+            0.6301968608900552,
+            0.28859003322259136,
+            0.6742549663524696
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8225108225108225,
+          "anchorY": 0.6804123711340206,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6547840531561462,
+          "scene_anchorY": 0.6522259136212625,
+          "conservative_footprint_norm": [
+            0.07760000000000002,
+            0.07715909090909091
+          ],
+          "scene_bbox_envelope": [
+            0.6177887043189368,
+            0.6291038205980066,
+            0.6917794019933554,
+            0.6753480066445183
+          ]
+        },
+        {
+          "role": "detail",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.45021645021645024,
+          "anchorY": 0.5567010309278351,
+          "scale": 0.13,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 400,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_PLATE/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4204983388704319,
+          "scene_anchorY": 0.6195348837209302,
+          "conservative_footprint_norm": [
+            0.03602857142857143,
+            0.044161057231819636
+          ],
+          "scene_bbox_envelope": [
+            0.403321926910299,
+            0.6063012379989696,
+            0.4376747508305648,
+            0.6327685294428907
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_BAKING_DISH|P1|S3|D0|A0",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_BAKING_DISH",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.45201298701298703,
+          "scene_anchorY": 0.5381168831168831,
+          "conservative_footprint_norm": [
+            0.15890410958904108,
+            0.15441558897786314
+          ],
+          "scene_bbox_envelope": [
+            0.3748051948051948,
+            0.4877563444388755,
+            0.5292207792207793,
+            0.5884774217948907
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1810344827586207,
+          "anchorY": 0.68,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.255,
+          "scene_anchorY": 0.586038961038961,
+          "conservative_footprint_norm": [
+            0.07374847123287673,
+            0.1142857142857143
+          ],
+          "scene_bbox_envelope": [
+            0.21916734181818184,
+            0.5487662337662338,
+            0.2908326581818182,
+            0.6233116883116883
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8189655172413793,
+          "anchorY": 0.64,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6490259740259741,
+          "scene_anchorY": 0.5753896103896103,
+          "conservative_footprint_norm": [
+            0.07671232876712329,
+            0.052207785681819
+          ],
+          "scene_bbox_envelope": [
+            0.6117532467532467,
+            0.5583627530138353,
+            0.6862987012987012,
+            0.5924164677653854
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.20689655172413793,
+          "anchorY": 0.38,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.270974025974026,
+          "scene_anchorY": 0.5061688311688312,
+          "conservative_footprint_norm": [
+            0.07671232876712329,
+            0.09818183201653088
+          ],
+          "scene_bbox_envelope": [
+            0.23370129870129874,
+            0.4741481654998035,
+            0.30824675324675327,
+            0.5381894968378589
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_BAKING_DISH|P1|S4|D0|A1",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_BAKING_DISH",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.45201298701298703,
+          "scene_anchorY": 0.5381168831168831,
+          "conservative_footprint_norm": [
+            0.15890410958904108,
+            0.15441558897786314
+          ],
+          "scene_bbox_envelope": [
+            0.3748051948051948,
+            0.4877563444388755,
+            0.5292207792207793,
+            0.5884774217948907
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1810344827586207,
+          "anchorY": 0.68,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.255,
+          "scene_anchorY": 0.586038961038961,
+          "conservative_footprint_norm": [
+            0.07671232876712329,
+            0.08495575822695635
+          ],
+          "scene_bbox_envelope": [
+            0.21772727272727277,
+            0.5583317989808514,
+            0.2922727272727273,
+            0.6137461230970707
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8189655172413793,
+          "anchorY": 0.6,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6490259740259741,
+          "scene_anchorY": 0.5647402597402598,
+          "conservative_footprint_norm": [
+            0.07671232876712329,
+            0.08445008899455941
+          ],
+          "scene_bbox_envelope": [
+            0.6117532467532467,
+            0.5371980148068068,
+            0.6862987012987012,
+            0.5922825046737126
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.19827586206896552,
+          "anchorY": 0.34,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2656493506493507,
+          "scene_anchorY": 0.4955194805194805,
+          "conservative_footprint_norm": [
+            0.07671232876712329,
+            0.08805195505608085
+          ],
+          "scene_bbox_envelope": [
+            0.2283766233766234,
+            0.46680253608641775,
+            0.3029220779220779,
+            0.5242364249525433
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8189655172413793,
+          "anchorY": 0.28,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 303,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6490259740259741,
+          "scene_anchorY": 0.47954545454545455,
+          "conservative_footprint_norm": [
+            0.07671232876712329,
+            0.07792206021251881
+          ],
+          "scene_bbox_envelope": [
+            0.6117532467532467,
+            0.4541322371806899,
+            0.6862987012987012,
+            0.5049586719102193
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5,
+          "anchorY": 0.5,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BAKING_DISH/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.45201298701298703,
+          "scene_anchorY": 0.5381168831168831,
+          "conservative_footprint_norm": [
+            0.19726027397260273,
+            0.1355843958630489
+          ],
+          "scene_bbox_envelope": [
+            0.3561688311688312,
+            0.49389788128427514,
+            0.5478571428571428,
+            0.5823358849494911
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_BOWL|P1|S1|D1|A1",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_BOWL",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.13096774193548386,
+            0.10759349861779455
+          ],
+          "scene_bbox_envelope": [
+            0.4135132947976879,
+            0.41653251716456297,
+            0.5329664739884393,
+            0.5004212400608705
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.18461538461538463,
+          "anchorY": 0.6428571428571429,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2908236994219654,
+          "scene_anchorY": 0.4878988439306359,
+          "conservative_footprint_norm": [
+            0.06322580645161291,
+            0.056984567140067416
+          ],
+          "scene_bbox_envelope": [
+            0.2619901734104047,
+            0.4656839209864509,
+            0.31965722543352604,
+            0.5101137668748208
+          ]
+        },
+        {
+          "role": "detail",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.4512820512820513,
+          "anchorY": 0.5571428571428572,
+          "scale": 0.13,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 400,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.44381791907514456,
+          "scene_anchorY": 0.47024566473988444,
+          "conservative_footprint_norm": [
+            0.02935483870967742,
+            0.02200857192761666
+          ],
+          "scene_bbox_envelope": [
+            0.43043092485549134,
+            0.46166582016053015,
+            0.45720491329479773,
+            0.4788255093192387
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.1625806451612903,
+            0.12967407001404072
+          ],
+          "scene_bbox_envelope": [
+            0.39909653179190757,
+            0.4079246042374455,
+            0.5473832369942196,
+            0.5090291529879881
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_RAMEKIN|P1|S2|D0|A1",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_RAMEKIN",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5038759689922481,
+          "anchorY": 0.48936170212765956,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4691546762589928,
+          "scene_anchorY": 0.4397230215827338,
+          "conservative_footprint_norm": [
+            0.12115555555555554,
+            0.059299343236932735
+          ],
+          "scene_bbox_envelope": [
+            0.419243381294964,
+            0.41692263741512325,
+            0.5190659712230216,
+            0.4625234057503444
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1937984496124031,
+          "anchorY": 0.6595744680851063,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.3226798561151079,
+          "scene_anchorY": 0.46901798561151076,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.054548487947830765
+          ],
+          "scene_bbox_envelope": [
+            0.2985847482014389,
+            0.4480442882131524,
+            0.346774964028777,
+            0.48999168300986917
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.813953488372093,
+          "anchorY": 0.6595744680851063,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6156294964028777,
+          "scene_anchorY": 0.46901798561151076,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.028627269148864088
+          ],
+          "scene_bbox_envelope": [
+            0.5915343884892086,
+            0.4580109035995608,
+            0.6397246043165468,
+            0.4800250676234607
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5038759689922481,
+          "anchorY": 0.48936170212765956,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4691546762589928,
+          "scene_anchorY": 0.4397230215827338,
+          "conservative_footprint_norm": [
+            0.15039999999999998,
+            0.07361297781136478
+          ],
+          "scene_bbox_envelope": [
+            0.4071958273381295,
+            0.41141909640914825,
+            0.531113525179856,
+            0.46802694675631934
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_RAMEKIN|P1|S4|D0|A0",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_RAMEKIN",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5038759689922481,
+          "anchorY": 0.48936170212765956,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4691546762589928,
+          "scene_anchorY": 0.4397230215827338,
+          "conservative_footprint_norm": [
+            0.12115555555555554,
+            0.10001234561786515
+          ],
+          "scene_bbox_envelope": [
+            0.419243381294964,
+            0.4012686344493036,
+            0.5190659712230216,
+            0.47817740871616404
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1937984496124031,
+          "anchorY": 0.6595744680851063,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.3226798561151079,
+          "scene_anchorY": 0.46901798561151076,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.04571816550510913
+          ],
+          "scene_bbox_envelope": [
+            0.2985847482014389,
+            0.4514395154286291,
+            0.346774964028777,
+            0.4865964557943925
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.813953488372093,
+          "anchorY": 0.6595744680851063,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6156294964028777,
+          "scene_anchorY": 0.46901798561151076,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.047427284260725955
+          ],
+          "scene_bbox_envelope": [
+            0.5915343884892086,
+            0.4507823654150036,
+            0.6397246043165468,
+            0.48725360580801796
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1937984496124031,
+          "anchorY": 0.2765957446808511,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.3226798561151079,
+          "scene_anchorY": 0.4031043165467626,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.0606727184476046
+          ],
+          "scene_bbox_envelope": [
+            0.2985847482014389,
+            0.37977587455084727,
+            0.346774964028777,
+            0.4264327585426779
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.813953488372093,
+          "anchorY": 0.3191489361702128,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 303,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_RAMEKIN/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6156294964028777,
+          "scene_anchorY": 0.41042805755395684,
+          "conservative_footprint_norm": [
+            0.058488888888888896,
+            0.04272726301653114
+          ],
+          "scene_bbox_envelope": [
+            0.5915343884892086,
+            0.39399957861929136,
+            0.6397246043165468,
+            0.4268565364886224
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_BOWL|P1|S1|D0|A1",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_BOWL",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.13096774193548386,
+            0.10863811050604381
+          ],
+          "scene_bbox_envelope": [
+            0.4135132947976879,
+            0.4161252845791685,
+            0.5329664739884393,
+            0.5008284726462651
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.19487179487179487,
+          "anchorY": 0.6428571428571429,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2967080924855492,
+          "scene_anchorY": 0.4878988439306359,
+          "conservative_footprint_norm": [
+            0.06078301419354839,
+            0.0739622641509434
+          ],
+          "scene_bbox_envelope": [
+            0.26898857858497116,
+            0.4590653179190752,
+            0.3244276063861272,
+            0.5167323699421966
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5025641025641026,
+          "anchorY": 0.5,
+          "scale": 0.72,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_BOWL/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.47323988439306364,
+          "scene_anchorY": 0.4584768786127168,
+          "conservative_footprint_norm": [
+            0.1625806451612903,
+            0.08688163579502708
+          ],
+          "scene_bbox_envelope": [
+            0.39909653179190757,
+            0.4246068513173057,
+            0.5473832369942196,
+            0.49234690590812785
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_CUP|P1|S1|D0|A0",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_CUP",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5039370078740157,
+          "anchorY": 0.4888888888888889,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_CUP/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.3304672897196262,
+          "scene_anchorY": 0.3509345794392523,
+          "conservative_footprint_norm": [
+            0.09157894736842105,
+            0.05974957374058886
+          ],
+          "scene_bbox_envelope": [
+            0.2865607476635514,
+            0.32329342149383966,
+            0.37437383177570094,
+            0.3785757373846649
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1732283464566929,
+          "anchorY": 0.6666666666666666,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_CUP/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.1891588785046729,
+          "scene_anchorY": 0.3778504672897196,
+          "conservative_footprint_norm": [
+            0.04421052631578948,
+            0.020930575896074707
+          ],
+          "scene_bbox_envelope": [
+            0.1679626168224299,
+            0.3681676307770495,
+            0.21035514018691587,
+            0.38753330380238965
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_CUP|P1|S0|D0|A0",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_CUP",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5039370078740157,
+          "anchorY": 0.4888888888888889,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_CUP/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.3304672897196262,
+          "scene_anchorY": 0.3509345794392523,
+          "conservative_footprint_norm": [
+            0.05794593789473684,
+            0.0949090909090909
+          ],
+          "scene_bbox_envelope": [
+            0.30268573257943926,
+            0.3070280373831775,
+            0.35824884685981306,
+            0.3948411214953271
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_DESSERT_MOLD|P1|S2|D0|A1",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_DESSERT_MOLD",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.16080402010050251,
+          "anchorY": 0.4845360824742268,
+          "scale": 0.54,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2368993506493507,
+          "scene_anchorY": 0.5108441558441559,
+          "conservative_footprint_norm": [
+            0.18378947368421053,
+            0.139939126212936
+          ],
+          "scene_bbox_envelope": [
+            0.15033629870129878,
+            0.45418471190135007,
+            0.3234624025974026,
+            0.5675035997869616
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.7839195979899497,
+          "anchorY": 0.5051546391752577,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6467435064935064,
+          "scene_anchorY": 0.5174545454545454,
+          "conservative_footprint_norm": [
+            0.09161630259649124,
+            0.11085714285714288
+          ],
+          "scene_bbox_envelope": [
+            0.6035931203371429,
+            0.47257,
+            0.6898938926498701,
+            0.5623390909090908
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.2814070351758794,
+          "anchorY": 0.15463917525773196,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.316224025974026,
+          "scene_anchorY": 0.4050779220779221,
+          "conservative_footprint_norm": [
+            0.0952982456140351,
+            0.07558439840614323
+          ],
+          "scene_bbox_envelope": [
+            0.2713394805194806,
+            0.3744748298596166,
+            0.36110857142857145,
+            0.4356810142962276
+          ]
+        },
+        {
+          "role": "sauce",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.16080402010050251,
+          "anchorY": 0.5257731958762887,
+          "scale": 0.55,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 160,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.2368993506493507,
+          "scene_anchorY": 0.5240649350649351,
+          "conservative_footprint_norm": [
+            0.18719298245614036,
+            0.09947447736160869
+          ],
+          "scene_bbox_envelope": [
+            0.1487332792207793,
+            0.48378907565136553,
+            0.3250654220779221,
+            0.5643407944785046
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_GLASS|P1|S3|D0|A0",
+      "recipe_count": 1,
+      "vessel_id": "VESSEL_GLASS",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.5,
+          "anchorY": 0.5135135135135135,
+          "scale": 0.58,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_GLASS/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.4668166666666667,
+          "scene_anchorY": 0.3475583333333333,
+          "conservative_footprint_norm": [
+            0.10729999999999999,
+            0.039603448784952894
+          ],
+          "scene_bbox_envelope": [
+            0.43024525,
+            0.33068561400724406,
+            0.5033880833333334,
+            0.36443105265942266
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1896551724137931,
+          "anchorY": 0.5675675675675675,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_GLASS/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.34411666666666674,
+          "scene_anchorY": 0.354375,
+          "conservative_footprint_norm": [
+            0.051800000000000006,
+            0.038237812619954535
+          ],
+          "scene_bbox_envelope": [
+            0.32646150000000007,
+            0.33808409858170685,
+            0.3617718333333334,
+            0.37066590141829314
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.8103448275862069,
+          "anchorY": 0.6756756756756757,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_GLASS/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.5895166666666667,
+          "scene_anchorY": 0.3680083333333333,
+          "conservative_footprint_norm": [
+            0.050858172400000005,
+            0.041440000000000005
+          ],
+          "scene_bbox_envelope": [
+            0.5721825062403334,
+            0.35035316666666666,
+            0.6068508270930001,
+            0.3856635
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1724137931034483,
+          "anchorY": 0.24324324324324326,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_GLASS/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.33730000000000004,
+          "scene_anchorY": 0.313475,
+          "conservative_footprint_norm": [
+            0.051800000000000006,
+            0.03428218773965061
+          ],
+          "scene_bbox_envelope": [
+            0.3196448333333334,
+            0.29886935959841965,
+            0.3549551666666667,
+            0.3280806404015803
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [
+        {
+          "upper": "DETAIL",
+          "lower": "PRIMARY_OR_SECONDARY",
+          "policy": "INTENTIONAL_GARNISH_ONLY_WITHIN_SAFE_REGION"
+        },
+        {
+          "upper": "PRIMARY_SECONDARY_DETAIL",
+          "lower": "SAUCE_UNDERLAY",
+          "policy": "INTENTIONAL_UNDERLAY_WITHIN_SAFE_REGION"
+        }
+      ],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100
+    },
+    {
+      "template_key": "VESSEL_DESSERT_MOLD|P1|S3|D0|A0",
+      "recipe_count": 5,
+      "vessel_id": "VESSEL_DESSERT_MOLD",
+      "status": "G5_PASS_FROZEN",
+      "slots": [
+        {
+          "role": "primary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.1708542713567839,
+          "anchorY": 0.4948453608247423,
+          "scale": 0.5,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 220,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.24350974025974031,
+          "scene_anchorY": 0.5141493506493506,
+          "conservative_footprint_norm": [
+            0.17017543859649123,
+            0.19795918367346937
+          ],
+          "scene_bbox_envelope": [
+            0.1633587662337663,
+            0.43399837662337665,
+            0.3236607142857143,
+            0.5943003246753247
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.7889447236180904,
+          "anchorY": 0.5051546391752577,
+          "scale": 0.28,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 300,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.6500487012987013,
+          "scene_anchorY": 0.5174545454545454,
+          "conservative_footprint_norm": [
+            0.0952982456140351,
+            0.11085714285714288
+          ],
+          "scene_bbox_envelope": [
+            0.6051641558441557,
+            0.47257,
+            0.6949332467532467,
+            0.5623390909090908
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.3015075376884422,
+          "anchorY": 0.13402061855670103,
+          "scale": 0.2666666666666667,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 301,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.32944480519480523,
+          "scene_anchorY": 0.3984675324675325,
+          "conservative_footprint_norm": [
+            0.09076023391812867,
+            0.08734200642833792
+          ],
+          "scene_bbox_envelope": [
+            0.2866976190476191,
+            0.36310394509205884,
+            0.3721919913419914,
+            0.4338311198430061
+          ]
+        },
+        {
+          "role": "secondary",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchorX": 0.7939698492462312,
+          "anchorY": 0.7835051546391752,
+          "scale": 0.22666666666666668,
+          "scale_semantics": "VISIBLE_ALPHA_MAX_SPAN_OF_INNER_SHORT_SIDE",
+          "rotation": 0,
+          "zIndex": 302,
+          "fitMode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "food_clip": "vessels/VESSEL_DESSERT_MOLD/food-clip.png",
+          "rim_crossing": 0,
+          "scene_anchorX": 0.653353896103896,
+          "scene_anchorY": 0.6066948051948051,
+          "conservative_footprint_norm": [
+            0.07714619883040937,
+            0.08974149659863946
+          ],
+          "scene_bbox_envelope": [
+            0.6170187878787878,
+            0.5703596969696969,
+            0.6896890043290043,
+            0.6430299134199133
+          ]
+        }
+      ],
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "allowed_overlaps": [],
+      "front_occluder_zIndex": 600,
+      "body_back_zIndex": 100,
+      "solver": "EXACT_ALPHA_CLEARANCE_BACKTRACK",
+      "search_nodes": 5
+    }
+  ],
+  "gauge_reservation": {
+    "anchor": [
+      0.82,
+      0.2
+    ],
+    "maximum_span": 0.27,
+    "zIndex": 800,
+    "body_source": "IMMUTABLE_G0",
+    "scope": "Neutral geometry reservation; runtime GaugeState belongs to G7."
+  },
+  "scene_safe_margin": 0.03
+}

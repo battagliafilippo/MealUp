@@ -1,0 +1,149 @@
+{
+  "schema": "MealUp_G7_GaugeContract/2",
+  "version": "2.0",
+  "status": "G7_PASS_FROZEN",
+  "G8_allowed": true,
+  "authorization": {
+    "scope": "Reconstruct Gauge body/needle and define/approve calibration; recover layered original if insufficient",
+    "source": "Explicit user authorization 2026-09-30 Europe/Rome",
+    "G0_exception": "G7 Gauge reconstruction only; G0 reference PNGs and FO/Vessel remain immutable",
+    "pixel_identity_to_G0_reference": false,
+    "visual_source": "Standalone GAUGE_MEDIUM in upper row of G0 states board",
+    "new_canonical_assets": "Reconstructed v2 layers, never represented as exact-source extraction"
+  },
+  "assets": {
+    "shell": {
+      "path": "assets/MEALUP_GAUGE_SHELL_v2.png",
+      "sha256": "db1594636552cf59c809ac33fce20420085d18cd9414d512106806796de28317",
+      "width": 1536,
+      "height": 1024,
+      "alpha_bbox": [
+        0,
+        0,
+        1518,
+        1024
+      ],
+      "transparent": true,
+      "source": "BUILT_IN_IMAGEGEN_RECONSTRUCTION_AUTHORIZED_EXCEPTION",
+      "original_pixels_preserved_after_generation": true
+    },
+    "needle": {
+      "path": "assets/MEALUP_GAUGE_NEEDLE_v2.png",
+      "sha256": "2889c201eb71fe9d7ddda523fd0a86e9183eda526e486261a89aaf2b8d305183",
+      "width": 1145,
+      "height": 1374,
+      "alpha_bbox": [
+        402,
+        72,
+        988,
+        1332
+      ],
+      "transparent": true,
+      "source": "BUILT_IN_IMAGEGEN_RECONSTRUCTION_AUTHORIZED_EXCEPTION",
+      "original_pixels_preserved_after_generation": true
+    }
+  },
+  "geometry": {
+    "frame": "UNIT_SQUARE",
+    "shell_rect": [
+      0,
+      0.16666666666666666,
+      1,
+      0.6666666666666666
+    ],
+    "pivot": [
+      0.4856770833333333,
+      0.5911458333333334
+    ],
+    "needle_source_pivot_px": [
+      572,
+      1045
+    ],
+    "needle_px_to_unit": 0.0003346475856697819,
+    "needle_neutral_angle": 0,
+    "value_rect": [
+      0.285,
+      0.645,
+      0.36,
+      0.075
+    ],
+    "value_alignment": "CENTER",
+    "value_min_font_em": 0.875,
+    "compact_value": "EXISTING_MEASURED_METADATA_FLOW",
+    "font": "Satoshi inherited from host",
+    "uniform_scale_only": true,
+    "shell_pixel_edit_at_runtime": false,
+    "unit_min_font_em": 0.625
+  },
+  "calibration": {
+    "id": "MEALUP_GAUGE_KCAL_0_800_V2",
+    "type": "LINEAR_MONOTONIC",
+    "points": [
+      {
+        "kcal": 0,
+        "angle": -70.0
+      },
+      {
+        "kcal": 120,
+        "angle": -49.0
+      },
+      {
+        "kcal": 200,
+        "angle": -35.0
+      },
+      {
+        "kcal": 280,
+        "angle": -21.0
+      },
+      {
+        "kcal": 380,
+        "angle": -3.5
+      },
+      {
+        "kcal": 400,
+        "angle": 0.0
+      },
+      {
+        "kcal": 450,
+        "angle": 8.75
+      },
+      {
+        "kcal": 600,
+        "angle": 35.0
+      },
+      {
+        "kcal": 650,
+        "angle": 43.75
+      },
+      {
+        "kcal": 800,
+        "angle": 70.0
+      }
+    ],
+    "range": [
+      0,
+      800
+    ],
+    "angles": [
+      -70,
+      70
+    ],
+    "overflow": "CLAMP_NEEDLE_KEEP_REAL_VALUE",
+    "unknown": "NEEDLE_HIDDEN; visible unknown label",
+    "angle_input": "rounded display kcal, same snapshot as number",
+    "nutrition_judgement": false,
+    "source": "New operational calibration under authorized exception, not inferred from the illustrative G0 values"
+  },
+  "state_module": "gauge-state.mjs",
+  "renderer_module": "gauge-renderer.mjs",
+  "update_policy": "IMMEDIATE_ATOMIC_FRAME; no loops or bounce; same result with reduced motion",
+  "portion_policy": "EXISTING_APP_RESOLVED_CURRENT_PORTION; cook people alone does not multiply kcal; FO geometry unchanged",
+  "upstream_G6_freeze_sha256": "37de08041040eb8b8769015675ebf4b48c42bf2d3ff28627878319e4853ef753",
+  "frozen_at": "2026-09-30",
+  "scope": "Canonical reconstructed raster layers, state/calibration and staged renderer contract; live application QA G8/G9",
+  "qa": {
+    "state": "state-qa-report.json",
+    "profiles": "profile-qa-report.json",
+    "raster": "render-qa.json"
+  }
+}

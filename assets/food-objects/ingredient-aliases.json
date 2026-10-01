@@ -1,0 +1,1313 @@
+{
+  "document": "MealUp C6.3 — Ingredient Alias Resolver",
+  "version": "1.0",
+  "status": "G3_FROZEN",
+  "authority_order": [
+    "1. Current recipe: C6.1 Composition Matrix (authoritative; never inferred from ingredient text).",
+    "2. Master resolver: C6.2 catalog + 47 deterministic mappings.",
+    "3. Future/import ingredient lookup: exact normalized alias table below.",
+    "4. CONTEXT_REQUIRED or unknown => explicit error; no fuzzy/synthetic fallback."
+  ],
+  "normalization": "lowercase + trim + Unicode diacritic removal + whitespace collapse; exact-key lookup only",
+  "current_seed_vocabulary_count": 245,
+  "records": {
+    "acciughe": {
+      "source_label": "acciughe",
+      "classification": "DIRECT_MASTER",
+      "master_id": "ANCHOVY"
+    },
+    "aceto": {
+      "source_label": "aceto",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "aceto balsamico": {
+      "source_label": "aceto balsamico",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "aceto di riso": {
+      "source_label": "aceto di riso",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "acqua tonica": {
+      "source_label": "acqua tonica",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEVERAGE_BOTTLE",
+      "variant_id": "TONICA"
+    },
+    "aglio": {
+      "source_label": "aglio",
+      "classification": "DIRECT_MASTER",
+      "master_id": "GARLIC"
+    },
+    "agnello": {
+      "source_label": "agnello",
+      "classification": "DIRECT_MASTER",
+      "master_id": "LAMB"
+    },
+    "albumi": {
+      "source_label": "albumi",
+      "classification": "DIRECT_MASTER",
+      "master_id": "EGG_WHITE"
+    },
+    "alga nori": {
+      "source_label": "alga nori",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "alici": {
+      "source_label": "alici",
+      "classification": "DIRECT_MASTER",
+      "master_id": "ANCHOVY"
+    },
+    "alloro": {
+      "source_label": "alloro",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "ananas": {
+      "source_label": "ananas",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PINEAPPLE"
+    },
+    "aneto": {
+      "source_label": "aneto",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "arachidi": {
+      "source_label": "arachidi",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "arancia": {
+      "source_label": "arancia",
+      "classification": "DIRECT_MASTER",
+      "master_id": "ORANGE"
+    },
+    "aranciata": {
+      "source_label": "aranciata",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEVERAGE_BOTTLE",
+      "variant_id": "ARANCIATA"
+    },
+    "asparagi": {
+      "source_label": "asparagi",
+      "classification": "DIRECT_MASTER",
+      "master_id": "ASPARAGUS"
+    },
+    "avena": {
+      "source_label": "avena",
+      "classification": "CONTEXT_REQUIRED",
+      "candidates": [
+        "PORRIDGE",
+        "OVERNIGHT_OATS"
+      ],
+      "reason": "can be a prepared oat dish or a supporting ingredient"
+    },
+    "avocado": {
+      "source_label": "avocado",
+      "classification": "DIRECT_MASTER",
+      "master_id": "AVOCADO"
+    },
+    "baccala": {
+      "source_label": "baccalà",
+      "classification": "DIRECT_MASTER",
+      "master_id": "COD"
+    },
+    "banana": {
+      "source_label": "banana",
+      "classification": "DIRECT_MASTER",
+      "master_id": "BANANA"
+    },
+    "basilico": {
+      "source_label": "basilico",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "bietole": {
+      "source_label": "bietole",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "SPINACH",
+      "reason": "nearest leafy-green visual; current recipes remain matrix-authoritative"
+    },
+    "birra": {
+      "source_label": "birra",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEVERAGE_BOTTLE",
+      "variant_id": "BIRRA"
+    },
+    "biscotti frollini": {
+      "source_label": "biscotti frollini",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BREAD",
+      "variant_id": "BISCUIT_FROLLINO_VISUAL_VARIANT"
+    },
+    "bottarga": {
+      "source_label": "bottarga",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "branzino": {
+      "source_label": "branzino",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SEA_BASS"
+    },
+    "bresaola": {
+      "source_label": "bresaola",
+      "classification": "DIRECT_MASTER",
+      "master_id": "BRESAOLA"
+    },
+    "brioche": {
+      "source_label": "brioche",
+      "classification": "DIRECT_MASTER",
+      "master_id": "BRIOCHE"
+    },
+    "broccoli": {
+      "source_label": "broccoli",
+      "classification": "DIRECT_MASTER",
+      "master_id": "BROCCOLI"
+    },
+    "brodo di carne": {
+      "source_label": "brodo di carne",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "brodo vegetale": {
+      "source_label": "brodo vegetale",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "burrata": {
+      "source_label": "burrata",
+      "classification": "DIRECT_MASTER",
+      "master_id": "BURRATA"
+    },
+    "burro": {
+      "source_label": "burro",
+      "classification": "DIRECT_MASTER",
+      "master_id": "BUTTER"
+    },
+    "burro d'arachidi": {
+      "source_label": "burro d'arachidi",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "cacao amaro": {
+      "source_label": "cacao amaro",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "caciocavallo": {
+      "source_label": "caciocavallo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CACIOCAVALLO"
+    },
+    "caffe": {
+      "source_label": "caffe",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "calamari": {
+      "source_label": "calamari",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SQUID"
+    },
+    "cannella": {
+      "source_label": "cannella",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "capesante": {
+      "source_label": "capesante",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SCALLOP"
+    },
+    "capperi": {
+      "source_label": "capperi",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "carciofi": {
+      "source_label": "carciofi",
+      "classification": "DIRECT_MASTER",
+      "master_id": "ARTICHOKE"
+    },
+    "carota": {
+      "source_label": "carota",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CARROT"
+    },
+    "cavolfiore": {
+      "source_label": "cavolfiore",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CAULIFLOWER"
+    },
+    "cavolo cappuccio": {
+      "source_label": "cavolo cappuccio",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CABBAGE"
+    },
+    "ceci": {
+      "source_label": "ceci",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CHICKPEA"
+    },
+    "cetrioli": {
+      "source_label": "cetrioli",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CUCUMBER"
+    },
+    "chinotto": {
+      "source_label": "chinotto",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEVERAGE_BOTTLE",
+      "variant_id": "CHINOTTO"
+    },
+    "ciambella": {
+      "source_label": "ciambella",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CIAMBELLA"
+    },
+    "cicoria": {
+      "source_label": "cicoria",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CHICORY"
+    },
+    "cime di rapa": {
+      "source_label": "cime di rapa",
+      "classification": "DIRECT_MASTER",
+      "master_id": "TURNIP_GREENS"
+    },
+    "cioccolato fondente": {
+      "source_label": "cioccolato fondente",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "cipolla": {
+      "source_label": "cipolla",
+      "classification": "DIRECT_MASTER",
+      "master_id": "ONION"
+    },
+    "cipolla rossa": {
+      "source_label": "cipolla rossa",
+      "classification": "DIRECT_MASTER",
+      "master_id": "RED_ONION"
+    },
+    "cola": {
+      "source_label": "cola",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEVERAGE_BOTTLE",
+      "variant_id": "COLA"
+    },
+    "cola zero": {
+      "source_label": "cola zero",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEVERAGE_BOTTLE",
+      "variant_id": "COLA_ZERO"
+    },
+    "concentrato di pomodoro": {
+      "source_label": "concentrato di pomodoro",
+      "classification": "DIRECT_MASTER",
+      "master_id": "TOMATO_SAUCE"
+    },
+    "coniglio": {
+      "source_label": "coniglio",
+      "classification": "MASTER_VARIANT",
+      "master_id": "CHICKEN",
+      "variant_id": "RABBIT_VISUAL_SUBSTITUTE"
+    },
+    "cornetto al cioccolato": {
+      "source_label": "cornetto al cioccolato",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "CROISSANT",
+      "reason": "nearest approved pastry form"
+    },
+    "costine di maiale": {
+      "source_label": "costine di maiale",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "PORK",
+      "reason": "pork visual family"
+    },
+    "cous cous": {
+      "source_label": "cous cous",
+      "classification": "DIRECT_MASTER",
+      "master_id": "COUSCOUS"
+    },
+    "cozze": {
+      "source_label": "cozze",
+      "classification": "DIRECT_MASTER",
+      "master_id": "MUSSEL"
+    },
+    "crema di nocciole": {
+      "source_label": "crema di nocciole",
+      "classification": "DIRECT_MASTER",
+      "master_id": "HAZELNUT_CREAM"
+    },
+    "crema di pistacchio": {
+      "source_label": "crema di pistacchio",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PISTACHIO_CREAM"
+    },
+    "curcuma": {
+      "source_label": "curcuma",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "curry": {
+      "source_label": "curry",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "datteri": {
+      "source_label": "datteri",
+      "classification": "DIRECT_MASTER",
+      "master_id": "DATE"
+    },
+    "edamame": {
+      "source_label": "edamame",
+      "classification": "DIRECT_MASTER",
+      "master_id": "EDAMAME"
+    },
+    "energy drink": {
+      "source_label": "energy drink",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEVERAGE_BOTTLE",
+      "variant_id": "ENERGY"
+    },
+    "erba cipollina": {
+      "source_label": "erba cipollina",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "fagioli borlotti": {
+      "source_label": "fagioli borlotti",
+      "classification": "DIRECT_MASTER",
+      "master_id": "BEAN"
+    },
+    "fagioli cannellini": {
+      "source_label": "fagioli cannellini",
+      "classification": "DIRECT_MASTER",
+      "master_id": "BEAN"
+    },
+    "fagiolini": {
+      "source_label": "fagiolini",
+      "classification": "DIRECT_MASTER",
+      "master_id": "GREEN_BEAN"
+    },
+    "farina": {
+      "source_label": "farina",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "farina di ceci": {
+      "source_label": "farina di ceci",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "CHICKPEA",
+      "reason": "chickpea-derived ingredient; only for future visual lookup"
+    },
+    "farro": {
+      "source_label": "farro",
+      "classification": "DIRECT_MASTER",
+      "master_id": "FARRO"
+    },
+    "fave": {
+      "source_label": "fave",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "BEAN",
+      "reason": "nearest legume visual"
+    },
+    "fegato": {
+      "source_label": "fegato",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEEF",
+      "variant_id": "LIVER"
+    },
+    "fesa di tacchino": {
+      "source_label": "fesa di tacchino",
+      "classification": "DIRECT_MASTER",
+      "master_id": "TURKEY"
+    },
+    "feta": {
+      "source_label": "feta",
+      "classification": "DIRECT_MASTER",
+      "master_id": "FETA"
+    },
+    "fette biscottate integrali": {
+      "source_label": "fette biscottate integrali",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "TOAST",
+      "reason": "nearest approved toast/rusk visual"
+    },
+    "fichi": {
+      "source_label": "fichi",
+      "classification": "DIRECT_MASTER",
+      "master_id": "FIG"
+    },
+    "finocchi": {
+      "source_label": "finocchi",
+      "classification": "DIRECT_MASTER",
+      "master_id": "FENNEL"
+    },
+    "finocchietto": {
+      "source_label": "finocchietto",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "fiocchi di latte": {
+      "source_label": "fiocchi di latte",
+      "classification": "DIRECT_MASTER",
+      "master_id": "COTTAGE_CHEESE"
+    },
+    "fontina": {
+      "source_label": "fontina",
+      "classification": "DIRECT_MASTER",
+      "master_id": "FONTINA"
+    },
+    "formaggio spalmabile": {
+      "source_label": "formaggio spalmabile",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CREAM_CHEESE"
+    },
+    "fragole": {
+      "source_label": "fragole",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "MIXED_BERRIES",
+      "reason": "approved berry-family fallback; no strawberry Master"
+    },
+    "fregola": {
+      "source_label": "fregola",
+      "classification": "MASTER_VARIANT",
+      "master_id": "COUSCOUS",
+      "variant_id": "FREGOLA_VISUAL_SUBSTITUTE"
+    },
+    "frutti di bosco": {
+      "source_label": "frutti di bosco",
+      "classification": "DIRECT_MASTER",
+      "master_id": "MIXED_BERRIES"
+    },
+    "funghi": {
+      "source_label": "funghi",
+      "classification": "DIRECT_MASTER",
+      "master_id": "MUSHROOM"
+    },
+    "funghi porcini": {
+      "source_label": "funghi porcini",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PORCINI"
+    },
+    "gallette di riso": {
+      "source_label": "gallette di riso",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "RICE",
+      "reason": "rice-family fallback"
+    },
+    "gallinella": {
+      "source_label": "gallinella",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "WHITE_FISH",
+      "reason": "neutral white-fish fallback"
+    },
+    "gamberi": {
+      "source_label": "gamberi",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SHRIMP"
+    },
+    "gassosa": {
+      "source_label": "gassosa",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEVERAGE_BOTTLE",
+      "variant_id": "GASSOSA"
+    },
+    "germogli di soia": {
+      "source_label": "germogli di soia",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "gorgonzola": {
+      "source_label": "gorgonzola",
+      "classification": "DIRECT_MASTER",
+      "master_id": "GORGONZOLA"
+    },
+    "grana": {
+      "source_label": "grana",
+      "classification": "DIRECT_MASTER",
+      "master_id": "GRANA"
+    },
+    "guanciale": {
+      "source_label": "guanciale",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "PORK",
+      "reason": "pork visual family"
+    },
+    "insalata": {
+      "source_label": "insalata",
+      "classification": "CONTEXT_REQUIRED",
+      "candidates": [
+        "ARUGULA",
+        "SPINACH"
+      ],
+      "reason": "generic leafy ingredient; exact leaf must come from recipe composition"
+    },
+    "lardo": {
+      "source_label": "lardo",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "PROSCIUTTO",
+      "reason": "nearest cured-pork visual used by current matrix"
+    },
+    "latte": {
+      "source_label": "latte",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "lenticchie": {
+      "source_label": "lenticchie",
+      "classification": "DIRECT_MASTER",
+      "master_id": "LENTIL"
+    },
+    "lievito di birra": {
+      "source_label": "lievito di birra",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "lievito per dolci": {
+      "source_label": "lievito per dolci",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "limone": {
+      "source_label": "limone",
+      "classification": "DIRECT_MASTER",
+      "master_id": "LEMON"
+    },
+    "lonza di maiale": {
+      "source_label": "lonza di maiale",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "PORK",
+      "reason": "pork visual family"
+    },
+    "macinato di manzo": {
+      "source_label": "macinato di manzo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "GROUND_BEEF"
+    },
+    "maionese": {
+      "source_label": "maionese",
+      "classification": "DIRECT_MASTER",
+      "master_id": "MAYONNAISE"
+    },
+    "mais": {
+      "source_label": "mais",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CORN"
+    },
+    "mandorle": {
+      "source_label": "mandorle",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "manzo": {
+      "source_label": "manzo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "BEEF"
+    },
+    "marmellata di albicocche": {
+      "source_label": "marmellata di albicocche",
+      "classification": "DIRECT_MASTER",
+      "master_id": "FRUIT_JAM"
+    },
+    "marmellata frutti di bosco": {
+      "source_label": "marmellata frutti di bosco",
+      "classification": "DIRECT_MASTER",
+      "master_id": "FRUIT_JAM"
+    },
+    "marsala": {
+      "source_label": "marsala",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "mascarpone": {
+      "source_label": "mascarpone",
+      "classification": "DIRECT_MASTER",
+      "master_id": "MASCARPONE"
+    },
+    "mela": {
+      "source_label": "mela",
+      "classification": "DIRECT_MASTER",
+      "master_id": "APPLE"
+    },
+    "melanzane": {
+      "source_label": "melanzane",
+      "classification": "DIRECT_MASTER",
+      "master_id": "EGGPLANT"
+    },
+    "melone": {
+      "source_label": "melone",
+      "classification": "DIRECT_MASTER",
+      "master_id": "MELON"
+    },
+    "menta": {
+      "source_label": "menta",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "merendina al cioccolato": {
+      "source_label": "merendina al cioccolato",
+      "classification": "DIRECT_MASTER",
+      "master_id": "MUFFIN"
+    },
+    "merluzzo": {
+      "source_label": "merluzzo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "COD"
+    },
+    "miele": {
+      "source_label": "miele",
+      "classification": "DIRECT_MASTER",
+      "master_id": "HONEY"
+    },
+    "mirin": {
+      "source_label": "mirin",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "miso": {
+      "source_label": "miso",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "mortadella": {
+      "source_label": "mortadella",
+      "classification": "DIRECT_MASTER",
+      "master_id": "MORTADELLA"
+    },
+    "mozzarella": {
+      "source_label": "mozzarella",
+      "classification": "DIRECT_MASTER",
+      "master_id": "MOZZARELLA"
+    },
+    "mozzarella di bufala": {
+      "source_label": "mozzarella di bufala",
+      "classification": "DIRECT_MASTER",
+      "master_id": "BUFFALO_MOZZARELLA"
+    },
+    "noce moscata": {
+      "source_label": "noce moscata",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "noci": {
+      "source_label": "noci",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "noodles": {
+      "source_label": "noodles",
+      "classification": "CONTEXT_REQUIRED",
+      "candidates": [
+        "PASTA_LONG"
+      ],
+      "reason": "no dedicated canonical Master; use only with explicit recipe/import rule"
+    },
+    "olio di semi": {
+      "source_label": "olio di semi",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "olio di sesamo": {
+      "source_label": "olio di sesamo",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "olio evo": {
+      "source_label": "olio evo",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "olive nere": {
+      "source_label": "olive nere",
+      "classification": "DIRECT_MASTER",
+      "master_id": "OLIVE"
+    },
+    "olive verdi": {
+      "source_label": "olive verdi",
+      "classification": "DIRECT_MASTER",
+      "master_id": "OLIVE"
+    },
+    "orata": {
+      "source_label": "orata",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SEA_BREAM"
+    },
+    "origano": {
+      "source_label": "origano",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "orzo": {
+      "source_label": "orzo",
+      "classification": "CONTEXT_REQUIRED",
+      "candidates": [
+        "FARRO"
+      ],
+      "reason": "grain-family visual only when explicitly approved"
+    },
+    "pancetta": {
+      "source_label": "pancetta",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "PORK",
+      "reason": "pork visual family"
+    },
+    "pane": {
+      "source_label": "pane",
+      "classification": "DIRECT_MASTER",
+      "master_id": "BREAD"
+    },
+    "pane in cassetta": {
+      "source_label": "pane in cassetta",
+      "classification": "DIRECT_MASTER",
+      "master_id": "BREAD"
+    },
+    "pane raffermo": {
+      "source_label": "pane raffermo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "BREAD"
+    },
+    "pangrattato": {
+      "source_label": "pangrattato",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "BREAD",
+      "reason": "bread-derived visual fallback"
+    },
+    "panna": {
+      "source_label": "panna",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CREAM"
+    },
+    "paprika": {
+      "source_label": "paprika",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "parmigiano": {
+      "source_label": "parmigiano",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PARMESAN"
+    },
+    "passata di pomodoro": {
+      "source_label": "passata di pomodoro",
+      "classification": "DIRECT_MASTER",
+      "master_id": "TOMATO_SAUCE"
+    },
+    "pasta": {
+      "source_label": "pasta",
+      "classification": "CONTEXT_REQUIRED",
+      "candidates": [
+        "PASTA_LONG",
+        "PASTA_SHORT",
+        "PASTA_EGG",
+        "FILLED_PASTA"
+      ],
+      "reason": "shape must come from recipe/title/context"
+    },
+    "pasta all'uovo": {
+      "source_label": "pasta all'uovo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PASTA_EGG"
+    },
+    "pasta sfoglia": {
+      "source_label": "pasta sfoglia",
+      "classification": "CONTEXT_REQUIRED",
+      "candidates": [
+        "CAKE",
+        "TART"
+      ],
+      "reason": "finished preparation determines the visual; raw pastry is not a standalone Master"
+    },
+    "pastina": {
+      "source_label": "pastina",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PASTA_SHORT"
+    },
+    "patate": {
+      "source_label": "patate",
+      "classification": "DIRECT_MASTER",
+      "master_id": "POTATO"
+    },
+    "pecorino": {
+      "source_label": "pecorino",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PECORINO"
+    },
+    "pelati": {
+      "source_label": "pelati",
+      "classification": "DIRECT_MASTER",
+      "master_id": "TOMATO_SAUCE"
+    },
+    "pepe nero": {
+      "source_label": "pepe nero",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "peperoncino": {
+      "source_label": "peperoncino",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "peperoni": {
+      "source_label": "peperoni",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PEPPER"
+    },
+    "pera": {
+      "source_label": "pera",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PEAR"
+    },
+    "pesce spada": {
+      "source_label": "pesce spada",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SWORDFISH"
+    },
+    "petto di pollo": {
+      "source_label": "petto di pollo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CHICKEN"
+    },
+    "piadina": {
+      "source_label": "piadina",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PIADINA"
+    },
+    "pinoli": {
+      "source_label": "pinoli",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "piselli": {
+      "source_label": "piselli",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PEA"
+    },
+    "pistacchi": {
+      "source_label": "pistacchi",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "plumcake": {
+      "source_label": "plumcake",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PLUMCAKE"
+    },
+    "polenta": {
+      "source_label": "polenta",
+      "classification": "DIRECT_MASTER",
+      "master_id": "POLENTA"
+    },
+    "pollo": {
+      "source_label": "pollo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CHICKEN"
+    },
+    "polpo": {
+      "source_label": "polpo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "OCTOPUS"
+    },
+    "pomodori": {
+      "source_label": "pomodori",
+      "classification": "DIRECT_MASTER",
+      "master_id": "TOMATO"
+    },
+    "pomodori secchi": {
+      "source_label": "pomodori secchi",
+      "classification": "DIRECT_MASTER",
+      "master_id": "TOMATO"
+    },
+    "pomodorini": {
+      "source_label": "pomodorini",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CHERRY_TOMATO"
+    },
+    "porri": {
+      "source_label": "porri",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "ONION",
+      "reason": "allium fallback"
+    },
+    "prezzemolo": {
+      "source_label": "prezzemolo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PARSLEY"
+    },
+    "prosciutto cotto": {
+      "source_label": "prosciutto cotto",
+      "classification": "DIRECT_MASTER",
+      "master_id": "HAM"
+    },
+    "prosciutto crudo": {
+      "source_label": "prosciutto crudo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PROSCIUTTO"
+    },
+    "proteine in polvere": {
+      "source_label": "proteine in polvere",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "provola": {
+      "source_label": "provola",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PROVOLA"
+    },
+    "quinoa": {
+      "source_label": "quinoa",
+      "classification": "DIRECT_MASTER",
+      "master_id": "QUINOA"
+    },
+    "radicchio": {
+      "source_label": "radicchio",
+      "classification": "DIRECT_MASTER",
+      "master_id": "RADICCHIO"
+    },
+    "rana pescatrice": {
+      "source_label": "rana pescatrice",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "WHITE_FISH",
+      "reason": "neutral white-fish fallback"
+    },
+    "ricotta": {
+      "source_label": "ricotta",
+      "classification": "DIRECT_MASTER",
+      "master_id": "RICOTTA"
+    },
+    "ricotta salata": {
+      "source_label": "ricotta salata",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "RICOTTA",
+      "reason": "ricotta-family fallback"
+    },
+    "riso": {
+      "source_label": "riso",
+      "classification": "DIRECT_MASTER",
+      "master_id": "RICE"
+    },
+    "riso basmati": {
+      "source_label": "riso basmati",
+      "classification": "DIRECT_MASTER",
+      "master_id": "RICE_BASMATI"
+    },
+    "riso carnaroli": {
+      "source_label": "riso carnaroli",
+      "classification": "CONTEXT_REQUIRED",
+      "candidates": [
+        "RISOTTO",
+        "RICE"
+      ],
+      "reason": "preparation determines whether the visual is risotto or plain rice"
+    },
+    "riso integrale": {
+      "source_label": "riso integrale",
+      "classification": "DIRECT_MASTER",
+      "master_id": "RICE_INTEGRAL"
+    },
+    "rosmarino": {
+      "source_label": "rosmarino",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "rucola": {
+      "source_label": "rucola",
+      "classification": "DIRECT_MASTER",
+      "master_id": "ARUGULA"
+    },
+    "salame": {
+      "source_label": "salame",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SALAMI"
+    },
+    "sale": {
+      "source_label": "sale",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "salmone": {
+      "source_label": "salmone",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SALMON"
+    },
+    "salsa agrodolce": {
+      "source_label": "salsa agrodolce",
+      "classification": "DIRECT_MASTER",
+      "master_id": "AGRODOLCE"
+    },
+    "salsa di soia": {
+      "source_label": "salsa di soia",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "salsiccia": {
+      "source_label": "salsiccia",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SAUSAGE"
+    },
+    "salvia": {
+      "source_label": "salvia",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "sarde": {
+      "source_label": "sarde",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SARDINE"
+    },
+    "savoiardi": {
+      "source_label": "savoiardi",
+      "classification": "CONTEXT_REQUIRED",
+      "candidates": [
+        "TIRAMISU",
+        "BREAD"
+      ],
+      "reason": "normally supporting ingredient; final preparation determines visual"
+    },
+    "scalogno": {
+      "source_label": "scalogno",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "ONION",
+      "reason": "allium fallback"
+    },
+    "scamorza": {
+      "source_label": "scamorza",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SCAMORZA"
+    },
+    "sedano": {
+      "source_label": "sedano",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CELERY"
+    },
+    "semi di sesamo": {
+      "source_label": "semi di sesamo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SESAME"
+    },
+    "semi di zucca": {
+      "source_label": "semi di zucca",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "semola": {
+      "source_label": "semola",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "senape": {
+      "source_label": "senape",
+      "classification": "DIRECT_MASTER",
+      "master_id": "MUSTARD_SAUCE"
+    },
+    "seppie": {
+      "source_label": "seppie",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SQUID"
+    },
+    "sesamo": {
+      "source_label": "sesamo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SESAME"
+    },
+    "sfoglie per lasagne": {
+      "source_label": "sfoglie per lasagne",
+      "classification": "DIRECT_MASTER",
+      "master_id": "LASAGNA"
+    },
+    "sgombro": {
+      "source_label": "sgombro",
+      "classification": "DIRECT_MASTER",
+      "master_id": "MACKEREL"
+    },
+    "spaghetti di riso": {
+      "source_label": "spaghetti di riso",
+      "classification": "CONTEXT_REQUIRED",
+      "candidates": [
+        "PASTA_LONG",
+        "RICE"
+      ],
+      "reason": "hybrid semantic case; current matrix explicitly decides the composition"
+    },
+    "speck": {
+      "source_label": "speck",
+      "classification": "APPROVED_FALLBACK",
+      "master_id": "PROSCIUTTO",
+      "reason": "nearest cured-ham visual"
+    },
+    "spinaci": {
+      "source_label": "spinaci",
+      "classification": "DIRECT_MASTER",
+      "master_id": "SPINACH"
+    },
+    "spremuta": {
+      "source_label": "spremuta",
+      "classification": "DIRECT_MASTER",
+      "master_id": "ORANGE"
+    },
+    "stracchino": {
+      "source_label": "stracchino",
+      "classification": "DIRECT_MASTER",
+      "master_id": "STRACCHINO"
+    },
+    "succo ace": {
+      "source_label": "succo ace",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEVERAGE_JUICE_BOX",
+      "variant_id": "ACE"
+    },
+    "succo di arancia": {
+      "source_label": "succo di arancia",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEVERAGE_JUICE_BOX",
+      "variant_id": "ARANCIA"
+    },
+    "succo di mela": {
+      "source_label": "succo di mela",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEVERAGE_JUICE_BOX",
+      "variant_id": "MELA"
+    },
+    "succo di pera": {
+      "source_label": "succo di pera",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEVERAGE_JUICE_BOX",
+      "variant_id": "PERA"
+    },
+    "tagliatelle all'uovo": {
+      "source_label": "tagliatelle all'uovo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PASTA_EGG"
+    },
+    "tartufo": {
+      "source_label": "tartufo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "TRUFFLE"
+    },
+    "te freddo": {
+      "source_label": "te freddo",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEVERAGE_BOTTLE",
+      "variant_id": "TE_FREDDO"
+    },
+    "timo": {
+      "source_label": "timo",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "tofu": {
+      "source_label": "tofu",
+      "classification": "DIRECT_MASTER",
+      "master_id": "TOFU"
+    },
+    "tonno": {
+      "source_label": "tonno",
+      "classification": "DIRECT_MASTER",
+      "master_id": "TUNA"
+    },
+    "tonno sott'olio": {
+      "source_label": "tonno sott'olio",
+      "classification": "DIRECT_MASTER",
+      "master_id": "TUNA"
+    },
+    "trippa": {
+      "source_label": "trippa",
+      "classification": "MASTER_VARIANT",
+      "master_id": "BEEF",
+      "variant_id": "TRIPE_WHEN_RECIPE_REQUIRES_A_BEEF_LIKE_VISUAL_SUBSTITUTE"
+    },
+    "trota": {
+      "source_label": "trota",
+      "classification": "DIRECT_MASTER",
+      "master_id": "TROUT"
+    },
+    "tuorli": {
+      "source_label": "tuorli",
+      "classification": "DIRECT_MASTER",
+      "master_id": "EGG"
+    },
+    "uova": {
+      "source_label": "uova",
+      "classification": "DIRECT_MASTER",
+      "master_id": "EGG"
+    },
+    "uovo": {
+      "source_label": "uovo",
+      "classification": "DIRECT_MASTER",
+      "master_id": "EGG"
+    },
+    "uvetta": {
+      "source_label": "uvetta",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "verza": {
+      "source_label": "verza",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CABBAGE"
+    },
+    "vino bianco": {
+      "source_label": "vino bianco",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "vino rosso": {
+      "source_label": "vino rosso",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "vitello": {
+      "source_label": "vitello",
+      "classification": "DIRECT_MASTER",
+      "master_id": "VEAL"
+    },
+    "vongole": {
+      "source_label": "vongole",
+      "classification": "DIRECT_MASTER",
+      "master_id": "CLAM"
+    },
+    "yogurt greco 0%": {
+      "source_label": "yogurt greco 0%",
+      "classification": "DIRECT_MASTER",
+      "master_id": "GREEK_YOGURT"
+    },
+    "yogurt proteico": {
+      "source_label": "yogurt proteico",
+      "classification": "DIRECT_MASTER",
+      "master_id": "YOGURT"
+    },
+    "zafferano": {
+      "source_label": "zafferano",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "zenzero": {
+      "source_label": "zenzero",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "zucca": {
+      "source_label": "zucca",
+      "classification": "DIRECT_MASTER",
+      "master_id": "PUMPKIN"
+    },
+    "zucchero": {
+      "source_label": "zucchero",
+      "classification": "NON_VISUAL_SUPPORT",
+      "reason": "Not a standalone canonical Food Object in the current 165-Master system. Current recipes use the C6.1 composition matrix instead of inventing a visual."
+    },
+    "zucchine": {
+      "source_label": "zucchine",
+      "classification": "DIRECT_MASTER",
+      "master_id": "ZUCCHINI"
+    }
+  }
+}

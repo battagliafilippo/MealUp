@@ -1,0 +1,4771 @@
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a37",
+      "composition_id": "COMP_a37",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S1|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "WHITE_FISH",
+          "render_source_master_id": "WHITE_FISH",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/WHITE_FISH/WHITE_FISH.png",
+          "sha256": "ebc5d8c95c32a77df8e5b153aaa5b6e1158fdb4a4bdaf690dd359176a8138cc7",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17361154852556374,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "BEVERAGE_BOTTLE",
+          "render_source_master_id": "BEVERAGE_BOTTLE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BEVERAGE_BOTTLE/BEVERAGE_BOTTLE.png",
+          "sha256": "5021ec2488aff1153a91d6b416e4b20cade78ef1ef79a9b9fc2d39e6d6ba057e",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.6522259136212625
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a38",
+      "composition_id": "COMP_a38",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S1|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "SQUID",
+          "render_source_master_id": "SQUID",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/SQUID/SQUID.png",
+          "sha256": "e7ba7fb438b0977250e8440b92623ba521fca3c578f586c85a479ad7b72dc25c",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17834640893989728,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "LEMON",
+          "render_source_master_id": "LEMON",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/LEMON/LEMON.png",
+          "sha256": "a4742e49427bcae0fb0badc6d6f06568f8ed7419f351352afcb0b4fbac3ad037",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.6523099885783872
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a39",
+      "composition_id": "COMP_a39",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S2|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "ZUCCHINI",
+          "render_source_master_id": "ZUCCHINI",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ZUCCHINI/ZUCCHINI.png",
+          "sha256": "bbf713a1772b1325e6d5a1d827f97a0595eadce57e7784f56105fb629d9bebe8",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17361154852556374,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "CAULIFLOWER",
+          "render_source_master_id": "CAULIFLOWER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/CAULIFLOWER/CAULIFLOWER.png",
+          "sha256": "e21d7233d88798c316294558d0592546998693f529e9bd29d65c87b72e92c594",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6597938144329897,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.0838124717019963,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.6468592934227265
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "ARTICHOKE",
+          "render_source_master_id": "ARTICHOKE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ARTICHOKE/ARTICHOKE.png",
+          "sha256": "20bd2b1fc571d247d8dbc6280b915cbfc52174f8ab2d09a33cbfc2f2df9fb78d",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8225108225108225,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a40",
+      "composition_id": "COMP_a40",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S3|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "BREAD",
+          "render_source_master_id": "BREAD",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BREAD/BREAD.png",
+          "sha256": "0e1e3ed322be17d5a0889953749b2d9234ce52ff34c090f7dd78fd74fd014bfa",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17834640893989728,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.603363524039094
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "TOMATO",
+          "render_source_master_id": "TOMATO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/TOMATO/TOMATO.png",
+          "sha256": "3d6f5c199bc904b46519320ce7ca2b411352aed2275f2d189c016d5805ffbf25",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6597938144329897,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "RED_ONION",
+          "render_source_master_id": "ONION",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ONION/ONION.png",
+          "sha256": "3d94c117123ce5382bb6cf9ec1a7f74aa699ccd3bf3db5a6a3a029424b611e2d",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8225108225108225,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.0838124717019963,
+            "raw_image_center_scene": [
+              0.6547840531561462,
+              0.6523077564998795
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 3,
+          "logical_master_id": "CUCUMBER",
+          "render_source_master_id": "CUCUMBER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/CUCUMBER/CUCUMBER.png",
+          "sha256": "6f68ae171681fe79f7bc3e8ffe4fdb8ca48431bff3f149b778db8d896d64861d",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.28865979381443296,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.0838124717019963,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.5487862037217299
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a41",
+      "composition_id": "COMP_a41",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S3|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "FARRO",
+          "render_source_master_id": "FARRO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/FARRO/FARRO.png",
+          "sha256": "de2f4a69c826347db324162c93a8cb8cbab7b4770ab0d3e9ef5f05e34187819a",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "CHERRY_TOMATO",
+          "render_source_master_id": "CHERRY_TOMATO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/CHERRY_TOMATO/CHERRY_TOMATO.png",
+          "sha256": "14f978714343fe2f903529fc8286d2d5589ce9e17a71b8a1b7654fb4814ba202",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6142857142857143,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.48207997741402
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "MOZZARELLA",
+          "render_source_master_id": "MOZZARELLA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/MOZZARELLA/MOZZARELLA.png",
+          "sha256": "b59c39e31349f02af19415439ac955ee7bbd531cad83d8a3ac97375686f4d189",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4938487635411876
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "OLIVE",
+          "render_source_master_id": "OLIVE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/OLIVE/OLIVE.png",
+          "sha256": "f71efcea318a448660ac8678ad318a4b73137ec8e78f5a9adc0fcd883e850938",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.2714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.07166390931028677,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.41147171391148774
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a42",
+      "composition_id": "COMP_a42",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S3|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "PEPPER",
+          "render_source_master_id": "PEPPER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PEPPER/PEPPER.png",
+          "sha256": "a67e134b93516080ad678159ee2311e1d75e3121f60a1641314c1d50aefea7fa",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17834640893989728,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6033635240390939
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "CARROT",
+          "render_source_master_id": "CARROT",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/CARROT/CARROT.png",
+          "sha256": "8580ecbed79856c2dc1bed079926948ad2f54f8d1e2df64b6c7a4b1660771e30",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6597938144329897,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.0838124717019963,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "CELERY",
+          "render_source_master_id": "CELERY",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/CELERY/CELERY.png",
+          "sha256": "aee39f53f1fec3077d15a0c320da477d5aa04868e619039ec090856ed4d48cd3",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8225108225108225,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.0838124717019963,
+            "raw_image_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "FENNEL",
+          "render_source_master_id": "FENNEL",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/FENNEL/FENNEL.png",
+          "sha256": "64ed40cb6e06c6f9de54701f10d465497c09f306bc3576581f4272eadfe32b3d",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.28865979381443296,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.0838124717019963,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a43",
+      "composition_id": "COMP_a43",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S4|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "ANCHOVY",
+          "render_source_master_id": "ANCHOVY",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ANCHOVY/ANCHOVY.png",
+          "sha256": "d088388756c483799261ac9f9cee6c845ba954cf8174282bae68ab5c43f1fb24",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17834640893989728,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "PEPPER",
+          "render_source_master_id": "PEPPER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PEPPER/PEPPER.png",
+          "sha256": "a67e134b93516080ad678159ee2311e1d75e3121f60a1641314c1d50aefea7fa",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6597938144329897,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.6468614835949984
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "CARROT",
+          "render_source_master_id": "CARROT",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/CARROT/CARROT.png",
+          "sha256": "8580ecbed79856c2dc1bed079926948ad2f54f8d1e2df64b6c7a4b1660771e30",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8225108225108225,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.0838124717019963,
+            "raw_image_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "GARLIC",
+          "render_source_master_id": "GARLIC",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/GARLIC/GARLIC.png",
+          "sha256": "2be5a64b1278d882771828bec987cb60259aaf6ecf535eef98082a1c18c14c21",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.28865979381443296,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.25167875934250683,
+              0.5487043189368771
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 3,
+          "logical_master_id": "BUTTER",
+          "render_source_master_id": "BUTTER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BUTTER/BUTTER.png",
+          "sha256": "e0cef340303abd22548ca23696605baf3e26a627fe73a2af3d2f6a91d810751e",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8138528138528138,
+          "anchor_y": 0.35051546391752575,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 303,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.6493355481727574,
+              0.5650498338870431
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6493355481727574,
+              0.5650498338870431
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a44",
+      "composition_id": "COMP_a44",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S2|D0|A1",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "POTATO",
+          "render_source_master_id": "POTATO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/POTATO/POTATO.png",
+          "sha256": "06e084908917296744f02bbfa0012f30365d39fd7dbc5abdf3ff0f67264fb567",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13530979589748834,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "CARROT",
+          "render_source_master_id": "CARROT",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/CARROT/CARROT.png",
+          "sha256": "8580ecbed79856c2dc1bed079926948ad2f54f8d1e2df64b6c7a4b1660771e30",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6428571428571429,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06532197043327025,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.4878988439306359
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.4878988439306359
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "PEA",
+          "render_source_master_id": "PEA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PEA/PEA.png",
+          "sha256": "bfa4ca2afe51d166d49513d9d309f1c7d91b2d8d6c8af4a783ebbe576eb80d60",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "sauce",
+          "matrix_slot_index": 0,
+          "logical_master_id": "MAYONNAISE",
+          "render_source_master_id": "MAYONNAISE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/MAYONNAISE/MAYONNAISE.png",
+          "sha256": "5bf3c407296e5cb5fe2e1bd5359146c088ccf73847f2bf815cd40c60540bd8cd",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.72,
+          "rotation_deg": 0,
+          "z_index": 160,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.1725518024172359,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586454617236784
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a45",
+      "composition_id": "COMP_a45",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S1|D0|A1",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "TUNA",
+          "render_source_master_id": "TUNA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/TUNA/TUNA.png",
+          "sha256": "d18f0970dfb56c04e39df493d9791d42fb4020c94127102271eb28cee21fdf99",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17834640893989728,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "EGG",
+          "render_source_master_id": "EGG",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/EGG/EGG.png",
+          "sha256": "e2d5f40d5b60f536a02d05c6393180da60be4944565c1aee710a02a28a1f1d63",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6597938144329897,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.25167875934250683,
+              0.6467774086378737
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "sauce",
+          "matrix_slot_index": 0,
+          "logical_master_id": "MAYONNAISE",
+          "render_source_master_id": "MAYONNAISE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/MAYONNAISE/MAYONNAISE.png",
+          "sha256": "5bf3c407296e5cb5fe2e1bd5359146c088ccf73847f2bf815cd40c60540bd8cd",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.72,
+          "rotation_deg": 0,
+          "z_index": 160,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.22139554213228627,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6034056722154274
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a46",
+      "composition_id": "COMP_a46",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S3|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "HAM",
+          "render_source_master_id": "HAM",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/HAM/HAM.png",
+          "sha256": "e0318c04ef29c8b042d010a2a9f93b80ad92424d2fefdcc291f015e65639746f",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17834640893989728,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6033636132122984
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "PEA",
+          "render_source_master_id": "PEA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PEA/PEA.png",
+          "sha256": "bfa4ca2afe51d166d49513d9d309f1c7d91b2d8d6c8af4a783ebbe576eb80d60",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6597938144329897,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "PROVOLA",
+          "render_source_master_id": "PROVOLA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PROVOLA/PROVOLA.png",
+          "sha256": "6b171c3b8429a9709402d25eb047ba2efd27ecd8def013a748d50586574dd1c5",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8225108225108225,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "BUTTER",
+          "render_source_master_id": "BUTTER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BUTTER/BUTTER.png",
+          "sha256": "e0cef340303abd22548ca23696605baf3e26a627fe73a2af3d2f6a91d810751e",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.28865979381443296,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a47",
+      "composition_id": "COMP_a47",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S3|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "CAKE",
+          "render_source_master_id": "CAKE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/CAKE/CAKE.png",
+          "sha256": "e9712987621b7f53ec4110da66ad826c0172f4fda1e0d52d13c7464b643dea34",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17834640893989728,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6033635240390939
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "EGG",
+          "render_source_master_id": "EGG",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/EGG/EGG.png",
+          "sha256": "e2d5f40d5b60f536a02d05c6393180da60be4944565c1aee710a02a28a1f1d63",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6597938144329897,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.25167875934250683,
+              0.6467774086378737
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "RICOTTA",
+          "render_source_master_id": "RICOTTA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RICOTTA/RICOTTA.png",
+          "sha256": "578a6d2ffd956ff344632871f328e21b85f9e296883ff8fa4683917e3c08bf7b",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8225108225108225,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "PARMESAN",
+          "render_source_master_id": "PARMESAN",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PARMESAN/PARMESAN.png",
+          "sha256": "1a8c7345ff15195ca3ff4c54c0674375a334a78650add81b4e695d029ac5a268",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.28865979381443296,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.5487883938940018
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a48",
+      "composition_id": "COMP_a48",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S4|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "CAKE",
+          "render_source_master_id": "CAKE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/CAKE/CAKE.png",
+          "sha256": "e9712987621b7f53ec4110da66ad826c0172f4fda1e0d52d13c7464b643dea34",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17834640893989728,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6033635240390939
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "EGG",
+          "render_source_master_id": "EGG",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/EGG/EGG.png",
+          "sha256": "e2d5f40d5b60f536a02d05c6393180da60be4944565c1aee710a02a28a1f1d63",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6597938144329897,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.25167875934250683,
+              0.6467774086378737
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "SPINACH",
+          "render_source_master_id": "SPINACH",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/SPINACH/SPINACH.png",
+          "sha256": "393dfbac30e85e0a11bd26302ab3bdb5fe015ca918ad67a3278810a60ef5cf70",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8225108225108225,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "RICOTTA",
+          "render_source_master_id": "RICOTTA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RICOTTA/RICOTTA.png",
+          "sha256": "578a6d2ffd956ff344632871f328e21b85f9e296883ff8fa4683917e3c08bf7b",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.28865979381443296,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 3,
+          "logical_master_id": "PARMESAN",
+          "render_source_master_id": "PARMESAN",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PARMESAN/PARMESAN.png",
+          "sha256": "1a8c7345ff15195ca3ff4c54c0674375a334a78650add81b4e695d029ac5a268",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8138528138528138,
+          "anchor_y": 0.35051546391752575,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 303,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.6493355481727574,
+              0.5651339088441678
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6493355481727574,
+              0.5650498338870431
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a49",
+      "composition_id": "COMP_a49",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S3|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "CAULIFLOWER",
+          "render_source_master_id": "CAULIFLOWER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/CAULIFLOWER/CAULIFLOWER.png",
+          "sha256": "e21d7233d88798c316294558d0592546998693f529e9bd29d65c87b72e92c594",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17361154852556374,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6033589872536737
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "EGG",
+          "render_source_master_id": "EGG",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/EGG/EGG.png",
+          "sha256": "e2d5f40d5b60f536a02d05c6393180da60be4944565c1aee710a02a28a1f1d63",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6597938144329897,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.25167875934250683,
+              0.6467774086378737
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "PARMESAN",
+          "render_source_master_id": "PARMESAN",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PARMESAN/PARMESAN.png",
+          "sha256": "1a8c7345ff15195ca3ff4c54c0674375a334a78650add81b4e695d029ac5a268",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8225108225108225,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.6547840531561462,
+              0.6523099885783872
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "BUTTER",
+          "render_source_master_id": "BUTTER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BUTTER/BUTTER.png",
+          "sha256": "e0cef340303abd22548ca23696605baf3e26a627fe73a2af3d2f6a91d810751e",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.28865979381443296,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a50",
+      "composition_id": "COMP_a50",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S2|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "EGG",
+          "render_source_master_id": "EGG",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/EGG/EGG.png",
+          "sha256": "e2d5f40d5b60f536a02d05c6393180da60be4944565c1aee710a02a28a1f1d63",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17834640893989728,
+            "raw_image_center_scene": [
+              0.4533635240390939,
+              0.6031893687707641
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "PARMESAN",
+          "render_source_master_id": "PARMESAN",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PARMESAN/PARMESAN.png",
+          "sha256": "1a8c7345ff15195ca3ff4c54c0674375a334a78650add81b4e695d029ac5a268",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6597938144329897,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.6468614835949984
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "CREAM",
+          "render_source_master_id": "BESCIAMELLA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BESCIAMELLA/BESCIAMELLA.png",
+          "sha256": "c577e1377f892e6291d81f775b4b37f3d59e253147c36a6ac780295aaf7200b4",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8225108225108225,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.6547840531561462,
+              0.6523099885783872
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a51",
+      "composition_id": "COMP_a51",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S0|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RICOTTA",
+          "render_source_master_id": "RICOTTA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RICOTTA/RICOTTA.png",
+          "sha256": "578a6d2ffd956ff344632871f328e21b85f9e296883ff8fa4683917e3c08bf7b",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17834640893989728,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a52",
+      "composition_id": "COMP_a52",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S1|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "SCAMORZA",
+          "render_source_master_id": "PROVOLA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PROVOLA/PROVOLA.png",
+          "sha256": "6b171c3b8429a9709402d25eb047ba2efd27ecd8def013a748d50586574dd1c5",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17834640893989728,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "HONEY",
+          "render_source_master_id": "MUSTARD_SAUCE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/MUSTARD_SAUCE/MUSTARD_SAUCE.png",
+          "sha256": "0fb8d063727e729ddb0925a0037672d636bf8e7c37f948a336fe76e570d641a3",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.6523100316275204
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a53",
+      "composition_id": "COMP_a53",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S3|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "ZUCCHINI",
+          "render_source_master_id": "ZUCCHINI",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ZUCCHINI/ZUCCHINI.png",
+          "sha256": "bbf713a1772b1325e6d5a1d827f97a0595eadce57e7784f56105fb629d9bebe8",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17361154852556374,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "EGGPLANT",
+          "render_source_master_id": "EGGPLANT",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/EGGPLANT/EGGPLANT.png",
+          "sha256": "a9abd429231ff0d6927322ee252da82f785b54beddea8a7c34ac513693944237",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6597938144329897,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "PEPPER",
+          "render_source_master_id": "PEPPER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PEPPER/PEPPER.png",
+          "sha256": "a67e134b93516080ad678159ee2311e1d75e3121f60a1641314c1d50aefea7fa",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8225108225108225,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.6547840531561462,
+              0.6523099885783872
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "GARLIC",
+          "render_source_master_id": "GARLIC",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/GARLIC/GARLIC.png",
+          "sha256": "2be5a64b1278d882771828bec987cb60259aaf6ecf535eef98082a1c18c14c21",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.28865979381443296,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.25167875934250683,
+              0.5487043189368771
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a54",
+      "composition_id": "COMP_a54",
+      "resolved_vessel_id": "VESSEL_PLATE",
+      "template_key": "VESSEL_PLATE|P1|S3|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "BREAD",
+          "render_source_master_id": "BREAD",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BREAD/BREAD.png",
+          "sha256": "0e1e3ed322be17d5a0889953749b2d9234ce52ff34c090f7dd78fd74fd014bfa",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5021645021645021,
+          "anchor_y": 0.4948453608247423,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.17834640893989728,
+            "raw_image_center_scene": [
+              0.4531893687707641,
+              0.603363524039094
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.4531893687707641,
+              0.6031893687707641
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "BEVERAGE_BOTTLE",
+          "render_source_master_id": "BEVERAGE_BOTTLE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BEVERAGE_BOTTLE/BEVERAGE_BOTTLE.png",
+          "sha256": "5021ec2488aff1153a91d6b416e4b20cade78ef1ef79a9b9fc2d39e6d6ba057e",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.6597938144329897,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.6467774086378737
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "PROSCIUTTO",
+          "render_source_master_id": "PROSCIUTTO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PROSCIUTTO/PROSCIUTTO.png",
+          "sha256": "d9f23c2ab79af9c9950f805c4f57fb7f145c8f1e9f9ee73a360313e42e2090ee",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8225108225108225,
+          "anchor_y": 0.6804123711340206,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.08609826638477801,
+            "raw_image_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6547840531561462,
+              0.6522259136212625
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "STRACCHINO",
+          "render_source_master_id": "STRACCHINO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/STRACCHINO/STRACCHINO.png",
+          "sha256": "d3955d28797a3a6586cb9153a9c175039b32563668e4fa1463609c83707cfd87",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18181818181818182,
+          "anchor_y": 0.28865979381443296,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.0838124717019963,
+            "raw_image_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2515946843853821,
+              0.5487043189368771
+            ],
+            "reference_short_side_scene": 0.2642524916943521,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "a55",
+      "composition_id": "COMP_a55",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S2|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "ANCHOVY",
+          "render_source_master_id": "ANCHOVY",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ANCHOVY/ANCHOVY.png",
+          "sha256": "d088388756c483799261ac9f9cee6c845ba954cf8174282bae68ab5c43f1fb24",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "CAULIFLOWER",
+          "render_source_master_id": "CAULIFLOWER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/CAULIFLOWER/CAULIFLOWER.png",
+          "sha256": "e21d7233d88798c316294558d0592546998693f529e9bd29d65c87b72e92c594",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6428571428571429,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06532197043327025,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.4879626634957492
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.4878988439306359
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "OLIVE",
+          "render_source_master_id": "OLIVE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/OLIVE/OLIVE.png",
+          "sha256": "f71efcea318a448660ac8678ad318a4b73137ec8e78f5a9adc0fcd883e850938",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.07166390931028677,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.49385321680166117
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b01",
+      "composition_id": "COMP_b01",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S4|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RISOTTO",
+          "render_source_master_id": "RISOTTO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RISOTTO/RISOTTO.png",
+          "sha256": "a59dcfec19cacd77cd7dbd6b5136edcf15941d7eac8603895bb59db298a1cd9c",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RICE",
+          "render_source_master_id": "RICE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RICE/RICE.png",
+          "sha256": "8da4ff1ec59c6dadaade0cbc361fcb0dab31b689bb0118bc4f3f5f2415085d3d",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6142857142857143,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "ONION",
+          "render_source_master_id": "ONION",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ONION/ONION.png",
+          "sha256": "3d94c117123ce5382bb6cf9ec1a7f74aa699ccd3bf3db5a6a3a029424b611e2d",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06532197043327025,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4938470238983478
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "PARMESAN",
+          "render_source_master_id": "PARMESAN",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PARMESAN/PARMESAN.png",
+          "sha256": "1a8c7345ff15195ca3ff4c54c0674375a334a78650add81b4e695d029ac5a268",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.2714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.4114672606510142
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 3,
+          "logical_master_id": "BUTTER",
+          "render_source_master_id": "BUTTER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BUTTER/BUTTER.png",
+          "sha256": "e0cef340303abd22548ca23696605baf3e26a627fe73a2af3d2f6a91d810751e",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.32857142857142857,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 303,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b02",
+      "composition_id": "COMP_b02",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S3|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RISOTTO",
+          "render_source_master_id": "RISOTTO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RISOTTO/RISOTTO.png",
+          "sha256": "a59dcfec19cacd77cd7dbd6b5136edcf15941d7eac8603895bb59db298a1cd9c",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RICE",
+          "render_source_master_id": "RICE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RICE/RICE.png",
+          "sha256": "8da4ff1ec59c6dadaade0cbc361fcb0dab31b689bb0118bc4f3f5f2415085d3d",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6142857142857143,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "PORCINI",
+          "render_source_master_id": "MUSHROOM",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/MUSHROOM/MUSHROOM.png",
+          "sha256": "da2709c8934693fb30a1f441e952b5971d740b781f1060eda97141bb9a8dc0eb",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4938487635411876
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 3,
+          "logical_master_id": "ONION",
+          "render_source_master_id": "ONION",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ONION/ONION.png",
+          "sha256": "3d94c117123ce5382bb6cf9ec1a7f74aa699ccd3bf3db5a6a3a029424b611e2d",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.2714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06532197043327025,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.41146552100817435
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b03",
+      "composition_id": "COMP_b03",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S4|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RISOTTO",
+          "render_source_master_id": "RISOTTO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RISOTTO/RISOTTO.png",
+          "sha256": "a59dcfec19cacd77cd7dbd6b5136edcf15941d7eac8603895bb59db298a1cd9c",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RICE",
+          "render_source_master_id": "RICE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RICE/RICE.png",
+          "sha256": "8da4ff1ec59c6dadaade0cbc361fcb0dab31b689bb0118bc4f3f5f2415085d3d",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6142857142857143,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "SQUID",
+          "render_source_master_id": "SQUID",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/SQUID/SQUID.png",
+          "sha256": "e7ba7fb438b0977250e8440b92623ba521fca3c578f586c85a479ad7b72dc25c",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "MUSSEL",
+          "render_source_master_id": "MUSSEL",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/MUSSEL/MUSSEL.png",
+          "sha256": "39cc2d4a164cd98b6669a06018a58092fe618edd471e36b7875cb389f0ef87d2",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.2714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06590520231213873,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 3,
+          "logical_master_id": "CLAM",
+          "render_source_master_id": "CLAM",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/CLAM/CLAM.png",
+          "sha256": "3e0331aff97d9879625c6984bf263c7ce7ec903783484bceffcdca24277215e4",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.32857142857142857,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 303,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06590520231213873,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b04",
+      "composition_id": "COMP_b04",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S4|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RISOTTO",
+          "render_source_master_id": "RISOTTO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RISOTTO/RISOTTO.png",
+          "sha256": "a59dcfec19cacd77cd7dbd6b5136edcf15941d7eac8603895bb59db298a1cd9c",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RICE",
+          "render_source_master_id": "RICE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RICE/RICE.png",
+          "sha256": "8da4ff1ec59c6dadaade0cbc361fcb0dab31b689bb0118bc4f3f5f2415085d3d",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6142857142857143,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "ONION",
+          "render_source_master_id": "ONION",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ONION/ONION.png",
+          "sha256": "3d94c117123ce5382bb6cf9ec1a7f74aa699ccd3bf3db5a6a3a029424b611e2d",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06532197043327025,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4938470238983478
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "RADICCHIO",
+          "render_source_master_id": "RADICCHIO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RADICCHIO/RADICCHIO.png",
+          "sha256": "89798acb2aef86ef87897f00f01af59ad7468c032e99ff79e8822fa88c5c8ad0",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.2714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.4114672606510142
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 3,
+          "logical_master_id": "GORGONZOLA",
+          "render_source_master_id": "GORGONZOLA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/GORGONZOLA/GORGONZOLA.png",
+          "sha256": "1826b14bacc164e1732241099fb65cecbeecf6032a1914dd1eaeccf277d55746",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.32857142857142857,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 303,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4232360467781819
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b05",
+      "composition_id": "COMP_b05",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S4|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RISOTTO",
+          "render_source_master_id": "RISOTTO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RISOTTO/RISOTTO.png",
+          "sha256": "a59dcfec19cacd77cd7dbd6b5136edcf15941d7eac8603895bb59db298a1cd9c",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RICE",
+          "render_source_master_id": "RICE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RICE/RICE.png",
+          "sha256": "8da4ff1ec59c6dadaade0cbc361fcb0dab31b689bb0118bc4f3f5f2415085d3d",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6142857142857143,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "ONION",
+          "render_source_master_id": "ONION",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ONION/ONION.png",
+          "sha256": "3d94c117123ce5382bb6cf9ec1a7f74aa699ccd3bf3db5a6a3a029424b611e2d",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06532197043327025,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4938470238983478
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "PUMPKIN",
+          "render_source_master_id": "PUMPKIN",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PUMPKIN/PUMPKIN.png",
+          "sha256": "880c381c456e67f3d8112c6dd5f4ca0af50e40d196b96be86e99e709d63e90c4",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.2714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06532197043327025,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.4114655210081743
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 3,
+          "logical_master_id": "PARMESAN",
+          "render_source_master_id": "PARMESAN",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PARMESAN/PARMESAN.png",
+          "sha256": "1a8c7345ff15195ca3ff4c54c0674375a334a78650add81b4e695d029ac5a268",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.32857142857142857,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 303,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4232360467781819
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b06",
+      "composition_id": "COMP_b06",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S4|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RISOTTO",
+          "render_source_master_id": "RISOTTO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RISOTTO/RISOTTO.png",
+          "sha256": "a59dcfec19cacd77cd7dbd6b5136edcf15941d7eac8603895bb59db298a1cd9c",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RICE",
+          "render_source_master_id": "RICE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RICE/RICE.png",
+          "sha256": "8da4ff1ec59c6dadaade0cbc361fcb0dab31b689bb0118bc4f3f5f2415085d3d",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6142857142857143,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "ONION",
+          "render_source_master_id": "ONION",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ONION/ONION.png",
+          "sha256": "3d94c117123ce5382bb6cf9ec1a7f74aa699ccd3bf3db5a6a3a029424b611e2d",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06532197043327025,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4938470238983478
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "PARMESAN",
+          "render_source_master_id": "PARMESAN",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PARMESAN/PARMESAN.png",
+          "sha256": "1a8c7345ff15195ca3ff4c54c0674375a334a78650add81b4e695d029ac5a268",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.2714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.4114672606510142
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 3,
+          "logical_master_id": "BUTTER",
+          "render_source_master_id": "BUTTER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BUTTER/BUTTER.png",
+          "sha256": "e0cef340303abd22548ca23696605baf3e26a627fe73a2af3d2f6a91d810751e",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.32857142857142857,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 303,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b07",
+      "composition_id": "COMP_b07",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S4|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RISOTTO",
+          "render_source_master_id": "RISOTTO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RISOTTO/RISOTTO.png",
+          "sha256": "a59dcfec19cacd77cd7dbd6b5136edcf15941d7eac8603895bb59db298a1cd9c",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RICE",
+          "render_source_master_id": "RICE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RICE/RICE.png",
+          "sha256": "8da4ff1ec59c6dadaade0cbc361fcb0dab31b689bb0118bc4f3f5f2415085d3d",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6142857142857143,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "ONION",
+          "render_source_master_id": "ONION",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ONION/ONION.png",
+          "sha256": "3d94c117123ce5382bb6cf9ec1a7f74aa699ccd3bf3db5a6a3a029424b611e2d",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06532197043327025,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4938470238983478
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "ASPARAGUS",
+          "render_source_master_id": "ASPARAGUS",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ASPARAGUS/ASPARAGUS.png",
+          "sha256": "14b9846cfcfd2e88ec9cbdb66c50b47e50c0671c0d3344b7b7eb4d7d96413670",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.2714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 3,
+          "logical_master_id": "PARMESAN",
+          "render_source_master_id": "PARMESAN",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PARMESAN/PARMESAN.png",
+          "sha256": "1a8c7345ff15195ca3ff4c54c0674375a334a78650add81b4e695d029ac5a268",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.32857142857142857,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 303,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4232360467781819
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b08",
+      "composition_id": "COMP_b08",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S3|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RISOTTO",
+          "render_source_master_id": "RISOTTO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RISOTTO/RISOTTO.png",
+          "sha256": "a59dcfec19cacd77cd7dbd6b5136edcf15941d7eac8603895bb59db298a1cd9c",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RICE",
+          "render_source_master_id": "RICE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RICE/RICE.png",
+          "sha256": "8da4ff1ec59c6dadaade0cbc361fcb0dab31b689bb0118bc4f3f5f2415085d3d",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6142857142857143,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "CLAM",
+          "render_source_master_id": "CLAM",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/CLAM/CLAM.png",
+          "sha256": "3e0331aff97d9879625c6984bf263c7ce7ec903783484bceffcdca24277215e4",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06590520231213873,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "SHRIMP",
+          "render_source_master_id": "SHRIMP",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/SHRIMP/SHRIMP.png",
+          "sha256": "dcb707459dab88394ea8950a1c83349adebf046aaa6e7da6b0e7fc07c8419393",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.2714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.4114672606510142
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b09",
+      "composition_id": "COMP_b09",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S4|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RISOTTO",
+          "render_source_master_id": "RISOTTO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RISOTTO/RISOTTO.png",
+          "sha256": "a59dcfec19cacd77cd7dbd6b5136edcf15941d7eac8603895bb59db298a1cd9c",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "RICE",
+          "render_source_master_id": "RICE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/RICE/RICE.png",
+          "sha256": "8da4ff1ec59c6dadaade0cbc361fcb0dab31b689bb0118bc4f3f5f2415085d3d",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6142857142857143,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "ONION",
+          "render_source_master_id": "ONION",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ONION/ONION.png",
+          "sha256": "3d94c117123ce5382bb6cf9ec1a7f74aa699ccd3bf3db5a6a3a029424b611e2d",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06532197043327025,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4938470238983478
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "FONTINA",
+          "render_source_master_id": "FONTINA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/FONTINA/FONTINA.png",
+          "sha256": "b16d7f7ee3b19ed7ade767cb8494225f9a6107c78076b0b3a047c8431d9ee7d0",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.2714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.4114672606510142
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 3,
+          "logical_master_id": "BUTTER",
+          "render_source_master_id": "BUTTER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BUTTER/BUTTER.png",
+          "sha256": "e0cef340303abd22548ca23696605baf3e26a627fe73a2af3d2f6a91d810751e",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.32857142857142857,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 303,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b10",
+      "composition_id": "COMP_b10",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S4|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "GNOCCHI",
+          "render_source_master_id": "GNOCCHI",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/GNOCCHI/GNOCCHI.png",
+          "sha256": "d78f6ec83b054ddb1c10382b2394660747594804bad0d7fae6b4c31470a6a830",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "EGG",
+          "render_source_master_id": "EGG",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/EGG/EGG.png",
+          "sha256": "e2d5f40d5b60f536a02d05c6393180da60be4944565c1aee710a02a28a1f1d63",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6142857142857143,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.29088922596893335,
+              0.482014450867052
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "POTATO",
+          "render_source_master_id": "POTATO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/POTATO/POTATO.png",
+          "sha256": "06e084908917296744f02bbfa0012f30365d39fd7dbc5abdf3ff0f67264fb567",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06532197043327025,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "TOMATO_SAUCE",
+          "render_source_master_id": "ROSA_SAUCE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ROSA_SAUCE/ROSA_SAUCE.png",
+          "sha256": "3a514d9c155fa32994d6947e09e87a07b2973d7765688cf2d1c536cd42729cfb",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.2714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.4114672942027535
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 3,
+          "logical_master_id": "TOMATO",
+          "render_source_master_id": "TOMATO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/TOMATO/TOMATO.png",
+          "sha256": "3d6f5c199bc904b46519320ce7ca2b411352aed2275f2d189c016d5805ffbf25",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.32857142857142857,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 303,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b11",
+      "composition_id": "COMP_b11",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S4|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "GNOCCHI",
+          "render_source_master_id": "GNOCCHI",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/GNOCCHI/GNOCCHI.png",
+          "sha256": "d78f6ec83b054ddb1c10382b2394660747594804bad0d7fae6b4c31470a6a830",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "POTATO",
+          "render_source_master_id": "POTATO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/POTATO/POTATO.png",
+          "sha256": "06e084908917296744f02bbfa0012f30365d39fd7dbc5abdf3ff0f67264fb567",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6142857142857143,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06532197043327025,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "TOMATO_SAUCE",
+          "render_source_master_id": "ROSA_SAUCE",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/ROSA_SAUCE/ROSA_SAUCE.png",
+          "sha256": "3a514d9c155fa32994d6947e09e87a07b2973d7765688cf2d1c536cd42729cfb",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.49384879709292695
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "TOMATO",
+          "render_source_master_id": "TOMATO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/TOMATO/TOMATO.png",
+          "sha256": "3d6f5c199bc904b46519320ce7ca2b411352aed2275f2d189c016d5805ffbf25",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.2714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 3,
+          "logical_master_id": "MOZZARELLA",
+          "render_source_master_id": "MOZZARELLA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/MOZZARELLA/MOZZARELLA.png",
+          "sha256": "b59c39e31349f02af19415439ac955ee7bbd531cad83d8a3ac97375686f4d189",
+          "slot_index": 3,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.32857142857142857,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 303,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4232360467781819
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.42317052023121393
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b12",
+      "composition_id": "COMP_b12",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S2|D0|A1",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "GNOCCHI",
+          "render_source_master_id": "GNOCCHI",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/GNOCCHI/GNOCCHI.png",
+          "sha256": "d78f6ec83b054ddb1c10382b2394660747594804bad0d7fae6b4c31470a6a830",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "POTATO",
+          "render_source_master_id": "POTATO",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/POTATO/POTATO.png",
+          "sha256": "06e084908917296744f02bbfa0012f30365d39fd7dbc5abdf3ff0f67264fb567",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6428571428571429,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06532197043327025,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.4878988439306359
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.4878988439306359
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "PARMESAN",
+          "render_source_master_id": "PARMESAN",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PARMESAN/PARMESAN.png",
+          "sha256": "1a8c7345ff15195ca3ff4c54c0674375a334a78650add81b4e695d029ac5a268",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4938487635411876
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "sauce",
+          "matrix_slot_index": 0,
+          "logical_master_id": "BUTTER_SAGE",
+          "render_source_master_id": "BUTTER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BUTTER/BUTTER.png",
+          "sha256": "e0cef340303abd22548ca23696605baf3e26a627fe73a2af3d2f6a91d810751e",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.72,
+          "rotation_deg": 0,
+          "z_index": 160,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.1725518024172359,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b13",
+      "composition_id": "COMP_b13",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S3|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "GNOCCHI",
+          "render_source_master_id": "GNOCCHI",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/GNOCCHI/GNOCCHI.png",
+          "sha256": "d78f6ec83b054ddb1c10382b2394660747594804bad0d7fae6b4c31470a6a830",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4586126121742933
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "EGG",
+          "render_source_master_id": "EGG",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/EGG/EGG.png",
+          "sha256": "e2d5f40d5b60f536a02d05c6393180da60be4944565c1aee710a02a28a1f1d63",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6142857142857143,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.29088922596893335,
+              0.482014450867052
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.482014450867052
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "PARMESAN",
+          "render_source_master_id": "PARMESAN",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PARMESAN/PARMESAN.png",
+          "sha256": "1a8c7345ff15195ca3ff4c54c0674375a334a78650add81b4e695d029ac5a268",
+          "slot_index": 1,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.8205128205128205,
+          "anchor_y": 0.6714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 301,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.6556560693641619,
+              0.4938487635411876
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.6556560693641619,
+              0.49378323699421967
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 2,
+          "logical_master_id": "BUTTER",
+          "render_source_master_id": "BUTTER",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BUTTER/BUTTER.png",
+          "sha256": "e0cef340303abd22548ca23696605baf3e26a627fe73a2af3d2f6a91d810751e",
+          "slot_index": 2,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.2714285714285714,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 302,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.41140173410404623
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b14",
+      "composition_id": "COMP_b14",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S1|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "EGG",
+          "render_source_master_id": "EGG",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/EGG/EGG.png",
+          "sha256": "e2d5f40d5b60f536a02d05c6393180da60be4944565c1aee710a02a28a1f1d63",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.4733756179546401,
+              0.4584768786127168
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "BREAD",
+          "render_source_master_id": "BREAD",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/BREAD/BREAD.png",
+          "sha256": "0e1e3ed322be17d5a0889953749b2d9234ce52ff34c090f7dd78fd74fd014bfa",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.18461538461538463,
+          "anchor_y": 0.6428571428571429,
+          "target_span": 0.28,
+          "rotation_deg": 0,
+          "z_index": 300,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.06710347871781397,
+            "raw_image_center_scene": [
+              0.2908236994219654,
+              0.4879643704776038
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.2908236994219654,
+              0.4878988439306359
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "recipe_id": "b15",
+      "composition_id": "COMP_b15",
+      "resolved_vessel_id": "VESSEL_BOWL",
+      "template_key": "VESSEL_BOWL|P1|S3|D0|A0",
+      "gauge_profile": "G4_NEUTRAL_RESERVED_MAX_0.27",
+      "animation_profile": "STATIC_BASE_G6_ADAPTS",
+      "layers": [
+        {
+          "role": "primary",
+          "matrix_slot_index": 0,
+          "logical_master_id": "FILLED_PASTA",
+          "render_source_master_id": "FILLED_PASTA",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/FILLED_PASTA/FILLED_PASTA.png",
+          "sha256": "1fd6519d7da405c32cec9d1be7eadce500649a49be93b2b67440a0c0ce559823",
+          "slot_index": 0,
+          "anchor_ref": "VESSEL_INNER_BBOX",
+          "anchor_x": 0.5025641025641026,
+          "anchor_y": 0.5,
+          "target_span": 0.58,
+          "rotation_deg": 0,
+          "z_index": 220,
+          "fit_mode": "ALPHA_CONTAIN_PRESERVE_ASPECT",
+          "transform": {
+            "raw_image_side_scene": 0.13900006305832893,
+            "raw_image_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "visible_alpha_bbox_center_scene": [
+              0.47323988439306364,
+              0.4584768786127168
+            ],
+            "reference_short_side_scene": 0.2059537572254335,
+            "uniform_scale": true,
+            "mirror": false,
+            "crop": false,
+            "filter": false
+          },
+          "alpha_outside_safe_pixels_4x": 0
+        },
+        {
+          "role": "secondary",
+          "matrix_slot_index": 1,
+          "logical_master_id": "PORK",
+          "render_source_master_id": "PORK",
+          "variant_id": null,
+          "asset_file": "assets/food-objects/PORK/PORK.png",

@@ -1,0 +1,2 @@
+export const CALIBRATION=Object.freeze({id:'MEALUP_GAUGE_KCAL_0_800_V2',minKcal:0,maxKcal:800,minAngle:-70,maxAngle:70,neutral:'UP',rotation:'CLOCKWISE_DEGREES',overflow:'CLAMP_NEEDLE_KEEP_REAL_VALUE',unknown:'HIDE_NEEDLE_KEEP_UNKNOWN_TEXT',nutritionJudgement:false});
+export function kcalToAngle(kcal){if(!Number.isFinite(kcal)||kcal<0)throw Error('INVALID_KCAL');return -70+140*Math.min(kcal,800)/800;}

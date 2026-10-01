@@ -1,0 +1,46 @@
+{
+  "document": "MealUp C6.3 — Corrupted Gates Recovery Evidence v19",
+  "date": "2026-10-01",
+  "branch": "mealup-redesign-preview",
+  "corruption": {
+    "historical_path": "G5/recipe-geometry.json",
+    "historical_preserved": true,
+    "successor": "G5/recipe-geometry.v2.corrected.json",
+    "successor_sha256": "02e0fdd7ec1490a329eab73755f6c882995708e2cddcec712d2a92623f192ad6"
+  },
+  "audit": {
+    "recipes": 454,
+    "unique_recipe_ids": 454,
+    "layers": 1537,
+    "structural_errors": 0,
+    "validated_slot_source_failures": 0,
+    "healthy_prefix_compared": 72,
+    "healthy_prefix_mismatches": 0
+  },
+  "binding": {
+    "expected_inputs_path": "../G5/recipe-geometry.v2.corrected.json",
+    "expected_inputs_sha256": "02e0fdd7ec1490a329eab73755f6c882995708e2cddcec712d2a92623f192ad6",
+    "index_loads_classic_bundle": true,
+    "bundle_bound_to_successor": true,
+    "corrected_transport_shards": 12,
+    "old_corrupted_shards": 0
+  },
+  "gates": {
+    "G5": "PASS_SUCCESSOR_CORRECTION",
+    "G8": "PASS_RECERTIFIED_SUCCESSOR",
+    "G11": "PASS_STATIC_RECERTIFICATION",
+    "G12": "RUNTIME_RETEST_PENDING",
+    "G13": "FROZEN_WITH_SUCCESSOR_CORRECTION_PATCH"
+  },
+  "isolation": {
+    "main_sha": "120104b633d6676a6bb04f91b2e7e3e285198424",
+    "main_modified": false,
+    "deployment": "NOT_PERFORMED",
+    "tester_count_operational": 1,
+    "tester_branch": "mealup-redesign-preview"
+  },
+  "remaining": [
+    "Fresh browser/runtime validation against corrected successor",
+    "Manual iPhone visual confirmation"
+  ]
+}

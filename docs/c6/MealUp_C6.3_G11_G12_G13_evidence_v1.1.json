@@ -1,0 +1,60 @@
+{
+  "schema": "MealUp_C6.3_G11_G12_G13_Review/1.2",
+  "approved_by_user": true,
+  "approval_date": "2026-09-30",
+  "freeze_date": "2026-09-30",
+  "gates": {
+    "G11": "PASS_FROZEN",
+    "G12": "PASS_FROZEN",
+    "G13": "PASS_FROZEN_USER_WAIVER_TESTER"
+  },
+  "g13_closure": {
+    "tester_human_report": "NOT_RECEIVED",
+    "tester_requirement_waived_by_user": true,
+    "waiver_scope": "G13 human tester PASS only",
+    "technical_baseline_commit": "6932e427bf9db317ab6580990a24d851832ccb9d",
+    "technical_baseline_verified": true
+  },
+  "upstream_main": "120104b633d6676a6bb04f91b2e7e3e285198424",
+  "remote_main_modified": false,
+  "deployment": "NOT_PERFORMED",
+  "protected_functions_byte_identical": true,
+  "runtime_cases": 10896,
+  "bounds_alpha_checks": 33639,
+  "app_interactions": 69,
+  "g12_dom_cases": 3632,
+  "canonical_png_assets_verified": 118,
+  "legacy_svg_after": 0,
+  "artifacts": [
+    {
+      "path": "index.html",
+      "bytes": 1247641,
+      "sha256": "e0af92628742604e74430f39d1cb1d014142d5adc4c1fa804fbe4d9877904534"
+    },
+    {
+      "path": "G11/app-wiring.mjs",
+      "bytes": 18073,
+      "sha256": "4c06f956484bae2abf25e369b349d9697538a056f19d7b3bb063f7f392b5ce8d"
+    },
+    {
+      "path": "G11/bootstrap.mjs",
+      "bytes": 317,
+      "sha256": "48b2fd3adaca3f2ccdd13d722a51b352c7c6873f860909c88b35d86306cc6a4e"
+    },
+    {
+      "path": "G11/full-runtime-browser-report.json",
+      "bytes": 426,
+      "sha256": "3c10e068e380626e5e111c469c52e3d3bf60fc8842ee5d1b8bbe5f3629896061"
+    },
+    {
+      "path": "G11/app-browser-qa-report.json",
+      "bytes": 389780,
+      "sha256": "decf901e7174ce76e19072f491cf1d0fe7fe4f6f4dad0e2ec74a582a210907e9"
+    },
+    {
+      "path": "G12/actual-app-dom-qa-report.json",
+      "bytes": 928,
+      "sha256": "65063adcbcc7a8cd09d384ab719ad63901419804fa1819909971cc73739ecfe8"
+    }
+  ]
+}
