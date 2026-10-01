@@ -472,12 +472,14 @@ async function createG11Runtime({fontFamily='Satoshi'}={}){
    }
    return new TextEncoder().encode(chunks.join(''));
   }
-  const r=await fetch(new URL(path,new URL('../G8/',__MEALUP_G11_SCRIPT_BASE)));
+  const assetURL=new URL(path,new URL('../G8/',__MEALUP_G11_SCRIPT_BASE));
+  assetURL.searchParams.set('v','recipe-geometry-v2-correction-20261001');
+  const r=await fetch(assetURL);
   if(!r.ok)throw Error('G11_S1_FETCH');
   return new Uint8Array(await r.arrayBuffer());
  };
  const kit=await loadVerifiedKit({readBytes,sha256:digest}),compiler=createSceneCompiler(kit),cache=new Map(),versions=new WeakMap();
- async function assetsFor(plan){const out={};for(const a of requiredAssets(plan)){if(!cache.has(a.key)){const bytes=await readBytes(a.path);if(await digest(bytes)!==a.sha256)throw Error('G11_S1_HASH');const image=await createImageBitmap(new Blob([bytes],{type:'image/png'}));cache.set(a.key,{image,sha256:a.sha256,...(a.mask?{alphaMask:luminanceMaskToAlpha(image,{createCanvas:canvas})}:{})});}out[a.key]=cache.get(a.key);}return out;}
+async function assetsFor(plan){const out={};for(const a of requiredAssets(plan)){if(!cache.has(a.key)){const bytes=await readBytes(a.path);if(await digest(bytes)!==a.sha256)throw Error('G11_S1_HASH');const image=await createImageBitmap(new Blob([bytes],{type:'image/png'}));cache.set(a.key,{image,sha256:a.sha256,...(a.mask?{alphaMask:luminanceMaskToAlpha(image,{createCanvas:canvas})}:{})});}out[a.key]=cache.get(a.key);}return out;}
  async function render({surfaceEl,artHost,valueHost,recipe_id,surfaceId,kcal_value,context_id='g11-app',revision=0,cook_people=1,hostWidth,fontEm=19.52,measurements,motion={}}){
   if(!G11_ROLLOUT_ORDER.includes(surfaceId))throw Error('G11_UNKNOWN_SURFACE');if(!surfaceEl||!artHost||!valueHost)throw Error('G11_HOSTS_REQUIRED');
   const token=(versions.get(surfaceEl)||0)+1;versions.set(surfaceEl,token);const state=createGaugeState({recipe_id,context_id,revision,kcal_value,source:'EXISTING_APP_VALUE',portion_ref:'standard',cook_people});
