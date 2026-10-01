@@ -48,3 +48,9 @@ The successor is deterministic from the frozen G4/G5 inputs and does not introdu
 
 The repository-side corruption recovery is complete. Full post-correction closure of G12/G13 requires one fresh runtime/browser validation against the corrected successor, including manual iPhone visual confirmation that migrated recipe surfaces show the canonical Food Objects rather than legacy `arteRicetta()`.
 
+## Cache correction update — 2026-10-01
+
+- Bundle cache-busting patch published on the tester branch: `9bb279bf8f18ab524ab56753bb2ad9549c683481`.
+- Tester HTML bundle-version patch published: `703d2c49e2c5be00921469f67db56c77726ae5c3`.
+- The corrected geometry and its 12 shards remain unchanged and verified.
+- Fresh visual retest remains pending until the preview CDN serves the new versioned page.
