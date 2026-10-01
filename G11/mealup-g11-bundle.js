@@ -466,14 +466,14 @@ async function createG11Runtime({fontFamily='Satoshi'}={}){
    const files=["transport/recipe-geometry-v2.part01.txt","transport/recipe-geometry-v2.part02.txt","transport/recipe-geometry-v2.part03.txt","transport/recipe-geometry-v2.part04.txt","transport/recipe-geometry-v2.part05.txt","transport/recipe-geometry-v2.part06.txt","transport/recipe-geometry-v2.part07.txt","transport/recipe-geometry-v2.part08.txt","transport/recipe-geometry-v2.part09.txt","transport/recipe-geometry-v2.part10.txt","transport/recipe-geometry-v2.part11.txt","transport/recipe-geometry-v2.part12.txt"];
    const chunks=[];
    for(const file of files){
-    const r=await fetch(new URL(file+'?v=recipe-geometry-v2-correction-20261001',__MEALUP_G11_SCRIPT_BASE),{cache:'no-store'});
+    const shardBase='https://raw.githubusercontent.com/battagliafilippo/MealUp/97a71f11c0b3d324c75509c89696b413ee963d40/G11/';
+    const r=await fetch(new URL(file,shardBase),{cache:'no-store'});
     if(!r.ok)throw Error('G11_S1_FETCH_RECIPE_GEOMETRY_V2_SHARD');
     chunks.push(await r.text());
    }
    return new TextEncoder().encode(chunks.join(''));
   }
-  const assetURL=new URL(path,new URL('../G8/',__MEALUP_G11_SCRIPT_BASE));
-  assetURL.searchParams.set('v','recipe-geometry-v2-correction-20261001');
+  const assetURL=new URL(path,'https://raw.githubusercontent.com/battagliafilippo/MealUp/97a71f11c0b3d324c75509c89696b413ee963d40/');
   const r=await fetch(assetURL);
   if(!r.ok)throw Error('G11_S1_FETCH');
   return new Uint8Array(await r.arrayBuffer());
