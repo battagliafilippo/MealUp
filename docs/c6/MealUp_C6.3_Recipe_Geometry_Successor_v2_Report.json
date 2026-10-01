@@ -1,7 +1,7 @@
 {
   "document": "MealUp C6.3 — Recipe Geometry Successor Correction",
   "date": "2026-09-30",
-  "status": "VALIDATED_SUCCESSOR_CREATED",
+  "status": "SUCCESSOR_VALIDATED_AND_BOUND_TO_SINGLE_TESTER",
   "successor_path": "G5/recipe-geometry.v2.corrected.json",
   "recipe_count": 454,
   "unique_recipe_ids": 454,
@@ -11,5 +11,28 @@
   "validated_slot_source_failures": 0,
   "original_path_preserved": "G5/recipe-geometry.json",
   "original_modified": false,
-  "note": "Successor is deterministic from frozen inputs; original corrupted file remains untouched for traceability. SHA-256 will be recorded after byte-level verification of the committed successor."
+  "note": "Successor is deterministic from frozen inputs; original corrupted file remains untouched for traceability. SHA-256 will be recorded after byte-level verification of the committed successor.",
+  "sha256": "02e0fdd7ec1490a329eab73755f6c882995708e2cddcec712d2a92623f192ad6",
+  "committed_blob_sha": "2452be2b78593cea0a258da22a925b553798d4a2",
+  "committed_blob_chars": 2035393,
+  "committed_json_parse": "PASS",
+  "layer_count": 1537,
+  "structural_audit_errors": 0,
+  "transport": {
+    "strategy": "12 deterministic text shards for raw.githack/single tester transport only",
+    "shard_count": 12,
+    "total_bytes": 2035393,
+    "byte_identical_to_successor": true,
+    "old_corrupted_shards_removed": true
+  },
+  "tester_binding": {
+    "branch": "mealup-redesign-preview",
+    "expected_inputs_path": "../G5/recipe-geometry.v2.corrected.json",
+    "expected_inputs_sha256": "02e0fdd7ec1490a329eab73755f6c882995708e2cddcec712d2a92623f192ad6",
+    "classic_bundle_bound": true,
+    "temporary_diagnostic_removed": true,
+    "manual_ios_visual_test": "PENDING"
+  },
+  "main_modified": false,
+  "deployment": "NOT_PERFORMED"
 }
