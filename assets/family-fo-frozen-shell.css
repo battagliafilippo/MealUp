@@ -23,3 +23,19 @@ html,body,button,input,select,textarea,h1,h2,h3,h4,h5,h6{font-family:"Satoshi",s
 #view-home .mealup-fo-slot[data-fo-state="missing"]{background:rgba(242,219,198,.13);border-color:rgba(242,219,198,.22)}
 #view-fridge,#view-spesa,#view-profile{font-family:"Satoshi",sans-serif}
 @media (prefers-reduced-motion:reduce){#view-home *,#view-search *,#cook-mode *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Family FO adopts the geometry of existing approved hosts; no host is resized here. */
+.scheda-arte>.mealup-fo-slot,
+.dettaglio-arte>.mealup-fo-slot,
+.storico-arte>.mealup-fo-slot,
+.avanzo-arte>.mealup-fo-slot{
+  width:100%;
+  height:100%;
+}
+.scheda-arte>.mealup-fo-slot>img,
+.dettaglio-arte>.mealup-fo-slot>img,
+.storico-arte>.mealup-fo-slot>img,
+.avanzo-arte>.mealup-fo-slot>img{
+  max-width:100%;
+  max-height:100%;
+}
