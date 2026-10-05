@@ -3418,6 +3418,36 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 
 </style>
 <link rel="stylesheet" href="./assets/family-fo-frozen-shell.css?v=1">
+<style id="mealup-dimmi-tu-frozen">
+/* MealUp FROZEN · Dimmi Tu: carousel orizzontale, mai stack verticale.
+   La card corrente resta protagonista e la successiva rimane parzialmente visibile. */
+.dimmi-tu-carousel{
+  display:flex;
+  gap:12px;
+  width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-inline:contain;
+  scrollbar-width:none;
+  padding:2px 14% 8px 0;
+  margin:0 0 4px;
+}
+.dimmi-tu-carousel::-webkit-scrollbar{display:none}
+.dimmi-tu-carousel .dimmi-tu-card{
+  flex:0 0 86%;
+  width:86%;
+  margin:0;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  animation:none;
+}
+@media (prefers-reduced-motion:reduce){
+  .dimmi-tu-carousel{scroll-behavior:auto}
+}
+</style>
 </head>
 <body>
 
@@ -9213,13 +9243,14 @@ function renderPasto(id) {
     const consigli = suggestFor(id, riga.budget, riga.budgetP)
       .filter(o => !sepolte.has('pasto:' + o.r.id));
     if (consigli.length) {
-      html += `<span class="sezione-titolo">Per te, adesso</span>` +
+      html += `<span class="sezione-titolo">Per te, adesso</span>
+        <div class="dimmi-tu-carousel" role="region" aria-label="Proposte Dimmi tu">` +
         consigli.map(o => `
-          <button type="button" class="sugg" data-act="detail" data-val="${esc(o.r.id)}">
+          <button type="button" class="sugg dimmi-tu-card" data-act="detail" data-val="${esc(o.r.id)}">
             <span class="sugg-t">${esc(o.r.title)}</span>
             <span class="sugg-m">${o.kcal} kcal \u00b7 ${o.pro}g proteine${o.motivi.length ? ' \u00b7 ' + esc(o.motivi.join(' \u00b7 ')) : ''}</span>
             ${xSugg('pasto:' + esc(o.r.id))}
-          </button>`).join('');
+          </button>`).join('') + `</div>`;
       const ids = consigli.map(o => o.r.id);
       piatti = piatti.filter(r => !ids.includes(r.id));
     }
