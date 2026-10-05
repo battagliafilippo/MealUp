@@ -4433,6 +4433,7 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 
 
 <div id="toast" role="status" aria-live="polite"></div>
+<script src="./assets/family-fo/runtime.js?v=2"></script>
 <script>
 (function () {
 'use strict';
@@ -8011,7 +8012,7 @@ function recipeCard(r, extra, n) {
     <button type="button" class="glass-card card-btn scheda con-stella ${fuori ? 'fuori-stagione' : ''}"
       data-act="detail" data-val="${esc(r.id)}"${ritardo}
       ${fuori ? 'title="Fuori stagione"' : ''}>
-      <span class="scheda-arte" ${copertura ? `style="--riempi:${copertura}%"` : ''}>${arteRicetta(r)}</span>
+      <span class="scheda-arte" ${copertura ? `style="--riempi:${copertura}%"` : ''}>${arteRicetta(r, 'RECIPE_CARD')}</span>
       <span class="scheda-testo">
         <span class="scheda-titolo">${esc(r.title)}</span>
         ${piede}
@@ -8449,7 +8450,10 @@ const PESCI = ['pesce', 'salmone', 'tonno', 'orata', 'branzino', 'merluzzo', 'ba
 const GASSATE = ['cola', 'sprite', 'fanta', 'aranciata', 'gassosa', 'gazzosa', 'chinotto',
   'tonica', 'cedrata', 'spuma', 'soda'];
 
-function arteRicetta(r) {
+function arteRicetta(r, host) {
+  if (window.MealUpFamilyFO && r && r.id) {
+    return window.MealUpFamilyFO.markup(r.id, host || 'RECIPE_CARD', 'fo-recipe');
+  }
   const t = norm(r.title);
   // La famiglia si giudica dal titolo o dall'ingrediente che pesa di piu',
   // non da una comparsa: le uova ripiene col tonno restano uova, non pesce.
@@ -10586,7 +10590,7 @@ function anteprimaRicetta(id) {
   const cov = S.pantry.length ? coverage(r) : null;
   document.getElementById('detail-body').innerHTML = `
 
-    <span class="dettaglio-arte">${arteRicetta(r)}</span>
+    <span class="dettaglio-arte">${arteRicetta(r, 'RECIPE_DETAIL')}</span>
     <h2 style="text-align:center">${esc(r.title)}</h2>
     ${porzioniCucina(r) > 1 ? `<p class="in-tutto">In tutto per ${porzioniCucina(r)}:
       ${Math.round(perPortion(r).kcal * porzioniCucina(r))} kcal \u00b7
@@ -10897,7 +10901,7 @@ function openDetail(id, tornando) {
     ${daDove ? `<button type="button" class="torna" data-act="detail-indietro">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
       ${esc(daDove.title)}</button>` : ''}
-    <span class="dettaglio-arte">${arteRicetta(r)}</span>
+    <span class="dettaglio-arte">${arteRicetta(r, 'RECIPE_DETAIL')}</span>
     <h2 style="text-align:center">${esc(r.title)}</h2>
     ${porzioniCucina(r) > 1 ? `<p class="in-tutto">In tutto per ${porzioniCucina(r)}:
       ${Math.round(perPortion(r).kcal * porzioniCucina(r))} kcal \u00b7
