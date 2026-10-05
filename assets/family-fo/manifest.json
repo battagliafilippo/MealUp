@@ -4,7 +4,7 @@
   "date": "2026-10-05",
   "constitution": "AI v1.9",
   "canonical_state": "FAMILY_VISUALS_APPROVED_MAPPING_VERIFIED",
-  "runtime_state": "MAPPING_ACTIVE_ASSET_TRANSFER_PENDING",
+  "runtime_state": "MAPPING_ACTIVE_ASSETS_PRESENT",
   "source_seed_count": 454,
   "source_seed_sha256": "01981e0345c168dae812d900ff1e9502a042a49fce56b29c36f61d97ce257a06",
   "resolver": "recipe.id → family_id → approved_family_asset",
@@ -13,72 +13,72 @@
   "families": {
     "PASTA": {
       "asset_id": "FAMILY_PASTA_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/pasta.webp"
     },
     "CEREALI": {
       "asset_id": "FAMILY_CEREALI_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/cereali.webp"
     },
     "PANE": {
       "asset_id": "FAMILY_PANE_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/pane.webp"
     },
     "POLLO": {
       "asset_id": "FAMILY_POLLO_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/pollo.webp"
     },
     "CARNE": {
       "asset_id": "FAMILY_CARNE_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/carne-tomahawk.webp"
     },
     "PESCE": {
       "asset_id": "FAMILY_PESCE_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/pesce.webp"
     },
     "UOVA": {
       "asset_id": "FAMILY_UOVA_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/uova.webp"
     },
     "LATTICINI": {
       "asset_id": "FAMILY_LATTICINI_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/latticini.webp"
     },
     "VERDURA": {
       "asset_id": "FAMILY_VERDURA_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/verdura.webp"
     },
     "LEGUMI": {
       "asset_id": "FAMILY_LEGUMI_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/legumi.webp"
     },
     "DOLCE": {
       "asset_id": "FAMILY_DOLCE_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/dolce-pasticceria.webp"
     },
     "FRUTTA": {
       "asset_id": "FAMILY_FRUTTA_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/frutta.webp"
     },
     "SALSE": {
       "asset_id": "FAMILY_SALSE_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/salse-diner.webp"
     },
     "BEVANDE": {
       "asset_id": "FAMILY_BEVANDE_MEALUP_TOYS_3D",
-      "status": "APPROVED_ASSET_PENDING_BINARY_UPLOAD",
+      "status": "APPROVED_ASSET_PRESENT",
       "path": "assets/family-fo/bevande-dispenser.webp"
     }
   },

@@ -47,3 +47,14 @@ Binary transfer:
 
 Next required action:
 Upload the 14 approved WEBP files into `assets/family-fo/` using the exact manifest filenames, then run browser/device QA before declaring PASS.
+
+## Family asset installation — 2026-10-05
+
+Status: ASSETS_PRESENT_RESOLVER_PASS.
+
+- The four approved source boards supplied by the owner were split into the 14 family assets.
+- The revised dessert board is installed as `dolce-pasticceria.webp`.
+- Every asset is a transparent 1024 × 1024 WEBP and matches its manifest path.
+- All 454 recipe IDs resolve to the expected family asset.
+- Unknown recipe IDs retain the neutral placeholder and invalid hosts remain rejected.
+- `main` and the previous tester remain unchanged.
