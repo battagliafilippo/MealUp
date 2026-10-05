@@ -1,0 +1,59 @@
+{
+  "asset_key": "POLENTA",
+  "master_id": "POLENTA",
+  "variant_id": null,
+  "object_type": "Food Object",
+  "status": "REGISTERED_CANONICAL",
+  "registration_stage": "C6.3-G2",
+  "asset_family": "RECOVERED_DIRECT",
+  "binary_file": "POLENTA.png",
+  "binary_sha256": "f8a2081441c53d5b982ed5c70de2bbb432a67a357cceb42892b2a3f3280635f3",
+  "binary_bytes": 121156,
+  "image": {
+    "width": 512,
+    "height": 512,
+    "mode": "RGBA",
+    "transparent_background": true
+  },
+  "immutable": true,
+  "redraw_allowed": false,
+  "style_standard": "MealUp Toys / approved vessel design language",
+  "recipe_link_contract": {
+    "source": "docs/c6/MealUp_C6.1_Composition_Matrix_v1.json",
+    "key": "POLENTA",
+    "match": [
+      "primary.master_id",
+      "secondary[].master_id",
+      "details[].master_id",
+      "sauce.master_id"
+    ],
+    "reason": "Recipe links stay normalized in the composition matrix to avoid duplicated/stale lists."
+  },
+  "vessel_contract": {
+    "independent": true,
+    "embedded_in_food_object": false
+  },
+  "gauge_contract": {
+    "component": "MEALUP_GAUGE",
+    "independent": true,
+    "embedded_in_food_object": false,
+    "state": "recipe/portion driven"
+  },
+  "render_transform_policy": {
+    "allowed": [
+      "scale_at_render_time",
+      "position",
+      "approved_rotation",
+      "z_index"
+    ],
+    "forbidden": [
+      "regenerate",
+      "redraw",
+      "repaint",
+      "filter",
+      "distort",
+      "replace_with_svg",
+      "replace_with_similar_asset"
+    ]
+  }
+}
