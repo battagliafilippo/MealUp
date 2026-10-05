@@ -22,7 +22,7 @@ function markup(recipeId,host,extraClass){
     return '<span class="'+cls+'" data-fo-state="missing" role="img" aria-label="Food Object non disponibile"></span>';
   }
   return '<span class="'+cls+'" data-family="'+esc(r.familyId)+'" data-fo-state="loading" role="img" aria-label="Simbolo della famiglia '+esc(r.familyId.toLowerCase())+'">'+
-    '<img src="'+esc(r.assetPath)+'" alt="" loading="lazy" decoding="async" onload="this.parentElement.dataset.foState=\'ready\'" onerror="this.remove();this.parentElement.dataset.foState=\'missing\'">'+
+    '<img src="'+esc(r.assetPath)+'?v=20261005c" alt="" loading="lazy" decoding="async" onload="this.parentElement.dataset.foState=\'ready\'" onerror="this.remove();this.parentElement.dataset.foState=\'missing\'">'+
   '</span>';
 }
 
