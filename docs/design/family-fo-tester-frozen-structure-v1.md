@@ -21,3 +21,29 @@ Scorte hub, Dispensa, Frigo, Freezer, Avanzi, Spesa, Diario, Profilo, Scanner fi
 
 ## Next
 Install approved family FO assets into this structure on this branch only.
+
+
+## Runtime integration checkpoint — 2026-10-05
+
+Status: PARTIAL_PASS_BINARY_TRANSFER_BLOCKED.
+
+Verified:
+- 14/14 family records present.
+- 454/454 recipe IDs mapped exactly once.
+- No invalid family references.
+- Runtime resolver loaded by the tester index.
+- Recipe visual rendering is intercepted by `MealUpFamilyFO` before the legacy `arteRicetta` body.
+- Explicit hosts wired: RECIPE_CARD and RECIPE_DETAIL.
+- Missing binary asset resolves to the neutral placeholder.
+- `no_vessels=true`, `no_compositions=true`.
+- All 14 manifest filenames exactly match the approved asset package.
+
+Binary transfer:
+- The approved package contains all 14 WEBP files.
+- The current GitHub connector accepts repository blob content, but cannot consume binary bytes directly from the local conversation/container file.
+- Therefore the 14 image binaries are NOT claimed as uploaded.
+- Runtime state remains `MAPPING_ACTIVE_ASSET_TRANSFER_PENDING`.
+- main and the previous tester remain unchanged.
+
+Next required action:
+Upload the 14 approved WEBP files into `assets/family-fo/` using the exact manifest filenames, then run browser/device QA before declaring PASS.
