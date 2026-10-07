@@ -115,6 +115,41 @@ h4{font-size:1rem;font-weight:calc(var(--peso-titoli,800) - 100);letter-spacing:
 .pager::-webkit-scrollbar{display:none}
 .pagina{flex:0 0 100%;scroll-snap-align:center;padding:0 16px;
   --tema:var(--accent-primary);--tema2:var(--accent-primary)}
+#view-home .pasto-search,#view-home .mic-campo{display:none}
+#view-home .cards-list{min-height:0}
+.home-suggestion-stage{position:relative;overflow:hidden;min-height:274px;touch-action:pan-y;overscroll-behavior-x:contain}
+.home-suggestion-stage .scheda{margin:0}
+.home-suggestion-stage::after{content:'';position:absolute;right:0;top:18%;bottom:18%;width:18px;
+  pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,248,239,.82))}
+.home-suggestion-hint{display:block;margin:10px auto 0;text-align:center;font-size:.74rem;color:var(--text-tertiary)}
+.scheda.home-card{overflow:hidden}
+.scheda.home-card{display:grid;grid-template-columns:1fr;grid-template-rows:144px auto 40px;align-items:stretch;
+  gap:8px;min-height:262px;padding:12px 14px}
+.home-card .scheda-arte{grid-row:1;align-self:stretch;min-width:0;width:100%;height:144px;min-height:0;flex:none;
+  display:grid;place-items:center;overflow:hidden;border-radius:18px;opacity:1;background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(255,224,191,.48))}
+.home-card .scheda-arte::before{border-radius:21px}
+.home-card .mealup-fo-slot{display:grid;place-items:center;width:100%;height:100%}
+.home-card .mealup-fo-slot img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.home-card .scheda-testo{grid-row:2;justify-content:center;gap:4px;min-width:0;padding:0 54px 0 2px}
+.home-card .scheda-titolo{font-size:1rem;font-weight:650;line-height:1.18}
+.home-card .scheda-dati{gap:9px;flex-wrap:wrap}
+.home-card .dato{font-size:.76rem;gap:4px}
+.home-card-cta{grid-column:1;grid-row:3;display:grid;place-items:center;min-height:40px;padding:0 12px;border-radius:14px;
+  color:#fff;background:var(--tema,var(--accent-primary));font-size:.86rem;font-weight:700;box-shadow:0 6px 15px color-mix(in srgb,var(--tema,var(--accent-primary)) 30%,transparent)}
+.home-card-cta:active{transform:scale(.97)}
+.home-card .mealup-fo-slot{animation:home-fo-in .42s cubic-bezier(.22,.8,.28,1) both}
+.home-card-gauge{position:absolute;top:21px;right:31px;width:48px;height:48px;border-radius:50%;display:grid;place-content:center;
+  background:radial-gradient(circle at center,#fff8ef 55%,transparent 57%),conic-gradient(var(--tema,var(--accent-primary)) calc(var(--gauge) * 1%),rgba(99,57,24,.14) 0);
+  animation:home-gauge-in .42s .04s cubic-bezier(.22,.8,.28,1) both;box-shadow:0 2px 7px rgba(91,40,10,.12)}
+.home-card-gauge b{font-size:.67rem;line-height:1;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.home-card-gauge em{font-size:.46rem;line-height:1.1;font-style:normal;color:var(--text-tertiary)}
+@keyframes home-fo-in{from{opacity:0;transform:translateX(-20px) scale(.86)}72%{opacity:1;transform:translateX(2px) scale(1.03)}to{opacity:1;transform:translateX(0) scale(1)}}
+@keyframes home-gauge-in{from{opacity:0;transform:translateX(18px) scale(.86)}72%{opacity:1;transform:translateX(-2px) scale(1.03)}to{opacity:1;transform:translateX(0) scale(1)}}
+.tab-bar .tab-item[data-val="view-home"]{order:1}
+.tab-bar .tab-item[data-val="view-search"]{order:2}
+.tab-bar .tab-item[data-val="view-spesa"]{order:3}
+.tab-bar .tab-item[data-val="view-fridge"]{order:4}
+.tab-bar .tab-item[data-val="view-profile"]{order:5}
 #pagina-col{--tema:var(--pasto-col, #ff6115);--tema2:var(--pasto-col-2, #c2410c)}
 #pagina-pra{--tema:var(--pasto-pra, #d84a00);--tema2:var(--pasto-pra-2, #9a3412)}
 #pagina-cen{--tema:var(--pasto-cen, #a63a05);--tema2:var(--pasto-cen-2, #7c2d00)}
@@ -3418,6 +3453,7 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 
 </style>
 <link rel="stylesheet" href="./assets/family-fo-frozen-shell.css?v=1">
+<link rel="stylesheet" href="./assets/mealup-v124.css?v=1">
 </head>
 <body>
 
@@ -3503,6 +3539,13 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
         <h1>Scorte</h1>
       </div>
     </header>
+
+    <div class="scorte-hub" aria-label="Destinazioni Scorte">
+      <button type="button" data-act="frigo-hub" data-val="dispensa"><i>▤</i><b>Dispensa</b><span>Prodotti secchi, conserve e condimenti</span></button>
+      <button type="button" data-act="frigo-hub" data-val="frigo"><i>▣</i><b>Frigo</b><span>Freschi ordinati per urgenza</span></button>
+      <button type="button" data-act="frigo-hub" data-val="freezer"><i>❄</i><b>Freezer</b><span>Surgelati e piatti congelati</span></button>
+      <button type="button" data-act="frigo-hub" data-val="avanzi"><i>◫</i><b>Avanzi</b><span>Piatti già cucinati da consumare</span></button>
+    </div>
 
     <div class="filter-bar" style="padding-bottom:10px">
       <button type="button" class="chip" data-act="frigo-sez" data-val="dispensa">Dispensa</button>
@@ -3682,6 +3725,13 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
       </div>
     </header>
 
+    <div class="profile-hub" aria-label="Sezioni Profilo">
+      <button type="button" data-act="prof-sez" data-val="tu"><i>◎</i><span><b>I miei obiettivi</b>Obiettivi nutrizionali e preferenze</span><em>›</em></button>
+      <button type="button" data-act="prof-sez" data-val="tu"><i>♨</i><span><b>Come mangio</b>Abitudini, diete e alimenti da evitare</span><em>›</em></button>
+      <button type="button" data-act="prof-sez" data-val="giornata"><i>◔</i><span><b>Diario e andamento</b>Giornata alimentare e progressi</span><em>›</em></button>
+      <button type="button" data-act="prof-sez" data-val="dati"><i>↻</i><span><b>App e collegamenti</b>Famiglia, sincronizzazione e backup</span><em>›</em></button>
+    </div>
+
     <div class="filter-bar" style="padding-bottom:10px">
       <button type="button" class="chip" data-act="prof-sez" data-val="tu">Tu</button>
       <button type="button" class="chip" data-act="prof-sez" data-val="giornata">Giornata</button>
@@ -3810,6 +3860,14 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
         <p class="section-desc">Chi vive con te usa l'app sul suo telefono, gratis: la spesa
           di uno aggiorna la casa di tutti, con un link.</p>
         <div id="famiglia-body"></div>
+      </div>
+
+      <div class="glass-card diary-card-v124" data-sez="giornata">
+        <div class="header" style="margin-bottom:6px">
+          <div><span class="subtitle">Oggi</span><h3>Diario</h3></div>
+          <button type="button" class="btn-primary" data-act="quick-open" aria-label="Aggiungi alimento">+</button>
+        </div>
+        <div id="diary-body"></div>
       </div>
 
       <div class="glass-card" data-sez="giornata">
@@ -7987,6 +8045,7 @@ function fmtQty(i) {
 /* ---------- componenti di render ---------- */
 function recipeCard(r, extra, n) {
   const cov = extra && extra.cov;
+  const homeCard = extra && extra.host === 'HOME_CARD';
   const m = perPortion(r);
   const t = totalTime(r);
   const ritardo = n ? ' style="animation-delay:' + Math.min(n * 45, 400) + 'ms"' : '';
@@ -8009,14 +8068,16 @@ function recipeCard(r, extra, n) {
   const fuori = fuoriStagione(r);
 
   return `
-    <button type="button" class="glass-card card-btn scheda con-stella ${fuori ? 'fuori-stagione' : ''}"
+    <button type="button" class="glass-card card-btn scheda con-stella ${homeCard ? 'home-card' : ''} ${fuori ? 'fuori-stagione' : ''}"
       data-act="detail" data-val="${esc(r.id)}"${ritardo}
       ${fuori ? 'title="Fuori stagione"' : ''}>
-      <span class="scheda-arte" ${copertura ? `style="--riempi:${copertura}%"` : ''}>${arteRicetta(r, 'RECIPE_CARD')}</span>
+      <span class="scheda-arte" ${copertura ? `style="--riempi:${copertura}%"` : ''}>${arteRicetta(r, homeCard ? 'HOME_CARD' : 'RECIPE_CARD')}</span>
       <span class="scheda-testo">
         <span class="scheda-titolo">${esc(r.title)}</span>
         ${piede}
       </span>
+      ${homeCard ? `<span class="home-card-cta" role="button" tabindex="0" data-act="cook-open" data-val="${esc(r.id)}" aria-label="Cucina ${esc(r.title)}">Cucina</span>` : ''}
+      ${homeCard ? `<span class="home-card-gauge" style="--gauge:${Math.max(0, Math.min(100, Math.round(m.kcal / 8)))}" aria-label="${m.kcal} kcal"><b>${m.kcal}</b><em>kcal</em></span>` : ''}
       <span class="stella scheda-stella ${isFav(r.id) ? 'on' : ''}" role="button"
         data-act="fav" data-val="${esc(r.id)}"
         aria-label="${isFav(r.id) ? 'Togli dalle preferite' : 'Metti tra le preferite'}">
@@ -8614,6 +8675,7 @@ const PORTATE_PAGINA = {
   cen: ['primo', 'secondo', 'contorno', 'antipasto', 'dolce', 'bevanda', 'altro']
 };
 let pastoCorrente = 0;
+const indiceSuggerimentoHome = { col: 0, pra: 0, cen: 0 };
 const limitePagina = { col: 12, pra: 12, cen: 12 };
 
 /* ---------- l'anello della giornata ----------
@@ -8871,7 +8933,7 @@ function anelloGiornata(mealId) {
       : '';
 
     return `
-    <div class="anello bilancia bilancia-reference bilancia-live" aria-label="${valore} kcal su ${T}">
+    <div class="anello bilancia bilancia-reference bilancia-live" data-valore="${valore}" aria-label="${valore} kcal su ${T}">
       <svg class="mealup-scale-svg" viewBox="0 0 760 620" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
         <defs>
           <linearGradient id="muCream" x1="0" y1="0" x2="0" y2="1">
@@ -9153,14 +9215,13 @@ function renderPasto(id) {
   //     cambia il pasto attivo o quando cambiano i numeri ---
   const anello = id === idPastoCorrente() ? document.getElementById('anello-unico') : null;
   if (anello) {
-    const prima = anello.querySelector('.conta-kcal');
+    const prima = anello.querySelector('.bilancia-live');
     const eraA = prima ? Number(prima.dataset.valore) : null;
     anello.innerHTML = anelloGiornata(id);
-    const ora = anello.querySelector('.conta-kcal');
+    const ora = anello.querySelector('.bilancia-live');
     if (ora && eraA !== null && Number(ora.dataset.valore) !== eraA) {
-      animaNumero(ora, eraA, Number(ora.dataset.valore));
-      // e l'ago tentenna prima di fermarsi, come su una bilancia vera
-      ['.gruppo-ago', '.gruppo-piatto'].forEach(sel => {
+      // La bilancia si assesta senza sostituire il quadrante con il contatore legacy.
+      ['.mealup-scale-svg'].forEach(sel => {
         const el = anello.querySelector(sel);
         if (!el) return;
         el.classList.remove('oscilla');
@@ -9193,56 +9254,78 @@ function renderPasto(id) {
   if (S.ui.noCook) piatti = piatti.filter(r => !r.cook);
   if (S.ui.fav) piatti = piatti.filter(r => isFav(r.id));
 
-  let html = rigaComandi(id);
-
-  // Gli avanzi vengono prima di tutto: e' cibo gia' pronto e pagato. Compaiono
-  // solo nel pasto da cui vengono, e solo quando quel pasto torna.
-  if (!query) {
-    const av = avanziPerPasto(id);
-    if (av.suoi.length) {
-      html += '<span class="sezione-titolo">Gi\u00e0 pronto in frigo</span>'
-        + av.suoi.map((x, n) => schedaAvanzo(x, n)).join('');
-    }
-  }
-
-  // Il budget del pasto non si vede piu' in un riquadro, ma serve ancora per
-  // scegliere cosa proporti.
   const riga = dayPlan().meals.find(m => m.m.id === id);
-
-  if (!query && riga && !riga.fatto && !riga.saltato && riga.budget) {
-    const consigli = suggestFor(id, riga.budget, riga.budgetP)
-      .filter(o => !sepolte.has('pasto:' + o.r.id));
-    if (consigli.length) {
-      html += `<span class="sezione-titolo">Per te, adesso</span>` +
-        consigli.map(o => `
-          <button type="button" class="sugg" data-act="detail" data-val="${esc(o.r.id)}">
-            <span class="sugg-t">${esc(o.r.title)}</span>
-            <span class="sugg-m">${o.kcal} kcal \u00b7 ${o.pro}g proteine${o.motivi.length ? ' \u00b7 ' + esc(o.motivi.join(' \u00b7 ')) : ''}</span>
-            ${xSugg('pasto:' + esc(o.r.id))}
-          </button>`).join('');
-      const ids = consigli.map(o => o.r.id);
-      piatti = piatti.filter(r => !ids.includes(r.id));
-    }
-  }
-
-  const limite = limitePagina[id];
-  const mostrate = piatti.slice(0, limite);
-  const restanti = piatti.length - mostrate.length;
-
-  // Se i consigli hanno gia' esaurito il pasto, non apro una sezione vuota.
-  if (mostrate.length || query) {
-    html += `<span class="sezione-titolo">${query ? piatti.length + ' risultat' + (piatti.length === 1 ? 'o' : 'i') : 'Tutto quello che puoi fare'}</span>`;
-    html += mostrate.length
-      ? mostrate.map((r, n) => recipeCard(r, null, n)).join('')
-      : `<p class="empty">Niente con \u201c${esc(query)}\u201d in questo pasto.<br>Cerca in tutte le ricette dalla scheda Ricette.</p>`;
-  }
-  if (restanti > 0) {
-    html += `<button type="button" class="btn-ghost full-width" data-act="pasto-more" data-val="${id}">
-      Mostra altre ${Math.min(12, restanti)} \u00b7 ne restano ${restanti}</button>`;
-  }
-
-  lista.innerHTML = html;
+  // Home FROZEN: una proposta alla volta. Catalogo, avanzi e tutte le altre
+  // ricette restano nella sezione Ricette: qui non devono ricomparire come lista.
+  const suggerimenti = !query && riga && !riga.fatto && !riga.saltato && riga.budget
+    ? suggestFor(id, riga.budget, riga.budgetP).map(o => o.r)
+    : piatti;
+  const proposte = suggerimenti.length ? suggerimenti : piatti;
+  const indice = proposte.length ? indiceSuggerimentoHome[id] % proposte.length : 0;
+  const proposta = proposte[indice];
+  lista.innerHTML = proposta
+    ? `<div class="home-suggestion-stage" data-home-meal="${id}" data-home-count="${proposte.length}" aria-label="Ricetta suggerita, scorri per cambiare proposta">
+         ${recipeCard(proposta, { host: 'HOME_CARD' }, indice)}
+       </div>${proposte.length > 1 ? '<span class="home-suggestion-hint">Scorri per un’altra proposta</span>' : ''}`
+    : `<div class="home-suggestion-stage">${emptyState('Non riesco a trovare una ricetta al momento.<br>Riprova tra qualche istante.')}</div>`;
 }
+
+let homeSwipeStart = null;
+let homeSwipeSuppressClick = false;
+document.addEventListener('pointerdown', event => {
+  if (event.pointerType === 'mouse' && event.button !== 0) return;
+  const stage = event.target.closest('.home-suggestion-stage[data-home-meal]');
+  if (!stage) { homeSwipeStart = null; return; }
+  homeSwipeStart = { stage, pointerId:event.pointerId, id:stage.dataset.homeMeal, count:Number(stage.dataset.homeCount) || 0, x:event.clientX, y:event.clientY };
+  if (stage.setPointerCapture) stage.setPointerCapture(event.pointerId);
+});
+document.addEventListener('pointermove', event => {
+  if (!homeSwipeStart || event.pointerId !== homeSwipeStart.pointerId) return;
+  if (Math.abs(event.clientX - homeSwipeStart.x) > Math.abs(event.clientY - homeSwipeStart.y)) event.preventDefault();
+}, { passive:false });
+document.addEventListener('pointerup', event => {
+  if (!homeSwipeStart || event.pointerId !== homeSwipeStart.pointerId) return;
+  const delta = event.clientX - homeSwipeStart.x;
+  if (Math.abs(delta) > 42) {
+    const id = homeSwipeStart.id;
+    const count = homeSwipeStart.count;
+    indiceSuggerimentoHome[id] = count ? (indiceSuggerimentoHome[id] + (delta < 0 ? 1 : -1) + count) % count : 0;
+    homeSwipeSuppressClick = true;
+    renderPasto(id);
+    setTimeout(() => { homeSwipeSuppressClick = false; }, 0);
+  }
+  homeSwipeStart = null;
+});
+document.addEventListener('click', event => {
+  if (!homeSwipeSuppressClick) return;
+  event.preventDefault();
+  event.stopPropagation();
+}, true);
+// Fallback per i WebView che non espongono Pointer Events: mantiene identica
+// la soglia e blocca il trascinamento della pagina solo per uno swipe orizzontale.
+document.addEventListener('touchstart', event => {
+  if (homeSwipeStart) return;
+  const stage = event.target.closest('.home-suggestion-stage[data-home-meal]');
+  if (!stage) return;
+  homeSwipeStart = { fallback:true, id:stage.dataset.homeMeal, count:Number(stage.dataset.homeCount) || 0, x:event.touches[0].clientX, y:event.touches[0].clientY };
+}, { passive:true });
+document.addEventListener('touchmove', event => {
+  if (!homeSwipeStart || !homeSwipeStart.fallback) return;
+  const point = event.touches[0];
+  if (Math.abs(point.clientX - homeSwipeStart.x) > Math.abs(point.clientY - homeSwipeStart.y)) event.preventDefault();
+}, { passive:false });
+document.addEventListener('touchend', event => {
+  if (!homeSwipeStart || !homeSwipeStart.fallback) return;
+  const delta = event.changedTouches[0].clientX - homeSwipeStart.x;
+  if (Math.abs(delta) > 42) {
+    const count = homeSwipeStart.count;
+    indiceSuggerimentoHome[homeSwipeStart.id] = count ? (indiceSuggerimentoHome[homeSwipeStart.id] + (delta < 0 ? 1 : -1) + count) % count : 0;
+    homeSwipeSuppressClick = true;
+    renderPasto(homeSwipeStart.id);
+    setTimeout(() => { homeSwipeSuppressClick = false; }, 0);
+  }
+  homeSwipeStart = null;
+}, { passive:true });
 
 function renderPasti() { PASTI_HOME.forEach(renderPasto); aggiornaTab(); }
 
@@ -13013,6 +13096,10 @@ function apriScanEsito(p, codice, senzaRete) {
   if (p) {
     titolo.textContent = 'Prodotto riconosciuto';
     const V = p.valori || {};
+    const giudizio = voto(V, { add: p.add, bio: !!p.bio, confezionato: true });
+    const livello = giudizio ? (giudizio.punteggio < 25 ? 0 : giudizio.punteggio < 45 ? 1
+      : giudizio.punteggio < 65 ? 2 : giudizio.punteggio < 85 ? 3 : 4) : -1;
+    const livelli = ['Occasionale', 'Da moderare', 'Equilibrato', 'Buono', 'Ottimo'];
     const righe = [['Calorie', V.kcal, ' kcal'], ['Carboidrati', V.carboidrati, ' g'],
       ['di cui zuccheri', V.zuccheri, ' g'], ['Grassi', V.grassi, ' g'],
       ['di cui saturi', V.saturi, ' g'], ['Proteine', V.proteine, ' g'],
@@ -13024,8 +13111,15 @@ function apriScanEsito(p, codice, senzaRete) {
       <h3 class="scan-nome">${esc(p.nome)}</h3>
       <p class="scan-sotto">${p.marca ? esc(p.marca) : ''}${p.marca && p.cat ? ' · ' : ''}${p.cat ? esc(p.cat) : ''}</p>
       ${formato ? `<span class="chip mini scan-formato">${esc(formato)}</span>` : ''}
+      ${giudizio ? `<section class="scan-score" style="--scan-score:${giudizio.punteggio};--scan-colore:${giudizio.colore}">
+        <div class="scan-score-num"><b>${giudizio.punteggio}</b><span>/100</span></div>
+        <strong>${livelli[livello]}</strong>
+        <div class="scan-score-levels" aria-label="Valutazione ${livelli[livello]}">
+          ${livelli.map((x, i) => `<span class="${i === livello ? 'active' : ''}"><i>${i === 0 ? '☹' : i === 1 ? '🙁' : i === 2 ? '―' : '●'}</i>${x}</span>`).join('')}
+        </div>
+      </section>` : ''}
       ${righe.length ? `<div class="scan-valori">
-        <span class="field-label" style="margin:12px 0 4px">Valori per 100 g</span>
+        <span class="field-label" style="margin:12px 0 4px">Valori nutrizionali trovati · per 100 g</span>
         ${righe.map(r => `<div class="split-row scan-riga"><span>${r[0]}</span><b>${r[1]}${r[2]}</b></div>`).join('')}
       </div>` : '<p class="hint">Valori nutrizionali non presenti nell\'archivio: se vuoi, compilali dall\'etichetta.</p>'}
       ${p.ingr ? `<p class="scan-ingr"><b>Ingredienti</b> ${esc(p.ingr)}</p>` : ''}
@@ -13034,12 +13128,15 @@ function apriScanEsito(p, codice, senzaRete) {
         Aggiungi al carrello</button>
       <button type="button" class="btn-ghost full-width" data-act="scan-etichetta">Correggi o completa l'etichetta</button>`;
   } else {
-    titolo.textContent = 'Prodotto non riconosciuto';
+    titolo.textContent = 'Prodotto non trovato';
     corpo.innerHTML = `
+      <div class="scan-ko-icon" aria-hidden="true">!</div>
       <p class="hint">${senzaRete
         ? 'Non riesco a raggiungere l\'archivio (serve internet).'
         : 'Codice ' + esc(codice || '') + ' letto, ma il prodotto non è nell\'archivio.'}
         Scrivilo tu: bastano nome e, se vuoi, marca e formato. Il codice resta in memoria.</p>
+      <button type="button" class="btn-primary full-width scan-retry" data-act="codice-apri">Riprova scansione</button>
+      <p class="scan-manual-title">Oppure inserisci il prodotto manualmente</p>
       <label class="field-label" for="scan-nome">Nome del prodotto</label>
       <input type="text" id="scan-nome" maxlength="60" autocomplete="off" placeholder="es. latte intero">
       <label class="field-label" for="scan-marca" style="margin-top:10px">Marca</label>
@@ -20834,7 +20931,8 @@ document.addEventListener('click', e => {
       if (rIng.punteggio >= 0.72 && !gIng) invitoEtichetta(nome, 'freezer');
       break;
     }
-    case 'frigo-sez': S.ui.frigoSez = val; save(); renderFridge(); window.scrollTo(0, 0); break;
+    case 'frigo-sez':
+    case 'frigo-hub': S.ui.frigoSez = val; save(); renderFridge(); window.scrollTo(0, 0); break;
     case 'mostra-tag': {
       S.ui.tagAperti = S.ui.tagAperti || {};
       S.ui.tagAperti[val] = !S.ui.tagAperti[val];
@@ -21380,7 +21478,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261001b').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261007a').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
@@ -21444,6 +21542,7 @@ window.fitmealsProva = { profilo: activeProfile, visibili: visibleRecipes,
   prodottiPerIngrediente: prodottiPerIngrediente, prodottoScelto: prodottoScelto,
   tabellaScelta: tabellaScelta, marcaGira: marcaGira,
   prodottiCheCombaciano: prodottiCheCombaciano,
+  scanEsito: apriScanEsito, apriLettoreCodice: apriLettoreCodice,
   perPortion: perPortion, istPesoPorzione: istPesoPorzione,
   renderCatalogo: renderCatalogo,
   energia: energy, renderProfilo: renderProfile,

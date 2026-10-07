@@ -91,7 +91,16 @@ async function app(opts) {
       if (c) c.click();
       return d.querySelector('#detail-body h2') ? d.querySelector('#detail-body h2').textContent : null;
     },
-    click: sel => { const e = d.querySelector(sel); if (e) e.click(); return !!e; },
+    click: sel => {
+      // Home v1.24 espone una CTA Cucina sulla proposta corrente. I test che
+      // hanno appena aperto un dettaglio devono continuare a esercitare la CTA
+      // di quel dettaglio, non la prima CTA omonima presente nel documento.
+      const e = sel === '[data-act=cook-open]'
+        ? (d.querySelector('#modal-detail.active [data-act=cook-open]') || d.querySelector(sel))
+        : d.querySelector(sel);
+      if (e) e.click();
+      return !!e;
+    },
     conta: sel => d.querySelectorAll(sel).length,
     testo: sel => (d.querySelector(sel) || {}).textContent || '',
     profiloBase: function () {
@@ -102,6 +111,8 @@ async function app(opts) {
 }
 
 async function test(nome, fn) {
+  const filtro = process.env.MEALUP_TEST_FILTER;
+  if (filtro && !new RegExp(filtro, 'i').test(nome)) return;
   try {
     await fn();
     passati++;

@@ -1117,7 +1117,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     const dopo = a.dom.window.fitmealsPlan();
     vero(dopo.target > prima.target, 'l\'allenamento non alza il fabbisogno');
     a.click('[data-act=pasto-vai][data-val="2"]');
-    almeno(a.conta('#pagina-cen .sugg'), 1, 'nessun suggerimento per la cena');
+    eq(a.conta('#pagina-cen .home-card'), 1, 'la Home deve mostrare una proposta per la cena');
   });
 
   await test('le colazioni ricche ci sono e sono marcate come sgarro', async () => {
@@ -1373,7 +1373,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(a.d.getElementById('cook-mode').hidden, 'la finestra non si e\' chiusa');
     const salvato = a.dom.window.localStorage.getItem('fitmeals.cook');
     vero(salvato.length > 5, 'uscendo a meta\' ho perso il punto: ' + salvato);
-    a.click('[data-act=cook-open]');
+    a.click('#modal-detail [data-act=cook-open]');
     vero(a.testo('#cook-progress') !== 'Ingredienti', 'non riprende da dove ero');
   });
 
@@ -1566,18 +1566,19 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     };
   };
 
-  await test('un avanzo torna solo nel suo pasto, il giro dopo', async () => {
+  await test('gli avanzi restano nella sezione dedicata con il pasto di origine', async () => {
     const a = await app({ storage: conAvanzi(ora => [
       // di ieri a pranzo: oggi a pranzo ci deve essere
       { rid:'c25', title:'Pollo di ieri', n:2, kcal:400, pro:45, ts: ora - 26 * 3600000, pasto:'pra' },
       // di oggi a pranzo: non stasera, e nemmeno adesso
       { rid:'p07', title:'Risotto di oggi', n:1, kcal:600, pro:15, ts: ora - 2 * 3600000, pasto:'pra' }
     ]) });
-    vero(a.testo('#lista-pra').includes('Pollo di ieri'), 'l\'avanzo di ieri non torna a pranzo');
-    vero(!a.testo('#lista-cen').includes('Risotto di oggi'), 'l\'avanzo del pranzo compare a cena');
-    vero(!a.testo('#lista-cen').includes('Pollo di ieri'), 'un avanzo del pranzo compare a cena');
-    eq(a.conta('#lista-cen .avanzo-nota'), 0, 'c\'e\' ancora l\'annuncio dell\'altro pasto');
-    eq(a.conta('#lista-pra .avanzo-nota'), 0, 'c\'e\' ancora l\'annuncio dell\'altro pasto');
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=avanzi]');
+    const testo = a.testo('#leftovers-body');
+    vero(testo.includes('Pollo di ieri'), 'manca l\'avanzo di ieri');
+    vero(testo.includes('Risotto di oggi'), 'manca l\'avanzo di oggi');
+    vero(/pranzo/i.test(testo), 'manca il pasto di origine');
   });
 
   await test('la sezione dice quando un avanzo tornera\'', async () => {
@@ -1591,13 +1592,15 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(/pranzo/.test(q.textContent), 'non nomina il pasto: ' + q.textContent);
   });
 
-  await test('se sta per scadere lo mostra comunque', async () => {
+  await test('un avanzo urgente resta visibile nella sezione dedicata', async () => {
     const a = await app({ storage: conAvanzi(ora => [
       // pesce di ieri sera: la finestra e\' 24 ore, quindi stringe adesso
       { rid:'m01', title:'Orata di ieri', n:1, kcal:300, pro:40, ts: ora - 20 * 3600000, pasto:'cen' }
     ]) });
-    vero(a.testo('#lista-cen').includes('Orata di ieri'),
-      'un avanzo agli sgoccioli e\' stato nascosto dalla regola del pasto');
+    a.tab('view-fridge');
+    a.click('[data-act=frigo-sez][data-val=avanzi]');
+    vero(a.testo('#leftovers-body').includes('Orata di ieri'),
+      'un avanzo agli sgoccioli non compare nella sezione Avanzi');
   });
 
   await test('senza avanzi non compare niente', async () => {
@@ -1630,14 +1633,12 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(a.conta('.avviso-avanzi'), 'nessun avviso nella scheda del frigo');
   });
 
-  await test('le icone della barra sono un libro e un frigo', async () => {
+  await test('le icone della barra seguono il Master v1.24', async () => {
     const a = await app();
-    const icona = nome => [...a.d.querySelectorAll('.tab-item')]
-      .find(t => t.textContent.includes(nome)).querySelector('.icon').innerHTML;
-    vero(/M12 7\.5v13/.test(icona('Ricette')), 'le ricette non hanno il dorso del libro');
-    // la scheda ora si chiama Conservazione, l'icona resta il frigo
-    vero(/M5 9h14/.test(icona('Conservazione')), 'il frigo non ha la divisione del freezer');
-    vero(/M16\.5 11v5/.test(icona('Conservazione')), 'manca la maniglia verticale');
+    vero(a.d.querySelector('.tab-item .ricette-icon'), 'manca l\'icona Ricette approvata');
+    vero(a.d.querySelector('.tab-item .scorte-icon'), 'manca l\'icona Scorte approvata');
+    eq([...a.d.querySelectorAll('.tab-item')].map(x => x.textContent.trim()).join('|'),
+      'Home|Ricette|Spesa|Scorte|Profilo', 'ordine o nomi della barra errati');
   });
 
   await test('gli avanzi hanno una sezione sempre raggiungibile', async () => {
@@ -2349,16 +2350,11 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
     a.tab('view-home');
-    eq(a.conta('#view-home .bilancia'), 1, 'la bilancia deve essere una');
+    eq(a.conta('#view-home .bilancia-live'), 1, 'la bilancia deve essere una');
     const box = a.d.getElementById('anello-unico');
-    vero(box.querySelector('svg') && box.querySelector('.ago'), 'manca la bilancia');
-    vero(!box.querySelector('.tracciato'), 'sul quadrante non vanno i settori dei pasti');
-    eq(box.querySelectorAll('.gamba').length, 3, 'servono le tre gambe');
-    almeno(box.querySelectorAll('.cifra').length, 3, 'mancano le cifre della scala');
-    a.click('[data-act=pasto-vai][data-val="0"]');
-    vero(box.querySelector('.gamba.qui.f-col'), 'a colazione l\'evidenza non si sposta');
-    a.click('[data-act=pasto-vai][data-val="2"]');
-    vero(box.querySelector('.gamba.qui.f-cen'), 'a cena l\'evidenza non si sposta');
+    vero(box.querySelector('.mealup-scale-svg') && box.querySelector('.mu-scale-needle'), 'manca la bilancia');
+    eq(box.querySelectorAll('.mu-flip').length, 4, 'il contatore non ha quattro cifre');
+    almeno(box.querySelectorAll('.mu-scale-label').length, 4, 'mancano le cifre della scala');
   });
 
   await test('l\'anello si riempie con quello che mangi', async () => {
@@ -2369,10 +2365,9 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.click('#modal-detail [data-act=close-modal]');
     a.tab('view-home');
     const box = a.d.getElementById('anello-unico');
-    const centro = Number(box.querySelector('.conta-kcal').dataset.valore);
+    const centro = Number(box.querySelector('.bilancia-live').dataset.valore);
     almeno(centro, 500, 'il centro non conta quello che hai mangiato');
-    // gli archi pieni ora esistono solo quando il pasto ha qualcosa dentro
-    eq(box.querySelectorAll('.riempito').length, 1, 'dovrebbe essersi riempito un arco solo');
+    eq(box.querySelectorAll('.mu-scale-progress').length, 1, 'manca il progresso sul quadrante');
   });
 
   await test('il menu del giorno si modifica dalla home', async () => {
@@ -2545,7 +2540,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.click('[data-act=quick-save]');
 
     const box = a.d.getElementById('anello-unico');
-    eq(box.querySelector('.conta-kcal').dataset.valore, '500', 'le kcal non sono nel cerchio');
+    eq(box.querySelector('.bilancia-live').dataset.valore, '500', 'le kcal non sono sulla bilancia');
     const macro = box.querySelector('.macro-giorno');
     vero(macro, 'manca la riga dei macro');
     vero(/proteine/.test(macro.textContent) && /carboidrati/.test(macro.textContent)
@@ -2766,8 +2761,8 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
                    qta:300, unita:'g' }
       }
     } });
-    const b = a.d.querySelector('#lista-cen [data-act=sorprendimi]');
-    vero(b, 'manca il comando');
+    const b = a.d.querySelector('#pagina-cen .home-card');
+    vero(b, 'manca la proposta Dimmi tu');
     b.click();
     const titolo = a.testo('#detail-body h2');
     vero(titolo, 'non ha aperto niente');
@@ -2777,7 +2772,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     const miei = ['pollo', 'riso', 'pomodor', 'cipolla'];
     vero((r.ing || []).some(i => miei.some(k => i.n.includes(k))),
       titolo + ' non usa niente di quello che ho');
-    vero(/kcal/.test(a.testo('#toast')), 'non dice quante calorie');
+    vero(/kcal/.test(a.testo('#detail-body')), 'il dettaglio non mostra le calorie');
   });
 
   await test('quello che consumi sparisce dal calendario', async () => {
@@ -2805,14 +2800,11 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
   await test('l\'ago segue le calorie e cambia colore per pasto', async () => {
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
-    const ago = () => a.d.querySelector('#anello-unico .ago');
-    // nuovo rendering: l'ago e' un pezzo fisso che RUOTA (transform sul gruppo)
-    const punta = () => a.d.querySelector('#anello-unico .gruppo-ago').dataset.g;
+    const ago = () => a.d.querySelector('#anello-unico .mu-scale-needle');
+    const punta = () => ago().getAttribute('style');
 
     const digiuno = punta();
-    vero(a.conta('#anello-unico .tacca') >= 5, 'il quadrante non ha le tacche');
-    vero(!ago().className.baseVal.includes('f-col'),
-      'l\'ago non deve piu\' colorarsi per pasto: e\' un pezzo meccanico arancione');
+    vero(a.conta('#anello-unico .mu-scale-label') >= 4, 'il quadrante non ha la scala');
 
     const mangia = (pasto, kcal) => {
       a.click('[data-act=quick-open][data-val=' + pasto + ']');
@@ -2826,7 +2818,8 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     mangia('pra', 800);
     vero(punta() !== digiuno, 'l\'ago non segue il pranzo');
     mangia('cen', 1500);
-    vero(ago().className.baseVal.includes('oltre'), 'oltre il fabbisogno l\'ago non lo segnala');
+    vero(a.d.querySelector('#anello-unico .bilancia-live').dataset.valore > 2000,
+      'oltre il fabbisogno il totale non viene registrato');
   });
 
   await test('la cucina accende la pentola, ma solo se si cuoce', async () => {
@@ -2856,16 +2849,9 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(fuoco('carpaccio di manzo'), null, 'un carpaccio non va sul fuoco');
   });
 
-  await test('sotto ogni ricerca ci sono sorpresa e filtri', async () => {
+  await test('ricerca e Scorte espongono i rispettivi comandi', async () => {
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
-    a.tab('view-home');
-    ['col', 'pra', 'cen'].forEach(id => {
-      const riga = a.d.querySelector('#lista-' + id + ' .riga-comandi');
-      vero(riga, 'manca la riga comandi in ' + id);
-      vero(riga.querySelector('[data-act=sorprendimi]'), 'manca sorprendimi in ' + id);
-      vero(riga.querySelector('[data-act=filtri-apri]'), 'mancano i filtri in ' + id);
-    });
     a.tab('view-search');
     vero(a.d.querySelector('#comandi-cerca [data-act=sorprendimi]'), 'manca sorprendimi in Cerca');
     a.tab('view-fridge');
@@ -2873,7 +2859,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'manca la sorpresa in dispensa');
   });
 
-  await test('i filtri sono nascosti e valgono ovunque', async () => {
+  await test('i filtri sono nascosti e governano il catalogo', async () => {
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
     a.tab('view-search');
@@ -2886,10 +2872,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
 
     a.click('[data-act=filtro][data-val=situazione][data-v=ufficio]');
     a.click('#modal-filtri [data-act=close-modal]');
-    // e lo stesso filtro vale anche nelle pagine dei pasti
-    a.tab('view-home');
-    vero(a.d.querySelector('#lista-cen .chip.attivo'), 'il filtro non compare nella pagina');
-    const titoli = [...a.d.querySelectorAll('#lista-cen .scheda-titolo')].map(x => x.textContent);
+    const titoli = [...a.d.querySelectorAll('#recipe-list .scheda-titolo')].map(x => x.textContent);
     almeno(titoli.length, 1, 'nessuna ricetta con quel filtro');
   });
 
@@ -2921,18 +2904,17 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     almeno(box.querySelectorAll('.chip.mini').length, 2, 'nessuna ricetta per usarli');
   });
 
-  await test('niente piatto: restano i due contrappesi sull\'asta', async () => {
+  await test('la bilancia mantiene la struttura approvata', async () => {
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
     a.apri('carbonara');
     a.click('#detail-body [data-act=log-meal]');
     a.click('#modal-detail [data-act=close-modal]');
     a.tab('view-home');
-    eq(a.conta('#anello-unico .sul-piatto'), 0, 'sulla bilancia non deve posarsi niente');
-    vero(!a.d.querySelector('#anello-unico .piatto'), 'il piatto non esiste piu\'');
-    vero(a.d.querySelector('#anello-unico .impugnatura'), 'manca il contrappeso zigrinato');
-    vero(a.d.querySelector('#anello-unico .contrappeso'), 'manca il contrappeso liscio');
-    almeno(a.conta('#anello-unico .ghiera'), 2, 'mancano i raccordi metallici');
+    vero(a.d.querySelector('#anello-unico .mu-scale-shell'), 'manca il quadrante');
+    vero(a.d.querySelector('#anello-unico .mu-scale-neck'), 'manca il collo');
+    vero(a.d.querySelector('#anello-unico .mu-scale-base'), 'manca la base');
+    eq(a.conta('#anello-unico .mu-scale-foot'), 2, 'mancano i piedini');
   });
 
   await test('ogni calendario vede solo la sua sezione', async () => {
@@ -3041,7 +3023,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     almeno(t.querySelectorAll('.storico-numeri b').length, 3, 'mancano le medie');
     // i giorni passati stanno qui, e il conto di oggi parte da zero
     vero(/\d+.?kcal al giorno/.test(t.textContent), 'la media non si legge');
-    eq(a.d.querySelector('#anello-unico .conta-kcal').dataset.valore, '0', 'oggi non parte da zero');
+    eq(a.d.querySelector('#anello-unico .bilancia-live').dataset.valore, '0', 'oggi non parte da zero');
   });
 
   await test('la migrazione degli id porta con se\' lo storico', async () => {
@@ -3110,28 +3092,19 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(/Niente in questo pasto/.test(a.testo('#pasto-piatti-body')), 'la finestra non si aggiorna');
   });
 
-  await test('le calorie girano su un flip clock piccolo, e il quadrante ha le cifre', async () => {
+  await test('la bilancia usa quattro cifre e una scala crescente', async () => {
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
-    const css = a.d.querySelector('style').textContent;
-    vero(/\.flip i\{[^}]*linear-gradient\(#3/.test(css), 'mancano le tessere scure del flip clock');
-    vero(/\.flip i\{[^}]*monospace/.test(css), 'le cifre non sono da flip clock');
-    vero(/linear-gradient/.test(css.match(/\.flip i\{[^}]*\}/)[0]), 'manca la riga del ribaltamento');
     const box = a.d.getElementById('anello-unico');
-    almeno(box.querySelectorAll('.flip i').length, 1, 'mancano le celle delle cifre');
-    vero(!a.d.querySelector('#anello-unico .striscia-fondo'),
-      'la base deve restare pulita: niente striscia dei pasti');
-    vero(!a.d.querySelector('#anello-unico .sotto-flip'), 'la cifra sotto doveva sparire');
-    // RENDERING DALLA FOTO: un terzo, due terzi, obiettivo, e il fondo
-    // scala piccolo a destra — quattro cifre crescenti
-    almeno(box.querySelectorAll('.cifra').length, 4, 'mancano le cifre nel quadrante');
-    const cifre = [...box.querySelectorAll('.cifra')].map(x => Number(x.textContent));
+    eq(box.querySelectorAll('.mu-flip').length, 4, 'mancano le quattro celle delle cifre');
+    almeno(box.querySelectorAll('.mu-scale-label').length, 4, 'mancano le cifre nel quadrante');
+    const cifre = [...box.querySelectorAll('.mu-scale-label')].map(x => Number(x.textContent));
     vero(cifre.every((v, i) => !i || v > cifre[i - 1]),
       'la scala non cresce: ' + cifre.join(','));
     vero(cifre[0] > 0 && Math.abs(cifre[1] - cifre[0] * 2) <= 20 && cifre[3] > cifre[2],
       'la scala non e\' terzo/due terzi/obiettivo/fondo: ' + cifre.join(','));
-    vero(box.querySelector('.collo'), 'manca il collo della bilancia');
-    almeno(box.querySelectorAll('.piedino').length, 2, 'mancano i piedini');
+    vero(box.querySelector('.mu-scale-neck'), 'manca il collo della bilancia');
+    eq(box.querySelectorAll('.mu-scale-foot').length, 2, 'mancano i piedini');
   });
 
   console.log('\nUltimo giro: mezzi piatti, frecce, salse');
@@ -3149,7 +3122,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.click('[data-act=cook-close]');
   });
 
-  await test('il piatto della bilancia molleggia, ed e\' vuoto', async () => {
+  await test('la bilancia si assesta quando cambia il totale', async () => {
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
     a.click('[data-act=pasto-vai][data-val="1"]');
@@ -3158,9 +3131,8 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.d.getElementById('q-kcal').value = '500';
     a.click('[data-act=quick-save]');
     const box = a.d.getElementById('anello-unico');
-    vero(box.querySelector('.gruppo-piatto.oscilla'), 'il piatto non molleggia');
-    eq(box.querySelectorAll('.sul-piatto').length, 0, 'sul piatto non deve esserci niente');
-    eq(a.conta('#anello-unico .matita'), 0, 'la matita doveva sparire');
+    vero(box.querySelector('.mealup-scale-svg.oscilla'), 'la bilancia non si assesta');
+    eq(box.querySelector('.bilancia-live').dataset.valore, '500', 'il totale non cambia');
   });
 
   await test('si avanza anche mezza porzione', async () => {
@@ -3460,42 +3432,26 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'manca la barretta di progresso del pasto');
   });
 
-  await test('i piu e meno delle card ritoccano il registro vero', async () => {
+  await test('registrare e correggere un pasto aggiorna il totale vero', async () => {
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
     a.tab('view-home');
-    a.click('.gamba.f-col [data-act=pasto-piu]');
-    a.click('.gamba.f-col [data-act=pasto-piu]');
-    eq(a.testo('#anello-unico .gamba.f-col b'), '100', 'due + non fanno 100');
-    eq(Number(a.d.querySelector('#anello-unico .conta-kcal').dataset.valore), 100,
-      'il flip clock non segue il totale');
-    vero(a.d.querySelector('#anello-unico .giorno-traccia .f-col'),
-      'manca il segmento dorato nella barra del giorno');
-    vero(/\d+%$/.test(a.testo('#anello-unico .giorno-cento').trim()),
-      'manca la percentuale del giorno');
-    const punta = a.d.querySelector('#anello-unico .gruppo-ago').dataset.g;
-    a.click('.gamba.f-col [data-act=pasto-meno]');
-    eq(a.testo('#anello-unico .gamba.f-col b'), '50', 'il meno non toglie i 50');
-    vero(a.d.querySelector('#anello-unico .gruppo-ago').dataset.g !== punta,
-      'l\'ago non torna indietro col meno');
-    // nel diario resta UNA voce di ritocco per pasto, non una per clic
-    eq(a.stato().log.filter(v => v.title === 'Ritocco').length, 1,
-      'i ritocchi non si fondono in una voce sola');
+    a.dom.window.fitmealsProva.logMeal(a.stato().recipes[8].id, 'col');
+    const totale = Number(a.d.querySelector('#anello-unico .bilancia-live').dataset.valore);
+    almeno(totale, 1, 'la registrazione non aggiorna la bilancia');
+    vero(a.d.querySelector('#anello-unico .mealup-scale-svg.oscilla'),
+      'la bilancia non reagisce alla registrazione');
+    eq(a.stato().log.length, 1, 'la registrazione non entra nel diario');
   });
 
-  await test('ogni suggerimento si toglie dalla vista con la sua x', async () => {
+  await test('la Home mantiene una sola proposta per pasto', async () => {
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
     a.click('[data-act=pasto-vai][data-val="2"]');
-    const primo = a.d.querySelector('#pagina-cen .sugg');
+    const primo = a.d.querySelector('#pagina-cen .home-card');
     vero(primo, 'nessun consiglio in cena');
-    const id = primo.dataset.val;
-    const tot = a.conta('#pagina-cen .sugg');
-    primo.querySelector('.sugg-x').dispatchEvent(
-      new a.dom.window.MouseEvent('click', { bubbles: true }));
-    vero(a.conta('#pagina-cen .sugg') < tot || tot === 1, 'il consiglio non sparisce');
-    vero(![...a.d.querySelectorAll('#pagina-cen .sugg')].some(x => x.dataset.val === id),
-      'quello chiuso e\' ancora li\'');
+    eq(a.conta('#pagina-cen .home-card'), 1, 'la Home mostra più di una proposta');
+    eq(a.conta('#pagina-cen .sugg-x'), 0, 'è rimasto il comando legacy di chiusura');
 
     // anche le combinazioni della dispensa hanno la loro x
     const ora = Date.now();
@@ -3825,13 +3781,14 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     await wait(200);
 
     const box = a.d.getElementById('anello-unico');
-    vero(box.querySelector('.bilancia'), 'senza bilancia non c\'e\' niente da animare');
-    vero(!box.querySelector('.gruppo-ago.oscilla'), 'l\'ago oscilla gia\' prima del pasto');
+    vero(box.querySelector('.bilancia-live'), 'senza bilancia non c\'e\' niente da animare');
+    vero(!box.querySelector('.mealup-scale-svg.oscilla'), 'la bilancia oscilla gia\' prima del pasto');
 
     a.dom.window.fitmealsProva.logMeal(a.stato().recipes[8].id, 'pra');
 
-    vero(box.querySelector('.gruppo-ago.oscilla'), 'l\'ago non vibra dopo il pasto');
-    vero(box.querySelector('.gruppo-piatto.oscilla'), 'il piatto non si abbassa dopo il pasto');
+    vero(box.querySelector('.mealup-scale-svg.oscilla'), 'la bilancia non reagisce dopo il pasto');
+    almeno(Number(box.querySelector('.bilancia-live').dataset.valore), 1,
+      'il valore non cambia dopo il pasto');
   });
 
   await test('lo scontrino accetta anche il virtuale: scelta, testo incollato, correzioni', async () => {
@@ -4800,26 +4757,13 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
   await test('a colazione niente bibite: fra le bevande restano solo i succhi', async () => {
     const a = await app();
 
-    // cercando "cola" a colazione le bibite non escono; a pranzo si'
-    a.set('cerca-col', 'cola');
-    await wait(100);
-    vero(!/lattina di cola/i.test(a.testo('#lista-col')),
-      'la cola compare ancora a colazione');
-    a.set('cerca-pra', 'cola');
-    await wait(100);
-    vero(/lattina di cola/i.test(a.testo('#lista-pra')),
-      'la cola deve restare a pranzo');
-
-    // i succhi di frutta e le spremute invece a colazione ci sono
-    a.set('cerca-col', 'succo');
-    await wait(100);
-    vero(/succo/i.test(a.testo('#lista-col')), 'i succhi spariti dalla colazione');
-    a.set('cerca-col', 'aranciata');
-    await wait(100);
-    vero(!/lattina di aranciata/i.test(a.testo('#lista-col')),
-      'l\'aranciata compare ancora a colazione');
-    a.set('cerca-col', '');
-    await wait(100);
+    const col = a.dom.window.MealUpVisualData.suggestions('col').map(x => x.title.toLowerCase());
+    vero(!col.some(x => /cola|aranciata/.test(x)), 'una bibita compare a colazione');
+    vero(a.stato().recipes.some(x => /lattina di cola/i.test(x.title) && x.portata !== 'colazione'),
+      'la cola non resta disponibile nel catalogo per gli altri pasti');
+    vero(a.stato().recipes.some(x => /succo|spremuta/i.test(x.title)
+      && x.portata === 'bevanda' && (x.tags || []).includes('colazione')),
+      'i succhi sono spariti dalla colazione');
   });
 
   await test('la dispensa cerca solo in casa, e il mangiato si somma al pasto', async () => {
@@ -5384,7 +5328,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.d.getElementById('codice-cifre').value = '80012345';
     a.click('[data-act=codice-cerca]');
     await wait(150);
-    eq(a.d.getElementById('scan-esito-titolo').textContent, 'Prodotto non riconosciuto',
+    eq(a.d.getElementById('scan-esito-titolo').textContent, 'Prodotto non trovato',
       'senza archivio deve aprirsi la scheda manuale');
     vero(a.d.getElementById('modal-scan-esito').classList.contains('active'), 'la scheda esito non si apre');
     // il flusso non si blocca: nome, marca, formato, e via nel carrello
