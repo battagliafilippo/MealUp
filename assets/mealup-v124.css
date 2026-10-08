@@ -10,7 +10,7 @@ body:has(.view:not(#view-home).active){background:var(--mu-cream)!important}
 .header h1{font-size:2.35rem;line-height:1;letter-spacing:-.045em;color:var(--mu-ink)!important}
 #view-search .header h1,#view-spesa .header h1,#view-profile .header h1{color:var(--mu-ink)!important}
 .header .subtitle{display:block;margin-top:6px;font-size:.98rem;letter-spacing:0;text-transform:none;color:var(--mu-muted)!important}
-#view-home .header h1{display:none}#view-home .home-greeting{font-size:1.38rem;font-weight:800;text-transform:none;letter-spacing:-.02em}
+#view-home .header h1.home-brand{display:block;flex:0 0 132px;width:132px;height:auto;margin:0 0 5px;line-height:0}#view-home .home-brand img{display:block;width:100%;height:auto}#view-home .home-greeting{font-size:1.38rem;font-weight:800;text-transform:none;letter-spacing:-.02em}
 #view-home .header .subtitle{font-size:.9rem;color:#fff3e8!important}
 input,select,textarea,.glass-card,.scheda,.chip,.btn-ghost{border-color:var(--mu-line)!important}
 .glass-card,.scheda{background:rgba(255,250,243,.94)!important;box-shadow:var(--mu-shadow)!important}

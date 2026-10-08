@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="MealUp">
+  <path d="M13 55C15 28 31 14 55 14h18c24 0 40 14 42 41l-10 10H23z" fill="#fff8ef" stroke="#ead5bd" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M31 49a35 35 0 0 1 12-21" fill="none" stroke="#56aa5d" stroke-width="7" stroke-linecap="round"/><path d="M43 28a35 35 0 0 1 18-7" fill="none" stroke="#d9c53d" stroke-width="7" stroke-linecap="round"/><path d="M61 21a35 35 0 0 1 18 4" fill="none" stroke="#f2a329" stroke-width="7" stroke-linecap="round"/><path d="M79 25a35 35 0 0 1 17 24" fill="none" stroke="#ef6a26" stroke-width="7" stroke-linecap="round"/>
+  <path d="M64 52l21-18" stroke="#ff5b16" stroke-width="5" stroke-linecap="round"/><circle cx="64" cy="52" r="6" fill="#ff5b16" stroke="#fff8ef" stroke-width="2"/>
+  <text x="64" y="111" text-anchor="middle" font-family="Arial Rounded MT Bold, system-ui, sans-serif" font-size="49" font-weight="900" letter-spacing="-5"><tspan fill="#292b30">M</tspan><tspan fill="#ff5b16">U</tspan></text>
+</svg>

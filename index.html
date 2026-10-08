@@ -3453,7 +3453,7 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 
 </style>
 <link rel="stylesheet" href="./assets/family-fo-frozen-shell.css?v=1">
-<link rel="stylesheet" href="./assets/mealup-v124.css?v=1">
+<link rel="stylesheet" href="./assets/mealup-v124.css?v=brand-b">
 </head>
 <body>
 
@@ -3473,7 +3473,7 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
       <div>
         <span class="home-greeting" id="home-greeting">Ciao</span>
         <span class="subtitle" id="home-sub">I tuoi pasti su misura</span>
-        <h1>MealUp</h1>
+        <h1 class="home-brand"><img src="./assets/brand/mealup-logo.svg?v=proposta-b2" alt="MealUp"></h1>
       </div>
       <div class="testa-tasti">
         <button type="button" class="campanella" data-act="cena-apri" aria-label="Cena tra amici" title="Cena tra amici: due ricette che accontentano tutti">
@@ -8630,20 +8630,12 @@ function applicaSfondo(chiave, chiaveArte, colore) {
   if (!strati.length) return;
   stratoAttivo = 1 - stratoAttivo;
   const nuovo = strati[stratoAttivo], vecchio = strati[1 - stratoAttivo];
-
-  // sul fondo neon i disegni sono filigrana di porcellana e l'alone e'
-  // arancio bruciato: qualunque sia il tema, il fondale resta nella fiamma
-  const arte = 'rgba(255,252,244,0.55)';
-  const alone = '#8a2e00';
-  // L'alone si scalda al mattino e si fa piu' profondo la sera: la stessa
-  // pagina cambia umore secondo l'ora, senza cambiare colore.
-  const h = new Date().getHours();
-  const forza = h < 11 ? '26' : (h < 17 ? '33' : '44');
-  nuovo.style.backgroundImage = svgFondale(chiaveArte || 'piatto', arte) + ', ' +
-    'radial-gradient(120% 90% at 82% 82%, ' + alone + forza + ' 0%, transparent ' +
-    (h < 11 ? '68%' : h < 17 ? '62%' : '56%') + ')';
+  // Core UI v1.24 FROZEN: il guscio resta neutro. I temi continuano a
+  // governare controlli e gauge, senza reintrodurre illustrazioni legacy.
+  nuovo.style.backgroundImage = 'none';
   nuovo.style.opacity = '';
   nuovo.classList.add('viva');
+  vecchio.style.backgroundImage = 'none';
   vecchio.classList.remove('viva');
 }
 

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Simbolo MealUp</title><desc id="desc">Monogramma MU con gauge superiore</desc>
+  <defs><linearGradient id="c" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffdf8"/><stop offset="1" stop-color="#f1dfca"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dy="5" stdDeviation="5" flood-color="#5a3420" flood-opacity=".18"/></filter></defs>
+  <g filter="url(#s)">
+    <path d="M31 109C34 57 67 28 112 28h32c45 0 78 29 81 81l-18 18H49z" fill="url(#c)" stroke="#ead5bd" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M66 97a68 68 0 0 1 21-40" fill="none" stroke="#56aa5d" stroke-width="12" stroke-linecap="round"/><path d="M87 57a68 68 0 0 1 32-13" fill="none" stroke="#d9c53d" stroke-width="12" stroke-linecap="round"/><path d="M119 44a68 68 0 0 1 34 5" fill="none" stroke="#f2a329" stroke-width="12" stroke-linecap="round"/><path d="M153 49a68 68 0 0 1 30 25" fill="none" stroke="#ef6a26" stroke-width="12" stroke-linecap="round"/><path d="M183 74a68 68 0 0 1 7 23" fill="none" stroke="#df4428" stroke-width="12" stroke-linecap="round"/>
+    <path d="M128 103l39-34" stroke="#ff5b16" stroke-width="8" stroke-linecap="round"/><circle cx="128" cy="103" r="10" fill="#ff5b16" stroke="#fff8ef" stroke-width="4"/>
+  </g>
+  <text x="128" y="218" text-anchor="middle" font-family="Nunito, Avenir Next Rounded, Arial Rounded MT Bold, system-ui, sans-serif" font-size="92" font-weight="950" letter-spacing="-9"><tspan fill="#292b30">M</tspan><tspan fill="#ff5b16">U</tspan></text>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 220" role="img" aria-labelledby="title desc">
+  <title id="title">MealUp</title>
+  <desc id="desc">Logo MealUp con gauge nutrizionale superiore</desc>
+  <defs>
+    <linearGradient id="cream" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffdf8"/><stop offset="1" stop-color="#f3e4d2"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="170%"><feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#58341f" flood-opacity=".16"/></filter>
+  </defs>
+  <g transform="translate(28 8)" filter="url(#shadow)">
+    <path d="M74 105C78 48 111 18 168 18h174c57 0 90 30 94 87l-21 20H95z" fill="url(#cream)" stroke="#ead8c3" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M114 94a141 141 0 0 1 42-48" fill="none" stroke="#55a85b" stroke-width="14" stroke-linecap="round"/>
+    <path d="M156 46a141 141 0 0 1 49-19" fill="none" stroke="#d8c43d" stroke-width="14" stroke-linecap="round"/>
+    <path d="M205 27a141 141 0 0 1 53-1" fill="none" stroke="#f2a329" stroke-width="14" stroke-linecap="round"/>
+    <path d="M258 26a141 141 0 0 1 52 18" fill="none" stroke="#ef6a26" stroke-width="14" stroke-linecap="round"/>
+    <path d="M310 44a141 141 0 0 1 43 50" fill="none" stroke="#df4428" stroke-width="14" stroke-linecap="round"/>
+    <path d="M256 102l55-48" stroke="#ff5b16" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="256" cy="102" r="12" fill="#ff5b16" stroke="#fff8ef" stroke-width="4"/>
+  </g>
+  <text x="40" y="201" fill="#292b30" font-family="Nunito, Avenir Next Rounded, Arial Rounded MT Bold, system-ui, sans-serif" font-size="86" font-weight="900" letter-spacing="-5">Meal</text>
+  <text x="232" y="201" fill="#ff5b16" stroke="#fff8ef" stroke-width="8" paint-order="stroke fill" font-family="Nunito, Avenir Next Rounded, Arial Rounded MT Bold, system-ui, sans-serif" font-size="86" font-weight="900" letter-spacing="-5">Up</text>
+</svg>
