@@ -21,7 +21,7 @@ body{font-family:"Satoshi","Nunito",system-ui,sans-serif!important}
 .view:not(#view-home)::before{content:"MU";top:9%;font-size:min(48vw,13rem);color:#f2e6d7;opacity:.76}
 
 /* Home — orange stage with embossed MU signature, matching the approved board. */
-#view-home{background:linear-gradient(165deg,var(--render-orange-hi) 0%,var(--render-orange) 48%,#ff4e12 100%)!important;color:#fff;overflow:hidden}
+#view-home{background:linear-gradient(165deg,var(--render-orange-hi) 0%,var(--render-orange) 48%,#ff4e12 100%)!important;color:#fff;overflow:hidden;margin-top:calc(-22px - env(safe-area-inset-top));margin-left:-18px;margin-right:-18px}
 #view-home.active{display:flex!important;flex-direction:column}
 #view-home::before{content:"MU"!important;position:fixed;left:50%;top:16%;z-index:0;transform:translateX(-50%);font-size:clamp(8rem,38vw,13.5rem);font-weight:950;line-height:.75;letter-spacing:-.12em;color:rgba(218,66,5,.46);text-shadow:-3px -3px 4px rgba(255,139,72,.26),4px 6px 8px rgba(139,38,0,.26);opacity:.68}
 #view-home .header{position:relative;z-index:2;display:flex;align-items:center;flex-wrap:wrap;row-gap:2px;margin-bottom:12px}
