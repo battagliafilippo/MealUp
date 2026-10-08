@@ -9054,8 +9054,8 @@ function anelloGiornata(mealId) {
         <g class="mu-scale-live-needle" clip-path="url(#muNeedleAboveCounter)" style="transform-origin:380px 165px;transform:rotate(${gAgoLive}deg)">
           <path d="M375 169 L385 169 L382.5 -28 Q380 -40 377.5 -28 Z"/>
         </g>
-        <g class="mu-scale-live-flip-clock" filter="url(#muTinyShadow)">
-          <rect x="230" y="178" width="252" height="72" rx="10" fill="url(#muFace)"/>
+        <rect x="210" y="168" width="350" height="92" rx="12" fill="url(#muFace)"/>
+        <g class="mu-scale-live-flip-clock" filter="url(#muTinyShadow)" transform="translate(-18 0)">
           <rect x="230" y="209" width="254" height="10" rx="5" fill="url(#muLiveFlipPin)"/>
           <rect x="228" y="204" width="13" height="20" rx="5" fill="url(#muLiveFlipPin)"/>
           <rect x="473" y="204" width="13" height="20" rx="5" fill="url(#muLiveFlipPin)"/>
@@ -9069,6 +9069,7 @@ function anelloGiornata(mealId) {
             + '</g>';
         }).join('')}
         </g>
+        <text class="mu-scale-kcal" x="505" y="224">kcal</text>
       </svg>
     </div>
     <div class="anello-gambe">
