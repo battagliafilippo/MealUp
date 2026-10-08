@@ -9046,11 +9046,16 @@ function anelloGiornata(mealId) {
         <!-- Canonical 3D body extracted from the approved render. The live
              needle and digits remain code-driven and sit above this layer. -->
         <g class="mu-scale-live-needle" clip-path="url(#muNeedleAboveCounter)" style="transform-origin:380px 165px;transform:rotate(${gAgoLive}deg)">
-          <path d="M375 169 L385 169 L382.5 -78 Q380 -90 377.5 -78 Z"/>
+          <path d="M375 169 L385 169 L382.5 -28 Q380 -40 377.5 -28 Z"/>
         </g>
-        ${String(Math.round(valore)).padStart(4,'0').slice(-4).split('').map((d,i)=>
-          '<text class="mu-scale-live-digit" x="'+([265,328,388,449][i])+'" y="224">'+d+'</text>'
-        ).join('')}
+        ${String(Math.round(valore)).padStart(4,'0').slice(-4).split('').map((d,i)=>{
+          const cx = [265,328,388,449][i];
+          return '<g class="mu-scale-live-flip">'
+            + '<rect x="'+(cx-24)+'" y="190" width="48" height="48" rx="5" fill="#343330" stroke="#242321" stroke-width="1"/>'
+            + '<path d="M'+(cx-22)+' 214H'+(cx+22)+'" stroke="#171715" stroke-width="1" opacity=".8"/>'
+            + '<text class="mu-scale-live-digit" x="'+cx+'" y="214" dominant-baseline="middle">'+d+'</text>'
+            + '</g>';
+        }).join('')}
       </svg>
     </div>
     <div class="anello-gambe">
