@@ -11,7 +11,12 @@ const { JSDOM, VirtualConsole } = require('jsdom');
 const fs = require('fs');
 const path = require('path');
 
-const HTML = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+const ROOT = path.join(__dirname, '..');
+const FAMILY_FO_RUNTIME = fs.readFileSync(path.join(ROOT, 'assets', 'family-fo', 'runtime.js'), 'utf8');
+const HTML = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').replace(
+  '<script src="./assets/family-fo/runtime.js?v=3"></script>',
+  '<script>' + FAMILY_FO_RUNTIME + '</script>'
+);
 
 /* L'orologio dei test e' fermo alle otto di sera, e vale sia dentro la pagina
    sia nei seed scritti dai test: molte logiche (il pasto indovinato, gli
@@ -46,6 +51,11 @@ function boot(opts = {}) {
 
       Object.defineProperty(w, 'crypto', { value: require('crypto').webcrypto, configurable: true });
       Object.defineProperty(w, 'isSecureContext', { value: true, configurable: true });
+      // jsdom non espone sempre le API Encoding che sono native nei browser.
+      // Il runtime MealUp le usa per i link compressi, quindi il DOM di test
+      // deve offrire lo stesso contratto del telefono.
+      if (!w.TextEncoder) w.TextEncoder = require('util').TextEncoder;
+      if (!w.TextDecoder) w.TextDecoder = require('util').TextDecoder;
       // un "telefono vecchio": browser senza compressione nativa dei link
       if (!opts.senzaCompressione) {
         w.CompressionStream = global.CompressionStream;

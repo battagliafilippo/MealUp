@@ -616,16 +616,16 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'le finestre non ridefiniscono il colore delle scritte');
   });
 
-  await test('il fondale cambia con l\'ingrediente cercato', async () => {
+  await test('la ricerca conserva il fondale neutro del Core UI v1.24', async () => {
     const a = await app();
     a.click('[data-act=pasto-vai][data-val="2"]');
     const ora = () => (a.d.querySelector('#sfondo .strato.viva') || {}).style.backgroundImage || '';
     const prima = ora();
     a.set('cerca-cen', 'salmone');
     const dopo = ora();
-    vero(dopo && dopo !== prima, 'il fondale non segue la ricerca');
+    eq(dopo, prima, 'la ricerca ha riattivato un fondale illustrato legacy');
     a.set('cerca-cen', '');
-    vero(ora() !== dopo, 'non torna al fondale della cena');
+    eq(ora(), dopo, 'il fondale neutro non resta coerente');
   });
 
   await test('uno stato vecchio e incompleto viene ricostruito', async () => {
@@ -1037,11 +1037,11 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
   });
 
   console.log('\nMinimalismo');
-  await test('la scheda dice l\'essenziale e mostra un disegno', async () => {
+  await test('la scheda dice l\'essenziale e mostra il FO di famiglia', async () => {
     const a = await app();
     const c = a.d.querySelector('#lista-cen .scheda');
     vero(c, 'nessuna scheda');
-    vero(c.querySelector('.scheda-arte svg'), 'manca l\'illustrazione');
+    vero(c.querySelector('.scheda-arte .mealup-fo-slot img'), 'manca il FO di famiglia');
     const parole = c.textContent.trim().split(/\s+/).filter(Boolean).length;
     vero(parole <= 12, 'troppe parole nella scheda: ' + parole);
   });
@@ -1066,29 +1066,28 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'estremi non arrotondati');
   });
 
-  await test('le icone seguono le famiglie, e il peso decide il resto', async () => {
+  await test('i FO seguono la mappa canonica per recipe id', async () => {
     const a = await app();
-    const { ARTE, arteRicetta } = a.dom.window.fitmealsArte;
+    const { arteRicetta } = a.dom.window.fitmealsArte;
     const icona = t => {
       const r = a.stato().recipes.find(x => x.title.toLowerCase().startsWith(t));
       return r ? arteRicetta(r) : null;
     };
-    eq(icona('spaghetti alla carbonara'), ARTE.farfalle, 'la carbonara non porta la farfalla');
-    vero(/M13 7c3.4/.test(ARTE.farfalle), 'la farfalla non e\' quella in verticale');
-    eq(icona('succo'), ARTE.brik, 'il succo non porta il brik con la cannuccia');
-    eq(icona('te freddo'), ARTE.bottiglia33, 'il te freddo non porta la bottiglia di vetro');
-    eq(icona("penne all'arrabbiata"), ARTE.farfalle, 'le penne non portano la farfalla');
-    eq(icona('branzino'), ARTE.pesce, 'il branzino non porta il pesce');
-    vero(icona('zuppa di ceci') === ARTE.legume || icona('zuppa di lenticchie') === ARTE.lenticchie,
-      'le zuppe di legumi non mostrano i legumi');
+    vero(/data-family="PASTA"/.test(icona('spaghetti alla carbonara')), 'carbonara fuori famiglia PASTA');
+    vero(/data-family="BEVANDE"/.test(icona('succo')), 'succo fuori famiglia BEVANDE');
+    vero(/data-family="BEVANDE"/.test(icona('te freddo')), 'te freddo fuori famiglia BEVANDE');
+    vero(/data-family="PASTA"/.test(icona("penne all'arrabbiata")), 'penne fuori famiglia PASTA');
+    vero(/data-family="PESCE"/.test(icona('branzino')), 'branzino fuori famiglia PESCE');
+    vero(/data-family="LEGUMI"/.test(icona('zuppa di ceci') || icona('zuppa di lenticchie')),
+      'zuppa fuori famiglia LEGUMI');
   });
 
-  await test('il titolo comanda: le uova al tonno mostrano il pesce', async () => {
+  await test('la mappa canonica comanda anche sui titoli ambigui', async () => {
     const a = await app();
-    const { ARTE, arteRicetta } = a.dom.window.fitmealsArte;
+    const { arteRicetta } = a.dom.window.fitmealsArte;
     const r = a.stato().recipes.find(x => /uova ripiene/i.test(x.title));
     vero(r, 'ricetta non trovata');
-    eq(arteRicetta(r), ARTE.pesce, 'le uova al tonno non seguono la famiglia del titolo');
+    vero(/data-family="UOVA"/.test(arteRicetta(r)), 'recipe id fuori famiglia UOVA');
   });
 
   console.log('\nAllenamento e colazioni ricche');
@@ -1117,7 +1116,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     const dopo = a.dom.window.fitmealsPlan();
     vero(dopo.target > prima.target, 'l\'allenamento non alza il fabbisogno');
     a.click('[data-act=pasto-vai][data-val="2"]');
-    eq(a.conta('#pagina-cen .home-card'), 1, 'la Home deve mostrare una proposta per la cena');
+    eq(a.conta('#pagina-cen .home-card'), 2, 'la Home deve mostrare protagonista e anteprima per la cena');
   });
 
   await test('le colazioni ricche ci sono e sono marcate come sgarro', async () => {
@@ -1164,24 +1163,22 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       'la sezione Dati non mostra il gruppo');
   });
 
-  await test('il fondale e\' un disegno grande e decentrato', async () => {
+  await test('il fondale usa il guscio neutro FROZEN v1.24', async () => {
     const a = await app();
     const strati = [...a.d.querySelectorAll('#sfondo .strato')];
     eq(strati.length, 2, 'servono due strati per la dissolvenza');
     const viva = strati.find(x => x.classList.contains('viva'));
-    vero(viva && /svg/.test(viva.style.backgroundImage), 'nessun disegno di fondo');
-    const css = a.d.querySelector('style').textContent;
-    vero(/background-position:118% 86%/.test(css), 'il fondale non e\' decentrato');
-    vero(!/#sfondo\.f-/.test(css), 'i vecchi motivi a pallini sono ancora li');
+    vero(viva && !/svg/.test(viva.style.backgroundImage), 'è tornato un disegno di fondo legacy');
+    vero(a.d.querySelector('link[href*="mealup-v124.css"]'), 'manca il Core UI v1.24');
   });
 
-  await test('il fondale cambia con la ricetta aperta', async () => {
+  await test('il dettaglio conserva il fondale neutro FROZEN', async () => {
     const a = await app();
     const ora = () => (a.d.querySelector('#sfondo .strato.viva') || {}).style.backgroundImage;
     const prima = ora();
     a.cerca('branzino al cartoccio');
     a.click('#recipe-list .scheda');
-    vero(ora() !== prima, 'il fondale non e\' cambiato aprendo la ricetta');
+    eq(ora(), prima, 'il dettaglio ha riattivato un fondale legacy');
   });
 
   await test('ogni passaggio riconosce il gesto che chiede', async () => {
@@ -1467,23 +1464,21 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     almeno((svg.match(/<path/g) || []).length, 8, 'mancano i fili del mazzo');
   });
 
-  await test('le verdure condividono la stessa lingua botanica', async () => {
+  await test('le verdure condividono il FO canonico VERDURA', async () => {
     const a = await app();
-    const arte = t => { a.cerca(t); return a.d.querySelector('#recipe-list .scheda-arte svg').innerHTML; };
-    ['insalata mista', 'broccoli ripassati', 'carciofi trifolati', 'carote'].forEach(() => {});
+    const arte = t => { a.cerca(t); return a.d.querySelector('#recipe-list .mealup-fo-slot'); };
     ['insalata mista', 'broccoli ripassati', 'zucchine trifolate'].forEach(t => {
-      const svg = arte(t);
-      // nervatura centrale: il tratto verticale che tutte le foglie hanno
-      vero(/M24 4\dV|M24 42V|M24 40V/.test(svg), t + ': manca la nervatura centrale');
+      const fo = arte(t);
+      vero(fo && fo.dataset.family === 'VERDURA', t + ': famiglia FO errata');
     });
   });
 
-  await test('le bevande non mostrano lettere', async () => {
+  await test('le bevande usano il FO canonico BEVANDE', async () => {
     const a = await app();
-    const { ARTE, arteRicetta } = a.dom.window.fitmealsArte;
+    const { arteRicetta } = a.dom.window.fitmealsArte;
     ['cola', 'chinotto', 'gassosa'].forEach(t => {
       const r = a.stato().recipes.find(x => new RegExp('(^|\\s)' + t + '($|\\s)').test(x.title.toLowerCase()));
-      if (r) eq(arteRicetta(r), ARTE.bottiglia33, t + ' non porta la bottiglia da 33');
+      if (r) vero(/data-family="BEVANDE"/.test(arteRicetta(r)), t + ' fuori famiglia BEVANDE');
     });
   });
 
@@ -2981,24 +2976,24 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
   });
 
   console.log('\nIcone, storico e testa interattiva');
-  await test('le famiglie hanno la loro icona fissa', async () => {
+  await test('le famiglie hanno il loro FO canonico fisso', async () => {
     const a = await app();
-    const { ARTE, arteRicetta } = a.dom.window.fitmealsArte;
-    const nome = svg => Object.keys(ARTE).find(k => ARTE[k] === svg) || 'altro';
+    const { arteRicetta } = a.dom.window.fitmealsArte;
+    const nome = markup => ((markup.match(/data-family="([A-Z]+)"/) || [])[1] || 'UNMAPPED');
     const icona = titolo => {
       const r = a.stato().recipes.find(x => x.title.toLowerCase().startsWith(titolo));
       return r ? nome(arteRicetta(r)) : '(non trovata)';
     };
-    eq(icona('spaghetti alla carbonara'), 'farfalle', 'la pasta non ha la farfalla');
-    eq(icona('lasagne'), 'farfalle', 'anche le lasagne sono pasta');
-    eq(icona('bistecca alla fiorentina'), 'bistecca', 'la carne non ha la bistecca');
-    eq(icona('tagliata di manzo'), 'bistecca', 'la tagliata e\' carne');
-    eq(icona('salmone al forno'), 'pesce', 'il pesce non ha il pesce');
-    eq(icona('frittata'), 'occhiodibue', 'la frittata non ha l\'occhio di bue');
-    eq(icona('porridge'), 'brioche', 'la colazione non ha la brioche');
-    eq(icona('pizza'), 'trancio', 'la pizza non ha il trancio');
-    eq(icona('lattina di cola'), 'bottiglia33', 'la cola non ha la bottiglia');
-    eq(icona('chinotto'), 'bottiglia33', 'il chinotto e\' una gassata');
+    eq(icona('spaghetti alla carbonara'), 'PASTA', 'carbonara fuori PASTA');
+    eq(icona('lasagne'), 'PASTA', 'lasagne fuori PASTA');
+    eq(icona('bistecca alla fiorentina'), 'CARNE', 'bistecca fuori CARNE');
+    eq(icona('tagliata di manzo'), 'CARNE', 'tagliata fuori CARNE');
+    eq(icona('salmone al forno'), 'PESCE', 'salmone fuori PESCE');
+    eq(icona('frittata'), 'UOVA', 'frittata fuori UOVA');
+    eq(icona('porridge'), 'CEREALI', 'porridge fuori CEREALI');
+    eq(icona('pizza'), 'PANE', 'pizza fuori PANE');
+    eq(icona('lattina di cola'), 'BEVANDE', 'cola fuori BEVANDE');
+    eq(icona('chinotto'), 'BEVANDE', 'chinotto fuori BEVANDE');
   });
 
   await test('lo storico ha i suoi grafici e ripartisce a mezzanotte', async () => {
@@ -3198,17 +3193,17 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     vero(a.d.getElementById('freccia-avanti').disabled, 'in cima la freccia avanti deve spegnersi');
   });
 
-  await test('il fondo ha il velo e le salse la bottiglietta', async () => {
+  await test('il fondo ha il velo e le salse il FO canonico', async () => {
     const a = await app();
     vero(a.d.getElementById('velo-fondo'), 'manca il velo sotto la barra');
     const css = a.d.querySelector('style').textContent;
     vero(/#velo-fondo\{[^}]*linear-gradient\(to top/.test(css), 'il velo non sfuma verso l\'alto');
 
-    const { ARTE, arteRicetta } = a.dom.window.fitmealsArte;
+    const { arteRicetta } = a.dom.window.fitmealsArte;
     const salse = a.stato().recipes.filter(r => r.portata === 'salsa');
     almeno(salse.length, 3, 'niente salse in catalogo');
-    salse.forEach(r => eq(arteRicetta(r), ARTE.kikkoman,
-      r.title + ' non ha la bottiglietta della soia'));
+    salse.forEach(r => vero(/data-family="SALSE"/.test(arteRicetta(r)),
+      r.title + ' fuori famiglia SALSE'));
   });
 
   await test('il piatto mangiato si modifica senza toccare la ricetta', async () => {
@@ -3444,13 +3439,13 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(a.stato().log.length, 1, 'la registrazione non entra nel diario');
   });
 
-  await test('la Home mantiene una sola proposta per pasto', async () => {
+  await test('la Home mantiene una protagonista e una anteprima per pasto', async () => {
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
     a.click('[data-act=pasto-vai][data-val="2"]');
     const primo = a.d.querySelector('#pagina-cen .home-card');
     vero(primo, 'nessun consiglio in cena');
-    eq(a.conta('#pagina-cen .home-card'), 1, 'la Home mostra più di una proposta');
+    eq(a.conta('#pagina-cen .home-card'), 2, 'la Home non mostra protagonista e anteprima');
     eq(a.conta('#pagina-cen .sugg-x'), 0, 'è rimasto il comando legacy di chiusura');
 
     // anche le combinazioni della dispensa hanno la loro x

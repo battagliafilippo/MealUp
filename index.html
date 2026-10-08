@@ -8515,6 +8515,9 @@ function arteRicetta(r, host) {
   if (window.MealUpFamilyFO && r && r.id) {
     return window.MealUpFamilyFO.markup(r.id, host || 'RECIPE_CARD', 'fo-recipe');
   }
+  if (r && r.id) {
+    return '<span class="mealup-fo-slot fo-recipe" data-fo-state="missing" role="img" aria-label="Food Object non disponibile"></span>';
+  }
   const t = norm(r.title);
   // La famiglia si giudica dal titolo o dall'ingrediente che pesa di piu',
   // non da una comparsa: le uova ripiene col tonno restano uova, non pesce.
@@ -9263,9 +9266,11 @@ function renderPasto(id) {
   const proposte = suggerimenti.length ? suggerimenti : piatti;
   const indice = proposte.length ? indiceSuggerimentoHome[id] % proposte.length : 0;
   const proposta = proposte[indice];
+  const prossima = proposte.length > 1 ? proposte[(indice + 1) % proposte.length] : null;
   lista.innerHTML = proposta
     ? `<div class="home-suggestion-stage" data-home-meal="${id}" data-home-count="${proposte.length}" aria-label="Ricetta suggerita, scorri per cambiare proposta">
          ${recipeCard(proposta, { host: 'HOME_CARD' }, indice)}
+         ${prossima ? recipeCard(prossima, { host: 'HOME_CARD' }, indice + 1) : ''}
        </div>${proposte.length > 1 ? '<span class="home-suggestion-hint">Scorri per un’altra proposta</span>' : ''}`
     : `<div class="home-suggestion-stage">${emptyState('Non riesco a trovare una ricetta al momento.<br>Riprova tra qualche istante.')}</div>`;
 }
