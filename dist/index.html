@@ -8981,7 +8981,7 @@ function anelloGiornata(mealId) {
           <filter id="muTinyShadow" x="-25%" y="-25%" width="150%" height="160%">
             <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#7c4f35" flood-opacity=".14"/>
           </filter>
-          <clipPath id="muNeedleAboveCounter"><path d="M80 44H680V160H80Z"/></clipPath>
+          <clipPath id="muNeedleAboveCounter"><path d="M80 44H680V170H80Z"/></clipPath>
         </defs>
 
         <g class="mu-scale-vector-fallback" opacity="0" aria-hidden="true">
@@ -9044,11 +9044,11 @@ function anelloGiornata(mealId) {
 
         <!-- Canonical 3D body extracted from the approved render. The live
              needle and digits remain code-driven and sit above this layer. -->
-        <g class="mu-scale-live-needle" clip-path="url(#muNeedleAboveCounter)" style="transform-origin:380px 205px;transform:rotate(${gAgo}deg)">
-          <path d="M375 209 L385 209 L382.5 87 Q380 75 377.5 87 Z"/>
+        <g class="mu-scale-live-needle" clip-path="url(#muNeedleAboveCounter)" style="transform-origin:380px 165px;transform:rotate(${gAgo}deg)">
+          <path d="M375 169 L385 169 L382.5 87 Q380 75 377.5 87 Z"/>
         </g>
         ${String(Math.round(valore)).padStart(4,'0').slice(-4).split('').map((d,i)=>
-          '<text class="mu-scale-live-digit" x="'+(265+i*62)+'" y="224">'+d+'</text>'
+          '<text class="mu-scale-live-digit" x="'+(272+i*62)+'" y="224">'+d+'</text>'
         ).join('')}
       </svg>
     </div>
