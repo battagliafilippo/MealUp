@@ -3347,9 +3347,15 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 .bilancia-reference{
   width:min(100%,560px)!important;height:auto!important;min-height:0!important;
   margin:4px auto 6px!important;position:relative!important;overflow:visible!important;
+  aspect-ratio:760/578;
   filter:none!important;
 }
-.mealup-scale-svg{display:block;width:100%;height:auto;overflow:visible}
+.mu-scale-raster-html{
+  position:absolute;z-index:1;left:-21.7105%;top:0;
+  width:143.421%;height:100%;object-fit:fill;pointer-events:none;
+  filter:drop-shadow(0 12px 12px rgba(105,38,5,.17));
+}
+.mealup-scale-svg{display:block;position:absolute;z-index:2;inset:0;width:100%;height:100%;overflow:visible}
 .mu-scale-shell,.mu-scale-neck,.mu-scale-base{
   fill:url(#muCream);stroke:#fffaf2;stroke-width:3.2;
 }
@@ -8950,6 +8956,7 @@ function anelloGiornata(mealId) {
 
     return `
     <div class="anello bilancia bilancia-reference bilancia-live" data-valore="${valore}" aria-label="${valore} kcal su ${T}">
+      <img class="mu-scale-raster-html" src="https://raw.githubusercontent.com/battagliafilippo/MealUp/0306409283086bc7e61b605e7381d5fa6f34a90f/assets/brand/mealup-scale-body-v3.png" alt="" aria-hidden="true">
       <svg class="mealup-scale-svg" viewBox="0 0 760 578" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
         <defs>
           <linearGradient id="muCream" x1="0" y1="0" x2="1" y2="1">
@@ -9036,8 +9043,6 @@ function anelloGiornata(mealId) {
 
         <!-- Canonical 3D body extracted from the approved render. The live
              needle and digits remain code-driven and sit above this layer. -->
-        <image class="mu-scale-raster" href="https://raw.githubusercontent.com/battagliafilippo/MealUp/0306409283086bc7e61b605e7381d5fa6f34a90f/assets/brand/mealup-scale-body-v3.png"
-          x="-165" y="0" width="1090" height="578" preserveAspectRatio="none"/>
         <g class="mu-scale-live-needle" clip-path="url(#muNeedleAboveCounter)" style="transform-origin:380px 205px;transform:rotate(${gAgo}deg)">
           <path d="M375 209 L385 209 L382.5 87 Q380 75 377.5 87 Z"/>
         </g>
