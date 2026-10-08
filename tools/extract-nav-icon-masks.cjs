@@ -32,14 +32,14 @@ async function extract(name, box, keep) {
 
 Promise.all([
   extract(
-    'nav-recipes-render-mask-v3.png',
+    'nav-recipes-render-mask-v4.png',
     { left: 475, top: 98, width: 110, height: 96 },
-    (r, g, b) => r > 210 && g > 55 && g < 175 && b < 75 && r - g > 80,
+    (r, g, b) => r > 245 && g > 62 && g < 138 && b < 48 && r - g > 112,
   ),
   extract(
-    'nav-stocks-render-mask-v3.png',
+    'nav-stocks-render-mask-v4.png',
     { left: 955, top: 100, width: 100, height: 95 },
-    (r, g, b) => r < 105 && g < 100 && b < 92 && Math.max(r, g, b) - Math.min(r, g, b) < 28,
+    (r, g, b) => r < 72 && g < 68 && b < 64 && Math.max(r, g, b) - Math.min(r, g, b) < 24,
   ),
 ]).catch((error) => {
   console.error(error);
