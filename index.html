@@ -3351,17 +3351,19 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 }
 .mealup-scale-svg{display:block;width:100%;height:auto;overflow:visible}
 .mu-scale-shell,.mu-scale-neck,.mu-scale-base{
-  fill:url(#muCream);stroke:rgba(255,255,255,.72);stroke-width:2.2;
+  fill:url(#muCream);stroke:#fffaf2;stroke-width:3.2;
 }
 .mu-scale-face{
-  fill:url(#muFace);stroke:rgba(176,123,84,.12);stroke-width:1.8;
+  fill:url(#muFace);stroke:#d7c3aa;stroke-width:3;
 }
-.mu-scale-tick{fill:none;stroke:rgba(82,56,43,.42);stroke-width:2;stroke-linecap:round}
-.mu-scale-tick.major{stroke:rgba(82,56,43,.72);stroke-width:3.1}
-.mu-scale-progress{
-  fill:none;stroke:#f7a044;stroke-width:16;stroke-linecap:round;
-  filter:drop-shadow(0 2px 2px rgba(192,84,12,.10));
+.mu-scale-inner-rim{fill:none;stroke:rgba(255,255,255,.86);stroke-width:5}
+.mu-scale-tick{fill:none;stroke:#4b4945;stroke-width:1.9;stroke-linecap:round}
+.mu-scale-tick.major{stroke:#343330;stroke-width:3.2}
+.mu-scale-zone{
+  fill:none;stroke-width:27;stroke-linecap:butt;
+  filter:drop-shadow(0 2px 2px rgba(121,63,16,.12));
 }
+.mu-scale-progress{fill:none;stroke:rgba(255,255,255,.24);stroke-width:4;stroke-linecap:round}
 .mu-scale-label{
   font:700 26px/1 "Satoshi",sans-serif;
   fill:#6b4a38;text-anchor:middle;
@@ -3380,10 +3382,10 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 .mu-scale-kcal{
   fill:#6b4a38;font:700 27px/1 "Satoshi",sans-serif;
 }
-.mu-scale-button-ring{fill:#d7b99c;stroke:rgba(122,70,37,.18);stroke-width:1}
-.mu-scale-button{fill:var(--mealup-orange);stroke:#8e3108;stroke-width:2}
-.mu-scale-slot{fill:#ead6c0;stroke:rgba(112,71,45,.16);stroke-width:1.4}
-.mu-scale-foot{fill:#6f4932}
+.mu-scale-button-ring{fill:url(#muButtonRing);stroke:#c5a98c;stroke-width:2}
+.mu-scale-button{fill:url(#muButton);stroke:#8e3108;stroke-width:2.4}
+.mu-scale-slot{fill:url(#muSlot);stroke:#ceb79d;stroke-width:1.8}
+.mu-scale-foot{fill:url(#muFoot)}
 
 /* HOME data windows: same rubber family as the approved navigation. */
 .anello-gambe,.macro-giorno,.menu-oggi,.riepilogo{position:relative;z-index:2}
@@ -8935,72 +8937,86 @@ function anelloGiornata(mealId) {
 
     return `
     <div class="anello bilancia bilancia-reference bilancia-live" data-valore="${valore}" aria-label="${valore} kcal su ${T}">
-      <svg class="mealup-scale-svg" viewBox="0 0 760 620" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+      <svg class="mealup-scale-svg" viewBox="0 0 760 630" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
         <defs>
-          <linearGradient id="muCream" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#fff9f0"/>
-            <stop offset=".58" stop-color="#f4e5d3"/>
-            <stop offset="1" stop-color="#e7d2ba"/>
+          <linearGradient id="muCream" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#fffdf8"/>
+            <stop offset=".34" stop-color="#f8ebd9"/>
+            <stop offset=".72" stop-color="#ead6bd"/>
+            <stop offset="1" stop-color="#cfb293"/>
           </linearGradient>
           <linearGradient id="muFace" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#fff8ee"/>
-            <stop offset="1" stop-color="#f5e6d5"/>
+            <stop offset="0" stop-color="#fffdf7"/>
+            <stop offset=".58" stop-color="#fbf0e1"/>
+            <stop offset="1" stop-color="#ead6bc"/>
           </linearGradient>
+          <radialGradient id="muButton" cx="34%" cy="25%" r="72%"><stop offset="0" stop-color="#ff8b42"/><stop offset=".65" stop-color="#ff5219"/><stop offset="1" stop-color="#d62f06"/></radialGradient>
+          <linearGradient id="muButtonRing" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff7eb"/><stop offset="1" stop-color="#dcc3a6"/></linearGradient>
+          <linearGradient id="muSlot" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#dfc7aa"/><stop offset=".35" stop-color="#f7ead8"/><stop offset="1" stop-color="#ead7c0"/></linearGradient>
+          <linearGradient id="muFoot" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#4a4641"/><stop offset="1" stop-color="#242321"/></linearGradient>
           <filter id="muSoftShadow" x="-25%" y="-25%" width="150%" height="170%">
-            <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#853006" flood-opacity=".20"/>
+            <feDropShadow dx="0" dy="15" stdDeviation="13" flood-color="#702904" flood-opacity=".28"/>
           </filter>
           <filter id="muTinyShadow" x="-25%" y="-25%" width="150%" height="160%">
             <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#7c4f35" flood-opacity=".14"/>
           </filter>
         </defs>
 
-        <ellipse cx="380" cy="594" rx="210" ry="13" fill="#8d2d05" opacity=".16"/>
+        <ellipse cx="380" cy="603" rx="225" ry="16" fill="#7b2806" opacity=".22"/>
 
         <!-- Head: cream body, subtle integrated rim, no metallic outer frame. -->
         <g filter="url(#muSoftShadow)">
-          <path class="mu-scale-shell" d="M128 82 Q138 43 181 38 Q380 14 579 38 Q622 43 632 82 L606 315 Q600 349 565 354 Q380 372 195 354 Q160 349 154 315 Z"/>
-          <path class="mu-scale-face" d="M147 88 Q156 58 188 54 Q380 34 572 54 Q604 58 613 88 L589 302 Q584 329 557 333 Q380 349 203 333 Q176 329 171 302 Z"/>
+          <path class="mu-scale-shell" d="M92 112 Q99 61 157 46 Q380 -2 603 46 Q661 61 668 112 L622 317 Q614 358 571 367 Q380 399 189 367 Q146 358 138 317 Z"/>
+          <path class="mu-scale-face" d="M116 118 Q124 78 169 66 Q380 24 591 66 Q636 78 644 118 L601 304 Q594 334 560 341 Q380 369 200 341 Q166 334 159 304 Z"/>
+          <path class="mu-scale-inner-rim" d="M128 121 Q135 89 176 78 Q380 39 584 78 Q625 89 632 121 L591 296 Q585 320 554 327 Q380 352 206 327 Q175 320 169 296 Z"/>
         </g>
 
-        <!-- Ticks + colored calorie arc. The same gAgo drives both arc and needle. -->
+        <!-- Colored enamel arc from the canonical render. -->
+        <path class="mu-scale-zone" stroke="#5f8d4d" d="${arcoP(-58,-39,230)}"/>
+        <path class="mu-scale-zone" stroke="#9ead3f" d="${arcoP(-39,-20,230)}"/>
+        <path class="mu-scale-zone" stroke="#f1c323" d="${arcoP(-20,0,230)}"/>
+        <path class="mu-scale-zone" stroke="#ff9d20" d="${arcoP(0,20,230)}"/>
+        <path class="mu-scale-zone" stroke="#f67522" d="${arcoP(20,39,230)}"/>
+        <path class="mu-scale-zone" stroke="#ef3e2a" d="${arcoP(39,58,230)}"/>
+
+        <!-- Ticks and live needle share the same scale. -->
         ${Array.from({length:25},(_,i)=>{
           const g = DA + (i/24)*SPAN;
           const major = i%4===0;
-          return '<path class="mu-scale-tick '+(major?'major':'')+'" d="M'+px(g, major?244:250)+' '+py(g, major?244:250)+' L'+px(g,263)+' '+py(g,263)+'"/>';
+          return '<path class="mu-scale-tick '+(major?'major':'')+'" d="M'+px(g, major?263:268)+' '+py(g, major?263:268)+' L'+px(g,282)+' '+py(g,282)+'"/>';
         }).join('')}
-        ${frazione > .01 ? '<path class="mu-scale-progress" d="'+arcoP(DA, Number(gAgo), 230)+'"/>' : ''}
-
-        <text class="mu-scale-label" x="205" y="202">${tonda(T/3)}</text>
-        <text class="mu-scale-label" x="332" y="180">${tonda(T*2/3)}</text>
-        <text class="mu-scale-label" x="468" y="202">${tonda(T)}</text>
-        <text class="mu-scale-label mu-scale-label-small" x="565" y="248">${tonda(fondo)}</text>
+        <path class="mu-scale-progress" d="${arcoP(DA, Math.max(DA + .1, Number(gAgo)), 230)}"/>
+        <g opacity="0" aria-hidden="true">
+          <text class="mu-scale-label">${tonda(T/3)}</text><text class="mu-scale-label">${tonda(T*2/3)}</text>
+          <text class="mu-scale-label">${tonda(T)}</text><text class="mu-scale-label">${tonda(fondo)}</text>
+        </g>
 
         <g class="mu-scale-needle" style="transform-origin:380px 330px;transform:rotate(${gAgo}deg)">
-          <path d="M376.5 333 L383.5 333 L382 105 Q380 92 378 105 Z"/>
+          <path d="M375 335 L385 335 L383 112 Q380 96 377 112 Z"/>
         </g>
 
         <!-- Dynamic flip counter: same real calorie value, no second source of truth. -->
         ${String(Math.round(valore)).padStart(4,'0').slice(-4).split('').map((d,i)=>{
-          const x = 278 + i*54;
-          return '<g class="mu-flip" transform="translate('+x+' 246)">'
-            + '<rect width="46" height="55" rx="7"/>'
-            + '<path d="M2 27.5H44" class="mu-flip-hinge"/>'
-            + '<text x="23" y="38">'+d+'</text></g>';
+          const x = 262 + i*58;
+          return '<g class="mu-flip" transform="translate('+x+' 254)">'
+            + '<rect width="50" height="62" rx="7"/>'
+            + '<path d="M2 31H48" class="mu-flip-hinge"/>'
+            + '<text x="25" y="43">'+d+'</text></g>';
         }).join('')}
-        <text class="mu-scale-kcal" x="505" y="282">kcal</text>
+        <text class="mu-scale-kcal" x="505" y="296">kcal</text>
 
         <!-- Cream neck + orange button. -->
-        <path class="mu-scale-neck" d="M329 356 Q380 364 431 356 L449 466 L311 466 Z"/>
-        <circle class="mu-scale-button-ring" cx="380" cy="424" r="21"/>
-        <circle class="mu-scale-button" cx="380" cy="424" r="16"/>
+        <path class="mu-scale-neck" d="M329 369 Q380 379 431 369 Q425 436 474 487 L286 487 Q335 436 329 369 Z"/>
+        <circle class="mu-scale-button-ring" cx="380" cy="429" r="24"/>
+        <circle class="mu-scale-button" cx="380" cy="429" r="18"/>
 
         <!-- Wide cream base with the recessed pill slot from the approved render. -->
         <g filter="url(#muSoftShadow)">
-          <path class="mu-scale-base" d="M183 474 Q190 459 213 457 H547 Q570 459 577 474 L590 545 Q592 566 566 570 H194 Q168 566 170 545 Z"/>
-          <rect class="mu-scale-slot" x="210" y="515" width="340" height="31" rx="15.5"/>
+          <path class="mu-scale-base" d="M179 485 Q188 472 216 470 H544 Q572 472 581 485 L606 557 Q611 582 580 588 H180 Q149 582 154 557 Z"/>
+          <rect class="mu-scale-slot" x="190" y="526" width="380" height="34" rx="17"/>
         </g>
-        <ellipse class="mu-scale-foot" cx="238" cy="579" rx="20" ry="11"/>
-        <ellipse class="mu-scale-foot" cx="522" cy="579" rx="20" ry="11"/>
+        <ellipse class="mu-scale-foot" cx="226" cy="598" rx="24" ry="13"/>
+        <ellipse class="mu-scale-foot" cx="534" cy="598" rx="24" ry="13"/>
       </svg>
     </div>
     <div class="anello-gambe">
