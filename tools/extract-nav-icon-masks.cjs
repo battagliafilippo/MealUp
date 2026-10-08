@@ -12,7 +12,11 @@ async function extract(name, box, keep) {
     .toBuffer({ resolveWithObject: true });
 
   for (let i = 0; i < data.length; i += 4) {
-    const alpha = keep(data[i], data[i + 1], data[i + 2]) ? 255 : 0;
+    const pixel = i / 4;
+    const x = pixel % info.width;
+    const y = Math.floor(pixel / info.width);
+    const inside = x >= 10 && x < info.width - 10 && y >= 10 && y < info.height - 7;
+    const alpha = inside && keep(data[i], data[i + 1], data[i + 2]) ? 255 : 0;
     data[i] = 0;
     data[i + 1] = 0;
     data[i + 2] = 0;
@@ -28,12 +32,12 @@ async function extract(name, box, keep) {
 
 Promise.all([
   extract(
-    'nav-recipes-render-mask-v2.png',
+    'nav-recipes-render-mask-v3.png',
     { left: 475, top: 98, width: 110, height: 96 },
     (r, g, b) => r > 210 && g > 55 && g < 175 && b < 75 && r - g > 80,
   ),
   extract(
-    'nav-stocks-render-mask-v2.png',
+    'nav-stocks-render-mask-v3.png',
     { left: 955, top: 100, width: 100, height: 95 },
     (r, g, b) => r < 105 && g < 100 && b < 92 && Math.max(r, g, b) - Math.min(r, g, b) < 28,
   ),

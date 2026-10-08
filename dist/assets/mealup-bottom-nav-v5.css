@@ -1,0 +1,151 @@
+/* MealUp bottom navigation — frozen molded-rubber component. */
+.mealup-tab-bar{
+  left:50%!important;
+  right:auto!important;
+  bottom:calc(10px + env(safe-area-inset-bottom))!important;
+  width:min(calc(100% - 28px),500px)!important;
+  height:82px!important;
+  padding:7px 11px!important;
+  transform:translateX(-50%)!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-around!important;
+  gap:clamp(2px,1.2vw,8px)!important;
+  box-sizing:border-box!important;
+  border:0!important;
+  border-radius:41px!important;
+  background:linear-gradient(145deg,#fffdf8 0%,#f3e8dc 48%,#e6d6c5 100%)!important;
+  box-shadow:0 18px 34px rgba(76,45,26,.24),inset 2px 2px 3px rgba(255,255,255,.94),inset -3px -4px 7px rgba(111,73,49,.09)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+.mealup-tab-bar .tab-item{
+  position:relative!important;
+  flex:0 0 clamp(54px,15vw,66px)!important;
+  width:clamp(54px,15vw,66px)!important;
+  height:clamp(54px,15vw,66px)!important;
+  min-width:0!important;
+  padding:7px 3px 6px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:2px!important;
+  border:0!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  color:#37322e!important;
+  font-family:"Satoshi",system-ui,sans-serif!important;
+  font-size:.61rem!important;
+  font-weight:750!important;
+  line-height:1!important;
+  letter-spacing:0!important;
+  overflow:visible!important;
+  isolation:isolate!important;
+  transition:transform .11s ease,filter .16s ease!important;
+}
+
+.mealup-tab-bar .tab-item::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  width:auto!important;
+  border:0!important;
+  border-radius:50%!important;
+  transform:none!important;
+  opacity:1!important;
+  background:linear-gradient(145deg,#fffdf8 0%,#f3e8dc 53%,#e5d4c1 100%)!important;
+  box-shadow:0 8px 13px rgba(79,50,31,.16),inset 2px 2px 3px rgba(255,255,255,.92),inset -2px -3px 5px rgba(105,69,46,.08)!important;
+  transition:box-shadow .11s ease,background .16s ease,transform .11s ease!important;
+}
+
+.mealup-tab-bar .tab-item .icon,
+.mealup-tab-bar .tab-item span{
+  position:relative!important;
+  z-index:2!important;
+}
+
+.mealup-tab-bar .tab-item .icon{
+  width:30px!important;
+  height:30px!important;
+  fill:currentColor!important;
+  stroke:none!important;
+  transform:none!important;
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.28));
+}
+
+.mealup-tab-bar .tab-item .icon .icon-cut{
+  fill:none!important;
+  stroke:#f4e8dc!important;
+  stroke-width:1.05!important;
+  stroke-linecap:round!important;
+}
+
+.mealup-tab-bar .tab-item .icon-render-mask{
+  display:block!important;
+  background:currentColor!important;
+  -webkit-mask-repeat:no-repeat!important;
+  mask-repeat:no-repeat!important;
+  -webkit-mask-position:center!important;
+  mask-position:center!important;
+  -webkit-mask-size:contain!important;
+  mask-size:contain!important;
+}
+
+.mealup-tab-bar .tab-item .icon-recipes-render{
+  -webkit-mask-image:url("./brand/nav-recipes-render-mask-v3.png")!important;
+  mask-image:url("./brand/nav-recipes-render-mask-v3.png")!important;
+}
+
+.mealup-tab-bar .tab-item .icon-stocks-render{
+  -webkit-mask-image:url("./brand/nav-stocks-render-mask-v3.png")!important;
+  mask-image:url("./brand/nav-stocks-render-mask-v3.png")!important;
+}
+
+.mealup-tab-bar .tab-item.active{
+  color:#ff6518!important;
+  background:transparent!important;
+  filter:drop-shadow(0 0 9px rgba(255,103,24,.25))!important;
+}
+
+.mealup-tab-bar .tab-item.active::before{
+  background:radial-gradient(circle at 46% 42%,#fff4df 0%,#ffe3bb 58%,#f1d5ba 100%)!important;
+  box-shadow:0 8px 14px rgba(82,49,28,.12),inset 0 0 24px rgba(255,132,49,.30),inset 2px 2px 3px rgba(255,255,255,.92),0 0 21px rgba(255,111,29,.27)!important;
+}
+
+.mealup-tab-bar .tab-item.active span{font-weight:800!important}
+
+.mealup-tab-bar .tab-item:active{
+  transform:translateY(2px) scale(.965)!important;
+}
+
+.mealup-tab-bar .tab-item:active::before{
+  transform:translateY(1px) scale(.97)!important;
+  box-shadow:inset 0 5px 10px rgba(102,66,44,.17),inset 0 0 17px rgba(255,128,45,.20),0 2px 4px rgba(75,46,28,.05)!important;
+}
+
+.mealup-tab-bar .tab-item:focus-visible{
+  outline:3px solid rgba(255,101,24,.72)!important;
+  outline-offset:3px!important;
+}
+
+@media(max-width:390px){
+  .mealup-tab-bar{
+    width:calc(100% - 14px)!important;
+    height:74px!important;
+    padding:6px 8px!important;
+    border-radius:39px!important;
+  }
+  .mealup-tab-bar .tab-item{
+    flex-basis:clamp(52px,15vw,58px)!important;
+    width:clamp(52px,15vw,58px)!important;
+    height:clamp(52px,15vw,58px)!important;
+    font-size:.56rem!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .mealup-tab-bar .tab-item,.mealup-tab-bar .tab-item::before{transition:none!important}
+}
