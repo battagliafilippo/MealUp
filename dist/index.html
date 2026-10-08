@@ -8976,6 +8976,12 @@ function anelloGiornata(mealId) {
           <linearGradient id="muButtonRing" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff7eb"/><stop offset="1" stop-color="#dcc3a6"/></linearGradient>
           <linearGradient id="muSlot" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#dfc7aa"/><stop offset=".35" stop-color="#f7ead8"/><stop offset="1" stop-color="#ead7c0"/></linearGradient>
           <linearGradient id="muFoot" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#4a4641"/><stop offset="1" stop-color="#242321"/></linearGradient>
+          <linearGradient id="muLiveFlipFace" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#4b4944"/><stop offset=".48" stop-color="#353431"/><stop offset=".52" stop-color="#2d2c29"/><stop offset="1" stop-color="#3b3935"/>
+          </linearGradient>
+          <linearGradient id="muLiveFlipPin" x1="0" y1="0" x2="0" y2="1">
+            <stop stop-color="#77736b"/><stop offset=".5" stop-color="#393834"/><stop offset="1" stop-color="#77736b"/>
+          </linearGradient>
           <filter id="muSoftShadow" x="-25%" y="-25%" width="150%" height="170%">
             <feDropShadow dx="0" dy="15" stdDeviation="13" flood-color="#702904" flood-opacity=".28"/>
           </filter>
@@ -9048,14 +9054,20 @@ function anelloGiornata(mealId) {
         <g class="mu-scale-live-needle" clip-path="url(#muNeedleAboveCounter)" style="transform-origin:380px 165px;transform:rotate(${gAgoLive}deg)">
           <path d="M375 169 L385 169 L382.5 -28 Q380 -40 377.5 -28 Z"/>
         </g>
+        <g class="mu-scale-live-flip-clock" filter="url(#muTinyShadow)">
+          <rect x="230" y="209" width="254" height="10" rx="5" fill="url(#muLiveFlipPin)"/>
+          <rect x="228" y="204" width="13" height="20" rx="5" fill="url(#muLiveFlipPin)"/>
+          <rect x="473" y="204" width="13" height="20" rx="5" fill="url(#muLiveFlipPin)"/>
         ${String(Math.round(valore)).padStart(4,'0').slice(-4).split('').map((d,i)=>{
           const cx = [265,328,388,449][i];
           return '<g class="mu-scale-live-flip">'
-            + '<rect x="'+(cx-24)+'" y="190" width="48" height="48" rx="5" fill="#343330" stroke="#242321" stroke-width="1"/>'
-            + '<path d="M'+(cx-22)+' 214H'+(cx+22)+'" stroke="#171715" stroke-width="1" opacity=".8"/>'
+            + '<rect x="'+(cx-26)+'" y="184" width="52" height="60" rx="7" fill="url(#muLiveFlipFace)" stroke="#292824" stroke-width="1.5"/>'
+            + '<path d="M'+(cx-24)+' 214H'+(cx+24)+'" stroke="#171715" stroke-width="1.2" opacity=".9"/>'
+            + '<path d="M'+(cx-22)+' 212H'+(cx+22)+'" stroke="#68655e" stroke-width=".8" opacity=".34"/>'
             + '<text class="mu-scale-live-digit" x="'+cx+'" y="214" dominant-baseline="middle">'+d+'</text>'
             + '</g>';
         }).join('')}
+        </g>
       </svg>
     </div>
     <div class="anello-gambe">
