@@ -3476,7 +3476,7 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 <link rel="stylesheet" href="./assets/mealup-v124.css?v=brand-b">
 <!-- Versioned delivery copy of the canonical mealup-render-v125.css layer. -->
 <link rel="stylesheet" href="./assets/mealup-render-home-fidelity-1.css">
-<link rel="stylesheet" href="./assets/mealup-bottom-nav-v1.css">
+<link rel="stylesheet" href="./assets/mealup-bottom-nav-v2.css">
 </head>
 <body>
 
@@ -4472,23 +4472,30 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 <!-- ============ TAB BAR · MEALUP FROZEN PREVIEW ============ -->
 <nav class="tab-bar mealup-tab-bar">
   <button type="button" class="tab-item active" data-act="tab" data-val="view-home" aria-label="Home">
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.8 11.1 11 3.8a1.5 1.5 0 0 1 2 0l8.2 7.3c1 .9.4 2.6-.9 2.6h-.8v6.2c0 .9-.7 1.6-1.6 1.6h-3.4v-5.3a1.3 1.3 0 0 0-1.3-1.3h-2.4a1.3 1.3 0 0 0-1.3 1.3v5.3H6.1c-.9 0-1.6-.7-1.6-1.6v-6.2h-.8c-1.3 0-1.9-1.7-.9-2.6Z"/></svg>
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.6 11.2 10.9 3.7a1.65 1.65 0 0 1 2.2 0l8.3 7.5c1 .9.35 2.55-1 2.55h-.85v6.05c0 .95-.75 1.7-1.7 1.7h-3.45v-5.15c0-.8-.65-1.45-1.45-1.45h-1.9c-.8 0-1.45.65-1.45 1.45v5.15H6.15c-.95 0-1.7-.75-1.7-1.7v-6.05H3.6c-1.35 0-2-1.65-1-2.55Z"/></svg>
     <span>Home</span>
   </button>
   <button type="button" class="tab-item" data-act="tab" data-val="view-search" aria-label="Ricette">
-    <svg class="icon ricette-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.1 19.9a2 2 0 0 1 0-2.8l1.1-1.1 2.8 2.8-1.1 1.1a2 2 0 0 1-2.8 0Zm2.2-5 8.6-8.6a2.5 2.5 0 0 1 3.5 3.5l-8.6 8.6-3.5-3.5Zm8.2 5.2 2.6-7.8 3.8 1.3-2.6 7.8a2 2 0 0 1-3.8-1.3Zm3.2-9.1.9-2.8a2.1 2.1 0 0 1 2.7-1.3 2.1 2.1 0 0 1 1.3 2.7l-.9 2.8-4-1.4Z"/></svg>
+    <svg class="icon ricette-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <g transform="rotate(38 8 12)"><rect x="6.1" y="4.7" width="4.4" height="14.6" rx="2.2"/><rect x="7.25" y="1.8" width="2.1" height="4.2" rx="1.05"/><rect x="7.25" y="17.8" width="2.1" height="4.2" rx="1.05"/></g>
+      <g transform="rotate(31 16.5 12)"><rect x="15.2" y="10.1" width="2.65" height="11" rx="1.3"/><path d="M13.1 2.6h6.8v7.9c0 1.25-1 2.25-2.25 2.25h-2.3a2.25 2.25 0 0 1-2.25-2.25V2.6Z"/><path class="icon-cut" d="M15 4.25v4.5M16.55 4.25v4.5M18.1 4.25v4.5"/></g>
+    </svg>
     <span>Ricette</span>
   </button>
   <button type="button" class="tab-item" data-act="tab" data-val="view-spesa" aria-label="Spesa">
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.7 4.1h2.8c.6 0 1.1.4 1.3 1l.5 2h13.2c.9 0 1.5.9 1.2 1.7l-2 6a2 2 0 0 1-1.9 1.4H9.4a2 2 0 0 1-2-1.6L5.6 7H2.7a1.4 1.4 0 1 1 0-2.9Zm7.2 13.5a2.1 2.1 0 1 1 0 4.2 2.1 2.1 0 0 1 0-4.2Zm7.8 0a2.1 2.1 0 1 1 0 4.2 2.1 2.1 0 0 1 0-4.2Z"/></svg>
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.4 4h3c.7 0 1.25.45 1.4 1.1l.45 1.85h13.4c.95 0 1.6.95 1.25 1.85l-2.15 5.8a2.1 2.1 0 0 1-2 1.4H9.7a2.1 2.1 0 0 1-2.05-1.65L5.8 6.8H2.4a1.4 1.4 0 1 1 0-2.8Zm7.8 13.7a2.05 2.05 0 1 1 0 4.1 2.05 2.05 0 0 1 0-4.1Zm7.5 0a2.05 2.05 0 1 1 0 4.1 2.05 2.05 0 0 1 0-4.1Z"/></svg>
     <span>Spesa</span>
   </button>
   <button type="button" class="tab-item" data-act="tab" data-val="view-fridge" aria-label="Scorte">
-    <svg class="icon scorte-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2.3h8a1 1 0 0 1 0 2H8a1 1 0 1 1 0-2Zm-1 3.1h10a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2Zm.5 3.1h9l1.1 2v8.4a2.8 2.8 0 0 1-2.8 2.8H9.2a2.8 2.8 0 0 1-2.8-2.8v-7H5.2v3.2l-1.8 1.8v-6.2c0-1.2 1-2.2 2.2-2.2h1.9Z"/></svg>
+    <svg class="icon scorte-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M8.1 2.1h7.8a1 1 0 1 1 0 2H8.1a1 1 0 1 1 0-2Zm-1 3h9.8a1 1 0 1 1 0 2H7.1a1 1 0 1 1 0-2Zm.35 3h9.1l1.1 2.25v8.3a3.05 3.05 0 0 1-3.05 3.05H9.4a3.05 3.05 0 0 1-3.05-3.05v-8.3l1.1-2.25Z"/>
+      <path d="M6.8 9H5.25c-1.05 0-1.9.85-1.9 1.9v3.25c0 .65.55 1.2 1.2 1.2h1.8v-1.9h-1.1v-2.5H6.8V9Z"/>
+      <path class="icon-cut" d="M8.2 9.75h7.6M8.15 12h7.7"/>
+    </svg>
     <span>Scorte</span>
   </button>
   <button type="button" class="tab-item" data-act="tab" data-val="view-profile" aria-label="Profilo">
-    <svg class="icon profilo-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.1 6.3c0-1.2.9-2.2 2.1-2.3A3.2 3.2 0 0 1 15 3.9a2.4 2.4 0 0 1 2.2 3.7 4.9 4.9 0 0 1-10.1-1.3ZM12 13.1c4.2 0 7 2.7 7.6 7.2.1.8-.5 1.4-1.3 1.4H5.7c-.8 0-1.4-.6-1.3-1.4.6-4.5 3.4-7.2 7.6-7.2Zm8.6-5.4c.7 0 1.2.5 1.2 1.2v11.6a1.2 1.2 0 1 1-2.4 0V8.9c0-.7.5-1.2 1.2-1.2Z"/></svg>
+    <svg class="icon profilo-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.15 6.15A2.85 2.85 0 0 1 10 3.3c.35 0 .7.06 1.02.18A3.05 3.05 0 0 1 16.7 5a2.65 2.65 0 0 1-1.15 4.9H8.3a2.65 2.65 0 0 1-1.15-3.75ZM9 10.7h6v1.15a3 3 0 0 1-6 0V10.7Zm3 4.2c4.25 0 7.05 2.35 7.65 6 .12.75-.48 1.4-1.25 1.4H5.6c-.77 0-1.37-.65-1.25-1.4.6-3.65 3.4-6 7.65-6Z"/></svg>
     <span>Profilo</span>
   </button>
 </nav>
