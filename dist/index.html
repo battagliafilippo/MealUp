@@ -8921,6 +8921,7 @@ function anelloGiornata(mealId) {
     const frazione = Math.max(0, Math.min(1, valore / fondo));
     const DA = -58, SPAN = 116;                  // arco e lancetta condividono la stessa scala
     const gAgo = (DA + frazione * SPAN).toFixed(2);
+    const gAgoLive = (-74 + frazione * 148).toFixed(2); // estremi reali dell'arco nel render 3D
     const CX = 380, CY = 330;                    // fulcro ottico del nuovo quadrante crema
 
     const rad = g => g * Math.PI / 180;
@@ -9044,11 +9045,11 @@ function anelloGiornata(mealId) {
 
         <!-- Canonical 3D body extracted from the approved render. The live
              needle and digits remain code-driven and sit above this layer. -->
-        <g class="mu-scale-live-needle" clip-path="url(#muNeedleAboveCounter)" style="transform-origin:380px 165px;transform:rotate(${gAgo}deg)">
-          <path d="M375 169 L385 169 L382.5 87 Q380 75 377.5 87 Z"/>
+        <g class="mu-scale-live-needle" clip-path="url(#muNeedleAboveCounter)" style="transform-origin:380px 165px;transform:rotate(${gAgoLive}deg)">
+          <path d="M375 169 L385 169 L382.5 12 Q380 0 377.5 12 Z"/>
         </g>
         ${String(Math.round(valore)).padStart(4,'0').slice(-4).split('').map((d,i)=>
-          '<text class="mu-scale-live-digit" x="'+(272+i*62)+'" y="224">'+d+'</text>'
+          '<text class="mu-scale-live-digit" x="'+([265,328,388,449][i])+'" y="263">'+d+'</text>'
         ).join('')}
       </svg>
     </div>
