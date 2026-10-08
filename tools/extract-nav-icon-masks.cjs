@@ -28,13 +28,13 @@ async function extract(name, box, keep) {
 
 Promise.all([
   extract(
-    'nav-recipes-render-mask.png',
-    { left: 450, top: 90, width: 150, height: 105 },
+    'nav-recipes-render-mask-v2.png',
+    { left: 475, top: 98, width: 110, height: 96 },
     (r, g, b) => r > 210 && g > 55 && g < 175 && b < 75 && r - g > 80,
   ),
   extract(
-    'nav-stocks-render-mask.png',
-    { left: 930, top: 85, width: 150, height: 110 },
+    'nav-stocks-render-mask-v2.png',
+    { left: 955, top: 100, width: 100, height: 95 },
     (r, g, b) => r < 105 && g < 100 && b < 92 && Math.max(r, g, b) - Math.min(r, g, b) < 28,
   ),
 ]).catch((error) => {
