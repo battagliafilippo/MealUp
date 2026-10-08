@@ -1,7 +1,7 @@
 /* FitMeals service worker — app shell in cache, aggiornamento in background */
 // La versione cambia a ogni pubblicazione: cosi' il telefono butta la cache
 // vecchia e prende subito l'app nuova.
-const CACHE = 'mealup-brand-b-2026-10-08b';
+const CACHE = 'mealup-render-v125-2026-10-08b';
 const SHELL = [
   './',
   './index.html',
@@ -15,6 +15,7 @@ const SHELL = [
   ,'./assets/brand/mealup-symbol-small.svg'
   ,'./assets/brand/mealup-app-icon.svg'
   ,'./assets/mealup-v124.css'
+  ,'./assets/mealup-render-v125.css'
   ,'./assets/family-fo-frozen-shell.css'
   ,'./assets/family-fo/runtime.js'
 ];

@@ -1,0 +1,146 @@
+/* MealUp Render Board v1.25 — presentation-only alignment layer. */
+:root{
+  --render-orange:#ff5a16;
+  --render-orange-hi:#ff7428;
+  --render-orange-deep:#e9480d;
+  --render-cream:#fff8ed;
+  --render-cream-hi:#fffdf8;
+  --render-cream-low:#efe2d3;
+  --render-ink:#171a20;
+  --render-muted:#626b78;
+  --render-dark:#17191b;
+  --render-dark-card:#292c2f;
+  --render-line:rgba(77,54,38,.10);
+  --render-card-shadow:0 12px 30px rgba(91,48,20,.13),inset 1px 1px 1px rgba(255,255,255,.82);
+}
+
+html,body{background:var(--render-cream)!important;color:var(--render-ink)}
+body{font-family:"Satoshi","Nunito",system-ui,sans-serif!important}
+.view{max-width:600px;min-height:100dvh;padding:calc(env(safe-area-inset-top) + 22px) 18px 126px}
+.view:not(#view-home){background:var(--render-cream)!important}
+.view:not(#view-home)::before{content:"MU";top:9%;font-size:min(48vw,13rem);color:#f2e6d7;opacity:.76}
+
+/* Home — orange stage with embossed MU signature, matching the approved board. */
+#view-home{background:linear-gradient(165deg,var(--render-orange-hi) 0%,var(--render-orange) 48%,#ff4e12 100%)!important;color:#fff;overflow:hidden}
+#view-home.active{display:flex!important;flex-direction:column}
+#view-home::before{content:"MU"!important;position:fixed;left:50%;top:16%;z-index:0;transform:translateX(-50%);font-size:clamp(8rem,38vw,13.5rem);font-weight:950;line-height:.75;letter-spacing:-.12em;color:rgba(218,66,5,.46);text-shadow:-3px -3px 4px rgba(255,139,72,.26),4px 6px 8px rgba(139,38,0,.26);opacity:.68}
+#view-home .header{position:relative;z-index:2;display:flex;align-items:center;flex-wrap:wrap;row-gap:2px;margin-bottom:12px}
+#view-home .header h1.home-brand{display:none!important}
+#view-home .home-greeting{flex:0 0 100%;order:0;font-size:1.18rem!important;font-weight:850;color:#fff}
+#view-home .header .subtitle{flex:1 1 auto;order:1;margin:1px 0 0!important;font-size:.78rem!important;color:rgba(255,248,239,.9)!important}
+#view-home .header .testa-tasti{order:2;margin-top:-23px}
+#view-home .campanella,#view-home .icon-btn{background:linear-gradient(145deg,#fffdf8,#eedfce)!important;color:var(--render-ink)!important;border:0!important;box-shadow:0 7px 14px rgba(112,39,8,.20),inset 1px 1px 2px #fff!important}
+#view-home .pasto-tabs{position:relative;z-index:2;padding:4px;border-radius:18px;background:linear-gradient(145deg,#fffdf8,#efe1d1);box-shadow:var(--render-card-shadow)}
+#view-home .pasto-tab{min-height:38px;border-radius:14px;color:#403832!important}
+#view-home .pasto-tab.active{background:linear-gradient(145deg,var(--render-orange-hi),var(--render-orange))!important;color:#fff!important;box-shadow:0 6px 13px rgba(231,68,8,.28),inset 1px 1px 1px rgba(255,255,255,.36)!important}
+#view-home .pasto-barra{display:none!important}
+#view-home .header{order:1}
+#view-home .anello-box{order:2;position:relative;z-index:2;width:72%;margin:-2px auto 4px}
+#view-home .anello-gambe,#view-home .macro-giorno,#view-home .allenamento,#view-home .menu-oggi,#view-home .riepilogo-btn,#view-home .riepilogo{display:none!important}
+#view-home .pasto-tabs{order:4}
+#view-home .pager{order:5}
+#view-home .home-dimmi{order:3;position:relative;z-index:2;display:flex;flex-direction:column;margin:0 4px 10px;color:#fff}
+#view-home .home-dimmi strong{font-size:1.28rem;line-height:1;font-weight:900;letter-spacing:-.025em}
+#view-home .home-dimmi span{margin-top:4px;font-size:.76rem;color:rgba(255,248,239,.9)}
+#view-home .anello-box .bilancia{filter:drop-shadow(0 14px 16px rgba(117,37,3,.22))}
+#view-home .home-suggestion-stage{position:relative;z-index:2;gap:10px;padding-right:14%;overflow-x:hidden!important}
+#view-home .home-card{border:0!important;border-radius:24px!important;background:linear-gradient(150deg,var(--render-cream-hi),#f7e9d9)!important;box-shadow:0 14px 28px rgba(117,38,5,.20),inset 1px 1px 1px rgba(255,255,255,.9)!important;color:var(--render-ink)!important}
+#view-home .home-card .scheda-arte{background:transparent!important}
+#view-home .home-card-cta{background:linear-gradient(180deg,var(--render-orange-hi),var(--render-orange-deep))!important;border-radius:15px!important;box-shadow:0 8px 15px rgba(226,65,7,.24),inset 0 1px 1px rgba(255,255,255,.35)!important}
+#view-home .home-card-gauge{background:radial-gradient(circle at center,#fff8ef 55%,transparent 57%),conic-gradient(#55a85b 0 24%,#e0c932 24% 48%,#f2a329 48% 70%,#ee6a24 70% 86%,#dc4328 86% 100%)!important;border:5px solid #fff6e9;box-shadow:0 7px 14px rgba(84,45,24,.18)!important}
+#view-home .home-suggestion-hint{color:#fff8ef;font-weight:700}
+
+/* Shared porcelain controls and cards. */
+.view:not(#view-home) .header h1{color:var(--render-ink)!important;font-size:2.1rem!important}
+.view:not(#view-home) .header .subtitle{color:var(--render-muted)!important}
+.view:not(#view-home) .header>div{display:flex;flex-direction:column}
+.view:not(#view-home) .header h1{order:1}
+.view:not(#view-home) .header .subtitle{order:2}
+.glass-card,.scheda,.profile-hub button,.scorte-hub button,.shopping-group,.shop-item,.sugg,.modal-content,.modal-card,.sheet{
+  border:1px solid rgba(87,58,40,.08)!important;
+  background:linear-gradient(150deg,var(--render-cream-hi),#f8eddf)!important;
+  box-shadow:var(--render-card-shadow)!important;
+}
+input,select,textarea,.btn-ghost,.chip{background:rgba(255,253,248,.78)!important;border:1px solid var(--render-line)!important;color:var(--render-ink)!important;box-shadow:inset 1px 1px 1px rgba(255,255,255,.9)}
+.btn-primary{background:linear-gradient(180deg,var(--render-orange-hi),var(--render-orange-deep))!important;color:#fff!important;box-shadow:0 8px 17px rgba(230,69,9,.24),inset 0 1px 1px rgba(255,255,255,.35)!important}
+.chip.active,.chip[aria-pressed=true]{background:linear-gradient(180deg,var(--render-orange-hi),var(--render-orange))!important;color:#fff!important}
+
+/* Recipes — porcelain catalog, one hero result and compact supporting cards. */
+#view-search{background:var(--render-cream)!important}
+#view-search #search-input{height:48px;padding-left:44px!important;border-radius:17px!important}
+#view-search #recipe-list{gap:11px!important}
+#view-search #recipe-list>.scheda{border-radius:20px!important}
+#view-search #recipe-list>.scheda:first-child{min-height:270px;border-radius:24px!important}
+#view-search #recipe-list .scheda-arte{background:transparent!important}
+#view-search #recipe-list .scheda-titolo{color:var(--render-ink);font-weight:850}
+
+/* Shopping — grouped list with the same calm porcelain hierarchy as the board. */
+#view-spesa{background:var(--render-cream)!important}
+#view-spesa #shopping-body{display:grid;gap:10px}
+#view-spesa #shopping-body>.glass-card,#view-spesa #shopping-body .shopping-group{border-radius:20px!important;overflow:hidden}
+#view-spesa .shop-item{margin:0!important;border-width:0 0 1px!important;border-radius:0!important;box-shadow:none!important;background:rgba(255,253,248,.58)!important}
+#view-spesa .spesa-cerca{padding:12px;border-radius:20px;background:rgba(255,253,248,.72);box-shadow:var(--render-card-shadow)}
+
+/* Scorte — full orange hub; destination/detail surfaces remain porcelain. */
+#view-fridge{background:linear-gradient(165deg,var(--render-orange-hi),var(--render-orange) 55%,#ff4d10)!important;color:#fff;padding-top:0}
+html body #view-fridge.active{background-color:#ff5a16!important;background-image:linear-gradient(165deg,#ff7428 0%,#ff5a16 55%,#ff4d10 100%)!important;color:#fff!important}
+#view-fridge::before{color:rgba(211,62,5,.42)!important;text-shadow:-3px -3px 4px rgba(255,143,77,.25),4px 6px 8px rgba(143,39,0,.24)}
+#view-fridge .header{margin:0 -18px 16px;padding:calc(env(safe-area-inset-top) + 24px) 18px 12px;background:transparent!important;border-radius:0}
+#view-fridge .header h1{color:#fff!important;font-size:2.35rem!important}
+#view-fridge .header .subtitle{color:rgba(255,247,238,.9)!important}
+html body #view-fridge.active .header h1{color:#fff!important}
+html body #view-fridge.active .header .subtitle{color:rgba(255,247,238,.9)!important}
+.scorte-hub{gap:10px}
+.scorte-hub button{min-height:142px;border:0!important;border-radius:22px!important;background:linear-gradient(150deg,#fffdf7,#f4e4d1)!important;color:var(--render-ink)!important;box-shadow:0 13px 26px rgba(119,38,4,.20),inset 1px 1px 1px #fff!important}
+.scorte-hub i{width:54px;height:54px;border-radius:18px;background:#ffead4;color:var(--render-orange);font-size:1.65rem}
+.scorte-hub span{color:var(--render-muted)!important}
+#view-fridge>.filter-bar{padding:4px!important;border-radius:18px;background:rgba(255,248,237,.96);box-shadow:0 10px 22px rgba(108,36,7,.17)}
+#view-fridge [data-fsez]{color:var(--render-ink)}
+#view-fridge [data-fsez]>.glass-card,#view-fridge .credenza,#view-fridge .fresco{border-radius:22px!important;background:linear-gradient(150deg,#fffdf8,#f7eadb)!important;box-shadow:var(--render-card-shadow)!important}
+
+/* Profile and Diary. */
+#view-profile{background:var(--render-cream)!important}
+.profile-hub{gap:9px}
+.profile-hub button{min-height:74px;border-radius:18px!important}
+.profile-hub i{background:#ffe8cf!important;color:var(--render-orange)!important}
+.diary-card-v124{background:linear-gradient(160deg,#26292c,#17191b)!important;color:#fff!important;border-color:rgba(255,255,255,.08)!important;box-shadow:0 16px 34px rgba(14,15,16,.28),inset 1px 1px 1px rgba(255,255,255,.08)!important}
+.diary-card-v124 .meal-row{background:linear-gradient(145deg,#33363a,#272a2d)!important}
+
+/* Kitchen mode — graphite panels, orange actions, large readable steps. */
+#cook-mode{background:radial-gradient(circle at 80% 12%,#2d3032,#151719 48%)!important;color:#fff}
+#cook-mode::before{content:"MU";position:fixed;left:50%;top:6%;transform:translateX(-50%);font-size:45vw;font-weight:950;letter-spacing:-.12em;color:#222527;text-shadow:-3px -3px 4px rgba(255,255,255,.035),5px 7px 10px #090a0b;pointer-events:none}
+#cook-mode>*{position:relative;z-index:1}
+#cook-mode .cook-top{background:rgba(21,23,25,.92)!important;border-bottom:1px solid rgba(255,255,255,.08)}
+#cook-mode .cook-check,#cook-mode .passo-chip,#cook-mode .cook-timer,#cook-mode .porzioni,#cook-mode .cook-step-ingredients{background:linear-gradient(145deg,#323538,#232527)!important;border:1px solid rgba(255,255,255,.09)!important;border-radius:18px!important;color:#fff!important}
+#cook-mode .cook-nav{background:linear-gradient(180deg,transparent,#151719 30%)!important}
+#cook-mode .btn-primary{background:linear-gradient(180deg,#ff7130,#ff4f12)!important}
+
+/* Scanner — soft porcelain result board and clearly separated score states. */
+#modal-codice .modal-content,#modal-scan-esito .modal-content{background:var(--render-cream)!important}
+#modal-codice .modal-content,#modal-scan-esito .modal-content{box-sizing:border-box!important;width:100%!important;max-width:600px!important;margin:0 auto!important;padding:20px 18px max(24px,env(safe-area-inset-bottom))!important;overflow-x:hidden!important}
+#modal-codice .modal-head,#modal-scan-esito .modal-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:0 0 14px!important}
+#modal-codice .modal-head h2,#modal-scan-esito .modal-head h2{margin:0!important;font-size:1.55rem!important;color:var(--render-ink)!important}
+#modal-codice .modal-head .x,#modal-scan-esito .modal-head .x{position:static!important;flex:0 0 42px;width:42px;height:42px;border-radius:50%;background:#fff8ee!important;color:var(--render-ink)!important}
+#modal-codice .codice-inquadra{background:linear-gradient(160deg,#39312a,#1f1b18)!important}
+.scan-score{background:linear-gradient(150deg,#fffdf8,#f7eadb)!important}
+.scan-score-levels span{border:1px solid rgba(86,57,39,.06);background:#fff7eb!important}
+.scan-score-levels .active{background:#fffaf2!important;box-shadow:0 0 0 2px #ff8a51,0 9px 20px rgba(255,88,21,.17)!important}
+
+/* Bottom navigation — one continuous premium rubber piece with raised keys. */
+#velo-fondo{height:calc(104px + env(safe-area-inset-bottom))!important;background:linear-gradient(to top,rgba(255,247,237,.92) 0 64%,transparent)!important}
+.mealup-tab-bar{left:12px!important;right:12px!important;bottom:calc(10px + env(safe-area-inset-bottom))!important;height:76px!important;padding:7px!important;border-radius:32px!important;background:linear-gradient(145deg,#fffdf8,#eaddce)!important;box-shadow:0 17px 32px rgba(72,43,25,.24),inset 1px 1px 2px #fff,inset -2px -3px 5px rgba(112,73,48,.08)!important}
+.mealup-tab-bar .tab-item{height:62px!important;border-radius:25px!important;color:#37322e!important}
+.mealup-tab-bar .tab-item::before{inset:1px!important;border-radius:24px!important;background:linear-gradient(145deg,#fffdf8,#eee1d2)!important;box-shadow:0 7px 13px rgba(74,48,31,.13),inset 1px 1px 2px #fff,inset -1px -2px 3px rgba(95,66,47,.08)!important}
+.mealup-tab-bar .tab-item.active{color:var(--render-orange)!important;filter:drop-shadow(0 0 9px rgba(255,98,24,.30))}
+.mealup-tab-bar .tab-item.active::before{background:linear-gradient(145deg,#fff4e3,#f5dcc2)!important;box-shadow:0 8px 14px rgba(79,48,28,.10),inset 0 0 23px rgba(255,126,45,.30),0 0 18px rgba(255,105,25,.25)!important}
+
+@media(max-width:390px){
+  .view{padding-left:14px;padding-right:14px}
+  #view-fridge .header{margin-left:-14px;margin-right:-14px}
+  #view-home::before{font-size:9.5rem;top:15%}
+  .scorte-hub button{min-height:132px;padding:15px 12px}
+  .mealup-tab-bar{left:7px!important;right:7px!important;height:72px!important}
+  .mealup-tab-bar .tab-item{height:58px!important}
+}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
