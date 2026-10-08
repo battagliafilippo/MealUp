@@ -3467,7 +3467,7 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 </style>
 <link rel="stylesheet" href="./assets/family-fo-frozen-shell.css?v=1">
 <link rel="stylesheet" href="./assets/mealup-v124.css?v=brand-b">
-<link rel="stylesheet" href="./assets/mealup-render-v125.css?v=d8c59f9">
+<link rel="stylesheet" href="./assets/mealup-render-v125.css?v=home-interaction-1">
 </head>
 <body>
 
@@ -8065,6 +8065,7 @@ function fmtQty(i) {
 function recipeCard(r, extra, n) {
   const cov = extra && extra.cov;
   const homeCard = extra && extra.host === 'HOME_CARD';
+  const cardTag = homeCard ? 'article' : 'button';
   const m = perPortion(r);
   const t = totalTime(r);
   const ritardo = n ? ' style="animation-delay:' + Math.min(n * 45, 400) + 'ms"' : '';
@@ -8087,7 +8088,7 @@ function recipeCard(r, extra, n) {
   const fuori = fuoriStagione(r);
 
   return `
-    <button type="button" class="glass-card card-btn scheda con-stella ${homeCard ? 'home-card' : ''} ${fuori ? 'fuori-stagione' : ''}"
+    <${cardTag} ${homeCard ? 'role="button" tabindex="0"' : 'type="button"'} class="glass-card card-btn scheda con-stella ${homeCard ? 'home-card' : ''} ${fuori ? 'fuori-stagione' : ''}"
       data-act="detail" data-val="${esc(r.id)}"${ritardo}
       ${fuori ? 'title="Fuori stagione"' : ''}>
       <span class="scheda-arte" ${copertura ? `style="--riempi:${copertura}%"` : ''}>${arteRicetta(r, homeCard ? 'HOME_CARD' : 'RECIPE_CARD')}</span>
@@ -8102,7 +8103,7 @@ function recipeCard(r, extra, n) {
         aria-label="${isFav(r.id) ? 'Togli dalle preferite' : 'Metti tra le preferite'}">
         <svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.6 6.1.6-4.6 4.1 1.3 6-5.3-3.1-5.3 3.1 1.3-6-4.6-4.1 6.1-.6z"/></svg>
       </span>
-    </button>`;
+    </${cardTag}>`;
 }
 
 function emptyState(msg) { return `<p class="empty">${msg}</p>`; }
@@ -9344,6 +9345,20 @@ document.addEventListener('click', event => {
   if (!homeSwipeSuppressClick) return;
   event.preventDefault();
   event.stopPropagation();
+}, true);
+
+// In un browser reale la scheda Home contiene comandi secondari (Cucina e
+// preferiti). Il click sul corpo della scheda deve invece aprire sempre il
+// dettaglio, senza dipendere dal riconoscimento dello swipe.
+document.addEventListener('click', event => {
+  const card = event.target.closest('.home-card[data-act="detail"]');
+  if (!card) return;
+  const nestedAction = event.target.closest('[data-act]');
+  if (nestedAction && nestedAction !== card) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  pastoContesto = pastoDaDove(card);
+  openDetail(card.dataset.val);
 }, true);
 // Fallback per i WebView che non espongono Pointer Events: mantiene identica
 // la soglia e blocca il trascinamento della pagina solo per uno swipe orizzontale.
