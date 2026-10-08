@@ -39,7 +39,9 @@ body{font-family:"Satoshi","Nunito",system-ui,sans-serif!important}
 #view-home .anello-gambe,#view-home .macro-giorno,#view-home .allenamento,#view-home .menu-oggi,#view-home .riepilogo-btn,#view-home .riepilogo{display:none!important}
 #view-home .pasto-tabs{order:4}
 #view-home .pager{order:5}
-#view-home .home-dimmi{order:3;position:relative;z-index:2;display:flex;flex-direction:column;margin:0 4px 10px;color:#fff}
+#view-home .home-dimmi{order:3;position:relative;z-index:3;display:flex;flex-direction:column;margin:-5px 4px 10px;color:#fff}
+#view-home .home-dimmi::before{content:"";position:absolute;z-index:0;left:-18px;right:-18px;top:-41px;height:41px;background:var(--render-orange)}
+#view-home .home-dimmi strong,#view-home .home-dimmi span{position:relative;z-index:1}
 #view-home .home-dimmi strong{font-size:1.28rem;line-height:1;font-weight:900;letter-spacing:-.025em}
 #view-home .home-dimmi span{margin-top:4px;font-size:.76rem;color:rgba(255,248,239,.9)}
 #view-home .anello-box .bilancia{filter:drop-shadow(0 14px 16px rgba(117,37,3,.22))}
