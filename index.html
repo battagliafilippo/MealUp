@@ -17671,7 +17671,8 @@ function renderCook() {
   };
 
   body.innerHTML = `
-    <span class="cook-eyebrow">Passaggio ${COOK.idx} di ${steps.length}</span>`n    <span class="cook-action-badge az-${azione}" aria-label="Azione ${azione}"><i aria-hidden="true"></i><b>${azione}</b></span>
+    <span class="cook-eyebrow">Passaggio ${COOK.idx} di ${steps.length}</span>
+    <span class="cook-action-badge az-${azione}" aria-label="Azione ${azione}"><i aria-hidden="true"></i><b>${azione}</b></span>
     <p class="cook-step ${done ? 'done' : ''} ${COOK.grande ? 'grande' : ''}"
        data-act="cook-grande" title="Tocca per ingrandire">${esc(text)}</p>
     ${citati.length ? `<div class="passo-ing">
