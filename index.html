@@ -9,7 +9,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MealUp">
-<meta name="theme-color" content="#ff6115">
+<meta name="theme-color" content="#ff681c">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
@@ -3535,6 +3535,14 @@ body:has(#view-fridge.active) #app{position:relative!important;z-index:0!importa
 #view-fridge.active{position:relative!important;isolation:isolate!important;background:linear-gradient(180deg,#ff681c 0%,#f85b14 35%,#ee4708 100%)!important;box-shadow:none!important;clip-path:none!important}
 #view-fridge.active::before{content:""!important;display:block!important;position:fixed!important;z-index:-1!important;top:-160px!important;right:0!important;bottom:0!important;left:0!important;height:auto!important;background:#ff681c!important;background-image:none!important;opacity:1!important;filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important;pointer-events:none!important}
 #view-fridge.active::after{content:none!important;display:none!important}
+</style><style id="scorte-ios-explicit-state-v4">
+html.scorte-chrome,html.scorte-chrome body,body.scorte-chrome,body.scorte-chrome #app{background:#ff681c!important;background-color:#ff681c!important;background-image:none!important}
+html.scorte-chrome,body.scorte-chrome{overscroll-behavior-y:none!important}
+body.scorte-chrome::before,body.scorte-chrome::after{content:none!important;display:none!important}
+body.scorte-chrome .ambient-mesh,body.scorte-chrome #sfondo{display:none!important;opacity:0!important}
+body.scorte-chrome #view-fridge.active{background:#ff681c!important;background-color:#ff681c!important;background-image:none!important;box-shadow:none!important;clip-path:none!important}
+body.scorte-chrome #view-fridge.active::before{content:""!important;display:block!important;position:fixed!important;inset:-180px 0 0!important;z-index:-1!important;background:#ff681c!important;background-image:none!important;box-shadow:none!important;filter:none!important;opacity:1!important}
+body.scorte-chrome #view-fridge.active::after{content:none!important;display:none!important}
 </style><style id="kitchen-render-v1">
 #cook-mode{--co:#ff611b;background:radial-gradient(circle at 72% 16%,#2b2d2e,#161819 50%,#101112)!important;color:#f9f2e9!important;padding:calc(12px + env(safe-area-inset-top)) 14px calc(12px + env(safe-area-inset-bottom))!important}#cook-mode::before{content:"MU";position:fixed;z-index:-1;left:50%;top:9%;transform:translateX(-50%);font:950 13rem/.7 "Satoshi";letter-spacing:-.12em;color:#202223;text-shadow:-3px -3px 4px rgba(255,255,255,.03),5px 7px 10px #090a0b;pointer-events:none}.cook-top{display:grid!important;grid-template-columns:42px 1fr auto!important;align-items:center!important;gap:8px!important;padding:0 0 13px!important;border-bottom:1px solid rgba(255,255,255,.09)!important}.cook-top>button{width:38px!important;height:38px!important;border-radius:50%!important;background:transparent!important;color:#fff!important;font-size:1.5rem!important}.cook-top #cook-title{font-size:0!important}.cook-top #cook-title::before{content:"Modalità cucina";font-size:1rem;font-weight:800;color:#fff}.cook-top #cook-progress{padding:8px 13px!important;border-radius:19px!important;background:linear-gradient(#363839,#252627)!important;color:#ff7a38!important;font-weight:800!important;box-shadow:inset 1px 1px rgba(255,255,255,.1),0 6px 13px rgba(0,0,0,.3)}.cook-barra{height:3px!important;margin:13px 0 12px!important;background:#3b3d3e!important}.cook-barra i{background:linear-gradient(90deg,#ff4e12,#ff7a35)!important;box-shadow:0 0 12px #ff5d19!important}#cook-body{padding:6px 2px 105px!important;color:#fff!important}.cook-eyebrow{color:#bdb8b2!important;font-size:.72rem!important;letter-spacing:.02em!important;text-transform:none!important}.porzioni,.cook-check,.passo-ing,.cook-timer,.prossimo{background:linear-gradient(145deg,#313334,#232526)!important;border:1px solid rgba(255,255,255,.09)!important;color:#fff!important;border-radius:18px!important;box-shadow:0 8px 18px rgba(0,0,0,.23),inset 1px 1px rgba(255,255,255,.07)!important}.porzioni{padding:14px!important}.porzioni button{background:linear-gradient(#484a4b,#343637)!important;color:#fff!important;border:0!important}.porzioni .porz-piu{background:linear-gradient(#ff7531,#ff4e12)!important}.cook-check{margin:7px 0!important;padding:12px!important}.cook-check .box{border-color:#777!important}.cook-check.on .box{background:var(--co)!important;border-color:#ff8245!important}.cook-check .txt,.cook-check .qty{color:#fff!important}.cook-step{font-size:1.65rem!important;line-height:1.24!important;color:#fff!important;margin:8px 0 16px!important}.passo-ing{padding:9px!important}.passo-chip{background:linear-gradient(#3a3c3d,#292b2c)!important;color:#fff!important;border-color:rgba(255,255,255,.08)!important}.passo-chip.usato{border-color:#ff6320!important;box-shadow:inset 0 0 16px rgba(255,99,32,.2)!important}.cook-timer .btn-ghost{min-height:60px!important;color:#fff!important;background:linear-gradient(#353738,#242526)!important;border:1px solid #555!important;font-weight:800!important}.prossimo{padding:13px!important;color:#c9c4be!important}.cook-done{text-align:center;padding-top:30px}.cook-done .big{display:grid!important;place-items:center!important;width:94px!important;height:94px!important;margin:0 auto 16px!important;border:8px solid var(--co)!important;border-radius:50%!important;background:none!important;color:transparent!important;box-shadow:0 0 30px rgba(255,92,20,.42),inset 0 0 22px rgba(255,92,20,.17)!important}.cook-done .big::after{content:"✓";color:#ff7832;font-size:3.4rem}.cook-done h2{font-size:0!important}.cook-done h2::after{content:"Ricetta completata";font-size:1.75rem;color:#fff}.cook-done .section-desc{color:#d1ccc6!important}.cook-done .btn-primary{background:linear-gradient(#ff7531,#ff4e12)!important;color:#fff!important}.cook-done .chip,.cook-done .btn-ghost{background:linear-gradient(#363839,#242526)!important;color:#fff!important;border-color:#555!important}.cook-nav{position:absolute!important;left:14px!important;right:14px!important;bottom:calc(12px + env(safe-area-inset-bottom))!important;z-index:4!important;display:grid!important;grid-template-columns:1fr 1.45fr!important;gap:9px!important;padding-top:15px!important;background:linear-gradient(transparent,#161819 32%)!important}.cook-nav button{height:58px!important;border-radius:29px!important;font-weight:850!important}.cook-nav .btn-ghost{background:linear-gradient(#363839,#232526)!important;color:#fff!important;border:1px solid #515354!important}.cook-nav .btn-primary{background:linear-gradient(#ff7634,#ff4f12)!important;color:#fff!important;border:0!important;box-shadow:0 9px 20px rgba(255,75,15,.27)!important}#timer-flottanti .tpill{background:linear-gradient(#37393a,#242627)!important;color:#fff!important;border-color:#555!important}
 </style>
@@ -19463,6 +19471,7 @@ document.addEventListener('click', e => {
   try {
   switch (act) {
     case 'tab': {
+      syncScreenChrome(val);
       document.querySelectorAll('.tab-item').forEach(x => x.classList.toggle('active', x === t));
       document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === val));
       S.ui.tab = val; save();
@@ -21613,7 +21622,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261009-dimmi-tu-fix-1').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261009-scorte-uniforme-1').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
@@ -21629,6 +21638,15 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http') && wind
   });
 }
 
+function syncScreenChrome(viewId) {
+  const scorte = viewId === 'view-fridge';
+  document.documentElement.classList.toggle('scorte-chrome', scorte);
+  document.body.classList.toggle('scorte-chrome', scorte);
+  document.documentElement.style.backgroundColor = scorte ? '#ff681c' : '';
+  document.body.style.backgroundColor = scorte ? '#ff681c' : '';
+  const theme = document.querySelector('meta[name="theme-color"]');
+  if (theme) theme.setAttribute('content', '#ff681c');
+}
 /* ---------- avvio ---------- */
 S = load();
 if (!S.ui.protein) S.ui.protein = GRILL[0].id;
@@ -21641,6 +21659,7 @@ if (!S.ui.cookFor.length) S.ui.cookFor = [S.ui.active];
 save(); // fissa la versione dei dati di esempio: la migrazione non si ripete
 
 // ripristina l'ultima scheda aperta
+syncScreenChrome(S.ui.tab || 'view-home');
 const tabBtn = document.querySelector('[data-act="tab"][data-val="' + S.ui.tab + '"]');
 if (tabBtn && S.ui.tab !== 'view-home') {
   document.querySelectorAll('.tab-item').forEach(x => x.classList.toggle('active', x === tabBtn));
