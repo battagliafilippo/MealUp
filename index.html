@@ -21622,7 +21622,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261009-scorte-uniforme-1').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261009-scorte-uniforme-2').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
@@ -21642,8 +21642,10 @@ function syncScreenChrome(viewId) {
   const scorte = viewId === 'view-fridge';
   document.documentElement.classList.toggle('scorte-chrome', scorte);
   document.body.classList.toggle('scorte-chrome', scorte);
-  document.documentElement.style.backgroundColor = scorte ? '#ff681c' : '';
-  document.body.style.backgroundColor = scorte ? '#ff681c' : '';
+  document.documentElement.style.setProperty('background-color', scorte ? '#ff681c' : '', scorte ? 'important' : '');
+  document.documentElement.style.setProperty('background-image', scorte ? 'none' : '', scorte ? 'important' : '');
+  document.body.style.setProperty('background-color', scorte ? '#ff681c' : '', scorte ? 'important' : '');
+  document.body.style.setProperty('background-image', scorte ? 'none' : '', scorte ? 'important' : '');
   const theme = document.querySelector('meta[name="theme-color"]');
   if (theme) theme.setAttribute('content', '#ff681c');
 }
