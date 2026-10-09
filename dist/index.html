@@ -117,7 +117,8 @@ h4{font-size:1rem;font-weight:calc(var(--peso-titoli,800) - 100);letter-spacing:
   --tema:var(--accent-primary);--tema2:var(--accent-primary)}
 #view-home .pasto-search,#view-home .mic-campo{display:none}
 #view-home .cards-list{min-height:0}
-.home-suggestion-stage{position:relative;overflow:hidden;min-height:274px;touch-action:pan-y;overscroll-behavior-x:contain}
+.home-suggestion-stage{position:relative;overflow-x:auto;overflow-y:hidden;min-height:274px;touch-action:pan-x pan-y;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.home-suggestion-stage::-webkit-scrollbar{display:none}
 .home-suggestion-stage .scheda{margin:0}
 .home-suggestion-stage::after{content:'';position:absolute;right:0;top:18%;bottom:18%;width:18px;
   pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,248,239,.82))}
@@ -137,7 +138,7 @@ h4{font-size:1rem;font-weight:calc(var(--peso-titoli,800) - 100);letter-spacing:
 .home-card-cta{grid-column:1;grid-row:3;display:grid;place-items:center;min-height:40px;padding:0 12px;border-radius:14px;
   color:#fff;background:var(--tema,var(--accent-primary));font-size:.86rem;font-weight:700;box-shadow:0 6px 15px color-mix(in srgb,var(--tema,var(--accent-primary)) 30%,transparent)}
 .home-card-cta:active{transform:scale(.97)}
-.home-card .mealup-fo-slot{animation:home-fo-in .42s cubic-bezier(.22,.8,.28,1) both}
+.home-card .mealup-fo-slot img{animation:home-fo-in .42s cubic-bezier(.22,.8,.28,1) both}
 .home-card-gauge{position:absolute;top:21px;right:31px;width:48px;height:48px;border-radius:50%;display:grid;place-content:center;
   background:radial-gradient(circle at center,#fff8ef 55%,transparent 57%),conic-gradient(var(--tema,var(--accent-primary)) calc(var(--gauge) * 1%),rgba(99,57,24,.14) 0);
   animation:home-gauge-in .42s .04s cubic-bezier(.22,.8,.28,1) both;box-shadow:0 2px 7px rgba(91,40,10,.12)}
@@ -3475,7 +3476,7 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 <link rel="stylesheet" href="./assets/family-fo-frozen-shell.css?v=1">
 <link rel="stylesheet" href="./assets/mealup-v124.css?v=brand-b">
 <!-- Versioned delivery copy of the canonical mealup-render-v125.css layer. -->
-<link rel="stylesheet" href="./assets/mealup-render-home-fidelity-1.css">
+<link rel="stylesheet" href="./assets/mealup-render-home-fidelity-1.css?v=dimmi-tu-fix-1">
 <link rel="stylesheet" href="./assets/mealup-bottom-nav-v6.css">
 </head>
 <body>
@@ -9339,87 +9340,12 @@ function renderPasto(id) {
     ? suggestFor(id, riga.budget, riga.budgetP).map(o => o.r)
     : piatti;
   const proposte = suggerimenti.length ? suggerimenti : piatti;
-  const indice = proposte.length ? indiceSuggerimentoHome[id] % proposte.length : 0;
-  const proposta = proposte[indice];
-  const prossima = proposte.length > 1 ? proposte[(indice + 1) % proposte.length] : null;
-  lista.innerHTML = proposta
+  lista.innerHTML = proposte.length
     ? `<div class="home-suggestion-stage" data-home-meal="${id}" data-home-count="${proposte.length}" aria-label="Ricetta suggerita, scorri per cambiare proposta">
-         ${recipeCard(proposta, { host: 'HOME_CARD' }, indice)}
-         ${prossima ? recipeCard(prossima, { host: 'HOME_CARD' }, indice + 1) : ''}
+         ${proposte.map((ricetta, indice) => recipeCard(ricetta, { host: 'HOME_CARD' }, indice)).join('')}
        </div>${proposte.length > 1 ? '<span class="home-suggestion-hint">Scorri per un’altra proposta</span>' : ''}`
     : `<div class="home-suggestion-stage">${emptyState('Non riesco a trovare una ricetta al momento.<br>Riprova tra qualche istante.')}</div>`;
 }
-
-let homeSwipeStart = null;
-let homeSwipeSuppressClick = false;
-document.addEventListener('pointerdown', event => {
-  if (event.pointerType === 'mouse' && event.button !== 0) return;
-  const stage = event.target.closest('.home-suggestion-stage[data-home-meal]');
-  if (!stage) { homeSwipeStart = null; return; }
-  homeSwipeStart = { stage, pointerId:event.pointerId, id:stage.dataset.homeMeal, count:Number(stage.dataset.homeCount) || 0, x:event.clientX, y:event.clientY };
-  if (stage.setPointerCapture) stage.setPointerCapture(event.pointerId);
-});
-document.addEventListener('pointermove', event => {
-  if (!homeSwipeStart || event.pointerId !== homeSwipeStart.pointerId) return;
-  if (Math.abs(event.clientX - homeSwipeStart.x) > Math.abs(event.clientY - homeSwipeStart.y)) event.preventDefault();
-}, { passive:false });
-document.addEventListener('pointerup', event => {
-  if (!homeSwipeStart || event.pointerId !== homeSwipeStart.pointerId) return;
-  const delta = event.clientX - homeSwipeStart.x;
-  if (Math.abs(delta) > 42) {
-    const id = homeSwipeStart.id;
-    const count = homeSwipeStart.count;
-    indiceSuggerimentoHome[id] = count ? (indiceSuggerimentoHome[id] + (delta < 0 ? 1 : -1) + count) % count : 0;
-    homeSwipeSuppressClick = true;
-    renderPasto(id);
-    setTimeout(() => { homeSwipeSuppressClick = false; }, 0);
-  }
-  homeSwipeStart = null;
-});
-document.addEventListener('click', event => {
-  if (!homeSwipeSuppressClick) return;
-  event.preventDefault();
-  event.stopPropagation();
-}, true);
-
-// In un browser reale la scheda Home contiene comandi secondari (Cucina e
-// preferiti). Il click sul corpo della scheda deve invece aprire sempre il
-// dettaglio, senza dipendere dal riconoscimento dello swipe.
-document.addEventListener('click', event => {
-  const card = event.target.closest('.home-card[data-act="detail"]');
-  if (!card) return;
-  const nestedAction = event.target.closest('[data-act]');
-  if (nestedAction && nestedAction !== card) return;
-  event.preventDefault();
-  event.stopImmediatePropagation();
-  pastoContesto = pastoDaDove(card);
-  openDetail(card.dataset.val);
-}, true);
-// Fallback per i WebView che non espongono Pointer Events: mantiene identica
-// la soglia e blocca il trascinamento della pagina solo per uno swipe orizzontale.
-document.addEventListener('touchstart', event => {
-  if (homeSwipeStart) return;
-  const stage = event.target.closest('.home-suggestion-stage[data-home-meal]');
-  if (!stage) return;
-  homeSwipeStart = { fallback:true, id:stage.dataset.homeMeal, count:Number(stage.dataset.homeCount) || 0, x:event.touches[0].clientX, y:event.touches[0].clientY };
-}, { passive:true });
-document.addEventListener('touchmove', event => {
-  if (!homeSwipeStart || !homeSwipeStart.fallback) return;
-  const point = event.touches[0];
-  if (Math.abs(point.clientX - homeSwipeStart.x) > Math.abs(point.clientY - homeSwipeStart.y)) event.preventDefault();
-}, { passive:false });
-document.addEventListener('touchend', event => {
-  if (!homeSwipeStart || !homeSwipeStart.fallback) return;
-  const delta = event.changedTouches[0].clientX - homeSwipeStart.x;
-  if (Math.abs(delta) > 42) {
-    const count = homeSwipeStart.count;
-    indiceSuggerimentoHome[homeSwipeStart.id] = count ? (indiceSuggerimentoHome[homeSwipeStart.id] + (delta < 0 ? 1 : -1) + count) % count : 0;
-    homeSwipeSuppressClick = true;
-    renderPasto(homeSwipeStart.id);
-    setTimeout(() => { homeSwipeSuppressClick = false; }, 0);
-  }
-  homeSwipeStart = null;
-}, { passive:true });
 
 function renderPasti() { PASTI_HOME.forEach(renderPasto); aggiornaTab(); }
 
@@ -21572,7 +21498,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261008a').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261009-dimmi-tu-fix-1').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {

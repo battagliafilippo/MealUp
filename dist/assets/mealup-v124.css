@@ -51,7 +51,7 @@ input,select,textarea,.glass-card,.scheda,.chip,.btn-ghost{border-color:var(--mu
 #cook-mode .cook-check,#cook-mode .passo-chip,#cook-mode .cook-timer,#cook-mode .porzioni{background:#25282c!important;border-color:rgba(255,255,255,.1)!important;color:#fff!important}
 @keyframes mu-scale-settle{0%{transform:translateY(0)}30%{transform:translateY(3px)}62%{transform:translateY(-1px)}100%{transform:translateY(0)}}
 .mealup-scale-svg.oscilla{animation:mu-scale-settle .42s ease-out}
-.home-suggestion-stage{display:flex!important;gap:12px;overflow-x:hidden!important;padding:2px 14% 6px 0;scroll-snap-type:x mandatory}
+.home-suggestion-stage{display:flex!important;gap:12px;overflow-x:auto!important;overflow-y:hidden!important;padding:2px 14% 6px 0;scroll-snap-type:x mandatory}
 .home-suggestion-stage>.home-card{flex:0 0 86%;width:86%;scroll-snap-align:start;scroll-snap-stop:always}
 
 /* Scanner R7 — stati live, manuale, risultato e retry. */

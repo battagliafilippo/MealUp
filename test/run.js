@@ -1116,7 +1116,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     const dopo = a.dom.window.fitmealsPlan();
     vero(dopo.target > prima.target, 'l\'allenamento non alza il fabbisogno');
     a.click('[data-act=pasto-vai][data-val="2"]');
-    eq(a.conta('#pagina-cen .home-card'), 2, 'la Home deve mostrare protagonista e anteprima per la cena');
+    eq(a.conta('#pagina-cen .home-card'), 3, 'la Home deve rendere scorribili le tre proposte per la cena');
   });
 
   await test('le colazioni ricche ci sono e sono marcate come sgarro', async () => {
@@ -3439,13 +3439,15 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     eq(a.stato().log.length, 1, 'la registrazione non entra nel diario');
   });
 
-  await test('la Home mantiene una protagonista e una anteprima per pasto', async () => {
+  await test('la Home mantiene una protagonista e due proposte scorribili per pasto', async () => {
     const a = await app();
     a.tab('view-profile'); a.profiloBase();
     a.click('[data-act=pasto-vai][data-val="2"]');
     const primo = a.d.querySelector('#pagina-cen .home-card');
     vero(primo, 'nessun consiglio in cena');
-    eq(a.conta('#pagina-cen .home-card'), 2, 'la Home non mostra protagonista e anteprima');
+    eq(a.conta('#pagina-cen .home-card'), 3, 'la Home non rende disponibili tutte le proposte');
+    vero(a.d.querySelector('#pagina-cen .home-suggestion-stage').dataset.homeCount === '3',
+      'il carosello non espone il numero corretto di proposte');
     eq(a.conta('#pagina-cen .sugg-x'), 0, 'è rimasto il comando legacy di chiusura');
 
     // anche le combinazioni della dispensa hanno la loro x

@@ -22,14 +22,14 @@ const { app, test, eq, vero, bilancio } = require('./suite.js');
     eq(a.errs.length, 0, 'errori JS durante la navigazione');
   });
 
-  await test('Home usa protagonista e anteprima per pasto con una sola bilancia', async () => {
+  await test('Home usa protagonista e due proposte scorribili per pasto con una sola bilancia', async () => {
     const a = await app();
     a.tab('view-profile');
     a.profiloBase();
     a.tab('view-home');
-    eq(a.conta('#lista-col .home-card'), 2, 'proposta e anteprima Colazione');
-    eq(a.conta('#lista-pra .home-card'), 2, 'proposta e anteprima Pranzo');
-    eq(a.conta('#lista-cen .home-card'), 2, 'proposta e anteprima Cena');
+    eq(a.conta('#lista-col .home-card'), 3, 'proposte Colazione');
+    eq(a.conta('#lista-pra .home-card'), 3, 'proposte Pranzo');
+    eq(a.conta('#lista-cen .home-card'), 3, 'proposte Cena');
     const scale = a.d.querySelector('#anello-unico .bilancia-live');
     vero(scale, 'manca la bilancia v1.24');
     eq(scale.querySelectorAll('.mu-flip').length, 4, 'celle flip');
