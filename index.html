@@ -3548,8 +3548,8 @@ body.scorte-chrome #view-fridge .scorte-add-render,body.scorte-chrome #view-frid
 #view-spesa{--spesa-orange:#ff5a18;--spesa-ink:#101626;--spesa-cream:#fff9ef;--spesa-line:#eadfce;color:var(--spesa-ink);background:linear-gradient(180deg,#fffaf2 0%,#fff5e8 100%);min-height:100dvh;margin:-22px -18px -26px;padding:calc(22px + env(safe-area-inset-top)) 18px 126px}
 #view-spesa .header{margin:0 0 8px;align-items:flex-start}
 #view-spesa .header>div{display:flex;flex-direction:column;align-items:flex-start}
-#view-spesa .header h1{order:1;margin:0;color:var(--spesa-ink);font:900 2.35rem/.98 "Satoshi",system-ui,sans-serif;letter-spacing:-.06em;text-shadow:none}
-#view-spesa .header .subtitle{order:2;margin-top:6px;color:#374052;font-size:.92rem;line-height:1.2;text-transform:none;letter-spacing:0;font-weight:550}
+#view-spesa .header h1{order:1;margin:0;color:var(--spesa-ink)!important;font:900 1.78rem/1 "Satoshi",system-ui,sans-serif;letter-spacing:-.06em;text-shadow:none}
+#view-spesa .header .subtitle{order:2;margin-top:6px;color:#374052!important;font-size:.78rem;line-height:1.2;text-transform:none;letter-spacing:0;font-weight:550}
 #view-spesa .spesa-intro{display:none}
 #view-spesa #shopping-body{color:var(--spesa-ink)}
 #view-spesa .spesa-cerca{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;margin:12px 0 14px!important}
@@ -3564,8 +3564,9 @@ body.scorte-chrome #view-fridge .scorte-add-render,body.scorte-chrome #view-frid
 #view-spesa .spesa-altri-titolo{display:none}
 #view-spesa .spesa-altri-riga{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:1px 1px 3px}
 #view-spesa .spesa-altri-riga::-webkit-scrollbar{display:none}
-#view-spesa .spesa-altri-riga .modo-spesa{flex:0 0 auto!important;min-width:72px!important;height:38px!important;padding:0 11px!important;border:1px solid #e7dac8!important;border-radius:19px!important;background:#fffaf3!important;color:#4f5663!important;box-shadow:none!important;font-size:.65rem!important;gap:5px!important}
+#view-spesa .spesa-altri-riga .modo-spesa{flex:0 0 40px!important;width:40px!important;min-width:40px!important;height:40px!important;padding:0!important;justify-content:center!important;border:1px solid #e7dac8!important;border-radius:19px!important;background:#fffaf3!important;color:#4f5663!important;box-shadow:none!important;font-size:.65rem!important;gap:5px!important}
 #view-spesa .spesa-altri-riga .modo-spesa svg{width:14px!important;height:14px!important;stroke:currentColor!important}
+#view-spesa .spesa-altri-riga .modo-spesa>span{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 #view-spesa .results-line{color:#6b7280;font-size:.66rem}
 #view-spesa .results-line button{color:#475065;font-size:.66rem;font-weight:700}
 #view-spesa .spesa-stato{margin:17px 0 7px;padding:0 2px}
