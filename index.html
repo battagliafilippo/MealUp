@@ -3545,6 +3545,9 @@ body.scorte-chrome #view-fridge.active::before{content:""!important;display:bloc
 body.scorte-chrome #view-fridge.active::after{content:none!important;display:none!important}
 body.scorte-chrome #view-fridge .scorte-add-render,body.scorte-chrome #view-fridge .scorte-hub,body.scorte-chrome #view-fridge .scorte-hub button{position:relative!important;z-index:20!important;pointer-events:auto!important;touch-action:manipulation!important;-webkit-tap-highlight-color:transparent}
 </style><style id="spesa-render-frozen-r9-v1">
+html.spesa-chrome,body.spesa-chrome{background:#fff8ef!important;background-image:none!important}
+body.spesa-chrome .ambient-mesh,body.spesa-chrome #sfondo{display:none!important;opacity:0!important}
+#view-spesa,#view-spesa *{text-shadow:none!important}
 #view-spesa{--spesa-orange:#ff5a18;--spesa-ink:#101626;--spesa-cream:#fff9ef;--spesa-line:#eadfce;color:var(--spesa-ink);background:linear-gradient(180deg,#fffaf2 0%,#fff5e8 100%);min-height:100dvh;margin:-22px -18px -26px;padding:calc(22px + env(safe-area-inset-top)) 18px 126px}
 #view-spesa .header{margin:0 0 8px;align-items:flex-start}
 #view-spesa .header>div{display:flex;flex-direction:column;align-items:flex-start}
@@ -3566,7 +3569,7 @@ body.scorte-chrome #view-fridge .scorte-add-render,body.scorte-chrome #view-frid
 #view-spesa .spesa-altri-riga::-webkit-scrollbar{display:none}
 #view-spesa .spesa-altri-riga .modo-spesa{flex:0 0 40px!important;width:40px!important;min-width:40px!important;height:40px!important;padding:0!important;justify-content:center!important;border:1px solid #e7dac8!important;border-radius:19px!important;background:#fffaf3!important;color:#4f5663!important;box-shadow:none!important;font-size:.65rem!important;gap:5px!important}
 #view-spesa .spesa-altri-riga .modo-spesa svg{width:14px!important;height:14px!important;stroke:currentColor!important}
-#view-spesa .spesa-altri-riga .modo-spesa>span{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+#view-spesa .spesa-altri-riga .modo-spesa>span{display:none!important}
 #view-spesa .results-line{color:#6b7280;font-size:.66rem}
 #view-spesa .results-line button{color:#475065;font-size:.66rem;font-weight:700}
 #view-spesa .spesa-stato{margin:17px 0 7px;padding:0 2px}
@@ -21689,8 +21692,11 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http') && wind
 
 function syncScreenChrome(viewId) {
   const scorte = viewId === 'view-fridge';
+  const spesa = viewId === 'view-spesa';
   document.documentElement.classList.toggle('scorte-chrome', scorte);
   document.body.classList.toggle('scorte-chrome', scorte);
+  document.documentElement.classList.toggle('spesa-chrome', spesa);
+  document.body.classList.toggle('spesa-chrome', spesa);
   document.documentElement.style.setProperty('background-color', scorte ? '#ff681c' : '', scorte ? 'important' : '');
   document.documentElement.style.setProperty('background-image', scorte ? 'none' : '', scorte ? 'important' : '');
   document.body.style.setProperty('background-color', scorte ? '#ff681c' : '', scorte ? 'important' : '');
