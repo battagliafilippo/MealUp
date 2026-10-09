@@ -3513,6 +3513,7 @@ body:has(#view-fridge.active),body:has(#view-fridge.active) #app{background:line
 <style id="scorte-final-visibility-fix">
 html:has(#view-fridge.active),body:has(#view-fridge.active),body:has(#view-fridge.active) #app{background:#f4510e!important}#view-fridge.active{box-shadow:0 0 0 100vmax #f4510e!important;clip-path:inset(0 -100vmax)!important}.scorte-hub button i{background-image:url("https://raw.githubusercontent.com/battagliafilippo/MealUp/mealup-tester-family-fo/assets/brand/scorte-category-sprite-v1.png?v=f9672e9")!important;background-size:200% 200%!important;background-repeat:no-repeat!important;opacity:1!important;visibility:visible!important}
 </style>
+<style id="orange-safe-area-final-fix">html:has(#view-home.active),html:has(#view-fridge.active),body:has(#view-home.active),body:has(#view-fridge.active){background:#ff5a16!important}body:has(#view-home.active)::before,body:has(#view-fridge.active)::before{content:""!important;position:fixed!important;z-index:0!important;inset:0 0 auto!important;height:calc(env(safe-area-inset-top) + 36px)!important;background:#ff651d!important;opacity:1!important;pointer-events:none!important}body:has(#view-fridge.active) #app{background:#ff5a16!important}</style>
 </head>
 <body>
 
@@ -3525,6 +3526,7 @@ html:has(#view-fridge.active),body:has(#view-fridge.active),body:has(#view-fridg
 </div>
 
 <main id="app">
+<script>queueMicrotask(()=>{const h=document.querySelector(".scorte-add-render");if(h&&h.nextSibling&&h.nextSibling.nodeType===3)h.nextSibling.textContent=""})</script>
 
   <!-- ============ RICETTE ============ -->
   <section id="view-home" class="view active">
