@@ -117,13 +117,15 @@ h4{font-size:1rem;font-weight:calc(var(--peso-titoli,800) - 100);letter-spacing:
   --tema:var(--accent-primary);--tema2:var(--accent-primary)}
 #view-home .pasto-search,#view-home .mic-campo{display:none}
 #view-home .cards-list{min-height:0}
-.home-suggestion-stage{position:relative;overflow-x:auto;overflow-y:hidden;min-height:274px;touch-action:pan-x pan-y;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.home-suggestion-stage{position:relative;display:flex;gap:12px;overflow:hidden;min-height:274px;touch-action:pan-y;overscroll-behavior-x:contain;scrollbar-width:none}
 .home-suggestion-stage::-webkit-scrollbar{display:none}
-.home-suggestion-stage .scheda{margin:0}
+.home-suggestion-stage .scheda{flex:0 0 86%;width:86%;margin:0;will-change:transform;transform:translate3d(var(--home-drag,0px),0,0);transition:transform .22s cubic-bezier(.22,.8,.28,1)}
+.home-suggestion-stage.is-dragging .scheda{transition:none}
 .home-suggestion-stage::after{content:'';position:absolute;right:0;top:18%;bottom:18%;width:18px;
   pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,248,239,.82))}
 .home-suggestion-hint{display:block;margin:10px auto 0;text-align:center;font-size:.74rem;color:var(--text-tertiary)}
 .scheda.home-card{overflow:hidden}
+.scheda.home-card.is-current{animation:home-card-in .48s cubic-bezier(.22,.8,.28,1) both}
 .scheda.home-card{display:grid;grid-template-columns:1fr;grid-template-rows:144px auto 40px;align-items:stretch;
   gap:8px;min-height:262px;padding:12px 14px}
 .home-card .scheda-arte{grid-row:1;align-self:stretch;min-width:0;width:100%;height:144px;min-height:0;flex:none;
@@ -138,14 +140,16 @@ h4{font-size:1rem;font-weight:calc(var(--peso-titoli,800) - 100);letter-spacing:
 .home-card-cta{grid-column:1;grid-row:3;display:grid;place-items:center;min-height:40px;padding:0 12px;border-radius:14px;
   color:#fff;background:var(--tema,var(--accent-primary));font-size:.86rem;font-weight:700;box-shadow:0 6px 15px color-mix(in srgb,var(--tema,var(--accent-primary)) 30%,transparent)}
 .home-card-cta:active{transform:scale(.97)}
-.home-card .mealup-fo-slot img{animation:home-fo-in .42s cubic-bezier(.22,.8,.28,1) both}
+.home-card.is-current .mealup-fo-slot img{animation:home-fo-in .48s cubic-bezier(.22,.8,.28,1) both}
 .home-card-gauge{position:absolute;top:21px;right:31px;width:48px;height:48px;border-radius:50%;display:grid;place-content:center;
   background:radial-gradient(circle at center,#fff8ef 55%,transparent 57%),conic-gradient(var(--tema,var(--accent-primary)) calc(var(--gauge) * 1%),rgba(99,57,24,.14) 0);
-  animation:home-gauge-in .42s .04s cubic-bezier(.22,.8,.28,1) both;box-shadow:0 2px 7px rgba(91,40,10,.12)}
+  box-shadow:0 2px 7px rgba(91,40,10,.12)}
+.home-card.is-current .home-card-gauge{animation:home-gauge-in .48s .03s cubic-bezier(.22,.8,.28,1) both}
 .home-card-gauge b{font-size:.67rem;line-height:1;color:var(--text-primary);font-variant-numeric:tabular-nums}
 .home-card-gauge em{font-size:.46rem;line-height:1.1;font-style:normal;color:var(--text-tertiary)}
-@keyframes home-fo-in{from{opacity:0;transform:translateX(-20px) scale(.86)}72%{opacity:1;transform:translateX(2px) scale(1.03)}to{opacity:1;transform:translateX(0) scale(1)}}
-@keyframes home-gauge-in{from{opacity:0;transform:translateX(18px) scale(.86)}72%{opacity:1;transform:translateX(-2px) scale(1.03)}to{opacity:1;transform:translateX(0) scale(1)}}
+@keyframes home-fo-in{from{opacity:0;transform:translate3d(-34px,16px,0) rotate(-5deg) scale(.84)}68%{opacity:1;transform:translate3d(4px,-3px,0) rotate(1deg) scale(1.035)}86%{transform:translate3d(-2px,1px,0) rotate(-.4deg) scale(.992)}to{opacity:1;transform:translate3d(0,0,0) rotate(0) scale(1)}}
+@keyframes home-gauge-in{from{opacity:0;transform:translate3d(28px,-14px,0) rotate(6deg) scale(.84)}68%{opacity:1;transform:translate3d(-4px,3px,0) rotate(-1deg) scale(1.035)}86%{transform:translate3d(2px,-1px,0) rotate(.4deg) scale(.992)}to{opacity:1;transform:translate3d(0,0,0) rotate(0) scale(1)}}
+@keyframes home-card-in{from{opacity:.82;transform:translate3d(18px,0,0) scale(.985)}68%{opacity:1;transform:translate3d(-2px,0,0) scale(1.004)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
 .tab-bar .tab-item[data-val="view-home"]{order:1}
 .tab-bar .tab-item[data-val="view-search"]{order:2}
 .tab-bar .tab-item[data-val="view-spesa"]{order:3}
@@ -3474,9 +3478,9 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 
 </style>
 <link rel="stylesheet" href="./assets/family-fo-frozen-shell.css?v=1">
-<link rel="stylesheet" href="./assets/mealup-v124.css?v=brand-b">
+<link rel="stylesheet" href="./assets/mealup-v124.css?v=dimmi-tu-fix-2">
 <!-- Versioned delivery copy of the canonical mealup-render-v125.css layer. -->
-<link rel="stylesheet" href="./assets/mealup-render-home-fidelity-1.css?v=dimmi-tu-fix-1">
+<link rel="stylesheet" href="./assets/mealup-render-home-fidelity-1.css?v=dimmi-tu-fix-2">
 <link rel="stylesheet" href="./assets/mealup-bottom-nav-v6.css">
 </head>
 <body>
@@ -8082,6 +8086,7 @@ function fmtQty(i) {
 function recipeCard(r, extra, n) {
   const cov = extra && extra.cov;
   const homeCard = extra && extra.host === 'HOME_CARD';
+  const homeClass = homeCard && extra.homeClass ? ' ' + extra.homeClass : '';
   const cardTag = homeCard ? 'article' : 'button';
   const m = perPortion(r);
   const t = totalTime(r);
@@ -8105,7 +8110,7 @@ function recipeCard(r, extra, n) {
   const fuori = fuoriStagione(r);
 
   return `
-    <${cardTag} ${homeCard ? 'role="button" tabindex="0"' : 'type="button"'} class="glass-card card-btn scheda con-stella ${homeCard ? 'home-card' : ''} ${fuori ? 'fuori-stagione' : ''}"
+    <${cardTag} ${homeCard ? 'role="button" tabindex="0"' : 'type="button"'} class="glass-card card-btn scheda con-stella ${homeCard ? 'home-card' + homeClass : ''} ${fuori ? 'fuori-stagione' : ''}"
       data-act="detail" data-val="${esc(r.id)}"${ritardo}
       ${fuori ? 'title="Fuori stagione"' : ''}>
       <span class="scheda-arte" ${copertura ? `style="--riempi:${copertura}%"` : ''}>${arteRicetta(r, homeCard ? 'HOME_CARD' : 'RECIPE_CARD')}</span>
@@ -9340,12 +9345,71 @@ function renderPasto(id) {
     ? suggestFor(id, riga.budget, riga.budgetP).map(o => o.r)
     : piatti;
   const proposte = suggerimenti.length ? suggerimenti : piatti;
+  const indice = Math.max(0, Math.min(proposte.length - 1, homeSuggestionIndex[id] || 0));
+  homeSuggestionIndex[id] = indice;
+  const visibili = proposte.length > 1
+    ? [proposte[indice], proposte[(indice + 1) % proposte.length]]
+    : proposte.slice(0, 1);
   lista.innerHTML = proposte.length
-    ? `<div class="home-suggestion-stage" data-home-meal="${id}" data-home-count="${proposte.length}" aria-label="Ricetta suggerita, scorri per cambiare proposta">
-         ${proposte.map((ricetta, indice) => recipeCard(ricetta, { host: 'HOME_CARD' }, indice)).join('')}
-       </div>${proposte.length > 1 ? '<span class="home-suggestion-hint">Scorri per un’altra proposta</span>' : ''}`
+    ? `<div class="home-suggestion-stage" data-home-meal="${id}" data-home-count="${proposte.length}" data-home-index="${indice}" aria-label="Ricetta suggerita, scorri per cambiare proposta">
+         ${visibili.map((ricetta, posizione) => recipeCard(ricetta, { host: 'HOME_CARD', homeClass: posizione === 0 ? 'is-current' : 'is-preview' }, posizione)).join('')}
+       </div>${proposte.length > 1 && !homeSwipeHintSeen() ? '<span class="home-suggestion-hint">Scorri per un’altra proposta</span>' : ''}`
     : `<div class="home-suggestion-stage">${emptyState('Non riesco a trovare una ricetta al momento.<br>Riprova tra qualche istante.')}</div>`;
 }
+
+const homeSuggestionIndex = { col: 0, pra: 0, cen: 0 };
+function homeSwipeHintSeen() {
+  try { return localStorage.getItem('mealup.homeSwipeSeen') === '1'; } catch (e) { return false; }
+}
+function segnaHomeSwipeVisto() {
+  try { localStorage.setItem('mealup.homeSwipeSeen', '1'); } catch (e) {}
+}
+
+/* Il carosello interno possiede il gesto orizzontale: il pager del pasto non
+   deve riceverlo. Nessun pointer capture, cosi' tap card e CTA restano nativi. */
+(function () {
+  let gesto = null, ignoraClickFino = 0;
+  document.addEventListener('pointerdown', e => {
+    const stage = e.target.closest && e.target.closest('.home-suggestion-stage');
+    if (!stage || e.button > 0 || Number(stage.dataset.homeCount || 0) < 2) return;
+    gesto = { stage, x: e.clientX, y: e.clientY, dx: 0, asse: null };
+  }, true);
+  document.addEventListener('pointermove', e => {
+    if (!gesto) return;
+    const dx = e.clientX - gesto.x, dy = e.clientY - gesto.y;
+    if (!gesto.asse && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) gesto.asse = Math.abs(dx) > Math.abs(dy) * 1.25 ? 'x' : 'y';
+    if (gesto.asse !== 'x') return;
+    gesto.dx = Math.max(-110, Math.min(40, dx));
+    gesto.stage.classList.add('is-dragging');
+    gesto.stage.style.setProperty('--home-drag', gesto.dx + 'px');
+    if (e.cancelable) e.preventDefault();
+    e.stopPropagation();
+  }, { capture: true, passive: false });
+  const fine = e => {
+    if (!gesto) return;
+    const { stage, dx, asse } = gesto;
+    gesto = null;
+    stage.classList.remove('is-dragging');
+    stage.style.removeProperty('--home-drag');
+    if (asse !== 'x' || Math.abs(dx) < 42) return;
+    const pasto = stage.dataset.homeMeal;
+    const totale = Number(stage.dataset.homeCount || 1);
+    const corrente = Number(stage.dataset.homeIndex || 0);
+    homeSuggestionIndex[pasto] = dx < 0 ? (corrente + 1) % totale : (corrente - 1 + totale) % totale;
+    segnaHomeSwipeVisto();
+    ignoraClickFino = Date.now() + 450;
+    renderPasto(pasto);
+    if (navigator.vibrate) navigator.vibrate(8);
+    if (e) e.stopPropagation();
+  };
+  document.addEventListener('pointerup', fine, true);
+  document.addEventListener('pointercancel', () => { gesto = null; }, true);
+  document.addEventListener('click', e => {
+    if (Date.now() < ignoraClickFino && e.target.closest && e.target.closest('.home-suggestion-stage')) {
+      e.preventDefault(); e.stopImmediatePropagation();
+    }
+  }, true);
+})();
 
 function renderPasti() { PASTI_HOME.forEach(renderPasto); aggiornaTab(); }
 
@@ -10638,6 +10702,7 @@ let rimescola = {};
 
   document.addEventListener('touchstart', e => {
     if (COOK) return;
+    if (e.target.closest && e.target.closest('.home-suggestion-stage')) return;
     const c = e.target.closest && e.target.closest('.scheda');
     if (!c) return;
     carta = c; x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; deciso = null;

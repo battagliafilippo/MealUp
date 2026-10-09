@@ -1116,7 +1116,8 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     const dopo = a.dom.window.fitmealsPlan();
     vero(dopo.target > prima.target, 'l\'allenamento non alza il fabbisogno');
     a.click('[data-act=pasto-vai][data-val="2"]');
-    eq(a.conta('#pagina-cen .home-card'), 3, 'la Home deve rendere scorribili le tre proposte per la cena');
+    eq(a.conta('#pagina-cen .home-card'), 2, 'la Home deve mostrare protagonista e anteprima per la cena');
+    eq(a.d.querySelector('#pagina-cen .home-suggestion-stage').dataset.homeCount, '3', 'la Home deve conservare le tre proposte per la cena');
   });
 
   await test('le colazioni ricche ci sono e sono marcate come sgarro', async () => {
@@ -3445,7 +3446,7 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
     a.click('[data-act=pasto-vai][data-val="2"]');
     const primo = a.d.querySelector('#pagina-cen .home-card');
     vero(primo, 'nessun consiglio in cena');
-    eq(a.conta('#pagina-cen .home-card'), 3, 'la Home non rende disponibili tutte le proposte');
+    eq(a.conta('#pagina-cen .home-card'), 2, 'la Home deve mostrare protagonista e anteprima');
     vero(a.d.querySelector('#pagina-cen .home-suggestion-stage').dataset.homeCount === '3',
       'il carosello non espone il numero corretto di proposte');
     eq(a.conta('#pagina-cen .sugg-x'), 0, 'è rimasto il comando legacy di chiusura');
@@ -3468,6 +3469,33 @@ const clone = o => JSON.parse(JSON.stringify(o));   // colazione, pranzo, spunti
       vero(![...b.d.querySelectorAll('#combinazioni-body .scheda')].some(x => x.dataset.val === rid),
         'la combinazione chiusa e\' ancora li\'');
     }
+  });
+
+  await test('lo swipe ricetta non cambia pasto, anima la nuova card e lascia aprire il dettaglio', async () => {
+    const a = await app();
+    a.tab('view-profile'); a.profiloBase();
+    a.click('[data-act=pasto-vai][data-val="2"]');
+    const stage = a.d.querySelector('#pagina-cen .home-suggestion-stage');
+    const prima = stage.querySelector('.home-card').dataset.val;
+    const pointer = (target, tipo, x, y) => {
+      const e = new a.dom.window.Event(tipo, { bubbles: true, cancelable: true });
+      Object.defineProperties(e, {
+        clientX: { value: x }, clientY: { value: y }, button: { value: 0 }
+      });
+      target.dispatchEvent(e);
+    };
+    pointer(stage, 'pointerdown', 240, 120);
+    pointer(a.d, 'pointermove', 140, 124);
+    pointer(a.d, 'pointerup', 140, 124);
+    const nuova = a.d.querySelector('#pagina-cen .home-suggestion-stage');
+    vero(nuova.querySelector('.home-card').dataset.val !== prima, 'lo swipe non cambia proposta');
+    vero(a.d.querySelector('.pasto-tab.active').dataset.val === '2', 'lo swipe ricetta ha cambiato pasto');
+    vero(nuova.querySelector('.home-card.is-current .mealup-fo-slot'), 'la nuova protagonista non attiva il FO');
+    vero(nuova.querySelector('.home-card.is-current .home-card-gauge'), 'la nuova protagonista non attiva il gauge');
+    eq(a.conta('#pagina-cen .home-suggestion-hint'), 0, 'l\'hint non scompare dopo il primo swipe');
+    await wait(500);
+    a.click('#pagina-cen .home-card.is-current');
+    vero(!a.d.getElementById('modal-detail').hidden, 'il tap sulla ricetta non apre il dettaglio');
   });
 
   console.log('\nDetta la spesa');
