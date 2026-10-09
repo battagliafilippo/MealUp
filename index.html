@@ -9965,10 +9965,17 @@ function renderFrigo() {
     return st && ['scade', 'scaduto'].includes(st.stato);
   });
 
-  box.innerHTML = (urgenti.length ? `<div class="avviso-avanzi">${urgenti.length === 1
-      ? esc(urgenti[0].nome) + ' \u00e8 da usare adesso.'
-      : urgenti.length + ' cose sono da usare adesso.'}</div>` : '')
-    + voci.map(schedaConservazione).join('');
+  const gruppi = [
+    { titolo: 'Da consumare subito', classe: 'subito', test: st => st && ['scade', 'scaduto'].includes(st.stato) },
+    { titolo: 'Nei prossimi giorni', classe: 'prossimi', test: st => st && !['scade', 'scaduto'].includes(st.stato) && st.restano <= 4 },
+    { titolo: 'Più avanti', classe: 'avanti', test: st => st && st.restano > 4 },
+    { titolo: 'Senza scadenza', classe: 'senza', test: st => !st || !st.limite }
+  ];
+  box.innerHTML = gruppi.map(g => {
+    const elementi = voci.filter(v => g.test(statoFresco(v)));
+    if (!elementi.length) return '';
+    return `<section class="scorte-time ${g.classe}"><h3>${g.titolo}<small>${elementi.length} prodott${elementi.length === 1 ? 'o' : 'i'}</small></h3>${elementi.map(schedaConservazione).join('')}</section>`;
+  }).join('');
 }
 
 /* La dispensa e' costruita come il frigo, ma divisa per corsie: con trenta
