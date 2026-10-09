@@ -3487,6 +3487,23 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 #view-home .header .testa-tasti{position:absolute;top:0;right:0;margin-top:0!important}
 #view-home .header .home-greeting{padding-right:132px;box-sizing:border-box}
 </style>
+<style id="mealup-bottom-render-fix">
+/* Bottom line canonica: unico corpo in gomma crema, cinque tasti integrati in rilievo. */
+.mealup-tab-bar{left:50%!important;right:auto!important;bottom:calc(10px + env(safe-area-inset-bottom))!important;width:min(calc(100% - 16px),500px)!important;height:82px!important;padding:7px 10px!important;transform:translateX(-50%)!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:4px!important;border:0!important;border-radius:43px!important;background:linear-gradient(145deg,#fffdf8 0%,#f5ebdf 52%,#e7d8c8 100%)!important;box-shadow:0 17px 30px rgba(79,45,25,.24),inset 2px 2px 4px rgba(255,255,255,.96),inset -3px -4px 7px rgba(103,67,43,.09)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-sizing:border-box!important}
+.mealup-tab-bar .tab-item{position:relative!important;flex:0 0 66px!important;width:66px!important;height:66px!important;min-width:0!important;padding:7px 3px 6px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:2px!important;border:0!important;border-radius:50%!important;background:transparent!important;color:#3c352f!important;font-family:"Satoshi",system-ui,sans-serif!important;font-size:.61rem!important;font-weight:750!important;line-height:1!important;letter-spacing:0!important;isolation:isolate!important;overflow:visible!important;transition:transform .11s ease,filter .16s ease!important}
+.mealup-tab-bar .tab-item::before{content:""!important;position:absolute!important;inset:0!important;z-index:0!important;border:0!important;border-radius:50%!important;background:linear-gradient(145deg,#fffdf8 0%,#f5ebdf 55%,#e7d7c5 100%)!important;box-shadow:0 8px 14px rgba(76,47,29,.16),inset 2px 2px 4px rgba(255,255,255,.94),inset -2px -3px 5px rgba(100,65,43,.08)!important;opacity:1!important;transform:none!important;transition:transform .11s ease,box-shadow .11s ease,background .16s ease!important}
+.mealup-tab-bar .tab-item .icon,.mealup-tab-bar .tab-item span{position:relative!important;z-index:2!important}
+.mealup-tab-bar .tab-item .icon{display:block!important;width:31px!important;height:31px!important;fill:currentColor!important;stroke:none!important;transform:none!important;filter:drop-shadow(0 1px 0 rgba(255,255,255,.3))}
+.mealup-tab-bar .tab-item .icon-recipes{width:34px!important;height:34px!important;margin-top:-2px!important;margin-bottom:-1px!important}
+.mealup-tab-bar .tab-item .icon-stocks{width:32px!important;height:32px!important}
+.mealup-tab-bar .tab-item .icon-detail{fill:none!important;stroke:currentColor!important;stroke-width:3!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+.mealup-tab-bar .tab-item.active{color:#ff6518!important;background:transparent!important;filter:drop-shadow(0 0 9px rgba(255,103,24,.26))!important}
+.mealup-tab-bar .tab-item.active::before{background:radial-gradient(circle at 46% 40%,#fff5df 0%,#ffe5bd 57%,#f0d3b5 100%)!important;box-shadow:0 8px 14px rgba(82,49,28,.12),inset 0 0 25px rgba(255,132,49,.34),inset 2px 2px 4px rgba(255,255,255,.94),0 0 22px rgba(255,111,29,.3)!important}
+.mealup-tab-bar .tab-item.active span{font-weight:850!important}
+.mealup-tab-bar .tab-item:active{transform:translateY(2px) scale(.965)!important}
+.mealup-tab-bar .tab-item:active::before{transform:translateY(1px) scale(.965)!important;box-shadow:inset 0 6px 11px rgba(101,65,43,.18),inset 0 0 18px rgba(255,128,45,.2),0 2px 4px rgba(75,46,28,.05)!important}
+@media(max-width:390px){.mealup-tab-bar{width:calc(100% - 12px)!important;height:76px!important;padding:6px 8px!important}.mealup-tab-bar .tab-item{flex-basis:58px!important;width:58px!important;height:58px!important;font-size:.56rem!important}.mealup-tab-bar .tab-item .icon{width:28px!important;height:28px!important}.mealup-tab-bar .tab-item .icon-recipes{width:31px!important;height:31px!important}}
+</style>
 </head>
 <body>
 
@@ -4480,39 +4497,27 @@ input::placeholder,textarea::placeholder{color:rgba(53,43,37,.46)!important}
 </div>
 
 <!-- ============ TAB BAR · MEALUP FROZEN PREVIEW ============ -->
-<nav class="tab-bar mealup-tab-bar">
+<nav class="tab-bar mealup-tab-bar" aria-label="Navigazione principale">
   <button type="button" class="tab-item active" data-act="tab" data-val="view-home" aria-label="Home">
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.6 11.2 10.9 3.7a1.65 1.65 0 0 1 2.2 0l8.3 7.5c1 .9.35 2.55-1 2.55h-.85v6.05c0 .95-.75 1.7-1.7 1.7h-3.45v-5.15c0-.8-.65-1.45-1.45-1.45h-1.9c-.8 0-1.45.65-1.45 1.45v5.15H6.15c-.95 0-1.7-.75-1.7-1.7v-6.05H3.6c-1.35 0-2-1.65-1-2.55Z"/></svg>
+    <svg class="icon icon-home" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 29.5 29.1 10.4a4.35 4.35 0 0 1 5.8 0L56 29.5c2.6 2.35.9 6.65-2.65 6.65H51v15.7A4.15 4.15 0 0 1 46.85 56H38V43.5a4 4 0 0 0-4-4h-4a4 4 0 0 0-4 4V56h-8.85A4.15 4.15 0 0 1 13 51.85v-15.7h-2.35C7.1 36.15 5.4 31.85 8 29.5Z"/></svg>
     <span>Home</span>
   </button>
   <button type="button" class="tab-item" data-act="tab" data-val="view-search" aria-label="Ricette">
-    <svg class="icon ricette-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <g transform="rotate(35 12 12)">
-        <rect x="3.7" y="5.2" width="4.3" height="13.6" rx="2.15"/>
-        <rect x="4.75" y="1.6" width="2.2" height="4.35" rx="1.1"/>
-        <rect x="4.75" y="18.05" width="2.2" height="4.35" rx="1.1"/>
-        <rect x="15.55" y="10.35" width="2.75" height="11.85" rx="1.38"/>
-        <path d="M13.25 1.8h7.35v7.3a3.1 3.1 0 0 1-3.1 3.1h-1.15a3.1 3.1 0 0 1-3.1-3.1V1.8Z"/>
-      </g>
+    <svg class="icon icon-recipes" viewBox="0 0 64 64" aria-hidden="true">
+      <g transform="rotate(35 32 32)"><rect x="12" y="18" width="12" height="30" rx="6"/><rect x="15.5" y="8" width="5" height="12" rx="2.5"/><rect x="15.5" y="46" width="5" height="12" rx="2.5"/><path d="M42 8v14M48 8v14M54 8v14M39 8v12c0 6 3 9 9 9v27h8V29c5-1 7-4 7-9V8h-5v11c0 2-1 3-2 4V8h-2v15h-6V8h-6Z"/></g>
     </svg>
     <span>Ricette</span>
   </button>
   <button type="button" class="tab-item" data-act="tab" data-val="view-spesa" aria-label="Spesa">
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.4 4h3c.7 0 1.25.45 1.4 1.1l.45 1.85h13.4c.95 0 1.6.95 1.25 1.85l-2.15 5.8a2.1 2.1 0 0 1-2 1.4H9.7a2.1 2.1 0 0 1-2.05-1.65L5.8 6.8H2.4a1.4 1.4 0 1 1 0-2.8Zm7.8 13.7a2.05 2.05 0 1 1 0 4.1 2.05 2.05 0 0 1 0-4.1Zm7.5 0a2.05 2.05 0 1 1 0 4.1 2.05 2.05 0 0 1 0-4.1Z"/></svg>
+    <svg class="icon icon-shopping" viewBox="0 0 64 64" aria-hidden="true"><path d="M7 14h9.2a4 4 0 0 1 3.9 3.1l1.2 5H53c2.8 0 4.8 2.8 3.8 5.4l-6 16a6 6 0 0 1-5.6 3.9H27.4a6 6 0 0 1-5.8-4.6L17 23H7a4.5 4.5 0 1 1 0-9Zm22 37a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Zm18 0a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Z"/></svg>
     <span>Spesa</span>
   </button>
   <button type="button" class="tab-item" data-act="tab" data-val="view-fridge" aria-label="Scorte">
-    <svg class="icon scorte-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="8.15" y="2" width="8.25" height="1.75" rx=".88"/>
-      <rect x="7.2" y="4.45" width="10.15" height="1.65" rx=".82"/>
-      <rect x="6.85" y="6.85" width="10.85" height="1.65" rx=".82"/>
-      <path d="M7.45 9.25h9.7l.75 1.65v7.55a3.25 3.25 0 0 1-3.25 3.25H9.95a3.25 3.25 0 0 1-3.25-3.25V10.9l.75-1.65Z"/>
-      <path fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" d="M6.95 9.15H5.3c-1 0-1.8.8-1.8 1.8v2.9c0 .72.58 1.3 1.3 1.3h1.8M4.8 15.15l-1.35 1.7"/>
-    </svg>
+    <svg class="icon icon-stocks" viewBox="0 0 64 64" aria-hidden="true"><path d="M23 5h28a3 3 0 0 1 0 6H23a3 3 0 0 1 0-6Zm-3 9h34a3 3 0 0 1 0 6H20a3 3 0 0 1 0-6Zm1 9h32l2 6v21c0 6-5 11-11 11H30c-6 0-11-5-11-11V29l2-6Z"/><path class="icon-detail" d="M18 25h-5c-4 0-7 3-7 7v9c0 3 2 5 5 5h7M11 46l-4 6M25 31h24"/></svg>
     <span>Scorte</span>
   </button>
   <button type="button" class="tab-item" data-act="tab" data-val="view-profile" aria-label="Profilo">
-    <svg class="icon profilo-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.15 6.15A2.85 2.85 0 0 1 10 3.3c.35 0 .7.06 1.02.18A3.05 3.05 0 0 1 16.7 5a2.65 2.65 0 0 1-1.15 4.9H8.3a2.65 2.65 0 0 1-1.15-3.75ZM9 10.7h6v1.15a3 3 0 0 1-6 0V10.7Zm3 4.2c4.25 0 7.05 2.35 7.65 6 .12.75-.48 1.4-1.25 1.4H5.6c-.77 0-1.37-.65-1.25-1.4.6-3.65 3.4-6 7.65-6Z"/></svg>
+    <svg class="icon icon-profile" viewBox="0 0 64 64" aria-hidden="true"><path d="M18 19a8 8 0 0 1 8-8c1 0 2 .2 2.9.5A8.5 8.5 0 0 1 45 15.8 7.5 7.5 0 0 1 41.7 30H21.3A7.5 7.5 0 0 1 18 19Zm8 14h12v3c0 4-2.7 7-6 7s-6-3-6-7v-3Zm6 12c12 0 20 6.5 22 16H10c2-9.5 10-16 22-16Z"/></svg>
     <span>Profilo</span>
   </button>
 </nav>
