@@ -1,7 +1,7 @@
 /* FitMeals service worker — app shell in cache, aggiornamento in background */
 // La versione cambia a ogni pubblicazione: cosi' il telefono butta la cache
 // vecchia e prende subito l'app nuova.
-const CACHE = 'mealup-recipes-recovery-13-2026-10-12';
+const CACHE = 'mealup-wheel-kitchen-recovery-1-2026-10-12';
 const SHELL = [
   './',
   './index.html',
