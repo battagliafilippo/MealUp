@@ -3635,7 +3635,7 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
 .rotella-fascia{left:8px!important;right:8px!important;top:78px!important;height:52px!important;border:1px solid #ffc7ae!important;border-radius:15px!important;background:linear-gradient(180deg,#fff5ed,#ffeadc)!important;box-shadow:inset 0 1px #fff,0 3px 10px rgba(255,82,18,.08)!important}.rotella-col{height:210px!important;padding:79px 0!important;z-index:4!important;scroll-padding:79px 0}.rotella-col+ .rotella-col{border-left:1px solid #eee4d7}.rotella-riga{height:52px!important;color:#8a8f98!important;font-size:1rem!important;font-weight:650!important;transform:none!important}.rotella-riga.rotella-centro{color:#ff4e13!important;font-size:1.28rem!important;font-weight:900!important;opacity:1!important}.rotella-col[hidden],.rotella-col[hidden]+*{display:none!important}.rotella-col[hidden]~.rotella-fascia{right:8px}
 #rotella-fatto{display:block;width:100%;height:50px;margin-top:14px;border:0;border-radius:25px;background:linear-gradient(180deg,#ff7130,#ff4b10);color:#fff;font-size:.91rem;font-weight:850;box-shadow:0 8px 18px rgba(220,62,7,.24),inset 0 1px rgba(255,255,255,.35)}#rotella-fatto:active{transform:translateY(1px);box-shadow:inset 0 3px 8px rgba(130,35,4,.22)}
 @media(min-width:600px){#rotella{margin-bottom:18px;border-radius:28px!important}}
-</style>
+.solo-qta .rotella-etichette{grid-template-columns:1fr}.solo-qta .rotella-etichette span:last-child{display:none}.solo-qta .rotella-corpo{display:block!important}.solo-qta #rotella-col-qta{width:100%;border-left:0}.solo-qta .rotella-fascia{left:8px!important;right:8px!important}</style>
 </head>
 <body>
 
@@ -14002,6 +14002,8 @@ function apriRotella(opz) {
   };
   const titolo = document.getElementById('rotella-titolo');
   if (titolo) titolo.textContent = opz.titolo || 'Scegli la quantità';
+  const pannello = document.getElementById('rotella');
+  if (pannello) pannello.classList.toggle('solo-qta', ROT.su.soloQta);
   const colU = document.getElementById('rotella-col-unita');
   colU.hidden = ROT.su.soloQta;
   rotRiempi(colU, lista, u => unitaEtichetta(u));
@@ -20201,7 +20203,7 @@ document.addEventListener('click', e => {
       save(); renderShopping();
       apriRotella({
         titolo: 'Quantità di ' + nome,
-        qta: null,
+        qta: u0 === 'pz' ? 1 : 500,
         unita: u0,
         fine: (q, u) => {
           if (q != null && isFinite(q) && q > 0) {
@@ -21749,7 +21751,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261011-wheel-picker-1').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261011-wheel-picker-2').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
