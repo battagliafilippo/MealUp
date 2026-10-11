@@ -11265,7 +11265,10 @@ function openDetail(id, tornando) {
       ${Math.round(perPortion(r).pro * porzioniCucina(r))}g di proteine.
       <em>A te resta la tua porzione.</em></p>` : ''}
 
-    <p class="detail-meta" style="text-align:center">`r`n      <span>◷ ${totalTime(r)} min</span><span>♙ ${porzioniCucina(r)} porzioni</span><span>♧ ${['facile', 'media', 'impegnativa'][difficolta(r) - 1]}</span>`r`n    </p>`r`n    <div class="macro-grid">
+    <p class="detail-meta" style="text-align:center">
+      <span>◷ ${totalTime(r)} min</span><span>♙ ${porzioniCucina(r)} porzioni</span><span>♧ ${['facile', 'media', 'impegnativa'][difficolta(r) - 1]}</span>
+    </p>
+    <div class="macro-grid">
       <div class="macro-box"><span>Kcal</span><b>${m.kcal}</b></div>
       <div class="macro-box"><span>Prot</span><b>${m.pro}g</b></div>
       <div class="macro-box"><span>Carbo</span><b>${m.carbs}g</b></div>
