@@ -3619,7 +3619,7 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
 /* Comandi rapidi Spesa: diametro massimo, sempre cinque su una riga. */
 #view-spesa .spesa-cerca{margin-bottom:4px!important}
 #view-spesa #shop-suggest:empty{display:none!important}
-#view-spesa .spesa-altri{margin-top:0!important}
+#view-spesa .spesa-altri{margin-top:-10px!important}
 #view-spesa .spesa-altri-riga{display:flex!important;flex-wrap:nowrap!important;justify-content:space-between!important;gap:clamp(3px,1.2vw,6px)!important;width:100%!important;overflow:visible!important;padding:0!important}
 #view-spesa .spesa-altri-riga .modo-spesa{flex:1 1 0!important;width:auto!important;min-width:0!important;max-width:64px!important;height:auto!important;aspect-ratio:1/1!important;padding:0!important;border-radius:50%!important}
 #view-spesa .spesa-altri-riga .modo-spesa svg{width:23px!important;height:23px!important}
@@ -21711,7 +21711,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261011-spesa-actions-1').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261011-spesa-actions-2').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
