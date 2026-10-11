@@ -3883,8 +3883,8 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
   <section id="view-search" class="view">
     <header class="header">
       <div>
-        <span class="subtitle">Cerca &amp; cucina</span>
         <h1>Ricette</h1>
+        <span class="subtitle">Cerca, scopri, cucina.</span>
       </div>
     </header>
 
@@ -3894,6 +3894,14 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
       <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/>
         <path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button>
     <div id="search-hist" class="search-hist"></div>
+    <div class="ricette-quick" aria-label="Categorie rapide">
+      <button type="button" class="active" data-act="recipe-quick" data-val="">Tutte</button>
+      <button type="button" data-act="recipe-quick" data-val="pasta">Pasta</button>
+      <button type="button" data-act="recipe-quick" data-val="carne">Carne</button>
+      <button type="button" data-act="recipe-quick" data-val="verdure">Verdure</button>
+      <button type="button" data-act="recipe-quick" data-val="dolce">Dolci</button>
+    </div>
+    <button type="button" class="ricette-guided" data-act="filtri-apri"><span><b>Idee per te</b><small>Ricette scelte in base alle tue scorte.</small></span><i>›</i></button>
 
     <div id="comandi-cerca"></div>
     <div class="filter-row">
@@ -3901,7 +3909,7 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
       <button type="button" class="btn-ghost filtri-btn" data-act="confronta-apri">Confronta</button>
     </div>
 
-    <div id="home-count" class="results-line"></div>
+    <div class="ricette-results-head"><b>Tutte le ricette</b><div id="home-count" class="results-line"></div></div>
     <div id="recipe-list" class="cards-list"></div>
 
     <hr class="divider">
@@ -8251,10 +8259,8 @@ function recipeCard(r, extra, n) {
          <span class="scheda-num">${cov.pct}%</span>
        </span>`
     : `<span class="scheda-dati">
-         <span class="dato">${ICONE.tempo}${t}</span>
-         <span class="dato">${ICONE.fuoco}${m.kcal}</span>
-         ${(() => { const g = votoRicetta(r);
-           return g ? `<span class="dato" title="${g.punteggio}/100 · ${esc(g.nome)}${g.parziale ? ' · voto parziale' : ''}"><i class="salute-pallino" style="background:${g.colore};margin:0"></i></span>` : ''; })()}
+         <span class="dato">${ICONE.tempo}${t} min</span>
+         <span class="catalog-gauge" style="--gauge:${Math.max(6, Math.min(96, Math.round(m.kcal / 8)))}" aria-label="Indicatore ricetta"></span>
        </span>`;
 
   // Il disegno si riempie in proporzione a quanto hai gia' in dispensa, e si
@@ -10921,7 +10927,7 @@ function anteprimaRicetta(id) {
   const cov = S.pantry.length ? coverage(r) : null;
   document.getElementById('detail-body').innerHTML = `
 
-    <span class="dettaglio-arte">${arteRicetta(r, 'RECIPE_DETAIL')}</span>
+    <span class="dettaglio-arte">${arteRicetta(r, 'RECIPE_DETAIL')}<span class="detail-gauge" style="--gauge:${Math.max(6, Math.min(96, Math.round(m.kcal / 8)))}"><b>${m.kcal}</b><em>kcal</em></span></span>
     <h2 style="text-align:center">${esc(r.title)}</h2>
     ${porzioniCucina(r) > 1 ? `<p class="in-tutto">In tutto per ${porzioniCucina(r)}:
       ${Math.round(perPortion(r).kcal * porzioniCucina(r))} kcal \u00b7
@@ -11223,6 +11229,12 @@ function openDetail(id, tornando) {
     ? S.recipes.find(x => x.id === scalaDettaglio[scalaDettaglio.length - 1]) : null;
 
   document.getElementById('detail-body').innerHTML = `
+    <div class="detail-toolbar">
+      <button type="button" data-act="close-modal" aria-label="Indietro">‹</button><span></span>
+      <button type="button" class="detail-heart ${isFav(r.id) ? 'on' : ''}" data-act="fav" data-val="${esc(r.id)}" aria-label="Preferito">♡</button>
+      <button type="button" data-act="detail-share" data-val="${esc(r.id)}" aria-label="Condividi">⇧</button>
+      <button type="button" aria-label="Altre opzioni">•••</button>
+    </div>
     <div class="azioni-rapide in-cima">
       <button type="button" class="btn-primary" data-act="cook-open" data-val="${esc(r.id)}">Prepara</button>
       <button type="button" class="btn-ghost" data-act="log-meal" data-val="${esc(r.id)}">${portataOf(r) === 'bevanda' ? 'Bevuta' : 'Mangiato'}</button>
@@ -11232,7 +11244,7 @@ function openDetail(id, tornando) {
     ${daDove ? `<button type="button" class="torna" data-act="detail-indietro">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
       ${esc(daDove.title)}</button>` : ''}
-    <span class="dettaglio-arte">${arteRicetta(r, 'RECIPE_DETAIL')}</span>
+    <span class="dettaglio-arte">${arteRicetta(r, 'RECIPE_DETAIL')}<span class="detail-gauge" style="--gauge:${Math.max(6, Math.min(96, Math.round(m.kcal / 8)))}"><b>${m.kcal}</b><em>kcal</em></span></span>
     <h2 style="text-align:center">${esc(r.title)}</h2>
     ${porzioniCucina(r) > 1 ? `<p class="in-tutto">In tutto per ${porzioniCucina(r)}:
       ${Math.round(perPortion(r).kcal * porzioniCucina(r))} kcal \u00b7
@@ -11343,7 +11355,7 @@ function openDetail(id, tornando) {
           ${(S.shopping || []).includes(r.id) ? '\u2713 Ricetta in lista' : 'Tutta la ricetta'}
         </button>
         ${mancanti && mancanti < (r.ing || []).length ? `<button type="button" class="btn-ghost"
-          data-act="spesa-mancanti" data-val="${esc(r.id)}">Solo i ${mancanti} che mancano</button>` : ''}
+          data-act="spesa-mancanti" data-val="${esc(r.id)}">Aggiungi mancanti</button>` : ''}
       </div>
       <ul class="ing-list">${ing}</ul>
     </details>
@@ -11383,7 +11395,7 @@ function openDetail(id, tornando) {
     })()}
 
     <details class="sezione" ${(S.notes || {})[r.id] ? 'open' : ''}>
-      <summary>La tua nota${(S.notes || {})[r.id] ? '<span class="conta">\u270e</span>' : ''}</summary>
+      <summary>Note${(S.notes || {})[r.id] ? '<span class="conta">Modifica</span>' : '<span class="conta">Aggiungi nota</span>'}</summary>
     <div class="note-mine" style="margin-top:0">
       <textarea data-act="note" data-val="${esc(r.id)}" rows="2"
         placeholder="Es. la prossima volta meno sale, cottura 2 minuti in meno\u2026">${esc((S.notes || {})[r.id] || '')}</textarea>
@@ -19627,6 +19639,18 @@ document.addEventListener('click', e => {
       try { window.scrollTo(0, 0); } catch (e) {}
       break;
     }
+    case 'recipe-quick': {
+      const campo = F('search-input'); campo.value = val;
+      document.querySelectorAll('.ricette-quick button').forEach(b => b.classList.toggle('active', b === t));
+      if (val) recordSearch(val); renderHome(); break;
+    }
+    case 'detail-share': {
+      const r = S.recipes.find(x => x.id === val); if (!r) break;
+      const testo = r.title + ' · MealUp';
+      if (navigator.share) navigator.share({ title:r.title, text:testo, url:location.href }).catch(() => {});
+      else if (navigator.clipboard) navigator.clipboard.writeText(testo).then(() => toast('Ricetta copiata.'));
+      break;
+    }
     case 'cat': S.ui.cat = val; save(); renderHome(); break;
     case 'portata': S.ui.portata = val; save(); renderHome(); break;
     case 'tempo': S.ui.tempo = val; save(); renderHome(); break;
@@ -21804,7 +21828,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261011-safe-drafts-1').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261011-recipes-master-1').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
