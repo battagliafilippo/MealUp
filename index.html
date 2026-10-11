@@ -3666,6 +3666,11 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
 
 /* Ricette visual recovery R4 — card art full width */
 #view-search .scheda .scheda-arte{width:100%!important;max-width:100%!important;min-width:0!important}
+
+/* Ricette visual recovery R5 — featured card grid */
+#view-search .cards-list>.scheda:first-of-type{grid-template-columns:minmax(0,55%) minmax(0,45%)!important;grid-template-rows:150px 50px!important}
+#view-search .cards-list>.scheda:first-of-type>.scheda-arte{grid-column:1!important;grid-row:1/3!important;width:auto!important;justify-self:stretch!important}
+#view-search .cards-list>.scheda:first-of-type>.scheda-testo{grid-column:2!important;grid-row:1/3!important;min-width:0!important}
 </style>
 </head>
 <body>
@@ -21846,7 +21851,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261011-recipes-recovery-5').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261011-recipes-recovery-6').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
