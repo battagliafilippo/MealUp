@@ -3676,6 +3676,10 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
 #view-search .scheda.recipe-featured{grid-template-columns:minmax(0,55%) minmax(0,45%)!important;grid-template-rows:150px 50px!important}
 #view-search .scheda.recipe-featured>.scheda-arte{grid-column:1!important;grid-row:1/3!important;width:100%!important;justify-self:stretch!important}
 #view-search .scheda.recipe-featured>.scheda-testo{grid-column:2!important;grid-row:1/3!important;min-width:0!important}
+
+/* Ricette visual recovery R7 — stable mobile featured columns */
+#view-search .scheda.recipe-featured{grid-template-columns:160px minmax(0,1fr)!important}
+@media(max-width:360px){#view-search .scheda.recipe-featured{grid-template-columns:145px minmax(0,1fr)!important}}
 </style>
 </head>
 <body>
@@ -21856,7 +21860,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261011-recipes-recovery-7').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261012-recipes-recovery-8').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
