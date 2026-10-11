@@ -3663,6 +3663,9 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
 .dettaglio-arte>.mealup-fo-slot{position:static!important;display:grid!important;place-items:center!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;transform:none!important;overflow:hidden!important;background:transparent!important}
 .dettaglio-arte>.mealup-fo-slot img{position:static!important;display:block!important;width:100%!important;height:100%!important;max-width:88%!important;max-height:154px!important;object-fit:contain!important;object-position:center!important;transform:none!important;opacity:1!important}
 .detail-gauge{z-index:3!important}.detail-meta{position:static!important;inset:auto!important;z-index:2!important;width:100%!important;min-height:34px!important;background:transparent!important;transform:none!important}.azioni-rapide.in-cima{position:static!important;inset:auto!important;z-index:2!important;width:100%!important;transform:none!important}
+
+/* Ricette visual recovery R4 — card art full width */
+#view-search .scheda .scheda-arte{width:100%!important;max-width:100%!important;min-width:0!important}
 </style>
 </head>
 <body>
@@ -21843,7 +21846,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261011-recipes-recovery-4').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261011-recipes-recovery-5').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
