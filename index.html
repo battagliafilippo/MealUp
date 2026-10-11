@@ -3729,7 +3729,10 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
 .modal button,.modal input,.modal select,.modal textarea{max-width:100%!important;min-width:0!important}
 #rotella-campo{font-variant-numeric:tabular-nums}
 #rotella-col-qta .rotella-riga[data-valore-manuale="1"]{color:#ff4e13!important;font-weight:900!important}
-@media(max-width:360px){#cook-body .passo-ing{grid-template-columns:minmax(0,1fr)!important}#cook-body .cook-check{grid-template-columns:34px minmax(0,1fr)!important}#cook-body .cook-check .qty{grid-column:2!important;max-width:none!important;text-align:left!important}}</style>
+@media(max-width:360px){#cook-body .passo-ing{grid-template-columns:minmax(0,1fr)!important}#cook-body .cook-check{grid-template-columns:34px minmax(0,1fr)!important}#cook-body .cook-check .qty{grid-column:2!important;max-width:none!important;text-align:left!important}}
+/* Kitchen nav viewport containment */
+#cook-mode .cook-nav{left:max(12px,env(safe-area-inset-left))!important;right:max(12px,env(safe-area-inset-right))!important;width:auto!important;max-width:none!important}
+</style>
 </head>
 <body>
 
@@ -21922,7 +21925,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261012-wheel-kitchen-recovery-1').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261012-wheel-kitchen-recovery-2').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
