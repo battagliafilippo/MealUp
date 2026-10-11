@@ -3635,7 +3635,12 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
 .rotella-fascia{left:8px!important;right:8px!important;top:78px!important;height:52px!important;border:1px solid #ffc7ae!important;border-radius:15px!important;background:linear-gradient(180deg,#fff5ed,#ffeadc)!important;box-shadow:inset 0 1px #fff,0 3px 10px rgba(255,82,18,.08)!important}.rotella-col{height:210px!important;padding:79px 0!important;z-index:4!important;scroll-padding:79px 0}.rotella-col+ .rotella-col{border-left:1px solid #eee4d7}.rotella-riga{height:52px!important;color:#8a8f98!important;font-size:1rem!important;font-weight:650!important;transform:none!important}.rotella-riga.rotella-centro{color:#ff4e13!important;font-size:1.28rem!important;font-weight:900!important;opacity:1!important}.rotella-col[hidden],.rotella-col[hidden]+*{display:none!important}.rotella-col[hidden]~.rotella-fascia{right:8px}
 #rotella-fatto{display:block;width:100%;height:50px;margin-top:14px;border:0;border-radius:25px;background:linear-gradient(180deg,#ff7130,#ff4b10);color:#fff;font-size:.91rem;font-weight:850;box-shadow:0 8px 18px rgba(220,62,7,.24),inset 0 1px rgba(255,255,255,.35)}#rotella-fatto:active{transform:translateY(1px);box-shadow:inset 0 3px 8px rgba(130,35,4,.22)}
 @media(min-width:600px){#rotella{margin-bottom:18px;border-radius:28px!important}}
-.solo-qta .rotella-etichette{grid-template-columns:1fr}.solo-qta .rotella-etichette span:last-child{display:none}.solo-qta .rotella-corpo{display:block!important}.solo-qta #rotella-col-qta{width:100%;border-left:0}.solo-qta .rotella-fascia{left:8px!important;right:8px!important}</style>
+.solo-qta .rotella-etichette{grid-template-columns:1fr}.solo-qta .rotella-etichette span:last-child{display:none}.solo-qta .rotella-corpo{display:block!important}.solo-qta #rotella-col-qta{width:100%;border-left:0}.solo-qta .rotella-fascia{left:8px!important;right:8px!important}
+/* Kitchen Mode R12 */
+.cook-ingredients-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:2px 0 10px}.cook-ingredients-head .cook-eyebrow{margin:0}.cook-all{border:1px solid #ff7a36;background:linear-gradient(145deg,#fff8ed,#f0dfc9);color:#ff5417;border-radius:999px;padding:10px 15px;font:800 .78rem/1 var(--font);box-shadow:0 5px 15px #0003,inset 0 1px 1px #fff;white-space:nowrap}.cook-all:active{transform:scale(.97)}
+.cook-complete-mark{position:relative;width:88px;height:88px;margin:8px auto 24px;border:6px solid #ff5a18;border-radius:50%;background:radial-gradient(circle at 34% 28%,#ffb36b,#ff5a18 62%,#d83d08);box-shadow:0 0 0 8px #ff5a1822,0 12px 30px #ff4a1055,inset 0 2px 4px #fff9}.cook-complete-mark span{position:absolute;left:25px;top:20px;width:27px;height:42px;border-right:8px solid #fff8ed;border-bottom:8px solid #fff8ed;transform:rotate(43deg)}.cook-complete-mark:before,.cook-complete-mark:after{content:'';position:absolute;left:50%;top:50%;width:128px;height:5px;border-radius:4px;background:linear-gradient(90deg,#ff6a25 0 12px,transparent 12px 116px,#ff6a25 116px);transform:translate(-50%,-50%)}.cook-complete-mark:after{transform:translate(-50%,-50%) rotate(45deg)}.cook-done h2{margin-top:0!important}
+#timer-flottanti{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:10020!important;pointer-events:none!important;overflow:visible!important}#timer-flottanti .tpill{position:absolute!important;pointer-events:auto!important;touch-action:none!important;display:grid!important;grid-template-columns:42px minmax(64px,1fr) 30px!important;grid-template-rows:22px 28px!important;align-items:center!important;column-gap:8px!important;min-width:154px!important;height:66px!important;padding:9px 8px 7px 10px!important;border:1px solid #ff883f99!important;border-radius:22px!important;background:linear-gradient(145deg,#fffaf0fa,#ecdac3f7)!important;color:#211b18!important;box-shadow:0 14px 36px #0006,inset 0 2px 2px #fff!important;cursor:grab;user-select:none}#timer-flottanti .tpill:before{content:'⏱';grid-column:1;grid-row:1/3;display:grid;place-items:center;width:40px;height:40px;border-radius:14px;background:linear-gradient(145deg,#ff9d50,#ff5819);color:#fff;font-size:21px}#timer-flottanti .tpill:after{content:'•••';position:absolute;top:1px;left:50%;transform:translateX(-50%);color:#48382f55;font-size:9px;letter-spacing:2px}#timer-flottanti .tpill i{grid-column:2;grid-row:1;font:800 .62rem/1 var(--font);color:#745b4e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-transform:uppercase}#timer-flottanti .tpill b{grid-column:2;grid-row:2;font:900 1.18rem/1 var(--font);color:#17120f}#timer-flottanti .tpill-x{grid-column:3;grid-row:1/3;width:28px;height:28px;border:0;border-radius:50%;background:#372a2317;color:#3d3029;font-size:20px}#timer-flottanti .tpill.presa{cursor:grabbing;transform:scale(1.04);box-shadow:0 18px 44px #0007,0 0 0 3px #ff611947!important}#timer-flottanti .tpill.finito{border-color:#ff5a18!important;animation:mealupTimerDone .8s ease-in-out infinite alternate}@keyframes mealupTimerDone{to{box-shadow:0 16px 42px #ff4d1073,0 0 0 5px #ff5a1833!important}}
+.cook-action-badge{display:inline-flex!important;align-items:center!important;gap:8px!important;width:auto!important;height:44px!important;margin:4px 0 14px!important;padding:5px 12px 5px 6px!important;border:1px solid #ff954a80!important;border-radius:15px!important;background:linear-gradient(145deg,#fff7e9,#ead7bd)!important;color:#31251e!important;box-shadow:0 7px 18px #0004,inset 0 1px 2px #fff!important}.cook-action-badge:after{display:none!important}.cook-action-badge i{display:grid!important;place-items:center!important;width:32px!important;height:32px!important;border-radius:11px!important;background:linear-gradient(145deg,#ffab61,#ff5a18)!important;font-style:normal!important;font-size:19px!important;transform:none!important}.cook-action-badge b{font:850 .76rem/1 var(--font)!important;text-transform:none!important;letter-spacing:0!important;color:#34261f!important}.cook-badge-padella i:before{content:'🍳'}.cook-badge-pentola i:before{content:'🍲'}.cook-badge-forno i:before{content:'♨'}.cook-badge-aria i:before{content:'◉'}.cook-badge-timer i:before{content:'⏱'}.cook-badge-temperatura i:before{content:'🌡'}</style>
 </head>
 <body>
 
@@ -17551,7 +17556,6 @@ function openCook(id) {
     'radial-gradient(120% 90% at 84% 84%, ' + colore + '1c 0%, transparent 60%)';
 
   renderTimers();   // i timer gia' accesi devono comparire subito, non al tick
-  animaFornelli(r);
   keepScreenAwake(true);
   renderCook();
 }
@@ -17587,6 +17591,17 @@ function azionePasso(testo) {
   const t = norm(testo);
   for (const a of AZIONI) if (a.k.some(k => t.includes(k))) return a.id;
   return 'versa';
+}
+/* Solo strumenti di cottura: i badge delle azioni manuali non compaiono. */
+function cotturaPasso(testo, durata) {
+  const t = norm(testo);
+  if (/friggitrice ad aria|air fryer/.test(t)) return { id:'aria', label:'Friggitrice ad aria' };
+  if (/forno|inforna|gratina|teglia/.test(t)) return { id:'forno', label:'Forno' };
+  if (/pentola|bolli|lessa|sobboll|stufa/.test(t)) return { id:'pentola', label:'Cottura in pentola' };
+  if (/padella|rosola|soffrigg|salta|friggi|piastra|griglia|tosta|sfuma/.test(t)) return { id:'padella', label:'Cottura in padella' };
+  if (/temperatura|gradi|°/.test(t)) return { id:'temperatura', label:'Temperatura' };
+  if (durata) return { id:'timer', label:'Timer' };
+  return null;
 }
 
 /* Quante porzioni stai facendo: e' la domanda che uno si fa prima di iniziare,
@@ -17751,7 +17766,10 @@ function renderCook() {
         ${Math.round(m.kcal * porz)} kcal in tutto \u00b7 ${Math.round(m.pro * porz)}g di proteine
       </p>
 
-      <span class="cook-eyebrow">Prepara tutto</span>
+      <div class="cook-ingredients-head">
+        <span class="cook-eyebrow">Prepara tutto</span>
+        <button type="button" class="cook-all" data-act="cook-ing-tutti">${(r.ing || []).length && (r.ing || []).every((_, n) => st.ings[n]) ? 'Deseleziona tutti' : 'Spunta tutti'}</button>
+      </div>
       ${(r.ing || []).map((i, n) => `
         <button type="button" class="cook-check ${st.ings[n] ? 'on' : ''}" data-act="cook-ing" data-val="${n}">
           <span class="box">${st.ings[n] ? '\u2713' : ''}</span>
@@ -17770,8 +17788,8 @@ function renderCook() {
     const fatti = steps.filter((_, n) => st.steps[n]).length;
     body.innerHTML = `
       <div class="cook-done">
-        <div class="big">\ud83c\udf7d\ufe0f</div>
-        <h2 style="font-size:1.4rem;margin-bottom:8px">\u00c8 pronto</h2>
+        <div class="cook-complete-mark" aria-hidden="true"><span></span></div>
+        <h2 style="font-size:1.4rem;margin-bottom:8px">Ricetta completata</h2>
         <p class="section-desc">${fatti} passaggi su ${steps.length} spuntati.</p>
         <button type="button" class="btn-primary full-width" data-act="log-meal" data-val="${esc(r.id)}">${cookRecipe() && portataOf(cookRecipe()) === 'bevanda' ? 'Bevuta' : 'Mangiato'}</button>
         <span class="field-label" style="margin:18px 0 6px">Ne hai cucinate di pi\u00f9?</span>
@@ -17793,6 +17811,7 @@ function renderCook() {
   const n = COOK.idx - 1;
   const text = steps[n];
   const d = stepDuration(text);
+  const cottura = cotturaPasso(text, d);
   const done = !!st.steps[n];
 
   const citati = ingredientiDelPasso(r, text);
@@ -17806,7 +17825,7 @@ function renderCook() {
 
   body.innerHTML = `
     <span class="cook-eyebrow">Passaggio ${COOK.idx} di ${steps.length}</span>
-    <span class="cook-action-badge az-${azione}" aria-label="Azione ${azione}"><i aria-hidden="true"></i><b>${azione}</b></span>
+    ${cottura ? `<span class="cook-action-badge cook-badge-${cottura.id}" aria-label="${cottura.label}"><i aria-hidden="true"></i><b>${cottura.label}</b></span>` : ''}
     <p class="cook-step ${done ? 'done' : ''} ${COOK.grande ? 'grande' : ''}"
        data-act="cook-grande" title="Tocca per ingrandire">${esc(text)}</p>
     ${citati.length ? `<div class="passo-ing">
@@ -19708,6 +19727,17 @@ document.addEventListener('click', e => {
       const st = cookState(COOK.id);
       st.ings[val] = !st.ings[val];
       saveCookData(); renderCook();
+      break;
+    }
+    case 'cook-ing-tutti': {
+      const r = cookRecipe();
+      const st = cookState(COOK.id);
+      const ingredienti = r && r.ing ? r.ing : [];
+      const tutti = ingredienti.length && ingredienti.every((_, n) => st.ings[n]);
+      ingredienti.forEach((_, n) => { st.ings[n] = !tutti; });
+      saveCookData();
+      if (navigator.vibrate) navigator.vibrate(12);
+      renderCook();
       break;
     }
     case 'cook-grande':
@@ -21751,7 +21781,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261011-wheel-picker-2').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261011-kitchen-mode-1').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
