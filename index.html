@@ -3696,7 +3696,40 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
 #view-search .scheda.recipe-featured>.scheda-arte{height:164px!important}
 #view-search .scheda.recipe-featured>.scheda-testo{top:188px!important}
 #view-search .scheda.recipe-featured .scheda-titolo{overflow-wrap:anywhere!important}
-</style>
+
+/* Kitchen + finestre responsive recovery 2026-10-12 */
+#cook-mode,#cook-mode *,.modal,.modal *{box-sizing:border-box}
+#cook-mode{overflow:hidden!important;padding-left:max(12px,env(safe-area-inset-left))!important;padding-right:max(12px,env(safe-area-inset-right))!important}
+#cook-mode .cook-top{width:100%!important;min-width:0!important;display:grid!important;grid-template-columns:44px minmax(0,1fr) auto!important;align-items:center!important;gap:8px!important}
+#cook-mode .cook-top>*{min-width:0!important;max-width:100%!important}
+#cook-title{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+#cook-body{flex:1 1 auto!important;width:100%!important;min-width:0!important;overflow-x:hidden!important;overflow-y:auto!important;padding-left:2px!important;padding-right:2px!important}
+#cook-body button,#cook-mode .cook-nav button{max-width:100%!important;min-width:0!important;white-space:normal!important;overflow-wrap:anywhere!important}
+#cook-mode .cook-nav{flex:0 0 auto!important;width:100%!important;min-width:0!important;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:8px!important;padding:10px 0 0!important}
+#cook-mode .cook-nav>*{width:100%!important;min-width:0!important;margin:0!important}
+#cook-body .porzioni{width:min(100%,310px)!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important;display:grid!important;grid-template-columns:56px minmax(0,1fr) 56px!important;gap:10px!important}
+#cook-body .porzioni button{width:56px!important;height:56px!important;padding:0!important}
+#cook-body .pantry-grid{max-width:100%!important;display:flex!important;flex-wrap:wrap!important;gap:7px!important}
+#cook-body .pantry-grid>.chip{flex:0 1 auto!important;min-width:48px!important;margin:0!important}
+#cook-body .cook-ingredients-head{display:flex!important;align-items:center!important;justify-content:space-between!important;flex-wrap:wrap!important;gap:8px!important;width:100%!important}
+#cook-body .cook-all{flex:0 1 auto!important;min-height:40px!important;padding:8px 12px!important}
+#cook-body .cook-check{width:100%!important;min-width:0!important;display:grid!important;grid-template-columns:38px minmax(0,1fr) auto!important;align-items:center!important;gap:9px!important;padding:10px!important}
+#cook-body .cook-check .txt{min-width:0!important;overflow-wrap:anywhere!important;text-align:left!important}
+#cook-body .cook-check .qty{max-width:105px!important;white-space:normal!important;text-align:right!important;overflow-wrap:anywhere!important}
+#cook-body .cook-step{width:100%!important;max-width:100%!important;overflow-wrap:anywhere!important}
+#cook-body .cook-action-badge{max-width:100%!important;min-width:0!important;margin-left:auto!important;margin-right:auto!important;overflow:hidden!important}
+#cook-body .cook-action-badge b{min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+#cook-body .passo-ing{width:100%!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+#cook-body .passo-chip{width:100%!important;min-width:0!important;margin:0!important;padding:9px 7px!important;overflow:hidden!important}
+#cook-body .passo-chip .nome,#cook-body .passo-chip .p1,#cook-body .passo-chip .p2{max-width:100%!important;overflow-wrap:anywhere!important}
+#cook-body .cook-timer,#cook-body .cook-timer button{width:100%!important;max-width:100%!important}
+#cook-body .prossimo{max-width:100%!important;overflow-wrap:anywhere!important}
+#cook-body .cook-done{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
+.modal .modal-content,.modal .sheet,.modal [role="dialog"]{max-width:calc(100vw - 16px)!important;overflow-x:hidden!important}
+.modal button,.modal input,.modal select,.modal textarea{max-width:100%!important;min-width:0!important}
+#rotella-campo{font-variant-numeric:tabular-nums}
+#rotella-col-qta .rotella-riga[data-valore-manuale="1"]{color:#ff4e13!important;font-weight:900!important}
+@media(max-width:360px){#cook-body .passo-ing{grid-template-columns:minmax(0,1fr)!important}#cook-body .cook-check{grid-template-columns:34px minmax(0,1fr)!important}#cook-body .cook-check .qty{grid-column:2!important;max-width:none!important;text-align:left!important}}</style>
 </head>
 <body>
 
@@ -13947,8 +13980,13 @@ function rotellaDom() {
     ROT.su.qta = v;                                  // il numero esatto vale, la rotella si avvicina
     const col = document.getElementById('rotella-col-qta');
     const idx = rotPiuVicino(ROT.su.passi, v);
-    col._idx = idx;                                  // cosi' lo scroll indotto non riscrive il campo
+    col._idx = idx;                                  // lo scroll indotto non riscrive il valore esatto
     col.scrollTop = idx * ROT_RIGA;
+    const rigaEsatta = col.children[idx];
+    if (rigaEsatta) {
+      rigaEsatta.textContent = String(v);             // campo e valore centrale mostrano lo stesso numero
+      rigaEsatta.dataset.valoreManuale = '1';
+    }
     rotDipingi(col);
   });
   velo.addEventListener('keydown', e => {
@@ -14055,6 +14093,11 @@ function rotCambiaUnita(u, ricostruisciSolo) {
   rotVaiA(colQ, idx);
   const c = document.getElementById('rotella-campo');
   if (c && su.qta != null) c.value = String(su.qta);
+  const rigaEsatta = colQ.children[idx];
+  if (rigaEsatta && su.qta != null) {
+    rigaEsatta.textContent = String(su.qta);
+    rigaEsatta.dataset.valoreManuale = '1';
+  }
 }
 
 function apriRotella(opz) {
@@ -14089,6 +14132,9 @@ function chiudiRotella(conferma) {
   const velo = document.getElementById('rotella-velo');
   if (!velo || velo.hidden || !ROT.su) return;
   const su = ROT.su;
+  const campoEsatto = document.getElementById('rotella-campo');
+  const scritto = campoEsatto ? parseFloat(String(campoEsatto.value).replace(',', '.')) : NaN;
+  if (conferma && isFinite(scritto) && scritto > 0) su.qta = scritto;
   ROT.su = null;
   velo.hidden = true;
   document.body.classList.remove('locked');
@@ -21876,7 +21922,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261012-recipes-recovery-13').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261012-wheel-kitchen-recovery-1').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
