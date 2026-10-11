@@ -14087,6 +14087,26 @@ document.addEventListener('pointerdown', e => {
   e.preventDefault();
   apriRotellaPer(dove);
 });
+/* Nei campi quantità il primo tocco seleziona tutto il valore: scrivendo 5
+   sopra 0 si ottiene subito 5, senza cancellazioni o tocchi aggiuntivi. */
+function eCampoQuantita(el) {
+  if (!el || el.tagName !== 'INPUT') return false;
+  return el.type === 'number' || el.inputMode === 'numeric' || el.inputMode === 'decimal'
+    || /(?:qta|quant|porzioni|peso|altezza|eta|age|height|weight)/i.test(el.id || el.name || '');
+}
+function selezionaQuantita(el) {
+  if (!eCampoQuantita(el) || !el.value) return;
+  try { el.select(); } catch (e) {
+    try { el.setSelectionRange(0, String(el.value).length); } catch (_) {}
+  }
+}
+document.addEventListener('focusin', e => {
+  if (eCampoQuantita(e.target)) requestAnimationFrame(() => selezionaQuantita(e.target));
+});
+document.addEventListener('pointerup', e => {
+  if (eCampoQuantita(e.target)) requestAnimationFrame(() => selezionaQuantita(e.target));
+}, true);
+
 /* Dentro l'app tutto vive in grammi (un millilitro conta come un grammo,
    l'approssimazione di cucina); la scorta pero' ricorda di essere liquida
    e si mostra in ml e litri. */
@@ -19596,11 +19616,15 @@ document.addEventListener('click', e => {
   try {
   switch (act) {
     case 'tab': {
+      /* Anche ritoccando la scheda corrente si torna subito alla sua home. */
+      resetVistaDefault(S.ui.tab || val);
+      if ((S.ui.tab || val) !== val) resetVistaDefault(val);
       syncScreenChrome(val);
       document.querySelectorAll('.tab-item').forEach(x => x.classList.toggle('active', x === t));
       document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === val));
-      S.ui.tab = val; save();
-
+      S.ui.tab = val;
+      renderVistaDefault(val);
+      save();
       try { window.scrollTo(0, 0); } catch (e) {}
       break;
     }
@@ -21781,7 +21805,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261011-kitchen-mode-1').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261011-input-defaults-1').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
@@ -21795,6 +21819,33 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http') && wind
       });
     }).catch(err => console.warn('SW non registrato:', err));
   });
+}
+
+/* Ogni sezione si riapre dalla propria radice. I dati dell'utente restano,
+   mentre pannelli, editor e sottosezioni temporanee non restano appesi. */
+function resetVistaDefault(viewId) {
+  closeModals();
+  try { chiudiRotella(false); } catch (e) {}
+  if (viewId === 'view-fridge') {
+    S.ui.frigoDetail = false;
+    S.ui.frigoSez = 'dispensa';
+    S.ui.pantryEdit = false;
+    scortaAperta = null;
+    cuociAperto = null;
+  } else if (viewId === 'view-spesa') {
+    S.ui.shopEdit = false;
+    S.ui.shopQtaAperta = null;
+  } else if (viewId === 'view-profile') {
+    S.ui.profSez = 'tu';
+    S.ui.weekPick = null;
+  }
+}
+
+function renderVistaDefault(viewId) {
+  if (viewId === 'view-fridge') renderFridge();
+  else if (viewId === 'view-spesa') renderShopping();
+  else if (viewId === 'view-profile') renderProfile();
+  else if (viewId === 'view-home') renderHome();
 }
 
 function syncScreenChrome(viewId) {
@@ -21813,6 +21864,7 @@ function syncScreenChrome(viewId) {
 }
 /* ---------- avvio ---------- */
 S = load();
+resetVistaDefault(S.ui.tab || 'view-home');
 if (!S.ui.protein) S.ui.protein = GRILL[0].id;
 if (!S.profiles || !S.profiles.length) S.profiles = clone(SEED.profiles);
 ensureUniqueProfileIds();
