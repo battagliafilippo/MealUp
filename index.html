@@ -8318,7 +8318,7 @@ function recipeCard(r, extra, n) {
     <${cardTag} ${homeCard ? 'role="button" tabindex="0"' : 'type="button"'} class="glass-card card-btn scheda con-stella ${!homeCard && n === 0 ? 'recipe-featured' : ''} ${homeCard ? 'home-card' + homeClass : ''} ${fuori ? 'fuori-stagione' : ''}"
       data-act="detail" data-val="${esc(r.id)}"${ritardo}
       ${fuori ? 'title="Fuori stagione"' : ''}>
-      <span class="scheda-arte" ${copertura ? `style="--riempi:${copertura}%"` : ''}>${arteRicetta(r, homeCard ? 'HOME_CARD' : 'RECIPE_CARD')}</span>
+      <span class="scheda-arte" style="${copertura ? '--riempi:' + copertura + '%;' : ''}${!homeCard && n === 0 ? 'position:absolute!important;left:8px!important;top:8px!important;width:160px!important;height:252px!important;' : ''}">${arteRicetta(r, homeCard ? 'HOME_CARD' : 'RECIPE_CARD')}</span>
       <span class="scheda-testo">
         <span class="scheda-titolo">${esc(r.title)}</span>
         ${piede}
@@ -21866,7 +21866,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261012-recipes-recovery-9').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261012-recipes-recovery-10').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
