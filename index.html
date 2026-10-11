@@ -19623,7 +19623,6 @@ document.addEventListener('click', e => {
       document.querySelectorAll('.tab-item').forEach(x => x.classList.toggle('active', x === t));
       document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === val));
       S.ui.tab = val;
-      renderVistaDefault(val);
       save();
       try { window.scrollTo(0, 0); } catch (e) {}
       break;
@@ -21805,7 +21804,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261011-input-defaults-1').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261011-safe-drafts-1').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
@@ -21824,28 +21823,24 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http') && wind
 /* Ogni sezione si riapre dalla propria radice. I dati dell'utente restano,
    mentre pannelli, editor e sottosezioni temporanee non restano appesi. */
 function resetVistaDefault(viewId) {
-  closeModals();
-  try { chiudiRotella(false); } catch (e) {}
+  /* Una bozza aperta vince sul reset: un tap sbagliato non deve mai far
+     perdere quantità, testo o configurazioni non ancora confermate. */
+  const modaleAperta = !!document.querySelector('.modal.active');
+  const rotellaAperta = !!(ROT.su && document.getElementById('rotella-velo')
+    && !document.getElementById('rotella-velo').hidden);
+  if (modaleAperta || rotellaAperta) return false;
+
   if (viewId === 'view-fridge') {
+    if (scortaAperta || cuociAperto) return false;
     S.ui.frigoDetail = false;
     S.ui.frigoSez = 'dispensa';
     S.ui.pantryEdit = false;
-    scortaAperta = null;
-    cuociAperto = null;
-  } else if (viewId === 'view-spesa') {
-    S.ui.shopEdit = false;
-    S.ui.shopQtaAperta = null;
-  } else if (viewId === 'view-profile') {
-    S.ui.profSez = 'tu';
-    S.ui.weekPick = null;
+    renderFrigoSezioni();
+    return true;
   }
-}
-
-function renderVistaDefault(viewId) {
-  if (viewId === 'view-fridge') renderFridge();
-  else if (viewId === 'view-spesa') renderShopping();
-  else if (viewId === 'view-profile') renderProfile();
-  else if (viewId === 'view-home') renderHome();
+  /* Spesa e Profilo conservano l'esatto punto di lavoro. I loro editor si
+     chiudono già nei rispettivi handler solo dopo un salvataggio riuscito. */
+  return false;
 }
 
 function syncScreenChrome(viewId) {
