@@ -3683,14 +3683,19 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
 
 /* Ricette visual recovery R8 — featured art independent track */
 #view-search .scheda.recipe-featured{display:block!important;position:relative!important}
-#view-search .scheda.recipe-featured>.scheda-arte{position:absolute!important;left:8px!important;top:18px!important;width:160px!important;height:168px!important;min-height:0!important}
+#view-search .scheda.recipe-featured>.scheda-arte{position:absolute!important;left:8px!important;top:18px!important;width:160px!important;height:164px!important;min-height:0!important}
 #view-search .scheda.recipe-featured>.scheda-testo{position:absolute!important;left:174px!important;right:8px!important;top:52px!important;bottom:14px!important;width:auto!important;height:auto!important;padding:0!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important}
 @media(max-width:360px){#view-search .scheda.recipe-featured>.scheda-arte{width:145px!important}#view-search .scheda.recipe-featured>.scheda-testo{left:159px!important}}
 
 /* Ricette visual recovery R9 — separate art and copy */
 #view-search .scheda.recipe-featured>.scheda-arte{top:18px!important;height:168px!important}
-#view-search .scheda.recipe-featured>.scheda-testo{left:16px!important;right:16px!important;top:184px!important;bottom:12px!important;justify-content:flex-end!important}
+#view-search .scheda.recipe-featured>.scheda-testo{left:16px!important;right:16px!important;top:188px!important;bottom:12px!important;justify-content:flex-end!important}
 #view-search .scheda.recipe-featured>.scheda-testo .scheda-titolo{max-width:230px!important}
+
+/* Ricette visual recovery R10 — final separation */
+#view-search .scheda.recipe-featured>.scheda-arte{height:164px!important}
+#view-search .scheda.recipe-featured>.scheda-testo{top:188px!important}
+#view-search .scheda.recipe-featured .scheda-titolo{overflow-wrap:anywhere!important}
 </style>
 </head>
 <body>
@@ -8323,8 +8328,8 @@ function recipeCard(r, extra, n) {
     <${cardTag} ${homeCard ? 'role="button" tabindex="0"' : 'type="button"'} class="glass-card card-btn scheda con-stella ${!homeCard && n === 0 ? 'recipe-featured' : ''} ${homeCard ? 'home-card' + homeClass : ''} ${fuori ? 'fuori-stagione' : ''}"
       data-act="detail" data-val="${esc(r.id)}"${ritardo}
       ${fuori ? 'title="Fuori stagione"' : ''}>
-      <span class="scheda-arte" style="${copertura ? '--riempi:' + copertura + '%;' : ''}${!homeCard && n === 0 ? 'position:absolute!important;left:8px!important;top:18px!important;width:160px!important;height:168px!important;' : ''}">${arteRicetta(r, homeCard ? 'HOME_CARD' : 'RECIPE_CARD')}</span>
-      <span class="scheda-testo" ${!homeCard && n === 0 ? 'style="position:absolute!important;left:16px!important;right:16px!important;top:184px!important;bottom:12px!important;width:auto!important;height:auto!important;padding:0!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important"' : ''}>
+      <span class="scheda-arte" style="${copertura ? '--riempi:' + copertura + '%;' : ''}${!homeCard && n === 0 ? 'position:absolute!important;left:8px!important;top:18px!important;width:160px!important;height:164px!important;' : ''}">${arteRicetta(r, homeCard ? 'HOME_CARD' : 'RECIPE_CARD')}</span>
+      <span class="scheda-testo" ${!homeCard && n === 0 ? 'style="position:absolute!important;left:16px!important;right:16px!important;top:188px!important;bottom:12px!important;width:auto!important;height:auto!important;padding:0!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important"' : ''}>
         <span class="scheda-titolo">${esc(r.title)}</span>
         ${piede}
       </span>
@@ -21871,7 +21876,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261012-recipes-recovery-12').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261012-recipes-recovery-13').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
