@@ -3680,6 +3680,12 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
 /* Ricette visual recovery R7 — stable mobile featured columns */
 #view-search .scheda.recipe-featured{grid-template-columns:160px minmax(0,1fr)!important}
 @media(max-width:360px){#view-search .scheda.recipe-featured{grid-template-columns:145px minmax(0,1fr)!important}}
+
+/* Ricette visual recovery R8 — featured art independent track */
+#view-search .scheda.recipe-featured{display:block!important;position:relative!important}
+#view-search .scheda.recipe-featured>.scheda-arte{position:absolute!important;left:8px!important;top:8px!important;width:160px!important;height:252px!important;min-height:0!important}
+#view-search .scheda.recipe-featured>.scheda-testo{position:absolute!important;left:174px!important;right:8px!important;top:52px!important;bottom:14px!important;width:auto!important;height:auto!important;padding:0!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important}
+@media(max-width:360px){#view-search .scheda.recipe-featured>.scheda-arte{width:145px!important}#view-search .scheda.recipe-featured>.scheda-testo{left:159px!important}}
 </style>
 </head>
 <body>
@@ -21860,7 +21866,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261012-recipes-recovery-8').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261012-recipes-recovery-9').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
