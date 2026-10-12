@@ -3732,7 +3732,35 @@ html:has(#view-fridge.active.scorte-detail),body:has(#view-fridge.active.scorte-
 @media(max-width:360px){#cook-body .passo-ing{grid-template-columns:minmax(0,1fr)!important}#cook-body .cook-check{grid-template-columns:34px minmax(0,1fr)!important}#cook-body .cook-check .qty{grid-column:2!important;max-width:none!important;text-align:left!important}}
 /* Kitchen nav viewport containment */
 #cook-mode .cook-nav{left:max(12px,env(safe-area-inset-left))!important;right:max(12px,env(safe-area-inset-right))!important;width:auto!important;max-width:none!important}
-</style>
+
+/* Scorte detail UX recovery 2026-10-12 */
+#view-fridge .fresco{position:relative!important;padding:12px!important;border-left-width:4px!important;border-radius:18px!important;background:#fffaf1!important;color:#17202d!important;overflow:hidden!important}
+#view-fridge .fresco-testa{display:grid!important;grid-template-columns:58px minmax(0,1fr) 46px!important;align-items:center!important;gap:10px!important;width:100%!important}
+#view-fridge .fresco-arte{width:58px!important;height:58px!important;display:grid!important;place-items:center!important;overflow:hidden!important}
+#view-fridge .fresco-arte img,#view-fridge .fresco-arte svg{max-width:100%!important;max-height:100%!important;object-fit:contain!important}
+#view-fridge .fresco-nome{min-width:0!important;display:flex!important;flex-direction:column!important;gap:3px!important}
+#view-fridge .fresco-nome>b{display:flex!important;align-items:center!important;gap:6px!important;min-width:0!important;font-size:.92rem!important;line-height:1.2!important;overflow-wrap:anywhere!important}
+#view-fridge .fresco-nome>span{font-size:.69rem!important;line-height:1.3!important;color:#687181!important;overflow-wrap:anywhere!important}
+#view-fridge .fresco .resta{margin-left:auto!important;flex:0 0 auto!important;padding:5px 8px!important;border:1px solid #efdfcb!important;border-radius:10px!important;background:#fff!important;color:#303948!important;font-size:.7rem!important;font-weight:800!important}
+#view-fridge .scorta-chevron{width:44px!important;height:44px!important;min-width:44px!important;padding:0!important;border:1px solid #eadfce!important;border-radius:50%!important;background:#fff!important;color:#ff5318!important;font-size:1.8rem!important;line-height:1!important;display:grid!important;place-items:center!important;transform:none!important}
+#view-fridge .fresco.aperta .scorta-chevron{transform:rotate(90deg)!important;background:#fff1e8!important}
+#view-fridge .fresco.compacta .fresco-fondo{display:none!important}
+#view-fridge .fresco.aperta{box-shadow:0 12px 28px rgba(68,39,16,.16)!important}
+#view-fridge .fresco.aperta .cuoci-riga{width:100%!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto minmax(94px,auto) auto!important;gap:7px!important;align-items:center!important;padding:10px!important;border:1px solid #eadfce!important;border-radius:14px!important;background:#fff!important}
+#view-fridge .fresco.aperta .cuoci-riga input{width:100%!important;min-width:0!important}
+#view-fridge .fresco-fondo{margin-top:10px!important;padding-top:10px!important;border-top:1px solid #eadfce!important;display:flex!important;flex-wrap:wrap!important;gap:7px!important;align-items:center!important}
+#view-fridge .fresco-fondo>*{max-width:100%!important;min-width:0!important;margin:0!important}
+#view-fridge .fresco-fondo .ric{flex:1 1 130px!important;white-space:normal!important;overflow-wrap:anywhere!important;text-align:left!important}
+#view-fridge .scorta-remove{border-color:#efb3a8!important;background:#fff6f3!important;color:#b52c1f!important}
+#view-fridge .avanzo{display:grid!important;grid-template-columns:72px minmax(0,1fr)!important;gap:10px!important;padding:11px!important;border-radius:18px!important;background:#fffaf1!important;color:#17202d!important}
+#view-fridge .avanzo>.scheda-arte{width:72px!important;height:72px!important;grid-row:1/3!important;overflow:hidden!important}
+#view-fridge .avanzo>.scheda-testo{min-width:0!important;overflow:hidden!important}
+#view-fridge .avanzo .scheda-titolo{font-size:.9rem!important;line-height:1.2!important;overflow-wrap:anywhere!important}
+#view-fridge .avanzo-dati{gap:7px!important;font-size:.7rem!important}
+#view-fridge .avanzo-azioni{grid-column:1/3!important;width:100%!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;align-items:stretch!important}
+#view-fridge .avanzo-azioni button{width:100%!important;min-width:0!important;min-height:42px!important;white-space:normal!important;overflow-wrap:anywhere!important;margin:0!important}
+#view-fridge [data-fsez]>.section-desc{font-size:.72rem!important;line-height:1.35!important;color:#fff!important;background:rgba(117,38,0,.18)!important;padding:9px 11px!important;border-radius:12px!important;margin:8px 0 12px!important}
+@media(max-width:360px){#view-fridge .fresco.aperta .cuoci-riga{grid-template-columns:minmax(0,1fr) auto!important}#view-fridge .avanzo-azioni{grid-template-columns:minmax(0,1fr)!important}}</style>
 </head>
 <body>
 
@@ -9857,7 +9885,7 @@ function schedaConservazione(v) {
   const giorno = ts => new Date(ts).toLocaleDateString('it-IT', { day: '2-digit', month: 'short' });
 
   return `
-    <div class="fresco ${st ? 'stato-' + st.stato : 'senza-data'} ${v.cotto ? 'cotto' : ''}">
+    <div class="fresco ${st ? 'stato-' + st.stato : 'senza-data'} ${v.cotto ? 'cotto' : ''} ${scortaAperta === v.k ? 'aperta' : 'compatta'}">
       <div class="fresco-testa">
         <span class="fresco-arte">${disegnoPer(v.nome) || ARTE.piatto}</span>
         <span class="fresco-nome">
@@ -9866,8 +9894,7 @@ function schedaConservazione(v) {
           <span>${giorno(v.dal)} \u00b7 ${etaTesto(v.dal)}${
             v.aperto ? ' \u00b7 aperto ' + giorno(v.apertoIl) : ''}</span>
         </span>
-        <button type="button" class="x" data-act="fresco-del" data-val="${esc(v.k)}"
-          aria-label="Non tenerlo d'occhio">\u00d7</button>
+        <button type="button" class="scorta-chevron" data-act="scorta-mod" data-val="${esc(v.k)}" aria-expanded="${scortaAperta === v.k ? 'true' : 'false'}" aria-label="${scortaAperta === v.k ? 'Chiudi dettagli' : 'Apri dettagli e azioni'}">\u203a</button>
       </div>
 
       ${scortaAperta === v.k ? `
@@ -9878,7 +9905,7 @@ function schedaConservazione(v) {
             v.unita === 'pz' ? 'un.'
             : v.unita === 'ml' ? (v.qta >= 1000 ? 'L' : 'ml')
             : (v.qta >= 1000 ? 'kg' : 'g')}</button>
-          <button type="button" class="chip mini active" data-act="scorta-salva" data-val="${esc(v.k)}">salva</button>
+          <button type="button" class="chip mini active" data-act="scorta-salva" data-val="${esc(v.k)}">Salva modifiche</button>`r`n          <button type="button" class="chip mini scorta-remove" data-act="fresco-del" data-val="${esc(v.k)}">Rimuovi</button>
 
         </div>` : ''}
 
@@ -14543,7 +14570,7 @@ function schedaAvanzo(x, n) {
           ? `<button type="button" class="btn-ghost" data-act="scongela" data-val="${esc(x.rid)}">Scongela</button>`
           : `<button type="button" class="btn-ghost" data-act="log-meal" data-val="${esc(x.rid)}">Mangia</button>`}
         <button type="button" class="chip mini" data-act="avanzo-finito" data-val="${esc(x.rid)}"
-          data-dove="${esc(st.dove)}">consumato</button>
+          data-dove="${esc(st.dove)}">Segna consumato</button>
       </span>
     </div>`;
 }
@@ -21342,10 +21369,21 @@ document.addEventListener('click', e => {
       save(); renderFridge();
       break;
     }
-    case 'fresco-del':
+    case 'fresco-del': {
+      const voce = freschezza()[val];
+      if (!voce) break;
+      if (!armed(t, 'Conferma rimozione')) {
+        toast('Tocca ancora “Conferma rimozione” per eliminare ' + voce.nome + '.');
+        break;
+      }
+      pushUndo('Scorta rimossa');
       delete freschezza()[val];
-      save(); renderFridge();
+      S.pantry = S.pantry.filter(p => norm(p) !== val);
+      scortaAperta = null;
+      save(); renderAll();
+      toast(voce.nome + ' rimossa dalle scorte.', 'Annulla');
       break;
+    }
     case 'scongela': {
       // Dal freezer al frigo: riparte il conto delle ore, com'e' giusto.
       const x = (S.leftovers || []).find(y => y.rid === val && y.dove === 'freezer');
@@ -21925,7 +21963,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261012-wheel-kitchen-recovery-2').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261012-scorte-detail-ux-1').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
