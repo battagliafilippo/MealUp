@@ -9905,7 +9905,8 @@ function schedaConservazione(v) {
             v.unita === 'pz' ? 'un.'
             : v.unita === 'ml' ? (v.qta >= 1000 ? 'L' : 'ml')
             : (v.qta >= 1000 ? 'kg' : 'g')}</button>
-          <button type="button" class="chip mini active" data-act="scorta-salva" data-val="${esc(v.k)}">Salva modifiche</button>`r`n          <button type="button" class="chip mini scorta-remove" data-act="fresco-del" data-val="${esc(v.k)}">Rimuovi</button>
+          <button type="button" class="chip mini active" data-act="scorta-salva" data-val="${esc(v.k)}">Salva modifiche</button>
+          <button type="button" class="chip mini scorta-remove" data-act="fresco-del" data-val="${esc(v.k)}">Rimuovi</button>
 
         </div>` : ''}
 
