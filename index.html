@@ -10471,6 +10471,7 @@ function riepilogoAvanzi() {
 }
 
 function renderFridge() {
+  riparaConservazioneCritica();
   renderFrigoSezioni();
   riepilogoAvanzi();
   renderCalendario();
@@ -12458,6 +12459,26 @@ function giorniFreschezza(nome) {
   return null;   // confezionato a lunga conservazione: la data la metti tu
 }
 
+let _conservazioneCriticaRiparata = false;
+function riparaConservazioneCritica() {
+  if (_conservazioneCriticaRiparata) return;
+  _conservazioneCriticaRiparata = true;
+  let cambiato = false;
+  Object.keys(freschezza()).forEach(k => {
+    const v = freschezza()[k];
+    const g = v && giorniFreschezza(v.nome);
+    if (!v || !g || dovConservare(v.nome) !== 'frigo' || v.posto !== 'dispensa') return;
+    v.posto = 'frigo';
+    v.dal = v.dal || Date.now();
+    v.entro = Date.now() + g * 86400000;
+    v.auto = true;
+    v.stimata = false;
+    catalogoRegistra(v.nome, 'frigo');
+    cambiato = true;
+  });
+  if (cambiato) save();
+}
+
 function statoFresco(voce) {
   // Nel congelatore vale il protocollo dei mesi, non quello delle ore.
   if (voce && voce.posto === 'freezer') {
@@ -13901,7 +13922,12 @@ function registraAcquisto(nome, qta, unita) {
   // il posto lo decide, nell'ordine: dov'era gia', dove il catalogo ricorda
   // che va tenuto, e solo alla fine la regola generale
   const ricordo = catalogoTrova(nome);
-  const posto = (prima && prima.posto) || (ricordo && ricordo.posto) || dovConservare(nome);
+  const regolaPosto = dovConservare(nome);
+  const postoMemorizzato = (prima && prima.posto) || (ricordo && ricordo.posto);
+  // Una memoria errata non puo' mandare un fresco deperibile in dispensa.
+  // Un freezer scelto esplicitamente resta invece valido.
+  const posto = g && regolaPosto === 'frigo' && postoMemorizzato !== 'freezer'
+    ? 'frigo' : (postoMemorizzato || regolaPosto);
   // In dispensa vale la durata del confezionato: un barattolo di passata non
   // e' un pomodoro fresco, anche se la parola e' la stessa.
   const gg = posto === 'dispensa' ? mesiDispensa(nome) * 30 : g;
@@ -13998,6 +14024,7 @@ function rotellaDom() {
   velo.querySelector('#rotella-fatto').addEventListener('click', () => chiudiRotella(true));
   velo.querySelector('#rotella-campo').addEventListener('input', e => {
     if (!ROT.su) return;
+    ROT.su.manuale = true;
     // scritto per esteso ("500 g", "1,5 kg"): numero E unita' insieme
     const detto = formatoDaTesto(e.target.value);
     if (detto && detto.scritta && !detto.pezzi
@@ -14054,6 +14081,11 @@ function rotellaDom() {
   ['rotella-col-qta', 'rotella-col-unita'].forEach(id => {
     const col = velo.querySelector('#' + id);
     col.addEventListener('scroll', () => rotAlloScroll(col), { passive: true });
+    if (id === 'rotella-col-qta') {
+      const abilitaRotella = () => { if (ROT.su) ROT.su.manuale = false; };
+      col.addEventListener('pointerdown', abilitaRotella, { passive: true });
+      col.addEventListener('wheel', abilitaRotella, { passive: true });
+    }
   });
   return velo;
 }
@@ -14089,6 +14121,7 @@ function rotAlloScroll(col) {
     col._raf = null;
     rotDipingi(col);
     if (!ROT.su) return;
+    if (col.dataset.tipo === 'qta' && ROT.su.manuale) return;
     const idx = Math.round(col.scrollTop / ROT_RIGA);
     if (idx === col._idx) return;
     col._idx = idx;
@@ -14148,6 +14181,7 @@ function apriRotella(opz) {
   const lista = (opz.lista && opz.lista.length ? opz.lista : UNITA_GIRO).slice();
   ROT.su = {
     qta: (opz.qta != null && isFinite(opz.qta) && opz.qta > 0) ? opz.qta : null,
+    manuale: false,
     unita: lista.indexOf(opz.unita) !== -1 ? opz.unita : lista[0],
     lista: lista, passi: [], fine: opz.fine, soloQta: !!opz.soloQta
   };
@@ -21976,7 +22010,7 @@ function doInstall() {
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http') && window.top === window.self) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?ver=20261012-scorte-detail-ux-2').then(reg => {
+    navigator.serviceWorker.register('sw.js?ver=20261012-stock-safety-wheel-1').then(reg => {
       // Senza questo, chi ha l'app installata resta sulla versione vecchia
       // finché non ricarica due volte, e non lo sa.
       reg.addEventListener('updatefound', () => {
