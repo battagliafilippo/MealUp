@@ -51,3 +51,35 @@ jobs:
           path: /tmp/mealup-visual-analysis/
           if-no-files-found: error
           retention-days: 30
+      - name: M3 - Verify Visual Director protections
+        run: node tools/recipe-visuals/visual-director.cjs --self-test
+      - name: M3 - Build all full-dish visual briefs without AI credits
+        run: node tools/recipe-visuals/visual-director.cjs --input /tmp/mealup-visual-analysis/recipe-specs.v1.json --out /tmp/mealup-visual-director/
+      - name: M3 - Gate all 454 unapproved briefs
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          const dir = '/tmp/mealup-visual-director/';
+          const report = JSON.parse(fs.readFileSync(dir + 'director-report.v1.json', 'utf8'));
+          const doc = JSON.parse(fs.readFileSync(dir + 'visual-briefs.v1.json', 'utf8'));
+          assert.equal(report.result, 'PASS');
+          assert.equal(report.total, 454);
+          assert.equal(report.uniqueIds, 454);
+          assert.equal(report.explicitEvidenceNeedsValidation, 102);
+          assert.equal(report.noExplicitEvidenceNeedsInference, 352);
+          assert.equal(report.safeToGenerate, 0);
+          assert.equal(report.imagesGenerated, 0);
+          assert.equal(report.apiCalls, 0);
+          assert.equal(doc.recipes.length, 454);
+          assert.ok(doc.recipes.every(r => !r.safeToGenerate &&
+            r.imageStatus === 'PENDING' && r.imageUrl === null && r.approvalStatus === 'NOT_REVIEWED'));
+          console.log('PASS M3: 454 full-dish planning briefs; 352 inference cases queued; 0 hallucinated placements approved');
+          NODE
+      - name: Save M3 visual briefs for review (no deploy or commit)
+        uses: actions/upload-artifact@v4
+        with:
+          name: mealup-visual-director-m3
+          path: /tmp/mealup-visual-director/
+          if-no-files-found: error
+          retention-days: 30
