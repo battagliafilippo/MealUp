@@ -30,17 +30,23 @@ Per ciascuna ricetta MealUp esiste una rappresentazione unica del piatto COMPLET
 - [ ] M7. Batch progressivo sul catalogo completo, dedup, resume, report QA automatico + eccezioni per review umana; nessuna rigenerazione degli asset approvati senza motivo.
 - [ ] M8. Nuove ricette: coda asincrona sicura, controllo della privacy, trigger post-salvataggio, soluzione gratuita sostenibile da validare prima di attivarla sugli utenti.
 
-## Agente trasversale approvato — MealUp Idea Validator (2026-10-14)
+## Governance aziendale approvata — Idea Validator v1.1 (2026-10-14)
 
-**Decisione utente: APPROVATO e inserito UFFICIALMENTE nella roadmap di sviluppo MealUp.**
-Contratto normativo di progetto: [MealUp Idea Validator v1.0](../design/mealup-idea-validator-agent-v1.md).
+**APPROVATA DALL'UTENTE** la struttura gerarchica con budget aggiuntivo di default **0 €**, vertice decisionale umano e competenze specialistiche separate. La **v1.1 sostituisce la v1.0** nel medesimo [contratto canonico Idea Validator](../design/mealup-idea-validator-agent-v1.md): non creare documenti concorrenti.
 
-- **Scopo:** esaminare ogni nuova proposta di funzione, microanimazione, interazione o redesign; verificare compatibilita' con codice reale, Costituzione AI v1.9, MealUp Master, FROZEN e QA; proporre sempre una soluzione coerente con l'intento dell'utente se quella letterale e' impraticabile.
-- **Esiti obbligatori:** FATTIBILE / FATTIBILE CON MODIFICHE / ALTERNATIVA EQUIVALENTE / NON FATTIBILE NELLE CONDIZIONI ATTUALI; se la prova e' insufficiente, dichiarare VERIFICA NECESSARIA. Mai promettere certezza al 100% senza test e mai confondere controlli statici con prove browser.
-- **Regola di sicurezza:** solo valutazione fino all'approvazione specifica dell'utente. No auto-implementazione, no modifiche ai FROZEN, no deploy, nessun agente permanente attivato in background.
-- **Collocazione:** agente di sviluppo TRASVERSALE per l'intero progetto (NON componente runtime della PWA, NON sub-agente per immagini). Potra' essere consultato ogni volta che l'utente propone un'idea; un trigger automatico indipendente richiedera' futura implementazione autorizzata.
-- **Stato:** [x] mandato/contratto approvati e documentati; [ ] implementazione tecnica, automazione trigger, test con idee campione. NON dichiararlo installato o funzionante finche' i test tecnici non lo dimostrano.
-- **Priorita':** backlog permanente della piattaforma MealUp, intervento in un micro-step separato DOPO il percorso critico delle immagini complete, salvo diversa priorita' esplicita dell'utente. La pipeline M2–M8 continua senza deviazioni.
+**Organigramma e ruoli:**
+- **Product Owner (utente):** unico decisore finale, approva o rifiuta ogni intervento, costo, sostituzione di scelta, deroga FROZEN, implementazione e deploy.
+- **Idea Validator (coordinatore):** assegna il lavoro ai soli specialisti necessari, confronta analisi, chiarisce disaccordi e presenta UNA raccomandazione con un micro-step.
+- **Design Validator:** estetica, UX/UI, MealUp Toys, animazioni, layout e FROZEN grafici. Non certifica codice e prestazioni.
+- **Technical Validator:** architettura, PWA, codice, costi, compatibilità, prestazioni, test e rischi di regressione. Non decide arbitrariamente il design.
+- **QA / Verification Gate indipendente:** controlla test ed evidenze prima della promozione; può segnalare BLOCCO, ma non sostituisce la decisione dell'utente.
+- **Specialisti di dominio:** Food/Recipe Analyzer/Visual Director e altri solo dove strettamente richiesti e dopo verifica della capacità reale. Non aggiungere ruoli per prestigio.
+
+**Norma sostituzioni vincolante:** UNA decisione ACTIVE per scope; se l'utente conferma una variante in sostituzione, NEW diventa ACTIVE e OLD SUPERSEDED nella fonte canonica pertinente, con storico Git preservato e rinvii riallineati. Le proposte restano PROPOSED fino a conferma. **Decisione ACTIVE ≠ codice implementato**, le due condizioni si registrano separatamente. Nessuna modifica implicita a Costituzione v1.9, MealUp Master o FROZEN; seguire le procedure canoniche specifiche per cambiarli.
+
+**Controllo del costo:** 0 € aggiuntivi per default, no nuove sottoscrizioni, top-up o API a pagamento senza consenso separato; quote gratuite non garantite illimitate, chiavi mai nel frontend.
+
+**Stato e priorità:** [x] modello organizzativo APPROVATO e documentato; [ ] agenti Design/Technical automatizzati e trigger; [ ] test reali di orchestrazione/QA. La definizione NON attiva agenti autonomi e NON autorizza modifiche alla PWA. La roadmap immagini M2–M8 rimane prioritaria; Idea Validator è lavoro trasversale futuro in un micro-step distinto, salvo variazione esplicita dell'utente. Nessun nuovo tester, nessun deploy, main intatto.
 
 ## Regola anti-deriva
 Ogni intervento deve riportare: micro-step corrente, risultato verificato, impatto sui FROZEN, eventuale blocco, e **un solo** prossimo passo.
