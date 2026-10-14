@@ -1,0 +1,47 @@
+name: QA - MealUp single FO renderer
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - index.html
+      - dist/index.html
+      - .github/workflows/qa-single-fo-renderer.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check single canonical renderer in both shells
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          for (const name of ['index.html','dist/index.html']) {
+            const s = fs.readFileSync(name, 'utf8');
+            assert.equal(s.includes('G11/mealup-g11-bundle.js'), false, name + ': legacy renderer is autoloaded');
+            assert.equal(s.includes('G11/c63-post-correction-retest.js'), false, name + ': legacy retest is autoloaded');
+            assert.ok(s.includes('<script src="./assets/family-fo/runtime.js?v=3"></script>'), name + ': family runtime absent');
+            assert.ok(s.includes('window.MealUpFamilyFO.markup(r.id'), name + ': family renderer absent');
+            assert.ok(s.includes('function recipeCard(r, extra, n)'), name + ': recipe card absent');
+            assert.ok(s.includes('function suggestFor('), name + ': protected suggestFor absent');
+            assert.ok(s.includes('function renderCook()'), name + ': protected Kitchen Mode absent');
+            assert.ok(s.includes("const KEY = 'fitmeals.v2'"), name + ': persistence changed');
+            console.log('PASS canonical-only visual runtime:', name);
+          }
+          NODE
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated test dependency
+        run: npm install --no-save --no-package-lock jsdom
+      - name: Test frozen app UI smoke
+        run: node test/master-v124-smoke.js
+      - name: Test protected app regression suite
+        run: node test/run.js
