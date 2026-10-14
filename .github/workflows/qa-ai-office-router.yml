@@ -1,0 +1,45 @@
+name: QA - MealUp AI Office Router
+
+# Lab-only: no app deployment, no paid APIs or model calls.
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - 'tools/ai-office/**'
+      - '.github/workflows/qa-ai-office-router.yml'
+  pull_request:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - 'tools/ai-office/**'
+      - '.github/workflows/qa-ai-office-router.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ai-office-router-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  router-qa:
+    name: Selective routing and safety gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout isolated revision
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Confirm router and tests are present
+        run: |
+          test -f tools/ai-office/router.cjs
+          test -f tools/ai-office/router.test.cjs
+          node --version
+      - name: Execute router tests (zero external dependencies)
+        run: node --test tools/ai-office/router.test.cjs
