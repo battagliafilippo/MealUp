@@ -57,7 +57,7 @@ const RULES=[
   'If ambiguous, use UNRESOLVED and write what needs human inspection.',
   'No invented garnish, no utensils, background props, brand labels or nutritional text.',
   'This is a RECIPE Food Portrait, not an isolated family FO. Preserve the exact canonical vesselId supplied by the trusted composition matrix.',
-  'Describe a recipe-specific MealUp Toys 3D vessel. Never invent a generic or transparent vessel. VESSEL_FREE means no additional container.',
+  'Describe a recipe-specific MealUp Toys 3D vessel with cream as the dominant color, orange accents and opaque material. Never invent a generic, dark, black or transparent vessel. VESSEL_FREE means no additional container.',
   'Do not bake gauge, needle, kcal, labels or other UI into the food portrait; those remain separate dynamic UI layers.',
   'Write a candidate image prompt but do not claim approval. needsHumanReview MUST be true.',
   'Return only JSON following the schema.'
@@ -126,8 +126,24 @@ function validateReply(r,b){
     .filter(x=>typeof x==='string').join(' ');
   if(b.vessel?.id!=='VESSEL_GLASS' && /trasparent|transparent/i.test(visualText))
     issues.push('NON_CANONICAL_TRANSPARENT_VESSEL');
+  if(b.vessel?.requiredInRecipePortrait && /\b(scur[oaie]?|dark|ner[oaie]?|black)\b/i.test(visualText))
+    issues.push('NON_CANONICAL_DARK_VESSEL');
+  if(b.vessel?.requiredInRecipePortrait &&
+     (!/(crema|cream)/i.test(r.finalImagePrompt||'') ||
+      !/(arancion|orange)/i.test(r.finalImagePrompt||'')))
+    issues.push('VESSEL_PALETTE_MISSING_FROM_PROMPT');
+  if(!/MealUp Toys 3D/i.test(r.finalImagePrompt||''))
+    issues.push('MEALUP_STYLE_MISSING_FROM_PROMPT');
   if(/\b(gauge|lancetta|kcal|calorie|cta)\b/i.test(r.finalImagePrompt||''))
     issues.push('UI_BAKED_INTO_IMAGE_PROMPT');
+  const ingredientWords=new Set(b.primaryIngredients.flatMap(x=>(x.name||'').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'').split(/[^a-z0-9]+/).filter(w=>w.length>2)));
+  for(const omitted of r.omittedVisualElements||[]){
+    const words=String(omitted).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .split(/[^a-z0-9]+/).filter(w=>w.length>2);
+    if(words.length && !words.some(w=>ingredientWords.has(w)))
+      issues.push('OMITTED_ELEMENT_NOT_IN_RECIPE');
+  }
   // Structural validation cannot prove culinary correctness. QA always mandatory.
   return [...new Set(issues)];
 }
@@ -135,7 +151,7 @@ function mockReply(b){
   return {
     recipeId:b.recipeId,visualRevision:b.visualRevision,
     vesselId:b.vessel.id,
-    vesselDescription:'Mock canonical MealUp Toys 3D vessel, unverified.',
+    vesselDescription:'Mock canonical MealUp Toys 3D vessel cream with orange accents, unverified.',
     dishPortraitDescription:'MOCK: full dish illustration unverified, not a culinary inference.',
     ingredientCoverage:b.primaryIngredients.map(x=>({
       ingredientPosition:x.position,culinaryForm:'Mock - unverified',
@@ -143,7 +159,7 @@ function mockReply(b){
       evidenceStepIndices:[],source:'UNRESOLVED'
     })),
     assumptions:['Mock only: no AI call'],contradictions:[],omittedVisualElements:[],
-    finalImagePrompt:'MOCK only: do not generate or publish any image from this dummy content.',
+    finalImagePrompt:'MOCK only: MealUp Toys 3D plate, cream dominant with orange accents; do not generate or publish.',
     needsHumanReview:true
   };
 }
@@ -264,8 +280,14 @@ async function selfTest(){
     'WRONG_VESSEL_NOT_BLOCKED');
   assert(validateReply({...ok,vesselDescription:'ciotola trasparente'},b)
     .includes('NON_CANONICAL_TRANSPARENT_VESSEL'),'TRANSPARENT_VESSEL_NOT_BLOCKED');
+  assert(validateReply({...ok,dishPortraitDescription:'cibo in un vaso di ceramica scura'},b)
+    .includes('NON_CANONICAL_DARK_VESSEL'),'DARK_VESSEL_NOT_BLOCKED');
+  assert(validateReply({...ok,finalImagePrompt:'MealUp Toys 3D plate'},b)
+    .includes('VESSEL_PALETTE_MISSING_FROM_PROMPT'),'MISSING_PALETTE_NOT_BLOCKED');
   assert(validateReply({...ok,finalImagePrompt:'Piatto con gauge 480 kcal'},b)
     .includes('UI_BAKED_INTO_IMAGE_PROMPT'),'BAKED_UI_NOT_BLOCKED');
+  assert(validateReply({...ok,omittedVisualElements:['olio inventato']},b)
+    .includes('OMITTED_ELEMENT_NOT_IN_RECIPE'),'INVENTED_OMISSION_NOT_BLOCKED');
   assert(validateReply({...ok,ingredientCoverage:ok.ingredientCoverage.slice(0,1)},b)
     .includes('INGREDIENT_COUNT_MISMATCH'),'MISSING_INGREDIENT_NOT_BLOCKED');
   const bad={...ok,ingredientCoverage:ok.ingredientCoverage.map(x=>({

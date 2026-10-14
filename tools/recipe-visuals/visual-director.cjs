@@ -19,6 +19,7 @@ const crypto = require('node:crypto');
 
 const VERSION = 'mealup-visual-director-v1';
 const STYLE = 'MealUp Toys 3D — complete food portrait';
+const VESSEL_DESIGN_CONTRACT = 'MealUp Toys 3D premium; crema predominante con accenti arancioni; materiale opaco; geometria specifica della preparazione; vietati vessel trasparenti, neri o scuri; nessun testo, logo, gauge, lancetta, kcal o altra UI incorporata';
 const VESSEL_IDS = new Set([
   'VESSEL_BAKING_DISH','VESSEL_BOWL','VESSEL_BREAD_SURFACE','VESSEL_CUP',
   'VESSEL_DESSERT_MOLD','VESSEL_FREE','VESSEL_GLASS','VESSEL_JAR',
@@ -79,6 +80,7 @@ function stableRecipeFields(r, composition) {
     compositionId: composition.composition_id,
     vesselId: composition.vessel_id,
     vesselDescription: VESSEL_DESCRIPTIONS[composition.vessel_id],
+    vesselDesignContract: VESSEL_DESIGN_CONTRACT,
   };
 }
 function buildBrief(r, composition) {
@@ -100,7 +102,7 @@ function buildBrief(r, composition) {
     'Usa ogni ingrediente come vincolo: ingredienti di condimento possono essere incorporati, non necessariamente visibili come oggetti interi',
     'Nessun ingrediente estraneo al ricettario, salvo elementi non visibili di processo gia citati nei passaggi',
     'Questo e un Food Portrait di RICETTA, non un FO di famiglia: usa obbligatoriamente il vessel canonico indicato da vesselId',
-    'Il vessel deve essere specifico per la preparazione e nello stile MealUp Toys 3D premium; vietati vessel generici, trasparenti o inventati, salvo VESSEL_GLASS esplicitamente canonico',
+    'Il vessel deve essere specifico per la preparazione, nello stile MealUp Toys 3D premium, crema predominante con accenti arancioni e materiale opaco; vietati vessel generici, neri, scuri, trasparenti o inventati, salvo VESSEL_GLASS esplicitamente canonico',
     'VESSEL_FREE significa nessun contenitore aggiuntivo; non sostituirlo con piatti o ciotole',
     'Nessuna grafica UI nel ritratto: gauge, lancetta, kcal, testi e CTA restano livelli dinamici separati',
     'Non aggiungere salse, foglie, posate, sfondi, lettere o numeri per riempire la scena',
@@ -129,7 +131,7 @@ function buildBrief(r, composition) {
       recipeId: r.recipeId,
       visualRevision: r.visualRevision,
       vesselId: composition.vessel_id,
-      vesselDescription: 'descrizione del vessel canonico in stile MealUp Toys 3D',
+      vesselDescription: 'descrizione del vessel canonico, inclusi geometria, crema predominante e accenti arancioni',
       dishPortraitDescription: 'Descrizione verificabile di UN piatto completo',
       ingredientCoverage: [
         {
@@ -161,6 +163,7 @@ function buildBrief(r, composition) {
     vessel: {
       id: composition.vessel_id,
       description: VESSEL_DESCRIPTIONS[composition.vessel_id],
+      designContract: VESSEL_DESIGN_CONTRACT,
       source: 'G8_CANONICAL_COMPOSITION_MATRIX',
       requiredInRecipePortrait: composition.vessel_id !== 'VESSEL_FREE',
     },
