@@ -1,0 +1,134 @@
+{
+  "schema": "mealup-pilot-candidate-v1",
+  "status": "IMAGE_GENERATION_SUBMITTED_AWAITING_VISUAL_QA",
+  "sourceRecipeId": "r2",
+  "sourceBranch": "experiment/recipe-visual-agents",
+  "sourceCatalogFile": "index.html",
+  "title": "Poke bowl tonno e avocado",
+  "inputRecipe": {
+    "ingredients": [
+      {
+        "position": 0,
+        "name": "tonno",
+        "quantity": 150,
+        "unit": "g"
+      },
+      {
+        "position": 1,
+        "name": "riso",
+        "quantity": 70,
+        "unit": "g"
+      },
+      {
+        "position": 2,
+        "name": "avocado",
+        "quantity": 0.5,
+        "unit": ""
+      },
+      {
+        "position": 3,
+        "name": "salsa di soia",
+        "quantity": 1,
+        "unit": "cucchiaio"
+      },
+      {
+        "position": 4,
+        "name": "sesamo",
+        "quantity": 1,
+        "unit": "cucchiaino"
+      }
+    ],
+    "steps": [
+      "Cuoci il riso in anticipo e raffreddalo.",
+      "Taglia tonno e avocado a cubetti regolari.",
+      "Assembla la bowl e completa con soia a basso sodio e sesamo."
+    ]
+  },
+  "reasoningProvider": "ChatGPT interactive conversation (NOT automated Groq API)",
+  "culinaryProposal": {
+    "composition": "Letto coeso di riso cotto e raffreddato, tonno e avocado a cubetti regolari distribuiti sulla sommità in due aree che si intersecano con naturalezza, soia integrata come sottile condimento lucido, sesamo sparso sulla superficie. In questa bozza il cibo si presenta senza vessel per rispettare le regole visuali del progetto.",
+    "ingredientCoverage": [
+      {
+        "position": 0,
+        "name": "tonno",
+        "culinaryForm": "cubetti regolari",
+        "role": "topping",
+        "stepFormEvidence": [
+          1
+        ],
+        "placementEvidence": "INFERRED"
+      },
+      {
+        "position": 1,
+        "name": "riso",
+        "culinaryForm": "riso cotto e raffreddato",
+        "role": "base",
+        "stepFormEvidence": [
+          0
+        ],
+        "placementEvidence": "INFERRED"
+      },
+      {
+        "position": 2,
+        "name": "avocado",
+        "culinaryForm": "cubetti regolari",
+        "role": "topping",
+        "stepFormEvidence": [
+          1
+        ],
+        "placementEvidence": "INFERRED"
+      },
+      {
+        "position": 3,
+        "name": "salsa di soia",
+        "culinaryForm": "condimento sottile lucido",
+        "role": "integrated",
+        "stepFormEvidence": [
+          2
+        ],
+        "placementEvidence": "INFERRED"
+      },
+      {
+        "position": 4,
+        "name": "sesamo",
+        "culinaryForm": "semi visibili",
+        "role": "topping",
+        "stepFormEvidence": [
+          2
+        ],
+        "placementEvidence": "INFERRED"
+      }
+    ],
+    "assumptions": [
+      "Riso come base sotto gli altri ingredienti: il passaggio 'assembla la bowl' non specifica l'ordine.",
+      "Tonno raffigurato rosso e non cotto: ricetta non dice espressamente crudo; ipotesi tipica del poke, richiede verifica.",
+      "Presentazione senza bowl/vessel benché il titolo dica bowl: da verificare con il FROZEN e con l'utente."
+    ],
+    "contradictionsOrOpenQuestions": [
+      "Il nome 'poke bowl' suggerisce una ciotola, mentre le specifiche dei Food Object prevedono assenza di vessel; l'immagine è volutamente un pilot food-only."
+    ]
+  },
+  "imageProvider": "Runway (account già collegato, crediti inclusi)",
+  "runwayTaskId": "5d5c8c5b-a721-43b7-9eb7-fd2e133bd855",
+  "generationParameters": {
+    "count": 1,
+    "ratio": "1:1",
+    "costKind": "credits_included",
+    "creditsRemainingAfterSubmission": 496
+  },
+  "imageValidation": {
+    "doNotPublish": true,
+    "doNotTouchTester": true,
+    "doNotFreeze": true,
+    "checksPending": [
+      "Tutti e solo i cinque ingredienti previsti, inclusi soia e sesamo",
+      "Cubetti di tonno e avocado corretti e non casualmente dispersi",
+      "Riso effettivamente cotto, presentazione plausibile",
+      "Regole no vessel e stile MealUp Toys 3D",
+      "Ritaglio/trasparenza, mobile legibility, peso asset e prestazioni"
+    ],
+    "qaApproved": false,
+    "readyForApp": false
+  },
+  "note": "Il pilot è una proposta illustrativa da valutare, non l'inizio di un batch autonomo. Non dimostra che un modello Groq sia collegato né che l'automazione per 454 immagini sia pronta."
+}
