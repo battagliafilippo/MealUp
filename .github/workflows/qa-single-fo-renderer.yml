@@ -48,3 +48,24 @@ jobs:
         run: node test/master-v124-smoke.js
       - name: Test protected app regression suite
         run: node test/run.js
+
+  baseline_11:
+    name: Audit 11 errori sul tester originale, senza modifiche
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 4716804ea4a6e38ecd8fdf462de61d81d4d4e857
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated test dependency
+        run: npm install --no-save --no-package-lock jsdom
+      - name: Run only 11 failed cases against original tester
+        env:
+          MEALUP_TEST_FILTER: '^(ogni passaggio riconosce|le icone della barra seguono|la barra della spesa suggerisce|un surgelato usa|lo stato si legge da una barra|la ricerca filtra|la cucina accende|la pentola dura|il riepilogo della spesa parla|la spesa ha due stati|le confezioni restano)'
+        run: |
+          node test/run.js > /tmp/mealup-baseline-11.log 2>&1 || exit_code=$?
+          cat /tmp/mealup-baseline-11.log
+          echo "Original tester suite exit code: ${exit_code:-0}"
