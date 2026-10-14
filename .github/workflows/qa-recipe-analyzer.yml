@@ -83,3 +83,38 @@ jobs:
           path: /tmp/mealup-visual-director/
           if-no-files-found: error
           retention-days: 30
+      - name: M3b - Test Groq adapter safeguards without network
+        run: node tools/recipe-visuals/groq-reasoner.cjs --self-test
+      - name: M3b - Verify provider DRY RUN requires no credentials
+        run: node tools/recipe-visuals/groq-reasoner.cjs --input /tmp/mealup-visual-director/visual-briefs.v1.json --out /tmp/mealup-groq-reasoner/
+      - name: M3b - Mock checkpoint and unapproved visual reasoning (no provider calls)
+        run: |
+          node tools/recipe-visuals/groq-reasoner.cjs --input /tmp/mealup-visual-director/visual-briefs.v1.json --out /tmp/mealup-groq-reasoner/ --mock --max 2
+          node <<'NODE'
+          const fs=require('node:fs');
+          const assert=require('node:assert/strict');
+          const p='/tmp/mealup-groq-reasoner/reasoner-state.v1.json';
+          const obj=JSON.parse(fs.readFileSync(p,'utf8'));
+          assert.equal(obj.schema,'groq-reasoner-v1');
+          assert.equal(Object.keys(obj.records).length,2);
+          for(const item of Object.values(obj.records)){
+            assert.equal(item.model,'MOCK_NOT_REAL');
+            assert.equal(item.status,'REQUIRES_HUMAN_QA');
+            assert.equal(item.qaApproved,false);
+            assert.equal(item.safeToGenerate,false);
+            assert.equal(item.imageStatus,'PENDING');
+            assert.equal(item.imageUrl,null);
+          }
+          console.log('PASS M3b mock: 2 source linked candidates, no real inference, approval denied');
+          NODE
+      - name: M3b - Verify resumability with mock checkpoint
+        run: |
+          node tools/recipe-visuals/groq-reasoner.cjs --input /tmp/mealup-visual-director/visual-briefs.v1.json --out /tmp/mealup-groq-reasoner/ --mock --max 1
+          node -e "const s=require('/tmp/mealup-groq-reasoner/reasoner-state.v1.json'); if(Object.keys(s.records).length!==3)process.exit(1);console.log('PASS M3b resume 3 unique IDs')"
+      - name: Store M3b dry-run proof (no secret and no calls)
+        uses: actions/upload-artifact@v4
+        with:
+          name: mealup-groq-reasoner-m3b-mock
+          path: /tmp/mealup-groq-reasoner/reasoner-state.v1.json
+          if-no-files-found: error
+          retention-days: 14
