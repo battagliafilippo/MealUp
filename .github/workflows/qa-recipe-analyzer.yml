@@ -9,6 +9,20 @@ on:
       - assets/family-fo/manifest.json
       - G8/composition-matrix.json
   workflow_dispatch:
+    inputs:
+      groq_live_pilot:
+        description: 'Eseguire una sola chiamata Groq LIVE sul piano Free verificato?'
+        required: true
+        default: 'NO'
+        type: choice
+        options:
+          - 'NO'
+          - 'YES'
+      recipe_id:
+        description: 'ID della singola ricetta pilota'
+        required: true
+        default: 'r2'
+        type: string
 
 permissions:
   contents: read
@@ -116,5 +130,39 @@ jobs:
         with:
           name: mealup-groq-reasoner-m3b-mock
           path: /tmp/mealup-groq-reasoner/reasoner-state.v1.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: M3b - Groq LIVE single-recipe pilot (manual opt-in only)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.groq_live_pilot == 'YES' }}
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MEALUP_GROQ_FREE_TIER_CONFIRMED: 'YES'
+        run: |
+          node tools/recipe-visuals/groq-reasoner.cjs \
+            --input /tmp/mealup-visual-director/visual-briefs.v1.json \
+            --out /tmp/mealup-groq-live-pilot/ \
+            --live --max 1 --recipe-id "${{ inputs.recipe_id }}"
+      - name: M3b - Verify LIVE pilot remains unapproved
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.groq_live_pilot == 'YES' }}
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');
+          const assert=require('node:assert/strict');
+          const p='/tmp/mealup-groq-live-pilot/reasoner-state.v1.json';
+          const obj=JSON.parse(fs.readFileSync(p,'utf8'));
+          assert.equal(Object.keys(obj.records).length,1);
+          const item=Object.values(obj.records)[0];
+          assert.equal(item.qaApproved,false);
+          assert.equal(item.safeToGenerate,false);
+          assert.equal(item.imageStatus,'PENDING');
+          assert.equal(item.imageUrl,null);
+          console.log('PASS M3b LIVE pilot: 1 proposal, human QA required, 0 images');
+          NODE
+      - name: Store M3b LIVE pilot for human review
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.groq_live_pilot == 'YES' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: mealup-groq-live-pilot-${{ inputs.recipe_id }}
+          path: /tmp/mealup-groq-live-pilot/reasoner-state.v1.json
           if-no-files-found: error
           retention-days: 14

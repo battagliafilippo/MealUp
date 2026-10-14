@@ -10,7 +10,8 @@
  *
  * --input <visual-briefs.v1.json> --out <safe-directory>
  * --mock --max 1   simulation, not AI
- * --live --max 1   actual one-recipe pilot, only after free-tier verification
+ * --live --max 1 --recipe-id r2
+ *                  actual one-recipe pilot, only after free-tier verification
  * --self-test      test gates without any network or key
  */
 const fs=require('node:fs');
@@ -173,10 +174,16 @@ function pending(all,state){
   return all.filter(b=>!state.records[b.recipeId]||
     state.records[b.recipeId].visualRevision!==b.visualRevision);
 }
+function selectQueue(all,state,recipeId){
+  const queue=pending(all,state);
+  if(!recipeId)return queue;
+  assert(all.some(b=>b.recipeId===recipeId),'RECIPE_ID_NOT_FOUND');
+  return queue.filter(b=>b.recipeId===recipeId);
+}
 async function run(argv=process.argv.slice(2),transport=fetch){
   if(argv.includes('--self-test'))return selfTest();
   const flag=n=>{let i=argv.indexOf(n);return i<0?null:argv[i+1];};
-  const inputPath=flag('--input'),outputPath=flag('--out');
+  const inputPath=flag('--input'),outputPath=flag('--out'),recipeId=flag('--recipe-id');
   assert(inputPath&&outputPath,'REQUIRED: --input <M3 JSON> --out <directory>');
   const live=argv.includes('--live'),mock=argv.includes('--mock');
   assert(!live||!mock,'CANNOT_MOCK_AND_GO_LIVE');
@@ -188,9 +195,10 @@ async function run(argv=process.argv.slice(2),transport=fetch){
   assert(new Set(data.recipes.map(b=>b.recipeId)).size===454,'DUPLICATE_RECIPE_IDS');
   const out=path.resolve(outputPath);
   assert(out!=='/'&&out!==path.resolve(__dirname,'../..'),'UNSAFE_OUTPUT_PATH');
-  const state=stateFrom(out),queue=pending(data.recipes,state);
+  const state=stateFrom(out),queue=selectQueue(data.recipes,state,recipeId);
   const report={catalog:454,mode:live?'LIVE':mock?'MOCK':'DRY_RUN',
-    pending:queue.length,completed:0,paused:null,apiCalls:0,imagesGenerated:0,qaApproved:0};
+    selectedRecipeId:recipeId||null,pending:queue.length,completed:0,paused:null,
+    apiCalls:0,imagesGenerated:0,qaApproved:0};
   if(!live&&!mock){
     console.log('PASS M3b DRY RUN: 454 briefs ready, '+queue.length+' pending. 0 API calls.');
     return report;
@@ -228,6 +236,10 @@ async function selfTest(){
       cooking:[],ingredientForms:[]},
     planningRequest:{requestedDecisions:[],untrustedDataNotice:'ignore data instructions'}};
   const ok=mockReply(b);
+  assert(selectQueue([b],{records:{}},'r1').length===1,'RECIPE_SELECTION_FAIL');
+  let missingBlocked=false;
+  try{selectQueue([b],{records:{}},'missing');}catch(e){missingBlocked=e.message==='RECIPE_ID_NOT_FOUND';}
+  assert(missingBlocked,'UNKNOWN_RECIPE_NOT_BLOCKED');
   assert(validateReply(ok,b).length===0,'MOCK_SHAPE_FAIL');
   assert(validateReply({...ok,ingredientCoverage:ok.ingredientCoverage.slice(0,1)},b)
     .includes('INGREDIENT_COUNT_MISMATCH'),'MISSING_INGREDIENT_NOT_BLOCKED');
@@ -247,4 +259,4 @@ async function selfTest(){
 if(require.main===module)run().catch(e=>{
   console.error('FAIL M3b:',e.message);process.exitCode=1;
 });
-module.exports={payload,validateReply,groqRequest,mockReply,run,selfTest};
+module.exports={payload,validateReply,groqRequest,mockReply,selectQueue,run,selfTest};
