@@ -132,31 +132,18 @@ jobs:
           path: /tmp/mealup-groq-reasoner/reasoner-state.v1.json
           if-no-files-found: error
           retention-days: 14
-      - name: M3b - Groq LIVE single-recipe pilot (manual opt-in or one-time guarded push)
-        if: >-
-          ${{
-            (github.event_name == 'workflow_dispatch' && inputs.groq_live_pilot == 'YES') ||
-            (github.event_name == 'push' &&
-             github.ref == 'refs/heads/experiment/recipe-visual-agents' &&
-             github.event.head_commit.message == 'chore(groq): rerun guarded live pilot r2')
-          }}
+      - name: M3b - Groq LIVE single-recipe pilot (manual opt-in only)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.groq_live_pilot == 'YES' }}
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           MEALUP_GROQ_FREE_TIER_CONFIRMED: 'YES'
-          MEALUP_GROQ_PILOT_RECIPE_ID: ${{ github.event_name == 'workflow_dispatch' && inputs.recipe_id || 'r2' }}
         run: |
           node tools/recipe-visuals/groq-reasoner.cjs \
             --input /tmp/mealup-visual-director/visual-briefs.v1.json \
             --out /tmp/mealup-groq-live-pilot/ \
-            --live --max 1 --recipe-id "$MEALUP_GROQ_PILOT_RECIPE_ID"
+            --live --max 1 --recipe-id "${{ inputs.recipe_id }}"
       - name: M3b - Verify LIVE pilot remains unapproved
-        if: >-
-          ${{
-            (github.event_name == 'workflow_dispatch' && inputs.groq_live_pilot == 'YES') ||
-            (github.event_name == 'push' &&
-             github.ref == 'refs/heads/experiment/recipe-visual-agents' &&
-             github.event.head_commit.message == 'chore(groq): rerun guarded live pilot r2')
-          }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.groq_live_pilot == 'YES' }}
         run: |
           node <<'NODE'
           const fs=require('node:fs');
@@ -172,16 +159,10 @@ jobs:
           console.log('PASS M3b LIVE pilot: 1 proposal, human QA required, 0 images');
           NODE
       - name: Store M3b LIVE pilot for human review
-        if: >-
-          ${{
-            (github.event_name == 'workflow_dispatch' && inputs.groq_live_pilot == 'YES') ||
-            (github.event_name == 'push' &&
-             github.ref == 'refs/heads/experiment/recipe-visual-agents' &&
-             github.event.head_commit.message == 'chore(groq): rerun guarded live pilot r2')
-          }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.groq_live_pilot == 'YES' }}
         uses: actions/upload-artifact@v4
         with:
-          name: mealup-groq-live-pilot-${{ github.event_name == 'workflow_dispatch' && inputs.recipe_id || 'r2' }}
+          name: mealup-groq-live-pilot-${{ inputs.recipe_id }}
           path: /tmp/mealup-groq-live-pilot/reasoner-state.v1.json
           if-no-files-found: error
           retention-days: 14
