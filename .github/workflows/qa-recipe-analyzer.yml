@@ -1,0 +1,53 @@
+name: QA - MealUp Recipe Analyzer (M2)
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - tools/recipe-visuals/**
+      - .github/workflows/qa-recipe-analyzer.yml
+      - assets/family-fo/manifest.json
+      - G8/composition-matrix.json
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install local QA dependency (not in PWA)
+        run: npm install --no-save --no-package-lock jsdom
+      - name: Test analyzer safeguards
+        run: node tools/recipe-visuals/recipe-analyzer.cjs --self-test
+      - name: Analyze all actual MealUp recipes
+        run: node tools/recipe-visuals/recipe-analyzer.cjs --out /tmp/mealup-visual-analysis
+      - name: Verify outputs are valid and no recipe lost
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');
+          const assert=require('node:assert/strict');
+          const dir='/tmp/mealup-visual-analysis/';
+          const report=JSON.parse(fs.readFileSync(dir+'analysis-report.v1.json'));
+          const doc=JSON.parse(fs.readFileSync(dir+'recipe-specs.v1.json'));
+          assert.equal(report.result,'PASS');
+          assert.equal(report.appRecipes,454);
+          assert.equal(report.uniqueIds,454);
+          assert.equal(report.familyMapped,454);
+          assert.equal(doc.recipes.length,454);
+          assert.ok(doc.recipes.every(r=>r.imageStatus==='PENDING'&&r.qaApproved===false&&r.imageUrl===null));
+          console.log('PASS M2 454/454 verified; no image generated, 0 API calls');
+          NODE
+      - name: Save structured result for review (no deploy or commit)
+        uses: actions/upload-artifact@v4
+        with:
+          name: mealup-recipe-analyzer-m2
+          path: /tmp/mealup-visual-analysis/
+          if-no-files-found: error
+          retention-days: 30
