@@ -13,8 +13,8 @@ const { app, test, eq, vero, bilancio } = require('./suite.js');
     const a = await app();
     const labels = [...a.d.querySelectorAll('.mealup-tab-bar .tab-item > span:not(.icon)')].map(x => x.textContent.trim());
     eq(labels.join('|'), 'Home|Ricette|Spesa|Scorte|Profilo', 'ordine navigazione');
-    vero(a.d.querySelector('.ricette-icon'), 'manca l’icona Ricette canonica');
-    vero(a.d.querySelector('.scorte-icon'), 'manca l’icona Scorte canonica');
+    vero(a.d.querySelector('.mealup-tab-bar .icon-recipes'), 'manca l’icona Ricette canonica');
+    vero(a.d.querySelector('.mealup-tab-bar .icon-stocks'), 'manca l’icona Scorte canonica');
     for (const route of ['view-home','view-search','view-spesa','view-fridge','view-profile']) {
       a.tab(route);
       vero(a.d.getElementById(route).classList.contains('active'), 'route non attiva: ' + route);
