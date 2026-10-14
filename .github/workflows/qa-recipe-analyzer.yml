@@ -68,7 +68,7 @@ jobs:
       - name: M3 - Verify Visual Director protections
         run: node tools/recipe-visuals/visual-director.cjs --self-test
       - name: M3 - Build all full-dish visual briefs without AI credits
-        run: node tools/recipe-visuals/visual-director.cjs --input /tmp/mealup-visual-analysis/recipe-specs.v1.json --out /tmp/mealup-visual-director/
+        run: node tools/recipe-visuals/visual-director.cjs --input /tmp/mealup-visual-analysis/recipe-specs.v1.json --composition G8/composition-matrix.json --out /tmp/mealup-visual-director/
       - name: M3 - Gate all 454 unapproved briefs
         run: |
           node <<'NODE'
@@ -83,9 +83,13 @@ jobs:
           assert.equal(report.explicitEvidenceNeedsValidation, 102);
           assert.equal(report.noExplicitEvidenceNeedsInference, 352);
           assert.equal(report.safeToGenerate, 0);
+          assert.equal(report.vesselMapped, 454);
           assert.equal(report.imagesGenerated, 0);
           assert.equal(report.apiCalls, 0);
           assert.equal(doc.recipes.length, 454);
+          assert.ok(doc.recipes.every(r => r.vessel && r.vessel.id &&
+            r.planningRequest.inputFacts.vesselId === r.vessel.id));
+          assert.equal(doc.recipes.find(r => r.recipeId === 'r2').vessel.id, 'VESSEL_BOWL');
           assert.ok(doc.recipes.every(r => !r.safeToGenerate &&
             r.imageStatus === 'PENDING' && r.imageUrl === null && r.approvalStatus === 'NOT_REVIEWED'));
           console.log('PASS M3: 454 full-dish planning briefs; 352 inference cases queued; 0 hallucinated placements approved');
@@ -152,6 +156,14 @@ jobs:
           const obj=JSON.parse(fs.readFileSync(p,'utf8'));
           assert.equal(Object.keys(obj.records).length,1);
           const item=Object.values(obj.records)[0];
+          assert.equal(item.recipeId,'r2');
+          assert.equal(item.candidate.vesselId,'VESSEL_BOWL');
+          assert.ok(!/trasparent|transparent/i.test([
+            item.candidate.vesselDescription,
+            item.candidate.dishPortraitDescription,
+            item.candidate.finalImagePrompt
+          ].join(' ')));
+          assert.ok(!/\b(gauge|lancetta|kcal|calorie|cta)\b/i.test(item.candidate.finalImagePrompt));
           assert.equal(item.qaApproved,false);
           assert.equal(item.safeToGenerate,false);
           assert.equal(item.imageStatus,'PENDING');

@@ -22,7 +22,7 @@ const ENDPOINT='https://api.groq.com/openai/v1/chat/completions';
 const ROLES=['base','topping','mixed','filling','side','integrated','uncertain'];
 const SOURCES=['EXPLICIT','INFERRED','UNRESOLVED'];
 function assert(ok,msg){if(!ok)throw new Error(msg);}
-function schema(){
+function schema(brief){
   const strArray={type:'array',items:{type:'string'}};
   const fields={
     ingredientPosition:{type:'integer',minimum:0},
@@ -35,6 +35,8 @@ function schema(){
   const fields2={
     recipeId:{type:'string'},
     visualRevision:{type:'string'},
+    vesselId:{type:'string',enum:[brief.vessel.id]},
+    vesselDescription:{type:'string'},
     dishPortraitDescription:{type:'string'},
     ingredientCoverage:{type:'array',items:{type:'object',properties:fields,
       required:Object.keys(fields),additionalProperties:false}},
@@ -54,6 +56,9 @@ const RULES=[
   'Include each input ingredient by index exactly once with food form, role, position and evidence.',
   'If ambiguous, use UNRESOLVED and write what needs human inspection.',
   'No invented garnish, no utensils, background props, brand labels or nutritional text.',
+  'This is a RECIPE Food Portrait, not an isolated family FO. Preserve the exact canonical vesselId supplied by the trusted composition matrix.',
+  'Describe a recipe-specific MealUp Toys 3D vessel. Never invent a generic or transparent vessel. VESSEL_FREE means no additional container.',
+  'Do not bake gauge, needle, kcal, labels or other UI into the food portrait; those remain separate dynamic UI layers.',
   'Write a candidate image prompt but do not claim approval. needsHumanReview MUST be true.',
   'Return only JSON following the schema.'
 ].join(' ');
@@ -64,6 +69,8 @@ function payload(brief){
       contract:'COMPLETE_DISH_VISUAL_REASONING',
       recipeId:brief.recipeId,visualRevision:brief.visualRevision,
       title:brief.title,family:brief.familyId,
+      compositionId:brief.compositionId,
+      canonicalVessel:brief.vessel,
       ingredients:brief.primaryIngredients,steps:brief.steps,
       explicitEvidence:brief.evidence.explicitPlating,
       cookingEvidence:brief.evidence.cooking,
@@ -72,7 +79,7 @@ function payload(brief){
       inputSafety:brief.planningRequest.untrustedDataNotice,
     })}
   ],response_format:{type:'json_schema',
-    json_schema:{name:'mealup_dish_interpretation',strict:true,schema:schema()}},
+    json_schema:{name:'mealup_dish_interpretation',strict:true,schema:schema(brief)}},
     temperature:0.1,max_completion_tokens:1900,stream:false};
 }
 function validateReply(r,b){
@@ -80,6 +87,9 @@ function validateReply(r,b){
   const issues=[];
   if(r.recipeId!==b.recipeId)issues.push('ID_MISMATCH');
   if(r.visualRevision!==b.visualRevision)issues.push('REVISION_MISMATCH');
+  if(r.vesselId!==b.vessel?.id)issues.push('VESSEL_ID_MISMATCH');
+  if(typeof r.vesselDescription!=='string'||r.vesselDescription.trim().length<10)
+    issues.push('VESSEL_DESCRIPTION_MISSING');
   if(r.needsHumanReview!==true)issues.push('REVIEW_NOT_ENFORCED');
   for(const k of ['dishPortraitDescription','finalImagePrompt'])
     if(typeof r[k]!=='string'||r[k].trim().length<20)issues.push('INVALID_'+k);
@@ -112,12 +122,20 @@ function validateReply(r,b){
       issues.push('INFERENCE_WITHOUT_ASSUMPTION');
   }
   if(seen.size!==b.primaryIngredients.length)issues.push('MISSING_INGREDIENTS');
+  const visualText=[r.vesselDescription,r.dishPortraitDescription,r.finalImagePrompt]
+    .filter(x=>typeof x==='string').join(' ');
+  if(b.vessel?.id!=='VESSEL_GLASS' && /trasparent|transparent/i.test(visualText))
+    issues.push('NON_CANONICAL_TRANSPARENT_VESSEL');
+  if(/\b(gauge|lancetta|kcal|calorie|cta)\b/i.test(r.finalImagePrompt||''))
+    issues.push('UI_BAKED_INTO_IMAGE_PROMPT');
   // Structural validation cannot prove culinary correctness. QA always mandatory.
   return [...new Set(issues)];
 }
 function mockReply(b){
   return {
     recipeId:b.recipeId,visualRevision:b.visualRevision,
+    vesselId:b.vessel.id,
+    vesselDescription:'Mock canonical MealUp Toys 3D vessel, unverified.',
     dishPortraitDescription:'MOCK: full dish illustration unverified, not a culinary inference.',
     ingredientCoverage:b.primaryIngredients.map(x=>({
       ingredientPosition:x.position,culinaryForm:'Mock - unverified',
@@ -231,6 +249,7 @@ async function run(argv=process.argv.slice(2),transport=fetch){
 async function selfTest(){
   const b={recipeId:'r1',visualRevision:'rev-1',sourceHash:'abc',title:'Demo',
     familyId:'CARNE',primaryIngredients:[{position:0,name:'manzo'},{position:1,name:'rucola'}],
+    compositionId:'COMP_r1',vessel:{id:'VESSEL_PLATE',description:'piatto MealUp Toys 3D',source:'G8_CANONICAL_COMPOSITION_MATRIX',requiredInRecipePortrait:true},
     steps:['Disponi la carne sul piatto','Aggiungi la rucola'],
     evidence:{explicitPlating:[{stepIndex:0,text:'Disponi la carne'}],
       cooking:[],ingredientForms:[]},
@@ -241,6 +260,12 @@ async function selfTest(){
   try{selectQueue([b],{records:{}},'missing');}catch(e){missingBlocked=e.message==='RECIPE_ID_NOT_FOUND';}
   assert(missingBlocked,'UNKNOWN_RECIPE_NOT_BLOCKED');
   assert(validateReply(ok,b).length===0,'MOCK_SHAPE_FAIL');
+  assert(validateReply({...ok,vesselId:'VESSEL_BOWL'},b).includes('VESSEL_ID_MISMATCH'),
+    'WRONG_VESSEL_NOT_BLOCKED');
+  assert(validateReply({...ok,vesselDescription:'ciotola trasparente'},b)
+    .includes('NON_CANONICAL_TRANSPARENT_VESSEL'),'TRANSPARENT_VESSEL_NOT_BLOCKED');
+  assert(validateReply({...ok,finalImagePrompt:'Piatto con gauge 480 kcal'},b)
+    .includes('UI_BAKED_INTO_IMAGE_PROMPT'),'BAKED_UI_NOT_BLOCKED');
   assert(validateReply({...ok,ingredientCoverage:ok.ingredientCoverage.slice(0,1)},b)
     .includes('INGREDIENT_COUNT_MISMATCH'),'MISSING_INGREDIENT_NOT_BLOCKED');
   const bad={...ok,ingredientCoverage:ok.ingredientCoverage.map(x=>({
