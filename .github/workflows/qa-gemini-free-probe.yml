@@ -15,7 +15,8 @@ permissions:
 jobs:
   gemini-free-access:
     name: Check Gemini free-only account access
-    if: ${{ github.event_name == 'push' && github.event.head_commit.message == 'ci(ai-office): one-shot Gemini 3.8 Flash Free-tier probe' }}
+    if: >-
+      ${{ github.event_name == 'push' && github.event.head_commit.message == 'ci(ai-office): one-shot Gemini 3.8 Flash Free-tier probe' }}
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
