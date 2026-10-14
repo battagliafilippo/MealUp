@@ -43,7 +43,7 @@ function createRouter() {
     if (tasks.has(input.id)) throw new Error('DUPLICATE_TASK_ID');
     // The Director must supply a verified, explicit domain; no pretend NLP or
     // keyword/prompt-injection based delegation in this prototype.
-    const owner = OWNERS[input.domain];
+    const owner = Object.hasOwn(OWNERS, input.domain) ? OWNERS[input.domain] : null;
     if (!owner) throw new Error('UNCLASSIFIED_DOMAIN');
     const task = {
       id: input.id, request: input.request, scope: input.scope,
