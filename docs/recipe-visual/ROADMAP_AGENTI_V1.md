@@ -30,6 +30,18 @@ Per ciascuna ricetta MealUp esiste una rappresentazione unica del piatto COMPLET
 - [ ] M7. Batch progressivo sul catalogo completo, dedup, resume, report QA automatico + eccezioni per review umana; nessuna rigenerazione degli asset approvati senza motivo.
 - [ ] M8. Nuove ricette: coda asincrona sicura, controllo della privacy, trigger post-salvataggio, soluzione gratuita sostenibile da validare prima di attivarla sugli utenti.
 
+## Agente trasversale approvato — MealUp Idea Validator (2026-10-14)
+
+**Decisione utente: APPROVATO e inserito UFFICIALMENTE nella roadmap di sviluppo MealUp.**
+Contratto normativo di progetto: [MealUp Idea Validator v1.0](../design/mealup-idea-validator-agent-v1.md).
+
+- **Scopo:** esaminare ogni nuova proposta di funzione, microanimazione, interazione o redesign; verificare compatibilita' con codice reale, Costituzione AI v1.9, MealUp Master, FROZEN e QA; proporre sempre una soluzione coerente con l'intento dell'utente se quella letterale e' impraticabile.
+- **Esiti obbligatori:** FATTIBILE / FATTIBILE CON MODIFICHE / ALTERNATIVA EQUIVALENTE / NON FATTIBILE NELLE CONDIZIONI ATTUALI; se la prova e' insufficiente, dichiarare VERIFICA NECESSARIA. Mai promettere certezza al 100% senza test e mai confondere controlli statici con prove browser.
+- **Regola di sicurezza:** solo valutazione fino all'approvazione specifica dell'utente. No auto-implementazione, no modifiche ai FROZEN, no deploy, nessun agente permanente attivato in background.
+- **Collocazione:** agente di sviluppo TRASVERSALE per l'intero progetto (NON componente runtime della PWA, NON sub-agente per immagini). Potra' essere consultato ogni volta che l'utente propone un'idea; un trigger automatico indipendente richiedera' futura implementazione autorizzata.
+- **Stato:** [x] mandato/contratto approvati e documentati; [ ] implementazione tecnica, automazione trigger, test con idee campione. NON dichiararlo installato o funzionante finche' i test tecnici non lo dimostrano.
+- **Priorita':** backlog permanente della piattaforma MealUp, intervento in un micro-step separato DOPO il percorso critico delle immagini complete, salvo diversa priorita' esplicita dell'utente. La pipeline M2–M8 continua senza deviazioni.
+
 ## Regola anti-deriva
 Ogni intervento deve riportare: micro-step corrente, risultato verificato, impatto sui FROZEN, eventuale blocco, e **un solo** prossimo passo.
 Difetti già presenti o estranei alle immagini: registrare in backlog, verificare se bloccanti e NON intraprendere fix collaterali in questo filone. Non aggiungere nuovi tester, branch, design, servizi, API o workflow senza necessità esplicita.
