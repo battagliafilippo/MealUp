@@ -1,6 +1,6 @@
 name: Gate - Gemini Free API access (one-shot)
 
-# One safe, fixed low-token request. Runs ONLY on the commit below in the lab.
+# Authorized second one-shot check after the user corrected GEMINI_API_KEY. No further retries.
 # No auto-repeat on future pushes, PRs, or scheduled events.
 on:
   push:
