@@ -11,7 +11,7 @@ const { app, test, eq, vero, bilancio } = require('./suite.js');
 
   await test('la navigazione globale conserva ordine e route', async () => {
     const a = await app();
-    const labels = [...a.d.querySelectorAll('.mealup-tab-bar .tab-item span')].map(x => x.textContent.trim());
+    const labels = [...a.d.querySelectorAll('.mealup-tab-bar .tab-item > span:not(.icon)')].map(x => x.textContent.trim());
     eq(labels.join('|'), 'Home|Ricette|Spesa|Scorte|Profilo', 'ordine navigazione');
     vero(a.d.querySelector('.ricette-icon'), 'manca l’icona Ricette canonica');
     vero(a.d.querySelector('.scorte-icon'), 'manca l’icona Scorte canonica');
