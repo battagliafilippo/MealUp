@@ -51,6 +51,8 @@ test('C: Food consults Design, rendering blocked until CEO and free quota are ve
 test('Unknown domains, missing baseline and stale constitution fail closed', () => {
   const r = createRouter();
   assert.throws(() => r.intake(brief('bad', 'legal', 'new task')), /UNCLASSIFIED_DOMAIN/);
+  assert.throws(() => r.intake(brief('bad', '__proto__', 'new task')), /UNCLASSIFIED_DOMAIN/);
+  assert.throws(() => r.intake(brief('bad', 'constructor', 'new task')), /UNCLASSIFIED_DOMAIN/);
   assert.throws(() => r.intake({ ...brief('bad', 'design', 'new task'), baselineId: '' }), /INCOMPLETE_BRIEF/);
   assert.throws(() => r.intake({ ...brief('bad', 'design', 'new task'), constitutionVersion: '1.8' }), /STALE_CONTRACT/);
   assert.throws(() => r.intake({ ...brief('bad', 'design', 'new task'), officeVersion: '1.2' }), /STALE_CONTRACT/);
