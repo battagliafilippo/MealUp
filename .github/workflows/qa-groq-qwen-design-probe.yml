@@ -1,0 +1,106 @@
+name: Gate - Qwen Design vision probe (one-shot)
+
+# Authorized by CEO on 2026-10-14. Lab-only. Runs for exactly this commit message.
+# No UI/app writes, no deploy, no retries, no schedule, no paid-tier upgrade.
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - '.github/workflows/qa-groq-qwen-design-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  qwen-vision-free:
+    name: Qwen 3.8 27B - single visual probe
+    if: >-
+      ${{ github.event_name == 'push' && github.event.head_commit.message == 'ci(ai-office): one-shot Qwen 3.8 Design vision probe' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Checkout test asset only
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: One Groq API vision request
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MEALUP_FREE_ONLY: 'YES'
+        run: |
+          node <<'NODE'
+          'use strict';
+          const fs = require('node:fs');
+          (async () => {
+            const key = process.env.GROQ_API_KEY;
+            if (process.env.MEALUP_FREE_ONLY !== 'YES' || !key) {
+              console.error('RESULT=BLOCKED FREE_ONLY_GATE_OR_SECRET_MISSING');
+              process.exitCode = 1;
+              return;
+            }
+            const img = fs.readFileSync('assets/family-fo/pasta.webp');
+            if (img.length > 250000 || img.length < 1000) {
+              console.error('RESULT=BLOCKED ASSET_SIZE');
+              process.exitCode = 1;
+              return;
+            }
+            const body = {
+              model: 'qwen/qwen3.8-27b',
+              reasoning_effort: 'none',
+              messages: [{
+                role: 'system',
+                content: 'Sei candidato agente Design MealUp. Rispondi in italiano. Distingui osservazioni visive da ipotesi. Vietato dichiarare FROZEN verificati, conformita completa o modifiche approvate. Nessuna azione operativa.'
+              }, {
+                role: 'user',
+                content: [
+                  { type: 'text', text: 'Analizza il Food Object di MealUp mostrato: 1) [OSSERVAZIONE] descrivi solo gli elementi visibili; 2) [FAMIGLIA] indica la famiglia alimentare; 3) [RISCHIO] un possibile rischio visivo da verificare su card senza affermare che sia presente; 4) [PROSSIMA VERIFICA] un test concreto sulla UI. Non inventare vessel, regole FROZEN mancanti o misure. Max 130 parole.' },
+                  { type: 'image_url', image_url: { url: 'data:image/webp;base64,' + img.toString('base64') } }
+                ]
+              }],
+              temperature: 0.2,
+              max_completion_tokens: 370,
+              stream: false
+            };
+            let response;
+            try {
+              response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                  'Authorization': 'Bearer ' + key,
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body),
+                signal: AbortSignal.timeout(25000)
+              });
+            } catch (_error) {
+              console.error('RESULT=ERROR NETWORK_OR_TIMEOUT');
+              process.exitCode = 1;
+              return;
+            }
+            let result = {};
+            try { result = await response.json(); } catch (_) { /* do not echo raw remote response */ }
+            if (!response.ok) {
+              const name = result?.error?.code;
+              const safeCode = typeof name === 'string' && /^[a-zA-Z_0-9-]+$/.test(name) ? name : 'UNKNOWN';
+              console.error('RESULT=ERROR HTTP_' + response.status + ' CODE_' + safeCode);
+              process.exitCode = 1;
+              return;
+            }
+            const answer = result?.choices?.[0]?.message?.content;
+            if (typeof answer !== 'string' || answer.trim().length === 0) {
+              console.error('RESULT=INCONCLUSIVE HTTP_200 EMPTY_OUTPUT');
+              process.exitCode = 1;
+              return;
+            }
+            console.log('RESULT=PASS API_ACCESS_AND_VISION_RESPONSE MODEL=qwen/qwen3.8-27b');
+            const safeText = answer.slice(0, 1350).replace(/(?:gsk_[A-Za-z0-9_-]{12,}|AIza[A-Za-z0-9_-]{12,})/g, '[REDACTED]');
+            console.log('DESIGN_PROBE_BEGIN\n' + safeText + '\nDESIGN_PROBE_END');
+            console.log('TOKEN_USAGE_TOTAL=' + (Number.isInteger(result?.usage?.total_tokens) ? result.usage.total_tokens : 'UNKNOWN'));
+            console.log('WARNING=This is a candidate result, not FROZEN certification or a production agent.');
+          })();
+          NODE
