@@ -42,4 +42,4 @@ jobs:
           test -f tools/ai-office/router.test.cjs
           node --version
       - name: Execute router tests (zero external dependencies)
-        run: node --test tools/ai-office/router.test.cjs
+        run: node --test tools/ai-office/*.test.cjs
