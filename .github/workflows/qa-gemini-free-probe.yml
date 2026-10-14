@@ -1,0 +1,79 @@
+name: Gate - Gemini Free API access (one-shot)
+
+# One safe, fixed low-token request. Runs ONLY on the commit below in the lab.
+# No auto-repeat on future pushes, PRs, or scheduled events.
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - '.github/workflows/qa-gemini-free-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  gemini-free-access:
+    name: Check Gemini free-only account access
+    if: ${{ github.event_name == 'push' && github.event.head_commit.message == 'ci(ai-office): one-shot Gemini 3.8 Flash Free-tier probe' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: One private request, no retries or tool use
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # User's AI Studio screenshot showed "Configure billing", not an active paid tier.
+          MEALUP_PROJECT_UNBILLED: 'YES'
+        run: |
+          node <<'NODE'
+          'use strict';
+          (async () => {
+            const key = process.env.GEMINI_API_KEY;
+            if (process.env.MEALUP_PROJECT_UNBILLED !== 'YES') {
+              console.error('BLOCKED: free-only account gate missing');
+              process.exitCode = 1;
+              return;
+            }
+            if (!key) {
+              console.error('BLOCKED: GEMINI_API_KEY secret missing');
+              process.exitCode = 1;
+              return;
+            }
+            // Exactly one request; no retry, no grounding, no tools, no generated images.
+            const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent';
+            const body = { contents: [{ role: 'user', parts: [{ text: 'Rispondi solo con OK.' }] }],
+              generationConfig: { maxOutputTokens: 32, temperature: 0 } };
+            let response;
+            try {
+              response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
+                body: JSON.stringify(body),
+                signal: AbortSignal.timeout(15000)
+              });
+            } catch (error) {
+              console.error('RESULT=BLOCKED NETWORK_OR_TIMEOUT');
+              process.exitCode = 1;
+              return;
+            }
+            let result = {};
+            try { result = await response.json(); } catch (_) { /* no unsafe response printing */ }
+            if (!response.ok) {
+              const status = result && result.error && result.error.status;
+              const safeStatus = typeof status === 'string' && /^[A-Z_]+$/.test(status) ? status : 'UNKNOWN';
+              console.error('RESULT=BLOCKED HTTP_' + response.status + ' ' + safeStatus);
+              process.exitCode = 1;
+              return;
+            }
+            if (!Array.isArray(result.candidates) || result.candidates.length === 0) {
+              console.error('RESULT=INCONCLUSIVE HTTP_200 NO_CANDIDATE');
+              process.exitCode = 1;
+              return;
+            }
+            console.log('RESULT=PASS HTTP_200 Gemini 3.8 Flash accessible; no billing changed; no design benchmark');
+          })();
+          NODE
