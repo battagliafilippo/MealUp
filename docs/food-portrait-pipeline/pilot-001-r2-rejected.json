@@ -1,0 +1,70 @@
+{
+  "schema": "mealup-food-portrait-pilot-attempt-v1",
+  "attemptId": "FPP-R2-IMAGEGEN-20261015-001",
+  "ownerSelectedRecipeId": "r2",
+  "ownerStyleReferenceId": "STYLE_OWNER_POKE_20261015",
+  "generatedCandidate": {
+    "source": "CHATGPT_IMAGES_INTERACTIVE",
+    "originalLibraryPath": "/MealUp_FoodPortrait_Lab_20261015/Pilot_001/REJECTED_R2_MultiPanel.png",
+    "sha256": "d622c345ded16fd6b4a0f0097d641b4421d1d3ed8e58563ecbf82b75e9c4c754",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 2527985,
+    "status": "QUARANTINED_NOT_ASSET"
+  },
+  "expected": {
+    "recipeId": "r2",
+    "recipeName": "Poke bowl tonno e avocado",
+    "vesselId": "VESSEL_BOWL",
+    "singleImage": true,
+    "foodIngredients": [
+      "tonno",
+      "riso",
+      "avocado",
+      "salsa di soia",
+      "sesamo"
+    ],
+    "uiGaugeBakedIntoAsset": false
+  },
+  "visualFindings": [
+    "Image is a six-card infographic, not the requested single prepared dish",
+    "Contains several unrelated dishes beyond r2, including pasta and desserts",
+    "Calorie gauges, headings, tags and other UI were baked into the generated image",
+    "Output is not an isolated food portrait",
+    "Not 1:1 aspect ratio; exceeds staging target byte budget"
+  ],
+  "independentPixelMeasurement": {
+    "inspectedUsing": "Pillow static pixel inspection",
+    "expectedSquare": true,
+    "actualSquare": false,
+    "actualFormat": "PNG",
+    "channelMode": "RGBA",
+    "alphaChannelRange": [
+      0,
+      254
+    ],
+    "transparencyClaimNotVerified": true
+  },
+  "qa": {
+    "automaticAcceptanceAllowed": false,
+    "technical": "FAIL",
+    "culinary": "FAIL",
+    "style": "NOT_SCORED_DUE_TO_FATAL_ERRORS",
+    "independentSecondVisualModel": "NOT_USED",
+    "final": "FAIL_QUARANTINED"
+  },
+  "rootCause": "UNKNOWN: generation tool produced a board matching broader conversation context rather than isolated recipe request",
+  "prevention": "Do not release a combined pilot-pack as an image prompt. Create one per-recipe generation job and block multi-panel images, baked UI and unexpected recipe identities by independent QA.",
+  "futureExceptionHandling": {
+    "reviewOwner": "Visual Production / Independent QA",
+    "retryLimitBeforeDiagnosis": 0,
+    "retryAuthorized": false,
+    "nextAction": "Qualify narrow per-recipe generator controls or select another actually supported engine with zero additional charge"
+  },
+  "history": {
+    "generated20261015": true,
+    "reportStored20261015": true,
+    "assetInPwa": false,
+    "anyMasterModified": false
+  }
+}
