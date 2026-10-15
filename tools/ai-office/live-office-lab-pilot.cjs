@@ -13,6 +13,8 @@ const SCRIPTS=Object.freeze({
   MEALUP_QA_REGRESSION_GATE:'tools/ai-office/skills/lab-independent-qa.cjs'
 });
 function runTask(roleId,capability,skillId){
+  if(process.env.MEALUP_LAB_EXECUTE!=='YES'||process.env.GITHUB_REF_NAME!==LAB)
+    return {roleId,status:'BLOCKED_LAB_EXECUTION_GATES'};
   const task={id:'MEALUP_LAB_'+roleId,agentId:'LAB_'+roleId,
     roleId,scope:'LAB_READ_ONLY',frozenContextVerified:true,
     capabilities:[capability]};
