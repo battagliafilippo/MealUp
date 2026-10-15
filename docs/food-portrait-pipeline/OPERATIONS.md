@@ -563,3 +563,13 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Stato:** REALIGNMENT IMPLEMENTED / LOCAL QA VERIFIED. Nessun avanzamento al lotto 001 elemento 2.
 
 **Prossimo micro-step necessario:** pubblicare il branch isolato per ottenere il checkpoint CI remoto. Una decisione separata resta necessaria per il freeze di v10 o per qualunque futuro ciclo di generazione.
+
+### Remote verification 2026-10-15
+
+- Commit verificato: `6c67c5e`, branch `experiment/food-portrait-pipeline-20261015`.
+- Workflow: https://github.com/battagliafilippo/MealUp/actions/runs/38790711232.
+- Job `preproduction-specs`: **SUCCESS**. Passano 454 recipe specs con kcal, propagazione M2/M3/Portrait, routing AI Office, request singola con gauge FROZEN, calibrazione v10, checkpoint persistente e blocco `do01`.
+- Job `contract-baseline`: **FAIL** soltanto al passo storico `Verify historical FROZEN vessel image binaries`, coerente con `E08 BLOCKED_HASH_MISMATCH`; i passi precedenti del job sono PASS e l'evidenza è stata salvata.
+- Stato complessivo: **PARTIALLY VERIFIED / KNOWN INDEPENDENT BLOCKER E08**. Nessun requisito di questo riallineamento è fallito; il workflow rimane intenzionalmente non verde finché la sorgente vessel storica non viene recuperata con hash canonico.
+
+**Prossimo micro-step necessario:** recuperare da fonte autorizzata la board vessel storica con SHA-256 canonico per chiudere E08. Restano decisioni separate il freeze di v10 e qualunque nuovo ciclo di generazione; `do01` non è autorizzato.
