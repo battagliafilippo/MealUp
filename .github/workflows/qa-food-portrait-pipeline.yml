@@ -86,7 +86,7 @@ jobs:
         with:
           node-version: '22'
       - name: Install existing M2 test harness only (not PWA runtime)
-        run: npm install --no-save --no-package-lock jsdom
+        run: npm install --no-save --no-package-lock jsdom sharp
       - name: Test contracts with negative cases, including future recipe
         run: |
           node --check tools/food-portrait-pipeline/portrait-contract.cjs
@@ -139,6 +139,24 @@ jobs:
           assert.equal(s.history.length,0);
           assert.ok(Object.values(s.records).every(x=>x.state==='WAITING_REFERENCE'&&x.approval===null));
           console.log('PASS REAL CATALOG QUEUE RESUME: 454 stable records, 0 loss, 0 approval');
+          NODE
+      - name: Test technical image QA with decoded real pixels
+        run: |
+          node --check tools/food-portrait-pipeline/image-technical-qa.cjs
+          node tools/food-portrait-pipeline/image-technical-qa.cjs --self-test
+          node <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict');
+          const {inspect}=require('./tools/food-portrait-pipeline/image-technical-qa.cjs');
+          (async()=>{
+            const p='assets/family-fo/pasta.webp';
+            const r=await inspect(fs.readFileSync(p),{maxBytes:2000000,
+              minVisibleFraction:0.005,maxVisibleFraction:0.97});
+            assert.equal(r.format,'webp');
+            assert.ok(r.width>0&&r.height>0&&r.sha256.length===64);
+            assert.equal(r.quality.acceptanceAllowed,false);
+            console.log('PASS independent image decoder on actual family FO (not a food portrait):',
+              r.width,r.height,r.status);
+          })().catch(e=>{console.error(e);process.exitCode=1;});
           NODE
       - name: Store preproduction evidence (no deploy)
         if: always()
