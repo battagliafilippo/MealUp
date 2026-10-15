@@ -1,0 +1,64 @@
+{
+  "schema": "MEALUP_LAB_APPROVED_INTERNAL_SKILLS_V1",
+  "purpose": "Read-only real execution of safe internal specialist skills on authorized lab checkout; no AI agent promotion",
+  "scope": "LAB_READ_ONLY",
+  "catalog": [
+    {
+      "id": "MEALUP_ENGINEERING_JS_AUDIT",
+      "kind": "INTERNAL",
+      "version": "1.0",
+      "capabilities": [
+        "JS_SYNTAX_AUDIT"
+      ],
+      "roles": [
+        "ENGINEERING"
+      ],
+      "scopes": [
+        "LAB_READ_ONLY"
+      ],
+      "approved": true,
+      "approvalRef": "CEO_20261015_LAB_READONLY_PILOT",
+      "qaVerified": true,
+      "securityReviewed": true,
+      "quotaKind": "VERIFIED_PREEXISTING_FREE_COMPUTE",
+      "extraCostEUR": 0,
+      "quotaVerified": true,
+      "needsNewPrivileges": false,
+      "changesFrozen": false,
+      "qaScore": 90,
+      "internalRunner": "tools/ai-office/skills/lab-javascript-audit.cjs"
+    },
+    {
+      "id": "MEALUP_QA_REGRESSION_GATE",
+      "kind": "INTERNAL",
+      "version": "1.0",
+      "capabilities": [
+        "OFFICE_REGRESSION_QA"
+      ],
+      "roles": [
+        "QA"
+      ],
+      "scopes": [
+        "LAB_READ_ONLY"
+      ],
+      "approved": true,
+      "approvalRef": "CEO_20261015_LAB_READONLY_PILOT",
+      "qaVerified": true,
+      "securityReviewed": true,
+      "quotaKind": "VERIFIED_PREEXISTING_FREE_COMPUTE",
+      "extraCostEUR": 0,
+      "quotaVerified": true,
+      "needsNewPrivileges": false,
+      "changesFrozen": false,
+      "qaScore": 90,
+      "internalRunner": "tools/ai-office/skills/lab-independent-qa.cjs"
+    }
+  ],
+  "qualifications": [
+    "Pilot internal scripts only; no external skill installers",
+    "GitHub Actions free quota is subject to repository plan/limits",
+    "QA verified means local deterministic pre-gates; it does not qualify a model",
+    "Never execute a command from a prompt or registry with arbitrary input",
+    "Director authorizes only engineering and QA read-only lab tasks"
+  ]
+}
