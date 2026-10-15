@@ -158,6 +158,26 @@ jobs:
               r.width,r.height,r.status);
           })().catch(e=>{console.error(e);process.exitCode=1;});
           NODE
+      - name: Validate isolated integration staging and grouped exception gate
+        run: |
+          node --check tools/food-portrait-pipeline/staging-catalog.cjs
+          node tools/food-portrait-pipeline/staging-catalog.cjs --self-test
+          node tools/food-portrait-pipeline/staging-catalog.cjs --specs /tmp/mealup-portrait-staging/portrait-specifications.v1.json --queue /tmp/mealup-portrait-staging/production-queue.v1.json --out /tmp/mealup-portrait-staging
+          node <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict');
+          const dir='/tmp/mealup-portrait-staging/';
+          const cat=JSON.parse(fs.readFileSync(dir+'staging-catalog.v1.json','utf8'));
+          const exc=JSON.parse(fs.readFileSync(dir+'exception-review.v1.json','utf8'));
+          const cov=JSON.parse(fs.readFileSync(dir+'staging-coverage.v1.json','utf8'));
+          assert.equal(cat.total,454);
+          assert.equal(cov.available,0);
+          assert.equal(exc.groupedIssues.length,2);
+          assert.equal(exc.groupedIssues[1].affectedRecipeCount,440);
+          assert.equal(exc.autoAcceptanceEnabled,false);
+          assert.ok(cat.entries.every(x=>x.portraitAsset===null&&
+            x.fallback.doNotReplaceWithFamilyFoodObject===true));
+          console.log('PASS staging: 454 recipe IDs mapped, 2 grouped root causes, no fake portraits');
+          NODE
       - name: Store preproduction evidence (no deploy)
         if: always()
         uses: actions/upload-artifact@v4
