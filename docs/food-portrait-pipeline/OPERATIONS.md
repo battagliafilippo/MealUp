@@ -149,3 +149,37 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - PWA + AI Office: UNCHANGED
 
 **Next atomic step:** recuperare e confrontare una reference Food Portrait/vessel realmente approvata con identità dei byte verificabile oppure ricostruire scientificamente la provenienza della board G5. Non eseguire generazione o approvazione automatica da un riferimento difforme. Continuare i controlli indipendenti che non dipendono dall'asset bloccato.
+
+
+## Checkpoint 2026-10-15 — AI Office ibrido e primo tentativo visivo
+
+**Obiettivo del micro-step:** integrare senza accorpare branch il router AI Office v1.3 con la Food Portrait Pipeline e provare un lotto pilota realmente tracciato.
+
+- Stato branch Food Portrait: preservato su `experiment/food-portrait-pipeline-20261015`; il branch Office `experiment/recipe-visual-agents`, `main`, tester, PWA e Master rimangono inalterati.
+- Mandato integrale tracciato: `docs/food-portrait-pipeline/MANDATE-TRACEABILITY.md` (10 sezioni + otto fasi, FROZEN, eccezioni, user approval).
+- Reference owner **originale** salvata in Library privata `/MealUp_FoodPortrait_Lab_20261015/References/`: SHA-256 `bc8c117581375c4826cb35072d2033d1274723b525debc023f80fe299fa36790`, con crop/manifest indipendenti. Registrata in `owner-style-reference.v1.json` come **style candidate ONLY**, non Golden Master o prova di vessel.
+- Sei ricette REALI M2/G8 selezionate: r2 BOWL, r1 PLATE, s02 RAMEKIN, do08 DESSERT_MOLD, p12 BAKING_DISH, v08 VESSEL_FREE. Controlli sorgente rilevano vino nei passaggi delle lasagne ma non nella lista ingredienti, e bicchiere menzionato nel succo VESSEL_FREE; non cambiati automaticamente.
+- Il codice `pilot-office-bridge.cjs` riusa `tools/ai-office/office-orchestrator.cjs`: 18 handoff di proposta (3 per ricetta), ruoli registrati Food, Design, Visual e QA. **NON** sono 18 agenti/provider eseguiti. Zero chiamate a modelli esterni per questi handoff; Office rimane intatto.
+- Prompt strutturati A/B/C/D/E per ciascuna ricetta, output persistenti sia come artifact GitHub Actions sia in Library privata `/MealUp_FoodPortrait_Lab_20261015/Pilot_001/` (prompt pack, office assignments, exception review, 454 specs, queue e checkpoint).
+- Test end-to-end CI `https://github.com/battagliafilippo/MealUp/actions/runs/38727195386`: job `preproduction-specs` **SUCCESS** (re-test Office routing, dry-run Groq con **0 API calls**, M2/M3 reale 454, prompt pack 6, handoff 18, template isolato singola ricetta, checkpoint 454); job `contract-baseline` continua **FAIL** per E08 board vessel mismatch, quindi **NON** dichiarare workflow globale verde.
+- **Prima generazione reale in ChatGPT Images** per r2: il generatore ha prodotto per errore una tavola a sei card con altri piatti, gauge e label incorporati. Evidenza visuale e tecnica `docs/food-portrait-pipeline/pilot-001-r2-rejected.json`, immagine rifiutata in Library privata `Pilot_001/REJECTED_R2_MultiPanel.png`, SHA `d622c345ded16fd6b4a0f0097d641b4421d1d3ed8e58563ecbf82b75e9c4c754`. **FAIL_QUARANTINED**; non Golden Master, non Food Portrait utilizzabile, non PWA. Diagnosi causale ancora ipotesi (contesto multiplo).
+- Correzione preventiva codificata: `single-portrait-request.cjs` emette una richiesta r2 UNICA, blocco ingredienti fonte, 1 immagine 1 ricetta, no gauges/UI, nessun confronto/multi-panel; fixture negative e CI PASS. Non prova che ChatGPT Images la esegua correttamente, perché questo ambiente non espone un'API con prompt isolato e generazione unattended garantita.
+- Artefatti di checkpoint anche esportati in ZIP privato `MealUp_FoodPortrait_Pilota_01_Checkpoint.zip` (14 voci e validazione archivio integra), conservato in Library. SHA-256 ZIP `7b7ade7723d55e86ef67a1ad3d22548ef67c98eebecfed2afd853e88fdace087`.
+
+**Nuove anomalie e blocchi:**
+
+| ID | Tipo | Stato e decisione |
+| --- | --- | --- |
+| E10 | OUTPUT_MULTIPANEL_UNEXPECTED | FAIL verificato, candidato isolato e preservato; prevenzione singola ricetta aggiunta e testata; **re-test GENERATORE non eseguito** |
+| E11 | PROMPT_ENGINE_NOT_AUTOMATED | Un prompt modulare preparato in CI non equivale a invocazione ImageGen automatica controllata. Non attribuire a Office ruoli visuali eseguiti senza provider e QA |
+| E12 | PRIVATE_STYLE_REFERENCE_OUTSIDE_REPO | Immagine originale con hash in Library, non accessibile ai runner GitHub senza montaggio autorizzato; confronto per pixel in CI blocca correttamente |
+| E08 | HISTORICAL_VESSEL_SHA_MISMATCH | IRRISOLTO; non alterare SHA canonico né promuovere candidate a reference FROZEN |
+
+**Stato aggiornato:**
+- P1–P4 infrastruttura offline e routing: PARTIALLY VERIFIED; packet prompts preparati.
+- P5 pilota reale: 1 output generato, 1 **FAIL**, 0 PASS; non completato.
+- P6 independent visual QA calibration: incompleto; STOP autoaccept.
+- P7 produzione 454 immagini: non autorizzata; 0 immagini utilizzabili.
+- P8 manifest staging: 454 mapping presenti; zero portrait integrati.
+
+**Prossimo micro-step autorizzato:** qualificare un generatore capace di consumare la richiesta singola `r2` come contratto isolato, montando la source style reference con hash verificato, e condurre test QA reale; affrontare E08 in parallelo senza riscrivere asset FROZEN. Non aumentare il lotto finché il test non passa.
