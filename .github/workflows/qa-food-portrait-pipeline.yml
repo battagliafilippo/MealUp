@@ -206,6 +206,30 @@ jobs:
           assert.ok(handoffs.handoffs.every(x=>x.officeHandoff.execution==='NOT_STARTED'));
           console.log('PASS HYBRID OFFICE: six actual recipes, 18 role handoffs, source facts, zero false execution');
           NODE
+      - name: Validate isolated single-image request after failed multi-panel pilot
+        run: |
+          node --check tools/food-portrait-pipeline/single-portrait-request.cjs
+          node tools/food-portrait-pipeline/single-portrait-request.cjs --self-test
+          node tools/food-portrait-pipeline/single-portrait-request.cjs \
+            --packs /tmp/mealup-portrait-staging/office-pilot/promptPacks.json \
+            --recipe-id r2 \
+            --out /tmp/mealup-portrait-staging/office-pilot/single-r2-request.json
+          node <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict');
+          const p=JSON.parse(fs.readFileSync(
+            '/tmp/mealup-portrait-staging/office-pilot/single-r2-request.json','utf8'));
+          assert.equal(p.recipeId,'r2');
+          assert.equal(p.contract.vesselId,'VESSEL_BOWL');
+          assert.equal(p.contract.maxImages,1);
+          assert.equal(p.contract.maxRecipesPerImage,1);
+          assert.equal(p.contract.noGaugeOrUiBakedIn,true);
+          assert.equal(p.contract.noInfographicOrMultiCard,true);
+          assert.equal(p.imagesGenerated,0);
+          assert.equal(p.autoAcceptanceAllowed,false);
+          for(const food of ['tonno','riso','avocado','salsa di soia','sesamo'])
+            assert.ok(p.promptText.includes(food),'missing '+food);
+          console.log('PASS isolated prompt packet: exactly r2, five ingredients, no baked UI');
+          NODE
       - name: Store preproduction evidence (no deploy)
         if: always()
         uses: actions/upload-artifact@v4
