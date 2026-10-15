@@ -20,3 +20,7 @@ Per domande quali «trova il miglior Design Agent», «chi sostituisce Qwen?», 
 
 ## Stato reale
 Questa skill è un **playbook versionato nel repository**, non un modello aggiuntivo né un agente cloud attivo. Le ricognizioni periodiche sono in ChatGPT Automations; non dichiarare che leggano già questi file o scrivano su GitHub senza verifica. Nessuna installazione sull'account utente è implicata dal commit.
+
+## Controllo obbligatorio delle Skill di ogni specialista
+
+Le cinque Skill dello Scout sono per la selezione. Prima di raccomandare un agente, leggi le tre `candidateSkillRequirements` del suo reparto in `tools/ai-office/scout-role-matrix.json`. Identifica e testa le sue competenze native e gli eventuali strumenti/Skill operative esterne, con QA indipendente; una Skill trovata online non vale automaticamente come prova. Valuta qualità, sicurezza, compatibilità e quota gratuita ricorrente. Usa `evaluateCandidateSkillFit` come pre-gate offline, senza interpretarlo come certificazione delle prove. Senza tutte le competenze comprovate il reclutamento è bloccato. Questa regola vale anche per sostituti, backup e lo Scout stesso; la scelta finale spetta al CEO.
