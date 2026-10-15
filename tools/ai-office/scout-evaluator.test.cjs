@@ -123,3 +123,23 @@ test('registered Groq and Cloudflare offers are recurring but NOT auto approved'
   assert.equal(q.state,STATES.CONNECTED_UNDER_QA);
   assert.equal(cf.state,STATES.ACCOUNT_NOT_CONNECTED);
 });
+
+test('existing ChatGPT subscription can qualify without buying an API only when entitlement is verified',()=>{
+  const subscription={...good,freeApiAccess:'NOT_SEPARATE_API',
+    freeQuotaPolicy:{kind:'EXISTING_SUBSCRIPTION_ENTITLEMENT_VERIFIED',
+      reset:'PLAN_PERIOD',source:'https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan'},
+    subscriptionPlanAlreadyHeld:true,noNewBillingVerified:true,
+    usesSeparatelyBilledApi:false,entitlementAccessVerified:true};
+  const eligible=classify(subscription);
+  assert.equal(eligible.state,STATES.CANDIDATE_FOR_CONTROLLED_PROBE);
+  assert.equal(eligible.automaticApiAccessAssumed,false);
+  assert.equal(eligible.approved,false);
+  for(const testVariant of [
+    {...subscription,entitlementAccessVerified:false},
+    {...subscription,usesSeparatelyBilledApi:true},
+    {...subscription,subscriptionPlanAlreadyHeld:false},
+    {...subscription,noNewBillingVerified:false}
+  ]){
+    assert.equal(classify(testVariant).state,STATES.RENEWAL_UNVERIFIED);
+  }
+});
