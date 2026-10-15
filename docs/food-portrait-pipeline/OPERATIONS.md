@@ -616,3 +616,13 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Nuove immagini generate: `0`; `do01` non generato; nessun batch, integrazione o deploy; budget `0 EUR`.
 
 **Prossimo micro-step necessario:** autorizzazione separata per un solo ciclo di revisione v10 che aggiunga un segnale ACE riconoscibile senza label, brand, ingredient collage o modifica del gauge FROZEN. Fino ad allora v10 resta approvato dall'owner ma non FROZEN.
+
+### Owner-scoped beverage decision 2026-10-15 — v10 FROZEN
+
+- L'owner ha chiarito che la somiglianza visiva tra bevande dello stesso colore è accettabile; per `v10` non è richiesto distinguere autonomamente ACE dal succo d'arancia.
+- L'eccezione è circoscritta alle bevande. Le ricette di cibo devono continuare a essere riconoscibili e differenti nella forma preparata; nessuna riduzione del gate visuale viene applicata al cibo.
+- Il precedente finding di QA resta documentato ma non è più bloccante. Esito aggiornato: `APPROVED_REFERENCE_FROZEN`.
+- Manifest FROZEN: `v10-vessel-free-frozen-v1.json`; asset e hash invariati; nessuna rigenerazione.
+- Nuove immagini generate: `0`; `do01` non generato; nessun avanzamento automatico del lotto, integrazione o deploy; budget `0 EUR`.
+
+**Prossimo micro-step necessario:** scegliere separatamente una ricetta di cibo pilota diversa da `do01`; prima di generare servirà una singola autorizzazione esplicita per quella candidate.

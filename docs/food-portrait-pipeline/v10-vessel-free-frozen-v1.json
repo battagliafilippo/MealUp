@@ -1,0 +1,43 @@
+{
+  "schema": "mealup-food-portrait-frozen-asset-v1",
+  "status": "FROZEN",
+  "decisionDate": "2026-10-15",
+  "authority": "OWNER_EXPLICIT_SCOPE_DECISION",
+  "recipeId": "v10",
+  "title": "Succo ACE",
+  "vesselId": "VESSEL_FREE",
+  "kcal": 95,
+  "gaugeAngleDegrees": -48.6,
+  "gaugeZone": "GREEN",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/v10-ace-juice-vessel-free-approved-001.webp",
+    "sha256": "0c0bd1f2023c34bf81963109c4856d50ff6f76b54a876fc97c68d879eb24d6ba",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 944940,
+    "format": "webp"
+  },
+  "evidence": {
+    "ownerVisualApproval": true,
+    "technicalQa": "PASS",
+    "decodedPixelIdentityToApprovedPng": true,
+    "gaugeValueMatchesRecipeCard": true,
+    "gaugeNeedleDirection": "DEEP_GREEN_FOR_95_KCAL",
+    "vesselFreeContract": "PASS_NO_ADDED_SERVING_VESSEL",
+    "independentVisualQa": "PASS_WITH_OWNER_SCOPED_BEVERAGE_EXCEPTION"
+  },
+  "frozenScope": [
+    "v10 final visual asset",
+    "neutral ACE juice bottle without glass or added vessel",
+    "95 kcal display and green gauge direction",
+    "beverage-only permission for visual equivalence to same-color juice variants"
+  ],
+  "scopeBoundary": "The beverage exception does not apply to food recipes; their prepared-food identity must remain visually distinguishable.",
+  "notAuthorized": [
+    "automatic batch production",
+    "generation of do01",
+    "tester or PWA integration",
+    "deployment",
+    "modification of main or external AI Office"
+  ]
+}

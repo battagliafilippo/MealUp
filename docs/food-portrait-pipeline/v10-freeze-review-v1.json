@@ -3,7 +3,7 @@
   "reviewedAt": "2026-10-15",
   "recipeId": "v10",
   "title": "Succo ACE",
-  "decision": "REVISION_REQUIRED_NOT_FROZEN",
+  "decision": "APPROVED_REFERENCE_FROZEN",
   "reviewAuthority": "INDEPENDENT_VISUAL_QA",
   "asset": {
     "path": "docs/food-portrait-pipeline/candidates/v10-ace-juice-vessel-free-approved-001.webp",
@@ -26,10 +26,12 @@
     "singleSubject": true,
     "recipeIdentityIndependentlyRecognizable": false
   },
-  "blockingFinding": {
+  "waivedFinding": {
     "code": "RECIPE_IDENTITY_NOT_DISTINGUISHABLE_FROM_V08",
-    "detail": "The v10 ACE portrait and the FROZEN v08 orange-juice portrait use the same neutral bottle, orange liquid and composition. Apart from 95 versus 90 kcal, the pixels provide no ACE-specific visual cue. This fails the mandate that each dedicated Food Portrait be recognizable."
+    "detail": "The v10 ACE portrait and the FROZEN v08 orange-juice portrait use the same neutral bottle, orange liquid and composition. The owner explicitly accepts this equivalence because the real beverages share the same color; beverage-variant identity is not a freeze requirement.",
+    "scope": "BEVERAGES_ONLY_NOT_FOOD_RECIPES"
   },
+  "ownerDecision": "BEVERAGE_COLOR_EQUIVALENCE_ACCEPTED_FOOD_RECIPES_MUST_REMAIN_DISTINCT",
   "constraints": {
     "imagesGeneratedThisReview": 0,
     "do01Generated": false,
@@ -38,5 +40,5 @@
     "deployment": false,
     "budgetEUR": 0
   },
-  "nextAction": "OWNER_AUTHORIZATION_REQUIRED_FOR_ONE_V10_REVISION_CYCLE"
+  "nextAction": "NO_GENERATION_AUTHORIZED_NEXT_RECIPE_REQUIRES_SEPARATE_DECISION"
 }
