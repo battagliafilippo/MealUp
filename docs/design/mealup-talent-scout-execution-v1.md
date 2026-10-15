@@ -128,13 +128,17 @@ Budget aggiuntivo 0 EUR, tester ufficiale unico, `main` immutato, nessun deploy 
 
 **Sequenza vincolante:** analisi del ruolo → ricerca modelli **e** Skill effettive per ruolo → esclusione costi non ricorrenti/rischi → prove pratiche incluse Skill → revisione QA indipendente → indicazione al CEO con evidenza e confronto → approvazione CEO → Director prepara un eventuale inserimento controllato. Candidato di backup/failover: stesse condizioni e stessa competenza del ruolo, oltre a quota indipendente. Il controllo offline `evaluateCandidateSkillFit` respinge ogni candidato senza evidenze complete, ma un esito che supera la verifica **strutturale** non vale come certificazione delle prove dichiarate né autorizza un'assunzione automatica.
 
-## Mandato professionale delle Skill: Scout propone, CEO approva, Director assegna
+## Mandato professionale dinamico controllato — aggiornamento ACTIVE 15/10/2026
 
-Regola applicabile a **OGNI agente reclutato, sostituito o impiegato come backup**, compreso lo Scout. Dopo aver usato le proprie Skill di selezione, il Talent Scout produce un **mandato professionale specifico dell'agente** con: ruolo e modello, competenze richieste, Skill native o esterne effettivamente verificate, prove benchmark e QA, condizioni di attivazione per singolo task, fonti FROZEN/version lock, limiti licenza e costo, gestione degli errori. Se manca una competenza testata, il mandato rimane `RECRUITMENT_BLOCKED`.
+Questa regola **sostituisce** il precedente elenco chiuso di Skill al momento del reclutamento. Fonte corrente: `docs/design/mealup-dynamic-skill-policy-v1.md`.
 
-Il Talent Scout **non assegna autonomamente** alcun agente: inoltra il mandato proposto **direttamente al CEO**, che deve approvare insieme candidato e pacchetto Skill. Solo il Director può integrare l'agente e **assegnargli il mandato approvato**, senza alterarlo di propria iniziativa. L'agente incaricato deve attivare **solo** le Skill pertinenti al lavoro assegnato e mantenere conformità a Costituzione v1.9, versioni FROZEN, scope, budget aggiuntivo 0 EUR, e QA indipendente. Evitare di utilizzare tutte le Skill indiscriminatamente. Aggiunte, rimozioni o sostituzioni significative del pacchetto dopo l'assunzione tornano allo Scout per valutazione e al CEO per approvazione prima che il Director aggiorni il mandato.
+Lo Scout svolge scouting e assunzione tecnica: verifica il potenziale dell'agente, le competenze professionali fondamentali, la sicurezza, i costi ricorrenti e la qualita' reale. Riferisce direttamente al CEO e puo' proporre di migliorare o sostituire qualsiasi agente. Non sceglie per gli specialisti ogni Skill quotidiana e non controlla gli incarichi del Director.
 
-**Implementazione verificabile, non runtime operativo:** `tools/ai-office/scout-skill-mandate.cjs` propone il mandato e verifica offline la struttura di un possibile passaggio CEO -> Director; non verifica da sé l'autenticità del consenso, non installa Skill, non recluta e non attiva agenti. Il QA dei veri risultati e la verifica di ogni fonte restano obbligatori. Le prove `scout-skill-mandate.test.cjs` coprono tutti gli otto reparti, il cambio skill sul singolo task, il gate CEO e il divieto di attivazione implicita.
+Il CEO approva il reclutamento e il mandato perimetrale. Il Director assegna gli incarichi concreti con risultato, scope e vincoli. Ogni specialista, anche un sottagente, **sceglie autonomamente qualsiasi Skill pertinente, verificata e gia' autorizzata** entro quel mandato, non soltanto le tre competenze d'ingresso; non deve tornare al CEO per ogni uso ordinario.
+
+Se emerge una necessita' imprevista, lo specialista cerca prima le capacita' gia' approvate; se non ci sono, richiede la valutazione a QA e Director. Lo Scout esamina nuove soluzioni esterne soltanto se servono. Installazioni non verificate, privilegi aggiuntivi, spese, cambi di scope o FROZEN richiedono l'approvazione del CEO. Nessuna sostituzione automatica, nessun nuovo billing.
+
+L'implementazione attuale copre due Skill interne eseguite in laboratorio tramite Director -> Engineering -> QA e una chiamata Groq di prova con due Skill Design caricate dinamicamente; **non** costituisce una squadra autonoma completa. Il modello Qwen non ha ancora approvazione QA Design.
 
 ## Criterio universale di reclutamento: competenze e Skill specifiche del ruolo
 
