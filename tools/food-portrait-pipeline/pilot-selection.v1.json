@@ -1,0 +1,49 @@
+{
+  "schema": "mealup-food-portrait-pilot-selection-v1",
+  "purpose": "SMALL_CONTROLLED_HYBRID_PILOT_NOT_MASS_GENERATION",
+  "source": "REAL_454_RECIPE_M2_M3_ARTIFACTS",
+  "selected": [
+    {
+      "recipeId": "r2",
+      "expectedVesselId": "VESSEL_BOWL",
+      "reason": "OWNER_REFERENCE_MATCHING_POKE_COMPOSITION",
+      "gate": "STYLE_PILOT_ONLY_UNTIL_VESSEL_MASTER_RECOVERED"
+    },
+    {
+      "recipeId": "r1",
+      "expectedVesselId": "VESSEL_PLATE",
+      "reason": "EXPLICIT_PLATING_EVIDENCE"
+    },
+    {
+      "recipeId": "s02",
+      "expectedVesselId": "VESSEL_RAMEKIN",
+      "reason": "COLD_SAUCE_WITH_INTEGRATED_INGREDIENTS"
+    },
+    {
+      "recipeId": "do08",
+      "expectedVesselId": "VESSEL_DESSERT_MOLD",
+      "reason": "SET_DESSERT_AND_TOPPING"
+    },
+    {
+      "recipeId": "p12",
+      "expectedVesselId": "VESSEL_BAKING_DISH",
+      "reason": "MULTILAYER_BAKED_COMPOSITION_AND_SOURCE_CONTRADICTION"
+    },
+    {
+      "recipeId": "v08",
+      "expectedVesselId": "VESSEL_FREE",
+      "reason": "DRINK_NOT_COMPLETE_DISH_AND_VESSEL_INSTRUCTION_CONFLICT"
+    }
+  ],
+  "control": {
+    "maxExperimentalImagesBeforeQA": 1,
+    "batchGenerationForbidden": true,
+    "mainPwaIntegrationForbidden": true,
+    "automaticAcceptanceEnabled": false,
+    "mandatePreservation": "docs/food-portrait-pipeline/MANDATE-TRACEABILITY.md",
+    "ownerStyleReferenceId": "STYLE_OWNER_POKE_20261015",
+    "currentOfficeSchema": "1.3",
+    "constitutionVersion": "1.9",
+    "extraCostEUR": 0
+  }
+}
