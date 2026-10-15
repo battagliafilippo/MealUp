@@ -34,7 +34,7 @@ Evidenze storiche al checkpoint: [134/134 test AI Office](https://github.com/bat
 | Fase | Obiettivo finale | Stato attuale e condizione di uscita |
 |---|---|---|
 | **01 — Unificazione** | Un solo registro autorevole di componenti, decisioni, stato, micro-step e recovery | Registro, vista umana, controllo CI e confronto senza perdite; dichiarare VERIFIED solo dopo QA |
-| **02 — Sicurezza + Costituzione** | Proteggere `main` e consentire preflight con l'originale v1.9 senza pubblicarlo | **BLOCKED:** `main` risultava `protected:false` e nessun ruleset; originale v1.9 disponibile soltanto in libreria privata |
+| **02 — Sicurezza + Costituzione** | Proteggere `main` e consentire preflight con l'originale v1.9 senza pubblicarlo | **PARTIAL + BLOCKED:** originale privato verificato (hash + 152 sezioni), protezioni di output e CI passate; `main` non protetto, GitHub runner ancora privo dell'originale |
 | **03 — Director operativo** | Persistenza task, eventi, checkpoint, recupero, quota zero e fail-closed | Da sviluppare su laboratorio dopo architettura e gate di sicurezza |
 | **04 — Qualificazione specialisti** | Candidati con capacità, Skill, costi e prove reali approvati; notifica Scout verificata | Qwen non qualificato Design; no otto agenti nominati |
 | **05 — Pilot end-to-end** | Un lavoro attraversa Director → specialista → Skill+Costituzione → QA → CEO e riprende da checkpoint | Non avviare finché fonte costituzionale, sicurezza, QA e permessi non sono verificati |
@@ -48,6 +48,12 @@ Per ogni micro-step il JSON contiene: **obiettivo, scope, precondizioni, dipende
 3. **Scout:** il controllo del task schedulato registra `last_run_time:null`, notifiche e email `false`. È configurato, non dimostrato come osservatorio che recapita rapporti.
 4. **Provider/quote:** Qwen Groq è un candidato collegato ma non un Design approvato; quote e failover tra fornitori non sono enforceable con i soli simulatori.
 5. **Sicurezza e limiti:** il fatto che il branch `main` non sia protetto non autorizza a modificarlo. Le versioni FROZEN, la PWA, il tester e il lavoro Food Portrait sono fuori scope.
+
+## Verifica fase 02 — 15/10/2026
+
+Controllo **reale indipendente** sulla Costituzione originale privata: hash SHA-256 identico a `constitution-task-packet.py`, **152 sezioni non vuote**; i codici canonici `1.3`, `2.1`, `2.17`, `8.6`, `8.9`, `9.3.1`, `9.10`, `12.15`, `12.16`, `13.5`, `14`, `A.14` e `B.4` sono presenti. Il testo del documento è rimasto fuori dal repository. Il motore offre ora un controllo `--verify-source-only` che non emette clausole né crea file; il salvataggio dei pacchetti con le clausole richiede cartelle private e file con permessi limitati. [22 test Python (19+3) PASS](https://github.com/battagliafilippo/MealUp/actions/runs/38760713791).
+
+**Stato accurato:** `AIOS-02.2 PARTIALLY_VERIFIED` perché il documento autentico è stato letto in una sessione privata, ma NON è collegato in modo persistente al Director né disponibile a GitHub Actions. `AIOS-02.1 BLOCKED` perché attivare la protezione di main richiede amministrazione GitHub. La procedura guidata e i criteri di verifica sono in [SECURITY-PHASE-02.md](SECURITY-PHASE-02.md).
 
 ## Recupero e prossimo incarico
 
