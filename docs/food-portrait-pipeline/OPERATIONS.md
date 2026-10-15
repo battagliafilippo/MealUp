@@ -426,3 +426,18 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dai quattro riferimenti verificati.
 
 **Prossimo micro-step necessario:** un solo pilot per il prossimo vessel previsto (`VESSEL_BAKING_DISH`) oppure arresto della sperimentazione. Nessuna produzione massiva automatica.
+
+
+## Fifth pilot checkpoint 2026-10-15 — p12 BAKING_DISH visual candidate
+
+- Ricetta reale verificata: `p12`, **Lasagne alla bolognese**, `VESSEL_BAKING_DISH`, `790 kcal` dalla card.
+- Anomalia source preservata: il vino è citato nei passaggi ma assente dalla lista ingredienti; non è stato reso come bottiglia, bicchiere o prop.
+- Mapping gauge verificata: `790 kcal` → `34,8°`, zona arancione alta, non saturata sul rosso.
+- Generata una sola immagine con ImageGen built-in usando i quattro riferimenti FROZEN; costo aggiuntivo dichiarato `0 EUR`.
+- Candidate: `candidates/p12-lasagne-baking-dish-candidate-001.png`, SHA-256 `d0a1f708c8dc6dfd7f48c8feb697b90f351f20c5e4e7e9d55d1de6b36d332add`, 1254 x 1254, `2.000.783` byte.
+- QA visivo indipendente: **PASS CANDIDATE ONLY**. Teglia rettangolare con due manici, cinque strati leggibili, ingredienti coerenti, nessun prop estraneo, `790 kcal` e lancetta corretti.
+- QA tecnico: **FAIL** esclusivamente per eccedenza di `783` byte sul limite di 2 MB. Nessuna ottimizzazione prima dell'approvazione owner.
+- Stato: `VISUAL_CANDIDATE_TECHNICAL_FAIL_NOT_APPROVED`. Nessun auto-accept, freeze, batch, integrazione o deploy.
+- E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dal pilot.
+
+**Prossimo micro-step necessario:** review visuale owner del candidato p12. Se approvato, conversione WebP lossless, QA ripetuta e decisione separata sul freeze `VESSEL_BAKING_DISH`.

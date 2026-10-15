@@ -1,0 +1,62 @@
+{
+  "schema": "mealup-food-portrait-pilot-attempt-v1",
+  "attemptId": "FPP-P12-IMAGEGEN-20261015-001",
+  "status": "VISUAL_CANDIDATE_TECHNICAL_FAIL_NOT_APPROVED",
+  "branch": "experiment/food-portrait-pipeline-20261015",
+  "generator": {
+    "provider": "CODEX_BUILT_IN_IMAGEGEN",
+    "mode": "PRECISE_OBJECT_EDIT_FROM_FOUR_FROZEN_REFERENCES",
+    "imageCountGenerated": 1,
+    "additionalSpendEur": 0
+  },
+  "candidate": {
+    "recipeId": "p12",
+    "title": "Lasagne alla bolognese",
+    "vesselId": "VESSEL_BAKING_DISH",
+    "kcal": 790,
+    "expectedGaugeAngleDegrees": 34.8,
+    "expectedGaugeZone": "ORANGE",
+    "path": "docs/food-portrait-pipeline/candidates/p12-lasagne-baking-dish-candidate-001.png",
+    "sha256": "d0a1f708c8dc6dfd7f48c8feb697b90f351f20c5e4e7e9d55d1de6b36d332add",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 2000783,
+    "format": "png"
+  },
+  "sourceFacts": {
+    "ingredients": ["sfoglie per lasagne 70 g", "macinato di manzo 90 g", "passata di pomodoro 90 g", "cipolla 20 g", "carota 15 g", "latte 110 ml", "burro 10 g", "farina 10 g", "parmigiano 25 g", "olio evo 0.5 cucchiaio", "noce moscata 1 pizzico"],
+    "preparation": "Cinque strati alternati di sfoglia, ragù, besciamella e parmigiano; ultimo strato solo besciamella e parmigiano; cottura al forno.",
+    "sourceAnomaly": "Wine appears in a preparation step but not in the ingredient list; it is not rendered as a visual prop."
+  },
+  "technicalQa": {
+    "status": "TECHNICAL_FAIL",
+    "errors": [{"code": "IMAGE_EXCEEDS_BYTE_BUDGET", "actualBytes": 2000783, "limitBytes": 2000000, "excessBytes": 783}],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"],
+    "automaticAcceptanceAllowed": false
+  },
+  "visualQa": {
+    "status": "INDEPENDENT_VISUAL_PASS_OWNER_REVIEW_REQUIRED",
+    "checks": {
+      "singleDish": "PASS",
+      "recipeIdentity": "PASS",
+      "bakingDishDistinctFromOtherVessels": "PASS_RECTANGULAR_TWO_HANDLES",
+      "fiveLayerStructure": "PASS",
+      "ingredientMatch": "PASS_NO_EXTRAS_DETECTED",
+      "winePropExcluded": "PASS",
+      "kcalTextExact": "PASS_790",
+      "needlePosition": "PASS_HIGH_ORANGE_NOT_SATURATED_RED",
+      "styleMatchToFrozenReferences": "PASS_CANDIDATE_ONLY",
+      "mobileLegibility": "PASS",
+      "unexpectedTextOrUi": "PASS_NONE_DETECTED"
+    },
+    "comparison": "docs/food-portrait-pipeline/review/pilot-p12-vs-frozen.html",
+    "limitations": ["VISUAL_QA_DOES_NOT_OVERRIDE_TECHNICAL_FAIL", "OWNER_APPROVAL_REQUIRED"]
+  },
+  "gates": {
+    "ownerApproved": false,
+    "frozen": false,
+    "deployAuthorized": false,
+    "batchExpansionAllowed": false,
+    "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
+  }
+}
