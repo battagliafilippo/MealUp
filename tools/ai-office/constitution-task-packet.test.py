@@ -29,6 +29,7 @@ def task():
         "acceptance":["QA complete"],"writeScope":[],
         "knownUnknowns":["New model quality remains unverified"],
         "tags":["delegated","existing_code","long_running"],
+        "selectedSkillIds":["MEALUP_ENGINEERING_JS_AUDIT"],
         "steps":[
             {"id":"S1","objective":"Identify source and active rules",
               "scope":"Source check","preconditions":"Verified source copy",
@@ -84,6 +85,32 @@ class ConstitutionTests(unittest.TestCase):
     def test_mock_has_actual_text_and_many_indexed_clauses(self):
         self.assertGreaterEqual(len(self.rules),115)
         self.assertEqual(self.rules["9.3.1"]["heading"],"Granularità e atomicità degli step")
+    def test_skill_activation_adds_rules_and_untrusted_skills_block(self):
+        t=task()
+        t["tags"]=[]
+        t["selectedSkillIds"]=["MEALUP_ENGINEERING_JS_AUDIT"]
+        p=engine.make_packet(t,self.rules)
+        self.assertIn("6.1",p["activeRuleIds"])
+        self.assertIn("MEALUP_ENGINEERING_JS_AUDIT",p["selectedSkillIds"])
+        t["selectedSkillIds"]=["UNKNOWN_EXTERNAL_SKILL"]
+        with self.assertRaisesRegex(ValueError,"SKILL_TRIGGER_NOT_REVIEWED"):
+            engine.make_packet(t,self.rules)
+    def test_scout_uses_direct_ceo_mandate_and_own_skills(self):
+        t=task()
+        t["roleId"]="SCOUT"
+        t["agentId"]="SCOUT_LAB"
+        t["assignedBy"]="CEO"
+        t["selectedSkillIds"]=["mealup-talent-scout","mealup-agent-benchmark"]
+        p=engine.make_packet(t,self.rules)
+        self.assertIn("5.6",p["activeRuleIds"])
+        self.assertIn("12.7",p["activeRuleIds"])
+    def test_structural_mandate_auto_activates_high_risk_and_delegation(self):
+        t=task()
+        t["tags"]=[]
+        t["risk"]="HIGH"
+        p=engine.make_packet(t,self.rules)
+        self.assertIn("12.5",p["activeRuleIds"])
+        self.assertIn("8.11",p["activeRuleIds"])
     def test_universal_dogmas_always_active(self):
         t=task();t["tags"]=[]
         packet=engine.make_packet(t,self.rules)
