@@ -68,3 +68,16 @@ test('even eligible benchmark never auto selects winner or approves replacement'
   assert.equal(r.status,'COMPARABLE_NO_AUTOMATIC_WINNER');
   assert.equal(r.winner,null);assert.equal(r.ceoApproved,false);
 });
+
+test('new Gemma 4 is a candidate but not connected',()=>{
+  const r=getCurrentReport().candidates.find(x=>x.id==='GEMMA4_26B_A4B_CLOUDFLARE');
+  assert.equal(r.state,STATES.ACCOUNT_NOT_CONNECTED);assert.equal(r.approved,false);
+});
+test('new Meta Llama vision requires explicit license review',()=>{
+  const r=getCurrentReport().candidates.find(x=>x.id==='LLAMA3_2_11B_VISION_CLOUDFLARE');
+  assert.equal(r.state,STATES.LICENSE_APPROVAL_REQUIRED);assert.equal(r.approved,false);
+});
+test('missing API evidence cannot crash Scout or authorize provider calls',()=>{
+  const r=classify({...good,freeApiAccess:undefined,status:'NO_STATUS'});
+  assert.equal(r.state,STATES.FREE_COMPUTE_UNVERIFIED);assert.equal(r.approved,false);
+});
