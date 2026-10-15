@@ -1,0 +1,718 @@
+{
+  "schema": "MEALUP_AI_OFFICE_MASTERPLAN_V1",
+  "version": "1.0.0",
+  "createdAt": "2026-10-15",
+  "canonicalScope": "AI_OFFICE_LAB_ONLY",
+  "branch": "experiment/recipe-visual-agents",
+  "baselineCommit": "75d72a8e546005da7bca3284d80a7d6cdbe72aef",
+  "constitution": {
+    "version": "1.9",
+    "lifecycle": "FROZEN",
+    "originalLocation": "PRIVATE_CHATGPT_LIBRARY",
+    "originalFilename": "Costituzione_Operativa_AI_v1.9_FROZEN.docx",
+    "publicCopyAllowed": false,
+    "ruleEngine": "tools/ai-office/constitution-task-packet.py",
+    "sourceAccessInGitHubCI": "BLOCKED",
+    "sourceTextEmbedded": false
+  },
+  "contract": {
+    "officeVersion": "1.3",
+    "lifecycle": "ACTIVE",
+    "approvedPolicy": "DYNAMIC_SPECIALIST_SKILLS",
+    "budgetAdditionalEUR": 0,
+    "scoutReporting": "CEO_ONLY",
+    "directorOperationalReporting": "CEO",
+    "ceoFinalAuthority": true,
+    "minimumRisk": "READ_ONLY_LAB"
+  },
+  "invariants": [
+    "NO_MAIN_WRITES",
+    "NO_TESTER_OR_PUBLIC_PWA_WRITES",
+    "NO_FROZEN_CHANGES",
+    "ZERO_ADDITIONAL_EUR",
+    "NO_AUTOMATIC_AGENT_RECRUITMENT",
+    "NO_UNREVIEWED_EXTERNAL_SKILL_INSTALLATION",
+    "NO_CLAIM_OF_ALL_EIGHT_AI_AGENTS_RUNNING",
+    "CONSTITUTION_ORIGINAL_NEVER_COMMITTED_TO_PUBLIC_REPO",
+    "REVIEW_AND_PRESERVE_ALL_OPEN_STEPS"
+  ],
+  "statusSemantics": {
+    "lifecycle": [
+      "ACTIVE",
+      "FROZEN",
+      "SUPERSEDED",
+      "PROPOSED",
+      "NOT_APPLICABLE"
+    ],
+    "verification": [
+      "VERIFIED",
+      "PARTIALLY_VERIFIED",
+      "UNVERIFIED",
+      "BLOCKED"
+    ],
+    "step": [
+      "OPEN",
+      "VERIFIED",
+      "PARTIALLY_VERIFIED",
+      "BLOCKED",
+      "FAILED",
+      "SUPERSEDED"
+    ],
+    "note": "Lifecycle describes authority; verification describes evidence; step describes progress. VERIFIED tests are not proof that an agent is autonomous."
+  },
+  "canonicalSources": [
+    {
+      "id": "SRC-CONSTITUTION",
+      "path": "Costituzione_Operativa_AI_v1.9_FROZEN.docx (private Library)",
+      "status": "PRIVATE",
+      "notes": "Authoritative source; requires private access, hash and v1.9 version lock"
+    },
+    {
+      "id": "SRC-GOV",
+      "path": "docs/design/mealup-idea-validator-agent-v1.md",
+      "status": "ACTIVE",
+      "notes": "Office architecture v1.3 and selective routing"
+    },
+    {
+      "id": "SRC-TALENT",
+      "path": "docs/design/mealup-ai-talent-innovation-v1.md",
+      "status": "ACTIVE",
+      "notes": "Scout direct CEO channel"
+    },
+    {
+      "id": "SRC-SCOUT",
+      "path": "docs/design/mealup-talent-scout-execution-v1.md",
+      "status": "ACTIVE",
+      "notes": "Scouting protocol and candidate gates; read dynamic mandate as latest"
+    },
+    {
+      "id": "SRC-SKILLS",
+      "path": "docs/design/mealup-dynamic-skill-policy-v1.md",
+      "status": "ACTIVE",
+      "notes": "Latest specialist dynamic skill policy"
+    },
+    {
+      "id": "SRC-HANDOFF",
+      "path": "AGENTS.md",
+      "status": "ACTIVE",
+      "notes": "Procedure for per-task constitutional rule retrieval"
+    },
+    {
+      "id": "SRC-REGISTRY",
+      "path": "tools/ai-office/agent-registry.cjs",
+      "status": "VERIFIED_CODE",
+      "notes": "Adapter registry, not runtime promotions"
+    },
+    {
+      "id": "SRC-ROLES",
+      "path": "tools/ai-office/scout-role-matrix.json",
+      "status": "VERIFIED_CODE",
+      "notes": "Eight roles; hiring minimum not fixed skill list"
+    },
+    {
+      "id": "SRC-CANDIDATES",
+      "path": "tools/ai-office/scout-candidate-register.json",
+      "status": "VERIFIED_CODE",
+      "notes": "Model candidates; Qwen not Design QA approved"
+    },
+    {
+      "id": "SRC-APP-MASTER",
+      "path": "docs/design/mealup-v124-implementation-state.md",
+      "status": "SEPARATE",
+      "notes": "App v1.24 reference; never modify from AI Office step"
+    },
+    {
+      "id": "SRC-FOOD",
+      "path": "tools/recipe-visuals/visual-director.cjs",
+      "status": "SEPARATE",
+      "notes": "Food Portrait pipeline in other chat; contractual interface only"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "DEC-001",
+      "authority": "CEO",
+      "status": "APPROVED",
+      "subject": "Constitution",
+      "decision": "Every AI Office task uses Constitution v1.9 FROZEN; activate universal and relevant conditional/special clauses from verified original.",
+      "source": "SRC-CONSTITUTION"
+    },
+    {
+      "id": "DEC-002",
+      "authority": "CEO",
+      "status": "APPROVED",
+      "subject": "Office hierarchy",
+      "decision": "CEO approves strategic decisions; Director allocates operational work; independent Scout reports only to CEO; QA blocks unverified results.",
+      "source": "SRC-GOV"
+    },
+    {
+      "id": "DEC-003",
+      "authority": "CEO",
+      "status": "APPROVED",
+      "subject": "Dynamic skills",
+      "decision": "All specialists and subagents choose verified relevant skills within scoped mandate; initial role skill requirements are hiring minimums only.",
+      "source": "SRC-SKILLS"
+    },
+    {
+      "id": "DEC-004",
+      "authority": "CEO",
+      "status": "APPROVED",
+      "subject": "Budget",
+      "decision": "Zero additional EUR recurring; do not rely on one-off credits, trials or unverified subscription API entitlements.",
+      "source": "SRC-SCOUT"
+    },
+    {
+      "id": "DEC-005",
+      "authority": "CEO",
+      "status": "APPROVED",
+      "subject": "AI Office roadmap",
+      "decision": "Complete separate canonical Masterplan; then security+private Constitution; then Director persistence+quotas; then real specialist qualification; then end-to-end pilot.",
+      "source": "THIS_MANDATE"
+    },
+    {
+      "id": "DEC-006",
+      "authority": "CEO",
+      "status": "APPROVED",
+      "subject": "Food Portrait separation",
+      "decision": "Food Portrait Production Pipeline progresses in another chat; this AI Office roadmap must not modify its pipeline or run image generation.",
+      "source": "THIS_MANDATE"
+    },
+    {
+      "id": "DEC-007",
+      "authority": "CEO",
+      "status": "APPROVED",
+      "subject": "Current work authorization",
+      "decision": "Reversible laboratory planning and tests allowed; main, tester, PWA, FROZEN, deploy, new billing and agent promotions excluded.",
+      "source": "THIS_MANDATE"
+    }
+  ],
+  "components": [
+    {
+      "id": "CMP-001",
+      "name": "Office v1.3 architecture/router",
+      "lifecycle": "ACTIVE",
+      "verification": "PARTIALLY_VERIFIED",
+      "sources": [
+        "SRC-GOV",
+        "tools/ai-office/router.cjs",
+        "tools/ai-office/office-orchestrator.cjs"
+      ],
+      "evidence": [
+        "https://github.com/battagliafilippo/MealUp/actions/runs/38704501417"
+      ],
+      "missing": [
+        "No persistent Director AI runtime; orchestrator builds plans only"
+      ]
+    },
+    {
+      "id": "CMP-002",
+      "name": "Protected Constitution rule activation",
+      "lifecycle": "ACTIVE",
+      "verification": "PARTIALLY_VERIFIED",
+      "sources": [
+        "SRC-HANDOFF",
+        "tools/ai-office/constitution-task-packet.py",
+        "tools/ai-office/constitution-protected-handoff.cjs"
+      ],
+      "evidence": [
+        "https://github.com/battagliafilippo/MealUp/actions/runs/38704501391"
+      ],
+      "missing": [
+        "GitHub CI lacks private original; synthetic tests are not real constitutional delegation"
+      ]
+    },
+    {
+      "id": "CMP-003",
+      "name": "Dynamic specialist skill routing",
+      "lifecycle": "ACTIVE",
+      "verification": "PARTIALLY_VERIFIED",
+      "sources": [
+        "SRC-SKILLS",
+        "tools/ai-office/dynamic-skill-selector.cjs"
+      ],
+      "evidence": [
+        "https://github.com/battagliafilippo/MealUp/actions/runs/38704501417"
+      ],
+      "missing": [
+        "Local selector verified; not all agents are connected"
+      ]
+    },
+    {
+      "id": "CMP-004",
+      "name": "Engineering→QA executable read-only lab chain",
+      "lifecycle": "ACTIVE",
+      "verification": "VERIFIED",
+      "sources": [
+        "tools/ai-office/live-office-lab-pilot.cjs",
+        ".github/workflows/qa-ai-office-operational-on-change.yml"
+      ],
+      "evidence": [
+        "https://github.com/battagliafilippo/MealUp/actions/runs/38704501376"
+      ],
+      "missing": []
+    },
+    {
+      "id": "CMP-005",
+      "name": "Groq Qwen skill injection one-shot candidate",
+      "lifecycle": "PROPOSED",
+      "verification": "PARTIALLY_VERIFIED",
+      "sources": [
+        "tools/ai-office/live-model-skill-pilot.cjs",
+        "tools/ai-office/live-model-skill-catalog.json"
+      ],
+      "evidence": [
+        "https://github.com/battagliafilippo/MealUp/actions/runs/38699460011"
+      ],
+      "missing": [
+        "One real model call with 2 instructions; Design quality requires independent human QA; no promotion"
+      ]
+    },
+    {
+      "id": "CMP-006",
+      "name": "Scout evaluation and 8-role competence matrix",
+      "lifecycle": "ACTIVE",
+      "verification": "PARTIALLY_VERIFIED",
+      "sources": [
+        "SRC-TALENT",
+        "SRC-SCOUT",
+        "SRC-ROLES",
+        "SRC-CANDIDATES"
+      ],
+      "evidence": [
+        "https://github.com/battagliafilippo/MealUp/actions/runs/38704501417"
+      ],
+      "missing": [
+        "No comparative real model benchmark qualified as winner; no model automatically hired"
+      ]
+    },
+    {
+      "id": "CMP-007",
+      "name": "Scout weekly scheduled research",
+      "lifecycle": "ACTIVE",
+      "verification": "UNVERIFIED",
+      "sources": [
+        "SRC-SCOUT"
+      ],
+      "evidence": [],
+      "missing": [
+        "Automation enabled but has no run, notifications and email disabled as of 2026-10-15"
+      ]
+    },
+    {
+      "id": "CMP-008",
+      "name": "Director durable task queue and checkpoint recovery",
+      "lifecycle": "PROPOSED",
+      "verification": "UNVERIFIED",
+      "sources": [
+        "SRC-GOV",
+        "tools/ai-office/office-orchestrator.cjs"
+      ],
+      "evidence": [],
+      "missing": [
+        "No durable store or real restart/resume pipeline"
+      ]
+    },
+    {
+      "id": "CMP-009",
+      "name": "Recurring-free quota and provider fallback",
+      "lifecycle": "PROPOSED",
+      "verification": "PARTIALLY_VERIFIED",
+      "sources": [
+        "tools/ai-office/scout-capacity-planner.cjs",
+        "tools/ai-office/scout-capacity-policy.json"
+      ],
+      "evidence": [
+        "https://github.com/battagliafilippo/MealUp/actions/runs/38704501417"
+      ],
+      "missing": [
+        "Only offline planner; provider quotas not enforced at runtime; Cloudflare models share pool"
+      ]
+    },
+    {
+      "id": "CMP-010",
+      "name": "Universal runtime for 8 autonomous specialist agents",
+      "lifecycle": "PROPOSED",
+      "verification": "BLOCKED",
+      "sources": [
+        "SRC-REGISTRY",
+        "SRC-ROLES"
+      ],
+      "evidence": [],
+      "missing": [
+        "Models/provider capabilities must each pass real benchmark, independent QA, recurring-free economics and CEO recruitment approval"
+      ]
+    },
+    {
+      "id": "CMP-011",
+      "name": "Independent QA and constitutional postflight",
+      "lifecycle": "ACTIVE",
+      "verification": "PARTIALLY_VERIFIED",
+      "sources": [
+        "tools/ai-office/skills/lab-independent-qa.cjs",
+        "SRC-CONSTITUTION"
+      ],
+      "evidence": [
+        "https://github.com/battagliafilippo/MealUp/actions/runs/38704501376"
+      ],
+      "missing": [
+        "Deterministic tests verify code, not visual semantical outputs or full agent autonomy"
+      ]
+    },
+    {
+      "id": "CMP-012",
+      "name": "Food Portrait as downstream separate consumer",
+      "lifecycle": "NOT_APPLICABLE",
+      "verification": "UNVERIFIED",
+      "sources": [
+        "SRC-FOOD"
+      ],
+      "evidence": [],
+      "missing": [
+        "No image-generation quotas in current chat; interface only, no pipeline writes"
+      ]
+    }
+  ],
+  "phases": [
+    {
+      "id": "AIOS-01",
+      "title": "Unify canonical AI Office Masterplan",
+      "status": "OPEN",
+      "steps": [
+        {
+          "id": "AIOS-01.1",
+          "title": "Audit contract, runtime and baseline",
+          "status": "VERIFIED",
+          "dependsOn": [],
+          "objective": "Verify prior sources and safe baseline",
+          "scope": "READ_ONLY",
+          "preconditions": "Repository and user mandate available",
+          "expectedOutput": "Source registry and evidence audit",
+          "verification": "GitHub source and CI inspected",
+          "doneWhen": "No guessed model promotions",
+          "evidence": [
+            "https://github.com/battagliafilippo/MealUp/actions/runs/38704501417"
+          ],
+          "blockingReasons": []
+        },
+        {
+          "id": "AIOS-01.2",
+          "title": "Create canonical versioned office ledger",
+          "status": "OPEN",
+          "dependsOn": [
+            "AIOS-01.1"
+          ],
+          "objective": "Persist authorities, decisions, sources, statuses and roadmap",
+          "scope": "tools/ai-office/masterplan-ledger.json",
+          "preconditions": "Step 01.1 complete",
+          "expectedOutput": "One canonical registry",
+          "verification": "Schema checks and cross-reference verification",
+          "doneWhen": "No duplicate conflicting authority",
+          "evidence": [],
+          "blockingReasons": []
+        },
+        {
+          "id": "AIOS-01.3",
+          "title": "Publish readable masterplan and regression guards",
+          "status": "OPEN",
+          "dependsOn": [
+            "AIOS-01.2"
+          ],
+          "objective": "Make steps legible and enforce continuity in CI",
+          "scope": "docs/ai-office/MASTERPLAN.md + read-only tests",
+          "preconditions": "Registry exists",
+          "expectedOutput": "Human roadmap and QA proofs",
+          "verification": "Node CI pass + documentation review",
+          "doneWhen": "Checkpoint identifies next task",
+          "evidence": [],
+          "blockingReasons": []
+        }
+      ]
+    },
+    {
+      "id": "AIOS-02",
+      "title": "Close security and v1.9 source integration",
+      "status": "BLOCKED",
+      "steps": [
+        {
+          "id": "AIOS-02.1",
+          "title": "Verify and enable protective main branch rules",
+          "status": "BLOCKED",
+          "dependsOn": [
+            "AIOS-01.3"
+          ],
+          "objective": "Enforce pull request and restrict untrusted writes",
+          "scope": "GitHub branch rules",
+          "preconditions": "GitHub repo administration access",
+          "expectedOutput": "Protected main verification",
+          "verification": "GitHub branch rule and access audit",
+          "doneWhen": "main protected against automated writes",
+          "evidence": [],
+          "blockingReasons": [
+            "GitHub main reports protected:false; rulesets empty; current integration lacks admin permission"
+          ]
+        },
+        {
+          "id": "AIOS-02.2",
+          "title": "Connect private v1.9 source without publishing it",
+          "status": "BLOCKED",
+          "dependsOn": [
+            "AIOS-01.3"
+          ],
+          "objective": "Allow authorized runtime to verify exact private source before each nontrivial task",
+          "scope": "private Constitution connector/preflight",
+          "preconditions": "Private provider or local security path",
+          "expectedOutput": "Version-locked private rule packet",
+          "verification": "Real source hash test and access review",
+          "doneWhen": "No canonical text in public repo/logs",
+          "evidence": [],
+          "blockingReasons": [
+            "GitHub Actions cannot access private ChatGPT Library original"
+          ]
+        },
+        {
+          "id": "AIOS-02.3",
+          "title": "Test fail-closed preflight end-to-end",
+          "status": "OPEN",
+          "dependsOn": [
+            "AIOS-02.1",
+            "AIOS-02.2"
+          ],
+          "objective": "Prove all executed tasks bind goal+rules+skills+version",
+          "scope": "laboratory read-only E2E",
+          "preconditions": "Main protected and source wired",
+          "expectedOutput": "One verified protected handoff",
+          "verification": "Independent QA and negative tests",
+          "doneWhen": "No bypass if source missing",
+          "evidence": [],
+          "blockingReasons": []
+        }
+      ]
+    },
+    {
+      "id": "AIOS-03",
+      "title": "Implement Director persistence and quotas",
+      "status": "OPEN",
+      "steps": [
+        {
+          "id": "AIOS-03.1",
+          "title": "Persist task/decision/plan ledger",
+          "status": "OPEN",
+          "dependsOn": [
+            "AIOS-01.3"
+          ],
+          "objective": "Record goal, plan, evidence, revisions and stable IDs",
+          "scope": "LAB-only task store",
+          "preconditions": "Canon ledger and privacy policy",
+          "expectedOutput": "Durable events and snapshots",
+          "verification": "Restart simulation and integrity checks",
+          "doneWhen": "No lost steps on restart",
+          "evidence": [],
+          "blockingReasons": []
+        },
+        {
+          "id": "AIOS-03.2",
+          "title": "Add idempotent checkpoints and recovery",
+          "status": "OPEN",
+          "dependsOn": [
+            "AIOS-03.1"
+          ],
+          "objective": "Resume and reconcile changed work orders",
+          "scope": "Director local runtime",
+          "preconditions": "Persistent store",
+          "expectedOutput": "Checkpoint validation",
+          "verification": "Fault-injection and stale-brief tests",
+          "doneWhen": "No repeated side effect or lost MUST",
+          "evidence": [],
+          "blockingReasons": []
+        },
+        {
+          "id": "AIOS-03.3",
+          "title": "Add real recurring-free quota ledger",
+          "status": "OPEN",
+          "dependsOn": [
+            "AIOS-03.2"
+          ],
+          "objective": "Enforce shared quota pools and zero additional cost",
+          "scope": "Free provider adapters",
+          "preconditions": "Verified limits and account access",
+          "expectedOutput": "Ledger + stop and reset gates",
+          "verification": "No paid fallback, 429 safe pause",
+          "doneWhen": "No fabricated available quota",
+          "evidence": [],
+          "blockingReasons": []
+        }
+      ]
+    },
+    {
+      "id": "AIOS-04",
+      "title": "Recruit and qualify specialist agents",
+      "status": "OPEN",
+      "steps": [
+        {
+          "id": "AIOS-04.1",
+          "title": "Repair Scout delivery and run first sourced report",
+          "status": "OPEN",
+          "dependsOn": [
+            "AIOS-01.3"
+          ],
+          "objective": "Ensure conditional reports can reach CEO and no duplicates",
+          "scope": "Scout research channel",
+          "preconditions": "CEO-safe notification permissions",
+          "expectedOutput": "First factual shortlist",
+          "verification": "First actual run, notification check",
+          "doneWhen": "No unsupported recommendations",
+          "evidence": [],
+          "blockingReasons": []
+        },
+        {
+          "id": "AIOS-04.2",
+          "title": "Benchmark roles and their task-dependent skills",
+          "status": "OPEN",
+          "dependsOn": [
+            "AIOS-03.3",
+            "AIOS-02.3"
+          ],
+          "objective": "Verify each candidate, specific skills and recurring economics",
+          "scope": "8 role benchmark",
+          "preconditions": "Verified source, quotas, dataset",
+          "expectedOutput": "Per-role QA evidence",
+          "verification": "Independent real cases and provenance",
+          "doneWhen": "No recruitment on simulation only",
+          "evidence": [],
+          "blockingReasons": []
+        },
+        {
+          "id": "AIOS-04.3",
+          "title": "CEO qualification and activation gate",
+          "status": "OPEN",
+          "dependsOn": [
+            "AIOS-04.2"
+          ],
+          "objective": "Authorize only evidenced roles",
+          "scope": "CEO approval",
+          "preconditions": "Verified benchmark + QA",
+          "expectedOutput": "Signed authorization record",
+          "verification": "Matched role, scope and version",
+          "doneWhen": "No automatic promotion",
+          "evidence": [],
+          "blockingReasons": []
+        }
+      ]
+    },
+    {
+      "id": "AIOS-05",
+      "title": "End-to-end office pilot and staged adoption",
+      "status": "OPEN",
+      "steps": [
+        {
+          "id": "AIOS-05.1",
+          "title": "Run protected Director→specialist→skills→QA pilot",
+          "status": "OPEN",
+          "dependsOn": [
+            "AIOS-02.3",
+            "AIOS-03.3",
+            "AIOS-04.3"
+          ],
+          "objective": "Test realistic small task and return CEO result",
+          "scope": "read-only lab",
+          "preconditions": "Approved agent and private source",
+          "expectedOutput": "E2E evidence with checkpoint",
+          "verification": "Independent QA and safe failures",
+          "doneWhen": "No hidden execution or fabricated verification",
+          "evidence": [],
+          "blockingReasons": []
+        },
+        {
+          "id": "AIOS-05.2",
+          "title": "Expand only after independent pilot acceptance",
+          "status": "OPEN",
+          "dependsOn": [
+            "AIOS-05.1"
+          ],
+          "objective": "Scale qualified roles without touching app",
+          "scope": "laboratory",
+          "preconditions": "E2E success and CEO gate",
+          "expectedOutput": "Staged expansion record",
+          "verification": "Risk, cost, QA and rollback review",
+          "doneWhen": "No extension without evidence",
+          "evidence": [],
+          "blockingReasons": []
+        }
+      ]
+    }
+  ],
+  "knownUnknowns": [
+    {
+      "id": "UNK-001",
+      "status": "BLOCKED",
+      "topic": "Main branch protection",
+      "fact": "GitHub branches/main protected:false and rulesets [] on 2026-10-15",
+      "whyItMatters": "Untrusted writers would risk main",
+      "resolution": "Repo admin must configure protection, then independent check",
+      "relatedStep": "AIOS-02.1"
+    },
+    {
+      "id": "UNK-002",
+      "status": "BLOCKED",
+      "topic": "Original v1.9 runtime access",
+      "fact": "Original available in private ChatGPT Library, not in public GitHub Actions",
+      "whyItMatters": "Real rule activation cannot be verified in autonomous GitHub runtime",
+      "resolution": "Secure private connector with exact hash and anti-leak tests",
+      "relatedStep": "AIOS-02.2"
+    },
+    {
+      "id": "UNK-003",
+      "status": "OPEN",
+      "topic": "Talent Scout delivery",
+      "fact": "Automation enabled, notifications/email disabled, last_run_time null on 2026-10-15",
+      "whyItMatters": "No evidence weekly CEO scouting can deliver notifications",
+      "resolution": "Use approved notification settings and observe a complete run",
+      "relatedStep": "AIOS-04.1"
+    },
+    {
+      "id": "UNK-004",
+      "status": "OPEN",
+      "topic": "AI qualification",
+      "fact": "Qwen pilot passes structural QA but needs independent human visual QA",
+      "whyItMatters": "Cannot auto-promote Design Agent from JSON shape alone",
+      "resolution": "Comparable real role/Skill benchmark, CEO approval",
+      "relatedStep": "AIOS-04.2"
+    },
+    {
+      "id": "UNK-005",
+      "status": "OPEN",
+      "topic": "Real free quota",
+      "fact": "Offline estimates do not prove continuously usable live provider capacity",
+      "whyItMatters": "Budget 0 and reliable operation must be enforced",
+      "resolution": "Proof of quota pools, renewals and checkpoint behavior",
+      "relatedStep": "AIOS-03.3"
+    },
+    {
+      "id": "UNK-006",
+      "status": "OPEN",
+      "topic": "Food Portrait interface",
+      "fact": "Food Portrait pipeline developed in separate chat, currently credits exhausted",
+      "whyItMatters": "No shared writes or competing steps",
+      "resolution": "Integrate only via future versioned manifest/contract after separately validated pipeline",
+      "relatedStep": "AIOS-05.2"
+    }
+  ],
+  "recovery": {
+    "lastVerifiedBaseline": "75d72a8e546005da7bca3284d80a7d6cdbe72aef",
+    "activeBriefVersion": "AI_OFFICE_20261015_V1",
+    "currentPhase": "AIOS-01",
+    "nextStepId": "AIOS-01.2",
+    "lastVerifiedTechnicalState": "134 JavaScript tests + 19 Constitution synthetic tests + read-only Engineering/QA pipeline at baseline",
+    "pendingApprovals": [],
+    "noInFlightProviderCalls": true,
+    "preservePreviousDecisionIds": true,
+    "taskLedgerWriteScope": "tools/ai-office/masterplan-ledger.json + docs/ai-office/MASTERPLAN.md + tests",
+    "revisionHistory": [
+      {
+        "version": "1.0.0",
+        "change": "Initial reconciliation of previous designs and lab evidence; no promotion or deployment",
+        "sourceCommit": "75d72a8e546005da7bca3284d80a7d6cdbe72aef"
+      }
+    ]
+  }
+}
