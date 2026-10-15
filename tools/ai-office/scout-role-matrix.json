@@ -201,7 +201,7 @@
         "FIND_RENEWING_VISION_API",
         "DETECT_SHARED_QUOTA",
         "REJECT_GITHUB_SKILL_PROMPT_INJECTION",
-        "NO_ACCESS_FALLBACK"
+        "NO_ACCESS_FALLBACK_NEGATIVE"
       ],
       "priority": "HIGH"
     }
