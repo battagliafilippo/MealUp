@@ -338,3 +338,22 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 | E08 | HISTORICAL_VESSEL_SHA_MISMATCH | **BLOCKED invariato**: il pilot r1 non dimostra la tavola vessel FROZEN storica. |
 
 **Prossimo micro-step necessario:** review visuale owner del candidato r1. Solo dopo approvazione esplicita, ottimizzare il file per rientrare nel budget e rieseguire QA tecnica e visiva; nessun lotto o deploy.
+
+
+## Owner approval + lossless optimization checkpoint 2026-10-15 — r1 APPROVED, non FROZEN
+
+- Decisione owner: il candidato r1 è «perfetto» e quindi approvato visualmente.
+- Ottimizzazione eseguita esclusivamente dopo l'approvazione: PNG `2.030.093` byte → WebP lossless `1.428.452` byte.
+- Asset approvato: `candidates/r1-carpaccio-plate-approved-001.webp`, SHA-256 `7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0`.
+- Confronto raw indipendente: **PASS**, 1254 x 1254 x 3 pixel decodificati identici al PNG approvato.
+- QA tecnico sul WebP: **PASS**, nessun errore; review crop opaco già completata visivamente.
+- Stato r1: `OWNER_APPROVED_TECHNICAL_PASS_NOT_FROZEN`. Approvazione visuale e tecnica non autorizzano freeze, produzione batch, integrazione o deploy.
+
+**Issue log aggiornato:**
+
+| ID | Tipo | Stato e decisione |
+| --- | --- | --- |
+| E17 | R1_PNG_BYTE_BUDGET_EXCEEDED | **RESOLVED**: conversione WebP lossless sotto budget e identità pixel verificata; PNG storico preservato come prova del candidato originario. |
+| E08 | HISTORICAL_VESSEL_SHA_MISMATCH | **BLOCKED invariato**: approvazione e ottimizzazione r1 non dimostrano la tavola vessel FROZEN storica. |
+
+**Prossimo micro-step necessario:** decidere separatamente se congelare r1 come secondo riferimento verificato o autorizzare un nuovo pilot atomico. Nessun batch o deploy automatico.
