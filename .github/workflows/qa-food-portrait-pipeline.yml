@@ -1,0 +1,55 @@
+name: QA - MealUp Food Portrait Contracts
+on:
+  push:
+    branches:
+      - experiment/food-portrait-pipeline-20261015
+    paths:
+      - tools/food-portrait-pipeline/**
+      - .github/workflows/qa-food-portrait-pipeline.yml
+      - G8/composition-matrix.json
+      - assets/family-fo/manifest.json
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract-baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Parse audited source
+        run: node --check tools/food-portrait-pipeline/contract-audit.cjs
+      - name: Negative tests and future growth
+        run: node tools/food-portrait-pipeline/contract-audit.cjs --self-test
+      - name: Verify real 454-recipe matrix and family mapping
+        run: node tools/food-portrait-pipeline/contract-audit.cjs --out /tmp/mealup-food-portrait-contract.json
+      - name: Enforce fail-closed staging and no premature image approval
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          const r = JSON.parse(fs.readFileSync('/tmp/mealup-food-portrait-contract.json','utf8'));
+          assert.equal(r.status, 'PASS_CONTRACT_ONLY');
+          assert.equal(r.catalog.matrixRows, 454);
+          assert.equal(r.catalog.manifestMappings, 454);
+          assert.equal(r.catalog.uniqueRecipeIds, 454);
+          assert.equal(r.catalog.families, 14);
+          assert.equal(r.scope.goldenMastersVerified, false);
+          assert.equal(r.scope.imagePixelsInspected, false);
+          assert.equal(r.scope.imagesApproved, 0);
+          assert.equal(r.scope.automaticImageAcceptanceAllowed, false);
+          assert.deepEqual(r.errors, []);
+          console.log('PASS: 454 source records validated. Images not assessed or approved.');
+          NODE
+      - name: Save audit evidence (no deploy)
+        uses: actions/upload-artifact@v4
+        with:
+          name: food-portrait-contract-baseline
+          path: /tmp/mealup-food-portrait-contract.json
+          if-no-files-found: error
+          retention-days: 30
