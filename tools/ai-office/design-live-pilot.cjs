@@ -34,6 +34,12 @@ function validateCandidate(candidate) {
     issues.push('FILES_MODIFIED_FORBIDDEN');
   if (!Array.isArray(candidate.otherDepartmentsActivated) || candidate.otherDepartmentsActivated.length !== 0)
     issues.push('CROSS_DEPARTMENT_ACTIVATION_FORBIDDEN');
+  const observations = Array.isArray(candidate.visibleObservations) ?
+    candidate.visibleObservations.join(' ') : '';
+  // The fixed pilot input is one static WebP. Claims about multiple frames or
+  // later crops are therefore impossible and must fail closed.
+  if (/\b(frame|fotogramm[ai]|crop|inquadratur[ae])\b|successiv[oi]|precedent[ei]/i.test(observations))
+    issues.push('STATIC_ASSET_MULTI_FRAME_HALLUCINATION');
   return [...new Set(issues)];
 }
 
@@ -134,6 +140,8 @@ function selfTest() {
     'FAKE_WRITE_NOT_BLOCKED');
   assert(validateCandidate({ ...good, otherDepartmentsActivated: ['Engineering'] })
     .includes('CROSS_DEPARTMENT_ACTIVATION_FORBIDDEN'), 'CROSS_DEPARTMENT_NOT_BLOCKED');
+  assert(validateCandidate({ ...good, visibleObservations: ['Nei frame successivi compaiono crop'] })
+    .includes('STATIC_ASSET_MULTI_FRAME_HALLUCINATION'), 'MULTI_FRAME_HALLUCINATION_NOT_BLOCKED');
   const plan = buildOfficePlan();
   assert(plan.handoff.execution === 'NOT_STARTED', 'HANDOFF_EXECUTED_DURING_TEST');
   console.log('PASS office live pilot self-test: routing, adapter, zero budget and QA gates');

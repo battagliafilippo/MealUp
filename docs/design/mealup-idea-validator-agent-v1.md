@@ -77,6 +77,11 @@ Collocazione: agente trasversale di PROGETTO, fuori dalla PWA pubblica. Nessuna 
 
 Il file eseguibile `tools/ai-office/agent-registry.cjs` e' la mappa runtime canonica; `tools/ai-office/office-orchestrator.cjs` prepara il percorso e gli envelope senza eseguirli. `CONNECTED` significa adapter mappato e provato entro i limiti dichiarati, non autorizzazione autonoma.
 
+### Primo incarico end-to-end — OFFICE-DESIGN-PILOT-001 — 2026-10-15
+- Percorso realmente eseguito: Director -> Design/Qwen 3.8 Vision su Groq Free -> QA -> CEO. Una chiamata API, zero retry, zero immagini, zero scritture e zero deploy. Run GitHub `38678076069`; artifact `mealup-ai-office-design-pilot-001`.
+- Il gate strutturale ha mantenuto `PROPOSAL_ONLY`, nessuna approvazione, nessun altro reparto e ha richiesto review umana. L'ispezione umana dell'asset statico ha pero' rilevato un'affermazione falsa: Qwen ha descritto un "primo frame" e "frame successivi/crop" che non esistono nell'unico WebP inviato.
+- Esito finale QA: **BLOCKED — STATIC_ASSET_MULTI_FRAME_HALLUCINATION**. Il probe dimostra che il collegamento tecnico funziona, non che Qwen sia affidabile o il miglior Design Agent. Il validatore e' stato esteso per bloccare automaticamente questa classe di errore nei futuri pilot statici; nessun'altra chiamata e' stata effettuata.
+
 ### Budget e limite delle capacità
 - **Budget autorizzato per default = 0 € aggiuntivi**, inclusi abbonamenti, chiamate API, crediti extra, piattaforme e plugin a pagamento; spese vietate salvo autorizzazione specifica e distinta.
 - Riutilizzare strumenti e crediti già disponibili, rispettando i limiti reali: GRATIS NON significa illimitato e crediti inclusi non equivalgono a un'API automatica senza costo.

@@ -1,0 +1,35 @@
+{
+  "schema": "mealup-office-pilot-review-v1",
+  "taskId": "OFFICE-DESIGN-PILOT-001",
+  "date": "2026-10-15",
+  "branch": "experiment/recipe-visual-agents",
+  "workflowRun": "https://github.com/battagliafilippo/MealUp/actions/runs/38678076069",
+  "artifactId": 11947445703,
+  "pipeline": [
+    "AI Office Director",
+    "Design Director",
+    "QA / Verification Gate",
+    "CEO"
+  ],
+  "provider": "Groq Free",
+  "model": "qwen/qwen3.8-27b",
+  "apiCalls": 1,
+  "retries": 0,
+  "additionalCostEUR": 0,
+  "imagesGenerated": 0,
+  "filesModifiedByAgent": [],
+  "deploys": 0,
+  "automaticGate": {
+    "status": "PARTIAL_HUMAN_REVIEW",
+    "approved": false
+  },
+  "humanQA": {
+    "status": "BLOCKED",
+    "issues": [
+      "STATIC_ASSET_MULTI_FRAME_HALLUCINATION"
+    ],
+    "evidence": "The model described a first frame and subsequent close-up crops, but the submitted pasta.webp is one static image."
+  },
+  "finalDecision": "NOT_APPROVED",
+  "nextAction": "Keep Qwen as a guarded technical candidate and compare it against alternatives before assigning the Design Agent role."
+}

@@ -28,3 +28,9 @@ test('Candidate cannot claim writes or activate another department', () => {
   assert.ok(validateCandidate({ ...valid, otherDepartmentsActivated: ['Engineering'] })
     .includes('CROSS_DEPARTMENT_ACTIVATION_FORBIDDEN'));
 });
+
+test('Static asset cannot be described as multiple frames or crops', () => {
+  const hallucinated = { ...valid,
+    visibleObservations: ['Il primo frame e intero, i successivi sono crop ravvicinati'] };
+  assert.ok(validateCandidate(hallucinated).includes('STATIC_ASSET_MULTI_FRAME_HALLUCINATION'));
+});

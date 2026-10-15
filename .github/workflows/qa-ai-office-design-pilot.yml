@@ -1,21 +1,24 @@
 name: Gate - AI Office Director to Design pilot
 
-# One-shot laboratory proof. No app writes, deploys, image generation or retries.
+# Manual-only laboratory proof. No app writes, deploys, image generation or retries.
 on:
-  push:
-    branches:
-      - experiment/recipe-visual-agents
-    paths:
-      - '.github/workflows/qa-ai-office-design-pilot.yml'
+  workflow_dispatch:
+    inputs:
+      run_live:
+        description: 'Confermare una singola chiamata Design su quota Free?'
+        required: true
+        default: 'NO'
+        type: choice
+        options:
+          - 'NO'
+          - 'YES'
 
 permissions:
   contents: read
 
 jobs:
   office-design-pilot:
-    if: >-
-      ${{ github.event_name == 'push' &&
-          github.event.head_commit.message == 'ci(ai-office): run first Director Design QA pilot' }}
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_live == 'YES' }}
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
