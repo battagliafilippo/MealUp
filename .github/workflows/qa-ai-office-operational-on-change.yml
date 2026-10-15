@@ -1,0 +1,45 @@
+name: MealUp AI Office - Automatic Safe Skill Execution
+# Ongoing read-only Engineering -> independent QA on relevant LAB changes.
+# Public repo runner; no secrets, paid APIs, writes or deploy.
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - 'tools/ai-office/**'
+      - '.github/workflows/qa-ai-office-operational-on-change.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: mealup-office-operational-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  autonomous-internal-skills:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout lab branch only
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Enforce branch and rights
+        run: |
+          test "$GITHUB_REF_NAME" = "experiment/recipe-visual-agents"
+          test "$GITHUB_REPOSITORY" = "battagliafilippo/MealUp"
+      - name: Actual read-only Engineering and QA internal skills
+        env:
+          MEALUP_LAB_EXECUTE: 'YES'
+        run: node tools/ai-office/live-office-lab-pilot.cjs
+      - name: Save independently inspectable result
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: mealup-automatic-office-readonly-skills
+          path: /tmp/mealup-office-operational-pilot.json
+          retention-days: 5
+          if-no-files-found: warn
