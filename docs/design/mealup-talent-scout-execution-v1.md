@@ -44,6 +44,26 @@ Esempi con fonti ufficiali al 15 ottobre 2026:
 
 Fonti: https://console.groq.com/docs/rate-limits ; https://developers.cloudflare.com/workers-ai/platform/pricing/ .
 
+## Skill set specialistico v1 — implementato nel laboratorio (2026-10-15)
+
+È approvata come architettura di ricerca **una regia Scout indipendente con skill on demand**, evitando di moltiplicare modelli e token senza necessità. La regia è `mealup-talent-scout`; le altre quattro skill sono consultate solo quando pertinenti:
+
+| Skill | Quando serve | Esito minimo |
+|---|---|---|
+| `.agents/skills/mealup-talent-scout/SKILL.md` | Scoperta per un ruolo e shortlist | prove primarie e gap |
+| `.agents/skills/mealup-recurring-cost-auditor/SKILL.md` | Piano Free, autonomia e quote condivise | ricorrenza verificata o blocco |
+| `.agents/skills/mealup-agent-security/SKILL.md` | Software e skill GitHub di terzi | audit licenza, supply chain, privilegi |
+| `.agents/skills/mealup-agent-benchmark/SKILL.md` | Candidati accessibili e confrontabili | test identici, errori, QA indipendente |
+| `.agents/skills/mealup-ceo-selection-brief/SKILL.md` | Rapporto CEO | una raccomandazione motivata, nessun auto-switch |
+
+**Matrice di capacità e test per reparto:** `tools/ai-office/scout-role-matrix.json`: 8 ruoli, 32 casi specifici, incluso un test negativo per ruolo; la selezione non usa una graduatoria generalista. **Router deterministico offline:** `tools/ai-office/scout-skill-router.cjs` sceglie le skill per ruolo/fase, verifica metadata SKILL.md secondo standard Agent Skills e resta privo di rete e side effect. È testato da `tools/ai-office/scout-skill-router.test.cjs`. Lo standard portabile è `https://agentskills.io/specification` e le istruzioni `SKILL.md` sono di nostra proprietà, non scaricate/eseguite da repository non attendibili.
+
+**Strumenti da considerare, non installati:** `promptfoo` MIT per A/B dichiarativi e multimodali nel nostro progetto Node, `Inspect AI` per valutazioni con campioni multipli, `OpenSSF Scorecard` per segnali di rischio nei progetti GitHub. Sono ausili metodologici, NON scorciatoie per avere API vision, conti Free o QA umano. Fonti: https://github.com/promptfoo/promptfoo ; https://inspect.aisi.org.uk/ ; https://scorecard.dev/ .
+
+**Modalità di esecuzione reale:** le skill inserite in `.agents/skills/` sono scopribili dai client compatibili come Codex quando lavorano su questo branch; NON sono state installate nell'account ChatGPT dell'utente e la compatibilità con il suo piano non è assunta. L'automazione settimanale `MealUp — Talent Scout` è stata istruita a seguire gli stessi cinque protocolli e a leggere il repository *se il connettore è disponibile nella sua sessione*. Il job settimanale non corrisponde a 5 agenti live né a benchmark API automatici. Quando accessi non ci sono, l'audit rimane desk research e il rapporto dice NON VERIFICATO.
+
+**Protezione dei risultati:** un benchmark A/B fra due modelli con medesimi input e QA umano resta requisito per dichiarare migliore l'uno dell'altro per MealUp; né CI verde, né scorecard, né questioni di branding autorizzano la nomina. Ogni promozione è decisione separata ed esplicita del CEO.
+
 ## Pipeline anti-confusione
 
 1. `DISCOVERED`: nome, versione esatta, licenza, uso per il reparto, fonte ufficiale e rischio.
