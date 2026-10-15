@@ -1,6 +1,6 @@
 {
   "schema": "MEALUP_AI_OFFICE_MASTERPLAN_V1",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "createdAt": "2026-10-15",
   "canonicalScope": "AI_OFFICE_LAB_ONLY",
   "branch": "experiment/recipe-visual-agents",
@@ -376,7 +376,7 @@
     {
       "id": "AIOS-01",
       "title": "Unify canonical AI Office Masterplan",
-      "status": "OPEN",
+      "status": "VERIFIED",
       "steps": [
         {
           "id": "AIOS-01.1",
@@ -397,7 +397,7 @@
         {
           "id": "AIOS-01.2",
           "title": "Create canonical versioned office ledger",
-          "status": "OPEN",
+          "status": "VERIFIED",
           "dependsOn": [
             "AIOS-01.1"
           ],
@@ -407,13 +407,16 @@
           "expectedOutput": "One canonical registry",
           "verification": "Schema checks and cross-reference verification",
           "doneWhen": "No duplicate conflicting authority",
-          "evidence": [],
+          "evidence": [
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/masterplan-ledger.json",
+            "https://github.com/battagliafilippo/MealUp/actions/runs/38756992907"
+          ],
           "blockingReasons": []
         },
         {
           "id": "AIOS-01.3",
           "title": "Publish readable masterplan and regression guards",
-          "status": "OPEN",
+          "status": "VERIFIED",
           "dependsOn": [
             "AIOS-01.2"
           ],
@@ -423,7 +426,10 @@
           "expectedOutput": "Human roadmap and QA proofs",
           "verification": "Node CI pass + documentation review",
           "doneWhen": "Checkpoint identifies next task",
-          "evidence": [],
+          "evidence": [
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/MASTERPLAN.md",
+            "https://github.com/battagliafilippo/MealUp/actions/runs/38756992907"
+          ],
           "blockingReasons": []
         }
       ]
@@ -700,9 +706,9 @@
   "recovery": {
     "lastVerifiedBaseline": "75d72a8e546005da7bca3284d80a7d6cdbe72aef",
     "activeBriefVersion": "AI_OFFICE_20261015_V1",
-    "currentPhase": "AIOS-01",
-    "nextStepId": "AIOS-01.2",
-    "lastVerifiedTechnicalState": "134 JavaScript tests + 19 Constitution synthetic tests + read-only Engineering/QA pipeline at baseline",
+    "currentPhase": "AIOS-02",
+    "nextStepId": "AIOS-02.1",
+    "lastVerifiedTechnicalState": "149 JavaScript tests PASS in GitHub Actions run 38756992907; Engineering→QA read-only 32 checked modules; 19 Constitution synthetic tests PASS on preceding checkpoint",
     "pendingApprovals": [],
     "noInFlightProviderCalls": true,
     "preservePreviousDecisionIds": true,
@@ -712,6 +718,11 @@
         "version": "1.0.0",
         "change": "Initial reconciliation of previous designs and lab evidence; no promotion or deployment",
         "sourceCommit": "75d72a8e546005da7bca3284d80a7d6cdbe72aef"
+      },
+      {
+        "version": "1.0.1",
+        "change": "AIOS-01.2 and AIOS-01.3 completed after creation of canonical ledger and readable Masterplan, evidence linked; security gates remain BLOCKED",
+        "sourceCommit": "652968cb323e4b5def7dd2e1e40d6ca9af3ee54b"
       }
     ]
   }
