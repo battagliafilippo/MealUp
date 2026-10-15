@@ -2,6 +2,10 @@
 
 Applies to every AI Office department and subordinate specialist that receives a task related to this repository. This file is a **procedural pointer**, NOT a replacement for the original Costituzione Operativa AI v1.9 FROZEN.
 
+## Canonical AI Office Masterplan and recovery
+
+Before starting or resuming any AI Office work, read [`docs/ai-office/MASTERPLAN.md`](docs/ai-office/MASTERPLAN.md) and its single structured source [`tools/ai-office/masterplan-ledger.json`](tools/ai-office/masterplan-ledger.json). Locate the open `AIOS-XX.X` step, check its authorized scope, verified evidence, dependencies and FROZEN, preserve decision and recovery IDs, and update only the applicable step after independent QA. Do not confuse completed offline tests with autonomous model capability. Food Portrait has its own workstream, not an AI Office subtask. If the ledger and current task disagree materially, mark STALE/BLOCKED and reconcile before acting.
+
 ## Before each nontrivial order
 
 1. Confirm who issued the order. The **CEO** directs the independent Talent Scout; the **Director** assigns scoped work to the operating departments and their authorized subagents. No subordinate expands permissions or switches agents on its own.
