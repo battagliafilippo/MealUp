@@ -7,17 +7,22 @@ function selectSkills(task,assignment,skills) {
   const manager=task?.roleId==='SCOUT'?'CEO':'DIRECTOR';
   if(!task||!roles.includes(task.roleId)||!nonblank(task.id)||
      !nonblank(task.agentId)||!nonblank(task.scope)||
-     !Array.isArray(task.capabilities)||task.frozenContextVerified!==true||
+     !Array.isArray(task.capabilities)||task.capabilities.length>20||
+     task.capabilities.some(x=>!nonblank(x))||task.frozenContextVerified!==true||
      !assignment||assignment.authorized!==true||
      !nonblank(assignment.reference)||
      assignment.roleId!==task.roleId||assignment.taskId!==task.id||
      assignment.agentId!==task.agentId||assignment.scope!==task.scope||
      assignment.assignedBy!==manager||
-     !Array.isArray(skills))
+     !Array.isArray(skills)||
+     (task.isSubagent===true && (!nonblank(task.parentAgentId)||
+       assignment.parentAgentId!==task.parentAgentId||
+       assignment.subagentApproved!==true)))
      return {status:'BLOCKED',selected:[],missing:[],simulatedOnly:true};
   const selected=[],missing=[];
   for(const capability of new Set(task.capabilities)) {
-    const eligible=skills.filter(s=>s&&
+    const eligible=skills.filter(s=>s&&nonblank(s.id)&&
+      Array.isArray(s.roles)&&Array.isArray(s.scopes)&&
       Array.isArray(s.capabilities)&&s.capabilities.includes(capability)&&
       s.roles?.includes(task.roleId)&&s.scopes?.includes(task.scope)&&
       s.approved===true&&s.qaVerified===true&&s.securityReviewed===true&&
