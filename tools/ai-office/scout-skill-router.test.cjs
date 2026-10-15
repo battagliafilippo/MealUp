@@ -62,3 +62,78 @@ test('each non-Design role has separate evidence cases and no automatic model pr
     assert.equal(x.proactiveLiveProviderCalls,false);
   }
 });
+
+const evidenceFor=(roleId,candidateId='candidate-a',mode='BUILT_IN_TESTED')=>{
+  const r=lib.plan({roleId});
+  return r.candidateSkillRequirements.map(skill=>({
+    skillId:skill.skillId,candidateId,mode,
+    testEvidenceRef:'https://github.com/battagliafilippo/MealUp/actions/runs/12345',
+    independentQa:'PASS',roleTaskBenchmarked:true,
+    conformanceToFrozenVerified:true,
+    externalSkillProvenanceReviewed:true,externalSkillLicenseReviewed:true,
+    externalSkillSecurityApproved:true
+  }));
+};
+test('every role has candidate-specific professional skill criteria',()=>{
+  for(const id of ['DESIGN','ENGINEERING','FOOD','VISUAL_PRODUCTION','PROMPT_ARCHITECT','QA','DIRECTOR','SCOUT']){
+    const p=lib.plan({roleId:id});
+    assert.ok(p.candidateSkillRequirements.length>=3);
+    assert.equal(p.candidateSkillRequirements.every(x=>x.verification.includes('INDEPENDENT_QA')),true);
+  }
+});
+test('every agent candidate remains blocked without its required skills evidence',()=>{
+  for(const id of ['DESIGN','ENGINEERING','FOOD','VISUAL_PRODUCTION','PROMPT_ARCHITECT','QA','DIRECTOR','SCOUT']){
+    const r=lib.evaluateCandidateSkillFit({roleId:id,candidateId:'candidate-a',
+      economicsVerified:true,licenseAndSecurityApproved:true});
+    assert.equal(r.status,'RECRUITMENT_BLOCKED');
+    assert.ok(r.missing.length>=3);
+    assert.equal(r.candidateRecruited,false);
+  }
+});
+test('quality, cost or security gaps block a candidate for every department',()=>{
+  for(const id of ['DESIGN','ENGINEERING','FOOD','VISUAL_PRODUCTION','PROMPT_ARCHITECT','QA','DIRECTOR','SCOUT']){
+    const q=evidenceFor(id);
+    const incomplete=q.slice(0,-1);
+    assert.equal(lib.evaluateCandidateSkillFit({roleId:id,candidateId:'candidate-a',
+      skillProofs:incomplete,economicsVerified:true,licenseAndSecurityApproved:true}).status,'RECRUITMENT_BLOCKED');
+    assert.equal(lib.evaluateCandidateSkillFit({roleId:id,candidateId:'candidate-a',
+      skillProofs:q,economicsVerified:false,licenseAndSecurityApproved:true}).status,'RECRUITMENT_BLOCKED');
+    assert.equal(lib.evaluateCandidateSkillFit({roleId:id,candidateId:'candidate-a',
+      skillProofs:q,economicsVerified:true,licenseAndSecurityApproved:false}).status,'RECRUITMENT_BLOCKED');
+  }
+});
+test('mismatched model evidence and incomplete QA never count',()=>{
+  const q=evidenceFor('DESIGN');
+  q[0].candidateId='DIFFERENT';
+  q[1].independentQa='FAIL';
+  const r=lib.evaluateCandidateSkillFit({roleId:'DESIGN',candidateId:'candidate-a',
+    skillProofs:q,economicsVerified:true,licenseAndSecurityApproved:true});
+  assert.equal(r.status,'RECRUITMENT_BLOCKED');
+  assert.ok(r.unverified.length>=2);
+});
+test('third-party skills need supply-chain review even when model is competent',()=>{
+  const q=evidenceFor('ENGINEERING','candidate-a','EXTERNAL_SKILL_AUDITED');
+  q[0].externalSkillSecurityApproved=false;
+  const r=lib.evaluateCandidateSkillFit({roleId:'ENGINEERING',candidateId:'candidate-a',
+    skillProofs:q,economicsVerified:true,licenseAndSecurityApproved:true});
+  assert.equal(r.status,'RECRUITMENT_BLOCKED');
+  assert.ok(r.unverified.includes(q[0].skillId));
+});
+test('declared perfect evidence never automatically recruits even a qualified agent',()=>{
+  for(const id of ['DESIGN','ENGINEERING','FOOD','VISUAL_PRODUCTION','PROMPT_ARCHITECT','QA','DIRECTOR','SCOUT']){
+    const r=lib.evaluateCandidateSkillFit({roleId:id,candidateId:'candidate-a',
+      skillProofs:evidenceFor(id),economicsVerified:true,licenseAndSecurityApproved:true});
+    assert.equal(r.status,'SKILL_EVIDENCE_DECLARED_REQUIRES_INDEPENDENT_VERIFICATION');
+    assert.equal(r.skillEvidenceGateReady,true);
+    assert.equal(r.candidateRecruited,false);
+    assert.equal(r.ceoApproved,false);
+    assert.equal(r.evidenceMustBeIndependentlyAudited,true);
+  }
+});
+test('a named external Skill is not a guarantee of agent competency',()=>{
+  const q=evidenceFor('FOOD');
+  q[0].testEvidenceRef='a SKILL.md without performance evidence';
+  const r=lib.evaluateCandidateSkillFit({roleId:'FOOD',candidateId:'candidate-a',
+    skillProofs:q,economicsVerified:true,licenseAndSecurityApproved:true});
+  assert.equal(r.status,'RECRUITMENT_BLOCKED');
+});
