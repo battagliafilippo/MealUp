@@ -596,3 +596,12 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Nessuna immagine Food Portrait generata; `v10` resta sola calibrazione e `do01` non è stato generato. Nessuna modifica a `main`, tester ufficiale, PWA o AI Office esterno al branch.
 
 **Stato E08:** `SOURCE_RECOVERED / LOCAL_AUDIT_PASS / REMOTE_CI_PENDING`. La chiusura richiede il checkpoint CI remoto verde.
+
+### E08 remote closure 2026-10-15
+
+- Commit verificato: `747c0c0`; workflow `QA - MealUp Food Portrait Contracts`, run `38794555114`.
+- Job `contract-baseline`: **SUCCESS**, inclusi self-test fail-closed, verifica della board FROZEN e copertura vessel esatta.
+- Job `preproduction-specs`: **SUCCESS**, inclusi 454 record, checkpoint persistenti, QA indipendente, singola candidate per ciclo e calibrazione limitata a `v10`.
+- Nessun deploy o image generation eseguito; `do01` resta non generato.
+
+**Stato finale E08:** `CLOSED_CANONICAL_SOURCE_VERIFIED`. Il prossimo passo resta una decisione separata dell'owner su un eventuale nuovo ciclo; nessun batch è autorizzato implicitamente.
