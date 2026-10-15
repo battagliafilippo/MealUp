@@ -249,22 +249,48 @@ def make_packet(t, sections):
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--canonical-docx",required=True)
-    ap.add_argument("--task-json",required=True)
-    ap.add_argument("--out",required=True)
+    ap.add_argument("--task-json")
+    ap.add_argument("--out")
     ap.add_argument("--previous-packet",required=False)
+    ap.add_argument("--verify-source-only",action="store_true",
+                    help="Confirm privately held original hash and headings; never output rule text")
     args=ap.parse_args()
-    # Output remains in local temp/private workspace, never in public repo.
+    repo_root=Path(__file__).resolve().parents[2]
+    canonical=Path(args.canonical_docx).resolve()
+    if canonical==repo_root or repo_root in canonical.parents:
+        raise ValueError("BLOCKED_PRIVATE_CONSTITUTION_INSIDE_PUBLIC_REPOSITORY")
+    sections=docx_sections(canonical)
+    must_exist={"1.3","2.1","2.17","8.6","8.9","9.3.1",
+                "9.10","12.15","12.16","13.5","14","A.14","B.4"}
+    if not must_exist.issubset(sections) or any(not sections[k]["text"] for k in must_exist):
+        raise ValueError("BLOCKED_CANONICAL_RULE_SECTIONS_INCOMPLETE")
+    if args.verify_source_only:
+        if args.task_json or args.out or args.previous_packet:
+            raise ValueError("BLOCKED_PROBE_MODE_MUST_NOT_WRITE")
+        print(json.dumps({"status":"VERIFIED_PRIVATE_SOURCE_ONLY",
+              "canonicalVersion":VERSION,"sha256":CANONICAL_SHA256,
+              "sectionsFound":len(sections),"ruleTextDisclosed":False,
+              "delegationOrAgentExecution":False}))
+        return
+    if not args.task_json or not args.out:
+        raise ValueError("BLOCKED_REQUIRED_PRIVATE_TASK_AND_OUTPUT")
+    # Exact original excerpts must stay in a private dir OUTSIDE the public repo.
     out=Path(args.out).resolve()
-    if str(out).startswith(str(Path.cwd().resolve())+os.sep):
+    if out==repo_root or repo_root in out.parents:
         raise ValueError("BLOCKED_PUBLIC_REPO_RULE_BODY_OUTPUT")
-    sections=docx_sections(args.canonical_docx)
     t=json.loads(Path(args.task_json).read_text(encoding="utf-8"))
     packet=make_packet(t,sections)
     previous=(json.loads(Path(args.previous_packet).read_text(encoding="utf-8"))
               if args.previous_packet else None)
     packet["continuity"]=verify_plan_continuity(previous,packet,t)
-    out.parent.mkdir(parents=True,exist_ok=True)
-    out.write_text(json.dumps(packet,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    out.parent.mkdir(mode=0o700,parents=True,exist_ok=True)
+    if out.parent.stat().st_mode & 0o077:
+        raise ValueError("BLOCKED_UNSAFE_PRIVATE_OUTPUT_DIRECTORY_PERMISSIONS")
+    # No following symlinks or creating world-readable rules in shared /tmp.
+    flags=os.O_WRONLY|os.O_CREAT|os.O_TRUNC|getattr(os,"O_NOFOLLOW",0)
+    fd=os.open(out,flags,0o600)
+    with os.fdopen(fd,"w",encoding="utf-8") as fh:
+        fh.write(json.dumps(packet,ensure_ascii=False,indent=2)+"\n")
     print(json.dumps({"status":packet["status"],
         "taskId":packet["taskId"],"activeRuleCount":len(packet["activeRuleIds"]),
         "handoffRuleCount":len(packet["handoffRules"]),
