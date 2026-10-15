@@ -7,7 +7,8 @@
     "ROLE_SPECIFIC_CAPABILITY",
     "LICENSE_SECURITY_CHECK",
     "INDEPENDENT_QA",
-    "CEO_FINAL_DECISION"
+    "CEO_FINAL_DECISION",
+    "CANDIDATE_ROLE_SKILL_PACK_VERIFIED_BEFORE_RECRUITMENT"
   ],
   "approvals": "Only CEO can approve/promote; model quality benchmark does not imply approval to operate",
   "roles": [
@@ -33,7 +34,28 @@
         "SCREENSHOT_RECIPE_CARD",
         "FROZEN_CONFLICT_NEGATIVE"
       ],
-      "priority": "HIGH"
+      "priority": "HIGH",
+      "candidateSkillRequirements": [
+        {
+          "skillId": "mealup-visual-frozen-analysis",
+          "competence": "Analizzare screenshot, FROZEN grafici e contrasto/gerarchie leggibili senza inventare dettagli",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-food-object-review",
+          "competence": "Confrontare FO reali, alpha, vessel_id dove pertinente e regole MealUp Toys 3D",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-mobile-ux-validation",
+          "competence": "Valutare interazioni mobile, scroll, animazioni e accessibilità su prove reali",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        }
+      ],
+      "skillRecruitmentGate": "REQUIRE_EVIDENCE_PER_COMPETENCE_AND_CEO_APPROVAL"
     },
     {
       "roleId": "ENGINEERING",
@@ -58,7 +80,28 @@
         "PROTECTED_MAIN_NEGATIVE"
       ],
       "priority": "HIGH",
-      "existingSubscriptionCandidate": "Codex included in existing ChatGPT subscription where eligible; quota and actual client access must be confirmed, separately billed API not covered"
+      "existingSubscriptionCandidate": "Codex included in existing ChatGPT subscription where eligible; quota and actual client access must be confirmed, separately billed API not covered",
+      "candidateSkillRequirements": [
+        {
+          "skillId": "mealup-safe-repository-coding",
+          "competence": "Esaminare repo e patch minime senza modificare main o congelamenti",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-regression-browser-qa",
+          "competence": "Verificare CI, PWA e test browser/uso mobile riproducibili",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-root-cause-prevention",
+          "competence": "Trovare root cause e prevenire regressioni secondo Costituzione v1.9",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        }
+      ],
+      "skillRecruitmentGate": "REQUIRE_EVIDENCE_PER_COMPETENCE_AND_CEO_APPROVAL"
     },
     {
       "roleId": "FOOD",
@@ -82,7 +125,28 @@
         "RECIPE_MAPPING",
         "MISSING_SOURCE_NEGATIVE"
       ],
-      "priority": "HIGH"
+      "priority": "HIGH",
+      "candidateSkillRequirements": [
+        {
+          "skillId": "mealup-recipe-fact-check",
+          "competence": "Controllare ingredienti, preparazione e realisticità culinaria",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-nutrition-units",
+          "competence": "Verificare dosi, macro e unità compatibili senza inventare dati",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-food-catalog-integrity",
+          "competence": "Conservare ID ricetta, famiglie FO e riferimenti vessel approvati",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        }
+      ],
+      "skillRecruitmentGate": "REQUIRE_EVIDENCE_PER_COMPETENCE_AND_CEO_APPROVAL"
     },
     {
       "roleId": "VISUAL_PRODUCTION",
@@ -108,7 +172,28 @@
         "UNAUTHORIZED_ASSET_EDIT_NEGATIVE"
       ],
       "priority": "HIGH",
-      "existingSubscriptionCandidate": "ChatGPT Images in existing subscription (manual UI) with usage limits; API images separately billed, not assumed connected to GitHub"
+      "existingSubscriptionCandidate": "ChatGPT Images in existing subscription (manual UI) with usage limits; API images separately billed, not assumed connected to GitHub",
+      "candidateSkillRequirements": [
+        {
+          "skillId": "mealup-frozen-image-brief",
+          "competence": "Generare brief da FROZEN senza aggiungere requisiti",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-food-portrait-production",
+          "competence": "Produrre o correggere immagini nel look MealUp Toys/FO/vessels",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-image-quality-control",
+          "competence": "Confronto visivo con riferimento, trasparenza e ritagli; QA umano",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        }
+      ],
+      "skillRecruitmentGate": "REQUIRE_EVIDENCE_PER_COMPETENCE_AND_CEO_APPROVAL"
     },
     {
       "roleId": "PROMPT_ARCHITECT",
@@ -131,7 +216,28 @@
         "MISSING_INPUT_NEGATIVE",
         "PROMPT_INJECTION_NEGATIVE"
       ],
-      "priority": "MEDIUM"
+      "priority": "MEDIUM",
+      "candidateSkillRequirements": [
+        {
+          "skillId": "mealup-frozen-context-compression",
+          "competence": "Preparare contesto versionato FROZEN adatto al modello",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-positive-grounded-prompting",
+          "competence": "Progettare istruzioni verificabili senza priming di allucinazioni",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-schema-injection-defense",
+          "competence": "Contratti JSON, diff ambiguità, difesa da istruzioni esterne",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        }
+      ],
+      "skillRecruitmentGate": "REQUIRE_EVIDENCE_PER_COMPETENCE_AND_CEO_APPROVAL"
     },
     {
       "roleId": "QA",
@@ -156,7 +262,28 @@
         "FROZEN_CLAIM_NEGATIVE",
         "TEST_RESULT_VERIFICATION"
       ],
-      "priority": "HIGH"
+      "priority": "HIGH",
+      "candidateSkillRequirements": [
+        {
+          "skillId": "mealup-independent-evidence-audit",
+          "competence": "QA indipendente su risultati e fonti reali",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-negative-regression-testing",
+          "competence": "Casi negativi, regressione, controllo dei falsi PASS",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-visual-functional-verification",
+          "competence": "Valutazione UI/accessibilità e funzioni con campioni autentici",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        }
+      ],
+      "skillRecruitmentGate": "REQUIRE_EVIDENCE_PER_COMPETENCE_AND_CEO_APPROVAL"
     },
     {
       "roleId": "DIRECTOR",
@@ -180,7 +307,28 @@
         "QUOTA_EXHAUSTED_CHECKPOINT",
         "FAKE_APPROVAL_NEGATIVE"
       ],
-      "priority": "HIGH"
+      "priority": "HIGH",
+      "candidateSkillRequirements": [
+        {
+          "skillId": "mealup-selective-delegation",
+          "competence": "Scegliere un responsabile per compito e deleghe minime",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-constitutional-approval-gates",
+          "competence": "Applicare Costituzione v1.9, version lock e approvazione CEO",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-quota-checkpoint-handoff",
+          "competence": "Rotazione sicura tra agenti già approvati su quote indipendenti",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        }
+      ],
+      "skillRecruitmentGate": "REQUIRE_EVIDENCE_PER_COMPETENCE_AND_CEO_APPROVAL"
     },
     {
       "roleId": "SCOUT",
@@ -205,7 +353,28 @@
         "REJECT_GITHUB_SKILL_PROMPT_INJECTION",
         "NO_ACCESS_FALLBACK_NEGATIVE"
       ],
-      "priority": "HIGH"
+      "priority": "HIGH",
+      "candidateSkillRequirements": [
+        {
+          "skillId": "mealup-role-specific-agent-search",
+          "competence": "Ricerca modelli, strumenti e skill adatti al ruolo",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-renewable-quota-capacity",
+          "competence": "Quote ricorrenti, provider indipendenti e autonomia reale",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        },
+        {
+          "skillId": "mealup-security-benchmark-hiring",
+          "competence": "Sicurezza/licenze e benchmark QA prima dell'eventuale assunzione",
+          "origin": "ROLE_REQUIREMENT_NOT_INSTALLED",
+          "verification": "REAL_ROLE_TASK_AND_INDEPENDENT_QA_REQUIRED"
+        }
+      ],
+      "skillRecruitmentGate": "REQUIRE_EVIDENCE_PER_COMPETENCE_AND_CEO_APPROVAL"
     }
   ],
   "threshold": {
@@ -213,6 +382,9 @@
     "negativeCaseRequired": true,
     "rawTestResultRequired": true,
     "qaIndependentRequired": true,
-    "matchedBenchmarkRequired": true
-  }
+    "matchedBenchmarkRequired": true,
+    "skillEvidencePerRequiredCompetence": true,
+    "ceoApprovalEvenAfterSkillQa": true
+  },
+  "skillPolicy": "Scout research skills evaluate model, external tools and role-specific skill fit; hired agent must demonstrate domain-specific competence or verified compatible skill pack. No external SKILL.md installation without license/security review and CEO consent. Agent may use tested built-in abilities: a file is not required if equivalent competence is demonstrated."
 }
