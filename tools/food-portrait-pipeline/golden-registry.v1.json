@@ -1,0 +1,44 @@
+{
+  "schema": "mealup-food-portrait-golden-registry-v1",
+  "constitution": "Costituzione Operativa AI v1.9 FROZEN",
+  "state": "NO_VERIFIED_FOOD_PORTRAIT_GOLDEN_MASTER",
+  "approvalPolicy": "HUMAN_APPROVAL_REQUIRED_UNTIL_REAL_PILOT_AND_QA_CALIBRATION",
+  "masterCount": 0,
+  "masters": [],
+  "scopeRules": {
+    "foodObjectFamilyIsNotFoodPortrait": true,
+    "frozenPastaLungaHeroIsNotPortraitMaster": true,
+    "vesselFreeMustRemainWithoutVessel": true,
+    "imageGeneratorOutputIsNotAutomaticallyApproved": true,
+    "referencesCannotBeFabricated": true
+  },
+  "sourceCandidates": [
+    {
+      "id": "VESSEL_BOARD_G5_C63",
+      "assetScope": "VESSEL_LIBRARY_HISTORICAL_REFERENCE_NOT_PORTRAIT_MASTER",
+      "sourcePath": "G5/references/VESSEL_LIBRARY_reference.png",
+      "assertedFrozenSha256": "3318fbf8a718438520b12e9d8d28d88374a46041fc94b3efac1f23b38a50d5c8",
+      "repositoryObservedSha256": "28bba33ad0caaf6da129ae32ec5e9b771723f99ac9c9fd83aeec3e5c310bef7e",
+      "authoritySources": [
+        "G5/vessel-geometry.json",
+        "MealUp_C6.3_G0_Canonical_Manifest_v1.json"
+      ],
+      "state": "QUARANTINED_HASH_MISMATCH",
+      "permittedUse": "METADATA_AND_RECIPE_VESSEL_ID_ONLY",
+      "forbiddenUse": "UNCONDITIONAL_GOLDEN_MASTER_OR_VISUAL_APPROVAL",
+      "recovery": "Recover exact binary and verify source authenticity, do not modify expected hash silently."
+    }
+  ],
+  "unknowns": [
+    "Approved individual Food Portrait Golden Master image set with content hashes and files",
+    "Pixel level validated MealUp Toys 3D vessel source board matching the FROZEN hash",
+    "Automatically callable, permanently free, rate-sustainable image generator",
+    "Validated measurable image QA thresholds and false acceptance rate"
+  ],
+  "doNotTouch": [
+    "main",
+    "mealup-tester-family-fo",
+    "experiment/recipe-visual-agents",
+    "MealUp Master FROZEN without scoped change confirmation"
+  ]
+}
