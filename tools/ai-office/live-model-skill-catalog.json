@@ -1,0 +1,56 @@
+{
+  "schema": "MEALUP_CANDIDATE_SKILL_CATALOG_V1",
+  "status": "LAB_INSTRUCTIONS_ONLY_CANDIDATE_NOT_DESIGN_QA_APPROVED",
+  "skills": [
+    {
+      "id": "MEALUP_DESIGN_STATIC_OBSERVATION",
+      "kind": "INTERNAL",
+      "version": "1.0",
+      "capabilities": [
+        "FO_VISUAL_OBSERVATION"
+      ],
+      "roles": [
+        "DESIGN"
+      ],
+      "scopes": [
+        "LAB_READ_ONLY"
+      ],
+      "approved": true,
+      "approvalRef": "CEO_20261015_READ_ONLY_SKILLS_PILOT",
+      "qaVerified": true,
+      "securityReviewed": true,
+      "quotaKind": "RECURRING_FREE_QUOTA",
+      "extraCostEUR": 0,
+      "quotaVerified": true,
+      "needsNewPrivileges": false,
+      "changesFrozen": false,
+      "qaScore": 90,
+      "path": ".agents/skills/mealup-design-observe-static-fo/SKILL.md"
+    },
+    {
+      "id": "MEALUP_DESIGN_OVERCLAIM_GUARD",
+      "kind": "INTERNAL",
+      "version": "1.0",
+      "capabilities": [
+        "CLAIM_BOUNDARIES"
+      ],
+      "roles": [
+        "DESIGN"
+      ],
+      "scopes": [
+        "LAB_READ_ONLY"
+      ],
+      "approved": true,
+      "approvalRef": "CEO_20261015_READ_ONLY_SKILLS_PILOT",
+      "qaVerified": true,
+      "securityReviewed": true,
+      "quotaKind": "RECURRING_FREE_QUOTA",
+      "extraCostEUR": 0,
+      "quotaVerified": true,
+      "needsNewPrivileges": false,
+      "changesFrozen": false,
+      "qaScore": 90,
+      "path": ".agents/skills/mealup-design-no-overclaim/SKILL.md"
+    }
+  ]
+}
