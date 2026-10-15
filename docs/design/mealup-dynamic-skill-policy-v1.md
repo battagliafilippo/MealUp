@@ -1,0 +1,3 @@
+# MealUp — Mandato professionale dinamico controllato
+
+Decisione del CEO del 15 ottobre 2026: le competenze di ingresso non costituiscono un elenco chiuso di Skill. Ogni agente sceglie le Skill pertinenti all'incarico fra quelle già verificate e autorizzate, senza bisogno di approvazione ad ogni uso. Nuovi strumenti e nuovi privilegi richiedono la verifica prevista. Il Talent Scout ricerca e propone gli agenti migliori e rimane indipendente dal Director, con rapporto diretto al CEO. Il Director assegna le attività degli altri reparti. Tutti rispettano i FROZEN e il budget aggiuntivo zero. Questa è una regola progettuale, non l'attivazione di nuovi agenti.
