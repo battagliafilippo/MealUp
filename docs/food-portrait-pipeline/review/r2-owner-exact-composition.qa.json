@@ -66,5 +66,10 @@
       "deployment"
     ]
   },
-  "nextDecisionRequired": "No visual or kcal decision remains for r2. A separate explicit authorization is required for freeze, integration, batch expansion or deploy; E08 remains independently blocked."
+  "styleFreeze": {
+    "status": "FROZEN",
+    "contract": "docs/food-portrait-pipeline/food-portrait-style-frozen-v1.json",
+    "scope": "Style reference for all Food Portraits; recipe content, kcal and needle remain per-recipe variables."
+  },
+  "nextDecisionRequired": "The next controlled pilot may be prepared under the frozen style. Integration, batch expansion beyond the authorized pilot or deploy still require separate authorization; E08 remains independently blocked."
 }

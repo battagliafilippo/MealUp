@@ -305,3 +305,18 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - E08 resta `BLOCKED_HASH_MISMATCH`: l'approvazione r2 non dimostra né sostituisce la tavola vessel FROZEN storica.
 
 **Prossimo micro-step necessario:** definire con autorizzazione separata se congelare r2 come riferimento o usarlo come base per il successivo pilota controllato. Nessuna azione automatica.
+
+
+## Delegated decision checkpoint 2026-10-15 — Food Portrait Style v1 FROZEN
+
+- L'owner delega la decisione operativa con il vincolo che tutti i Food Portrait seguano identicamente lo stile r2 approvato e che la lancetta avanzi dal verde al rosso al crescere delle calorie.
+- Decisione: congelare r2 come **riferimento stilistico canonico**, non come ricetta universale. Contratto: `food-portrait-style-frozen-v1.json`.
+- Invarianti FROZEN: MealUp Toys 3D premium, vessel crema/arancio, luce calda, composizione hero tre-quarti, singolo piatto integrato, materiali soft glossy, proporzioni mobile e linguaggio del gauge identici alla source owner SHA `027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a`.
+- Variabili per ricetta: ingredienti/preparazione, vessel canonico, numero kcal letto dalla card, posizione lancetta.
+- Audit sui 454 valori kcal reali: minimo 0, mediana 480, P75 645, P90 820, P95 995, massimo 3900, 23 ricette oltre 1000.
+- Scala FROZEN scelta: 0–1000 kcal, angolo lineare -60° verde → +60° rosso. Oltre 1000 la lancetta satura sul rosso ma il numero resta esatto. Formula verificata da `gauge-mapping.cjs`.
+- Lo stile FROZEN non risolve E08 e non autorizza produzione batch, integrazione tester/PWA o deploy.
+
+**Stato:** r2 APPROVED; Food Portrait Style v1 FROZEN; gauge mapping FROZEN; E08 BLOCKED; produzione massiva NON AUTORIZZATA.
+
+**Prossimo micro-step necessario:** preparare un secondo pilot controllato con ricetta/vessel diversi applicando il nuovo contratto, quindi confrontarlo visivamente con r2 prima di autorizzare qualsiasi lotto.

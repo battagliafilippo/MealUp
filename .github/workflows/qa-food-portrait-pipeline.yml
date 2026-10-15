@@ -142,6 +142,8 @@ jobs:
           NODE
       - name: Test technical image QA with decoded real pixels
         run: |
+          node --check tools/food-portrait-pipeline/gauge-mapping.cjs
+          node tools/food-portrait-pipeline/gauge-mapping.cjs
           node --check tools/food-portrait-pipeline/image-technical-qa.cjs
           node tools/food-portrait-pipeline/image-technical-qa.cjs --self-test
           node <<'NODE'

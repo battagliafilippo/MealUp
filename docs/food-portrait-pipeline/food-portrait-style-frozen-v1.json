@@ -1,0 +1,64 @@
+{
+  "schema": "mealup-food-portrait-style-frozen-v1",
+  "status": "FROZEN",
+  "decisionDate": "2026-10-15",
+  "authority": "OWNER_DELEGATED_DECISION",
+  "scope": "Visual language for all MealUp Food Portraits",
+  "canonicalReference": {
+    "recipeId": "r2",
+    "source": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+    "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a",
+    "contentBox": [0, 688, 1179, 1867],
+    "contentSize": [1179, 1179]
+  },
+  "frozenVisualInvariants": [
+    "MealUp Toys 3D premium rendering",
+    "soft rounded cream vessel with controlled orange accents",
+    "warm clean cream background",
+    "front three-quarter hero composition",
+    "single complete integrated recipe, never an ingredient collage",
+    "soft glossy stylized food with recognizable forms",
+    "same gauge housing language, segmented green-lime-yellow-orange-red arc, dark physical needle, visible pivot, central kcal value and orange secondary indicator",
+    "mobile-first square visual content and equivalent subject-to-canvas proportions"
+  ],
+  "perRecipeVariables": [
+    "recipe ingredients and prepared forms",
+    "canonical vessel category",
+    "recipe kcal number from the recipe card",
+    "gauge needle angle computed from the frozen mapping"
+  ],
+  "gaugeBehavior": {
+    "sourceOfTruth": "recipe card kcal",
+    "minimumKcal": 0,
+    "maximumKcal": 1000,
+    "minimumAngleDegrees": -60,
+    "maximumAngleDegrees": 60,
+    "formula": "angle=-60+120*clamp(kcal,0,1000)/1000",
+    "overflowPolicy": "Values above 1000 remain at the maximum red position while the numeric kcal stays exact.",
+    "colorDirection": "Lower kcal points toward green; higher kcal points toward red.",
+    "catalogEvidence": {
+      "recipeCount": 454,
+      "minimum": 0,
+      "median": 480,
+      "p75": 645,
+      "p90": 820,
+      "p95": 995,
+      "maximum": 3900,
+      "above1000Count": 23
+    }
+  },
+  "separationRule": {
+    "baseVisualMustMatchReferenceStyle": true,
+    "kcalAndNeedleAreDataDriven": true,
+    "sourceRecipeCardMustNotBeOverridden": true,
+    "automaticImageAcceptanceAllowed": false
+  },
+  "explicitlyNotFrozen": [
+    "the baked 480 text and baked needle angle in the owner source; production kcal and needle are dynamic",
+    "historical G5 vessel board affected by E08",
+    "individual Food Portraits other than the approved r2 reference",
+    "batch production",
+    "tester or PWA integration",
+    "deployment"
+  ]
+}
