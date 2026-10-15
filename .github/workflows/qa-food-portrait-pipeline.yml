@@ -178,6 +178,17 @@ jobs:
             x.fallback.doNotReplaceWithFamilyFoodObject===true));
           console.log('PASS staging: 454 recipe IDs mapped, 2 grouped root causes, no fake portraits');
           NODE
+      - name: Revalidate existing AI Office role routing and Groq reasoning guards
+        run: |
+          node --test tools/ai-office/agent-registry.test.cjs \
+            tools/ai-office/office-orchestrator.test.cjs \
+            tools/ai-office/router.test.cjs
+          node tools/recipe-visuals/groq-reasoner.cjs --self-test
+          node tools/recipe-visuals/groq-reasoner.cjs \
+            --input /tmp/mealup-m3-for-portrait/visual-briefs.v1.json \
+            --recipe-id r2 \
+            --out /tmp/mealup-portrait-staging/groq-food-dry-run
+          echo 'Verified existing agent contract without paid calls or visual acceptance.'
       - name: Verify AI Office handoffs and modular six-recipe pilot pack
         run: |
           node --check tools/food-portrait-pipeline/pilot-office-bridge.cjs
