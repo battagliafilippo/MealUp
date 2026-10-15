@@ -1,0 +1,36 @@
+name: QA - MealUp Constitution 1.9 Rule Activation
+# Synthetic fixtures only. Never stores or prints the private canonical DOCX.
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - 'tools/ai-office/constitution-task-packet.py'
+      - 'tools/ai-office/constitution-task-packet.test.py'
+      - '.github/workflows/qa-ai-office-constitution.yml'
+  pull_request:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - 'tools/ai-office/constitution-task-packet.py'
+      - 'tools/ai-office/constitution-task-packet.test.py'
+permissions:
+  contents: read
+jobs:
+  constitution-preflight-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate rule extraction and continuity under synthetic fixtures
+        run: python3 tools/ai-office/constitution-task-packet.test.py
+      - name: Fail closed without the privately stored original
+        run: |
+          if python3 tools/ai-office/constitution-task-packet.py --canonical-docx /tmp/not-present-original.docx --task-json /tmp/not-present-task.json --out /tmp/NEVER.json; then
+            echo "ERROR: unverified Constitution must NOT produce a handoff"
+            exit 1
+          else
+            echo "PASS: inaccessible source is blocked without bypass"
+          fi
