@@ -1,0 +1,97 @@
+name: QA - Qwen positive instruction control
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - '.github/workflows/qa-ai-office-qwen-positive-prompt.yml'
+permissions:
+  contents: read
+jobs:
+  one-shot:
+    if: >-
+      ${{ github.event_name == 'push' && github.event.head_commit.message == 'ci(ai-office): one-shot positive prompt control' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Positive prompt with same model and original Food Object
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MEALUP_FREE_ONLY: 'YES'
+        run: |
+          node <<'NODE'
+          'use strict';
+          const fs = require('node:fs');
+          const key = process.env.GROQ_API_KEY;
+          if (process.env.MEALUP_FREE_ONLY !== 'YES' || !(key?.length > 20)) throw Error('FREE_GATE_OR_SECRET');
+          const asset=fs.readFileSync('assets/family-fo/pasta.webp');
+          if (asset.length !== 147190) throw Error('ASSET_MISMATCH');
+          const schema = {
+            visibleObservations: ['solo un oggetto reale e un attributo visibile per voce'],
+            foodFamily: 'stringa', risksToVerify: ['proposta di controllo'],
+            recommendedMobileTest: 'un controllo futuro concreto',
+            assumptions: [], approvalClaim: false, decision: 'PROPOSAL_ONLY',
+            filesModified: [], otherDepartmentsActivated: []
+          };
+          const promptSystem = [
+            'Sei il Design Director candidato dell ufficio MealUp.',
+            'Ricevi una sola immagine statica 1024x1024, isolata con trasparenza nei pixel esterni.',
+            'Un analizzatore deterministico ha verificato queste proprieta tecniche; non serve dedurle visivamente.',
+            'L immagine raffigura una composizione singola.',
+            'Nelle osservazioni elenca esclusivamente elementi fisicamente visibili, forme, colori, disposizione e texture.',
+            'Massimo quattro osservazioni specifiche. Non descrivere il processo di acquisizione o il contesto non fornito.',
+            'Non e stato fornito uno screenshot della card: puoi solo proporre un futuro test.',
+            'Le ipotesi vanno solo in assumptions; nessuna approvazione FROZEN o azione operativa.',
+            'Rispondi esclusivamente con un JSON valido.'
+          ].join(' ');
+          const user = 'Analizza il Food Object Pasta senza modificarlo. Per visibleObservations descrivi solo elementi e attributi visibili nella singola composizione. Compila lo schema: ' + JSON.stringify(schema);
+          const body = { model: 'qwen/qwen3.8-27b', reasoning_effort: 'none', temperature: 0.1,
+            max_completion_tokens: 520, stream: false,
+            response_format: { type: 'json_object' }, messages: [
+              { role: 'system', content: promptSystem },
+              { role: 'user', content: [
+                { type: 'text', text: user },
+                { type: 'image_url', image_url: { url: 'data:image/webp;base64,'+asset.toString('base64') } }
+              ] }
+            ] };
+          (async()=>{
+            let response;
+            try { response=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+              method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json'},
+              body:JSON.stringify(body),signal:AbortSignal.timeout(25000)
+            }); }catch(_){throw Error('NETWORK_OR_TIMEOUT');}
+            if (!response.ok) throw Error('PROVIDER_HTTP_'+response.status);
+            const payload=await response.json();
+            const answer=JSON.parse(payload?.choices?.[0]?.message?.content||'{}');
+            const observations=Array.isArray(answer.visibleObservations)? answer.visibleObservations: [];
+            const flags={
+              sequence:/\b(primo|secondo|terzo|successiv[oi])\s+(frame|fotogramm[ai]|immagin[ei]|crop)\b|\b(frame|fotogramm[ai])\s+successiv[oi]\b/i.test(observations.join(' ')),
+              unsupportedCard:/nella card (si vede|si nota|appare)/i.test(observations.join(' ')),
+              technicalBackgroundAsWhite:/sfondo bianco/i.test(observations.join(' ')),
+              tooManyObservations:observations.length>4
+            };
+            const data={schema:'mealup-qwen-positive-control-v1',status:'HTTP_200',model:body.model,
+              flags,candidate:answer,tokens:payload?.usage?.total_tokens??null,
+              input:{staticSingleImage:true,pixelSize:'1024x1024',hasAlpha:true},
+              temperature:body.temperature,reasoningEffort:body.reasoning_effort,
+              maxCompletionTokens:body.max_completion_tokens,
+              apiCalls:1,retries:0};
+            fs.writeFileSync('/tmp/qwen-positive-control.json',JSON.stringify(data,null,2));
+            console.log('RESULT=COMPLETE HTTP_200 QA_FLAGS='+JSON.stringify(flags)+' TOKENS='+String(data.tokens));
+            console.log('ONE_CALL_ONLY; no writes to app or FROZEN; human review required');
+          })().catch(e=>{console.error('RESULT=BLOCKED '+e.message);process.exitCode=1;});
+          NODE
+      - name: Save review data
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: qwen-positive-prompt-control
+          path: /tmp/qwen-positive-control.json
+          if-no-files-found: warn
+          retention-days: 2
