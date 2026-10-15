@@ -107,6 +107,15 @@ def validate_task(t):
         raise ValueError("BLOCKED_MISSING_MUST_ACCEPTANCE_OR_STEPS")
     if set(t["tags"])-ALLOWED_TAGS:
         raise ValueError("BLOCKED_UNKNOWN_CONDITIONAL_TRIGGER")
+    # Structural risk/agency triggers cannot be silently omitted by a task author.
+    auto={"delegated"}  # Every packet is addressed to a delegated office specialist.
+    if len(t["steps"])>1:
+        auto.add("long_running")
+    if t["writeScope"]:
+        auto.add("modification")
+    if t["risk"].upper() in ("HIGH","MISSION_CRITICAL"):
+        auto.add("high_risk")
+    t["tags"]=sorted(set(t["tags"])|auto)
     ids=[]
     for i,s in enumerate(t["steps"]):
         if not isinstance(s,dict) or any(not NONEMPTY(s.get(key)) for key in
