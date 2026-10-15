@@ -1,0 +1,86 @@
+{
+  "schema": "mealup-ai-talent-candidate-registry-v1",
+  "asOf": "2026-10-15",
+  "budgetAdditionalEUR": 0,
+  "description": "Candidates researched, not active Design replacements. No unrelated agent promotions.",
+  "sourcesVerified": "official pages or prior real GitHub Actions runs; no model A/B winner",
+  "candidates": [
+    {
+      "id": "QWEN3_8_27B_GROQ",
+      "role": "Design Director",
+      "publisher": "Qwen",
+      "modelId": "qwen/qwen3.8-27b",
+      "inferenceProvider": "Groq Free",
+      "status": "CONNECTED_GUARDED_NOT_QA_APPROVED",
+      "vision": true,
+      "licenseClaim": "model weight license to recheck on canonical Qwen source; Groq inference proprietary",
+      "freeApiAccess": "VERIFIED_BY_REAL_CALLS",
+      "evidence": [
+        "https://console.groq.com/docs/model/qwen/qwen3.8-27b",
+        "https://github.com/battagliafilippo/MealUp/actions/runs/38678076069",
+        "https://github.com/battagliafilippo/MealUp/actions/runs/38679211583",
+        "https://github.com/battagliafilippo/MealUp/actions/runs/38679383524"
+      ],
+      "risk": "Hallucinated multiple frames from single static WebP; model not fully reliable",
+      "next": "Intra-model baseline + separate QA; only compare externally after second model free API confirmed"
+    },
+    {
+      "id": "PHI_4_REASONING_VISION_15B",
+      "role": "Design Director",
+      "publisher": "Microsoft",
+      "modelId": "microsoft/Phi-4-reasoning-vision-15B",
+      "inferenceProvider": null,
+      "status": "DISCOVERED_MODEL_LICENSE_VERIFIED",
+      "vision": true,
+      "licenseClaim": "MIT confirmed, official model/repo",
+      "freeApiAccess": "NOT_VERIFIED",
+      "evidence": [
+        "https://github.com/microsoft/Phi-4-reasoning-vision-15B",
+        "https://github.com/microsoft/Phi-4-reasoning-vision-15B/blob/main/LICENSE"
+      ],
+      "risk": "Vision open-weights but execution normally requires GPU/provider; Azure hosting not assumed free",
+      "next": "Locate verifiable hosted API 0 additional EUR and check no billing"
+    },
+    {
+      "id": "QWEN3_VL_8B_INSTRUCT",
+      "role": "Design Director",
+      "publisher": "Qwen",
+      "modelId": "Qwen/Qwen3-VL-8B-Instruct",
+      "inferenceProvider": null,
+      "status": "DISCOVERED_MODEL_LICENSE_VERIFIED",
+      "vision": true,
+      "licenseClaim": "Apache-2.0 per official model card",
+      "freeApiAccess": "NOT_VERIFIED",
+      "evidence": [
+        "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct"
+      ],
+      "risk": "No connected free inference endpoint; cannot count download/open source as free running agent",
+      "next": "Locate hosted API 0 additional EUR or feasible local GPU and verify limits"
+    },
+    {
+      "id": "GEMINI3_8_FLASH_GOOGLE",
+      "role": "Design Director",
+      "publisher": "Google",
+      "modelId": "gemini-3.8-flash",
+      "inferenceProvider": "Gemini API",
+      "status": "ACCESS_BLOCKED",
+      "vision": true,
+      "licenseClaim": "Proprietary; not open-source",
+      "freeApiAccess": "BLOCKED_HTTP_403",
+      "evidence": [
+        "https://github.com/battagliafilippo/MealUp/actions/runs/38638531077"
+      ],
+      "risk": "MealUp-AI-Office project 'Limitato' even after security checks",
+      "next": "Do not make further calls or enable billing; only reconsider on free access proof"
+    }
+  ],
+  "benchmark": {
+    "id": "OFFICE-DESIGN-BENCH-V1",
+    "workflow": ".github/workflows/qa-ai-office-design-benchmark.yml",
+    "type": "INTRA_MODEL_BASELINE",
+    "externalModelA_BStatus": "BLOCKED_NO_SECOND_VERIFIED_ZERO_COST_VISION_ENDPOINT",
+    "frozenAssetsUnmodified": true,
+    "modelWinner": null
+  },
+  "replacementPolicy": "CEO must approve; Director alone then implements under independent QA"
+}
