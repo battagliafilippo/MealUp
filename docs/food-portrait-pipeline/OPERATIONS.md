@@ -454,3 +454,15 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dai cinque riferimenti verificati.
 
 **Prossimo micro-step necessario:** trattare separatamente il caso `v08 VESSEL_FREE`, che presenta un conflitto tra classificazione FREE e bicchiere citato nei passaggi; non generare finché il conflitto non è risolto.
+
+
+## VESSEL_FREE exception resolution 2026-10-15 — v08 deciso, non generato
+
+- Source verificata: `v08`, **Succo d'arancia**, `90 kcal`, ingrediente `succo di arancia 200 ml`.
+- G8 assegna `VESSEL_FREE` e primary `BEVERAGE_JUICE_BOX` variante `ARANCIA`; G5 conferma `VESSEL_FREE`. La categoria `VESSEL_GLASS` esiste ma non è assegnata a v08.
+- I passaggi dicono «Agita la bottiglia» e poi «Versa in un bicchiere»: bottiglia/bicchiere descrivono confezione e consumo, non autorizzano la sostituzione del vessel canonico.
+- Decisione: **mantenere `VESSEL_FREE`**. Il futuro Food Portrait userà come soggetto il contenitore neutro del succo; non aggiungerà bicchiere né altro vessel.
+- Nessuna modifica a G8, G5, main, tester o AI Office. Manifest decisionale: `v08-vessel-resolution-v1.json`.
+- Nessuna immagine generata in questo micro-step. E08 resta `BLOCKED_HASH_MISMATCH`.
+
+**Prossimo micro-step necessario:** generare una sola candidate v08 con package/bottle `VESSEL_FREE`, `90 kcal` e lancetta verde, quindi QA e review owner prima di qualsiasi approvazione.

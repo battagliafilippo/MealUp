@@ -1,0 +1,39 @@
+{
+  "schema": "mealup-food-portrait-vessel-exception-resolution-v1",
+  "status": "DECIDED_NOT_GENERATED",
+  "decisionDate": "2026-10-15",
+  "recipeId": "v08",
+  "title": "Succo d'arancia",
+  "kcal": 90,
+  "canonicalVesselId": "VESSEL_FREE",
+  "decision": "KEEP_VESSEL_FREE",
+  "evidence": {
+    "ingredient": "succo di arancia 200 ml",
+    "primaryMasterId": "BEVERAGE_JUICE_BOX",
+    "primaryVariantId": "ARANCIA",
+    "stepMentions": ["bottiglia", "bicchiere"],
+    "mandateRule": "VESSEL_FREE must remain without an added vessel",
+    "existingGlassCategory": "VESSEL_GLASS exists independently and is not assigned to v08"
+  },
+  "interpretation": {
+    "confidence": "CERTAIN_FOR_CONTRACT_PRESERVATION",
+    "subject": "neutral orange-juice package or bottle as the primary prepared beverage object",
+    "glass": "consumption instruction only; must not be rendered",
+    "addedVesselForbidden": true,
+    "g8OrG5MutationRequired": false
+  },
+  "futurePilotConstraints": [
+    "exactly one beverage package or bottle",
+    "no glass, cup, bowl, plate, ramekin or tray",
+    "no loose oranges or ingredient collage",
+    "90 kcal exact",
+    "gauge needle in the low green zone",
+    "owner review required before approval or freeze"
+  ],
+  "gates": {
+    "generationAuthorizedByThisDecision": false,
+    "automaticAcceptanceAllowed": false,
+    "deployAuthorized": false,
+    "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
+  }
+}
