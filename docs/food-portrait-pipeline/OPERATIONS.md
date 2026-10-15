@@ -506,3 +506,16 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - E08 resta `BLOCKED_HASH_MISMATCH` e non viene aggirato dal report di copertura.
 
 **Prossimo micro-step necessario:** progettare, senza produrre immagini, il perimetro del primo lotto controllato ristretto ai vessel coperti e sottoporlo ad autorizzazione separata.
+
+
+## Controlled lot design checkpoint 2026-10-15 — FPP-LOT-001 PROPOSED, non autorizzato
+
+- Progettato il primo lotto controllato come sequenza di **6 nuove ricette**, una per ciascuna categoria vessel coperta da reference FROZEN.
+- Ordine per rischio crescente: `v10` VESSEL_FREE, `do01` RAMEKIN, `a07` PLATE, `r3` BOWL, `d32` BAKING_DISH, `do10` DESSERT_MOLD.
+- Ricette, ingredienti, kcal e vessel verificati contro `index.html` e `G8/composition-matrix.json`; SHA delle fonti registrati nel piano `controlled-lot-001-plan-v1.json`.
+- Il gauge è obbligatorio secondo il contratto FROZEN: valore dalla card e angolo deterministico; per `do10` il numero resta `1560 kcal` e la lancetta satura a `60°` rosso.
+- Modalità prevista: **una sola candidate per ciclo**, poi QA tecnico, QA visivo indipendente e review owner. Vietata l'esecuzione batch.
+- Stato: `PROPOSED_NOT_AUTHORIZED_FOR_GENERATION`. Nessuna immagine prodotta, nessun auto-accept, freeze, integrazione o deploy.
+- `VESSEL_CUP` e `VESSEL_PIZZA_SURFACE` restano esclusi; E08 resta `BLOCKED_HASH_MISMATCH`.
+
+**Prossimo micro-step necessario:** autorizzazione separata del solo elemento 1, `v10 — Succo ACE`; gli altri cinque elementi restano soltanto pianificati.

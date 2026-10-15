@@ -1,0 +1,167 @@
+{
+  "schema": "mealup-food-portrait-controlled-lot-plan-v1",
+  "lotId": "FPP-LOT-001",
+  "status": "PROPOSED_NOT_AUTHORIZED_FOR_GENERATION",
+  "decisionDate": "2026-10-15",
+  "purpose": "Validate controlled style transfer across all six covered FROZEN vessel categories without batch generation.",
+  "sourceEvidence": {
+    "recipeCards": {
+      "path": "index.html",
+      "sha256": "2743f558e5ccf3045a3bb07110ccf9f2b446ed4866b03deeb20229966d2aa8f8"
+    },
+    "compositionMatrix": {
+      "path": "G8/composition-matrix.json",
+      "sha256": "7439f54470e6c0a0ec51c38efd24ca27fb96ae428e8ce11165279a669d09ace7"
+    },
+    "frozenStyleContract": {
+      "path": "docs/food-portrait-pipeline/food-portrait-style-frozen-v1.json",
+      "sha256": "90202385ff1d82b543474347c4bde1efcd3c27a73abf41b9fb7d80bfb642d06f"
+    }
+  },
+  "executionContract": {
+    "mode": "STRICTLY_SERIAL_ONE_RECIPE_PER_CYCLE",
+    "plannedRecipeCount": 6,
+    "maximumImagesBeforeQa": 1,
+    "batchGenerationForbidden": true,
+    "advanceRequires": [
+      "technical QA PASS",
+      "independent visual QA PASS CANDIDATE ONLY",
+      "explicit owner review of the current candidate"
+    ],
+    "automaticAcceptanceAllowed": false,
+    "automaticFreezeAllowed": false,
+    "integrationAllowed": false,
+    "deploymentAllowed": false,
+    "extraCostEUR": 0
+  },
+  "globalVisualContract": {
+    "style": "Match the six FROZEN MealUp Food Portrait references identically in visual language.",
+    "oneCompleteRecipe": true,
+    "ingredientCollageForbidden": true,
+    "gaugeRequired": true,
+    "gaugeKcalSource": "recipe card",
+    "gaugeFormula": "angle=-60+120*clamp(kcal,0,1000)/1000",
+    "valuesAbove1000": "needle clamped at red maximum while numeric kcal remains exact",
+    "additionalTextOrUiForbidden": true,
+    "backgroundTransparency": "OPTIONAL_ONLY_IF_IT_SIMPLIFIES_PRODUCTION_WITHOUT_CHANGING_THE_FROZEN_LOOK"
+  },
+  "sequence": [
+    {
+      "order": 1,
+      "recipeId": "v10",
+      "title": "Succo ACE",
+      "vesselId": "VESSEL_FREE",
+      "kcal": 95,
+      "gaugeAngleDegrees": -48.6,
+      "referenceRecipeId": "v08",
+      "ingredients": [{"name": "succo ace", "quantity": 200, "unit": "ml"}],
+      "composition": {"primaryMasterId": "BEVERAGE_JUICE_BOX", "variantId": "ACE"},
+      "visualBoundary": "One neutral ACE juice package as subject; no glass, cup, loose fruit, label or brand.",
+      "risk": "LOW",
+      "reason": "Closest controlled transfer from the FROZEN v08 VESSEL_FREE package case."
+    },
+    {
+      "order": 2,
+      "recipeId": "do01",
+      "title": "Mousse di yogurt greco al cacao",
+      "vesselId": "VESSEL_RAMEKIN",
+      "kcal": 150,
+      "gaugeAngleDegrees": -42,
+      "referenceRecipeId": "s02",
+      "ingredients": [
+        {"name": "yogurt greco 0%", "quantity": 150, "unit": "g"},
+        {"name": "cacao amaro", "quantity": 8, "unit": "g"},
+        {"name": "miele", "quantity": 10, "unit": "g"}
+      ],
+      "composition": {"primaryMasterId": "MOUSSE", "secondaryMasterIds": ["GREEK_YOGURT", "YOGURT", "HONEY"]},
+      "visualBoundary": "Single airy cocoa mousse integrated in one ramekin; no separated ingredient props.",
+      "risk": "LOW",
+      "reason": "Clear prepared form and direct RAMEKIN reference."
+    },
+    {
+      "order": 3,
+      "recipeId": "a07",
+      "title": "Prosciutto e melone",
+      "vesselId": "VESSEL_PLATE",
+      "kcal": 270,
+      "gaugeAngleDegrees": -27.6,
+      "referenceRecipeId": "r1",
+      "ingredients": [
+        {"name": "prosciutto crudo", "quantity": 70, "unit": "g"},
+        {"name": "melone", "quantity": 250, "unit": "g"}
+      ],
+      "composition": {"primaryMasterId": "PROSCIUTTO", "secondaryMasterIds": ["MELON"]},
+      "visualBoundary": "Melon wedges with prosciutto slices draped in waves on one plate, exactly as stated by the recipe.",
+      "risk": "LOW",
+      "reason": "Explicit plating evidence and only two ingredients."
+    },
+    {
+      "order": 4,
+      "recipeId": "r3",
+      "title": "Yogurt bowl proteica ai frutti di bosco",
+      "vesselId": "VESSEL_BOWL",
+      "kcal": 320,
+      "gaugeAngleDegrees": -21.6,
+      "referenceRecipeId": "r2",
+      "ingredients": [
+        {"name": "yogurt greco 0%", "quantity": 250, "unit": "g"},
+        {"name": "frutti di bosco", "quantity": 80, "unit": "g"},
+        {"name": "miele", "quantity": 1, "unit": "cucchiaino"},
+        {"name": "mandorle", "quantity": 15, "unit": "g"}
+      ],
+      "composition": {"primaryMasterId": "YOGURT_BOWL", "secondaryMasterIds": ["GREEK_YOGURT", "YOGURT", "MIXED_BERRIES", "HONEY"]},
+      "visualBoundary": "One integrated yogurt bowl topped only with berries, almond flakes and a honey drizzle.",
+      "risk": "LOW",
+      "reason": "Explicit bowl assembly and strong ingredient recognizability."
+    },
+    {
+      "order": 5,
+      "recipeId": "d32",
+      "title": "Parmigiana di melanzane",
+      "vesselId": "VESSEL_BAKING_DISH",
+      "kcal": 975,
+      "gaugeAngleDegrees": 57,
+      "referenceRecipeId": "p12",
+      "ingredients": [
+        {"name": "melanzane", "quantity": 400, "unit": "g"},
+        {"name": "passata di pomodoro", "quantity": 250, "unit": "g"},
+        {"name": "mozzarella", "quantity": 120, "unit": "g"},
+        {"name": "parmigiano", "quantity": 50, "unit": "g"},
+        {"name": "basilico", "quantity": 5, "unit": "g"},
+        {"name": "olio evo", "quantity": 3.5, "unit": "cucchiai"}
+      ],
+      "composition": {"primaryMasterId": "EGGPLANT", "secondaryMasterIds": ["TOMATO_SAUCE", "TOMATO", "MOZZARELLA", "PARMESAN"]},
+      "visualBoundary": "Layered baked parmigiana in one baking dish; recognisable eggplant, tomato and melted cheese, no side props.",
+      "risk": "MEDIUM",
+      "reason": "More ingredients and layering, but direct BAKING_DISH evidence."
+    },
+    {
+      "order": 6,
+      "recipeId": "do10",
+      "title": "Banana bread proteico",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "kcal": 1560,
+      "gaugeAngleDegrees": 60,
+      "gaugeClamped": true,
+      "referenceRecipeId": "do08",
+      "ingredients": [
+        {"name": "banana", "quantity": 300, "unit": "g"},
+        {"name": "avena", "quantity": 200, "unit": "g"},
+        {"name": "uovo", "quantity": 110, "unit": "g"},
+        {"name": "miele", "quantity": 40, "unit": "g"},
+        {"name": "noci", "quantity": 40, "unit": "g"},
+        {"name": "lievito per dolci", "quantity": 8, "unit": "g"}
+      ],
+      "composition": {"primaryMasterId": "BANANA_BREAD", "secondaryMasterIds": ["EGG", "BANANA", "HONEY"]},
+      "visualBoundary": "One baked banana-bread loaf in a plumcake mold; nuts may be visible in the loaf, no loose ingredient display.",
+      "risk": "MEDIUM",
+      "reason": "Clear mold evidence but highest ingredient/form complexity in the lot; therefore scheduled last."
+    }
+  ],
+  "excluded": {
+    "frozenPilotRecipeIds": ["r1", "r2", "s02", "do08", "p12", "v08"],
+    "uncoveredVessels": ["VESSEL_CUP", "VESSEL_PIZZA_SURFACE"],
+    "historicalGate": "E08_HISTORICAL_VESSEL_SHA_MISMATCH remains BLOCKED and is not used as evidence."
+  },
+  "nextAuthorizedDecision": "OWNER_MAY_AUTHORIZE_ONLY_SEQUENCE_ITEM_1; the remaining five items stay planned and not generated."
+}
