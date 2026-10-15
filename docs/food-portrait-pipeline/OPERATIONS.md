@@ -207,3 +207,22 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Stato aggiornato:** un generatore ha dimostrato il rispetto del contratto singola-ricetta per un solo tentativo; `r2` resta `VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED` per FAIL tecnico. Produzione batch, auto-accept, freeze, integrazione e deploy restano vietati.
 
 **Prossimo micro-step necessario ma non ancora autorizzato:** decidere se la trasparenza è obbligatoria per lo staging Food Portrait. Se sì, autorizzare un solo retry r2 che cambi esclusivamente lo sfondo in trasparente e preservi tutti i vincoli visuali già passati; E08 resta indipendentemente bloccato.
+
+
+## Decision checkpoint 2026-10-15 — trasparenza opzionale, gauge obbligatorio
+
+- Decisione owner: la trasparenza del Food Portrait è **opzionale**; va scelta la soluzione che rende la produzione più semplice e affidabile.
+- Decisione owner: il gauge deve essere **visibile nella presentazione finale**.
+- Nuova reference gauge fornita: `IMG_1264.jpeg`, SHA-256 `fb7473e2da2cfafe84d0e33a9316c458207e0536b688267e6c18ab0c32535b47`, 497 x 422 RGB. Manifest: `owner-gauge-reference.v1.json`.
+- Boundary implementativo: gauge obbligatorio come **UI dinamica separata**, non incorporato nei pixel del Food Portrait. Il valore kcal, la lancetta, accessibilità e posizione responsive devono poter cambiare senza rigenerare il piatto.
+- La candidate r2 esistente resta invariata e classificata `VISUAL_CANDIDATE_PORTRAIT_ONLY`; non contiene il gauge e non è un asset approvato.
+
+**Issue log aggiornato:**
+
+| ID | Tipo | Stato e decisione |
+| --- | --- | --- |
+| E13 | OPAQUE_BACKGROUND_VS_ALPHA_CONTRACT | **OWNER DECISION RECEIVED / IMPLEMENTATION PENDING**: alpha non obbligatorio. Il FAIL storico resta prova corretta del test eseguito; aggiornare esplicitamente la policy QA e rieseguire prima di dichiarare PASS tecnico. |
+| E14 | GAUGE_REQUIRED_BUT_NOT_BAKED | **OPEN**: la presentazione finale deve mostrare il gauge secondo la nuova reference owner, come layer UI dinamico separato. Nessuna modifica a tester/PWA autorizzata. |
+| E08 | HISTORICAL_VESSEL_SHA_MISMATCH | **BLOCKED invariato**: la decisione su trasparenza e gauge non dimostra né sostituisce la tavola vessel FROZEN. |
+
+**Prossimo micro-step necessario:** aggiornare nel solo laboratorio la configurazione QA affinché l'alpha sia opzionale, rieseguire il controllo sulla candidate invariata e costruire una composizione review r2 non deployata con gauge dinamico separato. Nessun auto-accept o freeze.

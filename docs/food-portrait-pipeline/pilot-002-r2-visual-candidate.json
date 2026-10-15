@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-pilot-attempt-v1",
   "attemptId": "FPP-R2-IMAGEGEN-20261015-002",
-  "status": "VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED",
+  "status": "VISUAL_CANDIDATE_PORTRAIT_ONLY_REVIEW_REQUIRED_NOT_APPROVED",
   "branch": "experiment/food-portrait-pipeline-20261015",
   "generator": {
     "provider": "CODEX_BUILT_IN_IMAGEGEN",
@@ -45,7 +45,7 @@
       "NO_TRANSPARENT_BACKGROUND",
       "SUBJECT_TOUCHES_CROP_BORDER"
     ],
-    "interpretation": "The saved PNG is a square valid image under the 2 MB execution cap, but it has an opaque full-canvas background. Under the current alpha-based contract the background is counted as visible content and touches every border; no technical pass is claimed."
+    "interpretation": "The saved PNG is a square valid image under the 2 MB execution cap, but it has an opaque full-canvas background. It fails the alpha-mandatory validator configuration used for this attempt. The later owner decision makes transparency optional, so the validator policy must be revised and re-run before any technical pass can be claimed."
   },
   "independentVisualQa": {
     "method": "Separate post-generation inspection of the saved candidate bytes at original resolution",
@@ -82,6 +82,14 @@
     "deployAllowed": false,
     "batchExpansionAllowed": false
   },
-  "finalDecision": "REVIEW_REQUIRED_TECHNICAL_FAIL_VISUAL_CANDIDATE_ONLY",
-  "nextAuthorizedNeed": "Decide in a separate micro-step whether transparent background is mandatory for Food Portrait staging; if it remains mandatory, authorize one targeted r2 retry that changes only background transparency and preserves all passed visual constraints."
+  "ownerDecisionAfterQa": {
+    "date": "2026-10-15",
+    "transparencyRequired": false,
+    "gaugeRequiredInFinalPresentation": true,
+    "gaugeReferenceId": "GAUGE_OWNER_20261015_IMG1264",
+    "gaugeReferenceSha256": "fb7473e2da2cfafe84d0e33a9316c458207e0536b688267e6c18ab0c32535b47",
+    "implementationDecision": "REQUIRED_SEPARATE_DYNAMIC_UI_NOT_BAKED_INTO_PORTRAIT"
+  },
+  "finalDecision": "PORTRAIT_VISUAL_CANDIDATE_ONLY_REQUIRES_UPDATED_TECHNICAL_POLICY_AND_SEPARATE_GAUGE_COMPOSITION",
+  "nextAuthorizedNeed": "Update the technical QA policy so alpha is optional, then build and verify a non-deployed r2 review composition with the separate dynamic gauge visible beside the unchanged portrait candidate."
 }

@@ -1,0 +1,36 @@
+{
+  "schema": "mealup-food-portrait-gauge-reference-v1",
+  "refId": "GAUGE_OWNER_20261015_IMG1264",
+  "status": "OWNER_SUPPLIED_REQUIRED_UI_DIRECTION_NOT_FROZEN",
+  "source": {
+    "localPathAtDecision": "C:/Users/Ramona/Downloads/IMG_1264.jpeg",
+    "sha256": "fb7473e2da2cfafe84d0e33a9316c458207e0536b688267e6c18ab0c32535b47",
+    "width": 497,
+    "height": 422,
+    "pixelFormat": "RGB_24BPP"
+  },
+  "ownerDecision": {
+    "date": "2026-10-15",
+    "gaugeVisibleInFinalRecipePresentation": true,
+    "foodPortraitTransparencyRequired": false,
+    "foodPortraitTransparencyPolicy": "OPTIONAL_USE_WHICHEVER_SIMPLIFIES_RELIABLE_PRODUCTION"
+  },
+  "implementationBoundary": {
+    "gaugeIsSeparateDynamicUi": true,
+    "gaugeBakedIntoFoodPortraitPixels": false,
+    "reason": "Keep kcal value, pointer state, accessibility and responsive placement editable without regenerating the recipe image."
+  },
+  "observedDirection": [
+    "cream rounded semicircular housing",
+    "green yellow orange red segmented arc",
+    "dark physical pointer with visible pivot relationship",
+    "central numeric kcal value",
+    "orange circular secondary control or indicator"
+  ],
+  "limits": {
+    "notPixelPerfectGoldenMaster": true,
+    "notAuthorizedForDeploy": true,
+    "notAuthorizationToModifyTesterOrPwa": true,
+    "exactKcalValueMustComeFromRecipeData": true
+  }
+}
