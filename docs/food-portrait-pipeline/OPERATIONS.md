@@ -357,3 +357,18 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 | E08 | HISTORICAL_VESSEL_SHA_MISMATCH | **BLOCKED invariato**: approvazione e ottimizzazione r1 non dimostrano la tavola vessel FROZEN storica. |
 
 **Prossimo micro-step necessario:** decidere separatamente se congelare r1 come secondo riferimento verificato o autorizzare un nuovo pilot atomico. Nessun batch o deploy automatico.
+
+
+## Delegated use decision 2026-10-15 — r1 PLATE FROZEN
+
+- L'owner conferma che r1 è perfetto in ogni dettaglio, coincide con la visione desiderata e delega la decisione se usarlo.
+- Decisione tecnica: **usarlo e congelarlo** come riferimento canonico `VESSEL_PLATE`, affiancato al riferimento r2 `VESSEL_BOWL`.
+- Manifest immutabile: `r1-plate-frozen-v1.json`.
+- Asset FROZEN: `candidates/r1-carpaccio-plate-approved-001.webp`, SHA-256 `7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0`.
+- Il contratto `food-portrait-style-frozen-v1.json` ora contiene riferimenti canonici distinti per `VESSEL_BOWL` e `VESSEL_PLATE`.
+- Freeze circoscritto: asset r1, geometria/stile PLATE, composizione ingredienti e gauge 380. Non autorizza batch, integrazione o deploy.
+- E08 resta `BLOCKED_HASH_MISMATCH`: questo nuovo riferimento non dimostra la tavola vessel storica.
+
+**Stato:** r1 PLATE FROZEN; r2 BOWL FROZEN; stile generale FROZEN; produzione massiva NON AUTORIZZATA.
+
+**Prossimo micro-step necessario:** scegliere una singola ricetta con un vessel non ancora coperto e produrre un solo nuovo pilot contro i due riferimenti FROZEN, oppure fermarsi qui. Nessuna espansione automatica.

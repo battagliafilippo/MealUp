@@ -1,0 +1,38 @@
+{
+  "schema": "mealup-food-portrait-frozen-asset-v1",
+  "status": "FROZEN",
+  "decisionDate": "2026-10-15",
+  "authority": "OWNER_EXPLICIT_VISUAL_APPROVAL_AND_DELEGATED_USE_DECISION",
+  "recipeId": "r1",
+  "title": "Carpaccio di manzo con rucola e feta",
+  "vesselId": "VESSEL_PLATE",
+  "kcal": 380,
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+    "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1428452,
+    "format": "webp"
+  },
+  "evidence": {
+    "ownerVisualApproval": "PERFECT_IN_EVERY_DETAIL",
+    "technicalQa": "PASS",
+    "decodedPixelIdentityToApprovedPng": true,
+    "gaugeValueMatchesRecipeCard": true,
+    "gaugeNeedleDirection": "LOWER_THAN_R2_THEREFORE_GREENER"
+  },
+  "frozenScope": [
+    "r1 final visual asset",
+    "VESSEL_PLATE reference geometry and styling",
+    "ingredient composition and plating",
+    "380 kcal display and corresponding gauge direction"
+  ],
+  "notAuthorized": [
+    "automatic batch production",
+    "tester or PWA integration",
+    "deployment",
+    "modification of main, tester, or AI Office"
+  ],
+  "independentBlockedGate": "E08_HISTORICAL_VESSEL_SHA_MISMATCH"
+}

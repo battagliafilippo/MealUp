@@ -11,6 +11,20 @@
     "contentBox": [0, 688, 1179, 1867],
     "contentSize": [1179, 1179]
   },
+  "canonicalVesselReferences": {
+    "VESSEL_BOWL": {
+      "recipeId": "r2",
+      "source": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+      "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a",
+      "status": "FROZEN"
+    },
+    "VESSEL_PLATE": {
+      "recipeId": "r1",
+      "source": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+      "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0",
+      "status": "FROZEN"
+    }
+  },
   "frozenVisualInvariants": [
     "MealUp Toys 3D premium rendering",
     "soft rounded cream vessel with controlled orange accents",
@@ -56,7 +70,7 @@
   "explicitlyNotFrozen": [
     "the baked 480 text and baked needle angle in the owner source; production kcal and needle are dynamic",
     "historical G5 vessel board affected by E08",
-    "individual Food Portraits other than the approved r2 reference",
+    "individual Food Portraits other than the FROZEN r2 BOWL and r1 PLATE references",
     "batch production",
     "tester or PWA integration",
     "deployment"

@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-pilot-attempt-v1",
   "attemptId": "FPP-R1-IMAGEGEN-20261015-001",
-  "status": "OWNER_APPROVED_TECHNICAL_PASS_NOT_FROZEN",
+  "status": "OWNER_APPROVED_TECHNICAL_PASS_FROZEN_PLATE_REFERENCE",
   "branch": "experiment/food-portrait-pipeline-20261015",
   "generator": {
     "provider": "CODEX_BUILT_IN_IMAGEGEN",
@@ -65,11 +65,11 @@
       "unexpectedTextOrUi": "PASS_NONE_DETECTED"
     },
     "ownerDecision": "APPROVED_PERFECT",
-    "limitations": ["APPROVAL_DOES_NOT_IMPLY_FROZEN_OR_DEPLOY_AUTHORIZATION"]
+    "limitations": ["FROZEN_REFERENCE_DOES_NOT_IMPLY_BATCH_OR_DEPLOY_AUTHORIZATION"]
   },
   "gates": {
     "ownerApproved": true,
-    "frozen": false,
+    "frozen": true,
     "deployAuthorized": false,
     "batchExpansionAllowed": false,
     "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
