@@ -1,0 +1,26 @@
+{
+  "schema": "mealup-food-portrait-approval-checkpoint-v1",
+  "checkpointId": "FPP-A07-APPROVAL-001",
+  "recipeId": "a07",
+  "predecessor": "checkpoints/a07-visual-production-cycle-001.json",
+  "ownerDecision": "APPROVED_PERFECT",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/a07-prosciutto-melone-plate-approved-001.webp",
+    "sha256": "0277d9faf985ff415afb80f6de74a272743c6a9f939995ea7419839cb6cab299",
+    "bytes": 1335604,
+    "decodedPixelsIdenticalToCandidate": true
+  },
+  "gates": {
+    "technicalQaAfterOptimization": "PASS",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": true,
+    "frozen": true,
+    "automaticLotAdvance": false,
+    "integration": false,
+    "deployment": false
+  },
+  "imagesGeneratedThisCheckpoint": 0,
+  "do01Generated": false,
+  "budgetEUR": 0,
+  "state": "FROZEN_AWAITING_SEPARATE_NEXT_RECIPE_AUTHORIZATION"
+}

@@ -3,7 +3,7 @@
   "candidateId": "FPP-PILOT-009-A07-001",
   "lotId": "FPP-LOT-001",
   "lotSequenceOrder": 3,
-  "status": "VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED",
+  "status": "OWNER_APPROVED_TECHNICAL_PASS_FROZEN",
   "recipe": {
     "id": "a07",
     "title": "Prosciutto e melone",
@@ -26,6 +26,16 @@
     "bytes": 1912133,
     "format": "png",
     "alphaChannel": false
+  },
+  "approvedAsset": {
+    "path": "docs/food-portrait-pipeline/candidates/a07-prosciutto-melone-plate-approved-001.webp",
+    "sha256": "0277d9faf985ff415afb80f6de74a272743c6a9f939995ea7419839cb6cab299",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1335604,
+    "format": "webp",
+    "lossless": true,
+    "decodedPixelsIdenticalToCandidate": true
   },
   "references": [
     {
@@ -77,11 +87,12 @@
     }
   },
   "acceptance": {
-    "ownerApproved": false,
+    "ownerApproved": true,
+    "ownerDecision": "ottimo è perfetto",
     "automaticAcceptanceAllowed": false,
-    "frozen": false,
+    "frozen": true,
     "integrated": false,
     "deployed": false
   },
-  "nextAction": "OWNER_VISUAL_REVIEW_OF_A07_CANDIDATE_ONLY"
+  "nextAction": "NO_AUTOMATIC_LOT_ADVANCE_NEXT_RECIPE_REQUIRES_SEPARATE_AUTHORIZATION"
 }

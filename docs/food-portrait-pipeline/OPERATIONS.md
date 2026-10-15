@@ -641,3 +641,18 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Stato:** `VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED`.
 
 **Prossimo micro-step necessario:** review visuale owner della sola candidate a07. Solo dopo approvazione esplicita saranno consentite ottimizzazione lossless, nuova QA e decisione separata sul freeze.
+
+### Owner approval + a07 freeze checkpoint 2026-10-15
+
+- Decisione owner: `ottimo è perfetto`; la sola candidate a07 è approvata.
+- Convertita in WebP lossless senza rigenerazione: `candidates/a07-prosciutto-melone-plate-approved-001.webp`, SHA-256 `0277d9faf985ff415afb80f6de74a272743c6a9f939995ea7419839cb6cab299`.
+- Pixel decodificati identici alla PNG approvata: **PASS**. Dimensioni 1254 × 1254; byte ridotti da 1.912.133 a 1.335.604.
+- QA tecnica ripetuta sul WebP: **PASS**, `errors: []`; resta soltanto il warning già esaminato sullo sfondo opaco.
+- Errore di verifica registrato: il primo controllo aggregato confrontava per errore l'hash WebP con il campo `asset` della PNG sorgente e ha segnalato `hash contract mismatch`; corretto il selettore su `approvedAsset`, la verifica completa di hash, pixel, freeze e blocco `do01` è **PASS**.
+- Creato checkpoint append-only `checkpoints/a07-owner-approval-001.json`; il checkpoint originario di generazione non è stato sovrascritto.
+- Manifest FROZEN: `a07-plate-frozen-v1.json`. Nessuna integrazione o deploy.
+- Nuove immagini generate in questo checkpoint: `0`; `do01` non generato; budget `0 EUR`.
+
+**Stato a07:** `OWNER_APPROVED_TECHNICAL_PASS_FROZEN`.
+
+**Prossimo micro-step necessario:** nessun avanzamento automatico. La scelta e generazione di un'altra ricetta richiedono un'autorizzazione separata.

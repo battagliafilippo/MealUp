@@ -1,0 +1,43 @@
+{
+  "schema": "mealup-food-portrait-frozen-asset-v1",
+  "status": "FROZEN",
+  "decisionDate": "2026-10-15",
+  "authority": "OWNER_EXPLICIT_VISUAL_APPROVAL",
+  "recipeId": "a07",
+  "title": "Prosciutto e melone",
+  "vesselId": "VESSEL_PLATE",
+  "kcal": 270,
+  "gaugeAngleDegrees": -27.6,
+  "gaugeZone": "GREEN_LIME",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/a07-prosciutto-melone-plate-approved-001.webp",
+    "sha256": "0277d9faf985ff415afb80f6de74a272743c6a9f939995ea7419839cb6cab299",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1335604,
+    "format": "webp"
+  },
+  "evidence": {
+    "ownerVisualApproval": "PERFECT",
+    "technicalQaAfterOptimization": "PASS",
+    "decodedPixelIdentityToApprovedPng": true,
+    "ingredientRecognizability": "PASS_PROSCIUTTO_AND_MELON",
+    "integratedDishNotCollage": true,
+    "gaugeValueMatchesRecipeCard": true,
+    "gaugeNeedleDirection": "GREEN_LIME_FOR_270_KCAL",
+    "vesselPlateContract": "PASS"
+  },
+  "frozenScope": [
+    "a07 final visual asset",
+    "prosciutto and melon integrated composition",
+    "VESSEL_PLATE geometry and styling",
+    "270 kcal display and green-lime gauge direction"
+  ],
+  "notAuthorized": [
+    "automatic lot advance",
+    "generation of do01",
+    "tester or PWA integration",
+    "deployment",
+    "modification of main or external AI Office"
+  ]
+}
