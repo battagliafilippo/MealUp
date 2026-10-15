@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-owner-exact-review-v1",
   "reviewId": "FPP-R2-OWNER-EXACT-20261015-001",
-  "status": "OWNER_VISUAL_APPROVED_DYNAMIC_KCAL_REVIEW_NOT_FROZEN",
+  "status": "OWNER_APPROVED_DYNAMIC_KCAL_NOT_FROZEN",
   "source": {
     "userFileName": "IMG_1277.png",
     "repositoryCopy": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
@@ -48,11 +48,23 @@
     "visualSourceExact": true,
     "dataConsistent": true,
     "ownerVisualApproved": true,
-    "ownerApprovedAsFinalAsset": false,
+    "ownerApprovedAsFinalAsset": true,
     "frozen": false,
     "deployAuthorized": false,
     "batchExpansionAllowed": false,
     "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
   },
-  "nextDecisionRequired": "No visual or kcal decision remains for r2 review. Do not freeze, deploy or expand the batch without a separate explicit authorization; E08 remains independently blocked."
+  "approval": {
+    "decision": "APPROVED",
+    "approvedBy": "OWNER",
+    "date": "2026-10-15",
+    "scope": "r2 Food Portrait owner source plus dynamic kcal value from recipe card",
+    "doesNotAuthorize": [
+      "FROZEN status",
+      "tester or PWA integration",
+      "batch expansion",
+      "deployment"
+    ]
+  },
+  "nextDecisionRequired": "No visual or kcal decision remains for r2. A separate explicit authorization is required for freeze, integration, batch expansion or deploy; E08 remains independently blocked."
 }

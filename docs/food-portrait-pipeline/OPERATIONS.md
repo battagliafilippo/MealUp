@@ -294,3 +294,14 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Stato r2: `OWNER_VISUAL_APPROVED_DYNAMIC_KCAL_REVIEW_NOT_FROZEN`.
 
 **Prossimo micro-step necessario:** nessuna decisione visuale o kcal rimasta per la review r2. Attendere un'autorizzazione separata prima di freeze, integrazione, estensione del batch o deploy; E08 resta bloccato.
+
+
+## Owner approval checkpoint 2026-10-15 — r2 APPROVED, non FROZEN
+
+- L'owner approva esplicitamente la composizione r2 basata sulla source `IMG_1277.png` e sul layer dinamico `490 kcal` proveniente dalla card ricetta.
+- Stato aggiornato: `OWNER_APPROVED_DYNAMIC_KCAL_NOT_FROZEN`.
+- Scope dell'approvazione: Food Portrait r2, visuale owner e corrispondenza dinamica del valore kcal alla card.
+- Non autorizzati da questa decisione: stato FROZEN, integrazione tester/PWA, estensione batch o deploy.
+- E08 resta `BLOCKED_HASH_MISMATCH`: l'approvazione r2 non dimostra né sostituisce la tavola vessel FROZEN storica.
+
+**Prossimo micro-step necessario:** definire con autorizzazione separata se congelare r2 come riferimento o usarlo come base per il successivo pilota controllato. Nessuna azione automatica.
