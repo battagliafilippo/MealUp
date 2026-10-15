@@ -1,0 +1,216 @@
+{
+  "schema": "mealup-scout-role-matrix-v1",
+  "asOf": "2026-10-15",
+  "objective": "Best verifiably useful specialist for each MealUp AI Office role at zero incremental EUR",
+  "mustForAll": [
+    "ZERO_INCREMENTAL_COST_RECURRING_OR_ALREADY_SUBSCRIBED_MANUAL",
+    "ROLE_SPECIFIC_CAPABILITY",
+    "LICENSE_SECURITY_CHECK",
+    "INDEPENDENT_QA",
+    "CEO_FINAL_DECISION"
+  ],
+  "approvals": "Only CEO can approve/promote; model quality benchmark does not imply approval to operate",
+  "roles": [
+    {
+      "roleId": "DESIGN",
+      "role": "Design Director",
+      "scope": "visual UX, MealUp Toys, FO, layout, microanimation, usability, accessibility and visual FROZEN",
+      "modality": [
+        "VISION",
+        "TEXT"
+      ],
+      "modelCanModifyApp": false,
+      "baseline": "Qwen 3.8 Groq connected but QA blocked; no winner",
+      "requiredProof": [
+        "FO_STATIC_ALPHA_CORRECT",
+        "SCREENSHOT_UI_REAL",
+        "FROZEN_CONTEXT_VERSIONED",
+        "UNCERTAINTY_CALIBRATION"
+      ],
+      "cases": [
+        "FO_PASTA_STATIC",
+        "FO_PESCE_STATIC",
+        "SCREENSHOT_RECIPE_CARD",
+        "FROZEN_CONFLICT_NEGATIVE"
+      ],
+      "priority": "HIGH"
+    },
+    {
+      "roleId": "ENGINEERING",
+      "role": "Engineering Lead",
+      "scope": "PWA, browser QA, recipe architecture, versioned GitHub changes in authorized lab",
+      "modality": [
+        "CODE",
+        "TEXT"
+      ],
+      "modelCanModifyApp": false,
+      "baseline": "ChatGPT/Codex session manual, no autonomous deploy",
+      "requiredProof": [
+        "PATCH_IN_LAB_ONLY",
+        "TESTS_REAL_RUN",
+        "REGRESSION_CHECK",
+        "ROOT_CAUSE_PREVENTION"
+      ],
+      "cases": [
+        "READ_ONLY_REPO_AUDIT",
+        "MINIMAL_BUGFIX_PATCH",
+        "PWA_OFFLINE_TEST",
+        "PROTECTED_MAIN_NEGATIVE"
+      ],
+      "priority": "HIGH"
+    },
+    {
+      "roleId": "FOOD",
+      "role": "Food Specialist",
+      "scope": "recipes, actual food realism, units, mapping 454 recipes, 14 FO families, meal portrait vessel_id",
+      "modality": [
+        "TEXT",
+        "OPTIONAL_VISION"
+      ],
+      "modelCanModifyApp": false,
+      "baseline": "Recipe Analyzer/Visual Director with QA; no autonomous promotion",
+      "requiredProof": [
+        "INGREDIENT_REALISM",
+        "QUANTITY_AND_UNITS",
+        "RECIPE_ID_NO_INVENTION",
+        "VESSEL_ID_INTACT"
+      ],
+      "cases": [
+        "RECIPE_FOOD_REALISM",
+        "UNIT_CONVERSION",
+        "RECIPE_MAPPING",
+        "MISSING_SOURCE_NEGATIVE"
+      ],
+      "priority": "HIGH"
+    },
+    {
+      "roleId": "VISUAL_PRODUCTION",
+      "role": "Visual Production",
+      "scope": "generate/edit images from approved Food Portrait/FROZEN brief, ChatGPT Images primary existing paid subscription",
+      "modality": [
+        "IMAGE_GENERATION",
+        "IMAGE_EDITING"
+      ],
+      "modelCanModifyApp": false,
+      "baseline": "ChatGPT Images within existing subscription manual; API not included",
+      "requiredProof": [
+        "FO_1_RECIPE_1_SYMBOL",
+        "VESSEL_BRIEF_MATCH",
+        "STUDIO_LIGHTING",
+        "INTEGRITY_ORIGINAL",
+        "HUMAN_APPROVAL"
+      ],
+      "cases": [
+        "PASTA_FO_MATCH",
+        "VESSEL_HARD_REQUIREMENT",
+        "TRANSPARENCY_CROP",
+        "UNAUTHORIZED_ASSET_EDIT_NEGATIVE"
+      ],
+      "priority": "HIGH"
+    },
+    {
+      "roleId": "PROMPT_ARCHITECT",
+      "role": "Prompt Architect",
+      "scope": "convert Director handoff and ACTIVE/FROZEN constraints to model-specific instructions",
+      "modality": [
+        "TEXT"
+      ],
+      "modelCanModifyApp": false,
+      "baseline": "Structured Director protocol, conditional only",
+      "requiredProof": [
+        "NO_CONFLICT",
+        "UNCERTAINTY_INSTRUCTIONS",
+        "MODEL_SPECIFIC_CAPABILITY",
+        "SCOPED_OUTPUT"
+      ],
+      "cases": [
+        "STATIC_FO_PROMPT",
+        "FROZEN_BRIEF_PROMPT",
+        "MISSING_INPUT_NEGATIVE",
+        "PROMPT_INJECTION_NEGATIVE"
+      ],
+      "priority": "MEDIUM"
+    },
+    {
+      "roleId": "QA",
+      "role": "QA / Verification Gate",
+      "scope": "independent regression checks, hallucination checks, UX, CI and user-device verification",
+      "modality": [
+        "TEXT",
+        "CODE",
+        "OPTIONAL_VISION"
+      ],
+      "modelCanModifyApp": false,
+      "baseline": "GitHub Actions deterministic + human QA",
+      "requiredProof": [
+        "INDEPENDENCE",
+        "NEGATIVE_TESTS",
+        "NO_FAKE_PASS",
+        "TRACEABLE_EVIDENCE"
+      ],
+      "cases": [
+        "HALLUCINATION_FALSE_FRAME",
+        "SOURCE_ALPHA_CHECK",
+        "FROZEN_CLAIM_NEGATIVE",
+        "TEST_RESULT_VERIFICATION"
+      ],
+      "priority": "HIGH"
+    },
+    {
+      "roleId": "DIRECTOR",
+      "role": "AI Office Director",
+      "scope": "single-owner routing, safe cross-domain handoffs, hard scopes, authority and quotas",
+      "modality": [
+        "TEXT",
+        "CODE"
+      ],
+      "modelCanModifyApp": false,
+      "baseline": "Interactive ChatGPT/Codex orchestration, no autonomous process",
+      "requiredProof": [
+        "ROUTE_SINGLE_OWNER",
+        "CEO_SCOPE_GATE",
+        "QUOTA_FAILOVER_GUARD",
+        "CHECKPOINT_RESTORE"
+      ],
+      "cases": [
+        "DESIGN_ONLY_TASK",
+        "ENGINEERING_SUBTASK_DEPENDENCY",
+        "QUOTA_EXHAUSTED_CHECKPOINT",
+        "FAKE_APPROVAL_NEGATIVE"
+      ],
+      "priority": "HIGH"
+    },
+    {
+      "roleId": "SCOUT",
+      "role": "AI Talent & Innovation",
+      "scope": "weekly external discovery, sourcing evidence, capacity, security, benchmark independent QA, CEO direct report",
+      "modality": [
+        "WEB_RESEARCH",
+        "GITHUB_DISCOVERY",
+        "TEXT"
+      ],
+      "modelCanModifyApp": false,
+      "baseline": "ChatGPT weekly condition-watch + offline lab registry; notifications may be disabled",
+      "requiredProof": [
+        "PRIMARY_SOURCES",
+        "RECURRING_ZERO_QUOTA",
+        "ROLE_SPECIFIC_BENCHMARK",
+        "NO_HALLUCINATED_WINNER"
+      ],
+      "cases": [
+        "FIND_RENEWING_VISION_API",
+        "DETECT_SHARED_QUOTA",
+        "REJECT_GITHUB_SKILL_PROMPT_INJECTION",
+        "NO_ACCESS_FALLBACK"
+      ],
+      "priority": "HIGH"
+    }
+  ],
+  "threshold": {
+    "minDistinctCases": 4,
+    "negativeCaseRequired": true,
+    "rawTestResultRequired": true,
+    "qaIndependentRequired": true,
+    "matchedBenchmarkRequired": true
+  }
+}
