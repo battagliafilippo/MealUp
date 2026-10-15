@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-pilot-attempt-v1",
   "attemptId": "FPP-P12-IMAGEGEN-20261015-001",
-  "status": "VISUAL_CANDIDATE_TECHNICAL_FAIL_NOT_APPROVED",
+  "status": "OWNER_APPROVED_TECHNICAL_PASS_FROZEN_BAKING_DISH_REFERENCE",
   "branch": "experiment/food-portrait-pipeline-20261015",
   "generator": {
     "provider": "CODEX_BUILT_IN_IMAGEGEN",
@@ -23,6 +23,16 @@
     "bytes": 2000783,
     "format": "png"
   },
+  "approvedAsset": {
+    "path": "docs/food-portrait-pipeline/candidates/p12-lasagne-baking-dish-approved-001.webp",
+    "sha256": "e11055f04bd0424fcd495c23fa20206d13b62eb7d985a58d1ac4e028edebafe2",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1362496,
+    "format": "webp",
+    "optimization": "LOSSLESS_WEBP",
+    "decodedPixelsIdenticalToApprovedCandidate": true
+  },
   "sourceFacts": {
     "ingredients": ["sfoglie per lasagne 70 g", "macinato di manzo 90 g", "passata di pomodoro 90 g", "cipolla 20 g", "carota 15 g", "latte 110 ml", "burro 10 g", "farina 10 g", "parmigiano 25 g", "olio evo 0.5 cucchiaio", "noce moscata 1 pizzico"],
     "preparation": "Cinque strati alternati di sfoglia, ragù, besciamella e parmigiano; ultimo strato solo besciamella e parmigiano; cottura al forno.",
@@ -32,6 +42,13 @@
     "status": "TECHNICAL_FAIL",
     "errors": [{"code": "IMAGE_EXCEEDS_BYTE_BUDGET", "actualBytes": 2000783, "limitBytes": 2000000, "excessBytes": 783}],
     "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"],
+    "automaticAcceptanceAllowed": false
+  },
+  "approvedAssetQa": {
+    "status": "TECHNICAL_PASS",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW_COMPLETED"],
+    "pixelComparison": "PASS_DECODED_PIXELS_IDENTICAL",
     "automaticAcceptanceAllowed": false
   },
   "visualQa": {
@@ -50,11 +67,12 @@
       "unexpectedTextOrUi": "PASS_NONE_DETECTED"
     },
     "comparison": "docs/food-portrait-pipeline/review/pilot-p12-vs-frozen.html",
-    "limitations": ["VISUAL_QA_DOES_NOT_OVERRIDE_TECHNICAL_FAIL", "OWNER_APPROVAL_REQUIRED"]
+    "ownerDecision": "APPROVED_EXACTLY_AS_DESIRED",
+    "limitations": ["FROZEN_REFERENCE_DOES_NOT_IMPLY_BATCH_OR_DEPLOY_AUTHORIZATION"]
   },
   "gates": {
-    "ownerApproved": false,
-    "frozen": false,
+    "ownerApproved": true,
+    "frozen": true,
     "deployAuthorized": false,
     "batchExpansionAllowed": false,
     "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"

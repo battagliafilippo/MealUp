@@ -35,6 +35,12 @@
       "source": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
       "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4",
       "status": "FROZEN"
+    },
+    "VESSEL_BAKING_DISH": {
+      "recipeId": "p12",
+      "source": "docs/food-portrait-pipeline/candidates/p12-lasagne-baking-dish-approved-001.webp",
+      "sha256": "e11055f04bd0424fcd495c23fa20206d13b62eb7d985a58d1ac4e028edebafe2",
+      "status": "FROZEN"
     }
   },
   "frozenVisualInvariants": [
@@ -82,7 +88,7 @@
   "explicitlyNotFrozen": [
     "the baked 480 text and baked needle angle in the owner source; production kcal and needle are dynamic",
     "historical G5 vessel board affected by E08",
-    "individual Food Portraits other than the FROZEN r2 BOWL, r1 PLATE, s02 RAMEKIN and do08 DESSERT_MOLD references",
+    "individual Food Portraits other than the FROZEN r2 BOWL, r1 PLATE, s02 RAMEKIN, do08 DESSERT_MOLD and p12 BAKING_DISH references",
     "batch production",
     "tester or PWA integration",
     "deployment"

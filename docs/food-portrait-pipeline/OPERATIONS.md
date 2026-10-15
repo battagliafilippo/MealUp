@@ -441,3 +441,16 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dal pilot.
 
 **Prossimo micro-step necessario:** review visuale owner del candidato p12. Se approvato, conversione WebP lossless, QA ripetuta e decisione separata sul freeze `VESSEL_BAKING_DISH`.
+
+
+## Owner approval + BAKING_DISH freeze checkpoint 2026-10-15 — p12 FROZEN
+
+- Decisione owner: p12 è perfetto ed esattamente conforme alla visione desiderata.
+- Ottimizzazione lossless: PNG `2.000.783` byte → WebP `1.362.496` byte, con pixel decodificati identici.
+- Asset FROZEN: `candidates/p12-lasagne-baking-dish-approved-001.webp`, SHA-256 `e11055f04bd0424fcd495c23fa20206d13b62eb7d985a58d1ac4e028edebafe2`.
+- QA tecnico: **PASS**; `790 kcal`, angolo `34,8°` e zona arancione verificati sulla mapping FROZEN.
+- Manifest: `p12-baking-dish-frozen-v1.json`. Contratto stilistico aggiornato con `VESSEL_BAKING_DISH`.
+- Stato: PLATE, BOWL, RAMEKIN, DESSERT_MOLD e BAKING_DISH FROZEN. Nessun batch, integrazione o deploy autorizzato.
+- E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dai cinque riferimenti verificati.
+
+**Prossimo micro-step necessario:** trattare separatamente il caso `v08 VESSEL_FREE`, che presenta un conflitto tra classificazione FREE e bicchiere citato nei passaggi; non generare finché il conflitto non è risolto.

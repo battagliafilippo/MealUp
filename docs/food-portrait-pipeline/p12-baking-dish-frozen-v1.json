@@ -1,0 +1,41 @@
+{
+  "schema": "mealup-food-portrait-frozen-asset-v1",
+  "status": "FROZEN",
+  "decisionDate": "2026-10-15",
+  "authority": "OWNER_EXPLICIT_VISUAL_APPROVAL",
+  "recipeId": "p12",
+  "title": "Lasagne alla bolognese",
+  "vesselId": "VESSEL_BAKING_DISH",
+  "kcal": 790,
+  "gaugeAngleDegrees": 34.8,
+  "gaugeZone": "ORANGE",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p12-lasagne-baking-dish-approved-001.webp",
+    "sha256": "e11055f04bd0424fcd495c23fa20206d13b62eb7d985a58d1ac4e028edebafe2",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1362496,
+    "format": "webp"
+  },
+  "evidence": {
+    "ownerVisualApproval": "PERFECT_EXACTLY_AS_DESIRED",
+    "technicalQa": "PASS",
+    "decodedPixelIdentityToApprovedPng": true,
+    "gaugeValueMatchesRecipeCard": true,
+    "gaugeNeedleDirection": "HIGH_ORANGE_NOT_RED_SATURATED",
+    "sourceAnomalyHandled": "WINE_NOT_RENDERED_AS_PROP"
+  },
+  "frozenScope": [
+    "p12 final visual asset",
+    "VESSEL_BAKING_DISH reference geometry and styling",
+    "five-layer lasagna structure and presentation",
+    "790 kcal display and orange gauge direction"
+  ],
+  "notAuthorized": [
+    "automatic batch production",
+    "tester or PWA integration",
+    "deployment",
+    "modification of main, tester, or AI Office"
+  ],
+  "independentBlockedGate": "E08_HISTORICAL_VESSEL_SHA_MISMATCH"
+}
