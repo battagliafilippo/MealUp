@@ -1,0 +1,64 @@
+name: Gate - AI Office Director to Design pilot
+
+# One-shot laboratory proof. No app writes, deploys, image generation or retries.
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - '.github/workflows/qa-ai-office-design-pilot.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  office-design-pilot:
+    if: >-
+      ${{ github.event_name == 'push' &&
+          github.event.head_commit.message == 'ci(ai-office): run first Director Design QA pilot' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout isolated laboratory revision
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify pilot and all office guards without network
+        run: |
+          node tools/ai-office/design-live-pilot.cjs --self-test
+          node --test tools/ai-office/*.test.cjs
+      - name: One guarded Design request through the office
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MEALUP_FREE_ONLY: 'YES'
+        run: |
+          node tools/ai-office/design-live-pilot.cjs \
+            --live \
+            --asset assets/family-fo/pasta.webp \
+            --out /tmp/mealup-office-pilot/report.json
+      - name: Independent structural QA gate
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          const r = JSON.parse(fs.readFileSync('/tmp/mealup-office-pilot/report.json', 'utf8'));
+          assert.equal(r.schema, 'mealup-office-design-pilot-v1');
+          assert.deepEqual(r.pipeline, ['AI Office Director', 'Design Director', 'QA / Verification Gate', 'CEO']);
+          assert.equal(r.apiCalls, 1); assert.equal(r.retries, 0);
+          assert.equal(r.additionalCostEUR, 0); assert.equal(r.imagesGenerated, 0); assert.equal(r.deploys, 0);
+          assert.equal(r.qa.approved, false); assert.ok(['PARTIAL_HUMAN_REVIEW', 'BLOCKED'].includes(r.qa.status));
+          assert.deepEqual(r.filesModified, []); assert.equal(r.finalAuthority, 'CEO');
+          console.log(`PASS OFFICE E2E: ${r.qa.status}; proposal only; CEO authority preserved`);
+          NODE
+      - name: Preserve pilot evidence even when QA blocks
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: mealup-ai-office-design-pilot-001
+          path: /tmp/mealup-office-pilot/report.json
+          if-no-files-found: warn
+          retention-days: 30
