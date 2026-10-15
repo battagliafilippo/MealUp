@@ -1,0 +1,58 @@
+{
+  "schema": "mealup-food-portrait-review-composition-qa-v1",
+  "reviewId": "FPP-R2-GAUGE-REVIEW-20261015-001",
+  "status": "REVIEW_RENDER_VERIFIED_NOT_APPROVED",
+  "source": {
+    "html": "docs/food-portrait-pipeline/review/r2-gauge-composition.html",
+    "portrait": "docs/food-portrait-pipeline/candidates/r2-poke-visual-candidate-002.png",
+    "portraitSha256": "ad2cca0c90da0c1137b5e48e885b009727cda6dc661200ee2ffb565458960f85",
+    "gaugeReferenceId": "GAUGE_OWNER_20261015_IMG1264",
+    "gaugeReferenceSha256": "fb7473e2da2cfafe84d0e33a9316c458207e0536b688267e6c18ab0c32535b47",
+    "recipeKcalSource": "index.html recipe r2",
+    "recipeKcal": 490
+  },
+  "technicalQa": {
+    "portraitStatus": "TECHNICAL_PASS_VISUAL_REVIEW_REQUIRED",
+    "alphaRequired": false,
+    "opaqueBackgroundAccepted": true,
+    "warnings": [
+      "OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW",
+      "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"
+    ],
+    "automaticAcceptanceAllowed": false
+  },
+  "browserQa": {
+    "url": "http://127.0.0.1:8765/docs/food-portrait-pipeline/review/r2-gauge-composition.html",
+    "surface": "Codex in-app browser",
+    "visualReview": "PASS_REVIEW_ONLY",
+    "checks": {
+      "portraitLoads": "PASS",
+      "gaugeVisibleBesidePortrait": "PASS",
+      "gaugeSeparateDomLayer": "PASS",
+      "greenYellowOrangeRedArc": "PASS",
+      "darkNeedleAndPivot": "PASS",
+      "490KcalFromRecipeData": "PASS",
+      "orangeSecondaryIndicator": "PASS",
+      "mobileWidthLegibility": "PASS",
+      "portraitCropVisualReview": "PASS",
+      "noGaugePixelsAddedToPortraitFile": "PASS",
+      "reviewNotPresentedAsApproved": "PASS"
+    },
+    "dynamicInteraction": {
+      "initialKcal": 490,
+      "testKcal": 650,
+      "visibleTextUpdated": true,
+      "accessibleLabelUpdated": true,
+      "needleUpdated": true,
+      "restoredKcal": 490
+    }
+  },
+  "gates": {
+    "ownerApproved": false,
+    "frozen": false,
+    "deployAuthorized": false,
+    "historicalVesselBoardVerified": false,
+    "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
+  },
+  "final": "VERIFIED_REVIEW_COMPOSITION_ONLY"
+}

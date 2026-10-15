@@ -90,6 +90,21 @@
     "gaugeReferenceSha256": "fb7473e2da2cfafe84d0e33a9316c458207e0536b688267e6c18ab0c32535b47",
     "implementationDecision": "REQUIRED_SEPARATE_DYNAMIC_UI_NOT_BAKED_INTO_PORTRAIT"
   },
-  "finalDecision": "PORTRAIT_VISUAL_CANDIDATE_ONLY_REQUIRES_UPDATED_TECHNICAL_POLICY_AND_SEPARATE_GAUGE_COMPOSITION",
-  "nextAuthorizedNeed": "Update the technical QA policy so alpha is optional, then build and verify a non-deployed r2 review composition with the separate dynamic gauge visible beside the unchanged portrait candidate."
+  "technicalQaRecheckAfterOwnerDecision": {
+    "status": "TECHNICAL_PASS_VISUAL_REVIEW_REQUIRED",
+    "requiresAlpha": false,
+    "errors": [],
+    "warnings": [
+      "OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW",
+      "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"
+    ],
+    "automaticAcceptanceAllowed": false
+  },
+  "reviewComposition": {
+    "path": "docs/food-portrait-pipeline/review/r2-gauge-composition.html",
+    "qaReport": "docs/food-portrait-pipeline/review/r2-gauge-composition.qa.json",
+    "status": "VERIFIED_REVIEW_COMPOSITION_ONLY"
+  },
+  "finalDecision": "PORTRAIT_AND_SEPARATE_DYNAMIC_GAUGE_VERIFIED_FOR_OWNER_REVIEW_NOT_APPROVED",
+  "nextAuthorizedNeed": "Owner visual review of the r2 composition. Do not freeze, integrate or expand the batch without explicit approval; E08 remains blocked independently."
 }

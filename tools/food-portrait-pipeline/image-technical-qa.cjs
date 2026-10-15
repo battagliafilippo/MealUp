@@ -5,8 +5,8 @@
 const fs=require('node:fs'),crypto=require('node:crypto');
 const hash=buffer=>crypto.createHash('sha256').update(buffer).digest('hex');
 const DEFAULTS=Object.freeze({minWidth:512,minHeight:512,maxWidth:2048,maxHeight:2048,
- maxBytes:350000,requiresAlpha:true,minVisibleFraction:0.05,maxVisibleFraction:0.85,
- borderTolerancePixels:2});
+ maxBytes:350000,requiresAlpha:false,requireSquare:true,minVisibleFraction:0.05,
+ maxVisibleFraction:0.85,borderTolerancePixels:2});
 const assert=(x,msg)=>{if(!x)throw Error(msg)};
 async function inspect(buffer,config={},sharp=require('sharp')){
  assert(Buffer.isBuffer(buffer)&&buffer.length>0,'BINARY_BUFFER_REQUIRED');
@@ -19,6 +19,7 @@ async function inspect(buffer,config={},sharp=require('sharp')){
  }catch(e){return {status:'INVALID_IMAGE',sha256:hash(buffer),errors:[{code:'DECODING_FAILED',detail:e.message}],
   quality:{technicalVerified:false,visualVerified:false,acceptanceAllowed:false}};}
  const {width,height}=meta;
+ if(conf.requireSquare&&width!==height)issue('ASPECT_RATIO_NOT_SQUARE',{width,height});
  if(width<conf.minWidth||height<conf.minHeight)issue('LOW_RESOLUTION',{width,height});
  if(width>conf.maxWidth||height>conf.maxHeight)issue('UNNECESSARY_LARGE_RESOLUTION',{width,height});
  if(buffer.length>conf.maxBytes)issue('IMAGE_EXCEEDS_BYTE_BUDGET',buffer.length);
@@ -35,19 +36,23 @@ async function inspect(buffer,config={},sharp=require('sharp')){
   if(x<x0)x0=x;if(y<y0)y0=y;if(x>x1)x1=x;if(y>y1)y1=y;
   if(x<t||y<t||x>=width-t||y>=height-t)touches++;
  }
- const visibleFraction=visible/(width*height);
- if(visibleFraction<conf.minVisibleFraction)issue('SUBJECT_TOO_SMALL',visibleFraction);
- if(visibleFraction>conf.maxVisibleFraction)issue('SUBJECT_TOO_LARGE_OR_BACKGROUND',visibleFraction);
+ const measurableSubjectBounds=transparent>0;
+ const visibleFraction=measurableSubjectBounds?visible/(width*height):null;
+ if(measurableSubjectBounds&&visibleFraction<conf.minVisibleFraction)issue('SUBJECT_TOO_SMALL',visibleFraction);
+ if(measurableSubjectBounds&&visibleFraction>conf.maxVisibleFraction)issue('SUBJECT_TOO_LARGE_OR_BACKGROUND',visibleFraction);
  if(conf.requiresAlpha&&transparent===0)issue('NO_TRANSPARENT_BACKGROUND',null);
- if(touches>0)issue('SUBJECT_TOUCHES_CROP_BORDER',touches);
- const box=visible?{x:x0,y:y0,width:x1-x0+1,height:y1-y0+1}:null;
+ if(measurableSubjectBounds&&touches>0)issue('SUBJECT_TOUCHES_CROP_BORDER',touches);
+ const box=measurableSubjectBounds&&visible?{x:x0,y:y0,width:x1-x0+1,height:y1-y0+1}:null;
  if(!visible)issue('EMPTY_ALPHA_SUBJECT',null);
+ if(!measurableSubjectBounds&&!conf.requiresAlpha)
+  warnings.push({code:'OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW'});
  if(meta.format!=='webp')warnings.push({code:'OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL'});
  return {schema:'mealup-portrait-technical-qa-v1',
   status:errors.length?'TECHNICAL_FAIL':'TECHNICAL_PASS_VISUAL_REVIEW_REQUIRED',
   sha256:hash(buffer),width,height,bytes:buffer.length,format:meta.format,
-  alphaChannel:!!meta.hasAlpha,visibleFraction,transparentFraction:transparent/(width*height),
-  bbox:box,edgeTouchPixelCount:touches,errors,warnings,
+  alphaChannel:!!meta.hasAlpha,subjectBoundsMeasurable:measurableSubjectBounds,
+  visibleFraction,transparentFraction:transparent/(width*height),bbox:box,
+  edgeTouchPixelCount:measurableSubjectBounds?touches:null,errors,warnings,
   quality:{technicalVerified:errors.length===0,visualVerified:false,
    ingredientMatchVerified:false,vesselMatchVerified:false,
    approvalPolicyVerified:false,acceptanceAllowed:false}};
@@ -65,8 +70,13 @@ async function selfTest(sharp=require('sharp')){
  assert(touching.errors.some(e=>e.code==='SUBJECT_TOUCHES_CROP_BORDER'),'SELFTEST_BORDER_GATE');
  const opaque=await sharp({create:{width:768,height:768,channels:3,
    background:{r:0,g:0,b:0}}}).png().toBuffer();
- const bad=await inspect(opaque);
- assert(bad.errors.some(e=>e.code==='ALPHA_CHANNEL_MISSING'),'SELFTEST_ALPHA_GATE');
+ const optional=await inspect(opaque);
+ assert(optional.status==='TECHNICAL_PASS_VISUAL_REVIEW_REQUIRED'&&
+   optional.warnings.some(e=>e.code==='OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW'),
+   'SELFTEST_OPAQUE_OPTIONAL');
+ const alphaRequired=await inspect(opaque,{requiresAlpha:true});
+ assert(alphaRequired.errors.some(e=>e.code==='ALPHA_CHANNEL_MISSING')&&
+   alphaRequired.errors.some(e=>e.code==='NO_TRANSPARENT_BACKGROUND'),'SELFTEST_ALPHA_GATE');
  const tiny=await inspect(await sharp({create:{width:48,height:48,channels:4,
    background:{r:255,g:255,b:255,alpha:0.5}}}).png().toBuffer());
  assert(tiny.errors.some(e=>e.code==='LOW_RESOLUTION'),'SELFTEST_RESOLUTION_GATE');

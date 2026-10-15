@@ -226,3 +226,24 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 | E08 | HISTORICAL_VESSEL_SHA_MISMATCH | **BLOCKED invariato**: la decisione su trasparenza e gauge non dimostra né sostituisce la tavola vessel FROZEN. |
 
 **Prossimo micro-step necessario:** aggiornare nel solo laboratorio la configurazione QA affinché l'alpha sia opzionale, rieseguire il controllo sulla candidate invariata e costruire una composizione review r2 non deployata con gauge dinamico separato. Nessun auto-accept o freeze.
+
+
+## Checkpoint 2026-10-15 — QA opaco e composizione review r2 con gauge separato
+
+- `image-technical-qa.cjs` aggiornato: alpha opzionale per default; su immagini opache non inventa più bounding box o crop derivati dall'alpha. Emesso l'avviso obbligatorio `OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW`. Il profilo `requiresAlpha:true` resta disponibile e testato fail-closed.
+- Self-test veri pixel: PASS per asset trasparente, opaco opzionale, opaco con alpha obbligatorio, crop, risoluzione e byte budget. Auto-accept resta sempre `false`.
+- Candidate r2 invariata, SHA-256 `ad2cca0c90da0c1137b5e48e885b009727cda6dc661200ee2ffb565458960f85`: `TECHNICAL_PASS_VISUAL_REVIEW_REQUIRED`, con crop opaco demandato alla review visuale.
+- Composizione isolata non deployata: `review/r2-gauge-composition.html`. Il gauge è un layer DOM/SVG separato; il PNG portrait non è stato modificato.
+- `490 kcal` deriva dalla ricetta r2 in `index.html`; il `320` della reference non è stato copiato come dato.
+- Browser QA reale su larghezza mobile: immagine, crop, titolo e gauge leggibili. Test dinamico 490 → 650 → 490 ha aggiornato numero, label accessibile e lancetta.
+- Report: `review/r2-gauge-composition.qa.json`. Stato `VERIFIED_REVIEW_COMPOSITION_ONLY`, non approvato e non FROZEN.
+
+**Issue log aggiornato:**
+
+| ID | Tipo | Stato e decisione |
+| --- | --- | --- |
+| E13 | OPAQUE_BACKGROUND_VS_ALPHA_CONTRACT | **RESOLVED FOR REVIEW PIPELINE**: alpha opzionale, crop opaco sottoposto a review visuale obbligatoria; nessun auto-accept. |
+| E14 | GAUGE_REQUIRED_BUT_NOT_BAKED | **IMPLEMENTED + VERIFIED IN ISOLATED REVIEW**: gauge dinamico separato e visibile; nessuna integrazione tester/PWA. |
+| E08 | HISTORICAL_VESSEL_SHA_MISMATCH | **BLOCKED invariato**: la review non prova la tavola vessel FROZEN e non abilita freeze o produzione batch. |
+
+**Prossimo micro-step:** review visuale owner della composizione r2. Senza approvazione esplicita non eseguire freeze, integrazione, batch o deploy.

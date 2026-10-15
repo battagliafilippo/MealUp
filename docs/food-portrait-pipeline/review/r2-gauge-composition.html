@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MealUp · Review r2 Food Portrait + gauge</title>
+  <style>
+    :root{font-family:Inter,ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif;color:#33261f;background:#f4eee5}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:28px;background:radial-gradient(circle at 50% 10%,#fffaf1,#eadfce)}
+    .review{width:min(100%,430px);position:relative}
+    .label{margin:0 0 10px 4px;font-size:12px;font-weight:800;letter-spacing:.12em;color:#a24f24;text-transform:uppercase}
+    .card{position:relative;overflow:hidden;border-radius:38px;background:#fff9ef;box-shadow:0 28px 80px #5f38242b,0 2px 0 #fff inset;border:1px solid #fff4e6}
+    .portrait{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
+    .gauge{position:absolute;top:18px;right:16px;width:43%;filter:drop-shadow(0 10px 12px #6b331d38);isolation:isolate}
+    .gauge svg{display:block;width:100%;overflow:visible}
+    .gauge-shell{fill:#ffdfbb;stroke:#fff0dd;stroke-width:4}
+    .seg{stroke:#fff1d8;stroke-width:2}
+    .needle{transform-origin:100px 82px;transform:rotate(var(--needle-angle));transition:transform .25s ease}
+    .needle-body{fill:#343235;stroke:#222;stroke-width:1}
+    .pivot{fill:#ff641e;stroke:#ffb16e;stroke-width:3}
+    .dial{fill:#ffe0bf;stroke:#f7c99e;stroke-width:2}
+    .kcal{font-weight:900;font-size:27px;text-anchor:middle;fill:#282326}
+    .unit{font-weight:800;font-size:15px;text-anchor:middle;fill:#282326}
+    .accent{fill:#ff5a16;stroke:#ffad6d;stroke-width:3}
+    .copy{padding:22px 24px 26px}
+    h1{font-size:25px;line-height:1.08;margin:0 0 8px;letter-spacing:-.035em}
+    .meta{margin:0;color:#715f55;font-size:14px}
+    .controls{margin-top:16px;padding:14px 16px;border-radius:18px;background:#ffffffb5;border:1px solid #fff}
+    .controls label{display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:#6d574b}
+    input{width:100%;accent-color:#ff5a16;margin-top:9px}
+    .status{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+    .pill{font-size:10px;font-weight:850;letter-spacing:.04em;padding:6px 9px;border-radius:999px;background:#fff0df;color:#91451d}
+    @media(max-width:480px){body{padding:14px}.card{border-radius:31px}.gauge{top:12px;right:10px;width:44%}.copy{padding:19px 20px 23px}}
+    @media(prefers-reduced-motion:reduce){.needle{transition:none}}
+  </style>
+</head>
+<body>
+  <main class="review" aria-label="Composizione di revisione non approvata">
+    <p class="label">Review laboratorio · non approvata</p>
+    <article class="card">
+      <img class="portrait" src="../candidates/r2-poke-visual-candidate-002.png" alt="Poke bowl con riso, tonno, avocado, soia e sesamo">
+      <div class="gauge" role="img" aria-label="Gauge dinamico: 490 chilocalorie" data-kcal="490">
+        <svg viewBox="0 0 200 162" aria-hidden="true">
+          <path class="gauge-shell" d="M17 104A84 84 0 0 1 183 104L159 106A60 60 0 0 0 41 106Z"/>
+          <path class="seg" fill="#39af53" d="M22 101A79 79 0 0 1 40 53L58 69A55 55 0 0 0 46 102Z"/>
+          <path class="seg" fill="#b7cf19" d="M42 50A79 79 0 0 1 79 25L86 48A55 55 0 0 0 60 67Z"/>
+          <path class="seg" fill="#ffbf19" d="M83 24A79 79 0 0 1 122 27L115 50A55 55 0 0 0 89 48Z"/>
+          <path class="seg" fill="#ff7028" d="M126 28A79 79 0 0 1 159 56L140 71A55 55 0 0 0 119 52Z"/>
+          <path class="seg" fill="#f3262f" d="M162 59A79 79 0 0 1 178 101L154 102A55 55 0 0 0 143 74Z"/>
+          <g class="needle">
+            <path class="needle-body" d="M96 83L101 37L106 83Z"/>
+          </g>
+          <circle class="pivot" cx="101" cy="83" r="10"/>
+          <circle class="dial" cx="91" cy="119" r="38"/>
+          <text class="kcal" x="91" y="117">490</text>
+          <text class="unit" x="91" y="139">kcal</text>
+          <circle class="accent" cx="164" cy="125" r="16"/>
+        </svg>
+      </div>
+      <div class="copy">
+        <h1>Poke bowl tonno e avocado</h1>
+        <p class="meta">Bowl fredda · 8 min · r2</p>
+        <div class="status" aria-label="Stato revisione">
+          <span class="pill">Portrait candidate</span><span class="pill">Gauge UI separato</span>
+        </div>
+      </div>
+    </article>
+    <section class="controls" aria-label="Controllo dimostrativo del gauge">
+      <label for="kcal">Valore dinamico <output id="readout">490 kcal</output></label>
+      <input id="kcal" type="range" min="0" max="800" value="490" step="10">
+    </section>
+  </main>
+  <script>
+    const input=document.querySelector('#kcal');
+    const gauge=document.querySelector('.gauge');
+    const number=document.querySelector('.kcal');
+    const output=document.querySelector('#readout');
+    function render(value){
+      const kcal=Math.max(0,Math.min(800,Number(value)||0));
+      const angle=-58+(kcal/800)*116;
+      gauge.style.setProperty('--needle-angle',`${angle}deg`);
+      gauge.dataset.kcal=String(kcal);
+      gauge.setAttribute('aria-label',`Gauge dinamico: ${kcal} chilocalorie`);
+      number.textContent=String(kcal);
+      output.textContent=`${kcal} kcal`;
+    }
+    input.addEventListener('input',event=>render(event.target.value));
+    render(input.value);
+  </script>
+</body>
+</html>
