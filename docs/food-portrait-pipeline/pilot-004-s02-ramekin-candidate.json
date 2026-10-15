@@ -1,0 +1,61 @@
+{
+  "schema": "mealup-food-portrait-pilot-attempt-v1",
+  "attemptId": "FPP-S02-IMAGEGEN-20261015-001",
+  "status": "VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED",
+  "branch": "experiment/food-portrait-pipeline-20261015",
+  "generator": {
+    "provider": "CODEX_BUILT_IN_IMAGEGEN",
+    "mode": "PRECISE_OBJECT_EDIT_FROM_TWO_FROZEN_REFERENCES",
+    "imageCountGenerated": 1,
+    "additionalSpendEur": 0,
+    "referenceSha256": [
+      "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0",
+      "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+    ]
+  },
+  "candidate": {
+    "recipeId": "s02",
+    "title": "Salsa yogurt e cetriolo",
+    "vesselId": "VESSEL_RAMEKIN",
+    "kcal": 100,
+    "expectedGaugeAngleDegrees": -48,
+    "path": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-candidate-001.png",
+    "sha256": "d7d816ad48ca1d2238930d9faa3246e1a0c23a6c217e54806bb5df35b684df2a",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1790992,
+    "format": "png"
+  },
+  "sourceFacts": {
+    "ingredients": ["yogurt greco 0% 80 g", "cetrioli 60 g", "aglio 0.5 spicchio", "menta 3 g", "olio evo 0.5 cucchiaio"],
+    "preparation": "Cetriolo grattugiato e strizzato, mescolato con yogurt, aglio e menta; salsa densa lasciata riposare in frigo."
+  },
+  "technicalQa": {
+    "status": "TECHNICAL_PASS_VISUAL_REVIEW_REQUIRED",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"],
+    "automaticAcceptanceAllowed": false
+  },
+  "visualQa": {
+    "status": "INDEPENDENT_VISUAL_PASS_WITH_OWNER_REVIEW_POINT",
+    "checks": {
+      "singleDish": "PASS",
+      "recipeIdentity": "PASS",
+      "ingredientMatch": "PASS_NO_EXTRAS_DETECTED",
+      "kcalTextExact": "PASS_100",
+      "needleDirection": "PASS_DEEP_GREEN_APPROX_EXPECTED_MINUS_48_DEGREES",
+      "styleMatchToFrozenReferences": "PASS_CANDIDATE_ONLY",
+      "mobileLegibility": "PASS",
+      "unexpectedTextOrUi": "PASS_NONE_DETECTED"
+    },
+    "ownerReviewPoint": "RAMEKIN_SCALE_APPEARS_GENEROUS; OWNER MUST CONFIRM IT READS AS RAMEKIN, NOT BOWL",
+    "comparison": "docs/food-portrait-pipeline/review/pilot-s02-vs-frozen.html"
+  },
+  "gates": {
+    "ownerApproved": false,
+    "frozen": false,
+    "deployAuthorized": false,
+    "batchExpansionAllowed": false,
+    "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
+  }
+}

@@ -372,3 +372,17 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Stato:** r1 PLATE FROZEN; r2 BOWL FROZEN; stile generale FROZEN; produzione massiva NON AUTORIZZATA.
 
 **Prossimo micro-step necessario:** scegliere una singola ricetta con un vessel non ancora coperto e produrre un solo nuovo pilot contro i due riferimenti FROZEN, oppure fermarsi qui. Nessuna espansione automatica.
+
+
+## Third pilot checkpoint 2026-10-15 — s02 RAMEKIN visual candidate
+
+- Selezionata la prossima ricetta prevista dal pilot: `s02`, **Salsa yogurt e cetriolo**, `VESSEL_RAMEKIN`, `100 kcal` dalla card.
+- Generata una sola immagine con ImageGen built-in usando entrambi i riferimenti FROZEN r1 PLATE e r2 BOWL; costo aggiuntivo dichiarato `0 EUR`.
+- Candidate: `candidates/s02-yogurt-cucumber-ramekin-candidate-001.png`, SHA-256 `d7d816ad48ca1d2238930d9faa3246e1a0c23a6c217e54806bb5df35b684df2`, 1254 x 1254, `1.790.992` byte.
+- QA tecnico: **PASS**, con soli warning previsti per crop opaco e successiva conversione WebP dopo approvazione.
+- QA visivo indipendente: singola salsa, identità yogurt/cetriolo/menta, nessun ingrediente estraneo evidente, `100 kcal` esatto, lancetta profonda nel verde coerente con angolo atteso `-48°`, stile e leggibilità mobile PASS come candidate.
+- Punto aperto per owner review: il contenitore è coerente nello stile ma appare generoso; confermare che legga come ramekin e non come bowl.
+- Stato: `VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED`. Nessun auto-accept, freeze, batch, integrazione o deploy.
+- E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dal nuovo pilot.
+
+**Prossimo micro-step necessario:** review visuale owner del solo candidato s02. Se approvato, ottimizzazione lossless, nuova QA e decisione separata sull'eventuale freeze RAMEKIN.

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MealUp · Pilot s02 vs riferimenti FROZEN</title>
+  <style>
+    :root{font-family:Inter,ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif;color:#33261f;background:#efe7db}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;padding:28px;background:radial-gradient(circle at 50% 0,#fffaf1,#e7dac9)}
+    main{width:min(1320px,100%);margin:auto}.eyebrow{font-size:12px;font-weight:900;letter-spacing:.12em;color:#a24f24;text-transform:uppercase}
+    h1{margin:8px 0 6px;font-size:clamp(28px,4vw,48px);letter-spacing:-.05em}p{color:#6e5b50}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:24px}.card{overflow:hidden;border-radius:28px;background:#fff9ef;border:1px solid #fff3e3;box-shadow:0 24px 60px #5f382422}
+    .visual{position:relative;aspect-ratio:1;overflow:hidden;background:#fff8eb}.visual img{display:block;width:100%;height:100%;object-fit:cover}.reference img{object-position:center center}
+    .kcal-overlay{position:absolute;left:74.8%;top:29.1%;transform:translate(-50%,-50%);width:15.8%;height:13%;display:grid;place-content:center;border-radius:48%;background:radial-gradient(circle at 50% 38%,#ffe2c1 0 56%,#f5cda8 86%,#eebf97 100%);text-align:center;color:#302b29;line-height:.82}
+    .kcal-overlay b{font-size:clamp(16px,2.5vw,25px);letter-spacing:-.07em}.kcal-overlay span{font-size:clamp(9px,1.3vw,13px);font-weight:900;margin-top:4px}
+    .body{padding:18px 20px 22px}.tag{display:inline-block;padding:6px 9px;border-radius:999px;background:#fff0df;color:#91451d;font-size:10px;font-weight:900;letter-spacing:.05em}h2{margin:12px 0 6px;font-size:22px;letter-spacing:-.035em}.facts{font-size:13px;line-height:1.45;margin:0}
+    .gate{margin-top:22px;padding:14px 16px;border-radius:18px;background:#fff8eb;border:1px solid #f1c99f;color:#74472c;font-size:13px;line-height:1.45}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}.card{border-radius:28px}}@media(max-width:720px){body{padding:16px}}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">Terzo pilot controllato · confronto visuale</div>
+    <h1>s02 RAMEKIN candidato vs riferimenti FROZEN</h1>
+    <p>Una sola nuova immagine. Nessun auto-accept, freeze, batch o deploy.</p>
+    <section class="grid">
+      <article class="card">
+        <div class="visual"><img src="../candidates/r1-carpaccio-plate-approved-001.webp" alt="Riferimento FROZEN PLATE r1"></div>
+        <div class="body"><span class="tag">FROZEN PLATE</span><h2>r1 · Carpaccio</h2><p class="facts">380 kcal · owner + QA PASS</p></div>
+      </article>
+      <article class="card">
+        <div class="visual reference"><img src="../candidates/r2-owner-exact-source-003.png" alt="Riferimento FROZEN BOWL r2"><div class="kcal-overlay" aria-label="490 chilocalorie dalla card"><b>490</b><span>kcal</span></div></div>
+        <div class="body"><span class="tag">FROZEN BOWL</span><h2>r2 · Poke</h2><p class="facts">490 kcal · owner approved</p></div>
+      </article>
+      <article class="card">
+        <div class="visual"><img src="../candidates/s02-yogurt-cucumber-ramekin-candidate-001.png" alt="Candidato s02 salsa yogurt e cetriolo in ramekin"></div>
+        <div class="body"><span class="tag">CANDIDATE · NON APPROVATO</span><h2>s02 · Salsa yogurt e cetriolo</h2><p class="facts">VESSEL_RAMEKIN · 100 kcal · lancetta verde</p></div>
+      </article>
+    </section>
+    <div class="gate"><strong>Review richiesta:</strong> stile, ingredienti, valore e lancetta passano il controllo indipendente. Confermare che la scala del contenitore legga come ramekin e non come bowl.</div>
+  </main>
+</body>
+</html>
