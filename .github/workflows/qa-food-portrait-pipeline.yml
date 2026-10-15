@@ -178,6 +178,34 @@ jobs:
             x.fallback.doNotReplaceWithFamilyFoodObject===true));
           console.log('PASS staging: 454 recipe IDs mapped, 2 grouped root causes, no fake portraits');
           NODE
+      - name: Verify AI Office handoffs and modular six-recipe pilot pack
+        run: |
+          node --check tools/food-portrait-pipeline/pilot-office-bridge.cjs
+          node tools/food-portrait-pipeline/pilot-office-bridge.cjs --self-test
+          node tools/food-portrait-pipeline/pilot-office-bridge.cjs \
+            --specs /tmp/mealup-portrait-staging/portrait-specifications.v1.json \
+            --selection tools/food-portrait-pipeline/pilot-selection.v1.json \
+            --style docs/food-portrait-pipeline/owner-style-reference.v1.json \
+            --out /tmp/mealup-portrait-staging/office-pilot
+          node <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict');
+          const p='/tmp/mealup-portrait-staging/office-pilot/';
+          const packs=JSON.parse(fs.readFileSync(p+'promptPacks.json'));
+          const handoffs=JSON.parse(fs.readFileSync(p+'officeAssignments.json'));
+          const report=JSON.parse(fs.readFileSync(p+'report.json'));
+          assert.equal(packs.packCount,6);
+          assert.equal(handoffs.handoffs.length,18);
+          assert.deepEqual(report.recipeIds,['r2','r1','s02','do08','p12','v08']);
+          assert.equal(report.externalProviderCalls,0);
+          assert.equal(report.readyForAutomaticAcceptance,0);
+          const p12=packs.packs.find(x=>x.recipeId==='p12');
+          const v08=packs.packs.find(x=>x.recipeId==='v08');
+          assert.ok(p12.flaggedExceptions.some(x=>x.code==='STEP_MENTIONS_WINE_NOT_IN_INGREDIENTS'));
+          assert.ok(v08.flaggedExceptions.some(x=>x.code==='VESSEL_FREE_STEP_MENTIONS_GLASS'));
+          assert.ok(packs.packs.every(x=>x.blocks.C_RECIPE_SPECIFIC.facts.ingredients.length>0));
+          assert.ok(handoffs.handoffs.every(x=>x.officeHandoff.execution==='NOT_STARTED'));
+          console.log('PASS HYBRID OFFICE: six actual recipes, 18 role handoffs, source facts, zero false execution');
+          NODE
       - name: Store preproduction evidence (no deploy)
         if: always()
         uses: actions/upload-artifact@v4
