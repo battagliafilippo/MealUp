@@ -3,7 +3,7 @@
   "asOf": "2026-10-15",
   "objective": "Best verifiably useful specialist for each MealUp AI Office role at zero incremental EUR",
   "mustForAll": [
-    "ZERO_INCREMENTAL_COST_RECURRING_OR_ALREADY_SUBSCRIBED_MANUAL",
+    "ZERO_INCREMENTAL_COST_RECURRING_OR_VERIFIED_EXISTING_SUBSCRIPTION_ENTITLEMENT",
     "ROLE_SPECIFIC_CAPABILITY",
     "LICENSE_SECURITY_CHECK",
     "INDEPENDENT_QA",
@@ -57,7 +57,8 @@
         "PWA_OFFLINE_TEST",
         "PROTECTED_MAIN_NEGATIVE"
       ],
-      "priority": "HIGH"
+      "priority": "HIGH",
+      "existingSubscriptionCandidate": "Codex included in existing ChatGPT subscription where eligible; quota and actual client access must be confirmed, separately billed API not covered"
     },
     {
       "roleId": "FOOD",
@@ -106,7 +107,8 @@
         "TRANSPARENCY_CROP",
         "UNAUTHORIZED_ASSET_EDIT_NEGATIVE"
       ],
-      "priority": "HIGH"
+      "priority": "HIGH",
+      "existingSubscriptionCandidate": "ChatGPT Images in existing subscription (manual UI) with usage limits; API images separately billed, not assumed connected to GitHub"
     },
     {
       "roleId": "PROMPT_ARCHITECT",
