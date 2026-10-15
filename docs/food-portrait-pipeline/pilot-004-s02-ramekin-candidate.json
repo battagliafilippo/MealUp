@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-pilot-attempt-v1",
   "attemptId": "FPP-S02-IMAGEGEN-20261015-001",
-  "status": "VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED",
+  "status": "OWNER_APPROVED_TECHNICAL_PASS_FROZEN_RAMEKIN_REFERENCE",
   "branch": "experiment/food-portrait-pipeline-20261015",
   "generator": {
     "provider": "CODEX_BUILT_IN_IMAGEGEN",
@@ -26,6 +26,16 @@
     "bytes": 1790992,
     "format": "png"
   },
+  "approvedAsset": {
+    "path": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+    "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1207478,
+    "format": "webp",
+    "optimization": "LOSSLESS_WEBP",
+    "decodedPixelsIdenticalToApprovedCandidate": true
+  },
   "sourceFacts": {
     "ingredients": ["yogurt greco 0% 80 g", "cetrioli 60 g", "aglio 0.5 spicchio", "menta 3 g", "olio evo 0.5 cucchiaio"],
     "preparation": "Cetriolo grattugiato e strizzato, mescolato con yogurt, aglio e menta; salsa densa lasciata riposare in frigo."
@@ -34,6 +44,13 @@
     "status": "TECHNICAL_PASS_VISUAL_REVIEW_REQUIRED",
     "errors": [],
     "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"],
+    "automaticAcceptanceAllowed": false
+  },
+  "approvedAssetQa": {
+    "status": "TECHNICAL_PASS",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW_COMPLETED"],
+    "pixelComparison": "PASS_DECODED_PIXELS_IDENTICAL",
     "automaticAcceptanceAllowed": false
   },
   "visualQa": {
@@ -48,12 +65,13 @@
       "mobileLegibility": "PASS",
       "unexpectedTextOrUi": "PASS_NONE_DETECTED"
     },
-    "ownerReviewPoint": "RAMEKIN_SCALE_APPEARS_GENEROUS; OWNER MUST CONFIRM IT READS AS RAMEKIN, NOT BOWL",
+    "ownerDecision": "APPROVED_EXACTLY_AS_DESIRED",
+    "ownerReviewPoint": "RESOLVED_OWNER_CONFIRMED_RAMEKIN_VISUAL",
     "comparison": "docs/food-portrait-pipeline/review/pilot-s02-vs-frozen.html"
   },
   "gates": {
-    "ownerApproved": false,
-    "frozen": false,
+    "ownerApproved": true,
+    "frozen": true,
     "deployAuthorized": false,
     "batchExpansionAllowed": false,
     "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"

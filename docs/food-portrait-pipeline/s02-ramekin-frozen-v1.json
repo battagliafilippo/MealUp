@@ -1,0 +1,39 @@
+{
+  "schema": "mealup-food-portrait-frozen-asset-v1",
+  "status": "FROZEN",
+  "decisionDate": "2026-10-15",
+  "authority": "OWNER_EXPLICIT_VISUAL_APPROVAL",
+  "recipeId": "s02",
+  "title": "Salsa yogurt e cetriolo",
+  "vesselId": "VESSEL_RAMEKIN",
+  "kcal": 100,
+  "gaugeAngleDegrees": -48,
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+    "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1207478,
+    "format": "webp"
+  },
+  "evidence": {
+    "ownerVisualApproval": "PERFECT_EXACTLY_AS_DESIRED",
+    "technicalQa": "PASS",
+    "decodedPixelIdentityToApprovedPng": true,
+    "gaugeValueMatchesRecipeCard": true,
+    "gaugeNeedleDirection": "DEEP_GREEN_FOR_100_KCAL"
+  },
+  "frozenScope": [
+    "s02 final visual asset",
+    "VESSEL_RAMEKIN reference geometry and styling",
+    "ingredient composition and sauce presentation",
+    "100 kcal display and corresponding gauge direction"
+  ],
+  "notAuthorized": [
+    "automatic batch production",
+    "tester or PWA integration",
+    "deployment",
+    "modification of main, tester, or AI Office"
+  ],
+  "independentBlockedGate": "E08_HISTORICAL_VESSEL_SHA_MISMATCH"
+}

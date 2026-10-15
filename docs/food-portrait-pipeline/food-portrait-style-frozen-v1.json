@@ -23,6 +23,12 @@
       "source": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
       "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0",
       "status": "FROZEN"
+    },
+    "VESSEL_RAMEKIN": {
+      "recipeId": "s02",
+      "source": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+      "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c",
+      "status": "FROZEN"
     }
   },
   "frozenVisualInvariants": [
@@ -70,7 +76,7 @@
   "explicitlyNotFrozen": [
     "the baked 480 text and baked needle angle in the owner source; production kcal and needle are dynamic",
     "historical G5 vessel board affected by E08",
-    "individual Food Portraits other than the FROZEN r2 BOWL and r1 PLATE references",
+    "individual Food Portraits other than the FROZEN r2 BOWL, r1 PLATE and s02 RAMEKIN references",
     "batch production",
     "tester or PWA integration",
     "deployment"

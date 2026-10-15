@@ -386,3 +386,16 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dal nuovo pilot.
 
 **Prossimo micro-step necessario:** review visuale owner del solo candidato s02. Se approvato, ottimizzazione lossless, nuova QA e decisione separata sull'eventuale freeze RAMEKIN.
+
+
+## Owner approval + RAMEKIN freeze checkpoint 2026-10-15 — s02 FROZEN
+
+- Decisione owner: s02 è perfetto ed esattamente conforme alla visione desiderata; il dubbio sulla scala del ramekin è risolto.
+- Ottimizzazione lossless: PNG `1.790.992` byte → WebP `1.207.478` byte, con pixel decodificati identici.
+- Asset FROZEN: `candidates/s02-yogurt-cucumber-ramekin-approved-001.webp`, SHA-256 `32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c`.
+- QA tecnico: **PASS**; valore `100 kcal` e angolo gauge `-48°` verificati rispetto alla mapping FROZEN.
+- Manifest: `s02-ramekin-frozen-v1.json`. Contratto stilistico aggiornato con il terzo riferimento canonico `VESSEL_RAMEKIN`.
+- Stato: r1 PLATE FROZEN; r2 BOWL FROZEN; s02 RAMEKIN FROZEN. Nessun batch, integrazione o deploy autorizzato.
+- E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dai tre riferimenti verificati.
+
+**Prossimo micro-step necessario:** un solo pilot per il prossimo vessel previsto (`VESSEL_DESSERT_MOLD`) oppure arresto della sperimentazione. Nessuna produzione massiva automatica.
