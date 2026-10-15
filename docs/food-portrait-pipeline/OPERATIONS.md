@@ -247,3 +247,23 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 | E08 | HISTORICAL_VESSEL_SHA_MISMATCH | **BLOCKED invariato**: la review non prova la tavola vessel FROZEN e non abilita freeze o produzione batch. |
 
 **Prossimo micro-step:** review visuale owner della composizione r2. Senza approvazione esplicita non eseguire freeze, integrazione, batch o deploy.
+
+
+## Owner rejection checkpoint 2026-10-15 — richiesta identità con IMG_1277.png
+
+- L'owner ha respinto la composizione ricostruita: Food Portrait e gauge separato non erano identici alla nuova foto allegata.
+- Nuova regola per r2: usare direttamente `IMG_1277.png` come source visiva; vietata rigenerazione o reinterpretazione per dichiarare identità.
+- Source copiata senza alterazione in `candidates/r2-owner-exact-source-003.png`; SHA-256 sorgente e copia `027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a`, identità byte verificata.
+- Il file 1179 x 2556 contiene un'area visiva quadrata 1179 x 1179 nel bounding box non nero `[0,688,1179,1867]`. La review applica solo crop CSS centrale non distruttivo; nessun pixel del source viene riscritto.
+- La review precedente resta preservata ma `REJECTED_BY_OWNER_NOT_IDENTICAL_SUPERSEDED`.
+- Conflitto dati bloccante: la source owner mostra `480 kcal`; la ricetta r2 corrente in `index.html` dichiara `490 kcal`. Nessun dato o pixel modificato automaticamente.
+
+**Issue log aggiornato:**
+
+| ID | Tipo | Stato e decisione |
+| --- | --- | --- |
+| E15 | RECONSTRUCTED_REVIEW_NOT_IDENTICAL | **REJECTED + SUPERSEDED**: non ricostruire bowl/gauge quando è richiesta identità; usare i byte owner. |
+| E16 | OWNER_IMAGE_480_VS_RECIPE_490_KCAL | **BLOCKED DECISION**: identità visiva e coerenza catalogo non possono essere entrambe vere senza una decisione sul valore autorevole. |
+| E08 | HISTORICAL_VESSEL_SHA_MISMATCH | **BLOCKED invariato**: la nuova source owner non dimostra la tavola vessel FROZEN storica. |
+
+**Prossimo micro-step necessario:** ottenere una decisione owner sul valore kcal autorevole. Fino ad allora la source è `VISUAL_SOURCE_EXACT`, ma non asset approvato/FROZEN e non deployabile.

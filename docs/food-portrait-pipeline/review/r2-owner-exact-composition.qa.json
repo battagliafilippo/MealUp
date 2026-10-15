@@ -1,0 +1,46 @@
+{
+  "schema": "mealup-food-portrait-owner-exact-review-v1",
+  "reviewId": "FPP-R2-OWNER-EXACT-20261015-001",
+  "status": "VISUAL_SOURCE_EXACT_DATA_GATE_BLOCKED_NOT_APPROVED",
+  "source": {
+    "userFileName": "IMG_1277.png",
+    "repositoryCopy": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+    "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a",
+    "width": 1179,
+    "height": 2556,
+    "bytes": 1582050,
+    "format": "png",
+    "byteIdentityVerified": true
+  },
+  "visualContent": {
+    "nonBlackBoundingBox": [0, 688, 1179, 1867],
+    "contentWidth": 1179,
+    "contentHeight": 1179,
+    "squareContent": true,
+    "reviewCrop": "CSS_CENTER_CROP_ONLY_NO_PIXEL_REWRITE",
+    "portraitOrGaugeRegenerated": false,
+    "visualIdentityPolicy": "USE_OWNER_SOURCE_DIRECTLY"
+  },
+  "recipeComparison": {
+    "imageGaugeKcal": 480,
+    "catalogRecipeKcal": 490,
+    "catalogSource": "index.html recipe r2",
+    "status": "BLOCKED_DATA_CONFLICT",
+    "automaticCorrectionAllowed": false
+  },
+  "supersedes": {
+    "portrait": "docs/food-portrait-pipeline/candidates/r2-poke-visual-candidate-002.png",
+    "review": "docs/food-portrait-pipeline/review/r2-gauge-composition.qa.json",
+    "reason": "Owner rejected the reconstructed composition because it was not identical to IMG_1277.png."
+  },
+  "gates": {
+    "visualSourceExact": true,
+    "dataConsistent": false,
+    "ownerApprovedAsFinalAsset": false,
+    "frozen": false,
+    "deployAuthorized": false,
+    "batchExpansionAllowed": false,
+    "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
+  },
+  "nextDecisionRequired": "Choose the authoritative kcal value: preserve 480 exactly as shown in the owner image, or authorize a controlled 490-kcal derivative that cannot remain byte-identical to the source."
+}

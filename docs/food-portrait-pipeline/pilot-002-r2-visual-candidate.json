@@ -105,6 +105,10 @@
     "qaReport": "docs/food-portrait-pipeline/review/r2-gauge-composition.qa.json",
     "status": "VERIFIED_REVIEW_COMPOSITION_ONLY"
   },
-  "finalDecision": "PORTRAIT_AND_SEPARATE_DYNAMIC_GAUGE_VERIFIED_FOR_OWNER_REVIEW_NOT_APPROVED",
-  "nextAuthorizedNeed": "Owner visual review of the r2 composition. Do not freeze, integrate or expand the batch without explicit approval; E08 remains blocked independently."
+  "ownerReviewAfterComposition": {
+    "status": "REJECTED_NOT_IDENTICAL_TO_OWNER_SOURCE",
+    "supersededBy": "docs/food-portrait-pipeline/review/r2-owner-exact-composition.qa.json"
+  },
+  "finalDecision": "REJECTED_PRESERVED_FOR_AUDIT_SUPERSEDED_BY_EXACT_OWNER_SOURCE",
+  "nextAuthorizedNeed": "Resolve the 480 kcal shown in the exact owner source versus 490 kcal in recipe r2 before any approval, freeze, integration or batch expansion."
 }

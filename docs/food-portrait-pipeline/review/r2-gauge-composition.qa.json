@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-review-composition-qa-v1",
   "reviewId": "FPP-R2-GAUGE-REVIEW-20261015-001",
-  "status": "REVIEW_RENDER_VERIFIED_NOT_APPROVED",
+  "status": "REJECTED_BY_OWNER_NOT_IDENTICAL_SUPERSEDED",
   "source": {
     "html": "docs/food-portrait-pipeline/review/r2-gauge-composition.html",
     "portrait": "docs/food-portrait-pipeline/candidates/r2-poke-visual-candidate-002.png",
@@ -54,5 +54,7 @@
     "historicalVesselBoardVerified": false,
     "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
   },
-  "final": "VERIFIED_REVIEW_COMPOSITION_ONLY"
+  "ownerFinding": "The separate reconstructed gauge and generated portrait were not visually identical to the supplied owner image.",
+  "supersededBy": "docs/food-portrait-pipeline/review/r2-owner-exact-composition.qa.json",
+  "final": "REJECTED_PRESERVED_FOR_AUDIT"
 }
