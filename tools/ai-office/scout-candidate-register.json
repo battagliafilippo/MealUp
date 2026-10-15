@@ -25,6 +25,24 @@
       "next": "Intra-model baseline + separate QA; only compare externally after second model free API confirmed"
     },
     {
+      "id": "MISTRAL_SMALL_3_1_24B_CLOUDFLARE",
+      "role": "Design Director",
+      "publisher": "Mistral AI",
+      "modelId": "@cf/mistralai/mistral-small-3.1-24b-instruct",
+      "inferenceProvider": "Cloudflare Workers AI",
+      "status": "HOSTED_FREE_OFFER_VERIFIED_ACCOUNT_NOT_CONNECTED",
+      "vision": true,
+      "licenseClaim": "Apache-2.0 confirmed by official Mistral release, hosted model offered by Cloudflare",
+      "freeApiAccess": "CLOUDFLARE_WORKERS_FREE_10000_NEURONS_DAILY_DOCUMENTED_ACCOUNT_ACCESS_NOT_TESTED",
+      "evidence": [
+        "https://mistral.ai/news/mistral-small-3-1/",
+        "https://developers.cloudflare.com/workers-ai/models/mistral-small-3.1-24b-instruct/",
+        "https://developers.cloudflare.com/workers-ai/platform/pricing/"
+      ],
+      "risk": "Free-plan eligibility is documented, but no Cloudflare account/secret validated; model vision feature for API still requires a real test. No automatic binding; no paid upgrade",
+      "next": "CEO authorizes access to Workers AI Free without billing; verify account/token and one vision probe; only then run identical MealUp A/B benchmark"
+    },
+    {
       "id": "PHI_4_REASONING_VISION_15B",
       "role": "Design Director",
       "publisher": "Microsoft",
@@ -78,7 +96,7 @@
     "id": "OFFICE-DESIGN-BENCH-V1",
     "workflow": ".github/workflows/qa-ai-office-design-benchmark.yml",
     "type": "INTRA_MODEL_BASELINE",
-    "externalModelA_BStatus": "BLOCKED_NO_SECOND_VERIFIED_ZERO_COST_VISION_ENDPOINT",
+    "externalModelA_BStatus": "BLOCKED_NO_SECOND_CONNECTED_ZERO_COST_VISION_ENDPOINT_CLOUDFLARE_CANDIDATE_FOUND",
     "frozenAssetsUnmodified": true,
     "modelWinner": null
   },
