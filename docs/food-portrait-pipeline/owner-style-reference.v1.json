@@ -1,0 +1,49 @@
+{
+  "schema": "mealup-food-portrait-style-reference-v1",
+  "refId": "STYLE_OWNER_POKE_20261015",
+  "status": "OWNER_SUPPLIED_STYLE_DIRECTION_CANDIDATE_NOT_FROZEN",
+  "source": {
+    "provider": "PRIVATE_MEALUP_FILE_LIBRARY",
+    "libraryPath": "/MealUp_FoodPortrait_Lab_20261015/References/OWNER_REFERENCE_ORIGINAL_20261015.jpeg",
+    "sha256": "bc8c117581375c4826cb35072d2033d1274723b525debc023f80fe299fa36790",
+    "width": 709,
+    "height": 1536,
+    "derivedCrop": {
+      "libraryPath": "/MealUp_FoodPortrait_Lab_20261015/References/OWNER_REFERENCE_CROPPED_20261015.png",
+      "sha256": "b25538fdb3da60848019f51a76f1a9152b7eac63ff38ab40292240e82bf3e7bf",
+      "box": [
+        0,
+        414,
+        709,
+        1121
+      ],
+      "width": 709,
+      "height": 707
+    }
+  },
+  "limits": {
+    "sourceNotInRepo": true,
+    "sourceNotAvailableInGitHubRunnerUnlessExplicitlyMounted": true,
+    "notAPortraitGoldenMaster": true,
+    "notAVesselGoldenMaster": true,
+    "notApprovedForMassProduction": true,
+    "independentPixelPerfectClaimAllowed": false
+  },
+  "styleObservations": [
+    "soft premium MealUp Toys 3D materiality",
+    "rounded cream/orange bowl",
+    "glossy stylized ingredients with recognizable food forms",
+    "warm light and clean cream backdrop",
+    "front three-quarter view with food as hero",
+    "gauge visible in supplied example but not part of immutable Food Portrait image"
+  ],
+  "separation": {
+    "calorieGauge": "INDEPENDENT_DYNAMIC_UI_NOT_BAKED_INTO_IMAGE",
+    "vesselId": "PER_RECIPE_G8_NOT_UNIVERSAL_BOWL"
+  },
+  "mandatoryReview": [
+    "Verify exact reference hash before comparison",
+    "Review match of forms and colors, do not equate to pixel perfect",
+    "Confirm vessel separately before image approval"
+  ]
+}
