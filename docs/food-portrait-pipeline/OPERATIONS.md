@@ -63,24 +63,24 @@ Motivazione: componenti M2/M3 già funzionanti come preparazione, riuso controll
 | P1.2 | Audit | Inventariare gli script e i riferimenti | VERIFIED | file e SHA letti, limiti espliciti |
 | P1.3 | Audit | Eseguire gate di integrità dati | VERIFIED | codice + test remoto CI green |
 | P1.4 | Audit | Registrare conflitti, riferimenti mancanti e recovery | PARTIALLY VERIFIED / BLOCKED SOURCE | report reference-audit.v1.json; board originale non recuperato |
-| P2.1 | Architettura | Confrontare i metodi di produzione rispetto ai vincoli | PLANNED | audit P1 |
-| P2.2 | Architettura | Formalizzare unico contratto di pipeline offline-first | PLANNED | P2.1 |
-| P3.1 | Golden Master | Inventariare i file sorgente effettivi approvati | PLANNED | P2.2 |
+| P2.1 | Architettura | Confrontare i metodi di produzione rispetto ai vincoli | VERIFIED DECISION | ARCHITECTURE-AND-MASTER-SCOPE.md |
+| P2.2 | Architettura | Formalizzare unico contratto di pipeline offline-first | VERIFIED CONTRACT | ARCHITECTURE-AND-MASTER-SCOPE.md |
+| P3.1 | Golden Master | Inventariare i file sorgente effettivi approvati | PARTIAL / UNKNOWN | golden-registry.v1.json; nessun GM Portrait verificato |
 | P3.2 | Golden Master | Validare integrità/ambito/hash dei riferimenti | PLANNED | P3.1 |
-| P3.3 | Spec | Formalizzare schema per Food Portrait | PLANNED | P3.2 |
+| P3.3 | Spec | Formalizzare schema per Food Portrait | VERIFIED PREPRODUCTION | portrait-contract.cjs, CI real catalog 454 |
 | P3.4 | QA | Definire contratto di ammissione e quarantena | PLANNED | P3.3 |
-| P4.1 | Queue | Implementare coda deterministica delle spec | PLANNED | P3.3 |
-| P4.2 | Recovery | Implementare checkpoint, dedup e ripresa sicura | PLANNED | P4.1 |
+| P4.1 | Queue | Implementare coda deterministica delle spec | VERIFIED PREPRODUCTION | 454 records, 0 READY |
+| P4.2 | Recovery | Implementare checkpoint, dedup e ripresa sicura | VERIFIED PREPRODUCTION | queue-recovery.cjs, 454 replays real CI |
 | P4.3 | Engine | Implementare adapter di produzione immagini selezionato | PLANNED | P3.2, P4.2 |
-| P4.4 | QA | Implementare validatori misurabili su immagini vere | PLANNED | P4.3 |
-| P4.5 | Exceptions | Implementare registro eccezioni fail-closed | PLANNED | P4.4 |
+| P4.4 | QA | Implementare validatori misurabili su immagini vere | PARTIAL PASS | sharp pixel analyzer/test e FO reale, QA visuale da qualificare |
+| P4.5 | Exceptions | Implementare registro eccezioni fail-closed | VERIFIED PREPRODUCTION | staging-catalog.cjs 2 cause raggruppate, 0 accettazioni |
 | P5.1 | Pilota | Selezionare piccolo lotto di vessel diversi | PLANNED | P4.5 |
 | P5.2 | Pilota | Produrre immagini reali nel laboratorio | BLOCKED until pilot references | P5.1, riferimenti |
 | P5.3 | Pilota | Validare visivamente le immagini reali | PLANNED | P5.2 |
 | P6.1 | Calibrazione | Misurare errori e falsi positivi del QA | PLANNED | P5.3 |
 | P6.2 | Governance | Richiedere approvazione degli standard e della policy auto-accept | PLANNED | P6.1 |
 | P7.1 | Produzione | Ampliare i lotti per eccezione | BLOCKED until authorization | P6.2 |
-| P8.1 | Staging | Produrre manifest, WebP e rapporti di copertura | PLANNED | P7.1 |
+| P8.1 | Staging | Produrre manifest, WebP e rapporti di copertura | PARTIAL | 454 mapping staged senza asset; WebP pilota assenti |
 
 ## Primo checkpoint QA
 
@@ -125,3 +125,27 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 
 **Prossimo micro-step indipendente:** P2.1 — verificare e confrontare tecnicamente produzione AI via ChatGPT Images, riuso deterministico e pipeline ibrida, scegliendo un'unica architettura sostenibile. In parallelo l'issue E08 resta aperto senza richiedere all'utente un riferimento inventato.
 
+
+
+## Checkpoint implementazione — 2026-10-15, lavoro autorizzato
+
+**Owner scope:** e' ora autorizzata una futura modifica *mirata* del Master per realizzare Food Portrait specifici per ricetta. Si applica patch al freeze della sezione completa, non aggiornamento distruttivo anticipato; vedi `ARCHITECTURE-AND-MASTER-SCOPE.md`.
+
+**Test remoto effettivo:** https://github.com/battagliafilippo/MealUp/actions/runs/38721300671
+- Job `preproduction-specs`: **SUCCESS**, incluso harness M2/M3 di tutte le 454 ricette, `portrait-contract.cjs` con fixture negative e 455a ricetta simulata, `queue-recovery.cjs` con doppio replay del catalogo, `image-technical-qa.cjs` con veri pixel generati da Sharp e decodifica di un FO esistente, `staging-catalog.cjs` con 454 mapping/440 vessel obbligatori e nessuna auto-accettazione.
+- Artifact GitHub `food-portrait-preproduction-454`: spec, queue, checkpoint, report, manifest di staging e cause di eccezione.
+- Job `contract-baseline`: **FAIL per gate sorgente FROZEN**. Mismatch SHA-256 della board vessel E08, già isolato: NON contrassegnare l'intero workflow SUCCESS.
+- Nessuna immagine Food Portrait generata, approvata, integrata o congelata.
+
+**Prevenzione bug introdotto in questo ciclo:** `queue-recovery.cjs` aveva una condizione impossibile per `history` (`!Array.isArray(history) && Array.isArray(history)`), rilevata in CI; corretto e rivalidato con 454 record/replay. Nessuna perdita dati riscontrata.
+
+**Stato finale sottosistemi:**
+- PREPRODUCTION SOURCE CONTRACT: VERIFIED
+- QUEUE/CHECKPOINT: VERIFIED (soli stati preproduzione)
+- MEASURABLE IMAGE QA ENGINE: VERIFIED ON FIXTURES + EXISTING FO (NON sui Food Portrait)
+- GOLDEN MASTER BINARY SOURCE: BLOCKED HASH MISMATCH
+- VISUAL QUALITY / PILOT / AUTO-ACCEPT POLICY: NOT VERIFIED / NOT AUTHORIZED
+- STAGING INDEX: VERIFIED STRUCTURE, PORTRAIT COVERAGE 0/454
+- PWA + AI Office: UNCHANGED
+
+**Next atomic step:** recuperare e confrontare una reference Food Portrait/vessel realmente approvata con identità dei byte verificabile oppure ricostruire scientificamente la provenienza della board G5. Non eseguire generazione o approvazione automatica da un riferimento difforme. Continuare i controlli indipendenti che non dipendono dall'asset bloccato.
