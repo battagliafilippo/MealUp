@@ -1,0 +1,41 @@
+name: Pilot - MealUp one-shot AI with selected skills
+# Exactly one Free-tier request to an UNAPPROVED candidate; no deploy.
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - '.github/workflows/qa-ai-office-live-dynamic-skills-one-shot.yml'
+permissions:
+  contents: read
+jobs:
+  candidate:
+    if: >-
+      ${{ github.event_name == 'push' && github.event.head_commit.message == 'ci(ai-office): one authorized Groq Free dynamic skill candidate pilot' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify lab and local rules without secrets
+        run: |
+          test "$GITHUB_REF_NAME" = "experiment/recipe-visual-agents"
+          node --test tools/ai-office/live-model-skill-pilot.test.cjs
+      - name: One candidate Groq Free request with two role-specific Skills
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MEALUP_FREE_ONLY: 'YES'
+          MEALUP_ALLOW_ONE_GROQ_CALL: 'YES'
+        run: node tools/ai-office/live-model-skill-pilot.cjs
+      - name: Preserve response and evidence for independent QA
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: mealup-one-shot-ai-selected-skills
+          path: /tmp/mealup-dynamic-skill-ai-pilot.json
+          if-no-files-found: warn
+          retention-days: 5
