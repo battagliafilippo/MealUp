@@ -1,0 +1,43 @@
+name: Pilot - MealUp AI Office real internal skills
+# Single push-triggered lab-only proof. No provider tokens, app writes or deploys.
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - '.github/workflows/qa-ai-office-operational-skills-pilot.yml'
+permissions:
+  contents: read
+jobs:
+  live-internal-skills:
+    if: >-
+      ${{ github.event_name == 'push' && github.event.head_commit.message == 'ci(ai-office): execute read-only operational skills pilot' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout lab without write credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fail closed outside lab and reject disabled execution
+        run: |
+          test "$GITHUB_REF_NAME" = "experiment/recipe-visual-agents"
+          test -f tools/ai-office/live-office-lab-pilot.cjs
+      - name: Verify offline authority and selectors
+        run: node --test tools/ai-office/live-office-lab-pilot.test.cjs tools/ai-office/dynamic-skill-selector.test.cjs
+      - name: Execute Director Engineering then independent QA real internal skills
+        env:
+          MEALUP_LAB_EXECUTE: 'YES'
+        run: node tools/ai-office/live-office-lab-pilot.cjs
+      - name: Preserve non-secret audit evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: mealup-office-internal-skills-pilot
+          path: /tmp/mealup-office-operational-pilot.json
+          retention-days: 7
+          if-no-files-found: warn
