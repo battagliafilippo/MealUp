@@ -1,0 +1,90 @@
+{
+  "schema": "MEALUP_V1_9_SKILL_TRIGGER_CATALOG",
+  "version": "1.0",
+  "source": "Original Costituzione v1.9 FROZEN. This catalog stores only activation metadata; no protected rule text.",
+  "entries": [
+    {
+      "id": "MEALUP_ENGINEERING_JS_AUDIT",
+      "role": "ENGINEERING",
+      "tags": [
+        "existing_code",
+        "delegated"
+      ],
+      "review": "LAB_READONLY_INTERNAL"
+    },
+    {
+      "id": "MEALUP_QA_REGRESSION_GATE",
+      "role": "QA",
+      "tags": [
+        "existing_code",
+        "delegated",
+        "critical_system"
+      ],
+      "review": "LAB_READONLY_INTERNAL"
+    },
+    {
+      "id": "MEALUP_DESIGN_STATIC_OBSERVATION",
+      "role": "DESIGN",
+      "tags": [
+        "source_research",
+        "delegated"
+      ],
+      "review": "UNAPPROVED_CANDIDATE_LAB_ONLY"
+    },
+    {
+      "id": "MEALUP_DESIGN_OVERCLAIM_GUARD",
+      "role": "DESIGN",
+      "tags": [
+        "delegated"
+      ],
+      "review": "UNAPPROVED_CANDIDATE_LAB_ONLY"
+    },
+    {
+      "id": "mealup-talent-scout",
+      "role": "SCOUT",
+      "tags": [
+        "source_research",
+        "delegated",
+        "long_running"
+      ],
+      "review": "REPO_PLAYBOOK_NOT_EXTERNAL_AGENT"
+    },
+    {
+      "id": "mealup-recurring-cost-auditor",
+      "role": "SCOUT",
+      "tags": [
+        "source_research",
+        "delegated"
+      ],
+      "review": "REPO_PLAYBOOK_NOT_EXTERNAL_AGENT"
+    },
+    {
+      "id": "mealup-agent-security",
+      "role": "SCOUT",
+      "tags": [
+        "source_research",
+        "delegated",
+        "high_risk"
+      ],
+      "review": "REPO_PLAYBOOK_NOT_EXTERNAL_AGENT"
+    },
+    {
+      "id": "mealup-agent-benchmark",
+      "role": "SCOUT",
+      "tags": [
+        "source_research",
+        "delegated",
+        "critical_system"
+      ],
+      "review": "REPO_PLAYBOOK_NOT_EXTERNAL_AGENT"
+    },
+    {
+      "id": "mealup-ceo-selection-brief",
+      "role": "SCOUT",
+      "tags": [
+        "delegated"
+      ],
+      "review": "REPO_PLAYBOOK_NOT_EXTERNAL_AGENT"
+    }
+  ]
+}
