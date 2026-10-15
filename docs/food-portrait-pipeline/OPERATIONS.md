@@ -534,3 +534,17 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - E08 resta `BLOCKED_HASH_MISMATCH` e indipendente da questo ciclo.
 
 **Prossimo micro-step necessario:** review visuale owner della sola candidate v10. Solo dopo un'approvazione esplicita sarà consentita l'ottimizzazione lossless e la nuova QA; il secondo elemento del lotto resta non autorizzato.
+
+
+## Owner approval + lossless optimization checkpoint 2026-10-15 — v10 APPROVED, non FROZEN
+
+- Decisione owner: la candidate v10 è approvata.
+- Ottimizzazione lossless: PNG `1.578.034` byte → WebP `944.940` byte.
+- Asset approvato: `candidates/v10-ace-juice-vessel-free-approved-001.webp`, SHA-256 `0c0bd1f2023c34bf81963109c4856d50ff6f76b54a876fc97c68d879eb24d6ba`.
+- Confronto raw: **PASS**, 1254 × 1254 × 3 pixel decodificati identici alla candidate approvata.
+- QA tecnico sul WebP: **PASS**; crop opaco già verificato visivamente nella review browser.
+- Stato v10: `OWNER_APPROVED_TECHNICAL_PASS_NOT_FROZEN`. Nessun auto-freeze, integrazione, deploy o avanzamento automatico al secondo elemento del lotto.
+
+**Audit indipendenza AI Office:** lo stato corrente non è autonomo. `agent-registry.cjs` dichiara Director `INTERACTIVE_ONLY`, Visual Production `MANUAL_AUTHORIZATION_REQUIRED` e `autonomousExecution: false`; `pilot-office-bridge.cjs` prepara handoff e prompt ma non chiama provider. Il bridge conserva inoltre la vecchia separazione del gauge dai pixel, in conflitto con il contratto Food Portrait FROZEN ora approvato. Prima dell'autonomia servono riallineamento del contratto, esecuzione ImageGen realmente collegata, checkpoint persistenti e benchmark reali con QA indipendente.
+
+**Prossimo micro-step necessario:** decidere separatamente se congelare v10 oppure avviare il riallineamento controllato dell'AI Office alla pipeline Food Portrait FROZEN. `do01` resta non autorizzato.

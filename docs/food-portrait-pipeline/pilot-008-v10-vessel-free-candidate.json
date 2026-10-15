@@ -3,7 +3,7 @@
   "candidateId": "FPP-PILOT-008-V10-001",
   "lotId": "FPP-LOT-001",
   "lotSequenceOrder": 1,
-  "status": "VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED",
+  "status": "OWNER_APPROVED_TECHNICAL_PASS_NOT_FROZEN",
   "recipe": {
     "id": "v10",
     "title": "Succo ACE",
@@ -26,6 +26,16 @@
     "bytes": 1578034,
     "format": "png",
     "alphaChannel": false
+  },
+  "approvedAsset": {
+    "path": "docs/food-portrait-pipeline/candidates/v10-ace-juice-vessel-free-approved-001.webp",
+    "sha256": "0c0bd1f2023c34bf81963109c4856d50ff6f76b54a876fc97c68d879eb24d6ba",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 944940,
+    "format": "webp",
+    "lossless": true,
+    "decodedPixelsIdenticalToCandidate": true
   },
   "references": [
     {
@@ -54,7 +64,7 @@
     "errors": [],
     "warnings": [
       "OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW",
-      "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"
+      "OPAQUE_BACKGROUND_VISUALLY_REVIEWED"
     ]
   },
   "visualQa": {
@@ -75,11 +85,12 @@
     "reviewAuthority": "Independent post-generation visual inspection; not an owner approval."
   },
   "acceptance": {
-    "ownerApproved": false,
+    "ownerApproved": true,
+    "ownerDecision": "si e approvata",
     "automaticAcceptanceAllowed": false,
     "frozen": false,
     "integrated": false,
     "deployed": false
   },
-  "nextAction": "OWNER_VISUAL_REVIEW_OF_THIS_SINGLE_CANDIDATE"
+  "nextAction": "SEPARATE_DECISION_REQUIRED_FOR_FREEZE_OR_FOR_LOT_SEQUENCE_ITEM_2"
 }
