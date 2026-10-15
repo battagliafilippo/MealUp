@@ -37,7 +37,7 @@ function classify(candidate) {
   if (!candidate.inferenceProvider || candidate.freeApiAccess === 'NOT_VERIFIED')
     return { id: candidate.id, state: STATES.FREE_COMPUTE_UNVERIFIED, reason: 'NO_VERIFIED_FREE_PROVIDER', approved: false };
   if (candidate.status === 'HOSTED_FREE_OFFER_VERIFIED_ACCOUNT_NOT_CONNECTED' ||
-      candidate.freeApiAccess.includes('ACCOUNT_ACCESS_NOT_TESTED') ||
+      String(candidate.freeApiAccess || '').includes('ACCOUNT_ACCESS_NOT_TESTED') ||
       candidate.status === 'ACCOUNT_NOT_CONNECTED')
     return { id: candidate.id, state: STATES.ACCOUNT_NOT_CONNECTED, reason: 'NEEDS_PRIVATE_ACCOUNT_CONNECTION', approved: false };
   if (candidate.status === 'CONNECTED_GUARDED_NOT_QA_APPROVED')
