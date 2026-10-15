@@ -19,7 +19,7 @@ test('refuses when missing or malformed account credentials', () => {
   assert.deepEqual(p.checkFreeOnly(allowed), []);
 });
 test('builds one image and same fixed observation-only brief', () => {
-  const body = p.buildBody('test-b64'.repeat(100));
+  const body = p.buildBody('test-b64'.repeat(200));
   assert.equal(body.messages.length, 2);
   assert.equal(body.messages[1].content.filter(x => x.type === 'image_url').length, 1);
   assert.ok(body.messages[1].content[1].image_url.url.startsWith('data:image/webp;base64,'));
