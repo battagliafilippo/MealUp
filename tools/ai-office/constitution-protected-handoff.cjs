@@ -15,7 +15,7 @@ function createProtectedHandoff({task,assignment,sourcePath}={}){
   if(typeof sourcePath!=='string'||!sourcePath.trim()||
      !fs.existsSync(sourcePath)||!fs.statSync(sourcePath).isFile())
     return noAccess;
-  const canon=path.resolve(sourcePath);
+  const canon=fs.realpathSync(sourcePath);
   if(canon.startsWith(repoRoot+path.sep))
     return {...noAccess,status:'BLOCKED_PRIVATE_SOURCE_IN_PUBLIC_REPOSITORY'};
   if(!task||!assignment||
