@@ -180,6 +180,20 @@ class ConstitutionTests(unittest.TestCase):
         next_t=task();next_t["must"]=[]
         with self.assertRaisesRegex(ValueError,"MISSING_MUST"):
             engine.make_packet(next_t,self.rules)
+    def test_replaced_microsteps_are_archived_with_original_data(self):
+        old=engine.make_packet(task(),self.rules)
+        t=task()
+        t["steps"].pop(1)
+        t["steps"][1]["dependsOn"]=["S1"]
+        t["stepReconciliation"]=[{
+            "oldStepId":"S2","newStepId":"S3",
+            "reason":"S2 folded into S3 after scope review"}]
+        new=engine.make_packet(t,self.rules)
+        state=engine.verify_plan_continuity(old,new,t)
+        self.assertEqual(len(state["supersededStepRecords"]),1)
+        self.assertEqual(state["supersededStepRecords"][0]["oldStep"]["objective"],
+                         "Run bounded read-only audit")
+        self.assertEqual(state["supersededStepRecords"][0]["newStepId"],"S3")
     def test_no_drop_of_durable_evidence_or_approved_requirements(self):
         old=engine.make_packet(task(),self.rules)
         t=task();t["must"]=["A different goal"]
