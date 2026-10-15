@@ -1,0 +1,129 @@
+name: QA - Qwen prompt A/B investigation (one-shot)
+# Two user-authorized Free-tier requests, read-only, fixed static asset, no automated retries.
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - '.github/workflows/qa-ai-office-qwen-prompt-ab.yml'
+permissions:
+  contents: read
+jobs:
+  compare:
+    if: >-
+      ${{ github.event_name == 'push' && github.event.head_commit.message == 'ci(ai-office): one-shot Qwen prompt A-B evidence' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout lab only
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Two controlled single-shot Groq API calls
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MEALUP_FREE_ONLY: 'YES'
+        run: |
+          node <<'NODE'
+          'use strict';
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          const assetFile = 'assets/family-fo/pasta.webp';
+          const image = fs.readFileSync(assetFile);
+          assert(image.length === 147190, 'WRONG_ASSET_BYTES');
+          const key = process.env.GROQ_API_KEY;
+          assert(process.env.MEALUP_FREE_ONLY === 'YES' && key?.length > 20, 'FREE_ONLY_OR_SECRET_NOT_AVAILABLE');
+          const systemBase = [
+            'Sei il Design Director candidato dell ufficio MealUp.',
+            'Analizza soltanto cio che e visibile nell immagine e separa osservazioni da ipotesi.',
+            'Non dichiarare conformita ai FROZEN, approvazioni, implementazioni o modifiche eseguite.',
+            'Non attivare altri reparti. Non proporre spese. Rispondi solo con JSON valido.'
+          ].join(' ');
+          const userBase = 'Incarico reale controllato. Analizza questo Food Object Pasta per una card mobile. Non inventare misure, regole o vessel. Compila esattamente questo schema JSON: ';
+          const schema = {
+            visibleObservations: ['stringa basata solo sui pixel visibili'],
+            foodFamily: 'stringa',
+            risksToVerify: ['rischio da verificare, non difetto dichiarato'],
+            recommendedMobileTest: 'un solo test concreto su card mobile',
+            assumptions: [], approvalClaim: false, decision: 'PROPOSAL_ONLY',
+            filesModified: [], otherDepartmentsActivated: []
+          };
+          const variants = [
+            { id: 'A_ORIGINAL', system: systemBase, user: userBase + JSON.stringify(schema) },
+            { id: 'B_PRECISE', system: systemBase +
+              ' CONTEXT VERIFIED: ricevi esattamente una immagine WebP statica con un singolo fotogramma, sfondo trasparente. Nessuna sequenza video, nessun collage, nessun crop o seconda immagine e inclusa. La card mobile non e stata fornita; osserva solo il FO. Non inventare altri frame o viste, attributi non visibili, dimensioni della card o FROZEN. Se qualcosa e incerto, scrivilo in assumptions. Il test mobile deve essere esplicitamente una proposta futura, non una valutazione gia eseguita.',
+              user: userBase + JSON.stringify(schema) }
+          ];
+          const result = { schema: 'mealup-qwen-prompt-ab-v1', image: assetFile, model: 'qwen/qwen3.8-27b',
+            temperature: 0.1, reasoningEffort: 'none', maxCompletionTokens: 520,
+            apiCalls: 0, retries: 0, variants: [] };
+          async function call(v) {
+            const body = {
+              model: result.model,
+              reasoning_effort: result.reasoningEffort,
+              temperature: result.temperature,
+              max_completion_tokens: result.maxCompletionTokens,
+              stream: false,
+              response_format: { type: 'json_object' },
+              messages: [
+                { role: 'system', content: v.system },
+                { role: 'user', content: [
+                  { type: 'text', text: v.user },
+                  { type: 'image_url', image_url: { url: 'data:image/webp;base64,' + image.toString('base64') } }
+                ] }
+              ]
+            };
+            result.apiCalls++;
+            let response;
+            try {
+              response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
+                body: JSON.stringify(body), signal: AbortSignal.timeout(25000)
+              });
+            } catch (_) { return { id: v.id, status: 'NETWORK_TIMEOUT', qa: 'BLOCKED' }; }
+            let parsed = {};
+            try { parsed = await response.json(); } catch (_) { return { id: v.id, status: 'INVALID_RESPONSE', qa: 'BLOCKED' }; }
+            if (!response.ok) {
+              return { id: v.id, status: 'HTTP_'+response.status, qa: 'BLOCKED' };
+            }
+            let candidate = {};
+            try { candidate = JSON.parse(parsed?.choices?.[0]?.message?.content || '{}'); }
+            catch (_) { return { id: v.id, status: 'INVALID_MODEL_JSON', qa: 'BLOCKED' }; }
+            const observations = Array.isArray(candidate.visibleObservations) ? candidate.visibleObservations : [];
+            const text = observations.join(' ');
+            const fictiveSequence = /\b(primo|secondo|terzo|successiv[oi]|precedent[ei])\s+(frame|fotogramm[ai]|immagin[ei]|inquadratur[ae]|crop)\b|\b(frame|fotogramm[ai])\s+(successiv[oi]|precedent[ei])\b/i.test(text);
+            const cardOverclaim = /(?:nella card si (?:vede|nota|mostra)|(?:ho|abbiamo) (?:misurato|verificato)|card (?:presenta|mostra|contiene))/i.test(JSON.stringify(candidate));
+            return { id: v.id, status: 'HTTP_200', qa: fictiveSequence || cardOverclaim ? 'BLOCKED' : 'HUMAN_REVIEW',
+              fabricatedSequence: fictiveSequence, cardOverclaim,
+              visibleObservations: observations,
+              assumptions: candidate.assumptions,
+              recommendedMobileTest: candidate.recommendedMobileTest,
+              rawCandidate: candidate,
+              tokens: Number.isInteger(parsed?.usage?.total_tokens) ? parsed.usage.total_tokens : null };
+          }
+          (async () => {
+            for (const v of variants) {
+              const value = await call(v);
+              result.variants.push(value);
+              console.log('VARIANT=' + value.id + ' STATUS=' + value.status +
+                ' QA=' + value.qa + ' SEQUENCE=' + (value.fabricatedSequence ?? 'UNKNOWN') +
+                ' CARD_OVERCLAIM=' + (value.cardOverclaim ?? 'UNKNOWN') +
+                ' TOKENS=' + (value.tokens ?? 'UNKNOWN'));
+            }
+            fs.writeFileSync('/tmp/office-qwen-prompt-ab.json', JSON.stringify(result, null, 2) + '\n');
+            console.log('COMPARISON_COMPLETE CALLS=' + result.apiCalls + ' RETRIES=0 NO_APP_WRITES');
+          })().catch(() => { console.error('ABORTED');process.exitCode = 1; });
+          NODE
+      - name: Keep non-secret report for independent review
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: mealup-qwen-prompt-ab-evidence
+          path: /tmp/office-qwen-prompt-ab.json
+          if-no-files-found: warn
+          retention-days: 2
