@@ -108,20 +108,20 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 
 **P1.4 ha identificato un blocco concreto non aggirabile modificando l'asset.**
 
-- Nuovo validatore: \`tools/food-portrait-pipeline/vessel-asset-audit.cjs\` con fixture negative. Verifica gli SHA-256 effettivi delle reference, dei sedici file maschera e la copertura delle otto geometrie G5.
-- CI sul commit \`c9486158adff83c23f5fac723892b3255695a6ff\`: https://github.com/battagliafilippo/MealUp/actions/runs/38719090602 — **FAIL INTENZIONALE DEL GATE** (non è un test tecnico considerato verde).
-- Unico errore rimasto: \`G5/references/VESSEL_LIBRARY_reference.png\`. Hash FROZEN dichiarato da G0/G5: \`3318fbf8a718438520b12e9d8d28d88374a46041fc94b3efac1f23b38a50d5c8\`. Hash SHA-256 binario reale nel repository: \`28bba33ad0caaf6da129ae32ec5e9b771723f99ac9c9fd83aeec3e5c310bef7e\`.
-- Sedici maschere G5: nessun errore hash rilevato. Otto \`source-view.png\` mancanti: **warning** (G5 le classifica \`PROVENANCE_RGB_VIEW_ONLY\`, non sprite runtime necessari), non modifica dei FROZEN; restano recupero/stato aperti.
-- Origin del file board presente sin dal commit storico \`d1300440cca578b9cf7a3b0ce70116c788645903\`: non è un cambiamento causato da questa pipeline.
+- Nuovo validatore: `tools/food-portrait-pipeline/vessel-asset-audit.cjs` con fixture negative. Verifica gli SHA-256 effettivi delle reference, dei sedici file maschera e la copertura delle otto geometrie G5.
+- CI sul commit `c9486158adff83c23f5fac723892b3255695a6ff`: https://github.com/battagliafilippo/MealUp/actions/runs/38719090602 — **FAIL INTENZIONALE DEL GATE** (non è un test tecnico considerato verde).
+- Unico errore rimasto: `G5/references/VESSEL_LIBRARY_reference.png`. Hash FROZEN dichiarato da G0/G5: `3318fbf8a718438520b12e9d8d28d88374a46041fc94b3efac1f23b38a50d5c8`. Hash SHA-256 binario reale nel repository: `28bba33ad0caaf6da129ae32ec5e9b771723f99ac9c9fd83aeec3e5c310bef7e`.
+- Sedici maschere G5: nessun errore hash rilevato. Otto `source-view.png` mancanti: **warning** (G5 le classifica `PROVENANCE_RGB_VIEW_ONLY`, non sprite runtime necessari), non modifica dei FROZEN; restano recupero/stato aperti.
+- Origin del file board presente sin dal commit storico `d1300440cca578b9cf7a3b0ce70116c788645903`: non è un cambiamento causato da questa pipeline.
 - Tutti i controlli dati/contratti/fixture precedenti PASS; il QA ha conservato entrambi i report come artifact anche con il gate FAILED, senza modificare immagini.
-- Checkpoint leggibile da altri agenti: \`docs/food-portrait-pipeline/reference-audit.v1.json\`.
+- Checkpoint leggibile da altri agenti: `docs/food-portrait-pipeline/reference-audit.v1.json`.
 
 | ID | Problema / causa | Prevenzione / recovery | Stato |
 | --- | --- | --- | --- |
 | E08 | SHA-256 della board vessel storica diverso dal valore G0 FROZEN | reperire sorgente originale/ricostruire provenienza con prova indipendente; vietato cambiare hash previsto per far passare CI | **BLOCKING SOURCE APPROVAL** |
-| E09 | Otto preview \`source-view.png\` dichiarate ma non depositate | classificate come provenance-only, non rigenerate né spacciate per presenti | WARNING DOCUMENTATO |
+| E09 | Otto preview `source-view.png` dichiarate ma non depositate | classificate come provenance-only, non rigenerate né spacciate per presenti | WARNING DOCUMENTATO |
 
-**Impatto:** il dato \`vessel_id\` e le sedici maschere sono riutilizzabili come specifiche strutturali, ma l'immagine della board corrente NON può ancora essere promossa a Golden Master ufficiale. La generazione di output finali basata su tale sorgente è sospesa; lavoro su schemi, coda e QA indipendente può proseguire senza dipendere da essa.
+**Impatto:** il dato `vessel_id` e le sedici maschere sono riutilizzabili come specifiche strutturali, ma l'immagine della board corrente NON può ancora essere promossa a Golden Master ufficiale. La generazione di output finali basata su tale sorgente è sospesa; lavoro su schemi, coda e QA indipendente può proseguire senza dipendere da essa.
 
 **Prossimo micro-step indipendente:** P2.1 — verificare e confrontare tecnicamente produzione AI via ChatGPT Images, riuso deterministico e pipeline ibrida, scegliendo un'unica architettura sostenibile. In parallelo l'issue E08 resta aperto senza richiedere all'utente un riferimento inventato.
 
