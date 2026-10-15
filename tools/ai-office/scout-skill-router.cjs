@@ -53,6 +53,7 @@ function plan({roleId,stage=states.DISCOVERY,externalGitHubCode=false,
   return {
     schema:'mealup-scout-skill-plan-v1',roleId,stage,request,
     primaryRole:role.role,roleRequirements:role.requiredProof.slice(),
+    candidateSkillRequirements:role.candidateSkillRequirements.map(x=>({...x})),
     testsToPrepare:role.cases.slice(),skills:chosen.map(readSkillMetadata),
     departmentOwner:'INDEPENDENT_TALENT_SCOUT',reportTo:'CEO',
     noDirectorVeto:true,ceoDecisionRequired:true,
@@ -84,6 +85,54 @@ function screenExistingRole(roleId){
 function checkIndependentEvidence({left,right,cases}={}){
   return scorer.assessBenchmark(left,right,cases);
 }
+/**
+ * Evaluate evidence that a candidate possesses every role-specific skill.
+ * A verified built-in capability counts; external SKILL.md code must pass
+ * independent provenance/security review first. No automatic install or hire.
+ * Proof IDs are references to records, NOT substitutes for examining records.
+ */
+function evaluateCandidateSkillFit({roleId,candidateId,skillProofs=[],economicsVerified=false,
+  licenseAndSecurityApproved=false}={}){
+  const role=matrix.get(roleId);
+  if(!role)throw Error('UNKNOWN_ROLE');
+  if(typeof candidateId!=='string' || !candidateId.trim())throw Error('INVALID_CANDIDATE_ID');
+  if(!Array.isArray(skillProofs))throw Error('INVALID_SKILL_EVIDENCE');
+  const missing=[];
+  const unverified=[];
+  const needed=role.candidateSkillRequirements;
+  const acceptedModes=new Set(['BUILT_IN_TESTED','EXTERNAL_SKILL_AUDITED']);
+  const seen=new Set();
+  for(const req of needed){
+    const proofs=skillProofs.filter(p=>p?.skillId===req.skillId);
+    if(proofs.length!==1){missing.push(req.skillId);continue;}
+    const p=proofs[0];
+    seen.add(req.skillId);
+    const valid=acceptedModes.has(p.mode) &&
+      typeof p.testEvidenceRef==='string' && /^https:\/\/github\.com\/battagliafilippo\/MealUp\/actions\/runs\/[0-9]+$/.test(p.testEvidenceRef) &&
+      p.independentQa==='PASS' && p.roleTaskBenchmarked===true &&
+      p.conformanceToFrozenVerified===true && p.candidateId===candidateId &&
+      (p.mode!=='EXTERNAL_SKILL_AUDITED' ||
+        (p.externalSkillProvenanceReviewed===true &&
+         p.externalSkillLicenseReviewed===true &&
+         p.externalSkillSecurityApproved===true));
+    if(!valid)unverified.push(req.skillId);
+  }
+  const unexpected=skillProofs.filter(p=>p && typeof p.skillId==='string' &&
+    !needed.some(s=>s.skillId===p.skillId)).map(x=>x.skillId);
+  const allRoleSkillsEvidenceDeclared=missing.length===0&&unverified.length===0;
+  const readyForReview=allRoleSkillsEvidenceDeclared&&economicsVerified===true &&
+    licenseAndSecurityApproved===true;
+  return {
+    roleId,candidateId,requiredSkillIds:needed.map(x=>x.skillId),
+    missing,unverified,unexpected,
+    status:readyForReview?'SKILL_EVIDENCE_DECLARED_REQUIRES_INDEPENDENT_VERIFICATION':
+      'RECRUITMENT_BLOCKED',
+    skillEvidenceGateReady:readyForReview,
+    candidateRecruited:false,ceoApproved:false,
+    evidenceMustBeIndependentlyAudited:true,
+    note:'Declared evidence IDs and flags require independent verification; this offline gate never certifies real tests or hires.'
+  };
+}
 function validateSkillLibrary(){
   const discovered=skillNames.map(readSkillMetadata);
   if(new Set(discovered.map(x=>x.name)).size!==discovered.length)
@@ -92,6 +141,10 @@ function validateSkillLibrary(){
      new Set(roles.roles.map(x=>x.roleId)).size!==roles.roles.length)
     throw Error('INVALID_ROLE_MATRIX');
   for(const role of roles.roles){
+    if(!Array.isArray(role.candidateSkillRequirements)||role.candidateSkillRequirements.length<2 ||
+      new Set(role.candidateSkillRequirements.map(s=>s.skillId)).size!==role.candidateSkillRequirements.length ||
+      !role.candidateSkillRequirements.every(s=>typeof s.skillId==='string'&&s.skillId.trim()))
+      throw Error('INCOMPLETE_CANDIDATE_SKILL_SET:'+role.roleId);
     if(!Array.isArray(role.cases)||role.cases.length<4 ||
       !Array.isArray(role.requiredProof)||role.requiredProof.length<3)
       throw Error('INCOMPLETE_ROLE:'+role.roleId);
@@ -108,4 +161,4 @@ if(require.main===module){
     designState:screenExistingRole('DESIGN')},null,2));
 }
 module.exports={states,skillNames,readSkillMetadata,validateSkillLibrary,
-  plan,screenExistingRole,checkIndependentEvidence};
+  plan,screenExistingRole,checkIndependentEvidence,evaluateCandidateSkillFit};
