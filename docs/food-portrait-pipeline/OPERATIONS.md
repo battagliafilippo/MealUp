@@ -413,3 +413,16 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dal pilot.
 
 **Prossimo micro-step necessario:** review visuale owner del candidato do08. Se approvato, conversione WebP lossless, QA ripetuta e decisione separata sul freeze `VESSEL_DESSERT_MOLD`.
+
+
+## Owner approval + DESSERT_MOLD freeze checkpoint 2026-10-15 — do08 FROZEN
+
+- Decisione owner: do08 è perfetto ed esattamente conforme alla visione desiderata.
+- Ottimizzazione lossless: PNG `2.007.594` byte → WebP `1.417.140` byte, con pixel decodificati identici.
+- Asset FROZEN: `candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp`, SHA-256 `741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4`.
+- QA tecnico: **PASS**; `1600 kcal` resta esatto mentre la lancetta è saturata a `60°` rosso secondo la mapping FROZEN.
+- Manifest: `do08-dessert-mold-frozen-v1.json`. Contratto stilistico aggiornato con `VESSEL_DESSERT_MOLD`.
+- Stato: PLATE, BOWL, RAMEKIN e DESSERT_MOLD FROZEN. Nessun batch, integrazione o deploy autorizzato.
+- E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dai quattro riferimenti verificati.
+
+**Prossimo micro-step necessario:** un solo pilot per il prossimo vessel previsto (`VESSEL_BAKING_DISH`) oppure arresto della sperimentazione. Nessuna produzione massiva automatica.

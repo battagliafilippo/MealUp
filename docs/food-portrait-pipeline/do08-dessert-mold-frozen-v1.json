@@ -1,0 +1,40 @@
+{
+  "schema": "mealup-food-portrait-frozen-asset-v1",
+  "status": "FROZEN",
+  "decisionDate": "2026-10-15",
+  "authority": "OWNER_EXPLICIT_VISUAL_APPROVAL",
+  "recipeId": "do08",
+  "title": "Cheesecake fredda allo yogurt",
+  "vesselId": "VESSEL_DESSERT_MOLD",
+  "kcal": 1600,
+  "gaugeAngleDegrees": 60,
+  "gaugeSaturatedHigh": true,
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+    "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1417140,
+    "format": "webp"
+  },
+  "evidence": {
+    "ownerVisualApproval": "PERFECT_EXACTLY_AS_DESIRED",
+    "technicalQa": "PASS",
+    "decodedPixelIdentityToApprovedPng": true,
+    "gaugeValueMatchesRecipeCard": true,
+    "gaugeNeedleDirection": "MAXIMUM_RED_WITH_HIGH_CLAMP"
+  },
+  "frozenScope": [
+    "do08 final visual asset",
+    "VESSEL_DESSERT_MOLD reference geometry and styling",
+    "cheesecake structure and strawberry presentation",
+    "1600 kcal exact display and saturated red gauge"
+  ],
+  "notAuthorized": [
+    "automatic batch production",
+    "tester or PWA integration",
+    "deployment",
+    "modification of main, tester, or AI Office"
+  ],
+  "independentBlockedGate": "E08_HISTORICAL_VESSEL_SHA_MISMATCH"
+}

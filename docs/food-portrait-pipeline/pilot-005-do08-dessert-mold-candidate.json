@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-pilot-attempt-v1",
   "attemptId": "FPP-DO08-IMAGEGEN-20261015-001",
-  "status": "VISUAL_CANDIDATE_TECHNICAL_FAIL_NOT_APPROVED",
+  "status": "OWNER_APPROVED_TECHNICAL_PASS_FROZEN_DESSERT_MOLD_REFERENCE",
   "branch": "experiment/food-portrait-pipeline-20261015",
   "generator": {
     "provider": "CODEX_BUILT_IN_IMAGEGEN",
@@ -28,6 +28,16 @@
     "bytes": 2007594,
     "format": "png"
   },
+  "approvedAsset": {
+    "path": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+    "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1417140,
+    "format": "webp",
+    "optimization": "LOSSLESS_WEBP",
+    "decodedPixelsIdenticalToApprovedCandidate": true
+  },
   "sourceFacts": {
     "ingredients": ["avena 90 g", "burro 30 g", "formaggio spalmabile 300 g", "yogurt greco 0% 200 g", "miele 50 g", "fragole 150 g"],
     "preparation": "Base di avena e burro pressata nello stampo; crema di formaggio, yogurt e miele; raffreddamento lungo; copertura di fragole a fette."
@@ -36,6 +46,13 @@
     "status": "TECHNICAL_FAIL",
     "errors": [{"code": "IMAGE_EXCEEDS_BYTE_BUDGET", "actualBytes": 2007594, "limitBytes": 2000000, "excessBytes": 7594}],
     "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"],
+    "automaticAcceptanceAllowed": false
+  },
+  "approvedAssetQa": {
+    "status": "TECHNICAL_PASS",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW_COMPLETED"],
+    "pixelComparison": "PASS_DECODED_PIXELS_IDENTICAL",
     "automaticAcceptanceAllowed": false
   },
   "visualQa": {
@@ -52,11 +69,12 @@
       "unexpectedTextOrUi": "PASS_NONE_DETECTED"
     },
     "comparison": "docs/food-portrait-pipeline/review/pilot-do08-vs-frozen.html",
-    "limitations": ["VISUAL_QA_DOES_NOT_OVERRIDE_TECHNICAL_FAIL", "OWNER_APPROVAL_REQUIRED"]
+    "ownerDecision": "APPROVED_EXACTLY_AS_DESIRED",
+    "limitations": ["FROZEN_REFERENCE_DOES_NOT_IMPLY_BATCH_OR_DEPLOY_AUTHORIZATION"]
   },
   "gates": {
-    "ownerApproved": false,
-    "frozen": false,
+    "ownerApproved": true,
+    "frozen": true,
     "deployAuthorized": false,
     "batchExpansionAllowed": false,
     "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
