@@ -1,0 +1,44 @@
+name: Audit - MealUp Talent Scout eligibility
+
+# One-shot offline audit only. No model calls, no cloud logins, no credentials, no billing.
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - '.github/workflows/qa-talent-scout-offline.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    if: >-
+      ${{ github.event_name == 'push' && github.event.head_commit.message == 'ci(ai-office): publish independent Scout offline eligibility report' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Evaluate candidate statuses without model or network calls
+        run: |
+          node tools/ai-office/scout-evaluator.cjs
+          node tools/ai-office/scout-evaluator.cjs --json > /tmp/mealup-scout-eligibility.json
+          node --test tools/ai-office/scout-evaluator.test.cjs
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const a = JSON.parse(fs.readFileSync('/tmp/mealup-scout-eligibility.json','utf8'));
+          if(a.additionalBudgetEUR!==0 || a.eligibleForAutomaticPromotion!==0 ||
+             a.agentReplacementsPerformed!==0 || a.candidates.length!==7)
+             process.exit(1);
+          console.log('SCOUT_AUDIT_PASS = SEVEN_CANDIDATES; NO_PROMOTIONS; ZERO_EXTRA_COST');
+          NODE
+      - name: Preserve non-sensitive candidate status audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: mealup-talent-scout-eligibility
+          path: /tmp/mealup-scout-eligibility.json
+          retention-days: 7
+          if-no-files-found: error
