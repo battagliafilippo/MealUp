@@ -124,6 +124,22 @@ jobs:
           }
           console.log('PASS 454 MealUp portrait specifications: no placeholders mistaken for completed images');
           NODE
+      - name: Verify queue resume and revision invalidation
+        run: |
+          node --check tools/food-portrait-pipeline/queue-recovery.cjs
+          node tools/food-portrait-pipeline/queue-recovery.cjs --self-test
+          node tools/food-portrait-pipeline/queue-recovery.cjs --queue /tmp/mealup-portrait-staging/production-queue.v1.json --checkpoint /tmp/mealup-portrait-staging/checkpoint.v1.json
+          node tools/food-portrait-pipeline/queue-recovery.cjs --queue /tmp/mealup-portrait-staging/production-queue.v1.json --checkpoint /tmp/mealup-portrait-staging/checkpoint.v1.json
+          node <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict');
+          const s=JSON.parse(fs.readFileSync('/tmp/mealup-portrait-staging/checkpoint.v1.json','utf8'));
+          assert.equal(s.summary.total,454);
+          assert.equal(s.summary.resumed,454);
+          assert.equal(s.summary.readyToGenerate,0);
+          assert.equal(s.history.length,0);
+          assert.ok(Object.values(s.records).every(x=>x.state==='WAITING_REFERENCE'&&x.approval===null));
+          console.log('PASS REAL CATALOG QUEUE RESUME: 454 stable records, 0 loss, 0 approval');
+          NODE
       - name: Store preproduction evidence (no deploy)
         if: always()
         uses: actions/upload-artifact@v4
