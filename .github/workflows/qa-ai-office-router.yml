@@ -7,12 +7,14 @@ on:
       - experiment/recipe-visual-agents
     paths:
       - 'tools/ai-office/**'
+      - '.agents/skills/mealup-*/SKILL.md'
       - '.github/workflows/qa-ai-office-router.yml'
   pull_request:
     branches:
       - experiment/recipe-visual-agents
     paths:
       - 'tools/ai-office/**'
+      - '.agents/skills/mealup-*/SKILL.md'
       - '.github/workflows/qa-ai-office-router.yml'
 
 permissions:
