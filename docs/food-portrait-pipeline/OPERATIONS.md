@@ -626,3 +626,18 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Nuove immagini generate: `0`; `do01` non generato; nessun avanzamento automatico del lotto, integrazione o deploy; budget `0 EUR`.
 
 **Prossimo micro-step necessario:** scegliere separatamente una ricetta di cibo pilota diversa da `do01`; prima di generare servirà una singola autorizzazione esplicita per quella candidate.
+
+### Controlled food pilot 2026-10-15 — a07 single candidate
+
+- Scelta autonoma: `a07`, **Prosciutto e melone**, perché è il caso PLATE a rischio basso già previsto dal lotto controllato e verifica la riconoscibilità del cibo senza coinvolgere `do01`.
+- Generata una sola candidate tramite ImageGen built-in con riferimenti FROZEN `r1` PLATE e `r2` stile canonico. Costo aggiuntivo: `0 EUR`.
+- Asset: `candidates/a07-prosciutto-melone-plate-candidate-001.png`, SHA-256 `a747f64435629a174556573fc76fd6ac9b5c20e7d70bf9bb9a5392b556a613e9`, 1254 × 1254, 1.912.133 byte.
+- QA tecnica: **PASS**, `errors: []`; sfondo opaco da review visuale e ottimizzazione WebP rinviata fino all'approvazione owner.
+- QA visuale indipendente: **PASS CANDIDATE ONLY**. Melone e prosciutto sono distinguibili, integrati in un solo piatto, senza garnish, ingredienti estranei o props; stile, crop, `270 kcal` e direzione verde/lime del gauge sono coerenti. Non viene dichiarata precisione sub-grado della lancetta dalla sola ispezione visiva.
+- Checkpoint persistente: `checkpoints/a07-visual-production-cycle-001.json`; una candidate registrata, auto-accept e auto-freeze disabilitati.
+- Errore operativo non sostanziale: il primo comando di validazione del manifest ometteva la variabile locale con il percorso asset ed è terminato con `ERR_INVALID_ARG_TYPE`; corretto il comando, la verifica con hash reale e gate singola-candidate/no-`do01` è **PASS**.
+- `do01` non generato; nessun batch, integrazione o deploy.
+
+**Stato:** `VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED`.
+
+**Prossimo micro-step necessario:** review visuale owner della sola candidate a07. Solo dopo approvazione esplicita saranno consentite ottimizzazione lossless, nuova QA e decisione separata sul freeze.

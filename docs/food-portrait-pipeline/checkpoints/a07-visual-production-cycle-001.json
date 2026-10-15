@@ -1,0 +1,29 @@
+{
+  "schema": "mealup-food-portrait-visual-cycle-v1",
+  "cycleId": "FPP-A07-001",
+  "recipeId": "a07",
+  "mode": "SINGLE_CANDIDATE_GENERATION",
+  "providerAdapter": "OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE",
+  "candidateLimit": 1,
+  "candidatesRecorded": 1,
+  "imagesGeneratedThisRun": 1,
+  "do01Generated": false,
+  "budgetEUR": 0,
+  "producer": "OPENAI_BUILT_IN_IMAGEGEN",
+  "reviewer": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/a07-prosciutto-melone-plate-candidate-001.png",
+    "sha256": "a747f64435629a174556573fc76fd6ac9b5c20e7d70bf9bb9a5392b556a613e9",
+    "bytes": 1912133
+  },
+  "gates": {
+    "technicalQa": "PASS",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": false,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false
+  },
+  "state": "CANDIDATE_RECORDED_AWAITING_OWNER_VISUAL_REVIEW"
+}
