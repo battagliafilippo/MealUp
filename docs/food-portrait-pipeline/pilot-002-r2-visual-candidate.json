@@ -1,0 +1,87 @@
+{
+  "schema": "mealup-food-portrait-pilot-attempt-v1",
+  "attemptId": "FPP-R2-IMAGEGEN-20261015-002",
+  "status": "VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED",
+  "branch": "experiment/food-portrait-pipeline-20261015",
+  "generator": {
+    "provider": "CODEX_BUILT_IN_IMAGEGEN",
+    "imageCountRequested": 1,
+    "imageCountGenerated": 1,
+    "additionalSpendEur": 0,
+    "referenceMountedFromUserAttachment": true,
+    "referenceSha256": "bc8c117581375c4826cb35072d2033d1274723b525debc023f80fe299fa36790"
+  },
+  "candidate": {
+    "path": "docs/food-portrait-pipeline/candidates/r2-poke-visual-candidate-002.png",
+    "sha256": "ad2cca0c90da0c1137b5e48e885b009727cda6dc661200ee2ffb565458960f85",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1773915,
+    "format": "png",
+    "classification": "VISUAL_CANDIDATE_NOT_ASSET"
+  },
+  "sourceContract": {
+    "recipeId": "r2",
+    "recipeName": "Poke bowl tonno e avocado",
+    "vesselId": "VESSEL_BOWL",
+    "ingredients": [
+      "tonno 150 g",
+      "riso 70 g",
+      "avocado 0.5",
+      "salsa di soia 1 cucchiaio",
+      "sesamo 1 cucchiaino"
+    ],
+    "singleImage": true,
+    "singleRecipe": true,
+    "gaugeTextOrUiBakedIntoAsset": false
+  },
+  "technicalQa": {
+    "tool": "tools/food-portrait-pipeline/image-technical-qa.cjs",
+    "status": "TECHNICAL_FAIL",
+    "passed": false,
+    "errors": [
+      "ALPHA_CHANNEL_MISSING",
+      "SUBJECT_TOO_LARGE_OR_BACKGROUND",
+      "NO_TRANSPARENT_BACKGROUND",
+      "SUBJECT_TOUCHES_CROP_BORDER"
+    ],
+    "interpretation": "The saved PNG is a square valid image under the 2 MB execution cap, but it has an opaque full-canvas background. Under the current alpha-based contract the background is counted as visible content and touches every border; no technical pass is claimed."
+  },
+  "independentVisualQa": {
+    "method": "Separate post-generation inspection of the saved candidate bytes at original resolution",
+    "status": "VISUAL_PASS_CANDIDATE_ONLY",
+    "checks": {
+      "exactlyOneDish": "PASS",
+      "exactlyOneRecipeIdentity": "PASS",
+      "vesselCategoryBowl": "PASS",
+      "creamOrangeVesselDirection": "PASS",
+      "riceVisibleAsBase": "PASS",
+      "tunaRegularCubesVisible": "PASS",
+      "avocadoRegularCubesVisible": "PASS",
+      "soyAsGlossyIntegratedSeasoning": "PASS",
+      "sesameVisible": "PASS",
+      "noUnexpectedIngredientDetected": "PASS_WITH_VISUAL_LIMIT",
+      "noGaugeTextNumbersLabelsTagsButtonsLogosOrUi": "PASS",
+      "noGridCollageInfographicOrOtherRecipe": "PASS",
+      "squareAndSmartphoneLegible": "PASS",
+      "safeSubjectCrop": "PASS_VISUAL_BUT_NOT_ALPHA_CONTRACT"
+    },
+    "limits": [
+      "Visual inspection cannot prove ingredient chemistry or raw-versus-cooked tuna safety.",
+      "The exact historical FROZEN vessel board cannot be validated because its declared SHA-256 still differs from the repository binary.",
+      "Visual conformance does not override the technical QA failure."
+    ]
+  },
+  "gates": {
+    "ownerStyleReferenceHashVerified": true,
+    "historicalFrozenVesselBoardHashVerified": false,
+    "historicalFrozenVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08",
+    "automaticAcceptanceAllowed": false,
+    "assetApproved": false,
+    "frozen": false,
+    "deployAllowed": false,
+    "batchExpansionAllowed": false
+  },
+  "finalDecision": "REVIEW_REQUIRED_TECHNICAL_FAIL_VISUAL_CANDIDATE_ONLY",
+  "nextAuthorizedNeed": "Decide in a separate micro-step whether transparent background is mandatory for Food Portrait staging; if it remains mandatory, authorize one targeted r2 retry that changes only background transparency and preserves all passed visual constraints."
+}

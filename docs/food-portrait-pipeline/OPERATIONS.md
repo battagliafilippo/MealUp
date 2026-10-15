@@ -183,3 +183,27 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - P8 manifest staging: 454 mapping presenti; zero portrait integrati.
 
 **Prossimo micro-step autorizzato:** qualificare un generatore capace di consumare la richiesta singola `r2` come contratto isolato, montando la source style reference con hash verificato, e condurre test QA reale; affrontare E08 in parallelo senza riscrivere asset FROZEN. Non aumentare il lotto finché il test non passa.
+
+
+## Checkpoint 2026-10-15 — secondo tentativo r2 singolo con reference owner verificata
+
+**Obiettivo del micro-step:** generare una sola immagine sperimentale per `r2 — Poke bowl tonno e avocado`, usando la vera reference utente e senza gauge, testi, UI, griglie o altre ricette; eseguire QA tecnico e visuale separato senza auto-accept, freeze o deploy.
+
+- Checkout isolato verificato sul branch `experiment/food-portrait-pipeline-20261015`; `main`, tester ufficiale, PWA e AI Office non modificati.
+- Reference utente montata direttamente dall'allegato `IMG_1277(2).jpeg`; SHA-256 ricalcolato `bc8c117581375c4826cb35072d2033d1274723b525debc023f80fe299fa36790`, identico a `owner-style-reference.v1.json`.
+- Una sola generazione eseguita con il provider ImageGen integrato, costo aggiuntivo 0 EUR. Output: `docs/food-portrait-pipeline/candidates/r2-poke-visual-candidate-002.png`, SHA-256 `ad2cca0c90da0c1137b5e48e885b009727cda6dc661200ee2ffb565458960f85`, 1254 x 1254, 1.773.915 byte.
+- QA visuale post-generazione sull'immagine salvata: **PASS_CANDIDATE_ONLY** per singolo piatto, identità r2, BOWL crema/arancione, riso, cubetti di tonno e avocado, soia integrata, sesamo, leggibilità e assenza di gauge/testi/UI/collage. Nessuna approvazione implicita.
+- QA tecnico reale con `image-technical-qa.cjs`: **FAIL** per assenza canale alpha/sfondo trasparente. Il full canvas opaco produce anche `SUBJECT_TOO_LARGE_OR_BACKGROUND`, `NO_TRANSPARENT_BACKGROUND` e `SUBJECT_TOUCHES_CROP_BORDER`. Il file è quadrato e sotto il limite operativo 2 MB, ma questi dati non annullano il FAIL.
+- Report completo: `docs/food-portrait-pipeline/pilot-002-r2-visual-candidate.json`.
+
+**Issue log aggiornato:**
+
+| ID | Tipo | Stato e decisione |
+| --- | --- | --- |
+| E10 | OUTPUT_MULTIPANEL_UNEXPECTED | **MITIGATO nel re-test r2**: il secondo output contiene una sola ricetta e nessuna UI. L'errore storico resta preservato nel report del tentativo 001; nessuna generalizzazione a produzione massiva. |
+| E13 | OPAQUE_BACKGROUND_VS_ALPHA_CONTRACT | **OPEN / TECHNICAL FAIL**: il generatore ha prodotto un PNG opaco; non trasformare o approvare automaticamente. Serve una decisione separata sul requisito alpha e, solo se autorizzata, una nuova generazione mirata. |
+| E08 | HISTORICAL_VESSEL_SHA_MISMATCH | **BLOCKED invariato**: SHA atteso `3318fbf8...`, SHA repository `28bba33a...`; la candidate non dimostra la tavola vessel FROZEN e non può diventare asset approvato. |
+
+**Stato aggiornato:** un generatore ha dimostrato il rispetto del contratto singola-ricetta per un solo tentativo; `r2` resta `VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED` per FAIL tecnico. Produzione batch, auto-accept, freeze, integrazione e deploy restano vietati.
+
+**Prossimo micro-step necessario ma non ancora autorizzato:** decidere se la trasparenza è obbligatoria per lo staging Food Portrait. Se sì, autorizzare un solo retry r2 che cambi esclusivamente lo sfondo in trasparente e preservi tutti i vincoli visuali già passati; E08 resta indipendentemente bloccato.
