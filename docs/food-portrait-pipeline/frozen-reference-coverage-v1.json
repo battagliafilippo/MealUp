@@ -1,0 +1,87 @@
+{
+  "schema": "mealup-food-portrait-frozen-reference-coverage-v1",
+  "status": "VERIFIED",
+  "decisionDate": "2026-10-15",
+  "catalogRecipeCount": 454,
+  "catalogVesselCategoryCount": 8,
+  "frozenReferenceCount": 6,
+  "coveredRecipeCount": 449,
+  "coveredRecipePercent": 98.9,
+  "coveredVesselCategoryCount": 6,
+  "coveredVesselCategoryPercent": 75,
+  "references": [
+    {
+      "vesselId": "VESSEL_PLATE",
+      "recipeId": "r1",
+      "kcal": 380,
+      "catalogRecipeCount": 249,
+      "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+      "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+    },
+    {
+      "vesselId": "VESSEL_BOWL",
+      "recipeId": "r2",
+      "kcal": 490,
+      "catalogRecipeCount": 124,
+      "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+      "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a",
+      "note": "The baked 480 text is not authoritative; the reviewed dynamic recipe-card value is 490 kcal."
+    },
+    {
+      "vesselId": "VESSEL_RAMEKIN",
+      "recipeId": "s02",
+      "kcal": 100,
+      "catalogRecipeCount": 39,
+      "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+      "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+    },
+    {
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "recipeId": "do08",
+      "kcal": 1600,
+      "catalogRecipeCount": 17,
+      "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+      "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+    },
+    {
+      "vesselId": "VESSEL_BAKING_DISH",
+      "recipeId": "p12",
+      "kcal": 790,
+      "catalogRecipeCount": 6,
+      "asset": "docs/food-portrait-pipeline/candidates/p12-lasagne-baking-dish-approved-001.webp",
+      "sha256": "e11055f04bd0424fcd495c23fa20206d13b62eb7d985a58d1ac4e028edebafe2"
+    },
+    {
+      "vesselId": "VESSEL_FREE",
+      "recipeId": "v08",
+      "kcal": 90,
+      "catalogRecipeCount": 14,
+      "asset": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+      "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+    }
+  ],
+  "uncovered": [
+    {"vesselId": "VESSEL_CUP", "catalogRecipeCount": 4, "gate": "REFERENCE_REQUIRED"},
+    {"vesselId": "VESSEL_PIZZA_SURFACE", "catalogRecipeCount": 1, "gate": "REFERENCE_REQUIRED"}
+  ],
+  "calorieCoverage": {
+    "minimumFrozenExampleKcal": 90,
+    "maximumFrozenExampleKcal": 1600,
+    "zonesDemonstrated": ["GREEN", "LIME_OR_LOW_MID", "YELLOW", "ORANGE", "RED_HIGH_CLAMP"],
+    "exactNumberPreservedAbove1000": true
+  },
+  "decision": {
+    "verdict": "SUFFICIENT_FOR_RESTRICTED_CONTROLLED_LOT_DESIGN",
+    "notSufficientFor": [
+      "catalog-wide production",
+      "VESSEL_CUP recipes",
+      "VESSEL_PIZZA_SURFACE recipes",
+      "automatic acceptance",
+      "tester or PWA integration",
+      "deployment"
+    ],
+    "restrictedLotBoundary": "Only recipes mapped to one of the six covered vessel categories may be considered, with per-image technical QA, independent visual QA and explicit owner approval.",
+    "lotProductionAuthorized": false
+  },
+  "independentBlockedGate": "E08_HISTORICAL_VESSEL_SHA_MISMATCH"
+}

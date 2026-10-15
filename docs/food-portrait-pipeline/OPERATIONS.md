@@ -492,3 +492,17 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dai sei riferimenti verificati.
 
 **Prossimo micro-step necessario:** consolidare i sei pilot FROZEN in un report di copertura e valutare, con autorizzazione separata, se il campione è sufficiente per progettare il primo lotto controllato. Nessuna produzione massiva automatica.
+
+
+## Frozen reference coverage checkpoint 2026-10-15 — campione sufficiente con boundary
+
+- Consolidati sei riferimenti FROZEN con asset, SHA, kcal, QA e approvazione owner nel report `frozen-reference-coverage-v1.json`.
+- Copertura catalogo verificata: **449/454 ricette (98,90%)** e **6/8 categorie vessel (75%)**.
+- Categorie coperte: PLATE 249, BOWL 124, RAMEKIN 39, DESSERT_MOLD 17, BAKING_DISH 6, VESSEL_FREE 14.
+- Gap: `VESSEL_CUP` 4 ricette e `VESSEL_PIZZA_SURFACE` 1 ricetta; non possono entrare in un lotto finché non avranno riferimenti FROZEN dedicati.
+- Copertura gauge dimostrata: verde basso 90/100, fascia intermedia 380/490, arancione 790, clamp rosso con numero esatto 1600.
+- Decisione tecnica: **campione sufficiente per progettare un primo lotto controllato ristretto ai sei vessel coperti**. Non sufficiente per produzione catalogo completa.
+- Nessuna produzione autorizzata da questa decisione. Restano obbligatori QA tecnico per immagine, QA visivo indipendente e approvazione owner; vietati auto-accept, integrazione e deploy.
+- E08 resta `BLOCKED_HASH_MISMATCH` e non viene aggirato dal report di copertura.
+
+**Prossimo micro-step necessario:** progettare, senza produrre immagini, il perimetro del primo lotto controllato ristretto ai vessel coperti e sottoporlo ad autorizzazione separata.
