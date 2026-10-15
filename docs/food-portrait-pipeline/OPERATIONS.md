@@ -585,3 +585,14 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Nessun file è stato sostituito, rigenerato o rinominato; il digest canonico non è stato modificato per adattarlo al blob errato.
 
 **Stato E08:** `BLOCKED_SOURCE_NOT_AVAILABLE_AFTER_EXHAUSTIVE_RECOVERY`. La chiusura richiede che l'owner fornisca la board originale o un archivio autorizzato che contenga un file con hash esatto `3318fb…`.
+
+### E08 canonical recovery 2026-10-15
+
+- Fonte autorizzata: file fornito direttamente dall'owner come `222BFAED-4125-4E09-BD4E-598B0D640527 (1).png`.
+- SHA-256 verificato prima del ripristino: `3318fbf8a718438520b12e9d8d28d88374a46041fc94b3efac1f23b38a50d5c8`, identico al digest FROZEN dichiarato da G0/G5.
+- Ripristinato esclusivamente `G5/references/VESSEL_LIBRARY_reference.png` sul branch isolato; il blob non conforme `28bba33a…` è stato sostituito, senza cambiare il contratto o il digest atteso.
+- La CI ora osserva esplicitamente la board e `G5/vessel-geometry.json`, così ogni futura modifica riattiva l'audit binario.
+- Audit locale: self-test **PASS**; board e 16 asset binari caricati (`loadedBinaryFileCount: 17`); 8 geometrie e 14 ricette `VESSEL_FREE`; `errors: []`; stato `PASS_BINARY_INTEGRITY_ONLY`. Gli otto warning riguardano preview di provenienza non-runtime mancanti e non alterano il gate binario.
+- Nessuna immagine Food Portrait generata; `v10` resta sola calibrazione e `do01` non è stato generato. Nessuna modifica a `main`, tester ufficiale, PWA o AI Office esterno al branch.
+
+**Stato E08:** `SOURCE_RECOVERED / LOCAL_AUDIT_PASS / REMOTE_CI_PENDING`. La chiusura richiede il checkpoint CI remoto verde.
