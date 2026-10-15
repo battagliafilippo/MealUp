@@ -399,3 +399,17 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dai tre riferimenti verificati.
 
 **Prossimo micro-step necessario:** un solo pilot per il prossimo vessel previsto (`VESSEL_DESSERT_MOLD`) oppure arresto della sperimentazione. Nessuna produzione massiva automatica.
+
+
+## Fourth pilot checkpoint 2026-10-15 — do08 DESSERT_MOLD visual candidate
+
+- Ricetta reale verificata: `do08`, **Cheesecake fredda allo yogurt**, `VESSEL_DESSERT_MOLD`, `1600 kcal` dalla card.
+- Regola overflow applicata: numero esatto `1600`, lancetta saturata al massimo rosso (`60°`) sulla scala FROZEN 0–1000.
+- Generata una sola immagine con ImageGen built-in usando i tre riferimenti FROZEN; costo aggiuntivo dichiarato `0 EUR`.
+- Candidate: `candidates/do08-yogurt-cheesecake-dessert-mold-candidate-001.png`, SHA-256 `028089929538746cabba0af31178cd96097b0b238101456cfb5600e2f4a86b61`, 1254 x 1254, `2.007.594` byte.
+- QA visivo indipendente: **PASS CANDIDATE ONLY**. Stampo apribile distinto, cheesecake intera, base avena/burro, crema yogurt/formaggio/miele, copertura di fragole, nessun ingrediente estraneo rilevato, gauge e testo corretti.
+- QA tecnico: **FAIL** esclusivamente per eccedenza di `7.594` byte sul limite di 2 MB. Nessuna ottimizzazione prima dell'approvazione owner.
+- Stato: `VISUAL_CANDIDATE_TECHNICAL_FAIL_NOT_APPROVED`. Nessun auto-accept, freeze, batch, integrazione o deploy.
+- E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dal pilot.
+
+**Prossimo micro-step necessario:** review visuale owner del candidato do08. Se approvato, conversione WebP lossless, QA ripetuta e decisione separata sul freeze `VESSEL_DESSERT_MOLD`.

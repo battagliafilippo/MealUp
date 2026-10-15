@@ -1,0 +1,64 @@
+{
+  "schema": "mealup-food-portrait-pilot-attempt-v1",
+  "attemptId": "FPP-DO08-IMAGEGEN-20261015-001",
+  "status": "VISUAL_CANDIDATE_TECHNICAL_FAIL_NOT_APPROVED",
+  "branch": "experiment/food-portrait-pipeline-20261015",
+  "generator": {
+    "provider": "CODEX_BUILT_IN_IMAGEGEN",
+    "mode": "PRECISE_OBJECT_EDIT_FROM_THREE_FROZEN_REFERENCES",
+    "imageCountGenerated": 1,
+    "additionalSpendEur": 0,
+    "referenceSha256": [
+      "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0",
+      "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a",
+      "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+    ]
+  },
+  "candidate": {
+    "recipeId": "do08",
+    "title": "Cheesecake fredda allo yogurt",
+    "vesselId": "VESSEL_DESSERT_MOLD",
+    "kcal": 1600,
+    "expectedGaugeAngleDegrees": 60,
+    "gaugeSaturatedHigh": true,
+    "path": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-candidate-001.png",
+    "sha256": "028089929538746cabba0af31178cd96097b0b238101456cfb5600e2f4a86b61",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 2007594,
+    "format": "png"
+  },
+  "sourceFacts": {
+    "ingredients": ["avena 90 g", "burro 30 g", "formaggio spalmabile 300 g", "yogurt greco 0% 200 g", "miele 50 g", "fragole 150 g"],
+    "preparation": "Base di avena e burro pressata nello stampo; crema di formaggio, yogurt e miele; raffreddamento lungo; copertura di fragole a fette."
+  },
+  "technicalQa": {
+    "status": "TECHNICAL_FAIL",
+    "errors": [{"code": "IMAGE_EXCEEDS_BYTE_BUDGET", "actualBytes": 2007594, "limitBytes": 2000000, "excessBytes": 7594}],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"],
+    "automaticAcceptanceAllowed": false
+  },
+  "visualQa": {
+    "status": "INDEPENDENT_VISUAL_PASS_OWNER_REVIEW_REQUIRED",
+    "checks": {
+      "singleDessert": "PASS",
+      "recipeIdentity": "PASS",
+      "dessertMoldDistinctFromOtherVessels": "PASS_VISIBLE_RELEASE_CLASP",
+      "ingredientAndLayerMatch": "PASS_NO_EXTRAS_DETECTED",
+      "kcalTextExact": "PASS_1600",
+      "needleHighClamp": "PASS_MAXIMUM_RED",
+      "styleMatchToFrozenReferences": "PASS_CANDIDATE_ONLY",
+      "mobileLegibility": "PASS",
+      "unexpectedTextOrUi": "PASS_NONE_DETECTED"
+    },
+    "comparison": "docs/food-portrait-pipeline/review/pilot-do08-vs-frozen.html",
+    "limitations": ["VISUAL_QA_DOES_NOT_OVERRIDE_TECHNICAL_FAIL", "OWNER_APPROVAL_REQUIRED"]
+  },
+  "gates": {
+    "ownerApproved": false,
+    "frozen": false,
+    "deployAuthorized": false,
+    "batchExpansionAllowed": false,
+    "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
+  }
+}
