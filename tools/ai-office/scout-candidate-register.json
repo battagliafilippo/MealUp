@@ -2,7 +2,7 @@
   "schema": "mealup-ai-talent-candidate-registry-v1",
   "asOf": "2026-10-15",
   "budgetAdditionalEUR": 0,
-  "description": "Candidates researched, not active Design replacements. No unrelated agent promotions.",
+  "description": "Scoped Design candidates including Gemma 4 and Llama 3.2; evidence only, never automated promotion.",
   "sourcesVerified": "official pages or prior real GitHub Actions runs; no model A/B winner",
   "candidates": [
     {
@@ -90,13 +90,51 @@
       ],
       "risk": "MealUp-AI-Office project 'Limitato' even after security checks",
       "next": "Do not make further calls or enable billing; only reconsider on free access proof"
+    },
+    {
+      "id": "GEMMA4_26B_A4B_CLOUDFLARE",
+      "role": "Design Director",
+      "publisher": "Google DeepMind",
+      "modelId": "@cf/google/gemma-4-26b-a4b-it",
+      "inferenceProvider": "Cloudflare Workers AI",
+      "status": "HOSTED_FREE_OFFER_VERIFIED_ACCOUNT_NOT_CONNECTED",
+      "vision": true,
+      "licenseClaim": "Apache-2.0 per Google official Gemma 4 announcement",
+      "freeApiAccess": "CLOUDFLARE_WORKERS_FREE_10000_NEURONS_DAILY_DOCUMENTED_ACCOUNT_ACCESS_NOT_TESTED",
+      "evidence": [
+        "https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/",
+        "https://developers.cloudflare.com/changelog/post/2026-04-04-gemma-4-26b-a4b-workers-ai/",
+        "https://developers.cloudflare.com/changelog/post/2026-07-28-models-require-workers-paid/",
+        "https://developers.cloudflare.com/workers-ai/platform/pricing/"
+      ],
+      "risk": "API and image support documented, zero-cost eligibility via Free plan documented; no private Cloudflare account verified and zero real API calls",
+      "next": "When free Cloudflare access is verified, include identical-image A/B with Mistral and Qwen; remain NOT_PROMOTED"
+    },
+    {
+      "id": "LLAMA3_2_11B_VISION_CLOUDFLARE",
+      "role": "Design Director",
+      "publisher": "Meta",
+      "modelId": "@cf/meta/llama-3.2-11b-vision-instruct",
+      "inferenceProvider": "Cloudflare Workers AI",
+      "status": "LICENSE_APPROVAL_REQUIRED",
+      "vision": true,
+      "licenseClaim": "Meta Llama 3.2 Community License; separate CEO review/acceptance required; NOT Apache/MIT",
+      "licenseUserAcceptanceRequired": true,
+      "licenseAcceptedByCEO": false,
+      "freeApiAccess": "CLOUDFLARE_WORKERS_FREE_10000_NEURONS_DAILY_DOCUMENTED_ACCOUNT_ACCESS_NOT_TESTED",
+      "evidence": [
+        "https://developers.cloudflare.com/workers-ai/guides/tutorials/llama-vision-tutorial/",
+        "https://developers.cloudflare.com/workers-ai/platform/pricing/"
+      ],
+      "risk": "Meta license acceptance expressly required and cannot be completed by agents without CEO review",
+      "next": "Do not run or agree to Meta license before CEO approval and free account verification"
     }
   ],
   "benchmark": {
     "id": "OFFICE-DESIGN-BENCH-V1",
     "workflow": ".github/workflows/qa-ai-office-design-benchmark.yml",
     "type": "INTRA_MODEL_BASELINE",
-    "externalModelA_BStatus": "BLOCKED_NO_SECOND_CONNECTED_ZERO_COST_VISION_ENDPOINT_CLOUDFLARE_CANDIDATE_FOUND",
+    "externalModelA_BStatus": "BLOCKED_NO_SECOND_CONNECTED_ZERO_COST_VISION_ENDPOINT; MULTIPLE_FREE_HOSTED_OFFERS_DOCUMENTED",
     "frozenAssetsUnmodified": true,
     "modelWinner": null
   },
