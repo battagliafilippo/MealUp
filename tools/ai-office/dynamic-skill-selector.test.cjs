@@ -57,3 +57,41 @@ test('specialists require Director scoped handoff',()=>{
  const x=fixture('QA');x.assignment.assignedBy='CEO';
  assert.equal(selectSkills(x.task,x.assignment,[]).status,'BLOCKED');
 });
+
+test('outside scope or role cannot reuse an approved skill',()=>{
+ const x=fixture('ENGINEERING');
+ const outside=x.skill('OTHER_ROLE',['CODE']);outside.roles=['DESIGN'];
+ const wrongScope=x.skill('OTHER_SCOPE',['CODE']);wrongScope.scopes=['PROD'];
+ const r=selectSkills({...x.task,capabilities:['CODE']},x.assignment,[outside,wrongScope]);
+ assert.equal(r.status,'NEEDS_REVIEW');assert.deepEqual(r.selected,[]);
+});
+test('external skills need audit, QA and no new costs',()=>{
+ const x=fixture('VISUAL_PRODUCTION');
+ x.task.capabilities=['IMAGE'];
+ const bad=x.skill('EXTERNAL',['IMAGE']);bad.kind='EXTERNAL';
+ assert.equal(selectSkills(x.task,x.assignment,[bad]).status,'NEEDS_REVIEW');
+ bad.externalAuditPassed=true;bad.extraCostEUR=1;
+ assert.equal(selectSkills(x.task,x.assignment,[bad]).status,'NEEDS_REVIEW');
+ bad.extraCostEUR=0;bad.needsNewPrivileges=true;
+ assert.equal(selectSkills(x.task,x.assignment,[bad]).status,'NEEDS_REVIEW');
+});
+test('never modify frozen assets through an approved skill',()=>{
+ const x=fixture('DESIGN');
+ x.task.capabilities=['CODE'];
+ const bad=x.skill('WRITE_FROZEN',['CODE']);bad.changesFrozen=true;
+ assert.equal(selectSkills(x.task,x.assignment,[bad]).status,'NEEDS_REVIEW');
+});
+test('every subagent inherits authorized parent and its scope',()=>{
+ const x=fixture('ENGINEERING');
+ x.task.isSubagent=true;x.task.parentAgentId='lead-A';
+ assert.equal(selectSkills(x.task,x.assignment,[]).status,'BLOCKED');
+ x.assignment.parentAgentId='lead-A';x.assignment.subagentApproved=true;
+ assert.equal(selectSkills(x.task,x.assignment,[]).status,'NEEDS_REVIEW');
+});
+test('no budget proof, no quality proof, no skill selection',()=>{
+ const x=fixture('PROMPT_ARCHITECT');x.task.capabilities=['PROMPT'];
+ const bad=x.skill('PROMPT',['PROMPT']);bad.quotaVerified=false;
+ assert.equal(selectSkills(x.task,x.assignment,[bad]).status,'NEEDS_REVIEW');
+ bad.quotaVerified=true;bad.qaVerified=false;
+ assert.equal(selectSkills(x.task,x.assignment,[bad]).status,'NEEDS_REVIEW');
+});
