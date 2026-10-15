@@ -52,7 +52,14 @@ function classify(candidate) {
   const selfHosted = quota?.kind === 'SELF_HOSTED_PERPETUAL_VERIFIED' &&
     candidate.freeComputeVerified === true &&
     typeof quota.source === 'string' && /^https:\/\//.test(quota.source);
-  if (!recurring && !selfHosted)
+  const preexistingSubscription = quota?.kind === 'EXISTING_SUBSCRIPTION_ENTITLEMENT_VERIFIED' &&
+    candidate.subscriptionPlanAlreadyHeld === true &&
+    candidate.noNewBillingVerified === true &&
+    candidate.usesSeparatelyBilledApi === false &&
+    candidate.entitlementAccessVerified === true &&
+    typeof quota.reset === 'string' && quota.reset.length > 0 &&
+    typeof quota.source === 'string' && /^https:\/\//.test(quota.source);
+  if (!recurring && !selfHosted && !preexistingSubscription)
     return { id: candidate.id, state: STATES.RENEWAL_UNVERIFIED,
       reason: 'REPEATABLE_FREE_QUOTA_OR_EXISTING_FREE_COMPUTE_NOT_PROVEN', approved: false };
   if (candidate.status === 'HOSTED_FREE_OFFER_VERIFIED_ACCOUNT_NOT_CONNECTED' ||
@@ -61,6 +68,11 @@ function classify(candidate) {
     return { id: candidate.id, state: STATES.ACCOUNT_NOT_CONNECTED, reason: 'NEEDS_PRIVATE_ACCOUNT_CONNECTION', approved: false };
   if (candidate.status === 'CONNECTED_GUARDED_NOT_QA_APPROVED')
     return { id: candidate.id, state: STATES.CONNECTED_UNDER_QA, reason: 'LIVE_ACCESS_YES_QUALITY_QA_BLOCKED', approved: false };
+  if (preexistingSubscription) {
+    return { id: candidate.id, state: STATES.CANDIDATE_FOR_CONTROLLED_PROBE,
+      reason: 'EXISTING_PAID_PLAN_ENTITLEMENT_VERIFIED_NO_EXTRA_BILLING',
+      approved: false, automaticApiAccessAssumed: false };
+  }
   if (candidate.freeApiAccess === 'VERIFIED_BY_REAL_CALLS') {
     notes.push('Provider access verified but capability and quality must still pass QA');
     return { id: candidate.id, state: STATES.CANDIDATE_FOR_CONTROLLED_PROBE,
