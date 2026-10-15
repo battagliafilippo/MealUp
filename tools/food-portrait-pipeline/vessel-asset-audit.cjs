@@ -11,7 +11,7 @@ const BOARD='G5/references/VESSEL_LIBRARY_reference.png';
 const sha=data=>crypto.createHash('sha256').update(data).digest('hex');
 const validPath=p=>/^G5\/vessels\/VESSEL_[A-Z_]+\/(food-clip|front-occluder|source-view)\.png$/.test(p);
 function inspect(matrix,geometry,read){
-  const errors=[],loaded=new Set(),ids=new Set(),distribution={};
+  const errors=[],warnings=[],loaded=new Set(),ids=new Set(),distribution={};
   const fail=(code,detail)=>errors.push({code,detail});
   const check=(file,expected,board=false)=>{
     if(!board&&!validPath(file))return fail('UNSAFE_ASSET_PATH',file);
@@ -44,7 +44,17 @@ function inspect(matrix,geometry,read){
     if('G5/'+front?.file!==prefix+'front-occluder.png')fail('OCCLUDER_MAPPING_INVALID',id);
     else check('G5/'+front.file,front.sha256);
     if('G5/'+v.body_asset!==prefix+'source-view.png')fail('BODY_MAPPING_INVALID',id);
-    else check('G5/'+v.body_asset,v.body_sha256);
+    else {
+      // G5 declares source-view as provenance-only, not as a required runtime sprite.
+      // Track absent historic previews without manufacturing replacements.
+      const rel='G5/'+v.body_asset;
+      try{read(rel);check(rel,v.body_sha256);}
+      catch(e){
+        if(String(v.body_asset_usage||'').startsWith('PROVENANCE_RGB_VIEW_ONLY'))
+          warnings.push({code:'NONRUNTIME_PROVENANCE_PREVIEW_MISSING',file:rel});
+        else fail('REQUIRED_BODY_ASSET_MISSING',rel);
+      }
+    }
   }
   let freeCount=0;
   for(const r of matrix?.rows||[]){
@@ -59,7 +69,7 @@ function inspect(matrix,geometry,read){
     loadedBinaryFileCount:loaded.size,geometryVessels:ids.size,
     recipesWithNoVessel:freeCount,recipeVessels:distribution,
     imageSemanticsVerified:false,portraitQAApproved:false,automaticApprovalEnabled:false,
-    errors};
+    errors,warnings};
 }
 function selfTest(){
   const buffer=Buffer.from('fixture');
