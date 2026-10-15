@@ -519,3 +519,18 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - `VESSEL_CUP` e `VESSEL_PIZZA_SURFACE` restano esclusi; E08 resta `BLOCKED_HASH_MISMATCH`.
 
 **Prossimo micro-step necessario:** autorizzazione separata del solo elemento 1, `v10 — Succo ACE`; gli altri cinque elementi restano soltanto pianificati.
+
+
+## Controlled lot 001 · cycle 1 checkpoint 2026-10-15 — v10 visual candidate
+
+- Generata **una sola immagine** per `v10`, **Succo ACE**, primo e unico elemento autorizzato del lotto 001.
+- Candidate: `candidates/v10-ace-juice-vessel-free-candidate-001.png`, SHA-256 `9a5035c01b2658eaba91e06513d4f238825d06600fd9a4dc78206e9b21f26f92`, 1254 × 1254, `1.578.034` byte.
+- Vincolo `VESSEL_FREE` rispettato: una confezione neutra come soggetto; nessun bicchiere, cup, bowl, plate, frutta sciolta, label o brand.
+- Gauge visibile con testo esatto `95 kcal`; lancetta in zona verde coerente con l'angolo atteso `-48,6°`. Non viene dichiarata una precisione sub-grado misurata dal raster.
+- QA tecnico su pixel reali: **PASS**, con warning previsti per crop opaco e futura conversione WebP solo dopo eventuale approvazione visuale.
+- QA visivo post-generazione: **PASS CANDIDATE ONLY** per stile FROZEN, singolo soggetto, leggibilità mobile, crop, assenza di elementi estranei e direzione del gauge.
+- Limite registrato: senza label o ingredienti sciolti, l'identità ACE è sostenuta dalla mapping canonica e dal colore del succo, ma non è distinguibile autonomamente dal succo d'arancia.
+- Stato: `VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED`. Nessun auto-accept, ottimizzazione, freeze, integrazione, deploy o avanzamento a `do01`.
+- E08 resta `BLOCKED_HASH_MISMATCH` e indipendente da questo ciclo.
+
+**Prossimo micro-step necessario:** review visuale owner della sola candidate v10. Solo dopo un'approvazione esplicita sarà consentita l'ottimizzazione lossless e la nuova QA; il secondo elemento del lotto resta non autorizzato.

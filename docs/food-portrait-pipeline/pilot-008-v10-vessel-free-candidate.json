@@ -1,0 +1,85 @@
+{
+  "schema": "mealup-food-portrait-candidate-v1",
+  "candidateId": "FPP-PILOT-008-V10-001",
+  "lotId": "FPP-LOT-001",
+  "lotSequenceOrder": 1,
+  "status": "VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED",
+  "recipe": {
+    "id": "v10",
+    "title": "Succo ACE",
+    "kcal": 95,
+    "vesselId": "VESSEL_FREE",
+    "primaryMasterId": "BEVERAGE_JUICE_BOX",
+    "variantId": "ACE"
+  },
+  "gauge": {
+    "numericText": "95 kcal",
+    "expectedAngleDegrees": -48.6,
+    "zone": "GREEN",
+    "pixelClaim": "The raster is visually consistent with the expected deep-green position; sub-degree angle accuracy is not asserted from visual inspection alone."
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/v10-ace-juice-vessel-free-candidate-001.png",
+    "sha256": "9a5035c01b2658eaba91e06513d4f238825d06600fd9a4dc78206e9b21f26f92",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1578034,
+    "format": "png",
+    "alphaChannel": false
+  },
+  "references": [
+    {
+      "role": "closest VESSEL_FREE composition reference",
+      "recipeId": "v08",
+      "path": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+      "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+    },
+    {
+      "role": "general MealUp Food Portrait style reference",
+      "recipeId": "r2",
+      "path": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+      "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+    }
+  ],
+  "generation": {
+    "mode": "BUILT_IN_IMAGEGEN",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "transparentBackground": false,
+    "extraCostEUR": 0,
+    "promptSummary": "One neutral unbranded ACE juice package as the sole VESSEL_FREE subject, matching v08 and r2 FROZEN style; cream background; physical gauge with exact 95 kcal and deep-green needle; no glass, fruit, label, branding, extra text or UI."
+  },
+  "technicalQa": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": [
+      "OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW",
+      "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"
+    ]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "checks": {
+      "singleRecipeAndSingleSubject": true,
+      "vesselFreeNoServingVessel": true,
+      "neutralUnbrandedPackage": true,
+      "noLooseIngredientsOrProps": true,
+      "frozenStyleMatch": true,
+      "exactVisibleKcalText": true,
+      "needleDirectionAndZoneCoherent": true,
+      "mobileLegibility": true,
+      "safeOpaqueCrop": true,
+      "noAdditionalUiOrText": true
+    },
+    "identityLimit": "Without a label or loose ingredients, ACE is represented by the canonical recipe mapping and orange-golden juice appearance; the image does not independently distinguish the blend from orange juice.",
+    "reviewAuthority": "Independent post-generation visual inspection; not an owner approval."
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  },
+  "nextAction": "OWNER_VISUAL_REVIEW_OF_THIS_SINGLE_CANDIDATE"
+}
