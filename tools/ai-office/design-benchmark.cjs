@@ -35,10 +35,14 @@ function check(candidate, expected) {
   const obs=candidate.visibleObservations;
   if (!Array.isArray(obs)||obs.length<1||obs.length>4||!obs.every(x=>typeof x==='string'&&x.trim())) errors.push('OBSERVATIONS_SCHEMA');
   const joined=Array.isArray(obs) ? obs.join(' ').toLowerCase() : '';
-  if (/\b(primo|secondo|terzo|successiv[oi]|precedent[ei])\s+(frame|fotogramm[ai]|immagin[ei]|crop|inquadratur[ae])\b|\b(frame|fotogramm[ai])\s+(successiv[oi]|precedent[ei])\b/i.test(joined))
+  if (/\b(primo|secondo|terzo|successiv[oi]|precedent[ei]|più|piu|multiple|diverse|varie)\s+(frame|fotogramm[ai]|immagin[ei]|crop|inquadratur[ae])\b|\b(frame|fotogramm[ai])\s+(successiv[oi]|precedent[ei])\b/i.test(joined))
     errors.push('STATIC_ASSET_SEQUENCE_HALLUCINATION');
   if (/\b(?:nella|sulla)\s+card\s+(?:si\s+)?(?:vede|nota|mostra|appare)\b/i.test(joined))
     errors.push('UNSEEN_CARD_AS_FACT');
+  // The three canonical family FO assets have transparent pixels at the canvas edge.
+  // A viewer's white canvas is not a source-image white background.
+  if (expected !== 'NON_FOOD_BRAND' && /\b(su\s+)?sfondo\s+bianco\b|\bwhite background\b/i.test(joined))
+    errors.push('TRANSPARENT_SOURCE_BACKGROUND_HALLUCINATION');
   if (!Array.isArray(candidate.uncertainties)) errors.push('UNCERTAINTIES_SCHEMA');
   if (typeof candidate.suggestedMobileCheck!=='string'||candidate.suggestedMobileCheck.trim().length<12) errors.push('MOBILE_CHECK_MISSING');
   if (candidate.claimedFrozenCompliance!==false) errors.push('FROZEN_CLAIM');
@@ -55,6 +59,8 @@ function selfTest(){
   assert.ok(check({...base, family:'CEREALI'},'PASTA').errors.includes('FAMILY_MISMATCH'));
   assert.ok(check({...base, filesModified:['app.js']},'PASTA').errors.includes('WRITE_CLAIM'));
   assert.ok(check({...base, visibleObservations:['Nella card si vede la pasta']},'PASTA').errors.includes('UNSEEN_CARD_AS_FACT'));
+  assert.ok(check({...base, visibleObservations:['La scena è ripresa in più inquadrature']},'PASTA').errors.includes('STATIC_ASSET_SEQUENCE_HALLUCINATION'));
+  assert.ok(check({...base, visibleObservations:['Pasta su sfondo bianco']},'PASTA').errors.includes('TRANSPARENT_SOURCE_BACKGROUND_HALLUCINATION'));
   console.log('PASS: deterministic QA unit tests');
 }
 async function wait(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
