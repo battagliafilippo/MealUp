@@ -122,11 +122,11 @@ function forecastJob(modelId, job, telemetry) {
 function selectApprovedBackup({task,pool,candidates,budgets,blockedQuotaPoolIds=[]}) {
   if (!task || !REQUIRED(task.role) || !REQUIRED(task.capability) ||
       !REQUIRED(task.approvalScope) || task.contextSnapshotValidated!==true)
-    return {status:'BLOCKED',reason:'INCOMPLETE_VERIFIED_TASK_HANDOFF'};
+    return {status:'BLOCKED',reason:'INCOMPLETE_VERIFIED_TASK_HANDOFF',execute:false,agentSwitchPerformed:false};
   if (!pool || pool.ceoApproved!==true ||
       pool.scope!==task.approvalScope ||
       !Array.isArray(pool.allowedModelIds) || !pool.allowedCapabilities?.includes(task.capability))
-    return {status:'BLOCKED',reason:'CEO_APPROVED_POOL_REQUIRED'};
+    return {status:'BLOCKED',reason:'CEO_APPROVED_POOL_REQUIRED',execute:false,agentSwitchPerformed:false};
   const eligible = (Array.isArray(candidates)?candidates:[])
     .filter(x=>pool.allowedModelIds.includes(x.id) &&
       x.role===task.role &&
@@ -137,7 +137,7 @@ function selectApprovedBackup({task,pool,candidates,budgets,blockedQuotaPoolIds=
       !blockedQuotaPoolIds.includes(x.poolId))
     .sort((a,b)=>(a.rank||100)-(b.rank||100));
   if (eligible.length===0)
-    return {status:'BLOCKED',reason:'NO_QA_APPROVED_CONNECTED_MODEL_WITH_MATCHING_SCOPE'};
+    return {status:'BLOCKED',reason:'NO_QA_APPROVED_CONNECTED_MODEL_WITH_MATCHING_SCOPE',execute:false,agentSwitchPerformed:false};
   const wait=[];
   for (const item of eligible) {
     const b=budgets?.[item.poolId];
