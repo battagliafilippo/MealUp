@@ -114,6 +114,7 @@ jobs:
           assert.equal(coverage.readyToGenerate,0);
           assert.equal(coverage.imagesAccepted,0);
           assert.equal(new Set(specs.recipes.map(s=>s.recipeId)).size,454);
+          assert.ok(specs.recipes.every(s=>Number.isFinite(s.source.kcal)&&s.source.kcal>=0));
           assert.deepEqual(specs.recipes.map(s=>s.recipeId),queue.tasks.map(t=>t.recipeId));
           for (const s of specs.recipes) {
             assert.equal(s.acceptanceState,'BLOCKED_REFERENCE');
@@ -235,13 +236,37 @@ jobs:
           assert.equal(p.contract.vesselId,'VESSEL_BOWL');
           assert.equal(p.contract.maxImages,1);
           assert.equal(p.contract.maxRecipesPerImage,1);
-          assert.equal(p.contract.noGaugeOrUiBakedIn,true);
+          assert.equal(p.contract.kcal,490);
+          assert.ok(Math.abs(p.contract.gaugeAngleDegrees-(-1.2))<1e-9);
+          assert.equal(p.contract.gaugeZone,'YELLOW');
+          assert.equal(p.contract.frozenGaugeBakedInRequired,true);
+          assert.equal(p.contract.noAdditionalUiBakedIn,true);
           assert.equal(p.contract.noInfographicOrMultiCard,true);
           assert.equal(p.imagesGenerated,0);
           assert.equal(p.autoAcceptanceAllowed,false);
           for(const food of ['tonno','riso','avocado','salsa di soia','sesamo'])
             assert.ok(p.promptText.includes(food),'missing '+food);
-          console.log('PASS isolated prompt packet: exactly r2, five ingredients, no baked UI');
+          console.log('PASS isolated prompt packet: exactly r2, five ingredients, frozen gauge required');
+          NODE
+      - name: Calibrate guarded Visual Production cycle on existing v10 only
+        run: |
+          node --check tools/food-portrait-pipeline/visual-production-cycle.cjs
+          node tools/food-portrait-pipeline/visual-production-cycle.cjs --self-test
+          node tools/food-portrait-pipeline/visual-production-cycle.cjs \
+            --manifest docs/food-portrait-pipeline/pilot-008-v10-vessel-free-candidate.json \
+            --asset docs/food-portrait-pipeline/candidates/v10-ace-juice-vessel-free-approved-001.webp \
+            --checkpoint /tmp/mealup-portrait-staging/v10-visual-production-checkpoint.json
+          node <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict');
+          const c=JSON.parse(fs.readFileSync('/tmp/mealup-portrait-staging/v10-visual-production-checkpoint.json'));
+          assert.equal(c.recipeId,'v10');
+          assert.equal(c.candidateLimit,1);
+          assert.equal(c.candidatesRecorded,1);
+          assert.equal(c.imagesGeneratedThisRun,0);
+          assert.equal(c.do01Generated,false);
+          assert.equal(c.gates.independentVisualQa,'PASS_CANDIDATE_ONLY');
+          assert.equal(c.gates.automaticAcceptance,false);
+          console.log('PASS v10 calibration replay: persistent cycle, no do01 generation.');
           NODE
       - name: Store preproduction evidence (no deploy)
         if: always()

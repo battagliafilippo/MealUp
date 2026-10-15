@@ -548,3 +548,18 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Audit indipendenza AI Office:** lo stato corrente non è autonomo. `agent-registry.cjs` dichiara Director `INTERACTIVE_ONLY`, Visual Production `MANUAL_AUTHORIZATION_REQUIRED` e `autonomousExecution: false`; `pilot-office-bridge.cjs` prepara handoff e prompt ma non chiama provider. Il bridge conserva inoltre la vecchia separazione del gauge dai pixel, in conflitto con il contratto Food Portrait FROZEN ora approvato. Prima dell'autonomia servono riallineamento del contratto, esecuzione ImageGen realmente collegata, checkpoint persistenti e benchmark reali con QA indipendente.
 
 **Prossimo micro-step necessario:** decidere separatamente se congelare v10 oppure avviare il riallineamento controllato dell'AI Office alla pipeline Food Portrait FROZEN. `do01` resta non autorizzato.
+
+## AI Office realignment checkpoint 2026-10-15 — v10 calibration only
+
+- Corretto il contratto gauge storico per la produzione Food Portrait: il raster candidato deve includere il gauge fisico FROZEN, con kcal esatte e lancetta calcolata dalla mapping; resta vietata qualunque UI aggiuntiva.
+- Visual Production è collegata all'adapter interattivo `OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE`, con limite rigido di una sola candidate per ciclo e budget aggiuntivo `0 EUR`.
+- Aggiunto checkpoint JSON atomico e persistente: un ciclo esistente non può essere sovrascritto o duplicato.
+- La QA visuale deve dichiarare un revisore distinto dal produttore; QA tecnica e visuale restano gate separati e nessuna delle due abilita auto-accept, freeze, integrazione o deploy.
+- Calibrazione eseguita soltanto come replay verificato dell'asset v10 già approvato: hash, ricevuta ImageGen, gauge `95 kcal / -48,6° / GREEN`, QA tecnica e QA visuale indipendente verificati. Nuove immagini generate in questo step: `0`.
+- `do01` è bloccato esplicitamente dal test di calibrazione e non è stato generato.
+- Costituzione v1.9 completa: non caricata perché le copie `.txt` locali disponibili non corrispondono allo SHA-256 canonico fissato dal repository. Applicate le regole permanenti e il puntatore procedurale `AGENTS.md`; nessun testo costituzionale è stato inventato.
+- Master v1.24 FROZEN: recuperato in sola lettura. La regola FO famiglia della card resta invariata; questa attività non integra Food Portrait nel tester o nella PWA.
+
+**Stato:** REALIGNMENT IMPLEMENTED / LOCAL QA VERIFIED. Nessun avanzamento al lotto 001 elemento 2.
+
+**Prossimo micro-step necessario:** pubblicare il branch isolato per ottenere il checkpoint CI remoto. Una decisione separata resta necessaria per il freeze di v10 o per qualunque futuro ciclo di generazione.

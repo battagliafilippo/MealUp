@@ -1,0 +1,35 @@
+{
+  "schema": "mealup-food-portrait-visual-cycle-v1",
+  "cycleId": "FPP-CAL-V10-001",
+  "recipeId": "v10",
+  "mode": "CALIBRATION_REPLAY_NO_GENERATION",
+  "providerAdapter": "OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE",
+  "candidateLimit": 1,
+  "candidatesRecorded": 1,
+  "imagesGeneratedThisRun": 0,
+  "do01Generated": false,
+  "budgetEUR": 0,
+  "producer": "OPENAI_BUILT_IN_IMAGEGEN",
+  "reviewer": "INDEPENDENT_VISUAL_QA",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/v10-ace-juice-vessel-free-approved-001.webp",
+    "sha256": "0c0bd1f2023c34bf81963109c4856d50ff6f76b54a876fc97c68d879eb24d6ba",
+    "bytes": 944940
+  },
+  "gauge": {
+    "kcal": 95,
+    "angleDegrees": -48.6,
+    "zone": "GREEN",
+    "bakedInRequired": true
+  },
+  "gates": {
+    "technicalQa": "PASS",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": true,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false
+  },
+  "state": "CALIBRATION_VERIFIED_AWAITING_SEPARATE_FREEZE_DECISION"
+}

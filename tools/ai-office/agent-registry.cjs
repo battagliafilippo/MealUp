@@ -52,11 +52,11 @@ const REGISTRY = Object.freeze({
   }),
   visual: Object.freeze({
     label: 'Visual Production',
-    adapter: 'CHATGPT_IMAGEGEN_OR_RUNWAY_MANUAL',
-    status: 'MANUAL_AUTHORIZATION_REQUIRED',
-    activation: 'CEO_ASSET_APPROVAL_AND_QUOTA_CHECK',
+    adapter: 'OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE',
+    status: 'CONNECTED_GUARDED_SINGLE_CANDIDATE',
+    activation: 'AUTHORIZED_RECIPE_CYCLE_AND_ZERO_COST_QUOTA_CHECK',
     writes: false,
-    purpose: 'Generate approved image pilots only; no autonomous batch',
+    purpose: 'Generate exactly one candidate for one authorized recipe cycle; no batch or auto-approval',
   }),
   prompt_architect: Object.freeze({
     label: 'Prompt Architect',

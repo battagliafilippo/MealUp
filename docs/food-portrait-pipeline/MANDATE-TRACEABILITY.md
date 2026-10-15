@@ -29,7 +29,11 @@ Principio: questa matrice conserva **tutti gli obblighi** e impedisce di chiamar
 
 **15 ottobre — Modifica Master consentita:** obiettivo finale 1 Food Portrait per ogni ricetta; patch mirata alla sezione a chiusura/freeze. Non sostituisce automaticamente gli altri FROZEN, il runtime o i riferimenti più vecchi; evitare aggiornamenti prematuri.
 
-**15 ottobre — Foto reference owner:** screenshot `IMG_1277(2).jpeg` conservato ORIGINALE nella Library privata; SHA-256 `bc8c117581375c4826cb35072d2033d1274723b525debc023f80fe299fa36790`. Preview crop disponibile con hash indipendente. **STYLE CANDIDATE NON MASTER VESSEL**. Il gauge visibile in screenshot resta UI dinamica separata; non va cotto nell'asset.
+**15 ottobre — Foto reference owner (storico, SUPERSEDED per produzione):** screenshot `IMG_1277(2).jpeg` conservato ORIGINALE nella Library privata; SHA-256 `bc8c117581375c4826cb35072d2033d1274723b525debc023f80fe299fa36790`. Preview crop disponibile con hash indipendente. **STYLE CANDIDATE NON MASTER VESSEL**. La precedente separazione del gauge resta evidenza storica, ma non governa più i nuovi candidati Food Portrait.
+
+**15 ottobre — Contratto gauge Food Portrait FROZEN:** il candidato raster include il gauge fisico visibile con kcal esatte e lancetta derivata dalla mapping FROZEN. Il mismatch richiede rigenerazione e FAIL QA; non è consentito correggere silenziosamente l'immagine con un layer separato. Questa sostituzione vale solo per la produzione Food Portrait nel laboratorio e non autorizza modifiche a tester o PWA.
+
+**15 ottobre — Riallineamento AI Office:** Visual Production usa `OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE` con una sola candidate per ciclo, checkpoint persistente non sovrascrivibile e budget 0 EUR. La QA tecnica e la QA visuale indipendente sono gate separati; auto-accept, auto-freeze, integrazione e deploy restano vietati. La prova di calibrazione riusa soltanto v10 e genera 0 nuove immagini; `do01` resta esplicitamente bloccato.
 
 **15 ottobre — AI Office + ibrido:** tentare coordinamento tramite il vero AI Office: `office-orchestrator.cjs` 1.3 e ruoli registrati; non dichiarare esecuzione/provider con soli handoff. 6 pilot pack + 18 handoff verificati in CI; nessun cambio al branch ufficio.
 

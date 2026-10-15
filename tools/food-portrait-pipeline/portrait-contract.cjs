@@ -47,12 +47,13 @@ function compile(input,matrix,manifest,registry){
     assert(Array.isArray(b.primaryIngredients)&&Array.isArray(b.steps)&&
       b.primaryIngredients.every((x,i)=>x.position===i&&typeof x.name==='string'&&x.name),
       'RECIPE_INGREDIENTS_INVALID:'+b.recipeId);
+    assert(Number.isFinite(b.kcal)&&b.kcal>=0,'RECIPE_KCAL_INVALID:'+b.recipeId);
     assert(b.approvalStatus==='NOT_REVIEWED'&&b.imageStatus==='PENDING'&&
       b.safeToGenerate===false&&b.imageUrl===null,'PREMATURE_UPSTREAM_APPROVAL:'+b.recipeId);
     assert(b.interpretation&&Array.isArray(b.interpretation.verifiedPlacements)&&
       b.interpretation.verifiedPlacements.length===0,'UNVERIFIED_PLACEMENT_MASQUERADE');
     const source={
-      recipeId:b.recipeId,title:b.title,familyId:b.familyId,
+      recipeId:b.recipeId,title:b.title,kcal:b.kcal,familyId:b.familyId,
       compositionId:b.compositionId,vesselId:b.vessel.id,
       sourceHash:b.sourceHash,visualRevision:b.visualRevision,directorRevision:b.directorRevision,
       ingredients:b.primaryIngredients.map(x=>({
@@ -144,7 +145,7 @@ function stage(bundle,destination){
 }
 function selfTest(){
   const sample=(id,vessel='VESSEL_PLATE')=>({
-    recipeId:id,title:'Demo '+id,familyId:'PASTA',compositionId:'COMP_'+id,
+    recipeId:id,title:'Demo '+id,kcal:320,familyId:'PASTA',compositionId:'COMP_'+id,
     vessel:{id:vessel},sourceHash:'sha-'+id,visualRevision:'v1',directorRevision:'d1',
     primaryIngredients:[{position:0,name:'pasta',quantity:100,unit:'g'}],
     steps:['Cuoci e servi'],evidence:{explicitPlating:[],ingredientForms:[],cooking:[]},
@@ -170,6 +171,8 @@ function selfTest(){
   mustFail(run,'VESSEL_ID_MISMATCH');r[1].vessel.id='VESSEL_PLATE';
   r[1].primaryIngredients.push({position:1,name:''});
   mustFail(run,'RECIPE_INGREDIENTS_INVALID');r[1].primaryIngredients.pop();
+  r[1].kcal=-1;
+  mustFail(run,'RECIPE_KCAL_INVALID');r[1].kcal=320;
   r[1].approvalStatus='APPROVED';
   mustFail(run,'PREMATURE_UPSTREAM_APPROVAL');r[1].approvalStatus='NOT_REVIEWED';
   reg.masters.push({id:'fake',status:'APPROVED'});

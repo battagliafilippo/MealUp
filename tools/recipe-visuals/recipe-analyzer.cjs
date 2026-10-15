@@ -55,7 +55,8 @@ function analyzeRecipe(recipe, familyMapping) {
   const steps = Array.isArray(recipe.steps)
     ? recipe.steps.map(v => String(v ?? '').trim())
     : [];
-  const core = { id, title, portata: recipe.portata ?? null, ingredients, steps, description: recipe.desc ?? null };
+  const kcal = Number(recipe.kcal);
+  const core = { id, title, portata: recipe.portata ?? null, kcal, ingredients, steps, description: recipe.desc ?? null };
   const plating = evidence(steps, RE_PLATING);
   const form = evidence(steps, RE_FORM);
   const cooking = evidence(steps, RE_COOK);
@@ -65,6 +66,7 @@ function analyzeRecipe(recipe, familyMapping) {
   if (!steps.length || steps.some(s => !s)) flags.push('MISSING_STEPS');
   if (!plating.length) flags.push('MISSING_EXPLICIT_PLATING_EVIDENCE');
   if (!familyMapping[id]) flags.push('UNMAPPED_FAMILY');
+  if (!Number.isFinite(kcal) || kcal < 0) flags.push('INVALID_KCAL');
 
   return {
     recipeId: id,
@@ -73,6 +75,7 @@ function analyzeRecipe(recipe, familyMapping) {
     analyzerVersion: ANALYZER_VERSION,
     familyId: familyMapping[id] ?? null,
     title,
+    kcal,
     portata: core.portata,
     description: core.description,
     ingredients,
@@ -105,6 +108,7 @@ function validateCatalog(recipes, specs) {
   if (!sameIds(fromApp, fromSpecs)) failures.push('APP_SPEC_ID_MISMATCH');
   if (specs.some(s => !s.recipeSourceHash || !s.visualRevision)) failures.push('INCOMPLETE_HASHES');
   if (specs.some(s => !s.ingredients.every(i => i.name))) failures.push('UNNAMED_INGREDIENT');
+  if (specs.some(s => !Number.isFinite(s.kcal) || s.kcal < 0)) failures.push('INVALID_KCAL');
   if (specs.some(s => s.qaApproved || s.imageUrl !== null || s.imageStatus !== 'PENDING'))
     failures.push('PREMATURE_IMAGE_APPROVAL');
   return failures;
@@ -115,18 +119,19 @@ function runSelfTest() {
     id: 'r1', title: 'Bresaola con rucola',
     ing: [{ n: 'bresaola', q: 80, u: 'g' }, { n: 'rucola', q: 20, u: 'g' }],
     steps: ['Fodera il piatto con le fette di bresaola.', 'Ammucchia la rucola al centro.'],
-    desc: 'Piatto freddo', portata: 'antipasto',
+    desc: 'Piatto freddo', portata: 'antipasto', kcal: 320,
   };
   const a = analyzeRecipe(example, f);
-  if (a.ingredients.length !== 2 || a.steps.length !== 2 || a.evidence.plating.length !== 2 ||
+  if (a.ingredients.length !== 2 || a.steps.length !== 2 || a.kcal !== 320 || a.evidence.plating.length !== 2 ||
       a.evidence.physicalForm.length !== 1 || a.imageStatus !== 'PENDING' ||
       a.ingredients.some(x => x.placement !== 'NOT_YET_DETERMINED')) throw new Error('SELFTEST_EVIDENCE');
   if (analyzeRecipe(example, f).visualRevision !== a.visualRevision) throw new Error('SELFTEST_STABILITY');
   const changed = { ...example, steps: [...example.steps, 'Cospargi con grana.'] };
   if (analyzeRecipe(changed, f).visualRevision === a.visualRevision) throw new Error('SELFTEST_REVISION');
-  const incomplete = analyzeRecipe({ id: 'x1', title: 'Senza istruzioni', ing: [], steps: [] }, f);
+  const incomplete = analyzeRecipe({ id: 'x1', title: 'Senza istruzioni', kcal: -1, ing: [], steps: [] }, f);
   if (!incomplete.reviewFlags.includes('MISSING_EXPLICIT_PLATING_EVIDENCE') ||
       !incomplete.reviewFlags.includes('UNMAPPED_FAMILY') ||
+      !incomplete.reviewFlags.includes('INVALID_KCAL') ||
       incomplete.analysisStatus !== 'NEEDS_VISUAL_DIRECTION') throw new Error('SELFTEST_REVIEW_GATE');
   console.log('PASS M2 Analyzer self-test: evidence, no inferred placement, stable revisions, review gates');
 }

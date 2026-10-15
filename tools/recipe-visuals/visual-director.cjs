@@ -19,7 +19,7 @@ const crypto = require('node:crypto');
 
 const VERSION = 'mealup-visual-director-v1';
 const STYLE = 'MealUp Toys 3D — complete food portrait';
-const VESSEL_DESIGN_CONTRACT = 'MealUp Toys 3D premium; crema predominante con accenti arancioni; materiale opaco; geometria specifica della preparazione; vietati vessel trasparenti, neri o scuri; nessun testo, logo, gauge, lancetta, kcal o altra UI incorporata';
+const VESSEL_DESIGN_CONTRACT = 'MealUp Toys 3D premium; crema predominante con accenti arancioni; materiale opaco; geometria specifica della preparazione; vietati vessel trasparenti, neri o scuri; gauge Food Portrait FROZEN obbligatorio con kcal e lancetta della ricetta; nessun altro testo, logo o UI';
 const VESSEL_IDS = new Set([
   'VESSEL_BAKING_DISH','VESSEL_BOWL','VESSEL_BREAD_SURFACE','VESSEL_CUP',
   'VESSEL_DESSERT_MOLD','VESSEL_FREE','VESSEL_GLASS','VESSEL_JAR',
@@ -64,6 +64,7 @@ function stableRecipeFields(r, composition) {
     recipeId: r.recipeId,
     visualRevision: r.visualRevision,
     title: r.title,
+    kcal: r.kcal,
     familyId: r.familyId,
     portata: r.portata,
     description: r.description,
@@ -85,7 +86,8 @@ function stableRecipeFields(r, composition) {
 }
 function buildBrief(r, composition) {
   if (!r || !r.recipeId || !r.visualRevision || !Array.isArray(r.ingredients) ||
-      !Array.isArray(r.steps) || !r.evidence || !Array.isArray(r.evidence.plating)) {
+      !Array.isArray(r.steps) || !Number.isFinite(r.kcal) || r.kcal < 0 ||
+      !r.evidence || !Array.isArray(r.evidence.plating)) {
     throw new Error('INVALID_M2_RECIPE_SPEC');
   }
   if (!composition || composition.recipe_id !== r.recipeId ||
@@ -104,10 +106,10 @@ function buildBrief(r, composition) {
     'Questo e un Food Portrait di RICETTA, non un FO di famiglia: usa obbligatoriamente il vessel canonico indicato da vesselId',
     'Il vessel deve essere specifico per la preparazione, nello stile MealUp Toys 3D premium, crema predominante con accenti arancioni e materiale opaco; vietati vessel generici, neri, scuri, trasparenti o inventati, salvo VESSEL_GLASS esplicitamente canonico',
     'VESSEL_FREE significa nessun contenitore aggiuntivo; non sostituirlo con piatti o ciotole',
-    'Nessuna grafica UI nel ritratto: gauge, lancetta, kcal, testi e CTA restano livelli dinamici separati',
+    'Il raster include il gauge Food Portrait FROZEN con valore kcal esatto della ricetta e lancetta derivata dalla mapping canonica; nessun altra grafica UI o testo',
     'Non aggiungere salse, foglie, posate, sfondi, lettere o numeri per riempire la scena',
     'Cibo unito in una sola composizione culinaria leggibile in formato piccolo, prospettiva coerente, materiali 3D premium',
-    'Non alterare i valori kcal o suggerire porzioni nutrizionali differenti; i dati nutrizionali non sono parte del ritratto',
+    'Non alterare il valore kcal: e un input visivo obbligatorio del gauge; gli altri dati nutrizionali non sono parte del ritratto',
     'Ogni collocazione che non sia scritta nei passaggi va marcata come ipotesi, mai come fatto',
     'Qualsiasi ambiguita sulla composizione passa a revisione prima della generazione massiva',
   ];
@@ -158,6 +160,7 @@ function buildBrief(r, composition) {
     sourceHash: r.recipeSourceHash,
     directorRevision: hash({ VERSION, facts, constraints }).slice(0, 16),
     title: r.title,
+    kcal: r.kcal,
     familyId: r.familyId,
     compositionId: composition.composition_id,
     vessel: {
@@ -233,7 +236,7 @@ function validate(briefs, specs, compositions) {
 function selfTest() {
   const common = {
     recipeId:'r1', visualRevision:'abc12345', recipeSourceHash:'sha-a', familyId:'CARNE',
-    title:'Carpaccio con rucola', portata:'antipasto', description:'Freddo',
+    title:'Carpaccio con rucola', kcal:320, portata:'antipasto', description:'Freddo',
     ingredients:[{position:0,name:'manzo',quantity:120,unit:'g'},{position:1,name:'rucola',quantity:40,unit:'g'}],
     steps:['Disponi il carpaccio.', 'Aggiungi rucola.'],
     evidence:{plating:[{stepIndex:0,text:'Disponi il carpaccio.'}],physicalForm:[],cooking:[]},
@@ -249,6 +252,7 @@ function selfTest() {
      missing.safeToGenerate || explicit.safeToGenerate ||
      missing.planningRequest.strictJsonOutput.needsHumanReview !== true ||
      missing.interpretation.inferredPlacements.length !== 0 ||
+     explicit.planningRequest.inputFacts.kcal !== 320 ||
      explicit.vessel.id !== 'VESSEL_PLATE' || missing.vessel.id !== 'VESSEL_BOWL')
     throw new Error('M3_SELFTEST_GATING');
   const changed=buildBrief({...common,ingredients:[...common.ingredients,{position:2,name:'grana',quantity:30,unit:'g'}]},c1);

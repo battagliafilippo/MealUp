@@ -30,8 +30,9 @@ test('Design and Food use guarded existing Groq connections', () => {
 
 test('Engineering is interactive and Visual Production cannot start a batch', () => {
   assert.equal(getRole('engineering').status, 'INTERACTIVE_ONLY');
-  assert.equal(getRole('visual').status, 'MANUAL_AUTHORIZATION_REQUIRED');
-  assert.equal(getRole('visual').activation, 'CEO_ASSET_APPROVAL_AND_QUOTA_CHECK');
+  assert.equal(getRole('visual').status, 'CONNECTED_GUARDED_SINGLE_CANDIDATE');
+  assert.equal(getRole('visual').adapter, 'OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE');
+  assert.equal(getRole('visual').activation, 'AUTHORIZED_RECIPE_CYCLE_AND_ZERO_COST_QUOTA_CHECK');
 });
 
 test('QA is always after owner and independent; Prompt Architect is conditional', () => {

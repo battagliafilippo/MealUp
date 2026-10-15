@@ -89,6 +89,9 @@
   "separationRule": {
     "baseVisualMustMatchReferenceStyle": true,
     "kcalAndNeedleAreDataDriven": true,
+    "gaugeVisibleInCandidateRaster": true,
+    "gaugeRegenerationRequiredOnDataMismatch": true,
+    "additionalUiElementsForbidden": true,
     "sourceRecipeCardMustNotBeOverridden": true,
     "automaticImageAcceptanceAllowed": false
   },

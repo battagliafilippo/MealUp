@@ -37,7 +37,8 @@ test('Engineering and Visual connections do not imply repository or image execut
   office.intake(brief('eng-1', 'engineering'));
   office.intake(brief('visual-1', 'visual'));
   assert.equal(office.handoff('eng-1').adapterStatus, 'INTERACTIVE_ONLY');
-  assert.equal(office.handoff('visual-1').adapterStatus, 'MANUAL_AUTHORIZATION_REQUIRED');
+  assert.equal(office.handoff('visual-1').adapter, 'OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE');
+  assert.equal(office.handoff('visual-1').adapterStatus, 'CONNECTED_GUARDED_SINGLE_CANDIDATE');
   for (const [id, action] of [['eng-1', 'push main'], ['visual-1', 'generate 454 images']]) {
     const denied = office.requestAction(id, action);
     assert.equal(denied.allowed, false);

@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-gauge-reference-v1",
   "refId": "GAUGE_OWNER_20261015_IMG1264",
-  "status": "OWNER_SUPPLIED_REQUIRED_UI_DIRECTION_NOT_FROZEN",
+  "status": "SUPERSEDED_BY_FROZEN_FOOD_PORTRAIT_GAUGE_CONTRACT",
   "source": {
     "localPathAtDecision": "C:/Users/Ramona/Downloads/IMG_1264.jpeg",
     "sha256": "fb7473e2da2cfafe84d0e33a9316c458207e0536b688267e6c18ab0c32535b47",
@@ -18,7 +18,13 @@
   "implementationBoundary": {
     "gaugeIsSeparateDynamicUi": true,
     "gaugeBakedIntoFoodPortraitPixels": false,
-    "reason": "Keep kcal value, pointer state, accessibility and responsive placement editable without regenerating the recipe image."
+    "reason": "Historical boundary preserved for audit; superseded for Food Portrait production by the replacement contract below."
+  },
+  "supersession": {
+    "date": "2026-10-15",
+    "authority": "OWNER_AUTHORIZED_FROZEN_PIPELINE_REALIGNMENT",
+    "replacement": "docs/food-portrait-pipeline/food-portrait-style-frozen-v1.json",
+    "scope": "FOOD_PORTRAIT_PRODUCTION_ONLY; no tester or PWA integration"
   },
   "observedDirection": [
     "cream rounded semicircular housing",

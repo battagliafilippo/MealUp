@@ -36,13 +36,14 @@ function build(portraits,selection,style){
    ids.add(sel.recipeId);
    const s=byId.get(sel.recipeId);
    assert(s&&s.source&&s.production,'PILOT_RECIPE_NOT_FOUND:'+sel.recipeId);
+   assert(Number.isFinite(s.source.kcal)&&s.source.kcal>=0,'PILOT_KCAL_MISSING:'+sel.recipeId);
    assert(s.source.vesselId===sel.expectedVesselId&&
      s.production.vesselId===s.source.vesselId&&allowed.has(s.source.vesselId),
      'PILOT_VESSEL_DISAGREEMENT:'+sel.recipeId);
    assert(s.production.autoApprovalAllowed===false&&s.production.goldenMasterId===null&&
      s.imageStatus==='NOT_GENERATED','UPSTREAM_IMAGE_APPROVAL_DETECTED');
    const facts={
-     recipeId:s.recipeId,title:s.source.title,familyId:s.source.familyId,
+     recipeId:s.recipeId,title:s.source.title,kcal:s.source.kcal,familyId:s.source.familyId,
      vesselId:s.source.vesselId,
      compositionId:s.source.compositionId,
      sourceHash:s.source.sourceHash,specRevision:s.specRevision,
@@ -73,7 +74,8 @@ function build(portraits,selection,style){
        mandatory:['Use exact canonical vessel ID; never swap type','No independent disconnected ingredient collage',
          'Do not fabricate missing vessel geometry'],
        activeGate:'HISTORICAL_FROZEN_BOARD_SHA_MISMATCH_BLOCKS_CANONICAL_VESSEL_APPROVAL',
-       uiLayerSeparation:['Calorie gauge/needle/kcal are independent dynamic UI layers, not pixels baked into Food Portrait']
+       gaugeProductionContract:['The Food Portrait candidate includes the visible FROZEN gauge housing, exact recipe kcal text and mapped needle position in its pixels',
+         'Gauge values are computed from recipe data before generation; a mismatched raster fails QA and is regenerated, never silently corrected']
      },
      C_RECIPE_SPECIFIC:{
        facts,
@@ -87,7 +89,7 @@ function build(portraits,selection,style){
        semantic:['Every distinctive ingredient or justified integrated omission',
          'Dish recognizable','Canonical vessel verified or VESSEL_FREE',
          'Consistent 3D materials, proportions, color, lighting, camera',
-         'Mobile thumbnail readability', 'No gauge baked into Food Portrait pixels'],
+         'Mobile thumbnail readability','Visible gauge matches exact kcal text, frozen mapping and physical housing'],
        reviewState:'NOT_EXECUTED',autoAcceptance:false
      },
      E_OUTPUT:{
@@ -167,7 +169,7 @@ function main(args){
  const input=(name)=>{const n=args.indexOf(name);return n<0?null:args[n+1]};
  if(args.includes('--self-test')){
    const src={schema:'mealup-food-portrait-spec-v1',recipes:[{
-     recipeId:'case1',source:{title:'Test',familyId:'PESCE',
+     recipeId:'case1',source:{title:'Test',kcal:320,familyId:'PESCE',
        compositionId:'COMP_case1',vesselId:'VESSEL_BOWL',sourceHash:'source',
        ingredients:[{position:0,name:'pesce',quantity:50,unit:'g'}],
        preparationSteps:['Cuoci pesce.'],
@@ -183,8 +185,8 @@ function main(args){
      source:{sha256:'b'.repeat(64)},limits:{notAPortraitGoldenMaster:true,sourceNotInRepo:true}};
    const r=build(src,config,style);
    assert(r.report.officeTasks===3&&r.report.externalProviderCalls===0,'SELFTEST_ROLE_ROUTING');
-   assert(r.promptPacks.packs[0].blocks.B_VESSEL_COMPOSITION_CORE.uiLayerSeparation.length===1,
-     'SELFTEST_GAUGE_SEPARATION');
+   assert(r.promptPacks.packs[0].blocks.B_VESSEL_COMPOSITION_CORE.gaugeProductionContract.length===2,
+     'SELFTEST_FROZEN_GAUGE_CONTRACT');
    src.recipes[0].production.goldenMasterId='INVENTED';
    let failed=false;try{build(src,config,style)}catch(e){failed=e.message==='UPSTREAM_IMAGE_APPROVAL_DETECTED'};
    assert(failed,'SELFTEST_UNAPPROVED_MASTER');
