@@ -88,7 +88,7 @@ def validate_task(t):
     needed = ["taskId","roleId","agentId","assignedBy","assignmentRef","goal",
               "scope","activeBriefVersion","baselineId","constitutionVersion",
               "must","invariants","frozen","doNotTouch","acceptance",
-              "writeScope","steps","risk","tags","knownUnknowns"]
+              "writeScope","steps","risk","tags","knownUnknowns","selectedSkillIds"]
     if not isinstance(t, dict) or any(k not in t for k in needed):
         raise ValueError("BLOCKED_INCOMPLETE_STRUCTURED_TASK")
     if any(not NONEMPTY(t[k]) for k in ("taskId","roleId","agentId","assignedBy","assignmentRef",
@@ -100,15 +100,28 @@ def validate_task(t):
         raise ValueError("BLOCKED_WRONG_AUTHORITY")
     if t.get("assignmentVerified") is not True:
         raise ValueError("BLOCKED_UNVERIFIED_ASSIGNMENT")
-    for key in ("must","invariants","frozen","doNotTouch","acceptance","writeScope","steps","tags","knownUnknowns"):
+    for key in ("must","invariants","frozen","doNotTouch","acceptance","writeScope","steps","tags","knownUnknowns","selectedSkillIds"):
         if not isinstance(t[key],list):
             raise ValueError("BLOCKED_BAD_"+key.upper())
     if not t["must"] or not t["acceptance"] or not t["steps"] or not t["invariants"]:
         raise ValueError("BLOCKED_MISSING_MUST_ACCEPTANCE_OR_STEPS")
     if set(t["tags"])-ALLOWED_TAGS:
         raise ValueError("BLOCKED_UNKNOWN_CONDITIONAL_TRIGGER")
+    # Chosen specialist Skills also activate their own task-specific protocols.
+    # Unknown/unreviewed Skill IDs cannot silently bypass the Constitution.
+    catalog=json.loads(Path(__file__).with_name("constitution-skill-triggers.json")
+                       .read_text(encoding="utf-8"))
+    entries={e["id"]:e for e in catalog["entries"]}
+    skill_tags=set()
+    for skill_id in t["selectedSkillIds"]:
+        entry=entries.get(skill_id)
+        if entry is None or entry["role"]!=t["roleId"]:
+            raise ValueError("BLOCKED_SKILL_TRIGGER_NOT_REVIEWED:"+str(skill_id))
+        skill_tags.update(entry["tags"])
+    if skill_tags-ALLOWED_TAGS:
+        raise ValueError("BLOCKED_INVALID_SKILL_TRIGGER")
     # Structural risk/agency triggers cannot be silently omitted by a task author.
-    auto={"delegated"}  # Every packet is addressed to a delegated office specialist.
+    auto={"delegated"} | skill_tags  # Every packet is addressed to a delegated office specialist.
     if len(t["steps"])>1:
         auto.add("long_running")
     if t["writeScope"]:
@@ -203,6 +216,7 @@ def make_packet(t, sections):
         "taskId":t["taskId"],"roleId":t["roleId"],"agentId":t["agentId"],
         "goal":t["goal"],"scope":t["scope"],"activeBriefVersion":t["activeBriefVersion"],
         "baselineId":t["baselineId"],"risk":t["risk"],
+        "selectedSkillIds":t["selectedSkillIds"],"skillTriggeredRules":t["tags"],
         "must":t["must"],"invariants":t["invariants"],"frozen":t["frozen"],
         "doNotTouch":t["doNotTouch"],"acceptance":t["acceptance"],
         "writeScope":t["writeScope"],"knownUnknowns":t["knownUnknowns"],
