@@ -1,0 +1,59 @@
+{
+  "schema": "mealup-food-portrait-pilot-attempt-v1",
+  "attemptId": "FPP-R1-IMAGEGEN-20261015-001",
+  "status": "VISUAL_CANDIDATE_TECHNICAL_FAIL_NOT_APPROVED",
+  "branch": "experiment/food-portrait-pipeline-20261015",
+  "generator": {
+    "provider": "CODEX_BUILT_IN_IMAGEGEN",
+    "mode": "PRECISE_OBJECT_EDIT_FROM_FROZEN_R2_REFERENCE",
+    "imageCountGenerated": 1,
+    "additionalSpendEur": 0,
+    "referenceSha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+  },
+  "candidate": {
+    "recipeId": "r1",
+    "title": "Carpaccio di manzo con rucola e feta",
+    "vesselId": "VESSEL_PLATE",
+    "kcal": 380,
+    "path": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-candidate-001.png",
+    "sha256": "13146e628da3aca5f0a1774051ad5f9187f7c194a79b66e939fd5245c07f6f27",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 2030093,
+    "format": "png"
+  },
+  "sourceFacts": {
+    "ingredients": ["manzo 120 g", "feta 40 g", "rucola 40 g", "olio evo 1 cucchiaio", "limone 0.5"],
+    "plating": "Carpaccio disposto a raggiera sul piatto; rucola centrale; feta sbriciolata; condimento olio, limone e pepe."
+  },
+  "technicalQa": {
+    "status": "TECHNICAL_FAIL",
+    "errors": [{"code": "IMAGE_EXCEEDS_BYTE_BUDGET", "actualBytes": 2030093, "limitBytes": 2000000, "excessBytes": 30093}],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"],
+    "automaticAcceptanceAllowed": false
+  },
+  "visualQa": {
+    "status": "VISUAL_PASS_CANDIDATE_ONLY",
+    "comparison": "docs/food-portrait-pipeline/review/pilot-r1-vs-r2.html",
+    "reviewMethod": ["ORIGINAL_PIXEL_INSPECTION", "REAL_BROWSER_COMPARISON"],
+    "checks": {
+      "singleDish": "PASS",
+      "recipeIdentity": "PASS",
+      "canonicalVesselPlate": "PASS",
+      "ingredientAndPlatingMatch": "PASS",
+      "styleMatchToFrozenR2": "PASS_CANDIDATE_ONLY",
+      "kcalTextExact": "PASS_380",
+      "needleDirectionRelativeToR2": "PASS_GREENER_THAN_490",
+      "mobileLegibility": "PASS",
+      "unexpectedTextOrUi": "PASS_NONE_DETECTED"
+    },
+    "limitations": ["VISUAL_QA_DOES_NOT_OVERRIDE_TECHNICAL_FAIL", "OWNER_APPROVAL_REQUIRED"]
+  },
+  "gates": {
+    "ownerApproved": false,
+    "frozen": false,
+    "deployAuthorized": false,
+    "batchExpansionAllowed": false,
+    "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
+  }
+}

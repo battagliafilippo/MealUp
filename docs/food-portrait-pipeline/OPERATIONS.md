@@ -320,3 +320,21 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Stato:** r2 APPROVED; Food Portrait Style v1 FROZEN; gauge mapping FROZEN; E08 BLOCKED; produzione massiva NON AUTORIZZATA.
 
 **Prossimo micro-step necessario:** preparare un secondo pilot controllato con ricetta/vessel diversi applicando il nuovo contratto, quindi confrontarlo visivamente con r2 prima di autorizzare qualsiasi lotto.
+
+
+## Second pilot checkpoint 2026-10-15 — r1 PLATE visual candidate
+
+- Generata una sola immagine per `r1`, **Carpaccio di manzo con rucola e feta**, usando direttamente come reference il source r2 FROZEN SHA `027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a`.
+- Candidate: `candidates/r1-carpaccio-plate-candidate-001.png`, SHA-256 `13146e628da3aca5f0a1774051ad5f9187f7c194a79b66e939fd5245c07f6f27`, 1254 x 1254 PNG.
+- QA visivo indipendente su pixel originali e confronto browser reale: **PASS CANDIDATE ONLY**. Verificati un solo piatto, vessel `VESSEL_PLATE`, carpaccio a raggiera, rucola centrale, feta, condimento, stile r2, testo esatto `380 kcal`, lancetta più verde rispetto ai `490 kcal` di r2, leggibilità mobile e assenza di UI/testi estranei.
+- QA tecnico: **FAIL**. Peso `2.030.093` byte contro limite `2.000.000`; eccedenza esatta `30.093` byte. Nessuna ottimizzazione applicata prima dell'approvazione visuale owner.
+- Stato: `VISUAL_CANDIDATE_TECHNICAL_FAIL_NOT_APPROVED`. Nessun auto-accept, freeze, batch, integrazione o deploy.
+
+**Issue log aggiornato:**
+
+| ID | Tipo | Stato e decisione |
+| --- | --- | --- |
+| E17 | R1_PNG_BYTE_BUDGET_EXCEEDED | **OPEN / TECHNICAL FAIL**: il candidato supera il budget di 30.093 byte. Se approvato visualmente dall'owner, il solo passo successivo consentito è un'ottimizzazione lossless/visually lossless con nuovo SHA e nuova QA comparativa. |
+| E08 | HISTORICAL_VESSEL_SHA_MISMATCH | **BLOCKED invariato**: il pilot r1 non dimostra la tavola vessel FROZEN storica. |
+
+**Prossimo micro-step necessario:** review visuale owner del candidato r1. Solo dopo approvazione esplicita, ottimizzare il file per rientrare nel budget e rieseguire QA tecnica e visiva; nessun lotto o deploy.
