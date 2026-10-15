@@ -1,6 +1,6 @@
 {
   "schema": "mealup-food-portrait-vessel-exception-resolution-v1",
-  "status": "DECIDED_NOT_GENERATED",
+  "status": "RESOLVED_CANDIDATE_GENERATED_NOT_APPROVED",
   "decisionDate": "2026-10-15",
   "recipeId": "v08",
   "title": "Succo d'arancia",
@@ -35,5 +35,11 @@
     "automaticAcceptanceAllowed": false,
     "deployAuthorized": false,
     "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
+  },
+  "followUpGeneration": {
+    "candidatePath": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-candidate-001.png",
+    "candidateSha256": "9a79f281726d09140a4f6a283e3a4d6950fab06335c2d02190da79b3ee1b24d2",
+    "vesselContractPreserved": true,
+    "ownerApproved": false
   }
 }

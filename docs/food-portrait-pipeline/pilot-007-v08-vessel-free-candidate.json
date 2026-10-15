@@ -1,0 +1,61 @@
+{
+  "schema": "mealup-food-portrait-pilot-attempt-v1",
+  "attemptId": "FPP-V08-IMAGEGEN-20261015-001",
+  "status": "VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED",
+  "branch": "experiment/food-portrait-pipeline-20261015",
+  "generator": {
+    "provider": "CODEX_BUILT_IN_IMAGEGEN",
+    "mode": "PRECISE_OBJECT_EDIT_FROM_FROZEN_REFERENCES",
+    "imageCountGenerated": 1,
+    "additionalSpendEur": 0
+  },
+  "candidate": {
+    "recipeId": "v08",
+    "title": "Succo d'arancia",
+    "vesselId": "VESSEL_FREE",
+    "kcal": 90,
+    "expectedGaugeAngleDegrees": -49.2,
+    "expectedGaugeZone": "GREEN",
+    "path": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-candidate-001.png",
+    "sha256": "9a79f281726d09140a4f6a283e3a4d6950fab06335c2d02190da79b3ee1b24d2",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1593369,
+    "format": "png"
+  },
+  "sourceFacts": {
+    "ingredient": "succo di arancia 200 ml",
+    "primaryMasterId": "BEVERAGE_JUICE_BOX",
+    "variantId": "ARANCIA",
+    "vesselResolution": "KEEP_VESSEL_FREE; RENDER PACKAGE AS SUBJECT; NO GLASS"
+  },
+  "technicalQa": {
+    "status": "TECHNICAL_PASS_VISUAL_REVIEW_REQUIRED",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"],
+    "automaticAcceptanceAllowed": false
+  },
+  "visualQa": {
+    "status": "INDEPENDENT_VISUAL_PASS_OWNER_REVIEW_REQUIRED",
+    "checks": {
+      "singleSubject": "PASS_ONE_BOTTLE",
+      "vesselFreeContract": "PASS_NO_ADDED_VESSEL",
+      "glassExcluded": "PASS",
+      "looseFruitExcluded": "PASS",
+      "brandAndLabelExcluded": "PASS",
+      "kcalTextExact": "PASS_90",
+      "needlePosition": "PASS_DEEP_GREEN_SLIGHTLY_LOWER_THAN_100",
+      "styleMatchToFrozenReferences": "PASS_CANDIDATE_ONLY",
+      "mobileLegibility": "PASS",
+      "unexpectedTextOrUi": "PASS_NONE_DETECTED"
+    },
+    "comparison": "docs/food-portrait-pipeline/review/pilot-v08-vs-frozen.html"
+  },
+  "gates": {
+    "ownerApproved": false,
+    "frozen": false,
+    "deployAuthorized": false,
+    "batchExpansionAllowed": false,
+    "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
+  }
+}

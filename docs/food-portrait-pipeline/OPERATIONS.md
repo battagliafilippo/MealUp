@@ -466,3 +466,16 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Nessuna immagine generata in questo micro-step. E08 resta `BLOCKED_HASH_MISMATCH`.
 
 **Prossimo micro-step necessario:** generare una sola candidate v08 con package/bottle `VESSEL_FREE`, `90 kcal` e lancetta verde, quindi QA e review owner prima di qualsiasi approvazione.
+
+
+## Sixth pilot checkpoint 2026-10-15 — v08 VESSEL_FREE visual candidate
+
+- Generata una sola immagine per `v08`, **Succo d'arancia**, mantenendo `VESSEL_FREE` secondo la decisione verificata.
+- Soggetto: una sola bottiglia neutra di succo; nessun bicchiere, cup, bowl, plate, frutta sciolta, label o branding.
+- Candidate: `candidates/v08-orange-juice-vessel-free-candidate-001.png`, SHA-256 `9a79f281726d09140a4f6a283e3a4d6950fab06335c2d02190da79b3ee1b24d2`, 1254 x 1254, `1.593.369` byte.
+- Mapping gauge verificata: `90 kcal` → `-49,2°`, zona verde, leggermente più bassa del riferimento s02 da 100 kcal.
+- QA tecnico: **PASS**. QA visivo indipendente: **PASS CANDIDATE ONLY**; contratto VESSEL_FREE preservato e nessun extra rilevato.
+- Stato: `VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED`. Nessun auto-accept, freeze, batch, integrazione o deploy.
+- E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dal pilot.
+
+**Prossimo micro-step necessario:** review visuale owner del candidato v08. Se approvato, conversione WebP lossless, QA ripetuta e decisione separata sull'eventuale freeze del caso VESSEL_FREE.
