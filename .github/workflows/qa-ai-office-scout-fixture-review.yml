@@ -1,0 +1,31 @@
+name: QA - Independent benchmark fixture review
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - '.github/workflows/qa-ai-office-scout-fixture-review.yml'
+permissions:
+  contents: read
+jobs:
+  fixture-review:
+    if: >-
+      ${{ github.event_name == 'push' && github.event.head_commit.message == 'ci(ai-office): preserve four benchmark fixtures for independent QA' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Checkout fixed assets only
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Preserve four exact source images for independent review
+        uses: actions/upload-artifact@v4
+        with:
+          name: mealup-scout-benchmark-4-assets
+          path: |
+            assets/family-fo/pasta.webp
+            assets/family-fo/pesce.webp
+            assets/family-fo/verdura.webp
+            assets/mealup-home-scale.webp
+          if-no-files-found: error
+          retention-days: 7
