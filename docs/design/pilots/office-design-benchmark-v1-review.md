@@ -35,3 +35,9 @@ Benchmark eseguito realmente: [GitHub Actions run 38681649610](https://github.co
 - Non attivare Gemini (403), servizi a pagamento, o nuove chiavi senza verifica/consenso.
 - Nessuna sostituzione del Design Agent né modifica ai FROZEN o app: la decisione spetta al CEO; Scout fa proposte indipendenti e Director implementa solo dopo autorizzazione.
 - Avanzamento successivo suggerito: prova zero cost su seconda API vision realmente disponibile; benchmark A/B identico con almeno uno screenshot UI reale e criteri a priori, QA indipendente.
+
+## Scouting successivo al benchmark: candidato Cloudflare Free
+- **Mistral Small 3.1 24B**: Apache 2.0 ufficiale, multimodale con vision, ospitato con ID `@cf/mistralai/mistral-small-3.1-24b-instruct` su Cloudflare Workers AI.
+- Cloudflare documenta un allotment gratuito Workers AI di 10.000 Neurons/giorno sul piano Workers Free, senza addebito oltre quota (le ulteriori richieste falliscono); il candidato non compare fra i modelli con obbligo di piano Paid nel listino corrente. Fonti: https://mistral.ai/news/mistral-small-3-1/ e https://developers.cloudflare.com/workers-ai/models/mistral-small-3.1-24b-instruct/ e https://developers.cloudflare.com/workers-ai/platform/pricing/.
+- **Stato reale:** provider e licenza verificati come offerta; **account Cloudflare dell'utente NON connesso né testato**, 0 chiamate a Mistral, nessun A/B eseguito. Non creare account/credibili o accettare piano Paid al posto del CEO.
+- **Gate successivo:** verificare accesso Workers Free e token Cloudflare senza billing, poi inviare identico input/prompt e revisionare output di Mistral contro Qwen. Attenzione: l'API per le immagini del modello specifico va provata, non assunta dal solo marketing multimodale.
