@@ -605,3 +605,14 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Nessun deploy o image generation eseguito; `do01` resta non generato.
 
 **Stato finale E08:** `CLOSED_CANONICAL_SOURCE_VERIFIED`. Il prossimo passo resta una decisione separata dell'owner su un eventuale nuovo ciclo; nessun batch è autorizzato implicitamente.
+
+### Independent v10 freeze review 2026-10-15
+
+- Riesaminato a vista l'asset approvato v10 contro il riferimento FROZEN VESSEL_FREE v08 e contro il mandato di riconoscibilità per ricetta. Hash di entrambi gli asset riconfermati.
+- Passano stile, singolo soggetto, contratto VESSEL_FREE, leggibilità `95 kcal`, zona verde e assenza di elementi estranei.
+- Blocco: v10 e v08 presentano lo stesso contenitore neutro, lo stesso liquido arancione e la stessa composizione. Escludendo il diverso numero kcal, l'identità ACE non è distinguibile dal succo d'arancia. Il limite era già dichiarato nel manifest v10 e impedisce un freeze responsabile.
+- Esito registrato in `v10-freeze-review-v1.json`: `REVISION_REQUIRED_NOT_FROZEN`.
+- Errore operativo registrato: il primo tentativo di rilanciare la QA tecnica locale non ha trovato la dipendenza build-time `sharp`; ciò non invalida la precedente QA tecnica e la CI verde sul medesimo hash, ma non viene contato come nuova prova tecnica locale.
+- Nuove immagini generate: `0`; `do01` non generato; nessun batch, integrazione o deploy; budget `0 EUR`.
+
+**Prossimo micro-step necessario:** autorizzazione separata per un solo ciclo di revisione v10 che aggiunga un segnale ACE riconoscibile senza label, brand, ingredient collage o modifica del gauge FROZEN. Fino ad allora v10 resta approvato dall'owner ma non FROZEN.

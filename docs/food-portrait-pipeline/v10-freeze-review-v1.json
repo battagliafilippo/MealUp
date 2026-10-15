@@ -1,0 +1,42 @@
+{
+  "schema": "mealup-food-portrait-freeze-review-v1",
+  "reviewedAt": "2026-10-15",
+  "recipeId": "v10",
+  "title": "Succo ACE",
+  "decision": "REVISION_REQUIRED_NOT_FROZEN",
+  "reviewAuthority": "INDEPENDENT_VISUAL_QA",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/v10-ace-juice-vessel-free-approved-001.webp",
+    "sha256": "0c0bd1f2023c34bf81963109c4856d50ff6f76b54a876fc97c68d879eb24d6ba"
+  },
+  "comparisonReference": {
+    "recipeId": "v08",
+    "title": "Succo d'arancia",
+    "path": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+    "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+  },
+  "checks": {
+    "binaryIdentityVerified": true,
+    "technicalQaEvidencePresent": true,
+    "ownerApprovalPresent": true,
+    "frozenStyleCoherent": true,
+    "vesselFreeContractPreserved": true,
+    "gaugeTextExact": true,
+    "gaugeZoneCoherent": true,
+    "singleSubject": true,
+    "recipeIdentityIndependentlyRecognizable": false
+  },
+  "blockingFinding": {
+    "code": "RECIPE_IDENTITY_NOT_DISTINGUISHABLE_FROM_V08",
+    "detail": "The v10 ACE portrait and the FROZEN v08 orange-juice portrait use the same neutral bottle, orange liquid and composition. Apart from 95 versus 90 kcal, the pixels provide no ACE-specific visual cue. This fails the mandate that each dedicated Food Portrait be recognizable."
+  },
+  "constraints": {
+    "imagesGeneratedThisReview": 0,
+    "do01Generated": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false,
+    "budgetEUR": 0
+  },
+  "nextAction": "OWNER_AUTHORIZATION_REQUIRED_FOR_ONE_V10_REVISION_CYCLE"
+}
