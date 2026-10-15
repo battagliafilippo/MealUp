@@ -1,0 +1,78 @@
+{
+  "schema": "mealup-scout-free-capacity-v1",
+  "asOf": "2026-10-15",
+  "allowedAdditionalCostEUR": 0,
+  "scope": "OFFLINE_PLANNING_ONLY_NOT_AGENT_EXECUTION",
+  "policy": "ONLY_RECURRENT_FREE_QUOTAS_AND_VERIFIED_PREEXISTING_FREE_COMPUTE",
+  "maxModelSwitchesPerTask": 3,
+  "defaultHeadroomFraction": 0.15,
+  "budgetPools": [
+    {
+      "id": "GROQ_FREE_QWEN_3_8",
+      "provider": "Groq Free",
+      "sharing": "GROQ_ORGANIZATION_MODEL_RATE_LIMITS",
+      "resetWindow": "PER_MINUTE_AND_PER_DAY",
+      "source": "https://console.groq.com/docs/rate-limits",
+      "verifiedByLiveAccess": true,
+      "accountSpecificLimitsUnverified": true,
+      "caps": {
+        "requestsPerDay": 1000,
+        "requestsPerMinute": 30,
+        "tokensPerDay": 200000,
+        "tokensPerMinute": 8000
+      }
+    },
+    {
+      "id": "CLOUDFLARE_WORKERS_AI_FREE",
+      "provider": "Cloudflare Workers AI Free",
+      "sharing": "SHARED_ALL_WORKERS_AI_MODELS_IN_ACCOUNT",
+      "resetWindow": "DAILY_00_00_UTC",
+      "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
+      "verifiedByLiveAccess": false,
+      "accountSpecificLimitsUnverified": true,
+      "caps": {
+        "neuronsPerDay": 10000
+      }
+    }
+  ],
+  "modelCosts": [
+    {
+      "id": "QWEN3_8_27B_GROQ",
+      "modelId": "qwen/qwen3.8-27b",
+      "budgetPoolId": "GROQ_FREE_QWEN_3_8",
+      "billingUnit": "GROQ_REQUEST_AND_INPUT_OUTPUT_TOKENS",
+      "visionCostMeasured": false,
+      "qualityStatus": "NOT_APPROVED",
+      "costSource": "https://console.groq.com/docs/rate-limits"
+    },
+    {
+      "id": "GEMMA4_26B_A4B_CLOUDFLARE",
+      "modelId": "@cf/google/gemma-4-26b-a4b-it",
+      "budgetPoolId": "CLOUDFLARE_WORKERS_AI_FREE",
+      "billingUnit": "NEURONS",
+      "neuronsPerMillionInput": 9091,
+      "neuronsPerMillionOutput": 27273,
+      "visionCostMeasured": false,
+      "qualityStatus": "NOT_TESTED",
+      "costSource": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
+    },
+    {
+      "id": "MISTRAL_SMALL_3_1_24B_CLOUDFLARE",
+      "modelId": "@cf/mistralai/mistral-small-3.1-24b-instruct",
+      "budgetPoolId": "CLOUDFLARE_WORKERS_AI_FREE",
+      "billingUnit": "NEURONS",
+      "neuronsPerMillionInput": 31876,
+      "neuronsPerMillionOutput": 50488,
+      "visionCostMeasured": false,
+      "qualityStatus": "NOT_TESTED",
+      "costSource": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
+    }
+  ],
+  "notes": [
+    "All Neurons estimates are TEXT_ONLY; image inference can increase usage and must be measured first.",
+    "Cloudflare Gemma and Mistral SHARE a single 10000 Neurons/day budget; they do not multiply free capacity.",
+    "Groq published limits can differ from actual organization limits and are subject to rate headers/console; no 24/7 availability promise.",
+    "Model switching does not certify QA equivalence or reset a provider-shared quota.",
+    "This file is advisory; live Director failover requires a separate approved agent pool and persistent quota ledger."
+  ]
+}
