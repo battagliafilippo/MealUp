@@ -1,0 +1,41 @@
+name: QA - MealUp Design vision benchmark baseline
+# User-authorized one-shot. Eight fixed Groq Free requests max; no paid fallbacks.
+# Lab-only, 0 additional EUR, no app/taster/main/FROZEN writes, no deploy.
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - '.github/workflows/qa-ai-office-design-benchmark.yml'
+permissions:
+  contents: read
+jobs:
+  baseline:
+    if: >-
+      ${{ github.event_name == 'push' && github.event.head_commit.message == 'ci(ai-office): one-shot design vision baseline benchmark' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Checkout immutable benchmark fixtures
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify deterministic scoring without network
+        run: node tools/ai-office/design-benchmark.cjs --self-test
+      - name: Execute guarded free vision baseline
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MEALUP_FREE_ONLY: 'YES'
+        run: node tools/ai-office/design-benchmark.cjs --live
+      - name: Preserve complete masked report for independent human QA
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: mealup-design-vision-baseline-v1
+          path: /tmp/mealup-design-benchmark-report.json
+          if-no-files-found: warn
+          retention-days: 7
