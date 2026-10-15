@@ -41,6 +41,13 @@
       "source": "docs/food-portrait-pipeline/candidates/p12-lasagne-baking-dish-approved-001.webp",
       "sha256": "e11055f04bd0424fcd495c23fa20206d13b62eb7d985a58d1ac4e028edebafe2",
       "status": "FROZEN"
+    },
+    "VESSEL_FREE": {
+      "recipeId": "v08",
+      "source": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+      "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64",
+      "status": "FROZEN",
+      "rule": "The prepared object is the subject; no serving vessel may be added."
     }
   },
   "frozenVisualInvariants": [
@@ -88,7 +95,7 @@
   "explicitlyNotFrozen": [
     "the baked 480 text and baked needle angle in the owner source; production kcal and needle are dynamic",
     "historical G5 vessel board affected by E08",
-    "individual Food Portraits other than the FROZEN r2 BOWL, r1 PLATE, s02 RAMEKIN, do08 DESSERT_MOLD and p12 BAKING_DISH references",
+    "individual Food Portraits other than the FROZEN r2 BOWL, r1 PLATE, s02 RAMEKIN, do08 DESSERT_MOLD, p12 BAKING_DISH and v08 VESSEL_FREE references",
     "batch production",
     "tester or PWA integration",
     "deployment"

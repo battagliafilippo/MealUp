@@ -479,3 +479,16 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dal pilot.
 
 **Prossimo micro-step necessario:** review visuale owner del candidato v08. Se approvato, conversione WebP lossless, QA ripetuta e decisione separata sull'eventuale freeze del caso VESSEL_FREE.
+
+
+## Owner approval + VESSEL_FREE freeze checkpoint 2026-10-15 — v08 FROZEN
+
+- Decisione owner: v08 è perfetto ed esattamente conforme alla visione desiderata.
+- Ottimizzazione lossless: PNG `1.593.369` byte → WebP `965.934` byte, con pixel decodificati identici.
+- Asset FROZEN: `candidates/v08-orange-juice-vessel-free-approved-001.webp`, SHA-256 `10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64`.
+- QA tecnico: **PASS**; `90 kcal`, angolo `-49,2°` e zona verde verificati sulla mapping FROZEN.
+- Manifest: `v08-vessel-free-frozen-v1.json`. Contratto stilistico aggiornato con `VESSEL_FREE` e regola nessun serving vessel aggiunto.
+- Stato: PLATE, BOWL, RAMEKIN, DESSERT_MOLD, BAKING_DISH e VESSEL_FREE FROZEN. Nessun batch, integrazione o deploy autorizzato.
+- E08 resta `BLOCKED_HASH_MISMATCH` e indipendente dai sei riferimenti verificati.
+
+**Prossimo micro-step necessario:** consolidare i sei pilot FROZEN in un report di copertura e valutare, con autorizzazione separata, se il campione è sufficiente per progettare il primo lotto controllato. Nessuna produzione massiva automatica.

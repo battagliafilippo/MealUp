@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-pilot-attempt-v1",
   "attemptId": "FPP-V08-IMAGEGEN-20261015-001",
-  "status": "VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED",
+  "status": "OWNER_APPROVED_TECHNICAL_PASS_FROZEN_VESSEL_FREE_REFERENCE",
   "branch": "experiment/food-portrait-pipeline-20261015",
   "generator": {
     "provider": "CODEX_BUILT_IN_IMAGEGEN",
@@ -23,6 +23,16 @@
     "bytes": 1593369,
     "format": "png"
   },
+  "approvedAsset": {
+    "path": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+    "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 965934,
+    "format": "webp",
+    "optimization": "LOSSLESS_WEBP",
+    "decodedPixelsIdenticalToApprovedCandidate": true
+  },
   "sourceFacts": {
     "ingredient": "succo di arancia 200 ml",
     "primaryMasterId": "BEVERAGE_JUICE_BOX",
@@ -33,6 +43,13 @@
     "status": "TECHNICAL_PASS_VISUAL_REVIEW_REQUIRED",
     "errors": [],
     "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"],
+    "automaticAcceptanceAllowed": false
+  },
+  "approvedAssetQa": {
+    "status": "TECHNICAL_PASS",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW_COMPLETED"],
+    "pixelComparison": "PASS_DECODED_PIXELS_IDENTICAL",
     "automaticAcceptanceAllowed": false
   },
   "visualQa": {
@@ -49,11 +66,12 @@
       "mobileLegibility": "PASS",
       "unexpectedTextOrUi": "PASS_NONE_DETECTED"
     },
-    "comparison": "docs/food-portrait-pipeline/review/pilot-v08-vs-frozen.html"
+    "comparison": "docs/food-portrait-pipeline/review/pilot-v08-vs-frozen.html",
+    "ownerDecision": "APPROVED_EXACTLY_AS_DESIRED"
   },
   "gates": {
-    "ownerApproved": false,
-    "frozen": false,
+    "ownerApproved": true,
+    "frozen": true,
     "deployAuthorized": false,
     "batchExpansionAllowed": false,
     "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
