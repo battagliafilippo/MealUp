@@ -14,6 +14,20 @@ Data: 2026-10-15. Mandato richiesto dal CEO: identificare i migliori agenti per 
 
 Non creiamo processi o servizi cloud extra senza dimostrazione della necessità. Queste sono **responsabilità di processo**, non quattro credenziali/abbonamenti/agent runtime già accesi.
 
+## Vincolo CEO — FREE RECURRING, non crediti una tantum (15 ottobre 2026)
+
+**Interpretazione vincolante del budget 0 EUR:** il componente proposto per un reparto deve poter essere RIUTILIZZATO nel tempo con spesa aggiuntiva 0 EUR, non soltanto funzionare durante un trial. Lo Scout esclude dal ruolo stabile crediti promozionali/di benvenuto, trial con scadenza, allowance che si esaurisce per sempre, API paid-only o sistemi che obbligano a inserire una carta o attivare fatturazione per continuare.
+
+**Ammessi come candidati stabili:** (a) tier gratuito ricorrente con reset esplicito verificabile (al minuto, giorno o mese) e blocco sicuro quando la quota termina; (b) modello open-weight eseguito su hardware/infrastruttura gia disponibili e realmente gratuiti, senza costi nuovi nascosti. *Open source su GitHub, da solo, non dimostra la presenza di un motore AI gratuito*. Ogni quota gratuita vale per il provider/account nel suo insieme, non e necessariamente individuale per agente.
+
+**Checklist obbligatoria per ciascun candidato:** `freeQuotaPolicy.kind` deve essere `RECURRING_FREE_QUOTA` (con `reset` e fonte ufficiale), oppure `SELF_HOSTED_PERPETUAL_VERIFIED` con prova della risorsa hardware gratuita; `ONE_TIME_CREDITS` e `UNKNOWN` NON sono idonei al ruolo stabile. Registrare: unità quota, periodo reset, accesso via API reale, licenza, no-billing, esaurimento quota -> stop e ripresa al reset, cambiamenti del piano, quota condivisa con altri agenti, dipendenza infrastrutturale, throughput sostenibile e qualita al benchmark. Non inventare reset, entitlement né durata illimitata della policy: i provider possono cambiare le condizioni e lo Scout le riverifica periodicamente.
+
+**Gate runtime futuro:** `429`/quota esaurita -> nessuna chiamata extra, nessun fallback paid, sospendere il lavoro non urgente fino al rinnovo della finestra disponibile; la continuità non significa esecuzione 24/7. Se non verificata la ricorrenza gratuita, classificare `RENEWAL_UNVERIFIED`; se e' un credito una tantum, classificare `NON_RENEWING_FREE_OFFER`. Non promuovere neppure dopo un ottimo test qualitativo.
+
+Esempi con fonti ufficiali al 15 ottobre 2026:
+- **Groq Free:** limiti `RPM/RPD/TPM/TPD` ricorrenti; Qwen 3.8 27B documentato a 30 RPM, 1.000 RPD, 8.000 TPM e 200.000 TPD nella pagina limiti Free. I limiti reali dell'account vanno verificati sul pannello; continuita soggetta alla disponibilita del provider. https://console.groq.com/docs/rate-limits
+- **Cloudflare Workers AI Free:** quota condivisa di 10.000 Neurons/giorno, rinnovo alle 00:00 UTC; oltre la quota le operazioni falliscono. Non e un bonus una tantum. Un account collegato non e ancora presente; solo una chiamata vision reale puo provarne l'accessibilità per il progetto. https://developers.cloudflare.com/workers-ai/platform/pricing/
+
 ## Pipeline anti-confusione
 
 1. `DISCOVERED`: nome, versione esatta, licenza, uso per il reparto, fonte ufficiale e rischio.
