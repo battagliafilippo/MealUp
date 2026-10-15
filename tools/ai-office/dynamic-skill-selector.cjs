@@ -25,6 +25,7 @@ function selectSkills(task,assignment,skills) {
       Array.isArray(s.roles)&&Array.isArray(s.scopes)&&
       Array.isArray(s.capabilities)&&s.capabilities.includes(capability)&&
       s.roles?.includes(task.roleId)&&s.scopes?.includes(task.scope)&&
+      ['NATIVE','INTERNAL','EXTERNAL'].includes(s.kind)&&
       s.approved===true&&s.qaVerified===true&&s.securityReviewed===true&&
       nonblank(s.approvalRef)&&nonblank(s.version)&&
       quotaKinds.includes(s.quotaKind)&&s.extraCostEUR===0&&
