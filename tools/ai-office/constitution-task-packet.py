@@ -118,6 +118,8 @@ def validate_task(t):
             raise ValueError("BLOCKED_UNTRACED_DEPENDENCIES")
         if any(x not in ids for x in s["dependsOn"]):
             raise ValueError("BLOCKED_DEPENDENCY_NOT_PREVIOUS_STEP")
+        if s["status"]=="VERIFIED" and not NONEMPTY(s.get("evidenceRef")):
+            raise ValueError("BLOCKED_VERIFIED_STEP_WITHOUT_EVIDENCE")
         ids.append(s["id"])
     if len(set(ids))!=len(ids):
         raise ValueError("BLOCKED_DUPLICATE_STEP_ID")
@@ -141,6 +143,41 @@ def activate(t, sections):
     critical.update(TRIGGERS.get("long_running",()) if "long_running" in t["tags"] else [])
     selected = [r for r in ordered if r in critical or r not in set(BASE)]
     return ordered, selected
+
+def verify_plan_continuity(previous, current, task):
+    """Fail closed if a revised plan drops a requirement or an open task."""
+    if previous is None:
+        return {"status":"NEW_PLAN_NO_PREDECESSOR", "mappedPreviousSteps":0}
+    if previous.get("schema")!="MEALUP_CONSTITUTION_TASK_PACKET_V1" or (
+        previous.get("canonicalSha256")!=CANONICAL_SHA256 or
+        previous.get("taskId")!=current["taskId"]):
+        raise ValueError("BLOCKED_PREVIOUS_PLAN_WRONG_VERSION_OR_TASK")
+    for field in ("must","invariants","frozen","doNotTouch","acceptance","knownUnknowns"):
+        before=previous.get(field,[])
+        if not isinstance(before,list) or any(x not in current[field] for x in before):
+            raise ValueError("BLOCKED_LOST_APPROVED_CONSTRAINT:"+field)
+    if previous.get("goal")!=current["goal"] or (
+        previous.get("activeBriefVersion")!=current["activeBriefVersion"] or
+        previous.get("baselineId")!=current["baselineId"]):
+        if task.get("changeReconciled") is not True:
+            raise ValueError("BLOCKED_CHANGED_BRIEF_NEEDS_REASSESS")
+    current_steps={x["id"]:x for x in current["steps"]}
+    corrections=task.get("stepReconciliation",[])
+    for old in previous.get("steps",[]):
+        if old["id"] not in current_steps:
+            linked=[r for r in corrections if r.get("oldStepId")==old["id"]]
+            if len(linked)!=1 or not NONEMPTY(linked[0].get("reason")) or (
+                linked[0].get("newStepId") not in current_steps):
+                raise ValueError("BLOCKED_UNMAPPED_PREVIOUS_STEP:"+old["id"])
+        elif old["status"]=="VERIFIED" and current_steps[old["id"]]["status"]!="VERIFIED":
+            if task.get("changeReconciled") is not True:
+                raise ValueError("BLOCKED_SILENT_LOSS_OF_VERIFIED_WORK")
+    for fld in ("evidence","decisionLog","errorsAndPrevention","inFlightOperations"):
+        old_items=previous.get("recovery",{}).get(fld,[])
+        now_items=current["recovery"][fld]
+        if any(item not in now_items for item in old_items):
+            raise ValueError("BLOCKED_LOST_RECOVERY_EVIDENCE:"+fld)
+    return {"status":"CONTINUITY_VERIFIED", "mappedPreviousSteps":len(previous["steps"])}
 
 def make_packet(t, sections):
     t=validate_task(t)
@@ -186,6 +223,7 @@ def main():
     ap.add_argument("--canonical-docx",required=True)
     ap.add_argument("--task-json",required=True)
     ap.add_argument("--out",required=True)
+    ap.add_argument("--previous-packet",required=False)
     args=ap.parse_args()
     # Output remains in local temp/private workspace, never in public repo.
     out=Path(args.out).resolve()
@@ -194,6 +232,9 @@ def main():
     sections=docx_sections(args.canonical_docx)
     t=json.loads(Path(args.task_json).read_text(encoding="utf-8"))
     packet=make_packet(t,sections)
+    previous=(json.loads(Path(args.previous_packet).read_text(encoding="utf-8"))
+              if args.previous_packet else None)
+    packet["continuity"]=verify_plan_continuity(previous,packet,t)
     out.parent.mkdir(parents=True,exist_ok=True)
     out.write_text(json.dumps(packet,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(json.dumps({"status":packet["status"],
