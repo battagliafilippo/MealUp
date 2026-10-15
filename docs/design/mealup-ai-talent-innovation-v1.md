@@ -35,3 +35,9 @@ Approvazione del CEO: 2026-10-14. Questo e' il contratto CANONICO del nuovo repa
 - ATTIVO COME AUTOMAZIONE CHATGPT: monitoraggio pianificato e notifiche condizionali, senza agente eseguibile dentro il repository.
 - IMPLEMENTATO NEL LABORATORIO: registro delle connessioni dell'ufficio con Qwen/Groq come adapter Design protetto, pipeline Food/Groq e QA deterministico; nessun provider viene invocato automaticamente dal registro.
 - NON IMPLEMENTATO: API Gemini accessibile, benchmark A/B automatico su casi reali, sostituzione autonoma di modelli o orchestrazione in background.
+
+## Implementazione delle responsabilita Scout — 2026-10-15
+- Organizzazione e gate operativi dettagliati: [protocollo Scout](mealup-ai-scout-operating-protocol-v1.md). La gerarchia approvata (Scout direttamente al CEO; Director solo dopo consenso) non cambia.
+- Registro candidature, fonti e accesso API effettivamente verificato: `tools/ai-office/scout-candidate-register.json`.
+- Benchmark preliminare: `tools/ai-office/design-benchmark.cjs` + workflow `.github/workflows/qa-ai-office-design-benchmark.yml`. Include test intramodello `none` vs `medium` su quattro asset del repository con QA strutturale; **NON** e un A/B fra modelli diversi e non certifica conformita visiva ai FROZEN.
+- Status delle mansioni: Talent Scout Lead via automazione ChatGPT settimanale, Researcher e Auditor come verifiche della stessa iterazione, Engineer e QA mediante procedure GitHub e revisione umana. **Non esistono cinque nuovi agenti autonomi con provider distinti**. Il budget resta zero.
