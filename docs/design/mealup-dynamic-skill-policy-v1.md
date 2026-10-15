@@ -16,10 +16,16 @@ Se la Skill è già approvata, lo specialista può usarla. Se manca, lo speciali
 
 Tutte le attività mantengono budget aggiuntivo zero, quote ricorrenti o diritti d'uso già inclusi, obbligo di QA e rispetto delle licenze. Il failover usa soltanto altri modelli approvati e provider con quote indipendenti, riprendendo a checkpoint; altrimenti il lavoro attende il rinnovo.
 
-## Stato reale della realizzazione
+## Stato tecnico verificato al 15 ottobre 2026
 
-Il controllo `tools/ai-office/dynamic-skill-selector.cjs` produce esclusivamente un piano offline per un incarico. Verifica i campi dichiarati per ruolo, scope, autorizzazione di assegnazione, QA, costo e compatibilità, ma non verifica da solo la validità esterna delle prove. Non installa o esegue Skill, non collega modelli, non attiva sottagenti, non effettua chiamate API e non cambia la PWA.
+Il selettore `tools/ai-office/dynamic-skill-selector.cjs` sceglie le Skill pertinenti con controlli su ruolo, incarico, perimetro, costo, autorizzazione, QA e sicurezza. **Da solo pianifica e non esegue**.
 
-Il precedente mandato `tools/ai-office/scout-skill-mandate.cjs` resta un controllo di assunzione sulle competenze minime. La sua interpretazione come elenco chiuso degli strumenti usabili è **SUPERSEDED** da questo nuovo modello. Per l'attuazione autonoma reale serviranno un catalogo verificato, un runtime compatibile, un registro delle quote, checkpoint e audit end-to-end. Non considerare i test offline una prova che gli agenti stiano già lavorando in autonomia.
+Un primo esecutore reale, `tools/ai-office/live-office-lab-pilot.cjs`, collega Director -> ENGINEERING -> QA: seleziona due Skill interne approvate per il laboratorio, esegue effettivamente l'audit del codice e la suite di regressione in GitHub Actions read-only, salva le prove. Questa pipeline e' stata eseguita con successo; run 38698886910. Il workflow `qa-ai-office-operational-on-change.yml` ripete automaticamente i controlli a ogni modifica pertinente del branch di laboratorio (run 38699764670: 28 moduli esaminati, 130 test superati).
 
-Valido per tutti gli otto reparti (Design, Engineering, Food, Visual Production, Prompt Architect, QA, Director, Scout), per backup e per eventuali sottagenti. Branch di laboratorio soltanto; main, tester, PWA e documenti FROZEN invariati.
+Un secondo pilota, `tools/ai-office/live-model-skill-pilot.cjs`, ha chiamato una volta il candidato Qwen 3.8 via Groq Free usando **due Skill specialistiche del ruolo Design caricate realmente dal repository**. Run 38699460011: una chiamata, output ricevuto, controlli automatici senza blocchi e revisione visiva umana ancora obbligatoria. Qwen NON risulta assunto ne' approvato per il Design. Nessuna API a pagamento, token nuovo, deploy o modifica PWA.
+
+**Non ancora operativo:** una squadra di otto agenti AI autonomi, la scelta autonoma da parte di tutti i modelli, un catalogo di Skill completo, un Director LLM persistente, recupero/salvataggio dei checkpoint, monitoraggio reale delle quote e rotazione tra provider. Due Skill Engineering/QA sono script interni eseguiti da CI, non AI agenti; la prova con Qwen e' un candidato isolato.
+
+Il vecchio `scout-skill-mandate.cjs` resta valido solo per il controllo delle competenze minime in ingresso. La sua interpretazione come elenco chiuso di strumenti e' **SUPERSEDED** dal mandato dinamico. Per reclutamenti e cambi di privilegi serve ancora approvazione del CEO.
+
+La politica vale per tutti gli otto reparti e ogni sottagente o backup. `main`, tester, PWA, ricette, Food Objects, vessel_id e documenti FROZEN non sono modificati.
