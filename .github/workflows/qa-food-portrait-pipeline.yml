@@ -46,10 +46,32 @@ jobs:
           assert.deepEqual(r.errors, []);
           console.log('PASS: 454 source records validated. Images not assessed or approved.');
           NODE
+      - name: Test vessel fail-closed safeguards
+        run: node tools/food-portrait-pipeline/vessel-asset-audit.cjs --self-test
+      - name: Verify historical FROZEN vessel image binaries
+        run: node tools/food-portrait-pipeline/vessel-asset-audit.cjs --out /tmp/mealup-food-portrait-vessels.json
+      - name: Assert exact vessel coverage and no image admission
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');
+          const assert=require('node:assert/strict');
+          const a=JSON.parse(fs.readFileSync('/tmp/mealup-food-portrait-vessels.json','utf8'));
+          assert.equal(a.status,'PASS_BINARY_INTEGRITY_ONLY');
+          assert.equal(a.geometryVessels,8);
+          assert.equal(a.loadedBinaryFileCount,25);
+          assert.equal(a.recipesWithNoVessel,14);
+          assert.equal(a.imageSemanticsVerified,false);
+          assert.equal(a.portraitQAApproved,false);
+          assert.equal(a.automaticApprovalEnabled,false);
+          assert.deepEqual(a.errors,[]);
+          console.log('PASS FROZEN vessel binaries: 25 checked; 8 geometries, 14 VESSEL_FREE.');
+          NODE
       - name: Save audit evidence (no deploy)
         uses: actions/upload-artifact@v4
         with:
           name: food-portrait-contract-baseline
-          path: /tmp/mealup-food-portrait-contract.json
+          path: |
+            /tmp/mealup-food-portrait-contract.json
+            /tmp/mealup-food-portrait-vessels.json
           if-no-files-found: error
           retention-days: 30
