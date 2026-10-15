@@ -1,6 +1,6 @@
 # MealUp AI Office / Idea Validator — contratto operativo v1.3 (ORCHESTRAZIONE LEGGERA E ROUTING SELETTIVO APPROVATI)
 
-Approvazione utente: 2026-10-14. Confermati organigramma, Director propositivo e gestione bidirezionale (v1.2); approvata ora l'architettura leggera MealUp ispirata ai principi open source di Munder Difflin e la regola **UN REPARTO PRINCIPALE, ALTRI SOLO PER DIPENDENZE DIMOSTRATE**. **La v1.3 e' l'unica revisione ACTIVE di questo contratto e sostituisce la v1.2 (SUPERSEDED) nello stesso percorso canonico; v1.0-v1.2 rimangono nello storico Git.** Stato: **ARCHITETTURA, GERARCHIA E PROCEDURE APPROVATE; AGENTI AUTONOMI / ORCHESTRAZIONE AUTOMATICA NON IMPLEMENTATI**.
+Approvazione utente: 2026-10-14. Confermati organigramma, Director propositivo e gestione bidirezionale (v1.2); approvata ora l'architettura leggera MealUp ispirata ai principi open source di Munder Difflin e la regola **UN REPARTO PRINCIPALE, ALTRI SOLO PER DIPENDENZE DIMOSTRATE**. **La v1.3 e' l'unica revisione ACTIVE di questo contratto e sostituisce la v1.2 (SUPERSEDED) nello stesso percorso canonico; v1.0-v1.2 rimangono nello storico Git.** Stato: **ARCHITETTURA, GERARCHIA E PROCEDURE APPROVATE; ROUTER, REGISTRO CONNESSIONI E HANDOFF CONTROLLATO IMPLEMENTATI NEL LABORATORIO; AGENTI AUTONOMI / ORCHESTRAZIONE AUTOMATICA NON IMPLEMENTATI**.
 Questo documento formalizza la proposta, non e' un nuovo freeze visuale, non modifica la Costituzione Operativa AI v1.9, MealUp Master o i FROZEN esistenti e non autorizza deploy.
 Collocazione: agente trasversale di PROGETTO, fuori dalla PWA pubblica. Nessuna icona, schermata o processo persistente dentro MealUp viene introdotto con questo step.
 
@@ -60,7 +60,22 @@ Collocazione: agente trasversale di PROGETTO, fuori dalla PWA pubblica. Nessuna 
 - B: «Aggiungi un pop-out animato» => OWNER Design per UX; **solo quando** Design rileva vincoli di performance/gesture, Director apre subtask circoscritto a Engineering; QA testa solo gli aspetti pertinenti dopo un'implementazione autorizzata.
 - C: «Rappresenta correttamente una nuova ricetta nel Food Portrait» => OWNER Food per correttezza culinaria; se emerge necessita' di asset, Director consulta Design per le regole visive e attiva Visual Production SOLO dopo brief, autorizzazioni e disponibilita' reale di risorse gratuite.
 
-**Stato tecnico reale:** questo e' il CONTRATTO v1.3, NON un sistema multi-agente gia' installato. Per la prima prova futura si preferisce un routing di prova senza eseguire scritture, con tre casi A/B/C, confronto del routing atteso/ottenuto, costo 0 e report QA. Test, implementazione e background automation richiedono micro-step autorizzati distinti; priorita' pipeline Recipe Visual immutata.
+**Stato tecnico reale:** il contratto v1.3 dispone ora nel laboratorio di router selettivo, registro canonico delle connessioni e generatore di handoff Director -> OWNER -> QA -> Director. I test coprono i casi A/B/C, version lock, deduplica, injection, limite hop e blocco delle azioni. Questo livello prepara incarichi e identifica l'adapter corretto, ma non invoca autonomamente provider, non modifica file/app, non approva risultati e non costituisce un sistema multi-agente in background. Costo delle prove: 0 EUR aggiuntivi; priorita' pipeline Recipe Visual immutata.
+
+### Connessioni operative del laboratorio — 2026-10-15
+
+| Ruolo | Adapter registrato | Stato reale | Gate |
+|---|---|---|---|
+| AI Office Director | ChatGPT/Codex interattivo | Sessione interattiva, non processo repository autonomo | richiesta CEO |
+| Design Director | Qwen 3.8 27B Vision su Groq | connesso e verificato con un probe visivo; non certificato migliore tramite A/B | opt-in LIVE Free + QA |
+| Engineering Lead | ChatGPT/Codex interattivo | disponibile in sessione; scrittura solo nello scope autorizzato | CEO + branch laboratorio + test |
+| Food Specialist | Recipe Analyzer + Visual Director + Groq | connesso sotto contratto vessel e QA bloccante | opt-in LIVE Free + QA |
+| Visual Production | ImageGen ChatGPT o Runway manuale | solo manuale; nessun batch o pubblicazione automatica | approvazione asset + verifica quota |
+| Prompt Architect | protocollo strutturato del Director | connesso come passaggio condizionale, non obbligatorio | dipendenza dimostrata |
+| QA / Verification Gate | GitHub Actions + test deterministici | connesso e indipendente | evidenze reali prima del verdetto |
+| AI Talent & Innovation | automazione ChatGPT esterna al repository | scouting separato; nessuna sostituzione automatica | decisione CEO |
+
+Il file eseguibile `tools/ai-office/agent-registry.cjs` e' la mappa runtime canonica; `tools/ai-office/office-orchestrator.cjs` prepara il percorso e gli envelope senza eseguirli. `CONNECTED` significa adapter mappato e provato entro i limiti dichiarati, non autorizzazione autonoma.
 
 ### Budget e limite delle capacità
 - **Budget autorizzato per default = 0 € aggiuntivi**, inclusi abbonamenti, chiamate API, crediti extra, piattaforme e plugin a pagamento; spese vietate salvo autorizzazione specifica e distinta.
@@ -78,7 +93,7 @@ Processo: (1) leggere scelta ACTIVE esistente; (2) mostrare OLD -> NEW e ciò ch
 **ACTIVE descrive la decisione vigente, NON una funzionalità già implementata.** Non confondere approvazione di design con test, rilascio o freeze di codice. Le norme di Costituzione v1.9 / MealUp Master / FROZEN non si modificano implicitamente: serve il loro processo specifico e l'approvazione dell'utente. Se la sincronizzazione delle fonti non è verificabile, fermarsi e dichiarare il blocco.
 
 ### Livello di implementazione reale
-Questa sezione approva struttura organizzativa, mandato propositivo e contratto di instradamento. AI Office Director, Prompt Architect, Design Director, Engineering Lead, Food Specialist, Visual Production e QA NON sono per questo processi AI autonomi operativi. Recipe Analyzer, Visual Director (builder), adapter Groq e test GitHub gia' presenti sono moduli reali e distinti dai ruoli aziendali. L'orchestrazione automatica, gli eventuali trigger, i test end-to-end e i permessi sono micro-step futuri e separati, subordinati alla roadmap ricette. Nel frattempo l'assistente PUO' applicare manualmente la procedura durante richieste autorizzate, senza affermare di avere avviato agenti indipendenti.
+Questa sezione approva struttura organizzativa, mandato propositivo e contratto di instradamento. Router, registro delle connessioni, piani di routing e handoff protetti sono moduli reali e testabili nel laboratorio. Recipe Analyzer, Visual Director, adapter Groq e test GitHub restano i componenti esecutivi gia' verificati nei rispettivi perimetri. AI Office Director, Prompt Architect, Design Director, Engineering Lead, Food Specialist, Visual Production e QA NON diventano per questo processi AI autonomi: l'orchestratore non esegue provider, scritture, deploy o spese. Ogni attivazione reale resta una sessione autorizzata con gate specifico; background automation e permessi esecutivi non sono introdotti.
 
 ## 1. Mandato e obiettivo
 A ogni proposta di nuova funzione, microanimazione, interazione, modifica di design, flusso utente o refactoring significativo per MealUp, valutare PRIMA dell'implementazione:
@@ -139,8 +154,8 @@ Proposta preferenziale da provare: usare un unico asset food gia' disponibile, l
 Questo NON approva l'animazione o le relative modifiche, e non dimostra ancora fattibilita' runtime.
 
 ## 9. Confinamento, roadmap e criterio di implementazione
-- Approvati per ora mandato, organigramma, routing selettivo e architettura concettuale leggera (v1.3); NON autorizzato ancora il runtime automatico.
+- Approvati mandato, organigramma, routing selettivo e architettura leggera (v1.3); implementata nel laboratorio la fondazione non esecutiva router + registro + handoff. NON autorizzato il runtime automatico.
 - Priorita' implementativa: successiva o in micro-step separato rispetto alla pipeline di immagini complete MealUp Toys 3D; non interrompere Recipe Analyzer, Visual Director, provider, QA immagini.
 - Fino alla realizzazione e verifica di un orchestration trigger vero, AI Office Director / Idea Validator e' una **procedura applicata dall'assistente durante sessioni e attivita' autorizzate**, inclusa la proposta di miglioramenti motivati; NON un servizio automatico attivo 24/7.
-- Implementazione futura dopo autorizzazione esplicita: recupero canonico, matrice impatti, contratto di output, test su almeno tre tipologie di idee (fattibile, alternativa, incompatibile FROZEN), assenza di modifiche non autorizzate.
+- Implementazione futura dopo autorizzazione esplicita: esecuzione reale di ciascun adapter con input/output verificabili, recupero canonico, matrice impatti e test end-to-end su almeno tre tipologie di idee; nessuna modifica non autorizzata.
 - Nessun nuovo tester ufficiale. Laboratorio su `experiment/recipe-visual-agents` finche' coerente con la governance; `main` intatto; nessun deploy senza approvazione.
