@@ -76,3 +76,60 @@ jobs:
             /tmp/mealup-food-portrait-vessels.json
           if-no-files-found: warn
           retention-days: 30
+
+  preproduction-specs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install existing M2 test harness only (not PWA runtime)
+        run: npm install --no-save --no-package-lock jsdom
+      - name: Test contracts with negative cases, including future recipe
+        run: |
+          node --check tools/food-portrait-pipeline/portrait-contract.cjs
+          node tools/food-portrait-pipeline/portrait-contract.cjs --self-test
+      - name: Generate real M2 specs from 454 app recipes
+        run: node tools/recipe-visuals/recipe-analyzer.cjs --out /tmp/mealup-m2-for-portrait
+      - name: Generate M3 briefs from preserved vessel matrix
+        run: |
+          node tools/recipe-visuals/visual-director.cjs --input /tmp/mealup-m2-for-portrait/recipe-specs.v1.json --composition G8/composition-matrix.json --out /tmp/mealup-m3-for-portrait
+      - name: Compile 454 source-traced production specifications and queue
+        run: |
+          node tools/food-portrait-pipeline/portrait-contract.cjs --input /tmp/mealup-m3-for-portrait/visual-briefs.v1.json --out /tmp/mealup-portrait-staging
+      - name: Assert no fake image approval and exact source parity
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');
+          const assert=require('node:assert/strict');
+          const dir='/tmp/mealup-portrait-staging/';
+          const specs=JSON.parse(fs.readFileSync(dir+'portrait-specifications.v1.json','utf8'));
+          const queue=JSON.parse(fs.readFileSync(dir+'production-queue.v1.json','utf8'));
+          const coverage=JSON.parse(fs.readFileSync(dir+'coverage-report.v1.json','utf8'));
+          assert.equal(specs.total,454);
+          assert.equal(queue.total,454);
+          assert.equal(coverage.referenceBlocked,454);
+          assert.equal(coverage.readyToGenerate,0);
+          assert.equal(coverage.imagesAccepted,0);
+          assert.equal(new Set(specs.recipes.map(s=>s.recipeId)).size,454);
+          assert.deepEqual(specs.recipes.map(s=>s.recipeId),queue.tasks.map(t=>t.recipeId));
+          for (const s of specs.recipes) {
+            assert.equal(s.acceptanceState,'BLOCKED_REFERENCE');
+            assert.equal(s.production.QAStatus,'NOT_REVIEWED');
+            assert.equal(s.production.imageSource,null);
+            assert.equal(s.production.autoApprovalAllowed,false);
+            assert.equal(s.production.vesselRequired,s.production.vesselId!=='VESSEL_FREE');
+          }
+          console.log('PASS 454 MealUp portrait specifications: no placeholders mistaken for completed images');
+          NODE
+      - name: Store preproduction evidence (no deploy)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: food-portrait-preproduction-454
+          path: |
+            /tmp/mealup-portrait-staging/
+          if-no-files-found: warn
+          retention-days: 14
