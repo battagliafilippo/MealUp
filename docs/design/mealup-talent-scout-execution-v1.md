@@ -119,3 +119,12 @@ Lo Scout deve svolgere prima tutta la ricerca, benchmark offline, preparazione d
 ## Invarianti
 
 Budget aggiuntivo 0 EUR, tester ufficiale unico, `main` immutato, nessun deploy o asset change, 454 ricette, Food Portrait vessel_id, 14 famiglie FO e tutti i freeze canonici intatti. Non creare agenti attivi, nuove spese, token o servizi senza consenso esplicito del CEO.
+
+## Contratto di reclutamento: due set di Skill, universale per tutti i reparti
+
+**Fase Scout — Skill per scegliere.** L'osservatorio carica soltanto le proprie 5 Skill di ricerca e selezione pertinenti al compito: Talent Scout, quota/capacità ricorrente, supply-chain/sicurezza, benchmark, sintesi per il CEO. Il semplice caricamento delle Skill non rende migliore un modello e non sostituisce i test.
+
+**Fase specialista — Skill per lavorare.** Ciascuno degli 8 reparti (Design, Engineering, Food, Visual Production, Prompt Architect, QA, Director, Scout stesso) ha **3 competenze operative richieste** definite in `tools/ai-office/scout-role-matrix.json`. Per ogni candidato lo Scout deve identificare come sono realizzate: (a) capacità nativa dell'agente verificata da test, oppure (b) Skill `SKILL.md` o strumento di terzi **dopo** audit di provenienza, licenza, sicurezza e compatibilità. La lista è un requisito funzionale, non una dichiarazione che le 24 Skill operative siano state già implementate/installate. Un candidato con più Skill ma meno qualità non deve vincere.
+
+**Sequenza vincolante:** analisi del ruolo → ricerca modelli **e** Skill effettive per ruolo → esclusione costi non ricorrenti/rischi → prove pratiche incluse Skill → revisione QA indipendente → indicazione al CEO con evidenza e confronto → approvazione CEO → Director prepara un eventuale inserimento controllato. Candidato di backup/failover: stesse condizioni e stessa competenza del ruolo, oltre a quota indipendente. Il controllo offline `evaluateCandidateSkillFit` respinge ogni candidato senza evidenze complete, ma un esito che supera la verifica **strutturale** non vale come certificazione delle prove dichiarate né autorizza un'assunzione automatica.
+
