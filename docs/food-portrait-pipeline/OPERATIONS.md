@@ -267,3 +267,30 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 | E08 | HISTORICAL_VESSEL_SHA_MISMATCH | **BLOCKED invariato**: la nuova source owner non dimostra la tavola vessel FROZEN storica. |
 
 **Prossimo micro-step necessario:** ottenere una decisione owner sul valore kcal autorevole. Fino ad allora la source è `VISUAL_SOURCE_EXACT`, ma non asset approvato/FROZEN e non deployabile.
+
+
+## Owner decision checkpoint 2026-10-15 — visual approvato, kcal dalla card
+
+- L'owner dichiara perfetta la composizione basata sulla source `IMG_1277.png`.
+- Il valore kcal autorevole è quello già calcolato nella card ricetta: per r2 `490 kcal` da `index.html`.
+- Per preservare la source visiva approvata, i byte `027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a` restano invariati. La review copre soltanto il testo kcal incorporato con un layer UI dinamico `490 kcal` ancorato al quadrante.
+- La decisione risolve il conflitto E16 a livello review; richiede comunque QA visuale sul posizionamento. Non equivale a freeze o autorizzazione deploy.
+
+**Issue log aggiornato:**
+
+| ID | Tipo | Stato e decisione |
+| --- | --- | --- |
+| E16 | OWNER_IMAGE_480_VS_RECIPE_490_KCAL | **RESOLVED IN REVIEW**: source invariata, valore visibile 490 letto dalla card tramite layer dinamico. |
+| E15 | RECONSTRUCTED_REVIEW_NOT_IDENTICAL | **CLOSED**: bowl e gauge non vengono più ricostruiti; si usa la source owner diretta. |
+| E08 | HISTORICAL_VESSEL_SHA_MISMATCH | **BLOCKED invariato**: l'approvazione visuale r2 non dimostra la tavola vessel FROZEN storica. |
+
+**Prossimo micro-step:** QA visuale del solo overlay 490 sul gauge. Senza successiva autorizzazione esplicita non eseguire freeze, integrazione, batch o deploy.
+
+### Esito QA overlay kcal
+
+- Browser QA reale: **PASS**. `490 kcal` copre il precedente 480 ed è centrato nel quadrante.
+- Lancetta, perno, arco colorato, bowl e cibo restano visivamente invariati.
+- Etichetta accessibile verificata: `490 chilocalorie dalla card ricetta`.
+- Stato r2: `OWNER_VISUAL_APPROVED_DYNAMIC_KCAL_REVIEW_NOT_FROZEN`.
+
+**Prossimo micro-step necessario:** nessuna decisione visuale o kcal rimasta per la review r2. Attendere un'autorizzazione separata prima di freeze, integrazione, estensione del batch o deploy; E08 resta bloccato.

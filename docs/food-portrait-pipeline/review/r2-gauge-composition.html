@@ -11,8 +11,11 @@
     .review{width:min(100%,430px)}
     .label{margin:0 0 10px 4px;font-size:12px;font-weight:800;letter-spacing:.12em;color:#a24f24;text-transform:uppercase}
     .card{overflow:hidden;border-radius:38px;background:#fff9ef;box-shadow:0 28px 80px #5f38242b,0 2px 0 #fff inset;border:1px solid #fff4e6}
-    .portrait-crop{width:100%;aspect-ratio:1/1;overflow:hidden;background:#fff8eb}
+    .portrait-crop{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#fff8eb}
     .portrait{display:block;width:100%;height:100%;object-fit:cover;object-position:center center}
+    .kcal-overlay{position:absolute;left:74.8%;top:29.1%;transform:translate(-50%,-50%);width:15.8%;height:13%;display:grid;place-content:center;border-radius:48%;background:radial-gradient(circle at 50% 38%,#ffe2c1 0 56%,#f5cda8 86%,#eebf97 100%);color:#302b29;text-align:center;line-height:.82;filter:drop-shadow(0 1px 1px #fff5);pointer-events:none}
+    .kcal-value{display:block;font-size:clamp(18px,6.2vw,29px);font-weight:950;letter-spacing:-.07em}
+    .kcal-unit{display:block;margin-top:5px;font-size:clamp(10px,3.2vw,15px);font-weight:900;letter-spacing:-.04em}
     .copy{padding:22px 24px 26px}
     h1{font-size:25px;line-height:1.08;margin:0 0 8px;letter-spacing:-.035em}
     .meta{margin:0;color:#715f55;font-size:14px}
@@ -23,19 +26,22 @@
   </style>
 </head>
 <body>
-  <main class="review" aria-label="Composizione owner identica non approvata">
-    <p class="label">Review corretta · source owner identica</p>
+  <main class="review" aria-label="Composizione owner approvata visivamente, non congelata">
+    <p class="label">Visual approvata · non FROZEN</p>
     <article class="card">
       <div class="portrait-crop">
-        <img class="portrait" src="../candidates/r2-owner-exact-source-003.png" alt="Food Portrait owner della poke bowl con gauge incorporato da 480 chilocalorie">
+        <img class="portrait" src="../candidates/r2-owner-exact-source-003.png" alt="Food Portrait owner della poke bowl con gauge">
+        <div class="kcal-overlay" role="img" aria-label="490 chilocalorie dalla card ricetta">
+          <span class="kcal-value">490</span><span class="kcal-unit">kcal</span>
+        </div>
       </div>
       <div class="copy">
         <h1>Poke bowl tonno e avocado</h1>
         <p class="meta">Source visiva owner · crop centrale non distruttivo</p>
         <div class="status" aria-label="Stato revisione">
-          <span class="pill">Visual identica</span><span class="pill">Non approvata per i dati</span>
+          <span class="pill">Visual approvata</span><span class="pill">490 kcal dalla card</span>
         </div>
-        <p class="warning"><strong>Gate dati aperto:</strong> l’immagine mostra 480 kcal; la ricetta r2 attuale dichiara 490 kcal. Nessun valore è stato modificato.</p>
+        <p class="warning"><strong>Regola dati:</strong> il Food Portrait resta la source owner; il valore visibile è un layer dinamico e proviene dalla card ricetta r2.</p>
       </div>
     </article>
   </main>

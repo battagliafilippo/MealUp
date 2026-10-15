@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-owner-exact-review-v1",
   "reviewId": "FPP-R2-OWNER-EXACT-20261015-001",
-  "status": "VISUAL_SOURCE_EXACT_DATA_GATE_BLOCKED_NOT_APPROVED",
+  "status": "OWNER_VISUAL_APPROVED_DYNAMIC_KCAL_REVIEW_NOT_FROZEN",
   "source": {
     "userFileName": "IMG_1277.png",
     "repositoryCopy": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
@@ -22,11 +22,22 @@
     "visualIdentityPolicy": "USE_OWNER_SOURCE_DIRECTLY"
   },
   "recipeComparison": {
-    "imageGaugeKcal": 480,
+    "imageGaugeKcalUnderlay": 480,
     "catalogRecipeKcal": 490,
     "catalogSource": "index.html recipe r2",
-    "status": "BLOCKED_DATA_CONFLICT",
-    "automaticCorrectionAllowed": false
+    "status": "RESOLVED_BY_DYNAMIC_CARD_VALUE_OVERLAY",
+    "sourcePixelsModified": false,
+    "visibleKcal": 490
+  },
+  "overlayVisualQa": {
+    "surface": "Codex in-app browser",
+    "status": "PASS",
+    "old480Covered": true,
+    "visible490CenteredInDial": true,
+    "needlePreserved": true,
+    "coloredArcPreserved": true,
+    "bowlAndFoodPreserved": true,
+    "accessibleLabel": "490 chilocalorie dalla card ricetta"
   },
   "supersedes": {
     "portrait": "docs/food-portrait-pipeline/candidates/r2-poke-visual-candidate-002.png",
@@ -35,12 +46,13 @@
   },
   "gates": {
     "visualSourceExact": true,
-    "dataConsistent": false,
+    "dataConsistent": true,
+    "ownerVisualApproved": true,
     "ownerApprovedAsFinalAsset": false,
     "frozen": false,
     "deployAuthorized": false,
     "batchExpansionAllowed": false,
     "historicalVesselBoardGate": "BLOCKED_HASH_MISMATCH_E08"
   },
-  "nextDecisionRequired": "Choose the authoritative kcal value: preserve 480 exactly as shown in the owner image, or authorize a controlled 490-kcal derivative that cannot remain byte-identical to the source."
+  "nextDecisionRequired": "No visual or kcal decision remains for r2 review. Do not freeze, deploy or expand the batch without a separate explicit authorization; E08 remains independently blocked."
 }
