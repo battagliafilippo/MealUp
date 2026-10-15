@@ -128,3 +128,10 @@ Budget aggiuntivo 0 EUR, tester ufficiale unico, `main` immutato, nessun deploy 
 
 **Sequenza vincolante:** analisi del ruolo → ricerca modelli **e** Skill effettive per ruolo → esclusione costi non ricorrenti/rischi → prove pratiche incluse Skill → revisione QA indipendente → indicazione al CEO con evidenza e confronto → approvazione CEO → Director prepara un eventuale inserimento controllato. Candidato di backup/failover: stesse condizioni e stessa competenza del ruolo, oltre a quota indipendente. Il controllo offline `evaluateCandidateSkillFit` respinge ogni candidato senza evidenze complete, ma un esito che supera la verifica **strutturale** non vale come certificazione delle prove dichiarate né autorizza un'assunzione automatica.
 
+## Criterio universale di reclutamento: competenze e Skill specifiche del ruolo
+
+Per ogni candidato in ciascuno degli otto reparti, il Talent Scout seleziona sia il modello/agente, sia le competenze e le Skill operative migliori per il suo mestiere. Le cinque Skill dello Scout servono a selezionare; non equivalgono alle Skill operative dei futuri specialisti.
+
+Per ogni ruolo il registro `tools/ai-office/scout-role-matrix.json` contiene tre requisiti specialistici. L'agente candidato deve dimostrare tutti i requisiti attraverso capacità native testate oppure strumenti/Skill compatibili con evidenza reale, benchmarking e QA indipendente. Le Skill esterne richiedono verifica preventiva di provenienza, licenza e sicurezza. Una Skill proposta non è automaticamente installata o giudicata migliore.
+
+L'esame offline `evaluateCandidateSkillFit` in `tools/ai-office/scout-skill-router.cjs` respinge proposte prive di evidenze complete; esso controlla solo la struttura delle evidenze dichiarate e non sostituisce la verifica dei test originali. Nessun reclutamento o sostituzione senza approvazione finale del CEO. Il Director può implementare soltanto dopo autorizzazione, rispettando Costituzione v1.9 e tutti i FROZEN.
