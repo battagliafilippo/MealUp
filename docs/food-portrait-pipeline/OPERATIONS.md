@@ -573,3 +573,15 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Stato complessivo: **PARTIALLY VERIFIED / KNOWN INDEPENDENT BLOCKER E08**. Nessun requisito di questo riallineamento è fallito; il workflow rimane intenzionalmente non verde finché la sorgente vessel storica non viene recuperata con hash canonico.
 
 **Prossimo micro-step necessario:** recuperare da fonte autorizzata la board vessel storica con SHA-256 canonico per chiudere E08. Restano decisioni separate il freeze di v10 e qualunque nuovo ciclo di generazione; `do01` non è autorizzato.
+
+### E08 recovery audit 2026-10-15
+
+- Hash canonico richiesto: `3318fbf8a718438520b12e9d8d28d88374a46041fc94b3efac1f23b38a50d5c8`.
+- Hash dell'unico blob Git disponibile per `G5/references/VESSEL_LIBRARY_reference.png`: `28bba33ad0caaf6da129ae32ec5e9b771723f99ac9c9fd83aeec3e5c310bef7e`.
+- Eseguiti `fetch --prune` e ricerca su tutti i branch/ref e oggetti Git: un solo blob storico per il percorso, non conforme.
+- Cercati tutti i file omonimi nei checkout locali MealUp: due copie, entrambe con hash `28bba3…`.
+- Ispezionati gli archivi locali `MealUp_1.zip`, `MealUp-main (1).zip`, `MealUp-main.zip` e `MealUp.zip`: nessuna board vessel o cartella G5 recuperabile.
+- Esaminati i thread pertinenti e i relativi allegati disponibili: presenti reference Food Portrait owner, non la board vessel canonica.
+- Nessun file è stato sostituito, rigenerato o rinominato; il digest canonico non è stato modificato per adattarlo al blob errato.
+
+**Stato E08:** `BLOCKED_SOURCE_NOT_AVAILABLE_AFTER_EXHAUSTIVE_RECOVERY`. La chiusura richiede che l'owner fornisca la board originale o un archivio autorizzato che contenga un file con hash esatto `3318fb…`.
