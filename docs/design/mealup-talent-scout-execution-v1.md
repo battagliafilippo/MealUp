@@ -44,6 +44,12 @@ Esempi con fonti ufficiali al 15 ottobre 2026:
 
 Fonti: https://console.groq.com/docs/rate-limits ; https://developers.cloudflare.com/workers-ai/platform/pricing/ .
 
+## Terza via a budget 0 — utilizzo di abbonamenti già presenti
+
+Oltre a tier Free ricorrenti e computazione open-weight realmente gratuita, lo Scout deve riconoscere **entitlement inclusi negli abbonamenti già pagati dal CEO** senza incremento del costo: ChatGPT Images nella UI per Visual Production e, quando accessibile, Codex incluso nel piano ChatGPT per Engineering. L'uso deve essere sempre realmente consentito al piano/account e soggetto a quote rinnovabili verificabili; l'eventuale acquisto di crediti aggiuntivi, upgrade o API con fatturazione separata è VIETATO. Un'app terza può eventualmente utilizzare la quota del piano ChatGPT solo se supporta ufficialmente il flusso "Sign in with ChatGPT" e l'utente autorizza la connessione: non generalizzare ad API arbitrary.
+
+Condizioni del nuovo `freeQuotaPolicy.kind = EXISTING_SUBSCRIPTION_ENTITLEMENT_VERIFIED`: `subscriptionPlanAlreadyHeld = true`, `noNewBillingVerified = true`, `usesSeparatelyBilledApi = false`, `entitlementAccessVerified = true`, `reset` e fonte ufficiale non vuoti. Il codice `scout-evaluator.cjs` non lo considera idoneo se anche UNA di queste condizioni manca. Passare il filtro economico **non** promuove l'agente: serve la stessa QA professionale e approvazione del CEO. Fonti: https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan ; https://help.openai.com/en/articles/20001542-using-your-chatgpt-plan-in-other-apps-and-sites ; https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus .
+
 ## Skill set specialistico v1 — implementato nel laboratorio (2026-10-15)
 
 È approvata come architettura di ricerca **una regia Scout indipendente con skill on demand**, evitando di moltiplicare modelli e token senza necessità. La regia è `mealup-talent-scout`; le altre quattro skill sono consultate solo quando pertinenti:
