@@ -1,0 +1,33 @@
+name: QA - Static design asset evidence
+# Single-run read-only visual QA support. No models, secrets, writes to the app, or deployments.
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - '.github/workflows/qa-ai-office-design-asset-evidence.yml'
+permissions:
+  contents: read
+jobs:
+  snapshot-asset:
+    if: >-
+      ${{ github.event_name == 'push' && github.event.head_commit.message == 'ci(ai-office): capture single static asset for visual QA' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Checkout source asset read-only
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Confirm exact fixed input
+        run: |
+          test -s assets/family-fo/pasta.webp
+          file assets/family-fo/pasta.webp
+          sha256sum assets/family-fo/pasta.webp
+      - name: Preserve exact image for human QA
+        uses: actions/upload-artifact@v4
+        with:
+          name: office-pilot-001-pasta-original
+          path: assets/family-fo/pasta.webp
+          if-no-files-found: error
+          retention-days: 1
