@@ -7,6 +7,7 @@ on:
     paths:
       - 'tools/ai-office/constitution-task-packet.py'
       - 'tools/ai-office/constitution-task-packet.test.py'
+      - 'tools/ai-office/constitution-private-gate.test.py'
       - '.github/workflows/qa-ai-office-constitution.yml'
   pull_request:
     branches:
@@ -14,6 +15,7 @@ on:
     paths:
       - 'tools/ai-office/constitution-task-packet.py'
       - 'tools/ai-office/constitution-task-packet.test.py'
+      - 'tools/ai-office/constitution-private-gate.test.py'
 permissions:
   contents: read
 jobs:
@@ -26,6 +28,8 @@ jobs:
           persist-credentials: false
       - name: Validate rule extraction and continuity under synthetic fixtures
         run: python3 tools/ai-office/constitution-task-packet.test.py
+      - name: Verify privacy of source probe and local packet permissions
+        run: python3 tools/ai-office/constitution-private-gate.test.py
       - name: Fail closed without the privately stored original
         run: |
           if python3 tools/ai-office/constitution-task-packet.py --canonical-docx /tmp/not-present-original.docx --task-json /tmp/not-present-task.json --out /tmp/NEVER.json; then
