@@ -185,12 +185,16 @@ def verify_plan_continuity(previous, current, task):
             raise ValueError("BLOCKED_CHANGED_BRIEF_NEEDS_REASSESS")
     current_steps={x["id"]:x for x in current["steps"]}
     corrections=task.get("stepReconciliation",[])
+    archived=list(previous.get("continuity",{}).get("supersededStepRecords",[]))
+    mapped_records=[]
     for old in previous.get("steps",[]):
         if old["id"] not in current_steps:
             linked=[r for r in corrections if r.get("oldStepId")==old["id"]]
             if len(linked)!=1 or not NONEMPTY(linked[0].get("reason")) or (
                 linked[0].get("newStepId") not in current_steps):
                 raise ValueError("BLOCKED_UNMAPPED_PREVIOUS_STEP:"+old["id"])
+            mapped_records.append({"oldStep":old,"newStepId":linked[0]["newStepId"],
+                                   "reason":linked[0]["reason"]})
         elif old["status"]=="VERIFIED" and current_steps[old["id"]]["status"]!="VERIFIED":
             if task.get("changeReconciled") is not True:
                 raise ValueError("BLOCKED_SILENT_LOSS_OF_VERIFIED_WORK")
@@ -199,7 +203,8 @@ def verify_plan_continuity(previous, current, task):
         now_items=current["recovery"][fld]
         if any(item not in now_items for item in old_items):
             raise ValueError("BLOCKED_LOST_RECOVERY_EVIDENCE:"+fld)
-    return {"status":"CONTINUITY_VERIFIED", "mappedPreviousSteps":len(previous["steps"])}
+    return {"status":"CONTINUITY_VERIFIED", "mappedPreviousSteps":len(previous["steps"]),
+            "supersededStepRecords":archived+mapped_records}
 
 def make_packet(t, sections):
     t=validate_task(t)
