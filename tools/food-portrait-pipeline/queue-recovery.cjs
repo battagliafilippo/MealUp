@@ -28,7 +28,7 @@ function merge(queue,checkpoint){
  validateQueue(queue);
  const prev=checkpoint||{schema:SCHEMA,records:{},revisions:{},history:[]};
  check(prev.schema===SCHEMA&&!Array.isArray(prev.records)&&
-  prev.records&&typeof prev.records==='object'&&!Array.isArray(prev.history)&&
+  prev.records&&typeof prev.records==='object'&&
   Array.isArray(prev.history),'INVALID_CHECKPOINT');
  const records={},events=[],resumed=[],invalidated=[],fresh=[];
  for(const t of queue.tasks){
