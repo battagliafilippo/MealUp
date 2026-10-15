@@ -11,6 +11,8 @@ const registry = require('./scout-candidate-register.json');
 const STATES = Object.freeze({
   ACCESS_BLOCKED: 'ACCESS_BLOCKED',
   FREE_COMPUTE_UNVERIFIED: 'FREE_COMPUTE_UNVERIFIED',
+  RENEWAL_UNVERIFIED: 'RENEWAL_UNVERIFIED',
+  NON_RENEWING_FREE_OFFER: 'NON_RENEWING_FREE_OFFER',
   ACCOUNT_NOT_CONNECTED: 'ACCOUNT_NOT_CONNECTED',
   LICENSE_APPROVAL_REQUIRED: 'LICENSE_APPROVAL_REQUIRED',
   CONNECTED_UNDER_QA: 'CONNECTED_UNDER_QA',
@@ -19,6 +21,8 @@ const STATES = Object.freeze({
 const BLOCKING = new Set([
   STATES.ACCESS_BLOCKED,
   STATES.FREE_COMPUTE_UNVERIFIED,
+  STATES.RENEWAL_UNVERIFIED,
+  STATES.NON_RENEWING_FREE_OFFER,
   STATES.ACCOUNT_NOT_CONNECTED,
   STATES.LICENSE_APPROVAL_REQUIRED
 ]);
@@ -36,6 +40,21 @@ function classify(candidate) {
     return { id: candidate.id, state: STATES.LICENSE_APPROVAL_REQUIRED, reason: 'LICENSE_REVIEW_BY_CEO', approved: false };
   if (!candidate.inferenceProvider || candidate.freeApiAccess === 'NOT_VERIFIED')
     return { id: candidate.id, state: STATES.FREE_COMPUTE_UNVERIFIED, reason: 'NO_VERIFIED_FREE_PROVIDER', approved: false };
+  // CEO mandate 2026-10-15: a temporary trial or promotional credits cannot
+  // qualify an agent for ongoing zero-extra-budget use. Require verified renewals.
+  const quota = candidate.freeQuotaPolicy;
+  if (quota?.kind === 'ONE_TIME_CREDITS' || quota?.kind === 'PAID_AFTER_TRIAL')
+    return { id: candidate.id, state: STATES.NON_RENEWING_FREE_OFFER,
+      reason: 'TRIAL_OR_PROMOTIONAL_CREDITS_DO_NOT_RENEW', approved: false };
+  const recurring = quota?.kind === 'RECURRING_FREE_QUOTA' &&
+    typeof quota.reset === 'string' && quota.reset.length > 0 &&
+    typeof quota.source === 'string' && /^https:\/\//.test(quota.source);
+  const selfHosted = quota?.kind === 'SELF_HOSTED_PERPETUAL_VERIFIED' &&
+    candidate.freeComputeVerified === true &&
+    typeof quota.source === 'string' && /^https:\/\//.test(quota.source);
+  if (!recurring && !selfHosted)
+    return { id: candidate.id, state: STATES.RENEWAL_UNVERIFIED,
+      reason: 'REPEATABLE_FREE_QUOTA_OR_EXISTING_FREE_COMPUTE_NOT_PROVEN', approved: false };
   if (candidate.status === 'HOSTED_FREE_OFFER_VERIFIED_ACCOUNT_NOT_CONNECTED' ||
       String(candidate.freeApiAccess || '').includes('ACCOUNT_ACCESS_NOT_TESTED') ||
       candidate.status === 'ACCOUNT_NOT_CONNECTED')
@@ -82,6 +101,8 @@ function getCurrentReport() {
     schema: 'mealup-talent-scout-audit-v1',
     date: registry.asOf,
     additionalBudgetEUR: registry.budgetAdditionalEUR,
+    renewableQuotaRequired: true,
+    temporaryCreditsEligible: false,
     runType: 'OFFLINE_ELIGIBILITY_ONLY',
     candidates: results,
     eligibleForAutomaticPromotion: 0,
