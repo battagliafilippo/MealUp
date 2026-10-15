@@ -1,0 +1,44 @@
+{
+  "schema": "food-portrait-reference-audit-v1",
+  "asOf": "2026-10-15",
+  "branch": "experiment/food-portrait-pipeline-20261015",
+  "baselineCommit": "75d72a8e546005da7bca3284d80a7d6cdbe72aef",
+  "source": {
+    "historicalManifest": "MealUp_C6.3_G0_Canonical_Manifest_v1.json",
+    "geometryPath": "G5/vessel-geometry.json",
+    "boardPath": "G5/references/VESSEL_LIBRARY_reference.png",
+    "historicalBoardFirstObservedCommit": "d1300440cca578b9cf7a3b0ce70116c788645903"
+  },
+  "sourceBoardAudit": {
+    "status": "BLOCKED_HASH_MISMATCH",
+    "expectedSha256": "3318fbf8a718438520b12e9d8d28d88374a46041fc94b3efac1f23b38a50d5c8",
+    "repositoryActualSha256": "28bba33ad0caaf6da129ae32ec5e9b771723f99ac9c9fd83aeec3e5c310bef7e",
+    "correctiveAction": "Recover original approved source or trace authorized version history. Never replace, recompute expected hash, or mark source approved without independent evidence.",
+    "remediationAuthorized": false
+  },
+  "vesselGeometry": {
+    "status": "PASS_MASK_BINARY_HASHES_ONLY",
+    "geometryCount": 8,
+    "binaryMaskCount": 16,
+    "checkedFileCountIncludingMismatchedBoard": 17,
+    "provenanceOnlyPreviewMissingCount": 8,
+    "provenanceOnlyPreviewMissingPolicy": "NONRUNTIME_WARNING_NOT_SILENTLY_RECONSTRUCTED",
+    "vesselFreeRecipeCount": 14
+  },
+  "quality": {
+    "goldenMasterPortraitVerified": false,
+    "portraitImageSemanticsVerified": false,
+    "pilotCompleted": false,
+    "automaticImageAcceptanceAllowed": false,
+    "pwaIntegrationAuthorized": false
+  },
+  "ciEvidence": {
+    "passedContractAuditRun": "https://github.com/battagliafilippo/MealUp/actions/runs/38717833831",
+    "blockedReferenceAuditRun": "https://github.com/battagliafilippo/MealUp/actions/runs/38719090602",
+    "blockedRun": "EXPECTED_FAIL_CONTRACT_GATE",
+    "failedGate": "Verify historical FROZEN vessel image binaries",
+    "otherCheckResults": "Contract and negative-guard steps passed; image reference integrity gated",
+    "uploadedArtifact": "food-portrait-contract-baseline"
+  },
+  "nextAction": "Continue independently with architecture/spec/queue while separately recovering exact FROZEN vessel board provenance; do not proceed to image acceptance."
+}
