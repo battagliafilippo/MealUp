@@ -1,0 +1,42 @@
+{
+  "schema": "mealup-food-portrait-fast-same-gates-tooling-checkpoint-v1",
+  "checkpointId": "FPP-FAST-TOOLING-001",
+  "recordedAt": "2026-10-16",
+  "status": "PARTIALLY_VERIFIED_DIRECT_IMPLEMENTATION_OFFICE_HANDOFF_BLOCKED",
+  "scope": "New isolated Food Portrait tooling only",
+  "artifacts": [
+    "tools/food-portrait-pipeline/fast-job-packet.cjs",
+    "tools/food-portrait-pipeline/fast-rollback-harness.cjs",
+    "tools/food-portrait-pipeline/fast-path.test.cjs"
+  ],
+  "verified": {
+    "packetDeterministic": true,
+    "packetSourceAndReferenceLocked": true,
+    "hardPacketByteCeiling": 4096,
+    "pilotPacketsWithinCeiling": 10,
+    "rollbackFixtureOnly": true,
+    "rollbackBaselineByteIdentical": true,
+    "rollbackReplayIdempotent": true,
+    "baselinePreflightRestored": true,
+    "activeCycleRemainsBlocked": true,
+    "protectedFilesAndFrozenAssetsUnchanged": true,
+    "imageGenerationCalls": 0
+  },
+  "officeHandoff": {
+    "status": "BLOCKED_CANONICAL_SOURCE_INACCESSIBLE",
+    "requiredCanonicalSha256": "51043574d188c085de51282e50f8784d8f5cf779300891dee0fe8014414470eb",
+    "reason": "Repository AGENTS.md requires the exact private Costituzione Operativa AI v1.9 for delegated Office task packets; no matching local DOCX was found.",
+    "effect": "The tools are verified as direct isolated implementation but are not represented as a constitutionally activated Office handoff."
+  },
+  "protectedScopesUnchanged": [
+    "main",
+    "official tester",
+    "PWA",
+    "tools/ai-office",
+    "catalog autonomy state",
+    "production authorization",
+    "FROZEN documents and assets",
+    "automation"
+  ],
+  "nextGate": "OWNER_MAY_AUTHORIZE_DIRECT_SYNTHETIC_PACKET_PROMPT_BENCHMARK_OR_PROVIDE_CANONICAL_PRIVATE_SOURCE_FOR_OFFICE_HANDOFF"
+}
