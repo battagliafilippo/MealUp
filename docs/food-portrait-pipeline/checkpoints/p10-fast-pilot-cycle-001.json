@@ -1,0 +1,15 @@
+{
+  "schema": "mealup-food-portrait-fast-pilot-cycle-v1",
+  "checkpointId": "FPP-FAST-P10-CYCLE-001",
+  "recordedAt": "2026-10-16",
+  "recipeId": "p10",
+  "status": "FAIL_CANDIDATE_ONLY_STOPPED",
+  "imageCalls": 1,
+  "automaticRetry": false,
+  "assetSha256": "b7bdd4ea564995ff57d0cc5cb2856f1117f7bcb405634fb01e6725dfa7a5cf6c",
+  "technicalQa": "PASS",
+  "independentVisualQa": "FAIL_PASTA_FORM",
+  "authority": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
+  "pilotProgress": "3/10 QA_PASS; P10 FAILED",
+  "nextGate": "OWNER_MAY_AUTHORIZE_ONE_TARGETED_PASTA_FORM_CORRECTION"
+}

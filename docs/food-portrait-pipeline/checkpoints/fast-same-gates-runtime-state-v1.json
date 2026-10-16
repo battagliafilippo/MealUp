@@ -1,13 +1,13 @@
 {
   "schema": "mealup-food-portrait-fast-runtime-state-v1",
   "version": "1.0",
-  "status": "ACTIVE_READY",
+  "status": "BLOCKED_QA_FAIL",
   "modelSetVersion": "FPP_CANONICAL_MODELS_V1",
   "queue": [
     {"recipeId": "a10", "state": "QA_PASS_OWNER_REFERENCE_FROZEN"},
     {"recipeId": "a18", "state": "QA_PASS_OWNER_REFERENCE_FROZEN"},
     {"recipeId": "p09", "state": "QA_PASS_CANDIDATE_ONLY", "assetSha256": "061c5c12a5e28aa7b4a1e077f12a99b6935f5aebb02909c38d6ca81e7dbadb81"},
-    {"recipeId": "p10", "state": "PENDING"},
+    {"recipeId": "p10", "state": "FAIL_CANDIDATE_ONLY", "assetSha256": "b7bdd4ea564995ff57d0cc5cb2856f1117f7bcb405634fb01e6725dfa7a5cf6c"},
     {"recipeId": "s11", "state": "PENDING"},
     {"recipeId": "do04", "state": "PENDING"},
     {"recipeId": "do15", "state": "PENDING"},
@@ -16,6 +16,12 @@
     {"recipeId": "v01", "state": "PENDING"}
   ],
   "activeRecipeId": null,
+  "blocked": {
+    "recipeId": "p10",
+    "reason": "PASTA_FORM_NOT_TRENETTE",
+    "automaticRetryAllowed": false,
+    "requiredAction": "OWNER_AUTHORIZATION_FOR_ONE_TARGETED_CORRECTION"
+  },
   "qaPassCount": 3,
   "ownerReviewAt": 10,
   "gates": {

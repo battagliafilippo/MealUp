@@ -103,6 +103,10 @@ test('fast path selects exactly one role-relevant visual reference', () => {
 
 test('background preflight selects the first pending guarded-pilot recipe', () => {
   const state = JSON.parse(fs.readFileSync(path.join(root, 'docs/food-portrait-pipeline/checkpoints/fast-same-gates-runtime-state-v1.json'), 'utf8'));
+  if (state.status !== 'ACTIVE_READY') {
+    assert.deepEqual(inspectFastBackground(root), {decision: 'BLOCKED', reason: 'FAST_STATE_NOT_READY', status: state.status});
+    return;
+  }
   const expected = state.queue.find((entry) => entry.state === 'PENDING');
   assert.deepEqual(inspectFastBackground(root), {decision: 'READY', recipeId: expected.recipeId, qaPassCount: state.qaPassCount, ownerReviewAt: state.ownerReviewAt, modelSetVersion: state.modelSetVersion});
 });

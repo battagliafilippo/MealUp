@@ -1,0 +1,46 @@
+{
+  "schema": "mealup-food-portrait-fast-candidate-v1",
+  "candidateId": "FPP-FAST-P10-001",
+  "program": "FAST_SAME_GATES_V1",
+  "status": "FAIL_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "p10",
+    "title": "Trenette al pesto con patate e fagiolini",
+    "kcal": 745,
+    "vesselId": "VESSEL_BOWL",
+    "sourceHash": "beb1935278ddfea02b566a221f47d382fe8a436157922e75cbded5c7905e9ed3"
+  },
+  "packet": {
+    "sha256": "8b17ac763b77bf5d002e9f3fd7af8168e8ced705d56263d0525da4d7388d426b",
+    "bytes": 2879,
+    "promptSha256": "977b25bd6e8fb7677c628f8708ebc5223d2911f1752aaf5bebf1367a4820b21a",
+    "promptBytes": 1959,
+    "modelSetVersion": "FPP_CANONICAL_MODELS_V1"
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p10-fast-pilot-candidate-001.png",
+    "sha256": "b7bdd4ea564995ff57d0cc5cb2856f1117f7bcb405634fb01e6725dfa7a5cf6c",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1777261,
+    "format": "png",
+    "originalPreserved": true
+  },
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_HEARTBEAT_FAST_SAME_GATES",
+    "providerReceipt": "exec-e3ed948b-5aae-45c0-a2a4-2a9755072948.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "automaticRetry": false,
+    "extraCostEUR": 0
+  },
+  "technicalQa": {"status": "PASS", "errors": []},
+  "visualQa": {
+    "status": "FAIL",
+    "reviewAuthority": "INDEPENDENT_QA_RELIABILITY_AGENT",
+    "passingGates": ["STYLE_ENVELOPE", "MICROTEXTURE", "INGREDIENT_SET", "VESSEL_BOWL", "CROP", "GAUGE", "745_KCAL", "ORANGE_NEEDLE", "NO_EXTRA_UI_TEXT_PROP"],
+    "blockingDefect": "Pasta reads as thick round spaghetti or bucatini instead of narrow flat ribbon-shaped trenette."
+  },
+  "acceptance": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
+  "stopReason": "FIRST_VISUAL_QA_FAIL_NO_AUTOMATIC_RETRY"
+}
