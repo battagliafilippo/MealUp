@@ -731,3 +731,17 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Stato lotto: `LOT_OWNER_APPROVED_FROZEN`. Nessuna integrazione, deploy o modifica di main/tester/AI Office.
 
 **Prossimo micro-step necessario:** decisione separata tra integrazione degli asset e realizzazione/collaudo della modalità Office in background.
+
+### Background Office activation 2026-10-16 — ACTIVE, first run pending
+
+- Creata la skill repository `$mealup-food-portrait-background`, limitata alla ripresa di code già autorizzate e persistite.
+- Creato `background-preflight.cjs`: self-test PASS su READY, terminal no-op, violazione di scope e blocker persistente.
+- Sul lotto attuale il preflight restituisce `NOOP_TERMINAL`, quindi nessun asset FROZEN viene toccato.
+- Heartbeat della chat `mealup-food-portrait-office` creato ACTIVE ogni 30 minuti. La chat conserva contesto e checkout isolato; PC acceso e app desktop attiva sono necessari per i file locali.
+- Il primo tentativo di creazione è stato respinto per destinazione non esplicita; nessun duplicato creato. Il secondo tentativo con `destination=thread` è riuscito.
+- Il quick validator Python non è eseguibile per assenza di PyYAML nel runtime bundled; controllo manuale struttura/frontmatter PASS, senza installare dipendenze.
+- Auto-accept, auto-freeze, integrazione, deploy, modifiche a main/tester/PWA/AI Office e costi aggiuntivi restano vietati.
+
+**Stato:** infrastruttura background `ACTIVE_AWAITING_FIRST_SCHEDULED_RUN`. La disponibilità reale di ImageGen in una run non presidiata resta da dimostrare al prossimo lotto autorizzato.
+
+**Prossimo micro-step necessario:** osservare la prima esecuzione pianificata. Con lo stato corrente deve produrre un no-op; un futuro lotto autorizzato servirà al collaudo reale ImageGen background.

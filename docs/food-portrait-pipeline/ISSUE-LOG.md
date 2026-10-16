@@ -6,3 +6,6 @@
 - `RESOLVED` — Il primo comando di verifica finale concatenava più documenti JSON e passava più test come un solo argomento PowerShell. Nessun file era corrotto. Il comando è stato corretto; cinque JSON validi, tre self-test PASS e registro agenti 6/6 PASS.
 - `OPEN / BLOCKED` — `E08_HISTORICAL_VESSEL_SHA_MISMATCH`: l'hash della tavola vessel storica non è dimostrato. La tavola non è usata come evidenza e il relativo gate resta bloccato.
 - `RESOLVED` — Owner approval ricevuta per `d32` e `do10`: gli stessi raster verificati sono ora FROZEN. Integrazione e deploy restano non autorizzati.
+- `RESOLVED` — Il primo tentativo di creare l'heartbeat background è stato rifiutato perché mancava `destination=thread`; nessuna automazione parziale è stata creata. Parametro corretto e automazione `mealup-food-portrait-office` creata ACTIVE.
+- `LIMIT` — Il validatore Python ufficiale della skill non parte nel runtime bundled perché manca il modulo `yaml`. Nessuna dipendenza è stata installata: frontmatter e placeholder sono stati verificati manualmente, mentre il preflight deterministico ha superato il self-test.
+- `OPEN / FIRST-RUN GATE` — Scheduler e skill sono attivi, ma ImageGen non è ancora dimostrato in una vera run non presidiata. Il task resta fail-closed e deve fermarsi se la capability non è disponibile.
