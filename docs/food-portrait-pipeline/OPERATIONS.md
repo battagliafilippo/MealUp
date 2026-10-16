@@ -721,3 +721,13 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Stato persistente: `LOT_CANDIDATES_COMPLETE_AWAITING_OWNER_REVIEW`. Auto-accept, auto-freeze, integrazione, deploy e costi aggiuntivi restano disabilitati.
 
 **Prossimo micro-step necessario:** review owner congiunta di `d32` e `do10`; solo una decisione esplicita può autorizzare freeze o ulteriori passaggi.
+
+### Controlled lot owner approval 2026-10-16 — FROZEN
+
+- Decisione owner: `Le immagini sono perfette`; approvati `d32` e `do10`.
+- Congelati esattamente i WebP verificati, senza rigenerazione o modifica dei pixel.
+- `d32` FROZEN SHA-256 `bb7b34114530fc2be8f635b1bf13f7c2bc56cf1354e3458be0c4ec496d7a8366`; QA tecnico post-approvazione PASS.
+- `do10` FROZEN SHA-256 `b75964e4da7c9e0a1f8383003aafcfcdf19e44b43b486312cbc60512958e3927`; QA tecnico post-approvazione PASS.
+- Stato lotto: `LOT_OWNER_APPROVED_FROZEN`. Nessuna integrazione, deploy o modifica di main/tester/AI Office.
+
+**Prossimo micro-step necessario:** decisione separata tra integrazione degli asset e realizzazione/collaudo della modalità Office in background.

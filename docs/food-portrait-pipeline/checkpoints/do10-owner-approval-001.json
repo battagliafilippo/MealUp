@@ -1,0 +1,24 @@
+{
+  "schema": "mealup-food-portrait-approval-checkpoint-v1",
+  "checkpointId": "FPP-DO10-APPROVAL-001",
+  "recipeId": "do10",
+  "predecessor": "checkpoints/do10-visual-production-cycle-001.json",
+  "ownerDecision": "APPROVED_PERFECT",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/do10-banana-bread-dessert-mold-approved-001.webp",
+    "sha256": "b75964e4da7c9e0a1f8383003aafcfcdf19e44b43b486312cbc60512958e3927",
+    "bytes": 1453298,
+    "binaryIdenticalToCandidate": true
+  },
+  "gates": {
+    "technicalQaAfterApproval": "PASS",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": true,
+    "frozen": true,
+    "integration": false,
+    "deployment": false
+  },
+  "imagesGeneratedThisCheckpoint": 0,
+  "budgetEUR": 0,
+  "state": "FROZEN_NOT_INTEGRATED_NOT_DEPLOYED"
+}

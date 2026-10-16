@@ -1,0 +1,32 @@
+{
+  "schema": "mealup-food-portrait-frozen-asset-v1",
+  "status": "FROZEN",
+  "decisionDate": "2026-10-16",
+  "authority": "OWNER_EXPLICIT_VISUAL_APPROVAL",
+  "recipeId": "do10",
+  "title": "Banana bread proteico",
+  "vesselId": "VESSEL_DESSERT_MOLD",
+  "kcal": 1560,
+  "gaugeAngleDegrees": 60,
+  "gaugeClamped": true,
+  "gaugeZone": "RED_MAXIMUM",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/do10-banana-bread-dessert-mold-approved-001.webp",
+    "sha256": "b75964e4da7c9e0a1f8383003aafcfcdf19e44b43b486312cbc60512958e3927",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1453298,
+    "format": "webp"
+  },
+  "evidence": {
+    "ownerVisualApproval": "PERFECT",
+    "technicalQaAfterApproval": "PASS",
+    "binaryIdentityToApprovedCandidate": true,
+    "ingredientRecognizability": "PASS_BANANA_BREAD_WALNUTS",
+    "integratedDishNotCollage": true,
+    "gaugeValueMatchesRecipeCard": true,
+    "gaugeClampRule": "PASS_ABOVE_1000_RED_MAXIMUM",
+    "vesselContract": "PASS"
+  },
+  "notAuthorized": ["tester or PWA integration", "deployment", "modification of main"]
+}

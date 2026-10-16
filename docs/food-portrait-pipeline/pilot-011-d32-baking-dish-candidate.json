@@ -3,7 +3,7 @@
   "candidateId": "FPP-PILOT-011-D32-001",
   "lotId": "FPP-LOT-001",
   "lotSequenceOrder": 5,
-  "status": "QA_PASS_CANDIDATE_ONLY",
+  "status": "OWNER_APPROVED_TECHNICAL_PASS_FROZEN",
   "recipe": {
     "id": "d32",
     "title": "Parmigiana di melanzane",
@@ -70,11 +70,12 @@
     }
   },
   "acceptance": {
-    "ownerApproved": false,
+    "ownerApproved": true,
+    "ownerDecision": "perfette",
     "automaticAcceptanceAllowed": false,
-    "frozen": false,
+    "frozen": true,
     "integrated": false,
     "deployed": false
   },
-  "nextAction": "AUTONOMOUSLY_ADVANCE_TO_DO10_UNDER_CONTROLLED_LOT_MANDATE"
+  "nextAction": "AWAIT_SEPARATE_INTEGRATION_OR_BACKGROUND_AUTOMATION_AUTHORIZATION"
 }
