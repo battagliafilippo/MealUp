@@ -1,0 +1,32 @@
+{
+  "schema": "mealup-food-portrait-catalog-autonomy-activation-v1",
+  "activationDate": "2026-10-16",
+  "status": "ACTIVE_READY_FIRST_RECIPE_R7",
+  "authorization": "docs/food-portrait-pipeline/catalog-production-authorization-v1.json",
+  "state": "docs/food-portrait-pipeline/checkpoints/catalog-autonomy-state-v1.json",
+  "automationId": "mealup-food-portrait-office",
+  "schedule": "every 30 minutes",
+  "scope": {
+    "catalog": 454,
+    "eligiblePending": 437,
+    "blockedMissingFrozenVesselReference": 5,
+    "excludedFrozenReferenceOrPriorConstraint": 12
+  },
+  "firstCycle": {
+    "recipeId": "r7",
+    "title": "Bresaola, rucola e grana",
+    "kcal": 320,
+    "vesselId": "VESSEL_PLATE",
+    "sourceHash": "07cd1364547de7871ad2de0b4ec45bd7bd65dda53e27d8cbbf3f533a98699574",
+    "referenceRecipeId": "r1",
+    "state": "READY_NOT_GENERATED"
+  },
+  "reviewCadence": "PAUSE_AFTER_10_QA_PASS_CANDIDATES",
+  "gates": {
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false,
+    "budgetEUR": 0
+  }
+}

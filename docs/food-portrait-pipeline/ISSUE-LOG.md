@@ -9,3 +9,6 @@
 - `RESOLVED` — Il primo tentativo di creare l'heartbeat background è stato rifiutato perché mancava `destination=thread`; nessuna automazione parziale è stata creata. Parametro corretto e automazione `mealup-food-portrait-office` creata ACTIVE.
 - `LIMIT` — Il validatore Python ufficiale della skill non parte nel runtime bundled perché manca il modulo `yaml`. Nessuna dipendenza è stata installata: frontmatter e placeholder sono stati verificati manualmente, mentre il preflight deterministico ha superato il self-test.
 - `OPEN / FIRST-RUN GATE` — Scheduler e skill sono attivi, ma ImageGen non è ancora dimostrato in una vera run non presidiata. Il task resta fail-closed e deve fermarsi se la capability non è disponibile.
+- `RESOLVED` — Il primo controllo sorgente catalogo è stato bloccato prima dell'esecuzione perché includeva una rimozione ricorsiva temporanea. Rilanciato senza cancellazioni.
+- `RESOLVED` — `recipe-analyzer.cjs` richiedeva `jsdom`, non presente nel runtime disponibile. Nessuna dipendenza installata: creato `catalog-recipe-source.cjs`, estrattore isolato del literal `SEED_RECIPES`, con invarianti 454/ID/matrix e self-test PASS.
+- `OPEN / REFERENCE GATE` — `r6`, `k01`, `w01`, `w12`, `k14` restano esclususe dalla produzione: manca una reference FROZEN per `VESSEL_PIZZA_SURFACE` o `VESSEL_CUP`.

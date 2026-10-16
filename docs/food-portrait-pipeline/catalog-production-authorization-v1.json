@@ -1,0 +1,28 @@
+{
+  "schema": "mealup-food-portrait-catalog-autonomy-v1",
+  "version": "1.0",
+  "status": "ACTIVE_SCOPED_CATALOG_AUTONOMY",
+  "decisionDate": "2026-10-16",
+  "ownerAuthorization": {
+    "authorized": true,
+    "decision": "Autorizzo tutto, cosi l'office procede con la generazione di food portrait",
+    "interpretation": "All catalog recipes with a verified FROZEN vessel reference; no prospective approval of unseen pixels and no integration or deployment."
+  },
+  "scope": "ALL_RECIPES_WITH_VERIFIED_FROZEN_VESSEL_REFERENCE",
+  "excludedRecipeIds": ["r1", "r2", "r3", "s02", "do01", "do08", "p12", "v08", "v10", "a07", "d32", "do10"],
+  "execution": {
+    "mode": "SERIAL_BACKGROUND_ONE_CANDIDATE_PER_RUN",
+    "candidateLimitPerCycle": 1,
+    "advanceOnQaPass": true,
+    "stopOnAnyQaFailure": true,
+    "stopOnAmbiguityOrSourceConflict": true,
+    "ownerReviewBatchSize": 10,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false,
+    "budgetEUR": 0
+  },
+  "blockedVessels": ["VESSEL_CUP", "VESSEL_PIZZA_SURFACE"],
+  "authorityBoundary": "Generate and QA visual candidates only. Future pixels cannot be pre-approved; owner review remains required before freeze."
+}

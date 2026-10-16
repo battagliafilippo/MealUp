@@ -745,3 +745,17 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Stato:** infrastruttura background `ACTIVE_AWAITING_FIRST_SCHEDULED_RUN`. La disponibilità reale di ImageGen in una run non presidiata resta da dimostrare al prossimo lotto autorizzato.
 
 **Prossimo micro-step necessario:** osservare la prima esecuzione pianificata. Con lo stato corrente deve produrre un no-op; un futuro lotto autorizzato servirà al collaudo reale ImageGen background.
+
+### Catalog-wide guarded production authorization 2026-10-16 — ACTIVE
+
+- Decisione owner: `Autorizzo tutto`; interpretata come autorizzazione alla generazione autonoma delle ricette con reference vessel FROZEN verificata, non come pre-approvazione di pixel futuri o permesso di integrare/deployare.
+- Catalogo verificato: 454 ricette; 449 coperte da sei categorie vessel FROZEN; 437 nuove candidate in coda dopo esclusione degli asset già FROZEN/reference e di `do01`.
+- Cinque ricette restano bloccate: `r6` (`VESSEL_PIZZA_SURFACE`) e `k01`, `w01`, `w12`, `k14` (`VESSEL_CUP`).
+- Creato mandato `catalog-production-authorization-v1.json` e stato persistente `catalog-autonomy-state-v1.json`; hash di tutte e sei le reference verificati dal builder.
+- Creato estrattore deterministico `catalog-recipe-source.cjs`: invarianti 454/ID/matrix e self-test PASS. Prima ricetta `r7`, 320 kcal, `VESSEL_PLATE`, fonte strutturata verificata.
+- Heartbeat `mealup-food-portrait-office` aggiornato: una candidate per run, pausa ogni 10 QA PASS per review owner, stop su FAIL o ambiguità.
+- Rimangono vietati auto-accept, auto-freeze, integrazione, deploy, modifiche a main/tester/PWA/AI Office e costi aggiuntivi.
+
+**Stato:** `ACTIVE_READY_FIRST_RECIPE_R7`. Il prossimo heartbeat può tentare la prima vera generazione ImageGen non presidiata.
+
+**Prossimo micro-step necessario:** prima run background su `r7`; se ImageGen non è disponibile nel task pianificato, il programma si bloccherà senza avanzare la coda.

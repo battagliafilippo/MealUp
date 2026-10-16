@@ -1,0 +1,5307 @@
+{
+  "schema": "mealup-food-portrait-catalog-autonomy-state-v1",
+  "version": "1.0",
+  "status": "ACTIVE_READY",
+  "source": {
+    "matrixPath": "G8/composition-matrix.json",
+    "matrixSha256": "7439f54470e6c0a0ec51c38efd24ca27fb96ae428e8ce11165279a669d09ace7",
+    "coveragePath": "docs/food-portrait-pipeline/frozen-reference-coverage-v1.json",
+    "coverageSha256": "2dedfdd68d67ae30b11e6cc0a753ae3bcb83f07a75cccd004cbe1b25613b9f1d"
+  },
+  "totals": {
+    "catalog": 454,
+    "eligible": 437,
+    "blocked": 5,
+    "completed": 0,
+    "pending": 437
+  },
+  "queue": [
+    {
+      "recipeId": "r7",
+      "title": "Bresaola, rucola e grana",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_r7",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "r4",
+      "title": "Bowl calda pollo e spinaci",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_r4",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "r5",
+      "title": "Frittata di albumi, ceci e feta",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_r5",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p01",
+      "title": "Spaghetti alla carbonara",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p01",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p02",
+      "title": "Bucatini all'amatriciana",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p02",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p03",
+      "title": "Rigatoni alla gricia",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p03",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p04",
+      "title": "Tonnarelli cacio e pepe",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p04",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p05",
+      "title": "Spaghetti aglio, olio e peperoncino",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p05",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p06",
+      "title": "Penne all'arrabbiata",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p06",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p07",
+      "title": "Spaghetti al pomodoro e basilico",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p07",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p08",
+      "title": "Spaghetti alla puttanesca",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p08",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p09",
+      "title": "Spaghetti alle vongole",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p09",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p10",
+      "title": "Trenette al pesto con patate e fagiolini",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p10",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p11",
+      "title": "Tagliatelle al ragù alla bolognese",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p11",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p13",
+      "title": "Pasta alla Norma",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p13",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p14",
+      "title": "Orecchiette con le cime di rapa",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p14",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p15",
+      "title": "Pasta e fagioli",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p15",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p16",
+      "title": "Pasta e ceci",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p16",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p17",
+      "title": "Pasta e patate con la provola",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p17",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p18",
+      "title": "Pasta alla genovese",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p18",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p19",
+      "title": "Paccheri alla sorrentina",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p19",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p20",
+      "title": "Pasta alla Norcina",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p20",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p21",
+      "title": "Pasta alla boscaiola",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p21",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p22",
+      "title": "Spaghetti alla Nerano",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p22",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p23",
+      "title": "Pasta con le sarde",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p23",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p24",
+      "title": "Spaghetti allo scoglio",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p24",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p25",
+      "title": "Pasta al tonno",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p25",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p26",
+      "title": "Pasta gorgonzola e noci",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p26",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p27",
+      "title": "Pasta al salmone",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_p27",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "p28",
+      "title": "Pasta al forno",
+      "vesselId": "VESSEL_BAKING_DISH",
+      "compositionId": "COMP_p28",
+      "reference": {
+        "recipeId": "p12",
+        "asset": "docs/food-portrait-pipeline/candidates/p12-lasagne-baking-dish-approved-001.webp",
+        "sha256": "e11055f04bd0424fcd495c23fa20206d13b62eb7d985a58d1ac4e028edebafe2"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a01",
+      "title": "Bruschetta al pomodoro",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a01",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a02",
+      "title": "Crostini ai funghi",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a02",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a03",
+      "title": "Crostini toscani",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a03",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a04",
+      "title": "Crostini burro e acciughe",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a04",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a05",
+      "title": "Caprese",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a05",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a06",
+      "title": "Burrata con pomodorini secchi",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a06",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a08",
+      "title": "Prosciutto e fichi",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a08",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a09",
+      "title": "Vitello tonnato",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a09",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a10",
+      "title": "Tartare di manzo",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a10",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a11",
+      "title": "Tartare di tonno e avocado",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a11",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a12",
+      "title": "Carpaccio di polpo",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a12",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a13",
+      "title": "Insalata di polpo e patate",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_a13",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a14",
+      "title": "Insalata di mare",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_a14",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a15",
+      "title": "Alici marinate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a15",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a16",
+      "title": "Sarde in saor",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a16",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a17",
+      "title": "Baccalà mantecato",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a17",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a18",
+      "title": "Cozze alla marinara",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a18",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a19",
+      "title": "Gamberi al vapore con limone",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a19",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a20",
+      "title": "Cocktail di gamberi",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a20",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a21",
+      "title": "Capesante gratinate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a21",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a23",
+      "title": "Caponata",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a23",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a24",
+      "title": "Peperoni in agrodolce",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a24",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a25",
+      "title": "Zucchine alla scapece",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a25",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a26",
+      "title": "Melanzane a funghetto",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a26",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a27",
+      "title": "Carciofi alla giudia",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a27",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a28",
+      "title": "Carciofi alla romana",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a28",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a29",
+      "title": "Fiori di zucca fritti",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a29",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a30",
+      "title": "Panelle",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a30",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a31",
+      "title": "Farinata di ceci",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a31",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a32",
+      "title": "Olive ascolane",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a32",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a33",
+      "title": "Supplì",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a33",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a34",
+      "title": "Arancini",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a34",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a35",
+      "title": "Crocchette di patate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a35",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a36",
+      "title": "Mozzarella in carrozza",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a36",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a37",
+      "title": "Frittelle di baccalà",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a37",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a38",
+      "title": "Calamari fritti",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a38",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a39",
+      "title": "Verdure in pastella",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a39",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a40",
+      "title": "Panzanella",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a40",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a41",
+      "title": "Insalata di farro",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_a41",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a42",
+      "title": "Pinzimonio",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a42",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a43",
+      "title": "Bagna cauda",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a43",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a44",
+      "title": "Insalata russa",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_a44",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a45",
+      "title": "Uova ripiene al tonno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a45",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a46",
+      "title": "Frittatine di pasta",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a46",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a47",
+      "title": "Torta pasqualina",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a47",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a48",
+      "title": "Torta salata ricotta e spinaci",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a48",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a49",
+      "title": "Sformato di cavolfiore",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a49",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a50",
+      "title": "Flan di parmigiano",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a50",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a51",
+      "title": "Ricotta al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a51",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a52",
+      "title": "Tomino al forno con speck",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a52",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a53",
+      "title": "Verdure grigliate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a53",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a54",
+      "title": "Crescentine con affettati",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_a54",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "a55",
+      "title": "Insalata di rinforzo",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_a55",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b01",
+      "title": "Risotto alla milanese",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b01",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b02",
+      "title": "Risotto ai funghi porcini",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b02",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b03",
+      "title": "Risotto alla pescatora",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b03",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b04",
+      "title": "Risotto al radicchio e gorgonzola",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b04",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b05",
+      "title": "Risotto alla zucca",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b05",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b06",
+      "title": "Risotto al limone",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b06",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b07",
+      "title": "Risotto agli asparagi",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b07",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b08",
+      "title": "Risotto ai frutti di mare e bottarga",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b08",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b09",
+      "title": "Risotto al Castelmagno",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b09",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b10",
+      "title": "Gnocchi al pomodoro e basilico",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b10",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b11",
+      "title": "Gnocchi alla sorrentina",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b11",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b12",
+      "title": "Gnocchi burro e salvia",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b12",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b13",
+      "title": "Gnocchi alla romana",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b13",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b14",
+      "title": "Canederli in brodo",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b14",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b15",
+      "title": "Tortellini in brodo",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b15",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b16",
+      "title": "Ravioli ricotta e spinaci burro e salvia",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b16",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b17",
+      "title": "Cannelloni ricotta e spinaci",
+      "vesselId": "VESSEL_BAKING_DISH",
+      "compositionId": "COMP_b17",
+      "reference": {
+        "recipeId": "p12",
+        "asset": "docs/food-portrait-pipeline/candidates/p12-lasagne-baking-dish-approved-001.webp",
+        "sha256": "e11055f04bd0424fcd495c23fa20206d13b62eb7d985a58d1ac4e028edebafe2"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b18",
+      "title": "Lasagne al pesto",
+      "vesselId": "VESSEL_BAKING_DISH",
+      "compositionId": "COMP_b18",
+      "reference": {
+        "recipeId": "p12",
+        "asset": "docs/food-portrait-pipeline/candidates/p12-lasagne-baking-dish-approved-001.webp",
+        "sha256": "e11055f04bd0424fcd495c23fa20206d13b62eb7d985a58d1ac4e028edebafe2"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b19",
+      "title": "Pasticcio di carne al forno",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b19",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b20",
+      "title": "Zuppa di ceci e rosmarino",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b20",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b21",
+      "title": "Minestrone",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b21",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b22",
+      "title": "Zuppa di lenticchie",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b22",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b23",
+      "title": "Ribollita",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b23",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b24",
+      "title": "Zuppa di cavolfiore e patate",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b24",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b25",
+      "title": "Zuppa di farro e fagioli",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b25",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b26",
+      "title": "Zuppa di cipolle",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b26",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b27",
+      "title": "Vellutata di zucca",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b27",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b28",
+      "title": "Passato di verdure",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b28",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b29",
+      "title": "Stracciatella in brodo",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b29",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b30",
+      "title": "Pasta e piselli",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b30",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b31",
+      "title": "Pasta e zucca",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b31",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b32",
+      "title": "Pasta e lenticchie",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b32",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b33",
+      "title": "Pasta e cozze",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b33",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b34",
+      "title": "Pasta con i broccoli",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b34",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b35",
+      "title": "Pasta con fave e cicoria",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b35",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b36",
+      "title": "Pizzoccheri della Valtellina",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b36",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b37",
+      "title": "Malloreddus alla campidanese",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b37",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b38",
+      "title": "Fregola con le arselle",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b38",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b39",
+      "title": "Tajarin al burro e tartufo",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b39",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b40",
+      "title": "Bigoli in salsa",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b40",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b41",
+      "title": "Agnolotti del plin al sugo d'arrosto",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b41",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b42",
+      "title": "Casoncelli alla bergamasca",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b42",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b43",
+      "title": "Culurgiones",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b43",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b44",
+      "title": "Timballo di anelletti",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b44",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b45",
+      "title": "Crespelle ai funghi",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b45",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b46",
+      "title": "Polenta concia",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b46",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b47",
+      "title": "Polenta e funghi",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b47",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b48",
+      "title": "Zuppa di pesce",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b48",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b49",
+      "title": "Cacciucco",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b49",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b50",
+      "title": "Riso e prezzemolo",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b50",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b51",
+      "title": "Insalata di riso",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b51",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b52",
+      "title": "Riso al salto",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b52",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b53",
+      "title": "Farro alle verdure",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b53",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b54",
+      "title": "Cous cous di pesce",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b54",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "b55",
+      "title": "Orzotto ai funghi",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_b55",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c01",
+      "title": "Cotoletta alla milanese",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c01",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c02",
+      "title": "Ossobuco alla milanese",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c02",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c03",
+      "title": "Brasato al Barolo",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c03",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c04",
+      "title": "Bollito di manzo con salsa verde",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c04",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c05",
+      "title": "Tagliata di manzo con rucola",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c05",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c06",
+      "title": "Filetto al pepe verde",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c06",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c07",
+      "title": "Straccetti di manzo con rucola",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c07",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c08",
+      "title": "Polpette al sugo",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c08",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c09",
+      "title": "Polpettone al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c09",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c10",
+      "title": "Involtini di carne al sugo",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c10",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c11",
+      "title": "Spezzatino con patate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c11",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c12",
+      "title": "Peposo alla fornacina",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c12",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c13",
+      "title": "Scaloppine al limone",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c13",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c14",
+      "title": "Scaloppine al marsala",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c14",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c15",
+      "title": "Saltimbocca alla romana",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c15",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c16",
+      "title": "Scaloppine ai funghi",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c16",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c17",
+      "title": "Arrosto di vitello",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c17",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c18",
+      "title": "Arista di maiale al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c18",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c19",
+      "title": "Costine al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c19",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c20",
+      "title": "Salsiccia e friarielli",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c20",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c21",
+      "title": "Salsiccia e patate al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c21",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c22",
+      "title": "Pollo arrosto con patate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c22",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c23",
+      "title": "Pollo alla cacciatora",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c23",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c24",
+      "title": "Pollo alla diavola",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c24",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c25",
+      "title": "Petto di pollo alla piastra",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c25",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c26",
+      "title": "Pollo al limone",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c26",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c27",
+      "title": "Cotoletta di pollo al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c27",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c28",
+      "title": "Bocconcini di pollo alle verdure",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c28",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c29",
+      "title": "Fesa di tacchino in padella",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c29",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c30",
+      "title": "Coniglio alla ligure",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c30",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c31",
+      "title": "Coniglio all'ischitana",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c31",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c32",
+      "title": "Agnello al forno con patate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c32",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c33",
+      "title": "Abbacchio a scottadito",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c33",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c34",
+      "title": "Trippa alla romana",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c34",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c35",
+      "title": "Fegato alla veneziana",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c35",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c36",
+      "title": "Cotechino con lenticchie",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c36",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c37",
+      "title": "Bistecca alla fiorentina",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c37",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c38",
+      "title": "Braciole di maiale ai ferri",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c38",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c39",
+      "title": "Spiedini di carne misti",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c39",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c40",
+      "title": "Rollè di tacchino ripieno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c40",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c41",
+      "title": "Polpette di pollo al limone",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c41",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c42",
+      "title": "Vitello alle verdure in padella",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c42",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c43",
+      "title": "Hamburger di manzo alla piastra",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c43",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c44",
+      "title": "Costolette di agnello in crosta di erbe",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c44",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "c45",
+      "title": "Porchetta arrosto",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_c45",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d01",
+      "title": "Branzino all'acqua pazza",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d01",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d02",
+      "title": "Orata al forno con patate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d02",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d03",
+      "title": "Branzino al sale",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d03",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d04",
+      "title": "Baccalà alla vicentina",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d04",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d05",
+      "title": "Baccalà in umido con patate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d05",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d06",
+      "title": "Salmone al forno con erbe",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d06",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d07",
+      "title": "Salmone in padella al limone",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d07",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d08",
+      "title": "Tonno scottato al sesamo",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d08",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d09",
+      "title": "Tonno alla siciliana",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d09",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d10",
+      "title": "Pesce spada alla ghiotta",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d10",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d11",
+      "title": "Pesce spada alla piastra",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d11",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d12",
+      "title": "Sgombro al forno con patate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d12",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d13",
+      "title": "Alici arraganate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d13",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d14",
+      "title": "Alici fritte",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d14",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d15",
+      "title": "Sarde a beccafico",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d15",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d16",
+      "title": "Polpo alla luciana",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d16",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d17",
+      "title": "Seppie con piselli",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d17",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d18",
+      "title": "Calamari ripieni",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d18",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d19",
+      "title": "Calamari in umido",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d19",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d20",
+      "title": "Gamberoni all'aglio",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d20",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d21",
+      "title": "Fritto misto di mare",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d21",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d22",
+      "title": "Cozze gratinate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d22",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d23",
+      "title": "Trota alle mandorle",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d23",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d24",
+      "title": "Merluzzo gratinato",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d24",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d25",
+      "title": "Merluzzo con pomodorini e olive",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d25",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d26",
+      "title": "Rana pescatrice in guazzetto",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d26",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d27",
+      "title": "Frittata di cipolle",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d27",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d28",
+      "title": "Frittata di zucchine",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d28",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d29",
+      "title": "Frittata di patate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d29",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d30",
+      "title": "Uova in purgatorio",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d30",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d31",
+      "title": "Uova in cocotte con spinaci",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d31",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d33",
+      "title": "Parmigiana di zucchine",
+      "vesselId": "VESSEL_BAKING_DISH",
+      "compositionId": "COMP_d33",
+      "reference": {
+        "recipeId": "p12",
+        "asset": "docs/food-portrait-pipeline/candidates/p12-lasagne-baking-dish-approved-001.webp",
+        "sha256": "e11055f04bd0424fcd495c23fa20206d13b62eb7d985a58d1ac4e028edebafe2"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d34",
+      "title": "Melanzane ripiene",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d34",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d35",
+      "title": "Peperoni ripieni",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d35",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d36",
+      "title": "Pomodori ripieni di riso",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d36",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d37",
+      "title": "Zucchine ripiene",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d37",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d38",
+      "title": "Polpette di melanzane",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d38",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d39",
+      "title": "Polpette di ricotta e spinaci",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d39",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d40",
+      "title": "Scamorza alla piastra",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d40",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d41",
+      "title": "Verdure gratinate al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d41",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d42",
+      "title": "Insalata di pollo e verdure",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_d42",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d43",
+      "title": "Insalata di tonno e fagioli",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_d43",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d44",
+      "title": "Fagioli all'uccelletto",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d44",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d45",
+      "title": "Ceci in umido",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d45",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "d46",
+      "title": "Lenticchie in umido",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_d46",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f01",
+      "title": "Pollo marinato allo yogurt greco",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f01",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f02",
+      "title": "Involtini di pollo e spinaci",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f02",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f03",
+      "title": "Pollo al curry con yogurt",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f03",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f04",
+      "title": "Spiedini di pollo e verdure al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f04",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f05",
+      "title": "Pollo e broccoli in padella",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f05",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f06",
+      "title": "Petto di pollo ripieno di ricotta e zucchine",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f06",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f07",
+      "title": "Straccetti di tacchino e zucchine",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f07",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f08",
+      "title": "Polpette di tacchino al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f08",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f09",
+      "title": "Burger di pollo e zucchine",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f09",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f10",
+      "title": "Hamburger di tacchino e ricotta",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f10",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f11",
+      "title": "Tagliata di tacchino con rucola e grana",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f11",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f12",
+      "title": "Insalata di pollo, ceci e pomodorini",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_f12",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f13",
+      "title": "Bowl di pollo e quinoa",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_f13",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f14",
+      "title": "Merluzzo al vapore con verdure",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f14",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f15",
+      "title": "Merluzzo in crosta di pistacchi",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f15",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f16",
+      "title": "Salmone e asparagi al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f16",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f17",
+      "title": "Polpette di tonno e ricotta",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f17",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f18",
+      "title": "Polpette di salmone e patate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f18",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f19",
+      "title": "Tonno alla piastra con insalata di finocchi",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_f19",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f20",
+      "title": "Gamberi e zucchine in padella",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f20",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f21",
+      "title": "Insalata di gamberi e avocado",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_f21",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f22",
+      "title": "Seppie alla griglia con rucola",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f22",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f23",
+      "title": "Branzino al cartoccio",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f23",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f24",
+      "title": "Orata al vapore con verdure croccanti",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f24",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f25",
+      "title": "Frittata di albumi e asparagi",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f25",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f26",
+      "title": "Omelette proteica al prosciutto",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f26",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f27",
+      "title": "Uova strapazzate con spinaci",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f27",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f28",
+      "title": "Muffin di uova e verdure",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f28",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f29",
+      "title": "Rotolo di bresaola e ricotta",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f29",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f30",
+      "title": "Burger di lenticchie",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f30",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f31",
+      "title": "Ceci speziati al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f31",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f32",
+      "title": "Petto di pollo in crosta di senape ed erbe",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f32",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f33",
+      "title": "Cosce di pollo al forno senza pelle",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f33",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f34",
+      "title": "Bocconcini di tacchino al limone",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f34",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f35",
+      "title": "Filetto di manzo con asparagi",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f35",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f36",
+      "title": "Roast beef all'inglese",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f36",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f37",
+      "title": "Insalata di uova, tonno e fagiolini",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_f37",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f38",
+      "title": "Sgombro all'insalata di finocchi e arancia",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_f38",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f39",
+      "title": "Petto di pollo alle erbe in padella",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f39",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "f40",
+      "title": "Insalatona di tonno, uova e verdure",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_f40",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s01",
+      "title": "Salsa allo yogurt e limone",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s01",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s03",
+      "title": "Salsa verde leggera",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s03",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s04",
+      "title": "Pesto leggero di basilico e ricotta",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s04",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s05",
+      "title": "Crema di piselli e menta",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s05",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s06",
+      "title": "Salsa di pomodorini crudi",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s06",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s07",
+      "title": "Vinaigrette al limone e senape",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s07",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s08",
+      "title": "Salsa yogurt e curry",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s08",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s09",
+      "title": "Crema di ceci al limone",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s09",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s10",
+      "title": "Salsa di peperoni arrostiti",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s10",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s11",
+      "title": "Salsa tonnata leggera",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s11",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s12",
+      "title": "Salsa alle erbe fresche",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s12",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s13",
+      "title": "Crema di zucchine e basilico",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s13",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s14",
+      "title": "Cipolle rosse in agrodolce",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s14",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s15",
+      "title": "Salsa di prezzemolo e aglio",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s15",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s16",
+      "title": "Salsa allo yogurt e senape",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s16",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s17",
+      "title": "Maionese classica",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s17",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s18",
+      "title": "Aioli",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s18",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s19",
+      "title": "Salsa tonnata classica",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s19",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s20",
+      "title": "Salsa rosa",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s20",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s21",
+      "title": "Salsa tartara",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s21",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s22",
+      "title": "Burro nocciola alla salvia",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s22",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s23",
+      "title": "Salsa al gorgonzola",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s23",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s24",
+      "title": "Salsa ai quattro formaggi",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s24",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s25",
+      "title": "Besciamella",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s25",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s26",
+      "title": "Salsa al pepe verde",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s26",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s27",
+      "title": "Salsa ai funghi e panna",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s27",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s28",
+      "title": "Salsa al vino rosso",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s28",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s29",
+      "title": "Salsa olandese",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s29",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s30",
+      "title": "Pesto genovese classico",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s30",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s31",
+      "title": "Salsa di noci",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s31",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s32",
+      "title": "Fonduta di fontina",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s32",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "k02",
+      "title": "Yogurt proteico",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_k02",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n01",
+      "title": "Insalata mista",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_n01",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n02",
+      "title": "Spinaci saltati",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n02",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n03",
+      "title": "Broccoli ripassati",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n03",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n04",
+      "title": "Patate al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n04",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n05",
+      "title": "Patate lesse al prezzemolo",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n05",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n06",
+      "title": "Purè di patate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n06",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n07",
+      "title": "Zucchine trifolate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n07",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n08",
+      "title": "Melanzane grigliate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n08",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n09",
+      "title": "Peperoni in padella",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n09",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n10",
+      "title": "Cavolfiore gratinato",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n10",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n11",
+      "title": "Cicoria ripassata",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n11",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n12",
+      "title": "Fagiolini al vapore",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n12",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n13",
+      "title": "Carciofi trifolati",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n13",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n14",
+      "title": "Asparagi al burro e parmigiano",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n14",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n15",
+      "title": "Verza stufata",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n15",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n16",
+      "title": "Insalata di finocchi e arance",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_n16",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n17",
+      "title": "Caponatina di zucchine",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n17",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n18",
+      "title": "Pomodori gratinati",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n18",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n19",
+      "title": "Radicchio alla griglia",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n19",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n20",
+      "title": "Zucca al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n20",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n21",
+      "title": "Insalata di pomodori e cipolla",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_n21",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n22",
+      "title": "Funghi trifolati",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n22",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n23",
+      "title": "Lenticchie stufate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n23",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n24",
+      "title": "Piselli al prosciutto",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n24",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n25",
+      "title": "Insalata di cetrioli e yogurt",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_n25",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n26",
+      "title": "Bietole all'olio e limone",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n26",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n27",
+      "title": "Ceci croccanti al forno",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n27",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n28",
+      "title": "Cavolfiore arrosto",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n28",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n29",
+      "title": "Patate e cipolle in padella",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n29",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "n30",
+      "title": "Rucola, grana e balsamico",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_n30",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "v01",
+      "title": "Lattina di cola",
+      "vesselId": "VESSEL_FREE",
+      "compositionId": "COMP_v01",
+      "reference": {
+        "recipeId": "v08",
+        "asset": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+        "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "v02",
+      "title": "Lattina di cola zero",
+      "vesselId": "VESSEL_FREE",
+      "compositionId": "COMP_v02",
+      "reference": {
+        "recipeId": "v08",
+        "asset": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+        "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "v03",
+      "title": "Lattina di aranciata",
+      "vesselId": "VESSEL_FREE",
+      "compositionId": "COMP_v03",
+      "reference": {
+        "recipeId": "v08",
+        "asset": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+        "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "v04",
+      "title": "Chinotto",
+      "vesselId": "VESSEL_FREE",
+      "compositionId": "COMP_v04",
+      "reference": {
+        "recipeId": "v08",
+        "asset": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+        "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "v05",
+      "title": "Acqua tonica",
+      "vesselId": "VESSEL_FREE",
+      "compositionId": "COMP_v05",
+      "reference": {
+        "recipeId": "v08",
+        "asset": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+        "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "v06",
+      "title": "Gassosa",
+      "vesselId": "VESSEL_FREE",
+      "compositionId": "COMP_v06",
+      "reference": {
+        "recipeId": "v08",
+        "asset": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+        "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "v07",
+      "title": "Te freddo al limone",
+      "vesselId": "VESSEL_FREE",
+      "compositionId": "COMP_v07",
+      "reference": {
+        "recipeId": "v08",
+        "asset": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+        "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "v09",
+      "title": "Spremuta d'arancia",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_v09",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "v11",
+      "title": "Succo di pera",
+      "vesselId": "VESSEL_FREE",
+      "compositionId": "COMP_v11",
+      "reference": {
+        "recipeId": "v08",
+        "asset": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+        "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "v12",
+      "title": "Succo di mela",
+      "vesselId": "VESSEL_FREE",
+      "compositionId": "COMP_v12",
+      "reference": {
+        "recipeId": "v08",
+        "asset": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+        "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "v13",
+      "title": "Energy drink",
+      "vesselId": "VESSEL_FREE",
+      "compositionId": "COMP_v13",
+      "reference": {
+        "recipeId": "v08",
+        "asset": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+        "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "v14",
+      "title": "Limonata fatta in casa",
+      "vesselId": "VESSEL_FREE",
+      "compositionId": "COMP_v14",
+      "reference": {
+        "recipeId": "v08",
+        "asset": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+        "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "v15",
+      "title": "Birra media",
+      "vesselId": "VESSEL_FREE",
+      "compositionId": "COMP_v15",
+      "reference": {
+        "recipeId": "v08",
+        "asset": "docs/food-portrait-pipeline/candidates/v08-orange-juice-vessel-free-approved-001.webp",
+        "sha256": "10e4255f30383b50d75db0e1a07309da7a5c50a8616f098d8b21fc44b4fd6b64"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o01",
+      "title": "Pollo teriyaki",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_o01",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o02",
+      "title": "Riso saltato con uova e verdure",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_o02",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o03",
+      "title": "Noodles saltati con manzo",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_o03",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o04",
+      "title": "Salmone teriyaki",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_o04",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o05",
+      "title": "Gamberi in agrodolce",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_o05",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o06",
+      "title": "Tofu saltato con verdure",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_o06",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o07",
+      "title": "Zuppa di miso",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_o07",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o08",
+      "title": "Ramen veloce con pollo e uovo",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_o08",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o09",
+      "title": "Manzo alle cipolle e soia",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_o09",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o10",
+      "title": "Spaghetti di riso con verdure croccanti",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_o10",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o11",
+      "title": "Pollo alle mandorle",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_o11",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o12",
+      "title": "Maiale in agrodolce",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_o12",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o13",
+      "title": "Edamame al sale",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_o13",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o14",
+      "title": "Insalata di germogli e sesamo",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_o14",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "o15",
+      "title": "Riso al vapore con verdure e tofu",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_o15",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s33",
+      "title": "Salsa di soia",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s33",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s34",
+      "title": "Salsa teriyaki",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s34",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s35",
+      "title": "Salsa agrodolce",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s35",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "s36",
+      "title": "Salsa di soia e zenzero",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_s36",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "w02",
+      "title": "Banana e gallette",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_w02",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "w03",
+      "title": "Porridge d'avena e banana",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_w03",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "w04",
+      "title": "Riso bianco e petto di pollo",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_w04",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "w05",
+      "title": "Toast bresaola e miele",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_w05",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "w06",
+      "title": "Yogurt, frutta e miele",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_w06",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "w07",
+      "title": "Shake proteico e banana",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_w07",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "w08",
+      "title": "Pollo, riso e verdure",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_w08",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "w09",
+      "title": "Omelette di albumi e pane",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_w09",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "w10",
+      "title": "Tonno, patate e limone",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_w10",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "w11",
+      "title": "Ricotta, miele e noci",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_w11",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "w13",
+      "title": "Latte al cacao e biscotti",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_w13",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "w14",
+      "title": "Bowl di riso, salmone e avocado",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_w14",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "k03",
+      "title": "Brioche vuota",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_k03",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "k04",
+      "title": "Brioche con marmellata di albicocche",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_k04",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "k05",
+      "title": "Brioche con marmellata ai frutti di bosco",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_k05",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "k06",
+      "title": "Brioche con crema di nocciole",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_k06",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "k07",
+      "title": "Brioche con crema di pistacchio",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_k07",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "k08",
+      "title": "Cornetto al cioccolato",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_k08",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "k09",
+      "title": "Merendina al cioccolato",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_k09",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "k10",
+      "title": "Merendina e latte",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_k10",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "k11",
+      "title": "Pane, burro e marmellata",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_k11",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "k12",
+      "title": "Biscotti frollini e latte",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_k12",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "k13",
+      "title": "Fetta di plumcake",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_k13",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do02",
+      "title": "Nice cream alla banana",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do02",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do03",
+      "title": "Ricotta con miele e noci",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do03",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do04",
+      "title": "Palline di datteri e mandorle",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do04",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do05",
+      "title": "Pancake proteici ai frutti di bosco",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do05",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do06",
+      "title": "Mele al forno con cannella",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do06",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do07",
+      "title": "Porridge dolce al cacao e pera",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do07",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do09",
+      "title": "Crema al caffè proteica",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do09",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do11",
+      "title": "Tiramisù classico",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_do11",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do12",
+      "title": "Torta al cioccolato fondente",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do12",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do13",
+      "title": "Crostata alla marmellata",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do13",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do14",
+      "title": "Salame di cioccolato",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do14",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do15",
+      "title": "Muffin al cioccolato",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do15",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do16",
+      "title": "Pancake americani burro e miele",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do16",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do17",
+      "title": "Torta di mele della nonna",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do17",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do18",
+      "title": "Mousse al cioccolato",
+      "vesselId": "VESSEL_RAMEKIN",
+      "compositionId": "COMP_do18",
+      "reference": {
+        "recipeId": "s02",
+        "asset": "docs/food-portrait-pipeline/candidates/s02-yogurt-cucumber-ramekin-approved-001.webp",
+        "sha256": "32fefca8fcfd22db9f996dd6b5ca47b81abc5bfbe16d63c82268dba84117ad4c"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do19",
+      "title": "Biscotti burro e cioccolato",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do19",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "do20",
+      "title": "Cheesecake cotta al forno",
+      "vesselId": "VESSEL_DESSERT_MOLD",
+      "compositionId": "COMP_do20",
+      "reference": {
+        "recipeId": "do08",
+        "asset": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+        "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft01",
+      "title": "Overnight oats yogurt e mirtilli",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_ft01",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft02",
+      "title": "Toast con avocado e uovo",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_ft02",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft03",
+      "title": "Frullato verde spinaci e mela",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_ft03",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft04",
+      "title": "Hummus con verdure croccanti",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_ft04",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft05",
+      "title": "Caprese light coi fiocchi di latte",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_ft05",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft06",
+      "title": "Edamame al vapore con limone",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_ft06",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft07",
+      "title": "Quinoa saltata con verdure",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_ft07",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft08",
+      "title": "Riso con piselli e limone",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_ft08",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft09",
+      "title": "Zuppa di lenticchie e carote",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_ft09",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft10",
+      "title": "Cous cous freddo ceci e pomodorini",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_ft10",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft11",
+      "title": "Pollo alla griglia, limone e rosmarino",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_ft11",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft12",
+      "title": "Salmone al forno con finocchi",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_ft12",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft13",
+      "title": "Merluzzo in crosta di pomodorini",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_ft13",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft14",
+      "title": "Tofu saltato broccoli e sesamo",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_ft14",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft15",
+      "title": "Tacchino in padella con zucchine",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_ft15",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft16",
+      "title": "Frittata di albumi e spinaci",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_ft16",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft17",
+      "title": "Verdure al forno con paprika",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_ft17",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft18",
+      "title": "Cavolfiore arrosto alla curcuma",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_ft18",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft19",
+      "title": "Buddha bowl quinoa ceci e avocado",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_ft19",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "ft20",
+      "title": "Insalata di farro feta e pomodorini",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_ft20",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp01",
+      "title": "Pasta in bianco",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_sp01",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp02",
+      "title": "Riso basmati in bianco",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_sp02",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp03",
+      "title": "Pastina in brodo",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_sp03",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp04",
+      "title": "Patatine fritte",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_sp04",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp05",
+      "title": "Rosti di patate",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_sp05",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp06",
+      "title": "Torta salata zucchine e prosciutto cotto",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_sp06",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp07",
+      "title": "Torta salata patate e pancetta",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_sp07",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp08",
+      "title": "Bowl fit di pollo e riso",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_sp08",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp09",
+      "title": "Frittata fit di albumi e tacchino",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_sp09",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp10",
+      "title": "Wrap fit di pollo e yogurt",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_sp10",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp11",
+      "title": "Pancake fit di albumi e avena",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_sp11",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp12",
+      "title": "Chili fit di manzo magro",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_sp12",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp13",
+      "title": "Poke fit di salmone",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_sp13",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp14",
+      "title": "Toast fit tacchino e ricotta",
+      "vesselId": "VESSEL_PLATE",
+      "compositionId": "COMP_sp14",
+      "reference": {
+        "recipeId": "r1",
+        "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+        "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+      },
+      "state": "PENDING"
+    },
+    {
+      "recipeId": "sp15",
+      "title": "Insalata fit di tonno e ceci",
+      "vesselId": "VESSEL_BOWL",
+      "compositionId": "COMP_sp15",
+      "reference": {
+        "recipeId": "r2",
+        "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+      },
+      "state": "PENDING"
+    }
+  ],
+  "blocked": [
+    {
+      "recipeId": "r6",
+      "title": "Pizza in padella proteica",
+      "vesselId": "VESSEL_PIZZA_SURFACE",
+      "reason": "FROZEN_VESSEL_REFERENCE_REQUIRED"
+    },
+    {
+      "recipeId": "k01",
+      "title": "Fette biscottate con burro d'arachidi e marmellata",
+      "vesselId": "VESSEL_CUP",
+      "reason": "FROZEN_VESSEL_REFERENCE_REQUIRED"
+    },
+    {
+      "recipeId": "w01",
+      "title": "Pane, miele e caffè",
+      "vesselId": "VESSEL_CUP",
+      "reason": "FROZEN_VESSEL_REFERENCE_REQUIRED"
+    },
+    {
+      "recipeId": "w12",
+      "title": "Fiocchi di latte e frutta",
+      "vesselId": "VESSEL_CUP",
+      "reason": "FROZEN_VESSEL_REFERENCE_REQUIRED"
+    },
+    {
+      "recipeId": "k14",
+      "title": "Ciambella e cappuccino",
+      "vesselId": "VESSEL_CUP",
+      "reason": "FROZEN_VESSEL_REFERENCE_REQUIRED"
+    }
+  ],
+  "activeRecipeId": null,
+  "lastRun": null,
+  "gates": {
+    "candidateLimitPerCycle": 1,
+    "ownerReviewBatchSize": 10,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false,
+    "budgetEUR": 0
+  }
+}
