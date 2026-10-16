@@ -1,0 +1,68 @@
+{
+  "schema": "mealup-food-portrait-fast-pilot-cycle-v1",
+  "checkpointId": "FPP-FAST-A10-CYCLE-001",
+  "recordedAt": "2026-10-16",
+  "recipeId": "a10",
+  "title": "Tartare di manzo",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "packet": {
+    "sha256": "e315eb4a249f6ead245f0f307db2b62aae8bb7edfc72591970dcd2bf1f88d00a",
+    "bytes": 1851,
+    "sourceHash": "8ea5551cf3c5b36364617a48f2d8367c9384c8bdf4001651ac883dd45eed98eb",
+    "promptSha256": "ebd11630085582e9b5931f912779be1c2bab8e086096737c75c1ac998210d257",
+    "promptBytes": 989
+  },
+  "reference": {
+    "vesselId": "VESSEL_PLATE",
+    "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+    "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+  },
+  "candidate": {
+    "asset": "docs/food-portrait-pipeline/candidates/a10-fast-pilot-candidate-001.png",
+    "sha256": "927614d0a11ae654d4dc712770310b62229c87c63a75085cceac0343770908b8",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1980528,
+    "format": "png",
+    "originalPreserved": true
+  },
+  "generation": {
+    "imageCalls": 1,
+    "automaticRetry": false,
+    "toolWallClockSeconds": 31.0,
+    "actualProviderInputTokens": "UNVERIFIED_NOT_EXPOSED",
+    "actualProviderOutputTokens": "UNVERIFIED_NOT_EXPOSED"
+  },
+  "qaTechnical": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"]
+  },
+  "qaVisualIndependent": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "verified": [
+      "FROZEN PLATE style and crop",
+      "single integrated ring-mold beef tartare",
+      "one centered egg yolk",
+      "source-authorized seasoning and chopped capers",
+      "exact unique 380 kcal text",
+      "needle in correct LIME low-mid position",
+      "no extra text UI props or unlisted garnish"
+    ],
+    "reviewCorrection": {
+      "initialVerdict": "FAIL_CANDIDATE_ONLY",
+      "rootCause": "The reviewer brief listed primary ingredients but omitted the canonical preparation sentence that explicitly authorizes salt and pepper.",
+      "evidence": "catalog-recipe-source a10 step 2: Condisci con olio, limone, senape, capperi tritati, sale e pepe.",
+      "correctedVerdict": "PASS_CANDIDATE_ONLY",
+      "prevention": "Independent QA briefs must include the complete canonical steps, not only the ingredient list."
+    }
+  },
+  "authority": {
+    "ownerApproved": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  },
+  "pilotProgress": "1/10 QA_PASS_CANDIDATE_ONLY",
+  "nextGate": "CONTINUE_SERIAL_PILOT_WITH_RECIPE_A18_ONLY"
+}

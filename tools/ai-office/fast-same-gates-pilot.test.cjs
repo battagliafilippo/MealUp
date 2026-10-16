@@ -15,12 +15,12 @@ function sha256(file) {
   return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 }
 
-test('pilot spends no duplicate image calls and has no production authority', () => {
+test('owner-authorized pilot spends no duplicate image calls and preserves guarded authority', () => {
   assert.equal(pilot.cohort.length, 10);
   assert.equal(pilot.comparison.noDuplicateGeneration, true);
   assert.equal(pilot.execution.maximumImageCalls, 10);
   assert.equal(pilot.execution.stopOnFirstCriticalFailure, true);
-  assert.equal(pilot.authority.imageGenerationAuthorized, false);
+  assert.equal(pilot.authority.imageGenerationAuthorized, true);
   assert.equal(pilot.authority.additionalBudgetEUR, 0);
   for (const key of ['automaticRetryAuthorized', 'automaticAcceptanceAuthorized', 'automaticFreezeAuthorized', 'integrationAuthorized', 'deploymentAuthorized']) {
     assert.equal(pilot.authority[key], false, key);

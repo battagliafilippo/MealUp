@@ -38,7 +38,7 @@ function buildPacket(options) {
   const style = readJson(stylePath);
   const recipeId = options.recipeId;
   if (!recipeId) fail('RECIPE_ID_REQUIRED');
-  if (pilot.status !== 'DESIGNED_AWAITING_OWNER_APPROVAL_TO_EXECUTE') fail('PILOT_DESIGN_STATUS_INVALID');
+  if (!['DESIGNED_AWAITING_OWNER_APPROVAL_TO_EXECUTE', 'ACTIVE_OWNER_AUTHORIZED_SERIAL_EXECUTION'].includes(pilot.status)) fail('PILOT_DESIGN_STATUS_INVALID');
   const selected = pilot.cohort.find((entry) => entry.recipeId === recipeId);
   if (!selected) fail('RECIPE_NOT_IN_PILOT:' + recipeId);
   const queued = state.queue.find((entry) => entry.recipeId === recipeId);

@@ -1,0 +1,16 @@
+{
+  "schema": "mealup-food-portrait-fast-same-gates-real-pilot-authorization-v1",
+  "checkpointId": "FPP-FAST-REAL-PILOT-AUTH-001",
+  "recordedAt": "2026-10-16",
+  "status": "OWNER_AUTHORIZED_SERIAL_EXECUTION",
+  "ownerDecision": "ok procedi",
+  "firstRecipeId": "a10",
+  "maximumImageCallsThisCycle": 1,
+  "automaticRetry": false,
+  "stopOnFirstCriticalFailure": true,
+  "automaticAcceptance": false,
+  "automaticFreeze": false,
+  "integration": false,
+  "deployment": false,
+  "budgetEUR": 0
+}

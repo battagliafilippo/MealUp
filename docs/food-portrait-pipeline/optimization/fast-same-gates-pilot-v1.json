@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-fast-same-gates-pilot-v1",
   "pilotId": "FPP-FAST-PILOT-001",
-  "status": "DESIGNED_AWAITING_OWNER_APPROVAL_TO_EXECUTE",
+  "status": "ACTIVE_OWNER_AUTHORIZED_SERIAL_EXECUTION",
   "designDate": "2026-10-16",
   "purpose": "Measure whether compact orchestration reduces time and tokens without weakening any Food Portrait quality gate.",
   "comparison": {
@@ -22,7 +22,7 @@
   },
   "authority": {
     "designApprovedForCreation": true,
-    "imageGenerationAuthorized": false,
+    "imageGenerationAuthorized": true,
     "automaticRetryAuthorized": false,
     "automaticAcceptanceAuthorized": false,
     "automaticFreezeAuthorized": false,
