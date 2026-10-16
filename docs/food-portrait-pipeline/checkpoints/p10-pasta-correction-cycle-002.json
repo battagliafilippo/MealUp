@@ -1,0 +1,32 @@
+{
+  "schema": "mealup-food-portrait-fast-correction-cycle-v1",
+  "checkpointId": "FPP-FAST-P10-PASTA-CORRECTION-002",
+  "recordedAt": "2026-10-16",
+  "recipeId": "p10",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "correction": "PASTA_FORM_ONLY",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p10-fast-pilot-pasta-correction-002.png",
+    "sha256": "23c1a1cebeec83dee7341ef6f31995921451bc5600afcfc0f3e7c2bdefd95c5c",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1812069,
+    "format": "png"
+  },
+  "generation": {
+    "type": "OWNER_AUTHORIZED_TARGETED_PASTA_FORM_EDIT",
+    "providerReceipt": "exec-d1286e21-9d50-4a2e-9e07-f9c88215b917.png",
+    "imageCalls": 1,
+    "automaticRetry": false
+  },
+  "qaTechnical": "PASS",
+  "qaVisualIndependent": {
+    "status": "PASS",
+    "pastaForm": "CLEAR_NARROW_FLAT_RIBBON_TRENETTE",
+    "preserved": ["potato cubes", "green beans", "integrated pesto", "MealUp Toys 3D", "VESSEL_BOWL", "crop", "ORANGE gauge", "745 kcal"],
+    "blockingDefects": []
+  },
+  "authority": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
+  "pilotProgress": "4/10 QA_PASS_CANDIDATE_ONLY",
+  "nextGate": "BACKGROUND_CONTINUE_S11"
+}

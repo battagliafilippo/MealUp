@@ -11,5 +11,6 @@
   "independentVisualQa": "FAIL_PASTA_FORM",
   "authority": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
   "pilotProgress": "3/10 QA_PASS; P10 FAILED",
-  "nextGate": "OWNER_MAY_AUTHORIZE_ONE_TARGETED_PASTA_FORM_CORRECTION"
+  "nextGate": "COMPLETED_BY_FPP_FAST_P10_PASTA_CORRECTION_002",
+  "supersededBy": "docs/food-portrait-pipeline/checkpoints/p10-pasta-correction-cycle-002.json"
 }
