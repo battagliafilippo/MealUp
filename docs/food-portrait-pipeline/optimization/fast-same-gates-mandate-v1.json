@@ -1,0 +1,91 @@
+{
+  "schema": "mealup-food-portrait-efficiency-mandate-v1",
+  "mandateId": "FPP-FAST-SAME-GATES-001",
+  "issuedBy": "CEO_OWNER",
+  "assignedTo": "AI_OFFICE_DIRECTOR",
+  "status": "ACTIVE_RESEARCH_AND_PILOT_DESIGN_ONLY",
+  "objective": "Reduce orchestration tokens and elapsed coordination time while preserving the exact Food Portrait visual contract and every existing quality gate.",
+  "truthBoundary": {
+    "guaranteedFirstGenerationPerfection": false,
+    "requiredProcessBehavior": "FAIL_CLOSED_NO_DEFECT_MAY_PASS",
+    "reason": "Image generation is probabilistic; equivalence must be demonstrated by measured QA and owner review."
+  },
+  "baseline": {
+    "state": "PAUSED_OWNER_BATCH_REVIEW_10",
+    "eligible": 437,
+    "completed": 10,
+    "pending": 427,
+    "generationsObserved": 11,
+    "qaPassCandidates": 10,
+    "firstShotPassRate": 0.909,
+    "ownerApprovedFrozenInBatch": 1,
+    "candidateOnlyInBatch": 9
+  },
+  "activatedDepartments": [
+    {
+      "id": "director",
+      "skills": ["mealup-food-portrait-fast-same-gates", "mealup-design-no-overclaim"],
+      "authority": "ORCHESTRATE_AND_RECOMMEND_ONLY"
+    },
+    {
+      "id": "source_data",
+      "skills": ["mealup-food-portrait-fast-same-gates", "mealup-food-portrait-background"],
+      "authority": "READ_AND_COMPILE_PACKET_ONLY"
+    },
+    {
+      "id": "efficiency",
+      "skills": ["mealup-food-portrait-fast-same-gates", "mealup-recurring-cost-auditor"],
+      "authority": "MEASURE_AND_PROPOSE_ONLY"
+    },
+    {
+      "id": "prompt_architect",
+      "skills": ["mealup-food-portrait-fast-same-gates"],
+      "authority": "COMPILE_PROMPT_ONLY"
+    },
+    {
+      "id": "visual",
+      "skills": ["mealup-food-portrait-fast-same-gates", "imagegen"],
+      "authority": "ONE_SEPARATE_CANDIDATE_PER_AUTHORIZED_CYCLE"
+    },
+    {
+      "id": "qa_technical",
+      "skills": ["mealup-food-portrait-fast-same-gates", "mealup-agent-benchmark"],
+      "authority": "INDEPENDENT_TECHNICAL_VERIFICATION"
+    },
+    {
+      "id": "qa_visual",
+      "skills": ["mealup-food-portrait-fast-same-gates", "mealup-agent-benchmark", "mealup-design-no-overclaim"],
+      "authority": "INDEPENDENT_VISUAL_VERIFICATION"
+    },
+    {
+      "id": "audit",
+      "skills": ["mealup-food-portrait-fast-same-gates"],
+      "authority": "CHECKPOINT_AND_ROLLUP_ONLY"
+    }
+  ],
+  "communication": {
+    "sharedArtifact": "IMMUTABLE_HASHED_JOB_PACKET",
+    "allowedFields": ["recipeFacts", "sourceHash", "vessel", "referencePath", "referenceSha256", "gaugeTarget", "promptVersion", "assetPath", "assetSha256", "qaVerdict"],
+    "fullChatHistoryRequired": false,
+    "crossDepartmentMessaging": true,
+    "directorIsSingleConsolidator": true
+  },
+  "pilot": {
+    "status": "DESIGN_REQUIRED_NOT_AUTHORIZED_TO_GENERATE",
+    "size": 10,
+    "stratification": "MULTI_VESSEL_AND_MULTI_RISK",
+    "minimumVesselCoverage": 4,
+    "minimumMediumHighRiskRecipes": 3,
+    "metrics": ["inputTokens", "outputTokens", "contextBytes", "wallClockSeconds", "imageCalls", "firstShotQaPass", "criticalDefects", "ownerDecision"],
+    "goThresholds": {
+      "criticalRegressionCount": 0,
+      "ownerAcceptanceNotBelowBaseline": true,
+      "firstShotPassNotBelowBaseline": true,
+      "minimumOrchestrationTokenSavingPercent": 40,
+      "minimumMedianTimeSavingPercent": 20,
+      "rollbackDemonstrated": true
+    }
+  },
+  "forbidden": ["AUTO_ACCEPT", "AUTO_FREEZE", "INTEGRATION", "DEPLOY", "MAIN_TESTER_PWA_CHANGES", "FROZEN_ASSET_CHANGES", "PAID_API", "BATCHED_DISTINCT_IMAGES_IN_ONE_IMAGE_CALL", "REMOVING_INDEPENDENT_VISUAL_QA"],
+  "nextGate": "OWNER_APPROVAL_OF_PILOT_DESIGN"
+}

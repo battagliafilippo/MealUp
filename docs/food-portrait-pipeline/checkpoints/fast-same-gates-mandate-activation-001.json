@@ -1,0 +1,30 @@
+{
+  "schema": "mealup-food-portrait-efficiency-mandate-activation-v1",
+  "mandateId": "FPP-FAST-SAME-GATES-001",
+  "status": "ACTIVE_RESEARCH_AND_PILOT_DESIGN_ONLY",
+  "director": "ACTIVATED",
+  "departmentsActivated": 8,
+  "crossDepartmentCommunication": true,
+  "sharedSkill": ".agents/skills/mealup-food-portrait-fast-same-gates/SKILL.md",
+  "mandate": "docs/food-portrait-pipeline/optimization/fast-same-gates-mandate-v1.json",
+  "plan": "docs/food-portrait-pipeline/optimization/fast-same-gates-plan-v1.md",
+  "productionCatalogStatus": "PAUSED_OWNER_BATCH_REVIEW_10",
+  "pilotGenerationAuthorized": false,
+  "automaticAcceptance": false,
+  "automaticFreeze": false,
+  "integration": false,
+  "deployment": false,
+  "budgetEUR": 0,
+  "evidence": {
+    "independentDepartmentAudits": 3,
+    "mandateJsonValidated": true,
+    "skillFrontmatterManualValidation": true,
+    "pythonQuickValidatorAvailable": false,
+    "deterministicTestsRequired": [
+      "tools/ai-office/agent-registry.test.cjs",
+      "tools/ai-office/office-orchestrator.test.cjs",
+      "tools/ai-office/fast-same-gates-mandate.test.cjs"
+    ]
+  },
+  "nextGate": "OWNER_APPROVAL_OF_PILOT_DESIGN"
+}
