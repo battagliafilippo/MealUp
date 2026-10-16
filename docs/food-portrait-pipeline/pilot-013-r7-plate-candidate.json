@@ -1,0 +1,72 @@
+{
+  "schema": "mealup-food-portrait-candidate-v1",
+  "candidateId": "FPP-CATALOG-R7-001",
+  "program": "CATALOG_AUTONOMY_V1",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "r7",
+    "title": "Bresaola, rucola e grana",
+    "kcal": 320,
+    "vesselId": "VESSEL_PLATE",
+    "sourceHash": "07cd1364547de7871ad2de0b4ec45bd7bd65dda53e27d8cbbf3f533a98699574"
+  },
+  "gauge": {
+    "numericText": "320 kcal",
+    "expectedAngleDegrees": -21.6,
+    "zone": "GREEN_LIME_LOW_MID",
+    "pixelClaim": "Needle is visually coherent with the green-lime low-mid zone; sub-degree accuracy is not asserted from visual inspection alone."
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/r7-bresaola-rucola-grana-plate-candidate-001.webp",
+    "sha256": "9314c128e9452cf0b42832658cd8c1e6a98062d22c89e45995d5c55c2ec18137",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1477012,
+    "format": "webp",
+    "lossless": true,
+    "decodedPixelsIdenticalToGeneratedPng": true
+  },
+  "reference": {
+    "recipeId": "r1",
+    "path": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+    "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+  },
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE",
+    "providerReceipt": "exec-69c906e4-7c08-4982-b339-abe1fbe256bc.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "extraCostEUR": 0
+  },
+  "technicalQa": {
+    "status": "PASS_AFTER_LOSSLESS_ENCODING",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW"]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "reviewAuthority": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+    "evidenceMode": "ORIGINAL_SAVED_PIXELS_DIRECT_INSPECTION",
+    "checks": {
+      "singleRecipeAndSinglePlate": true,
+      "bresaolaRecognizable": true,
+      "arugulaRecognizable": true,
+      "granaShavingsRecognizable": true,
+      "oilLemonDressingIntegrated": true,
+      "noExtraIngredientsOrProps": true,
+      "frozenStyleMatch": true,
+      "exactVisibleKcalText": true,
+      "needleDirectionAndZoneCoherent": true,
+      "mobileLegibility": true,
+      "safeOpaqueCrop": true,
+      "noAdditionalUiOrText": true
+    }
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  }
+}

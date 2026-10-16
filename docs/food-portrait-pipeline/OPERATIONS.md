@@ -759,3 +759,13 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Stato:** `ACTIVE_READY_FIRST_RECIPE_R7`. Il prossimo heartbeat può tentare la prima vera generazione ImageGen non presidiata.
 
 **Prossimo micro-step necessario:** prima run background su `r7`; se ImageGen non è disponibile nel task pianificato, il programma si bloccherà senza avanzare la coda.
+
+### Catalog cycle 001 — r7 candidate QA PASS
+
+- Generata una sola candidate `r7` usando la reference FROZEN `r1` PLATE; valore esatto `320 kcal`.
+- QA tecnico PASS dopo ricodifica WebP lossless; pixel decodificati identici al PNG generato.
+- QA visivo indipendente PASS CANDIDATE ONLY: bresaola, rucola e scaglie di grana riconoscibili; dressing integrato; nessun ingrediente, testo, UI o prop estraneo.
+- Asset SHA-256 `9314c128e9452cf0b42832658cd8c1e6a98062d22c89e45995d5c55c2ec18137`; coda: 1 completata, 436 pendenti; batch review 1/10.
+- Nessuna approvazione automatica, freeze, integrazione o deploy.
+
+**Prossimo micro-step necessario:** il prossimo ciclo autonomo lavora esclusivamente sulla successiva ricetta PENDING (`r4`) e mantiene lo stop al decimo QA PASS.
