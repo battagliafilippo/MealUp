@@ -13,6 +13,8 @@ function compilePrompt(packet) {
     `Match only the supplied FROZEN ${packet.vessel.vesselId} reference (${packet.reference.sha256}) in style, physical vessel language, gauge housing, camera, lighting, crop and proportions.`,
     `Recipe: ${packet.recipeFacts.title}. Ingredients: ${ingredients}. Prepared form: ${preparation}`,
     `Show one complete integrated recipe in ${packet.vessel.vesselId}; ${packet.promptDelta.rule}.`,
+    'Render the food as rounded, simplified MealUp Toys 3D forms with smooth soft-gloss materials, clean color blocks and controlled low-frequency texture. Stay near the ideal toy-like references; never exceed the approved maximum-realism boundary.',
+    'Avoid photographic micro-texture: no dominant meat fibers, pores, rough wrinkles, grain, noisy specular detail, hard naturalistic crust or hyper-real food surface.',
     `The physical gauge must show exactly "${packet.gaugeTarget.exactKcalText}" once, with the needle at ${packet.gaugeTarget.angleDegrees} degrees in the ${packet.gaugeTarget.zone} zone.`,
     'No other text, numbers, labels, logos or UI. No ingredient collage, loose props, unlisted garnish or extra ingredients.',
     'Preserve the original output. Do not approve, freeze, integrate or deploy it.'

@@ -1,0 +1,42 @@
+{
+  "schema": "mealup-food-portrait-owner-style-envelope-v1",
+  "status": "OWNER_CONFIRMED",
+  "decisionDate": "2026-10-16",
+  "purpose": "Define the permitted MealUp Toys 3D range without allowing progressive drift toward food photography.",
+  "references": [
+    {
+      "role": "IDEAL_CENTER_PLATE",
+      "recipeId": "r1",
+      "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+      "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+    },
+    {
+      "role": "IDEAL_CENTER_BOWL",
+      "recipeId": "r2",
+      "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+      "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+    },
+    {
+      "role": "MAXIMUM_REALISM_BOUNDARY_NOT_TARGET",
+      "recipeId": "r4",
+      "asset": "docs/food-portrait-pipeline/candidates/r4-chicken-spinach-bowl-approved-001.webp",
+      "sha256": "26792719ab69fa2475ce62b2bad13ad9658dad815b8a8b00430af56c6a3d0f10"
+    }
+  ],
+  "target": [
+    "rounded simplified recognizable food forms",
+    "smooth soft glossy toy materials",
+    "controlled low-frequency texture",
+    "clean color blocks and gentle shading",
+    "premium miniature 3D product-render appearance"
+  ],
+  "failIf": [
+    "candidate is more photorealistic than the r4 maximum-realism boundary",
+    "visible meat fibers pores wrinkles or irregular photographic micro-texture dominate",
+    "grain or high-frequency surface detail weakens mobile clarity",
+    "hard photographic grill crust specular noise or naturalistic roughness replaces toy simplification",
+    "food and vessel appear to belong to different rendering styles"
+  ],
+  "qaRule": "Compare every candidate with the ideal center and the maximum-realism boundary. Passing technical resolution does not override perceptual grain or style drift.",
+  "backgroundGate": "BLOCKED_UNTIL_A10_A18_REEVALUATION_AND_PROMPT_QA_UPDATE_PASS"
+}

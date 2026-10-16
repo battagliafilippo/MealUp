@@ -1,0 +1,19 @@
+{
+  "schema": "mealup-food-portrait-owner-style-envelope-activation-v1",
+  "checkpointId": "FPP-OWNER-STYLE-ENVELOPE-001",
+  "recordedAt": "2026-10-16",
+  "status": "ACTIVE_BACKGROUND_BLOCKED_PENDING_CORRECTION",
+  "ownerDecision": "The three supplied examples remain the models to consider.",
+  "interpretation": {
+    "idealCenter": ["r1", "r2"],
+    "maximumRealismBoundary": "r4",
+    "rule": "Future candidates must remain inside this range and should target the smoother Toys 3D center."
+  },
+  "reevaluation": {
+    "a10": "FAIL_STYLE_ENVELOPE",
+    "a18": "FAIL_STYLE_ENVELOPE"
+  },
+  "promptGateUpdated": true,
+  "backgroundAutomation": "REMAINS_PAUSED",
+  "nextGate": "A10_STYLE_CORRECTION_TECHNICAL_AND_INDEPENDENT_VISUAL_QA"
+}

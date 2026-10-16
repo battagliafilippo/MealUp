@@ -1,0 +1,40 @@
+{
+  "schema": "mealup-food-portrait-style-correction-cycle-v1",
+  "checkpointId": "FPP-A10-STYLE-CORRECTION-002",
+  "recordedAt": "2026-10-16",
+  "recipeId": "a10",
+  "status": "FAIL_CANDIDATE_ONLY_STOPPED",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/a10-fast-pilot-style-correction-002.png",
+    "sha256": "26ccb9eb299766aa559c63aab6066f03df77365ba1a64d86758c40dadcd09581",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1828725,
+    "format": "png"
+  },
+  "generation": {
+    "type": "OWNER_AUTHORIZED_TARGETED_STYLE_EDIT",
+    "imageCalls": 1,
+    "automaticRetry": false
+  },
+  "qaTechnical": "PASS",
+  "qaVisualIndependent": {
+    "styleEnvelope": "PASS",
+    "microTexture": "PASS",
+    "toyForms": "PASS",
+    "gaugeTextCropVessel": "PASS",
+    "ingredientForm": "FAIL",
+    "blockingDefects": [
+      "Many whole green spheres read as whole capers instead of chopped capers.",
+      "Many yellow-orange spheres are ambiguous decorative pearls rather than integrated mustard."
+    ]
+  },
+  "authority": {
+    "ownerApproved": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  },
+  "stopReason": "FIRST_QA_FAILURE_AFTER_STYLE_CORRECTION",
+  "nextGate": "OWNER_MAY_AUTHORIZE_ONE_INGREDIENT_FORM_CORRECTION_PRESERVING_THE_NOW_APPROVED_STYLE"
+}

@@ -4,7 +4,7 @@
   "recordedAt": "2026-10-16",
   "recipeId": "a10",
   "title": "Tartare di manzo",
-  "status": "QA_PASS_CANDIDATE_ONLY",
+  "status": "REOPENED_FAIL_STYLE_ENVELOPE",
   "packet": {
     "sha256": "e315eb4a249f6ead245f0f307db2b62aae8bb7edfc72591970dcd2bf1f88d00a",
     "bytes": 1851,
@@ -55,6 +55,12 @@
       "evidence": "catalog-recipe-source a10 step 2: Condisci con olio, limone, senape, capperi tritati, sale e pepe.",
       "correctedVerdict": "PASS_CANDIDATE_ONLY",
       "prevention": "Independent QA briefs must include the complete canonical steps, not only the ingredient list."
+    },
+    "ownerEnvelopeReevaluation": {
+      "status": "FAIL_STYLE_ENVELOPE",
+      "reason": "High-frequency beef fibers, seasoning particles and wet specular detail exceed the r4 maximum-realism boundary despite correct composition and gauge.",
+      "cropAndGauge": "PASS",
+      "supersedesPreviousStyleVerdict": true
     }
   },
   "authority": {
@@ -63,6 +69,6 @@
     "integrated": false,
     "deployed": false
   },
-  "pilotProgress": "1/10 QA_PASS_CANDIDATE_ONLY",
-  "nextGate": "CONTINUE_SERIAL_PILOT_WITH_RECIPE_A18_ONLY"
+  "pilotProgress": "0/10 UNDER_REEVALUATION",
+  "nextGate": "ONE_OWNER_AUTHORIZED_STYLE_CORRECTION_FOR_A10"
 }

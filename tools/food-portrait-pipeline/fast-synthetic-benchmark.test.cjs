@@ -24,3 +24,14 @@ test('every compact context clears the preregistered forty-percent byte target',
   assert.equal(new Set(result.rows.map((row) => row.packetSha256)).size, 10);
   assert.equal(new Set(result.rows.map((row) => row.promptSha256)).size, 10);
 });
+
+test('compiled prompts enforce the owner style envelope against photorealistic drift', () => {
+  const result = runBenchmark(root, 1);
+  assert.equal(result.rows.length, 10);
+  const {buildPacket} = require('./fast-job-packet.cjs');
+  const {compilePrompt} = require('./fast-prompt-compiler.cjs');
+  const text = compilePrompt(buildPacket({root, recipeId: 'a10'})).text;
+  assert.match(text, /MealUp Toys 3D/);
+  assert.match(text, /Avoid photographic micro-texture/);
+  assert.match(text, /maximum-realism boundary/);
+});

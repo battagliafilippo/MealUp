@@ -4,7 +4,7 @@
   "recordedAt": "2026-10-16",
   "recipeId": "a18",
   "title": "Cozze alla marinara",
-  "status": "QA_PASS_CANDIDATE_ONLY",
+  "status": "REOPENED_FAIL_STYLE_ENVELOPE",
   "packet": {
     "sha256": "589527f99f710527fe6a943a2a64345e2ff483e7d83ac166461a7fc2da8936c4",
     "bytes": 1882,
@@ -52,7 +52,13 @@
       "exact unique 570 kcal text",
       "needle in correct YELLOW position",
       "no extra text UI props or unlisted garnish"
-    ]
+    ],
+    "ownerEnvelopeReevaluation": {
+      "status": "FAIL_STYLE_ENVELOPE",
+      "reason": "Shell reflections, mussel anatomy, bread pores, oily liquid and particles exceed the r4 maximum-realism boundary.",
+      "cropAndGauge": "PASS",
+      "supersedesPreviousStyleVerdict": true
+    }
   },
   "authority": {
     "ownerApproved": false,
@@ -60,6 +66,6 @@
     "integrated": false,
     "deployed": false
   },
-  "pilotProgress": "2/10 QA_PASS_CANDIDATE_ONLY",
-  "nextGate": "CONTINUE_SERIAL_PILOT_WITH_RECIPE_P09_ONLY"
+  "pilotProgress": "0/10 UNDER_REEVALUATION",
+  "nextGate": "HOLD_UNTIL_A10_STYLE_CORRECTION_PASSES"
 }

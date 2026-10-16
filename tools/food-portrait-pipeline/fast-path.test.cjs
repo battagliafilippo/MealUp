@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
+const crypto = require('node:crypto');
 const {buildPacket, canonicalJson, MAX_PACKET_BYTES} = require('./fast-job-packet.cjs');
 const {runDryRun} = require('./fast-rollback-harness.cjs');
 
@@ -68,4 +69,14 @@ test('rollback dry-run restores baseline bytes and never touches protected files
   assert.equal(result.activeCycleStillBlocked, true);
   assert.equal(result.protectedFilesUnchanged, true);
   assert.equal(result.frozenAssetCount, 6);
+});
+
+test('owner style envelope locks the three approved reference roles and hashes', () => {
+  const envelope = JSON.parse(fs.readFileSync(path.join(root, 'docs/food-portrait-pipeline/food-portrait-owner-style-envelope-v1.json'), 'utf8'));
+  assert.deepEqual(envelope.references.map((entry) => entry.role), ['IDEAL_CENTER_PLATE', 'IDEAL_CENTER_BOWL', 'MAXIMUM_REALISM_BOUNDARY_NOT_TARGET']);
+  for (const reference of envelope.references) {
+    const actual = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, reference.asset))).digest('hex');
+    assert.equal(actual, reference.sha256, reference.recipeId);
+  }
+  assert.match(envelope.qaRule, /perceptual grain or style drift/);
 });
