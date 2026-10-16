@@ -1,0 +1,28 @@
+{
+  "schema": "mealup-food-portrait-controlled-autonomy-v1",
+  "version": "1.0",
+  "status": "ACTIVE_SCOPED_AUTONOMY",
+  "decisionDate": "2026-10-16",
+  "lotId": "FPP-LOT-001",
+  "ownerAuthorization": {
+    "authorized": true,
+    "decision": "fallo",
+    "intent": "The Office should complete the authorized production work without recipe-by-recipe owner prompting."
+  },
+  "authorizedRecipeIds": ["d32", "do10"],
+  "excludedRecipeIds": ["do01"],
+  "execution": {
+    "mode": "SERIAL_CONTROLLED_AUTONOMY",
+    "candidateLimitPerCycle": 1,
+    "advanceOnQaPass": true,
+    "stopOnAnyQaFailure": true,
+    "stopOnAmbiguityOrSourceConflict": true,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false,
+    "budgetEUR": 0
+  },
+  "ownerReviewPoint": "AFTER_AUTHORIZED_LOT_CANDIDATES_COMPLETE_OR_ON_BLOCKER",
+  "authorityBoundary": "The Office may generate and QA candidates only inside this recipe list. Owner authority remains mandatory for acceptance, freeze, integration and deploy."
+}

@@ -53,10 +53,10 @@ const REGISTRY = Object.freeze({
   visual: Object.freeze({
     label: 'Visual Production',
     adapter: 'OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE',
-    status: 'CONNECTED_GUARDED_SINGLE_CANDIDATE',
-    activation: 'AUTHORIZED_RECIPE_CYCLE_AND_ZERO_COST_QUOTA_CHECK',
+    status: 'CONNECTED_GUARDED_CONTROLLED_LOT',
+    activation: 'OWNER_AUTHORIZED_LOT_AND_ZERO_COST_QUOTA_CHECK',
     writes: false,
-    purpose: 'Generate exactly one candidate for one authorized recipe cycle; no batch or auto-approval',
+    purpose: 'Generate one candidate per serial cycle inside an owner-authorized lot; QA may advance the queue, never auto-accept or freeze',
   }),
   prompt_architect: Object.freeze({
     label: 'Prompt Architect',

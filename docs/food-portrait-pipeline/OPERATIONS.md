@@ -688,3 +688,26 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Valutazione autonomia:** non è ancora dimostrata la piena autonomia. Visual Production ha due nuove produzioni alimentari approvate su vessel differenti (`a07` PLATE e `r3` BOWL), mentre il runtime canonico resta `OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE` e `autonomousExecution: false`. Serve almeno un terzo pilot alimentare su una categoria vessel differente e il successivo aggiornamento esplicito del contratto operativo prima di autorizzare avanzamento controllato senza conferma ricetta-per-ricetta.
 
 **Prossimo micro-step necessario:** un solo terzo pilot alimentare su vessel differente, consigliato `d32` BAKING_DISH. Nessun passaggio ad autonomia o generazione ulteriore senza autorizzazione separata.
+
+### Controlled production autonomy mandate 2026-10-16 — ACTIVE, scoped
+
+- Decisione owner: `fallo`; eliminare la richiesta di conferma ricetta-per-ricetta durante un lotto già delimitato.
+- Attivata autonomia controllata esclusivamente per `FPP-LOT-001` e per le candidate `d32` e `do10`; `do01` resta esclusa.
+- Visual Production resta interattiva ma il mandato passa a `CONNECTED_GUARDED_CONTROLLED_LOT`: una candidate per ciclo, avanzamento della coda solo dopo QA tecnico `PASS` e QA visivo indipendente `PASS_CANDIDATE_ONLY`.
+- Qualunque FAIL, ambiguità o conflitto di fonte blocca immediatamente il lotto e torna all'owner.
+- Auto-accept, auto-freeze, integrazione, deploy e costi aggiuntivi restano vietati. La review owner avviene alla fine delle candidate autorizzate o al primo blocco.
+- Contratto: `controlled-autonomy-authorization-v1.json`; controller fail-closed: `controlled-lot-autonomy.cjs`.
+
+**Prossimo micro-step necessario:** creare e verificare lo stato persistente del lotto; se PASS, l'Office può iniziare da `d32` senza ulteriore conferma ricetta-per-ricetta.
+
+### Controlled production autonomy activation 2026-10-16 — VERIFIED
+
+- Controller e registro Office verificati: test autonomia fail-closed **PASS** e 6/6 test del registro agenti **PASS**.
+- Creato lo stato persistente `checkpoints/controlled-lot-001-autonomy-state.json`, stato `ACTIVE_READY`.
+- Coda autorizzata: `d32` → `do10`; entrambe ancora `PENDING`. `do01` non è presente nella coda.
+- Errore operativo registrato: il primo test del nuovo controller ha rilevato una parentesi mancante nel comando CLI di inizializzazione. Corretta la singola riga e rilanciati tutti i test con esito PASS prima dell'attivazione.
+- Gate confermati: una candidate per ciclo; QA tecnico e visuale indipendente obbligatori; stop su FAIL; auto-accept, auto-freeze, integrazione, deploy e costi vietati.
+
+**Stato:** `ACTIVE_SCOPED_AUTONOMY / READY_FOR_D32`. L'Office non richiederà conferme ricetta-per-ricetta per `d32` e `do10`; tornerà all'owner al termine del lotto o al primo blocco.
+
+**Prossimo micro-step necessario:** Visual Production avvia autonomamente il ciclo `d32` alla prossima esecuzione del lotto.
