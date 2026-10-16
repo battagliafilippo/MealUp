@@ -101,6 +101,8 @@ test('fast path selects exactly one role-relevant visual reference', () => {
   assert.equal(selectVisualReference(locked, {vesselId: 'VESSEL_PLATE', title: 'Caprese', ingredients: []}, {}).id, 'r1-plate-ideal');
 });
 
-test('background preflight resumes the guarded pilot at p09', () => {
-  assert.deepEqual(inspectFastBackground(root), {decision: 'READY', recipeId: 'p09', qaPassCount: 2, ownerReviewAt: 10, modelSetVersion: 'FPP_CANONICAL_MODELS_V1'});
+test('background preflight selects the first pending guarded-pilot recipe', () => {
+  const state = JSON.parse(fs.readFileSync(path.join(root, 'docs/food-portrait-pipeline/checkpoints/fast-same-gates-runtime-state-v1.json'), 'utf8'));
+  const expected = state.queue.find((entry) => entry.state === 'PENDING');
+  assert.deepEqual(inspectFastBackground(root), {decision: 'READY', recipeId: expected.recipeId, qaPassCount: state.qaPassCount, ownerReviewAt: state.ownerReviewAt, modelSetVersion: state.modelSetVersion});
 });
