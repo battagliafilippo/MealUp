@@ -1,0 +1,71 @@
+{
+  "schema": "mealup-food-portrait-candidate-v1",
+  "candidateId": "FPP-CATALOG-P05-001",
+  "program": "CATALOG_AUTONOMY_V1",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "p05",
+    "title": "Spaghetti aglio, olio e peperoncino",
+    "kcal": 490,
+    "vesselId": "VESSEL_BOWL",
+    "sourceHash": "45ca3f6f5d325c3ef18b53a9c9b0b4e2b2ead6b7bf7f63b55283bfa559fe788d"
+  },
+  "gauge": {
+    "numericText": "490 kcal",
+    "zone": "YELLOW_ORANGE_TRANSITION",
+    "pixelClaim": "Needle is visibly near the yellow-orange transition and slightly redward of the 480 kcal FROZEN reference; sub-degree accuracy is not asserted."
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p05-aglio-olio-peperoncino-bowl-candidate-001.png",
+    "sha256": "c6ee4b4db947034fe4b2af35d5a2ed977ac054ebc4561b9b928567d64536d2a3",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1873542,
+    "format": "png",
+    "alphaChannel": false
+  },
+  "reference": {
+    "recipeId": "r2",
+    "path": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+    "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+  },
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_HEARTBEAT",
+    "providerReceipt": "exec-26daeae2-4c24-479d-a847-9cb2a5b62d71.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "extraCostEUR": 0
+  },
+  "technicalQa": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "reviewAuthority": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+    "evidenceMode": "ORIGINAL_SAVED_PIXELS_DIRECT_INSPECTION",
+    "checks": {
+      "singleRecipeAndSingleBowl": true,
+      "spaghettiRecognizable": true,
+      "oliveOilEmulsionRecognizable": true,
+      "chiliRecognizable": true,
+      "parsleyRecognizable": true,
+      "noWholeGarlicAfterRemovalStep": true,
+      "noExtraIngredientsOrProps": true,
+      "frozenStyleMatch": true,
+      "exactVisibleKcalText": true,
+      "needleDirectionAndZoneCoherent": true,
+      "mobileLegibility": true,
+      "safeOpaqueCrop": true,
+      "noAdditionalUiOrText": true
+    }
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  }
+}
