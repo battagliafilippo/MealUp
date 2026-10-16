@@ -1,0 +1,71 @@
+{
+  "schema": "mealup-food-portrait-candidate-v1",
+  "candidateId": "FPP-CATALOG-R4-001",
+  "program": "CATALOG_AUTONOMY_V1",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "r4",
+    "title": "Bowl calda pollo e spinaci",
+    "kcal": 520,
+    "vesselId": "VESSEL_BOWL",
+    "sourceHash": "4a7c82cca19b6ff16fb1b94cb0c4fef2d7542b61acb1766a6a6d49cb49f08c0b"
+  },
+  "gauge": {
+    "numericText": "520 kcal",
+    "expectedAngleDegrees": 2.4,
+    "zone": "YELLOW_ORANGE_TRANSITION",
+    "pixelClaim": "Needle is visually more redward than the 480 kcal reference and coherent with the yellow-orange transition; sub-degree accuracy is not asserted."
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/r4-chicken-spinach-bowl-candidate-001.png",
+    "sha256": "edb8904b1a50c6110c888f19ea78e3cf01a422e9dd9f94c2ebb278674755bdc5",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1929812,
+    "format": "png",
+    "alphaChannel": false
+  },
+  "reference": {
+    "recipeId": "r2",
+    "path": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+    "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+  },
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE",
+    "providerReceipt": "exec-288f8ee0-cdf6-4ff1-9516-1a45ccf1ac70.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "extraCostEUR": 0
+  },
+  "technicalQa": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "reviewAuthority": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+    "evidenceMode": "ORIGINAL_SAVED_PIXELS_DIRECT_INSPECTION",
+    "checks": {
+      "singleRecipeAndSingleBowl": true,
+      "grilledChickenRecognizable": true,
+      "brownRiceRecognizable": true,
+      "sauteedSpinachRecognizable": true,
+      "integratedPreparedDishNotCollage": true,
+      "noExtraIngredientsOrProps": true,
+      "frozenStyleMatch": true,
+      "exactVisibleKcalText": true,
+      "needleRelativeDirectionCoherent": true,
+      "mobileLegibility": true,
+      "safeOpaqueCrop": true,
+      "noAdditionalUiOrText": true
+    }
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  }
+}

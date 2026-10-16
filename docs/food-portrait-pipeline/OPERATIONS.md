@@ -769,3 +769,13 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Nessuna approvazione automatica, freeze, integrazione o deploy.
 
 **Prossimo micro-step necessario:** il prossimo ciclo autonomo lavora esclusivamente sulla successiva ricetta PENDING (`r4`) e mantiene lo stop al decimo QA PASS.
+
+### Catalog cycle 002 — r4 candidate QA PASS
+
+- Generata una sola candidate `r4` usando la reference FROZEN `r2` BOWL; valore esatto `520 kcal`.
+- QA tecnico PASS sul PNG originale, senza ricodifica.
+- QA visivo indipendente PASS CANDIDATE ONLY: pollo piastrato affettato, riso integrale e spinaci saltati riconoscibili e integrati; nessun ingrediente, testo, UI o prop estraneo.
+- Asset SHA-256 `edb8904b1a50c6110c888f19ea78e3cf01a422e9dd9f94c2ebb278674755bdc5`; coda: 2 completate, 435 pendenti; batch review 2/10.
+- Nessuna approvazione automatica, freeze, integrazione o deploy.
+
+**Prossimo micro-step necessario:** il prossimo ciclo autonomo lavora esclusivamente sulla successiva ricetta PENDING (`r5`).

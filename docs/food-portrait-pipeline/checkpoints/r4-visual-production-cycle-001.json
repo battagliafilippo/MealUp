@@ -1,0 +1,24 @@
+{
+  "schema": "mealup-food-portrait-visual-cycle-v1",
+  "cycleId": "FPP-R4-001",
+  "recipeId": "r4",
+  "mode": "SINGLE_CANDIDATE_GENERATION",
+  "candidateLimit": 1,
+  "imagesGeneratedThisRun": 1,
+  "budgetEUR": 0,
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/r4-chicken-spinach-bowl-candidate-001.png",
+    "sha256": "edb8904b1a50c6110c888f19ea78e3cf01a422e9dd9f94c2ebb278674755bdc5",
+    "bytes": 1929812
+  },
+  "gates": {
+    "technicalQa": "PASS",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": false,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false
+  },
+  "state": "CANDIDATE_RECORDED_CATALOG_QUEUE_ADVANCED"
+}

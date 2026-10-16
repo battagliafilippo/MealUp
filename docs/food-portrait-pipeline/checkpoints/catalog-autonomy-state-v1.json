@@ -12,8 +12,8 @@
     "catalog": 454,
     "eligible": 437,
     "blocked": 5,
-    "completed": 1,
-    "pending": 436
+    "completed": 2,
+    "pending": 435
   },
   "queue": [
     {
@@ -38,7 +38,7 @@
         "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
         "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
       },
-      "state": "PENDING"
+      "state": "QA_PASS_CANDIDATE_ONLY"
     },
     {
       "recipeId": "r5",
@@ -5295,10 +5295,10 @@
   ],
   "activeRecipeId": null,
   "lastRun": {
-    "recipeId": "r7",
+    "recipeId": "r4",
     "result": "QA_PASS_CANDIDATE_ONLY",
-    "assetSha256": "9314c128e9452cf0b42832658cd8c1e6a98062d22c89e45995d5c55c2ec18137",
-    "batchProgress": "1/10"
+    "assetSha256": "edb8904b1a50c6110c888f19ea78e3cf01a422e9dd9f94c2ebb278674755bdc5",
+    "batchProgress": "2/10"
   },
   "gates": {
     "candidateLimitPerCycle": 1,
