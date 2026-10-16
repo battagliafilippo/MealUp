@@ -1,0 +1,65 @@
+{
+  "schema": "mealup-food-portrait-fast-pilot-cycle-v1",
+  "checkpointId": "FPP-FAST-A18-CYCLE-001",
+  "recordedAt": "2026-10-16",
+  "recipeId": "a18",
+  "title": "Cozze alla marinara",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "packet": {
+    "sha256": "589527f99f710527fe6a943a2a64345e2ff483e7d83ac166461a7fc2da8936c4",
+    "bytes": 1882,
+    "sourceHash": "096848da13da7d34c139d24545d1716a8d742bed38ebb0f29addf768243173be",
+    "promptSha256": "d1d6a2047376a4a3b53acfb724aa91910752c916fcae34c8dc461cc206dfab71",
+    "promptBytes": 1018
+  },
+  "reference": {
+    "vesselId": "VESSEL_PLATE",
+    "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+    "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+  },
+  "candidate": {
+    "originalAsset": "docs/food-portrait-pipeline/candidates/a18-fast-pilot-candidate-001.png",
+    "originalSha256": "83bb9ff08fcf35eb02de893a75233ce9a6a75b34c548400fc6d837d0bae5a182",
+    "deliveryAsset": "docs/food-portrait-pipeline/candidates/a18-fast-pilot-candidate-001.webp",
+    "deliverySha256": "fd15a30ae17df346346251c91520c88a4b9cb229168bd7d7dd0a0de449398186",
+    "decodedPixelSha256": "ab3cf3cf87d9d7bc6634ed6aac9535ba78d4bac44c09e3a0d71d31ee252b0ab4",
+    "losslessPixelIdentity": true,
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1590610,
+    "format": "webp",
+    "originalPreserved": true
+  },
+  "generation": {
+    "imageCalls": 1,
+    "automaticRetry": false,
+    "toolWallClockSeconds": 31.9,
+    "actualProviderInputTokens": "UNVERIFIED_NOT_EXPOSED",
+    "actualProviderOutputTokens": "UNVERIFIED_NOT_EXPOSED"
+  },
+  "qaTechnical": {
+    "initialStatus": "FAIL_BYTE_BUDGET_ONLY",
+    "finalStatus": "PASS_AFTER_ONE_LOSSLESS_RECODE",
+    "pixelIdentityVerified": true,
+    "errors": []
+  },
+  "qaVisualIndependent": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "verified": [
+      "FROZEN PLATE style and crop",
+      "opened mussels dominant with integrated crostini",
+      "parsley black pepper oil cooking juices and garlic coherent with source",
+      "exact unique 570 kcal text",
+      "needle in correct YELLOW position",
+      "no extra text UI props or unlisted garnish"
+    ]
+  },
+  "authority": {
+    "ownerApproved": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  },
+  "pilotProgress": "2/10 QA_PASS_CANDIDATE_ONLY",
+  "nextGate": "CONTINUE_SERIAL_PILOT_WITH_RECIPE_P09_ONLY"
+}
