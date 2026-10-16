@@ -1,0 +1,24 @@
+{
+  "schema": "mealup-food-portrait-visual-cycle-v1",
+  "cycleId": "FPP-P06-001",
+  "recipeId": "p06",
+  "mode": "SINGLE_CANDIDATE_GENERATION",
+  "candidateLimit": 1,
+  "imagesGeneratedThisRun": 1,
+  "budgetEUR": 0,
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p06-arrabbiata-bowl-candidate-001.png",
+    "sha256": "57ee8138c7e39e93fdd6d958b0f417370f072bbe4d77287dc7d0ecbbde5efc9b",
+    "bytes": 1876845
+  },
+  "gates": {
+    "technicalQa": "PASS",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": false,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false
+  },
+  "state": "CANDIDATE_RECORDED_CATALOG_QUEUE_ADVANCED"
+}

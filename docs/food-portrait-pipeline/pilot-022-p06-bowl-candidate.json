@@ -1,0 +1,71 @@
+{
+  "schema": "mealup-food-portrait-candidate-v1",
+  "candidateId": "FPP-CATALOG-P06-001",
+  "program": "CATALOG_AUTONOMY_V1",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "p06",
+    "title": "Penne all'arrabbiata",
+    "kcal": 505,
+    "vesselId": "VESSEL_BOWL",
+    "sourceHash": "87cbafe1e42ea2e37ba0323a9b9fd990bec75b9ad392d23be1db4bd0db05ea8e"
+  },
+  "gauge": {
+    "numericText": "505 kcal",
+    "zone": "YELLOW_ORANGE_TRANSITION",
+    "pixelClaim": "Needle is visibly at the yellow-orange transition, redward of the 480 kcal FROZEN reference and before red; sub-degree accuracy is not asserted."
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p06-arrabbiata-bowl-candidate-001.png",
+    "sha256": "57ee8138c7e39e93fdd6d958b0f417370f072bbe4d77287dc7d0ecbbde5efc9b",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1876845,
+    "format": "png",
+    "alphaChannel": false
+  },
+  "reference": {
+    "recipeId": "r2",
+    "path": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+    "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+  },
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_HEARTBEAT",
+    "providerReceipt": "exec-92a795e5-fda9-47a9-9305-fe2900477971.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "extraCostEUR": 0
+  },
+  "technicalQa": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "reviewAuthority": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+    "evidenceMode": "ORIGINAL_SAVED_PIXELS_DIRECT_INSPECTION",
+    "checks": {
+      "singleRecipeAndSingleBowl": true,
+      "penneRecognizable": true,
+      "tomatoSauceRecognizable": true,
+      "oliveOilGarlicChiliRecognizable": true,
+      "parsleyRecognizable": true,
+      "noCheese": true,
+      "noExtraIngredientsOrProps": true,
+      "frozenStyleMatch": true,
+      "exactVisibleKcalText": true,
+      "needleDirectionAndZoneCoherent": true,
+      "mobileLegibility": true,
+      "safeOpaqueCrop": true,
+      "noAdditionalUiOrText": true
+    }
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  }
+}

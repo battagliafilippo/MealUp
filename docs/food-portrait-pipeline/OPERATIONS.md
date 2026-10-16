@@ -818,6 +818,15 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 
 **Prossimo micro-step necessario:** prossimo heartbeat sulla successiva ricetta PENDING; review owner unica al raggiungimento di 10/10.
 
+### Catalog cycle 010 — p06 candidate QA PASS
+
+- Generata una sola candidate `p06` usando la reference FROZEN `r2` BOWL; testo esatto `505 kcal` e lancetta nella transizione giallo-arancione.
+- QA tecnico PASS sul PNG originale (`1254×1254`, `1.876.845` byte, SHA-256 `57ee8138c7e39e93fdd6d958b0f417370f072bbe4d77287dc7d0ecbbde5efc9b`).
+- QA visivo indipendente PASS CANDIDATE ONLY: penne, pomodoro, olio, aglio, peperoncino e prezzemolo riconoscibili; formaggio assente come richiesto; nessun testo, UI o prop estraneo.
+- Coda avanzata a 9/10. Nessuna approvazione automatica, freeze, integrazione o deploy.
+
+**Prossimo micro-step necessario:** un ultimo ciclo QA PASS per raggiungere 10/10, poi pausa e review owner aggregata.
+
 ### Catalog cycle 009 — p05 candidate QA PASS
 
 - Generata una sola candidate `p05` usando la reference FROZEN `r2` BOWL; testo esatto `490 kcal` e lancetta vicino alla transizione giallo-arancione.
