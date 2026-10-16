@@ -827,6 +827,16 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 
 **Prossimo micro-step necessario:** un ultimo ciclo QA PASS per raggiungere 10/10, poi pausa e review owner aggregata.
 
+### Catalog cycle 011 — p07 QA PASS, batch review gate 10/10
+
+- Generata una sola candidate `p07` usando la reference FROZEN `r2` BOWL; testo esatto `510 kcal` e lancetta nella transizione giallo-arancione.
+- QA tecnico PASS sul PNG originale (`1254×1254`, `1.925.228` byte, SHA-256 `ee75a3eda156e1034583fcb3cfddb212a8cc87b4b7c1f9e078b0f7f6209068f3`).
+- QA visivo indipendente PASS CANDIDATE ONLY: spaghetti, pomodoro, olio e basilico riconoscibili; aglio e formaggio assenti coerentemente con fonte/preparazione; nessun testo, UI o prop estraneo.
+- Raggiunto il gate 10/10. Coda sospesa in `PAUSED_OWNER_BATCH_REVIEW_10`; creata review aggregata `review/catalog-batch-001-review.html`.
+- Nessuna approvazione automatica, freeze, integrazione o deploy.
+
+**Prossimo micro-step necessario:** review owner unica del lotto; solo una decisione esplicita potrà approvare/freeze le candidate o riaprire la coda.
+
 ### Catalog cycle 009 — p05 candidate QA PASS
 
 - Generata una sola candidate `p05` usando la reference FROZEN `r2` BOWL; testo esatto `490 kcal` e lancetta vicino alla transizione giallo-arancione.

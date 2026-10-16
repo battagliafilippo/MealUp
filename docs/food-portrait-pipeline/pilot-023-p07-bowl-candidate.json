@@ -1,0 +1,71 @@
+{
+  "schema": "mealup-food-portrait-candidate-v1",
+  "candidateId": "FPP-CATALOG-P07-001",
+  "program": "CATALOG_AUTONOMY_V1",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "p07",
+    "title": "Spaghetti al pomodoro e basilico",
+    "kcal": 510,
+    "vesselId": "VESSEL_BOWL",
+    "sourceHash": "0e7c3aa566bb57d60f678b056f41fe68a4192ac53d4a7a97b16f4da7e08d8290"
+  },
+  "gauge": {
+    "numericText": "510 kcal",
+    "zone": "YELLOW_ORANGE_TRANSITION",
+    "pixelClaim": "Needle is visibly at the yellow-orange transition, redward of the 480 kcal FROZEN reference and before red; sub-degree accuracy is not asserted."
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p07-pomodoro-basilico-bowl-candidate-001.png",
+    "sha256": "ee75a3eda156e1034583fcb3cfddb212a8cc87b4b7c1f9e078b0f7f6209068f3",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1925228,
+    "format": "png",
+    "alphaChannel": false
+  },
+  "reference": {
+    "recipeId": "r2",
+    "path": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+    "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+  },
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_HEARTBEAT",
+    "providerReceipt": "exec-faec6099-e375-4f8e-904b-beb48c4a5e95.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "extraCostEUR": 0
+  },
+  "technicalQa": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "reviewAuthority": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+    "evidenceMode": "ORIGINAL_SAVED_PIXELS_DIRECT_INSPECTION",
+    "checks": {
+      "singleRecipeAndSingleBowl": true,
+      "spaghettiRecognizable": true,
+      "tomatoSauceRecognizable": true,
+      "oliveOilAndBasilRecognizable": true,
+      "noGarlicAfterRemovalStep": true,
+      "noCheese": true,
+      "noExtraIngredientsOrProps": true,
+      "frozenStyleMatch": true,
+      "exactVisibleKcalText": true,
+      "needleDirectionAndZoneCoherent": true,
+      "mobileLegibility": true,
+      "safeOpaqueCrop": true,
+      "noAdditionalUiOrText": true
+    }
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  }
+}

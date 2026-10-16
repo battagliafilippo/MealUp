@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-catalog-autonomy-state-v1",
   "version": "1.0",
-  "status": "ACTIVE_READY",
+  "status": "PAUSED_OWNER_BATCH_REVIEW_10",
   "source": {
     "matrixPath": "G8/composition-matrix.json",
     "matrixSha256": "7439f54470e6c0a0ec51c38efd24ca27fb96ae428e8ce11165279a669d09ace7",
@@ -12,8 +12,8 @@
     "catalog": 454,
     "eligible": 437,
     "blocked": 5,
-    "completed": 9,
-    "pending": 428,
+    "completed": 10,
+    "pending": 427,
     "frozen": 1
   },
   "queue": [
@@ -135,7 +135,7 @@
         "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
         "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
       },
-      "state": "PENDING"
+      "state": "QA_PASS_CANDIDATE_ONLY"
     },
     {
       "recipeId": "p08",
@@ -5296,10 +5296,11 @@
   ],
   "activeRecipeId": null,
   "lastRun": {
-    "recipeId": "p06",
+    "recipeId": "p07",
     "result": "QA_PASS_CANDIDATE_ONLY",
-    "assetSha256": "57ee8138c7e39e93fdd6d958b0f417370f072bbe4d77287dc7d0ecbbde5efc9b",
-    "batchProgress": "9/10"
+    "assetSha256": "ee75a3eda156e1034583fcb3cfddb212a8cc87b4b7c1f9e078b0f7f6209068f3",
+    "batchProgress": "10/10",
+    "review": "docs/food-portrait-pipeline/review/catalog-batch-001-review.html"
   },
   "gates": {
     "candidateLimitPerCycle": 1,
