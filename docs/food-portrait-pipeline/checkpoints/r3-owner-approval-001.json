@@ -1,0 +1,26 @@
+{
+  "schema": "mealup-food-portrait-approval-checkpoint-v1",
+  "checkpointId": "FPP-R3-APPROVAL-001",
+  "recipeId": "r3",
+  "predecessor": "checkpoints/r3-visual-production-cycle-001.json",
+  "ownerDecision": "APPROVED_PERFECT_AS_INTENDED",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/r3-yogurt-berry-bowl-approved-001.webp",
+    "sha256": "64b23af744baa469be91dfec6ffda39dc6b2f054dddc61a8f1bae6f81ea91cd2",
+    "bytes": 1335722,
+    "decodedPixelsIdenticalToCandidate": true
+  },
+  "gates": {
+    "technicalQaAfterOptimization": "PASS",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": true,
+    "frozen": true,
+    "automaticLotAdvance": false,
+    "integration": false,
+    "deployment": false
+  },
+  "imagesGeneratedThisCheckpoint": 0,
+  "do01Generated": false,
+  "budgetEUR": 0,
+  "state": "FROZEN_AWAITING_SEPARATE_NEXT_RECIPE_AUTHORIZATION"
+}

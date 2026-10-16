@@ -672,3 +672,19 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Stato:** `VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED`.
 
 **Prossimo micro-step necessario:** review visuale owner della sola candidate r3. Solo dopo approvazione esplicita saranno consentite ottimizzazione lossless, nuova QA e decisione separata sul freeze.
+
+### Owner approval + r3 freeze checkpoint 2026-10-16
+
+- Decisione owner: `è perfetto come lo volevo`; la sola candidate r3 è approvata.
+- Conversione WebP lossless senza rigenerazione: `candidates/r3-yogurt-berry-bowl-approved-001.webp`, SHA-256 `64b23af744baa469be91dfec6ffda39dc6b2f054dddc61a8f1bae6f81ea91cd2`.
+- Pixel decodificati identici alla PNG approvata: **PASS**. Dimensioni 1254 × 1254; byte ridotti da `1.919.299` a `1.335.722`.
+- QA tecnica ripetuta sul WebP: **PASS**, `errors: []`; resta soltanto il warning già esaminato sullo sfondo opaco.
+- Checkpoint append-only: `checkpoints/r3-owner-approval-001.json`; il checkpoint di generazione non è stato sovrascritto.
+- Manifest FROZEN: `r3-bowl-frozen-v1.json`. Nessuna integrazione o deploy.
+- Nuove immagini generate in questo checkpoint: `0`; `do01` non generato; budget `0 EUR`.
+
+**Stato r3:** `OWNER_APPROVED_TECHNICAL_PASS_FROZEN`.
+
+**Valutazione autonomia:** non è ancora dimostrata la piena autonomia. Visual Production ha due nuove produzioni alimentari approvate su vessel differenti (`a07` PLATE e `r3` BOWL), mentre il runtime canonico resta `OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE` e `autonomousExecution: false`. Serve almeno un terzo pilot alimentare su una categoria vessel differente e il successivo aggiornamento esplicito del contratto operativo prima di autorizzare avanzamento controllato senza conferma ricetta-per-ricetta.
+
+**Prossimo micro-step necessario:** un solo terzo pilot alimentare su vessel differente, consigliato `d32` BAKING_DISH. Nessun passaggio ad autonomia o generazione ulteriore senza autorizzazione separata.

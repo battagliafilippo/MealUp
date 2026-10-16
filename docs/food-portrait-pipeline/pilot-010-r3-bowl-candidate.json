@@ -3,7 +3,7 @@
   "candidateId": "FPP-PILOT-010-R3-001",
   "lotId": "FPP-LOT-001",
   "lotSequenceOrder": 4,
-  "status": "VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED",
+  "status": "OWNER_APPROVED_TECHNICAL_PASS_FROZEN",
   "recipe": {
     "id": "r3",
     "title": "Yogurt bowl proteica ai frutti di bosco",
@@ -32,6 +32,16 @@
     "bytes": 1919299,
     "format": "png",
     "alphaChannel": false
+  },
+  "approvedAsset": {
+    "path": "docs/food-portrait-pipeline/candidates/r3-yogurt-berry-bowl-approved-001.webp",
+    "sha256": "64b23af744baa469be91dfec6ffda39dc6b2f054dddc61a8f1bae6f81ea91cd2",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1335722,
+    "format": "webp",
+    "lossless": true,
+    "decodedPixelsIdenticalToCandidate": true
   },
   "references": [
     {
@@ -87,11 +97,12 @@
     }
   },
   "acceptance": {
-    "ownerApproved": false,
+    "ownerApproved": true,
+    "ownerDecision": "perfetto come lo volevo",
     "automaticAcceptanceAllowed": false,
-    "frozen": false,
+    "frozen": true,
     "integrated": false,
     "deployed": false
   },
-  "nextAction": "OWNER_VISUAL_REVIEW_OF_THIS_SINGLE_CANDIDATE"
+  "nextAction": "NO_AUTOMATIC_LOT_ADVANCE_NEXT_RECIPE_REQUIRES_SEPARATE_AUTHORIZATION"
 }
