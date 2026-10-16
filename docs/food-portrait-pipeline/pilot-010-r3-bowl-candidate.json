@@ -1,0 +1,97 @@
+{
+  "schema": "mealup-food-portrait-candidate-v1",
+  "candidateId": "FPP-PILOT-010-R3-001",
+  "lotId": "FPP-LOT-001",
+  "lotSequenceOrder": 4,
+  "status": "VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED",
+  "recipe": {
+    "id": "r3",
+    "title": "Yogurt bowl proteica ai frutti di bosco",
+    "kcal": 320,
+    "vesselId": "VESSEL_BOWL",
+    "primaryMasterId": "YOGURT_BOWL",
+    "secondaryMasterIds": ["GREEK_YOGURT", "YOGURT", "MIXED_BERRIES", "HONEY"]
+  },
+  "source": {
+    "recipeCardPath": "index.html",
+    "recipeCardSha256": "2743f558e5ccf3045a3bb07110ccf9f2b446ed4866b03deeb20229966d2aa8f8",
+    "compositionMatrixPath": "G8/composition-matrix.json",
+    "compositionMatrixSha256": "7439f54470e6c0a0ec51c38efd24ca27fb96ae428e8ce11165279a669d09ace7"
+  },
+  "gauge": {
+    "numericText": "320 kcal",
+    "expectedAngleDegrees": -21.6,
+    "zone": "GREEN_LIME_LOW_MID",
+    "pixelClaim": "The raster is visually coherent with the expected green-lime low-mid direction; sub-degree angle accuracy is not asserted from visual inspection alone."
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/r3-yogurt-berry-bowl-candidate-001.png",
+    "sha256": "bf5d70cf94a73ff98fb9a2687da829a74fac5279bea4776f6cb17ead173123ba",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1919299,
+    "format": "png",
+    "alphaChannel": false
+  },
+  "references": [
+    {
+      "role": "FROZEN VESSEL_BOWL composition reference",
+      "recipeId": "r2",
+      "path": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+      "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+    },
+    {
+      "role": "latest FROZEN food material and gauge calibration",
+      "recipeId": "a07",
+      "path": "docs/food-portrait-pipeline/candidates/a07-prosciutto-melone-plate-approved-001.webp",
+      "sha256": "0277d9faf985ff415afb80f6de74a272743c6a9f939995ea7419839cb6cab299"
+    }
+  ],
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE",
+    "providerReceipt": "exec-448ce169-9aeb-4c1f-9886-2e45a6a648b0.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "transparentBackground": false,
+    "extraCostEUR": 0,
+    "promptSummary": "One integrated Greek-yogurt bowl topped only with mixed forest berries, almond flakes and honey; canonical BOWL; FROZEN MealUp style and physical gauge with exact 320 kcal; no extra ingredients, props, labels or UI."
+  },
+  "technicalQa": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": [
+      "OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW",
+      "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"
+    ]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "reviewAuthority": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+    "evidenceMode": "ORIGINAL_SAVED_PIXELS_DIRECT_INSPECTION",
+    "browserComparisonPageStatus": "PREPARED_NOT_REOPENED_BROWSER_UNAVAILABLE_IN_CURRENT_SESSION",
+    "checks": {
+      "singleRecipeAndSingleSubject": true,
+      "vesselBowlMatch": true,
+      "greekYogurtRecognizable": true,
+      "mixedBerriesRecognizable": true,
+      "almondFlakesRecognizable": true,
+      "honeyDrizzleRecognizable": true,
+      "integratedPreparedDishNotCollage": true,
+      "noExtraIngredientsOrProps": true,
+      "frozenStyleMatch": true,
+      "exactVisibleKcalText": true,
+      "needleDirectionAndZoneCoherent": true,
+      "mobileLegibility": true,
+      "safeOpaqueCrop": true,
+      "noAdditionalUiOrText": true
+    }
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  },
+  "nextAction": "OWNER_VISUAL_REVIEW_OF_THIS_SINGLE_CANDIDATE"
+}

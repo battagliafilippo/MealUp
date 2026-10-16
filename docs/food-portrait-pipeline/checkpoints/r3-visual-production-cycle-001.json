@@ -1,0 +1,35 @@
+{
+  "schema": "mealup-food-portrait-visual-cycle-v1",
+  "cycleId": "FPP-R3-001",
+  "recipeId": "r3",
+  "mode": "SINGLE_CANDIDATE_GENERATION",
+  "providerAdapter": "OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE",
+  "candidateLimit": 1,
+  "candidatesRecorded": 1,
+  "imagesGeneratedThisRun": 1,
+  "do01Generated": false,
+  "budgetEUR": 0,
+  "producer": "OPENAI_BUILT_IN_IMAGEGEN",
+  "reviewer": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/r3-yogurt-berry-bowl-candidate-001.png",
+    "sha256": "bf5d70cf94a73ff98fb9a2687da829a74fac5279bea4776f6cb17ead173123ba",
+    "bytes": 1919299
+  },
+  "gauge": {
+    "kcal": 320,
+    "angleDegrees": -21.6,
+    "zone": "GREEN_LIME_LOW_MID",
+    "bakedInRequired": true
+  },
+  "gates": {
+    "technicalQa": "PASS",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": false,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false
+  },
+  "state": "CANDIDATE_RECORDED_AWAITING_OWNER_VISUAL_REVIEW"
+}

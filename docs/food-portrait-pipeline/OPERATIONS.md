@@ -656,3 +656,19 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Stato a07:** `OWNER_APPROVED_TECHNICAL_PASS_FROZEN`.
 
 **Prossimo micro-step necessario:** nessun avanzamento automatico. La scelta e generazione di un'altra ricetta richiedono un'autorizzazione separata.
+
+### Controlled food pilot 2026-10-16 — r3 single candidate
+
+- Verificato il checkpoint dell'altra chat: riallineamento AI Office, CI verde, E08 chiuso, v10 e a07 FROZEN; worktree pulita sul branch isolato.
+- Scelta autonoma: `r3`, **Yogurt bowl proteica ai frutti di bosco**, `VESSEL_BOWL`, perché è un caso alimentare a rischio basso con composizione e ingredienti espliciti; `do01` resta escluso.
+- Generata una sola candidate tramite Visual Production `OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE`, usando r2 BOWL e a07 come reference FROZEN. Costo aggiuntivo: `0 EUR`.
+- Asset: `candidates/r3-yogurt-berry-bowl-candidate-001.png`, SHA-256 `bf5d70cf94a73ff98fb9a2687da829a74fac5279bea4776f6cb17ead173123ba`, 1254 × 1254, `1.919.299` byte.
+- QA tecnica: **PASS**, `errors: []`; sfondo opaco da review visuale e ottimizzazione WebP rinviata fino all'approvazione owner.
+- QA visuale indipendente: **PASS CANDIDATE ONLY**. Yogurt greco, frutti di bosco, mandorle e miele sono riconoscibili e integrati in un'unica bowl; nessun ingrediente o prop estraneo; stile, crop, testo `320 kcal` e direzione verde-lime del gauge sono coerenti. Nessuna precisione sub-grado della lancetta viene dichiarata dalla sola ispezione visiva.
+- Evidenza visuale eseguita sui pixel originali salvati. La pagina comparativa è stata preparata ma non riaperta nel browser perché il browser locale non era disponibile nella sessione; nessun browser PASS viene dichiarato.
+- Checkpoint persistente: `checkpoints/r3-visual-production-cycle-001.json`; una candidate registrata, auto-accept e auto-freeze disabilitati.
+- `do01` non generato; nessun batch, integrazione o deploy.
+
+**Stato:** `VISUAL_CANDIDATE_REVIEW_REQUIRED_NOT_APPROVED`.
+
+**Prossimo micro-step necessario:** review visuale owner della sola candidate r3. Solo dopo approvazione esplicita saranno consentite ottimizzazione lossless, nuova QA e decisione separata sul freeze.
