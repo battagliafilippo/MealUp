@@ -1,0 +1,67 @@
+{
+  "schema": "mealup-food-portrait-fast-candidate-v1",
+  "candidateId": "FPP-FAST-P09-001",
+  "program": "FAST_SAME_GATES_V1",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "p09",
+    "title": "Spaghetti alle vongole",
+    "kcal": 535,
+    "vesselId": "VESSEL_BOWL",
+    "sourceHash": "f4757c67dbdbca1c75d55e41ab85bfaa8b498461d7c906e005914f2225802da6"
+  },
+  "packet": {
+    "sha256": "f7d53c927337828cd36893261263f297ea8f5944387d94bea81e7f36524f6e9c",
+    "bytes": 2749,
+    "promptSha256": "84b069788d7dfcd967345eebffcbe3a94d97364c31f4b6ec632e2b8e2856c237",
+    "promptBytes": 1932,
+    "modelSetVersion": "FPP_CANONICAL_MODELS_V1"
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p09-fast-pilot-candidate-001.png",
+    "sha256": "061c5c12a5e28aa7b4a1e077f12a99b6935f5aebb02909c38d6ca81e7dbadb81",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1801407,
+    "format": "png",
+    "alphaChannel": false,
+    "originalPreserved": true
+  },
+  "reference": {
+    "id": "r2-bowl-ideal",
+    "path": "docs/food-portrait-pipeline/candidates/r2-owner-exact-content-crop-003.png",
+    "sha256": "70034093e72a9d06abab889d5bff337a8ac02e72763058d89b0063b7fb40d9a6"
+  },
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_HEARTBEAT_FAST_SAME_GATES",
+    "providerReceipt": "exec-328a2a7a-e3a1-413d-9b17-f42e4c948b2f.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "automaticRetry": false,
+    "extraCostEUR": 0
+  },
+  "technicalQa": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "reviewAuthority": "INDEPENDENT_QA_RELIABILITY_AGENT",
+    "verified": [
+      "MealUp Toys 3D envelope v2 and microtexture below r4 boundary",
+      "spaghetti mantecati and opened clams recognizable",
+      "garlic parsley chili olive oil and cooking liquid coherent",
+      "VESSEL_BOWL and safe crop",
+      "unique exact 535 kcal and needle in YELLOW",
+      "no extra ingredient prop text or UI"
+    ]
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  }
+}

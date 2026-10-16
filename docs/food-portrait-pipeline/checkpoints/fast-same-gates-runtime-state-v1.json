@@ -6,7 +6,7 @@
   "queue": [
     {"recipeId": "a10", "state": "QA_PASS_OWNER_REFERENCE_FROZEN"},
     {"recipeId": "a18", "state": "QA_PASS_OWNER_REFERENCE_FROZEN"},
-    {"recipeId": "p09", "state": "PENDING"},
+    {"recipeId": "p09", "state": "QA_PASS_CANDIDATE_ONLY", "assetSha256": "061c5c12a5e28aa7b4a1e077f12a99b6935f5aebb02909c38d6ca81e7dbadb81"},
     {"recipeId": "p10", "state": "PENDING"},
     {"recipeId": "s11", "state": "PENDING"},
     {"recipeId": "do04", "state": "PENDING"},
@@ -16,7 +16,7 @@
     {"recipeId": "v01", "state": "PENDING"}
   ],
   "activeRecipeId": null,
-  "qaPassCount": 2,
+  "qaPassCount": 3,
   "ownerReviewAt": 10,
   "gates": {
     "candidateLimitPerCycle": 1,
