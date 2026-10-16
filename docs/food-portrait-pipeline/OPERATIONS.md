@@ -799,3 +799,12 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Coda fermata fail-closed a 2/10. Nessuna seconda generazione, auto-approvazione, freeze, integrazione o deploy.
 
 **Prossimo micro-step necessario:** decisione owner separata per autorizzare o meno un nuovo tentativo corretto di `r5`; fino ad allora l'Office resta bloccato.
+
+### Catalog cycle 004 — r5 targeted correction QA PASS
+
+- Owner ha autorizzato `riprendi ... e finisci`; eseguito un solo nuovo tentativo mirato sul raster `r5`, senza alterare asset FROZEN.
+- Rimossi tutti i garnish verdi estranei; mantenuti esclusivamente frittata piegata, ceci, feta e paprika. Lancetta spostata nel giallo, coerente con `410 kcal` e più redward della reference 380 senza entrare nell'arancione.
+- QA tecnico PASS sul PNG originale: `1254×1254`, `1.961.482` byte, SHA-256 `7afc477622da9b9e81e0c2fe431594cb5efe0cd017cfe8e02b614fee16edbcaa`.
+- QA visivo indipendente PASS CANDIDATE ONLY; coda riattivata, batch review 3/10. Nessuna approvazione automatica, freeze, integrazione o deploy.
+
+**Prossimo micro-step necessario:** l'Office riprende automaticamente dalla prossima ricetta PENDING (`p01`) e continua fino alla review aggregata 10/10 o al primo blocker reale.

@@ -1,0 +1,70 @@
+{
+  "schema": "mealup-food-portrait-candidate-v1",
+  "candidateId": "FPP-CATALOG-R5-002",
+  "program": "CATALOG_AUTONOMY_V1",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "r5",
+    "title": "Frittata di albumi, ceci e feta",
+    "kcal": 410,
+    "vesselId": "VESSEL_PLATE",
+    "sourceHash": "69ac49d0f8508ba818920a63ca35a40ae3794a433557be9e802c9813a80bf97e"
+  },
+  "gauge": {
+    "numericText": "410 kcal",
+    "zone": "YELLOW_LOW_MID",
+    "pixelClaim": "Needle is visibly in yellow, clockwise from the 380 kcal FROZEN reference and outside orange/red; sub-degree accuracy is not asserted."
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/r5-eggwhite-chickpea-feta-plate-candidate-002.png",
+    "sha256": "7afc477622da9b9e81e0c2fe431594cb5efe0cd017cfe8e02b614fee16edbcaa",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1961482,
+    "format": "png",
+    "alphaChannel": false
+  },
+  "reference": {
+    "recipeId": "r1",
+    "path": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+    "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
+  },
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_TARGETED_EDIT",
+    "providerReceipt": "exec-40086599-2ecc-4260-a9bb-e508ecbb58b5.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "extraCostEUR": 0
+  },
+  "technicalQa": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "reviewAuthority": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+    "evidenceMode": "ORIGINAL_SAVED_PIXELS_DIRECT_INSPECTION",
+    "checks": {
+      "singleRecipeAndSinglePlate": true,
+      "foldedOmeletteRecognizable": true,
+      "chickpeasRecognizable": true,
+      "fetaRecognizable": true,
+      "paprikaRecognizable": true,
+      "noExtraIngredientsOrProps": true,
+      "frozenStyleMatch": true,
+      "exactVisibleKcalText": true,
+      "needleDirectionAndZoneCoherent": true,
+      "mobileLegibility": true,
+      "safeOpaqueCrop": true,
+      "noAdditionalUiOrText": true
+    }
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  }
+}

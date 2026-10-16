@@ -1,0 +1,29 @@
+{
+  "schema": "mealup-food-portrait-visual-cycle-v1",
+  "cycleId": "FPP-R5-002",
+  "recipeId": "r5",
+  "mode": "OWNER_AUTHORIZED_TARGETED_CORRECTION",
+  "candidateLimit": 1,
+  "imagesGeneratedThisRun": 1,
+  "budgetEUR": 0,
+  "predecessor": "checkpoints/r5-visual-production-cycle-001.json",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/r5-eggwhite-chickpea-feta-plate-candidate-002.png",
+    "sha256": "7afc477622da9b9e81e0c2fe431594cb5efe0cd017cfe8e02b614fee16edbcaa",
+    "bytes": 1961482
+  },
+  "gates": {
+    "technicalQa": "PASS",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": false,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false
+  },
+  "correctionsVerified": [
+    "NO_UNLISTED_VISIBLE_HERB_GARNISH",
+    "GAUGE_NEEDLE_IN_YELLOW_COHERENT_WITH_410_KCAL"
+  ],
+  "state": "CANDIDATE_RECORDED_CATALOG_QUEUE_ADVANCED"
+}
