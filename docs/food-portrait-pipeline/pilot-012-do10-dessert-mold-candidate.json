@@ -1,0 +1,82 @@
+{
+  "schema": "mealup-food-portrait-candidate-v1",
+  "candidateId": "FPP-PILOT-012-DO10-001",
+  "lotId": "FPP-LOT-001",
+  "lotSequenceOrder": 6,
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "do10",
+    "title": "Banana bread proteico",
+    "kcal": 1560,
+    "vesselId": "VESSEL_DESSERT_MOLD"
+  },
+  "source": {
+    "recipeCardPath": "index.html",
+    "recipeCardSha256": "2743f558e5ccf3045a3bb07110ccf9f2b446ed4866b03deeb20229966d2aa8f8",
+    "compositionMatrixPath": "G8/composition-matrix.json",
+    "compositionMatrixSha256": "7439f54470e6c0a0ec51c38efd24ca27fb96ae428e8ce11165279a669d09ace7"
+  },
+  "gauge": {
+    "numericText": "1560 kcal",
+    "expectedAngleDegrees": 60,
+    "clamped": true,
+    "zone": "RED_MAXIMUM",
+    "pixelClaim": "The saved raster visibly points to the red maximum; sub-degree accuracy is not asserted from visual inspection alone."
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/do10-banana-bread-dessert-mold-candidate-001.webp",
+    "sha256": "b75964e4da7c9e0a1f8383003aafcfcdf19e44b43b486312cbc60512958e3927",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1453298,
+    "format": "webp",
+    "lossless": true,
+    "decodedPixelsIdenticalToGeneratedPng": true
+  },
+  "reference": {
+    "role": "FROZEN VESSEL_DESSERT_MOLD visual-language reference",
+    "recipeId": "do08",
+    "path": "docs/food-portrait-pipeline/candidates/do08-yogurt-cheesecake-dessert-mold-approved-001.webp",
+    "sha256": "741b17c19c28cdb679abf7d5c85292281ed40579cf4c90667b37d81df1e81dc4"
+  },
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE",
+    "providerReceipt": "exec-841f9c2a-76b5-4863-ba67-e234cacfc119.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "transparentBackground": false,
+    "extraCostEUR": 0
+  },
+  "technicalQa": {
+    "status": "PASS_AFTER_LOSSLESS_ENCODING",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW"]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "reviewAuthority": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+    "evidenceMode": "ORIGINAL_SAVED_PIXELS_DIRECT_INSPECTION",
+    "checks": {
+      "singleRecipeAndSingleSubject": true,
+      "vesselDessertMoldMatch": true,
+      "bananaBreadFormRecognizable": true,
+      "walnutsIntegratedAndRecognizable": true,
+      "integratedPreparedDishNotCollage": true,
+      "noLooseIngredientDisplayOrProps": true,
+      "frozenStyleMatch": true,
+      "exactVisibleKcalText": true,
+      "needleAtClampedRedMaximum": true,
+      "mobileLegibility": true,
+      "safeOpaqueCrop": true,
+      "noAdditionalUiOrText": true
+    }
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  },
+  "nextAction": "OWNER_REVIEW_OF_COMPLETED_CONTROLLED_LOT_CANDIDATES"
+}

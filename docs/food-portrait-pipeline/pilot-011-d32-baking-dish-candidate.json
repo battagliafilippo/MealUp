@@ -1,0 +1,80 @@
+{
+  "schema": "mealup-food-portrait-candidate-v1",
+  "candidateId": "FPP-PILOT-011-D32-001",
+  "lotId": "FPP-LOT-001",
+  "lotSequenceOrder": 5,
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "d32",
+    "title": "Parmigiana di melanzane",
+    "kcal": 975,
+    "vesselId": "VESSEL_BAKING_DISH"
+  },
+  "source": {
+    "recipeCardPath": "index.html",
+    "recipeCardSha256": "2743f558e5ccf3045a3bb07110ccf9f2b446ed4866b03deeb20229966d2aa8f8",
+    "compositionMatrixPath": "G8/composition-matrix.json",
+    "compositionMatrixSha256": "7439f54470e6c0a0ec51c38efd24ca27fb96ae428e8ce11165279a669d09ace7"
+  },
+  "gauge": {
+    "numericText": "975 kcal",
+    "expectedAngleDegrees": 57,
+    "zone": "RED_NEAR_MAXIMUM",
+    "pixelClaim": "The saved raster visibly points deep into the red zone; sub-degree accuracy is not asserted from visual inspection alone."
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/d32-parmigiana-baking-dish-candidate-001.webp",
+    "sha256": "bb7b34114530fc2be8f635b1bf13f7c2bc56cf1354e3458be0c4ec496d7a8366",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1435896,
+    "format": "webp",
+    "lossless": true,
+    "decodedPixelsIdenticalToGeneratedPng": true
+  },
+  "reference": {
+    "role": "FROZEN VESSEL_BAKING_DISH composition reference",
+    "recipeId": "p12",
+    "path": "docs/food-portrait-pipeline/candidates/p12-lasagne-baking-dish-approved-001.webp",
+    "sha256": "e11055f04bd0424fcd495c23fa20206d13b62eb7d985a58d1ac4e028edebafe2"
+  },
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE",
+    "providerReceipt": "exec-e4593bf4-5790-4bcb-912f-4bc61aa5e4a2.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "transparentBackground": false,
+    "extraCostEUR": 0
+  },
+  "technicalQa": {
+    "status": "PASS_AFTER_LOSSLESS_ENCODING",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW"]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "reviewAuthority": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+    "evidenceMode": "ORIGINAL_SAVED_PIXELS_DIRECT_INSPECTION",
+    "checks": {
+      "singleRecipeAndSingleSubject": true,
+      "vesselBakingDishMatch": true,
+      "eggplantTomatoMeltedCheeseRecognizable": true,
+      "integratedPreparedDishNotCollage": true,
+      "noExtraProps": true,
+      "frozenStyleMatch": true,
+      "exactVisibleKcalText": true,
+      "needleDirectionAndZoneCoherent": true,
+      "mobileLegibility": true,
+      "safeOpaqueCrop": true,
+      "noAdditionalUiOrText": true
+    }
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  },
+  "nextAction": "AUTONOMOUSLY_ADVANCE_TO_DO10_UNDER_CONTROLLED_LOT_MANDATE"
+}

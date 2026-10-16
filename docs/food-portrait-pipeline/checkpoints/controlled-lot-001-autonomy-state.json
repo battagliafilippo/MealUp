@@ -2,23 +2,23 @@
   "schema": "mealup-food-portrait-controlled-autonomy-state-v1",
   "lotId": "FPP-LOT-001",
   "mandateVersion": "1.0",
-  "status": "ACTIVE_READY",
+  "status": "LOT_CANDIDATES_COMPLETE_AWAITING_OWNER_REVIEW",
   "queue": [
     {
       "recipeId": "d32",
       "vesselId": "VESSEL_BAKING_DISH",
       "kcal": 975,
-      "state": "PENDING"
+      "state": "QA_PASS_CANDIDATE_ONLY"
     },
     {
       "recipeId": "do10",
       "vesselId": "VESSEL_DESSERT_MOLD",
       "kcal": 1560,
-      "state": "PENDING"
+      "state": "QA_PASS_CANDIDATE_ONLY"
     }
   ],
   "activeRecipeId": null,
-  "completed": [],
+  "completed": ["d32", "do10"],
   "blocked": null,
   "gates": {
     "candidateLimitPerCycle": 1,

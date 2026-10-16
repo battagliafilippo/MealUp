@@ -1,0 +1,25 @@
+{
+  "schema": "mealup-food-portrait-visual-cycle-v1",
+  "cycleId": "FPP-DO10-001",
+  "recipeId": "do10",
+  "mode": "SINGLE_CANDIDATE_GENERATION",
+  "candidateLimit": 1,
+  "candidatesRecorded": 1,
+  "imagesGeneratedThisRun": 1,
+  "budgetEUR": 0,
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/do10-banana-bread-dessert-mold-candidate-001.webp",
+    "sha256": "b75964e4da7c9e0a1f8383003aafcfcdf19e44b43b486312cbc60512958e3927",
+    "bytes": 1453298
+  },
+  "gates": {
+    "technicalQa": "PASS",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": false,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false
+  },
+  "state": "CANDIDATE_RECORDED_LOT_AWAITING_OWNER_REVIEW"
+}
