@@ -1,0 +1,70 @@
+{
+  "schema": "mealup-food-portrait-candidate-v1",
+  "candidateId": "FPP-CATALOG-P04-001",
+  "program": "CATALOG_AUTONOMY_V1",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "p04",
+    "title": "Tonnarelli cacio e pepe",
+    "kcal": 515,
+    "vesselId": "VESSEL_BOWL",
+    "sourceHash": "e77045190512a3b2ec684f11f83174afc2f5b3569bb5b289f657bf3a15184084"
+  },
+  "gauge": {
+    "numericText": "515 kcal",
+    "zone": "YELLOW_ORANGE_TRANSITION",
+    "pixelClaim": "Needle is visibly at the yellow-orange transition, slightly redward of the 480 kcal FROZEN reference and before red; sub-degree accuracy is not asserted."
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p04-cacio-pepe-bowl-candidate-001.png",
+    "sha256": "9d884d865bc4e27fc86f4bc75ee17d5ce629deaaa79d40aa03676a871089c528",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1823542,
+    "format": "png",
+    "alphaChannel": false
+  },
+  "reference": {
+    "recipeId": "r2",
+    "path": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+    "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+  },
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_HEARTBEAT",
+    "providerReceipt": "exec-9213d3da-e364-402e-9f42-0d32f6aaeba9.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "extraCostEUR": 0
+  },
+  "technicalQa": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "reviewAuthority": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+    "evidenceMode": "ORIGINAL_SAVED_PIXELS_DIRECT_INSPECTION",
+    "checks": {
+      "singleRecipeAndSingleBowl": true,
+      "tonnarelliRecognizable": true,
+      "pecorinoEmulsionRecognizable": true,
+      "gratedPecorinoRecognizable": true,
+      "blackPepperRecognizable": true,
+      "noExtraIngredientsOrProps": true,
+      "frozenStyleMatch": true,
+      "exactVisibleKcalText": true,
+      "needleDirectionAndZoneCoherent": true,
+      "mobileLegibility": true,
+      "safeOpaqueCrop": true,
+      "noAdditionalUiOrText": true
+    }
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "mealup-food-portrait-visual-cycle-v1",
+  "cycleId": "FPP-P04-001",
+  "recipeId": "p04",
+  "mode": "SINGLE_CANDIDATE_GENERATION",
+  "candidateLimit": 1,
+  "imagesGeneratedThisRun": 1,
+  "budgetEUR": 0,
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p04-cacio-pepe-bowl-candidate-001.png",
+    "sha256": "9d884d865bc4e27fc86f4bc75ee17d5ce629deaaa79d40aa03676a871089c528",
+    "bytes": 1823542
+  },
+  "gates": {
+    "technicalQa": "PASS",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": false,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false
+  },
+  "state": "CANDIDATE_RECORDED_CATALOG_QUEUE_ADVANCED"
+}

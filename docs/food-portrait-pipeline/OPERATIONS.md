@@ -818,6 +818,15 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 
 **Prossimo micro-step necessario:** prossimo heartbeat sulla successiva ricetta PENDING; review owner unica al raggiungimento di 10/10.
 
+### Catalog cycle 008 — p04 candidate QA PASS
+
+- Generata una sola candidate `p04` usando la reference FROZEN `r2` BOWL; testo esatto `515 kcal` e lancetta nella transizione giallo-arancione.
+- QA tecnico PASS sul PNG originale (`1254×1254`, `1.823.542` byte, SHA-256 `9d884d865bc4e27fc86f4bc75ee17d5ce629deaaa79d40aa03676a871089c528`).
+- QA visivo indipendente PASS CANDIDATE ONLY: tonnarelli, emulsione e grattugiato di pecorino e pepe nero riconoscibili; nessun ingrediente, testo, UI o prop estraneo.
+- Coda avanzata a 7/10. Nessuna approvazione automatica, freeze, integrazione o deploy.
+
+**Prossimo micro-step necessario:** prossimo heartbeat sulla successiva ricetta PENDING; review owner unica al raggiungimento di 10/10.
+
 ### Catalog cycle 007 — p03 candidate QA PASS
 
 - Generata una sola candidate `p03` usando la reference FROZEN `r2` BOWL; testo esatto `635 kcal` e lancetta nella transizione arancione-rosso.
