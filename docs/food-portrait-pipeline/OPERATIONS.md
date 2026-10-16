@@ -817,3 +817,12 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Coda avanzata a 4/10. Nessuna approvazione automatica, freeze, integrazione o deploy.
 
 **Prossimo micro-step necessario:** prossimo heartbeat sulla successiva ricetta PENDING; review owner unica al raggiungimento di 10/10.
+
+### Catalog cycle 006 — p02 candidate QA PASS
+
+- Generata una sola candidate `p02` usando la reference FROZEN `r2` BOWL; testo esatto `635 kcal` e lancetta nella transizione arancione-rosso.
+- QA tecnico PASS sul PNG originale (`1254×1254`, `1.965.172` byte, SHA-256 `748c5151f5be2ceb1a168b70ad47131624e1b02b5b25b975226d1f44a4876f92`).
+- QA visivo indipendente PASS CANDIDATE ONLY: bucatini, pomodoro, guanciale, pecorino e peperoncino riconoscibili; nessun ingrediente, testo, UI o prop estraneo.
+- Coda avanzata a 5/10. Nessuna approvazione automatica, freeze, integrazione o deploy.
+
+**Prossimo micro-step necessario:** prossimo heartbeat sulla successiva ricetta PENDING; review owner unica al raggiungimento di 10/10.

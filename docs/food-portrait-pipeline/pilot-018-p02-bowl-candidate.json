@@ -1,0 +1,70 @@
+{
+  "schema": "mealup-food-portrait-candidate-v1",
+  "candidateId": "FPP-CATALOG-P02-001",
+  "program": "CATALOG_AUTONOMY_V1",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "p02",
+    "title": "Bucatini all'amatriciana",
+    "kcal": 635,
+    "vesselId": "VESSEL_BOWL",
+    "sourceHash": "742d5183999e464df07740197ee40b6d0fbb5a04cd214b94ccddfe5cb635f518"
+  },
+  "gauge": {
+    "numericText": "635 kcal",
+    "zone": "ORANGE_RED_TRANSITION",
+    "pixelClaim": "Needle is visibly in the orange-red transition, redward of the 480 kcal FROZEN reference and below the maximum end; sub-degree accuracy is not asserted."
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p02-amatriciana-bowl-candidate-001.png",
+    "sha256": "748c5151f5be2ceb1a168b70ad47131624e1b02b5b25b975226d1f44a4876f92",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1965172,
+    "format": "png",
+    "alphaChannel": false
+  },
+  "reference": {
+    "recipeId": "r2",
+    "path": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+    "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+  },
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_HEARTBEAT",
+    "providerReceipt": "exec-03bc78de-2c81-4297-8fab-1905615033c0.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "extraCostEUR": 0
+  },
+  "technicalQa": {
+    "status": "PASS",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW", "OPTIMIZE_TO_WEBP_AFTER_VISUAL_APPROVAL"]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "reviewAuthority": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+    "evidenceMode": "ORIGINAL_SAVED_PIXELS_DIRECT_INSPECTION",
+    "checks": {
+      "singleRecipeAndSingleBowl": true,
+      "bucatiniRecognizable": true,
+      "tomatoSauceRecognizable": true,
+      "guancialeRecognizable": true,
+      "pecorinoAndChiliRecognizable": true,
+      "noExtraIngredientsOrProps": true,
+      "frozenStyleMatch": true,
+      "exactVisibleKcalText": true,
+      "needleDirectionAndZoneCoherent": true,
+      "mobileLegibility": true,
+      "safeOpaqueCrop": true,
+      "noAdditionalUiOrText": true
+    }
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  }
+}
