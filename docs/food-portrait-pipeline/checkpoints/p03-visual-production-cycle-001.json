@@ -1,0 +1,26 @@
+{
+  "schema": "mealup-food-portrait-visual-cycle-v1",
+  "cycleId": "FPP-P03-001",
+  "recipeId": "p03",
+  "mode": "SINGLE_CANDIDATE_GENERATION",
+  "candidateLimit": 1,
+  "imagesGeneratedThisRun": 1,
+  "budgetEUR": 0,
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p03-gricia-bowl-candidate-001.webp",
+    "sha256": "fc40da34c8d8e3a3349ba8b10e68d40d7c7eca439575904ab8693152d58e873c",
+    "bytes": 1412734,
+    "originalPngSha256": "d9f077f0b64ac55335666b33fbbd1199bd5fe69fff654a548530a760e1275be4",
+    "losslessPixelIdentity": true
+  },
+  "gates": {
+    "technicalQa": "PASS_AFTER_LOSSLESS_ENCODING",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": false,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false
+  },
+  "state": "CANDIDATE_RECORDED_CATALOG_QUEUE_ADVANCED"
+}

@@ -818,6 +818,15 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 
 **Prossimo micro-step necessario:** prossimo heartbeat sulla successiva ricetta PENDING; review owner unica al raggiungimento di 10/10.
 
+### Catalog cycle 007 — p03 candidate QA PASS
+
+- Generata una sola candidate `p03` usando la reference FROZEN `r2` BOWL; testo esatto `635 kcal` e lancetta nella transizione arancione-rosso.
+- PNG sopra budget; unica ricodifica WebP lossless, pixel identici e QA tecnico PASS (`1254×1254`, `1.412.734` byte, SHA-256 `fc40da34c8d8e3a3349ba8b10e68d40d7c7eca439575904ab8693152d58e873c`).
+- QA visivo indipendente PASS CANDIDATE ONLY: rigatoni, guanciale, emulsione di pecorino, pecorino e pepe riconoscibili; nessun ingrediente, testo, UI o prop estraneo.
+- Coda avanzata a 6/10. Nessuna approvazione automatica, freeze, integrazione o deploy.
+
+**Prossimo micro-step necessario:** prossimo heartbeat sulla successiva ricetta PENDING; review owner unica al raggiungimento di 10/10.
+
 ### Catalog cycle 006 — p02 candidate QA PASS
 
 - Generata una sola candidate `p02` usando la reference FROZEN `r2` BOWL; testo esatto `635 kcal` e lancetta nella transizione arancione-rosso.

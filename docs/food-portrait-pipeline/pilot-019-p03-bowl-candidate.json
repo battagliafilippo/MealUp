@@ -1,0 +1,71 @@
+{
+  "schema": "mealup-food-portrait-candidate-v1",
+  "candidateId": "FPP-CATALOG-P03-001",
+  "program": "CATALOG_AUTONOMY_V1",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "p03",
+    "title": "Rigatoni alla gricia",
+    "kcal": 635,
+    "vesselId": "VESSEL_BOWL",
+    "sourceHash": "6438f4c14317151e0c907d1d27a10059cf8a4fe9ab4fa9b16acd71f794d26903"
+  },
+  "gauge": {
+    "numericText": "635 kcal",
+    "zone": "ORANGE_RED_TRANSITION",
+    "pixelClaim": "Needle is visibly in the orange-red transition, redward of the 480 kcal FROZEN reference and below the maximum end; sub-degree accuracy is not asserted."
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p03-gricia-bowl-candidate-001.webp",
+    "sha256": "fc40da34c8d8e3a3349ba8b10e68d40d7c7eca439575904ab8693152d58e873c",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1412734,
+    "format": "webp",
+    "lossless": true,
+    "decodedPixelsIdenticalToGeneratedPng": true
+  },
+  "reference": {
+    "recipeId": "r2",
+    "path": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+    "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
+  },
+  "generation": {
+    "mode": "OPENAI_BUILT_IN_IMAGEGEN_HEARTBEAT",
+    "providerReceipt": "exec-c26eda7b-bbbe-4e0c-b529-5d38c97e2c0f.png",
+    "imagesRequested": 1,
+    "imagesGenerated": 1,
+    "extraCostEUR": 0
+  },
+  "technicalQa": {
+    "status": "PASS_AFTER_LOSSLESS_ENCODING",
+    "errors": [],
+    "warnings": ["OPAQUE_BACKGROUND_REQUIRES_VISUAL_CROP_REVIEW"]
+  },
+  "visualQa": {
+    "status": "PASS_CANDIDATE_ONLY",
+    "reviewAuthority": "INDEPENDENT_POST_GENERATION_VISUAL_QA",
+    "evidenceMode": "ORIGINAL_SAVED_PIXELS_DIRECT_INSPECTION",
+    "checks": {
+      "singleRecipeAndSingleBowl": true,
+      "rigatoniRecognizable": true,
+      "guancialeRecognizable": true,
+      "pecorinoEmulsionRecognizable": true,
+      "pecorinoAndBlackPepperRecognizable": true,
+      "noExtraIngredientsOrProps": true,
+      "frozenStyleMatch": true,
+      "exactVisibleKcalText": true,
+      "needleDirectionAndZoneCoherent": true,
+      "mobileLegibility": true,
+      "safeOpaqueCrop": true,
+      "noAdditionalUiOrText": true
+    }
+  },
+  "acceptance": {
+    "ownerApproved": false,
+    "automaticAcceptanceAllowed": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  }
+}
