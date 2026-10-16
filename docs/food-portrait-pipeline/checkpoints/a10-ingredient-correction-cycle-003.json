@@ -1,0 +1,55 @@
+{
+  "schema": "mealup-food-portrait-ingredient-correction-cycle-v1",
+  "checkpointId": "FPP-A10-INGREDIENT-CORRECTION-003",
+  "recordedAt": "2026-10-16",
+  "recipeId": "a10",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/a10-fast-pilot-ingredient-correction-003.png",
+    "sha256": "ad8abd6b870b254b1241aee98b7ea8bf5afab882064d3aa809342d1cda85c5f8",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1821566,
+    "format": "png"
+  },
+  "generation": {
+    "type": "OWNER_AUTHORIZED_TARGETED_INGREDIENT_FORM_EDIT",
+    "imageCalls": 1,
+    "automaticRetry": false
+  },
+  "qaTechnical": {
+    "status": "PASS",
+    "opaque": true,
+    "notes": [
+      "Square 1254x1254 PNG retained as the original generated asset.",
+      "Opaque output requires only the standard card-crop review already completed."
+    ]
+  },
+  "qaVisualIndependent": {
+    "status": "PASS",
+    "styleEnvelope": "PASS",
+    "microTexture": "PASS",
+    "toyForms": "PASS",
+    "ingredientForm": "PASS",
+    "gaugeTextCropVessel": "PASS",
+    "sourceFacts": "PASS",
+    "verifiedFacts": [
+      "Smooth simplified Toys 3D forms remain inside the r1/r2 owner target and below the r4 maximum-realism boundary.",
+      "The ring mould, small cubes and single yolk are preserved.",
+      "Whole decorative caper spheres and yellow-orange pearls are absent.",
+      "Capers read as small irregular incorporated fragments; mustard reads as integrated seasoning.",
+      "VESSEL_PLATE, crop, physical gauge and the unique exact 380 kcal label are correct.",
+      "No extra text, UI, props or foreign ingredients are present."
+    ],
+    "blockingDefects": []
+  },
+  "authority": {
+    "ownerApproved": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  },
+  "pilotProgress": "1/10 QA_PASS_CANDIDATE_ONLY",
+  "backgroundStatus": "PAUSED_PENDING_A18_STYLE_CORRECTION",
+  "nextGate": "ONE_OWNER_AUTHORIZED_TARGETED_STYLE_CORRECTION_FOR_A18"
+}

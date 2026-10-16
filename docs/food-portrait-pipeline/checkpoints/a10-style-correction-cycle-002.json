@@ -36,5 +36,6 @@
     "deployed": false
   },
   "stopReason": "FIRST_QA_FAILURE_AFTER_STYLE_CORRECTION",
-  "nextGate": "OWNER_MAY_AUTHORIZE_ONE_INGREDIENT_FORM_CORRECTION_PRESERVING_THE_NOW_APPROVED_STYLE"
+  "nextGate": "COMPLETED_BY_FPP_A10_INGREDIENT_CORRECTION_003",
+  "supersededBy": "docs/food-portrait-pipeline/checkpoints/a10-ingredient-correction-cycle-003.json"
 }
