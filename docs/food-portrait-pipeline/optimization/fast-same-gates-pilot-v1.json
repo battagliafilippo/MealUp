@@ -1,0 +1,110 @@
+{
+  "schema": "mealup-food-portrait-fast-same-gates-pilot-v1",
+  "pilotId": "FPP-FAST-PILOT-001",
+  "status": "DESIGNED_AWAITING_OWNER_APPROVAL_TO_EXECUTE",
+  "designDate": "2026-10-16",
+  "purpose": "Measure whether compact orchestration reduces time and tokens without weakening any Food Portrait quality gate.",
+  "comparison": {
+    "design": "PROSPECTIVE_NON_INFERIORITY_WITH_PREREGISTERED_HISTORICAL_CONTROL",
+    "reason": "Generate each new Food Portrait once; a duplicate A/B image would spend twice the image credits and add generator variance.",
+    "baseline": {
+      "firstShotQaPassRate": 0.909,
+      "generationReceipts": 11,
+      "qaPassCandidates": 10,
+      "knownVisualFailures": 1,
+      "inputTokens": "UNVERIFIED",
+      "outputTokens": "UNVERIFIED",
+      "contextBytes": "UNVERIFIED",
+      "medianWallClockSeconds": "UNVERIFIED",
+      "ownerAcceptanceRate": "UNVERIFIED_FOR_9_OF_10"
+    },
+    "noDuplicateGeneration": true
+  },
+  "authority": {
+    "designApprovedForCreation": true,
+    "imageGenerationAuthorized": false,
+    "automaticRetryAuthorized": false,
+    "automaticAcceptanceAuthorized": false,
+    "automaticFreezeAuthorized": false,
+    "integrationAuthorized": false,
+    "deploymentAuthorized": false,
+    "additionalBudgetEUR": 0
+  },
+  "execution": {
+    "mode": "STRICTLY_SERIAL_ONE_IMAGE_CALL_PER_RECIPE",
+    "maximumImageCalls": 10,
+    "advanceOnlyAfter": [
+      "SOURCE_AND_REFERENCE_PREFLIGHT_PASS",
+      "TECHNICAL_QA_PASS",
+      "INDEPENDENT_VISUAL_QA_PASS_CANDIDATE_ONLY"
+    ],
+    "interimGateAfterQaPassCandidates": 5,
+    "ownerReviewAfterQaPassCandidates": 10,
+    "stopOnFirstCriticalFailure": true,
+    "sameTurnMicroLotMaximum": 5
+  },
+  "cohort": [
+    {"order": 1, "recipeId": "a10", "title": "Tartare di manzo", "kcal": 380, "vesselId": "VESSEL_PLATE", "risk": "HIGH", "sourceHash": "8ea5551cf3c5b36364617a48f2d8367c9384c8bdf4001651ac883dd45eed98eb"},
+    {"order": 2, "recipeId": "a18", "title": "Cozze alla marinara", "kcal": 570, "vesselId": "VESSEL_PLATE", "risk": "HIGH", "sourceHash": "096848da13da7d34c139d24545d1716a8d742bed38ebb0f29addf768243173be"},
+    {"order": 3, "recipeId": "p09", "title": "Spaghetti alle vongole", "kcal": 535, "vesselId": "VESSEL_BOWL", "risk": "HIGH", "sourceHash": "f4757c67dbdbca1c75d55e41ab85bfaa8b498461d7c906e005914f2225802da6"},
+    {"order": 4, "recipeId": "p10", "title": "Trenette al pesto con patate e fagiolini", "kcal": 745, "vesselId": "VESSEL_BOWL", "risk": "HIGH", "sourceHash": "beb1935278ddfea02b566a221f47d382fe8a436157922e75cbded5c7905e9ed3"},
+    {"order": 5, "recipeId": "s11", "title": "Salsa tonnata leggera", "kcal": 165, "vesselId": "VESSEL_RAMEKIN", "risk": "MEDIUM", "sourceHash": "5ba4f2c3ddceb9d744f5db0eae9311ae0b104b0ae28242ab1cc395bfa1e8d74c"},
+    {"order": 6, "recipeId": "do04", "title": "Palline di datteri e mandorle", "kcal": 235, "vesselId": "VESSEL_DESSERT_MOLD", "risk": "HIGH", "sourceHash": "66a487799dce8b36d160be794ef64abd0362a064eb387185638242b40e0c7b0b"},
+    {"order": 7, "recipeId": "do15", "title": "Muffin al cioccolato", "kcal": 2690, "vesselId": "VESSEL_DESSERT_MOLD", "risk": "HIGH", "sourceHash": "c85c40a18c68d9ee214d8a0ead77455a395d875f09573f667a92f13808109207"},
+    {"order": 8, "recipeId": "p28", "title": "Pasta al forno", "kcal": 805, "vesselId": "VESSEL_BAKING_DISH", "risk": "HIGH", "sourceHash": "b2ee9918e00bcadc389d2c4678b6f77289f9741606dc5084e811f562e787e0e8"},
+    {"order": 9, "recipeId": "b17", "title": "Cannelloni ricotta e spinaci", "kcal": 1040, "vesselId": "VESSEL_BAKING_DISH", "risk": "HIGH", "sourceHash": "c3a2df30581a0506c294639503aaf571bc7a9977d11c40c796c57fb58a3360cf"},
+    {"order": 10, "recipeId": "v01", "title": "Lattina di cola", "kcal": 140, "vesselId": "VESSEL_FREE", "risk": "MEDIUM", "sourceHash": "26c9ea3d1efc64beb9d093ffbadf5393e2fe0d5e886f7b32ac1964941c8635a9"}
+  ],
+  "coverage": {
+    "vessels": ["VESSEL_PLATE", "VESSEL_BOWL", "VESSEL_RAMEKIN", "VESSEL_DESSERT_MOLD", "VESSEL_BAKING_DISH", "VESSEL_FREE"],
+    "mediumHighRiskCount": 10,
+    "excluded": ["VESSEL_CUP", "VESSEL_PIZZA_SURFACE", "do01"]
+  },
+  "metrics": {
+    "perRecipe": ["inputTokens", "outputTokens", "contextBytes", "wallClockSeconds", "imageCalls", "firstShotQaPass", "criticalDefects", "ownerDecision"],
+    "measurementRules": {
+      "tokens": "RECORD_ACTUAL_USAGE_IF_EXPOSED_ELSE_UNVERIFIED",
+      "wallClock": "MONOTONIC_PHASE_TIMESTAMPS_P0_TO_P5",
+      "imageCalls": "COUNT_UNIQUE_GENERATION_RECEIPTS",
+      "firstShotQaPass": "DERIVE_FROM_ATTEMPT_HISTORY",
+      "missingValues": "NEVER_INFER_OR_REPLACE_WITH_ESTIMATES"
+    }
+  },
+  "goCriteria": {
+    "criticalRegressionCount": 0,
+    "technicalQaPassCount": 10,
+    "independentVisualQaPassCount": 10,
+    "ownerAcceptedCount": 10,
+    "minimumFirstShotQaPassRate": 0.909,
+    "minimumOrchestrationTokenSavingPercent": 40,
+    "minimumMedianTimeSavingPercent": 20,
+    "maximumImageCalls": 10,
+    "rollbackDemonstrated": true,
+    "missingRequiredMetricDecision": "NO_GO_INCONCLUSIVE"
+  },
+  "criticalStopReasons": [
+    "KCAL_OR_NEEDLE_MISMATCH",
+    "EXTRA_TEXT_OR_UI",
+    "WRONG_VESSEL_OR_REFERENCE_SHA",
+    "INGREDIENT_OR_PREPARED_FORM_MISMATCH",
+    "STYLE_OR_CROP_REGRESSION",
+    "NON_INDEPENDENT_VISUAL_QA",
+    "SECOND_AUTOMATIC_GENERATION",
+    "ORIGINAL_OR_AUDIT_EVIDENCE_LOST",
+    "PROTECTED_SCOPE_MODIFIED"
+  ],
+  "rollback": {
+    "status": "UNVERIFIED_PENDING_EXECUTABLE_DRY_RUN",
+    "requiredProof": [
+      "SNAPSHOT_BASELINE_POINTER_AND_PROTECTED_HASHES",
+      "ENABLE_FAST_WITH_ONE_VERSIONED_POINTER",
+      "RUN_SYNTHETIC_PASS_THEN_INJECTED_FAIL",
+      "RESTORE_BASELINE_POINTER",
+      "ASSERT_BYTE_IDENTICAL_BASELINE_CONFIGURATION",
+      "ASSERT_FROZEN_AND_PROTECTED_HASHES_UNCHANGED",
+      "ASSERT_BASELINE_PREFLIGHT_RESTORED",
+      "ASSERT_ROLLBACK_REPLAY_IDEMPOTENT"
+    ]
+  },
+  "nextGate": "OWNER_APPROVAL_TO_IMPLEMENT_PACKET_COMPILER_AND_ROLLBACK_HARNESS_NO_IMAGE_GENERATION"
+}

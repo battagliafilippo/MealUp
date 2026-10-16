@@ -1,0 +1,27 @@
+{
+  "schema": "mealup-food-portrait-fast-same-gates-pilot-design-checkpoint-v1",
+  "checkpointId": "FPP-FAST-PILOT-DESIGN-001",
+  "recordedAt": "2026-10-16",
+  "status": "PASS_DESIGN_ONLY_AWAITING_OWNER_GATE",
+  "pilotId": "FPP-FAST-PILOT-001",
+  "artifact": "docs/food-portrait-pipeline/optimization/fast-same-gates-pilot-v1.json",
+  "evidence": {
+    "recipeCount": 10,
+    "frozenVesselCount": 6,
+    "mediumHighRiskCount": 10,
+    "duplicateImageCallsPlanned": 0,
+    "maximumImageCalls": 10,
+    "deterministicTestsPassed": 18,
+    "sourceExtractorSelfTest": "PASS",
+    "gaugeMappingSelfTest": "PASS",
+    "referenceHashesVerified": 6
+  },
+  "limits": [
+    "NO_IMAGE_GENERATION_EXECUTED",
+    "HISTORICAL_TOKEN_AND_WALL_CLOCK_BASELINE_UNVERIFIED",
+    "ROLLBACK_EXECUTABLE_PROOF_PENDING",
+    "OWNER_ACCEPTANCE_PENDING"
+  ],
+  "protectedScopesUnchanged": ["main", "tester", "PWA", "AI Office production authorities", "FROZEN assets"],
+  "nextGate": "OWNER_APPROVAL_TO_IMPLEMENT_PACKET_COMPILER_AND_ROLLBACK_HARNESS_NO_IMAGE_GENERATION"
+}

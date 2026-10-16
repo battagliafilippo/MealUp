@@ -71,7 +71,8 @@
     "directorIsSingleConsolidator": true
   },
   "pilot": {
-    "status": "DESIGN_REQUIRED_NOT_AUTHORIZED_TO_GENERATE",
+    "status": "DESIGNED_AWAITING_OWNER_APPROVAL_NOT_AUTHORIZED_TO_GENERATE",
+    "designArtifact": "docs/food-portrait-pipeline/optimization/fast-same-gates-pilot-v1.json",
     "size": 10,
     "stratification": "MULTI_VESSEL_AND_MULTI_RISK",
     "minimumVesselCoverage": 4,
@@ -87,5 +88,5 @@
     }
   },
   "forbidden": ["AUTO_ACCEPT", "AUTO_FREEZE", "INTEGRATION", "DEPLOY", "MAIN_TESTER_PWA_CHANGES", "FROZEN_ASSET_CHANGES", "PAID_API", "BATCHED_DISTINCT_IMAGES_IN_ONE_IMAGE_CALL", "REMOVING_INDEPENDENT_VISUAL_QA"],
-  "nextGate": "OWNER_APPROVAL_OF_PILOT_DESIGN"
+  "nextGate": "OWNER_APPROVAL_TO_IMPLEMENT_PACKET_COMPILER_AND_ROLLBACK_HARNESS_NO_IMAGE_GENERATION"
 }
