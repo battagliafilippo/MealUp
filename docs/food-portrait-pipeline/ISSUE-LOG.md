@@ -13,3 +13,4 @@
 - `RESOLVED` — `recipe-analyzer.cjs` richiedeva `jsdom`, non presente nel runtime disponibile. Nessuna dipendenza installata: creato `catalog-recipe-source.cjs`, estrattore isolato del literal `SEED_RECIPES`, con invarianti 454/ID/matrix e self-test PASS.
 - `OPEN / REFERENCE GATE` — `r6`, `k01`, `w01`, `w12`, `k14` restano esclususe dalla produzione: manca una reference FROZEN per `VESSEL_PIZZA_SURFACE` o `VESSEL_CUP`.
 - `RESOLVED` — Il PNG `r7` superava il budget byte (`2.094.881`). Ricodifica WebP lossless senza rigenerazione; pixel decodificati identici e QA tecnico PASS a `1.477.012` byte.
+- `RESOLVED / PROCESS` — I cicli `r7` e `r4` sono stati eseguiti in primo piano dopo comandi `procedi`, non dal heartbeat. Il report per-candidate ha creato l'impressione errata di richiedere approvazione singola. Automazione aggiornata: avanzamento continuo e unica review dopo 10 QA PASS.

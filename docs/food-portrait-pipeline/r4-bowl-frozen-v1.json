@@ -1,0 +1,30 @@
+{
+  "schema": "mealup-food-portrait-frozen-asset-v1",
+  "status": "FROZEN",
+  "decisionDate": "2026-10-16",
+  "authority": "OWNER_EXPLICIT_VISUAL_APPROVAL",
+  "recipeId": "r4",
+  "title": "Bowl calda pollo e spinaci",
+  "vesselId": "VESSEL_BOWL",
+  "kcal": 520,
+  "gaugeAngleDegrees": 2.4,
+  "gaugeZone": "YELLOW_ORANGE_TRANSITION",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/r4-chicken-spinach-bowl-approved-001.webp",
+    "sha256": "26792719ab69fa2475ce62b2bad13ad9658dad815b8a8b00430af56c6a3d0f10",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1355372,
+    "format": "webp"
+  },
+  "evidence": {
+    "ownerVisualApproval": "APPROVED",
+    "technicalQaAfterOptimization": "PASS",
+    "decodedPixelIdentityToCandidate": true,
+    "ingredientRecognizability": "PASS_CHICKEN_BROWN_RICE_SPINACH",
+    "integratedDishNotCollage": true,
+    "gaugeValueMatchesRecipeCard": true,
+    "vesselContract": "PASS"
+  },
+  "notAuthorized": ["tester or PWA integration", "deployment", "modification of main"]
+}

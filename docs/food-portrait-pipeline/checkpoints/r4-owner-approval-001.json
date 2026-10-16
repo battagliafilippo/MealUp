@@ -1,0 +1,23 @@
+{
+  "schema": "mealup-food-portrait-approval-checkpoint-v1",
+  "checkpointId": "FPP-R4-APPROVAL-001",
+  "recipeId": "r4",
+  "predecessor": "checkpoints/r4-visual-production-cycle-001.json",
+  "ownerDecision": "APPROVED",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/r4-chicken-spinach-bowl-approved-001.webp",
+    "sha256": "26792719ab69fa2475ce62b2bad13ad9658dad815b8a8b00430af56c6a3d0f10",
+    "bytes": 1355372,
+    "decodedPixelsIdenticalToCandidate": true
+  },
+  "gates": {
+    "technicalQaAfterOptimization": "PASS",
+    "ownerApproval": true,
+    "frozen": true,
+    "integration": false,
+    "deployment": false
+  },
+  "imagesGeneratedThisCheckpoint": 0,
+  "budgetEUR": 0,
+  "state": "FROZEN_NOT_INTEGRATED_NOT_DEPLOYED"
+}

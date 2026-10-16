@@ -779,3 +779,13 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Nessuna approvazione automatica, freeze, integrazione o deploy.
 
 **Prossimo micro-step necessario:** il prossimo ciclo autonomo lavora esclusivamente sulla successiva ricetta PENDING (`r5`).
+
+### r4 owner approval + background cadence correction
+
+- Decisione owner: `L'immagine è approvata`; congelato lo stesso raster `r4` dopo conversione WebP lossless.
+- Asset FROZEN SHA-256 `26792719ab69fa2475ce62b2bad13ad9658dad815b8a8b00430af56c6a3d0f10`; pixel decodificati identici al PNG candidate; QA tecnico post-ottimizzazione PASS.
+- Chiarimento operativo: `r7` e `r4` sono stati prodotti in foreground su comando `procedi`; non costituiscono prova di una run heartbeat non presidiata.
+- Heartbeat aggiornato: nessuna richiesta di approvazione intermedia; prosegue sulle candidate QA PASS e si ferma soltanto alla review aggregata 10/10 o al primo blocker.
+- Il freeze resta separato: nessun pixel futuro viene pre-approvato automaticamente.
+
+**Prossimo micro-step necessario:** continuazione autonoma da `r5` fino al batch 10/10, senza richieste owner intermedie.

@@ -13,7 +13,8 @@
     "eligible": 437,
     "blocked": 5,
     "completed": 2,
-    "pending": 435
+    "pending": 435,
+    "frozen": 1
   },
   "queue": [
     {
@@ -38,7 +39,7 @@
         "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
         "sha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a"
       },
-      "state": "QA_PASS_CANDIDATE_ONLY"
+      "state": "OWNER_APPROVED_FROZEN"
     },
     {
       "recipeId": "r5",

@@ -2,7 +2,7 @@
   "schema": "mealup-food-portrait-candidate-v1",
   "candidateId": "FPP-CATALOG-R4-001",
   "program": "CATALOG_AUTONOMY_V1",
-  "status": "QA_PASS_CANDIDATE_ONLY",
+  "status": "OWNER_APPROVED_TECHNICAL_PASS_FROZEN",
   "recipe": {
     "id": "r4",
     "title": "Bowl calda pollo e spinaci",
@@ -62,9 +62,10 @@
     }
   },
   "acceptance": {
-    "ownerApproved": false,
+    "ownerApproved": true,
+    "ownerDecision": "approvata",
     "automaticAcceptanceAllowed": false,
-    "frozen": false,
+    "frozen": true,
     "integrated": false,
     "deployed": false
   }
