@@ -1,0 +1,59 @@
+{
+  "schema": "mealup-food-portrait-style-correction-cycle-v1",
+  "checkpointId": "FPP-A18-STYLE-CORRECTION-002",
+  "recordedAt": "2026-10-16",
+  "recipeId": "a18",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "asset": {
+    "originalPath": "docs/food-portrait-pipeline/candidates/a18-fast-pilot-style-correction-002.png",
+    "originalSha256": "6f6f669443075fa4c7cbc82174e610058f57e70d23a3010b05a3449e152fd35c",
+    "originalBytes": 2010461,
+    "deliveryPath": "docs/food-portrait-pipeline/candidates/a18-fast-pilot-style-correction-002.webp",
+    "deliverySha256": "0d3f80c68c80cdf74760530ddb8718c0880af74589510eb74466e0ac46b4637c",
+    "deliveryBytes": 1446872,
+    "decodedPixelSha256": "db608225475b25bad533cd4da475e099569c2eb6bbba0a71df0604bc24212dd6",
+    "losslessPixelIdentity": true,
+    "width": 1254,
+    "height": 1254,
+    "deliveryFormat": "webp",
+    "originalPreserved": true
+  },
+  "generation": {
+    "type": "OWNER_AUTHORIZED_TARGETED_STYLE_EDIT",
+    "imageCalls": 1,
+    "automaticRetry": false
+  },
+  "qaTechnical": {
+    "initialStatus": "FAIL_BYTE_BUDGET_ONLY",
+    "finalStatus": "PASS_AFTER_ONE_LOSSLESS_RECODE",
+    "pixelIdentityVerified": true,
+    "errors": []
+  },
+  "qaVisualIndependent": {
+    "status": "PASS",
+    "styleEnvelope": "PASS",
+    "microTexture": "PASS",
+    "toyForms": "PASS",
+    "ingredientForm": "PASS",
+    "gaugeTextCropVessel": "PASS",
+    "sourceFacts": "PASS",
+    "verifiedFacts": [
+      "Shells are smooth rounded volumes with broad reflections rather than photographic micro-striation.",
+      "Mussel flesh, bread and cooking juices are simplified inside the r1/r2 target and below the r4 maximum-realism boundary.",
+      "Opened mussels dominate; crostini, garlic, parsley, black pepper, olive oil and cooking juices remain source-coherent.",
+      "VESSEL_PLATE and crop are correct.",
+      "The physical gauge contains the unique exact 570 kcal label and its needle is in the yellow zone.",
+      "No extra text, UI, props, garnish or foreign ingredients are present."
+    ],
+    "blockingDefects": []
+  },
+  "authority": {
+    "ownerApproved": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
+  },
+  "pilotProgress": "2/10 QA_PASS_CANDIDATE_ONLY",
+  "backgroundStatus": "PAUSED_PENDING_OWNER_GATE",
+  "nextGate": "OWNER_DECISION_ON_RESUMING_THE_GUARDED_FAST_PILOT"
+}

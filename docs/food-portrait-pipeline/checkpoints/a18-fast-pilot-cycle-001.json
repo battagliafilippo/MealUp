@@ -67,5 +67,6 @@
     "deployed": false
   },
   "pilotProgress": "0/10 UNDER_REEVALUATION",
-  "nextGate": "HOLD_UNTIL_A10_STYLE_CORRECTION_PASSES"
+  "nextGate": "COMPLETED_BY_FPP_A18_STYLE_CORRECTION_002",
+  "supersededBy": "docs/food-portrait-pipeline/checkpoints/a18-style-correction-cycle-002.json"
 }
