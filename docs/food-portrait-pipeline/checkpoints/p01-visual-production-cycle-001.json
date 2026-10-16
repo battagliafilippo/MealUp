@@ -1,0 +1,24 @@
+{
+  "schema": "mealup-food-portrait-visual-cycle-v1",
+  "cycleId": "FPP-P01-001",
+  "recipeId": "p01",
+  "mode": "SINGLE_CANDIDATE_GENERATION",
+  "candidateLimit": 1,
+  "imagesGeneratedThisRun": 1,
+  "budgetEUR": 0,
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/p01-carbonara-bowl-candidate-001.png",
+    "sha256": "74e1cc937dd42c2df5bece4daf7087a666c8b6abecaaf801574c5dfb297732c8",
+    "bytes": 1887527
+  },
+  "gates": {
+    "technicalQa": "PASS",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": false,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false
+  },
+  "state": "CANDIDATE_RECORDED_CATALOG_QUEUE_ADVANCED"
+}

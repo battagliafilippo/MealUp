@@ -808,3 +808,12 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - QA visivo indipendente PASS CANDIDATE ONLY; coda riattivata, batch review 3/10. Nessuna approvazione automatica, freeze, integrazione o deploy.
 
 **Prossimo micro-step necessario:** l'Office riprende automaticamente dalla prossima ricetta PENDING (`p01`) e continua fino alla review aggregata 10/10 o al primo blocker reale.
+
+### Catalog cycle 005 — p01 candidate QA PASS
+
+- Generata una sola candidate `p01` usando la reference FROZEN `r2` BOWL; testo esatto `775 kcal` e lancetta nella zona rosso intenso.
+- QA tecnico PASS sul PNG originale (`1254×1254`, `1.887.527` byte, SHA-256 `74e1cc937dd42c2df5bece4daf7087a666c8b6abecaaf801574c5dfb297732c8`).
+- QA visivo indipendente PASS CANDIDATE ONLY: spaghetti, guanciale, crema uovo-pecorino, pecorino e pepe riconoscibili; nessun ingrediente, testo, UI o prop estraneo.
+- Coda avanzata a 4/10. Nessuna approvazione automatica, freeze, integrazione o deploy.
+
+**Prossimo micro-step necessario:** prossimo heartbeat sulla successiva ricetta PENDING; review owner unica al raggiungimento di 10/10.
