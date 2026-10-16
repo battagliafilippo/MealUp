@@ -4,6 +4,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { extract } = require('./catalog-recipe-source.cjs');
 const { gaugeState } = require('./gauge-mapping.cjs');
+const {verifyCanonicalModelSet, selectVisualReference} = require('./canonical-model-gate.cjs');
 
 const PACKET_SCHEMA = 'mealup-food-portrait-fast-job-packet-v1';
 const PROMPT_VERSION = 'FPP_FAST_PROMPT_V1';
@@ -36,6 +37,7 @@ function buildPacket(options) {
   const pilot = readJson(pilotPath);
   const state = readJson(statePath);
   const style = readJson(stylePath);
+  const modelSet = verifyCanonicalModelSet(root);
   const recipeId = options.recipeId;
   if (!recipeId) fail('RECIPE_ID_REQUIRED');
   if (!['DESIGNED_AWAITING_OWNER_APPROVAL_TO_EXECUTE', 'ACTIVE_OWNER_AUTHORIZED_SERIAL_EXECUTION'].includes(pilot.status)) fail('PILOT_DESIGN_STATUS_INVALID');
@@ -52,6 +54,9 @@ function buildPacket(options) {
   if (!fs.existsSync(referencePath) || sha256File(referencePath) !== frozen.sha256) fail('REFERENCE_HASH_MISMATCH:' + facts.vesselId);
   if (queued.reference.asset !== frozen.source || queued.reference.sha256 !== frozen.sha256) fail('QUEUE_REFERENCE_MISMATCH:' + recipeId);
   const gauge = gaugeState(facts.kcal);
+  const visualReference = selectVisualReference(modelSet, facts, frozen);
+  const visualReferencePath = path.resolve(root, visualReference.asset);
+  if (!fs.existsSync(visualReferencePath) || sha256File(visualReferencePath) !== visualReference.sha256) fail('VISUAL_REFERENCE_HASH_MISMATCH:' + recipeId);
   const payload = {
     schema: PACKET_SCHEMA,
     gateVersion: GATE_VERSION,
@@ -72,6 +77,20 @@ function buildPacket(options) {
       recipeId: frozen.recipeId,
       path: frozen.source,
       sha256: frozen.sha256
+    },
+    ownerModelSet: {
+      version: modelSet.manifest.version,
+      manifestPath: modelSet.manifestPath,
+      manifestSha256: modelSet.manifestSha256,
+      envelopePath: modelSet.envelopePath,
+      envelopeSha256: modelSet.envelopeSha256
+    },
+    visualReference: {
+      id: visualReference.id,
+      recipeId: visualReference.recipeId,
+      path: visualReference.asset,
+      sha256: visualReference.sha256,
+      roles: visualReference.roles
     },
     gaugeTarget: {
       exactKcalText: `${facts.kcal} kcal`,

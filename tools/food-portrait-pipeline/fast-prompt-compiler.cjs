@@ -10,10 +10,11 @@ function compilePrompt(packet) {
   const preparation = packet.recipeFacts.steps.join(' ');
   const prompt = [
     'Create exactly one square 1:1 MealUp Food Portrait candidate.',
-    `Match only the supplied FROZEN ${packet.vessel.vesselId} reference (${packet.reference.sha256}) in style, physical vessel language, gauge housing, camera, lighting, crop and proportions.`,
+    `Canonical owner model set ${packet.ownerModelSet.version} (${packet.ownerModelSet.manifestSha256}); style envelope ${packet.ownerModelSet.envelopeSha256}.`,
+    `Match the single supplied role-selected visual reference ${packet.visualReference.id} (${packet.visualReference.sha256}; roles ${packet.visualReference.roles.join(', ')}) and the FROZEN ${packet.vessel.vesselId} vessel contract (${packet.reference.sha256}).`,
     `Recipe: ${packet.recipeFacts.title}. Ingredients: ${ingredients}. Prepared form: ${preparation}`,
     `Show one complete integrated recipe in ${packet.vessel.vesselId}; ${packet.promptDelta.rule}.`,
-    'Render the food as rounded, simplified MealUp Toys 3D forms with smooth soft-gloss materials, clean color blocks and controlled low-frequency texture. Stay near the ideal toy-like references; never exceed the approved maximum-realism boundary.',
+    'Render the food as rounded, simplified MealUp Toys 3D forms with smooth soft-gloss materials, clean color blocks and controlled low-frequency texture. The full five-model owner set is the QA envelope and r4 is the maximum-realism boundary, not a target; do not average references or drift toward photography.',
     'Avoid photographic micro-texture: no dominant meat fibers, pores, rough wrinkles, grain, noisy specular detail, hard naturalistic crust or hyper-real food surface.',
     `The physical gauge must show exactly "${packet.gaugeTarget.exactKcalText}" once, with the needle at ${packet.gaugeTarget.angleDegrees} degrees in the ${packet.gaugeTarget.zone} zone.`,
     'No other text, numbers, labels, logos or UI. No ingredient collage, loose props, unlisted garnish or extra ingredients.',

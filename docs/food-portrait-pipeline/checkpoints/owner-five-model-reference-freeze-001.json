@@ -1,0 +1,16 @@
+{
+  "schema": "mealup-food-portrait-owner-reference-freeze-v1",
+  "checkpointId": "FPP-OWNER-FIVE-MODEL-LOCK-001",
+  "recordedAt": "2026-10-16",
+  "status": "OWNER_APPROVED_REFERENCE_FREEZE",
+  "modelSet": "docs/food-portrait-pipeline/food-portrait-canonical-model-set-v1.json",
+  "approvedRecipeIds": ["a18", "a10", "r2", "r1", "r4"],
+  "r2CropPolicy": "DERIVED_PIXEL_CROP_ONLY_ORIGINAL_PRESERVED",
+  "authority": {
+    "referenceFreezeOnly": true,
+    "automaticRecipeApproval": false,
+    "integration": false,
+    "deployment": false
+  },
+  "nextGate": "CANONICAL_MODEL_GATE_AND_NEGATIVE_TESTS"
+}

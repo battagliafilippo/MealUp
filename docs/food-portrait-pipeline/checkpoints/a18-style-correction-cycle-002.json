@@ -48,12 +48,12 @@
     "blockingDefects": []
   },
   "authority": {
-    "ownerApproved": false,
-    "frozen": false,
+    "ownerApproved": true,
+    "frozen": true,
     "integrated": false,
     "deployed": false
   },
   "pilotProgress": "2/10 QA_PASS_CANDIDATE_ONLY",
-  "backgroundStatus": "PAUSED_PENDING_OWNER_GATE",
-  "nextGate": "OWNER_DECISION_ON_RESUMING_THE_GUARDED_FAST_PILOT"
+  "backgroundStatus": "REFERENCE_LOCKED",
+  "nextGate": "CANONICAL_MODEL_GATE"
 }

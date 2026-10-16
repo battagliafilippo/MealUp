@@ -1,0 +1,24 @@
+{
+  "schema": "mealup-food-portrait-owner-style-envelope-v2",
+  "status": "OWNER_CONFIRMED_FIVE_MODEL_LOCK",
+  "decisionDate": "2026-10-16",
+  "supersedes": "docs/food-portrait-pipeline/food-portrait-owner-style-envelope-v1.json",
+  "canonicalModelSet": "docs/food-portrait-pipeline/food-portrait-canonical-model-set-v1.json",
+  "canonicalModelVersion": "FPP_CANONICAL_MODELS_V1",
+  "referenceIds": ["r1-plate-ideal", "a10-plate-sculpted", "a18-plate-complex-hot-wet", "r2-bowl-ideal", "r4-bowl-max-detail"],
+  "target": [
+    "rounded simplified recognizable food forms",
+    "smooth soft glossy toy materials",
+    "controlled low-frequency texture",
+    "clean color blocks and gentle shading",
+    "premium miniature 3D product-render appearance"
+  ],
+  "failIf": [
+    "candidate drifts outside the five owner-approved models",
+    "candidate is more photorealistic than the r4 maximum-detail boundary",
+    "visible fibers pores wrinkles grain or noisy reflections dominate",
+    "food and vessel belong to different rendering styles",
+    "gauge vessel crop ingredient form or exact kcal differs from the source packet"
+  ],
+  "backgroundGate": "READY_AFTER_CANONICAL_GATE_TESTS_AND_PREFLIGHT_PASS"
+}

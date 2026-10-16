@@ -1,0 +1,32 @@
+{
+  "schema": "mealup-food-portrait-fast-reference-lock-v1",
+  "checkpointId": "FPP-FAST-REFERENCE-LOCK-001",
+  "recordedAt": "2026-10-16",
+  "status": "READY_TO_RESUME_BACKGROUND",
+  "canonicalModelSet": {
+    "path": "docs/food-portrait-pipeline/food-portrait-canonical-model-set-v1.json",
+    "sha256": "e47136db61a9d0468c636a1ca0591dbcc377d42d09fbfef8b195cc9643223d66",
+    "entriesSha256": "704ffed71bdcba4558fb8c8cb3f5c97e02813a4bad131bb1353cca27a300b36d"
+  },
+  "styleEnvelope": {
+    "path": "docs/food-portrait-pipeline/food-portrait-owner-style-envelope-v2.json",
+    "sha256": "2c992cae46116e70d9fb3ae9175ee7168b1f79fcd14455f9d9618ccbd423899c"
+  },
+  "pilotProgress": "2/10 OWNER_REFERENCE_FROZEN",
+  "nextRecipeId": "p09",
+  "preflight": "PASS_READY",
+  "tests": "17/17 PASS",
+  "rollback": "PASS",
+  "referenceEconomy": "ONE_ROLE_SELECTED_REFERENCE_PER_NEW_GENERATION; SECOND_ONLY_FOR_TARGETED_CORRECTION",
+  "gates": {
+    "serial": true,
+    "oneImageCallPerRecipe": true,
+    "stopOnFirstFail": true,
+    "independentVisualQa": true,
+    "ownerReviewAt": 10,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false
+  }
+}

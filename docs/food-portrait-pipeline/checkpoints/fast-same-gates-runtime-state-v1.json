@@ -1,0 +1,30 @@
+{
+  "schema": "mealup-food-portrait-fast-runtime-state-v1",
+  "version": "1.0",
+  "status": "ACTIVE_READY",
+  "modelSetVersion": "FPP_CANONICAL_MODELS_V1",
+  "queue": [
+    {"recipeId": "a10", "state": "QA_PASS_OWNER_REFERENCE_FROZEN"},
+    {"recipeId": "a18", "state": "QA_PASS_OWNER_REFERENCE_FROZEN"},
+    {"recipeId": "p09", "state": "PENDING"},
+    {"recipeId": "p10", "state": "PENDING"},
+    {"recipeId": "s11", "state": "PENDING"},
+    {"recipeId": "do04", "state": "PENDING"},
+    {"recipeId": "do15", "state": "PENDING"},
+    {"recipeId": "p28", "state": "PENDING"},
+    {"recipeId": "b17", "state": "PENDING"},
+    {"recipeId": "v01", "state": "PENDING"}
+  ],
+  "activeRecipeId": null,
+  "qaPassCount": 2,
+  "ownerReviewAt": 10,
+  "gates": {
+    "candidateLimitPerCycle": 1,
+    "automaticRetry": false,
+    "automaticAcceptance": false,
+    "automaticFreeze": false,
+    "integration": false,
+    "deployment": false,
+    "budgetEUR": 0
+  }
+}

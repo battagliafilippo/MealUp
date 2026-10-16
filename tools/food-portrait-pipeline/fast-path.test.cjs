@@ -7,6 +7,8 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const {buildPacket, canonicalJson, MAX_PACKET_BYTES} = require('./fast-job-packet.cjs');
 const {runDryRun} = require('./fast-rollback-harness.cjs');
+const {verifyCanonicalModelSet, selectVisualReference} = require('./canonical-model-gate.cjs');
+const {inspect: inspectFastBackground} = require('./fast-background-preflight.cjs');
 
 const root = path.resolve(__dirname, '..', '..');
 
@@ -79,4 +81,26 @@ test('owner style envelope locks the three approved reference roles and hashes',
     assert.equal(actual, reference.sha256, reference.recipeId);
   }
   assert.match(envelope.qaRule, /perceptual grain or style drift/);
+});
+
+test('owner canonical model set locks all five models and fails closed on manifest drift', () => {
+  const locked = verifyCanonicalModelSet(root);
+  assert.equal(locked.manifest.references.length, 5);
+  assert.deepEqual(locked.manifest.references.map((entry) => entry.recipeId), ['r1', 'a10', 'a18', 'r2', 'r4']);
+  assert.throws(() => verifyCanonicalModelSet(root, {expectedManifestSha256: '0'.repeat(64)}), /CANONICAL_MODEL_MANIFEST_SHA_MISMATCH/);
+  assert.throws(() => verifyCanonicalModelSet(root, {expectedEnvelopeSha256: '0'.repeat(64)}), /OWNER_STYLE_ENVELOPE_SHA_MISMATCH/);
+});
+
+test('fast path selects exactly one role-relevant visual reference', () => {
+  const locked = verifyCanonicalModelSet(root);
+  const plate = buildPacket({root, recipeId: 'a10'});
+  const bowl = buildPacket({root, recipeId: 'p09'});
+  assert.equal(plate.visualReference.id, 'a10-plate-sculpted');
+  assert.equal(bowl.visualReference.id, 'r2-bowl-ideal');
+  assert.equal(Array.isArray(plate.visualReference), false);
+  assert.equal(selectVisualReference(locked, {vesselId: 'VESSEL_PLATE', title: 'Caprese', ingredients: []}, {}).id, 'r1-plate-ideal');
+});
+
+test('background preflight resumes the guarded pilot at p09', () => {
+  assert.deepEqual(inspectFastBackground(root), {decision: 'READY', recipeId: 'p09', qaPassCount: 2, ownerReviewAt: 10, modelSetVersion: 'FPP_CANONICAL_MODELS_V1'});
 });

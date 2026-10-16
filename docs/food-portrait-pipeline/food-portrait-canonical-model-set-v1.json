@@ -1,0 +1,92 @@
+{
+  "schema": "mealup-food-portrait-canonical-model-set-v1",
+  "version": "FPP_CANONICAL_MODELS_V1",
+  "status": "OWNER_APPROVED_FROZEN_REFERENCE_SET",
+  "decisionDate": "2026-10-16",
+  "entriesSha256": "704ffed71bdcba4558fb8c8cb3f5c97e02813a4bad131bb1353cca27a300b36d",
+  "ownerEvidenceSha256": [
+    "a2935b57cf3da23f37c8b3fe3cd7e3320bf7c605f08cfbb6f583be5c69329fee",
+    "7a70fa4443354f7674f4a8b7fffcd20f7471bcedc280dd69e555eb44ce65ae7e",
+    "cdb2f2adf88d1bfada9a1c001b2b793227279425e080f947728b3d4acf6d81cf",
+    "eb63a12c1ef77e2a1980c2bc9025fea78a5f034ce3117a237afc9be7d93fb01a",
+    "54738d5cb507bd85eac51be725862d7e2993b57df42bd7f98ce9408f79dd3ebb"
+  ],
+  "references": [
+    {
+      "id": "r1-plate-ideal",
+      "recipeId": "r1",
+      "vesselId": "VESSEL_PLATE",
+      "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+      "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0",
+      "width": 1254,
+      "height": 1254,
+      "roles": ["PLATE_IDEAL_TOY_CENTER", "PLATE_GEOMETRY"],
+      "immutable": true
+    },
+    {
+      "id": "a10-plate-sculpted",
+      "recipeId": "a10",
+      "vesselId": "VESSEL_PLATE",
+      "asset": "docs/food-portrait-pipeline/candidates/a10-fast-pilot-ingredient-correction-003.png",
+      "sha256": "ad8abd6b870b254b1241aee98b7ea8bf5afab882064d3aa809342d1cda85c5f8",
+      "width": 1254,
+      "height": 1254,
+      "roles": ["PLATE_COMPACT_SCULPTED_PREPARED_FORM"],
+      "immutable": true
+    },
+    {
+      "id": "a18-plate-complex-hot-wet",
+      "recipeId": "a18",
+      "vesselId": "VESSEL_PLATE",
+      "asset": "docs/food-portrait-pipeline/candidates/a18-fast-pilot-style-correction-002.png",
+      "sha256": "6f6f669443075fa4c7cbc82174e610058f57e70d23a3010b05a3449e152fd35c",
+      "width": 1254,
+      "height": 1254,
+      "roles": ["PLATE_COMPLEX_HOT_WET_RECIPE"],
+      "immutable": true
+    },
+    {
+      "id": "r2-bowl-ideal",
+      "recipeId": "r2",
+      "vesselId": "VESSEL_BOWL",
+      "asset": "docs/food-portrait-pipeline/candidates/r2-owner-exact-content-crop-003.png",
+      "sha256": "70034093e72a9d06abab889d5bff337a8ac02e72763058d89b0063b7fb40d9a6",
+      "width": 1179,
+      "height": 1179,
+      "roles": ["BOWL_IDEAL_TOY_CENTER", "BOWL_GEOMETRY"],
+      "immutable": true,
+      "provenance": {
+        "parent": "docs/food-portrait-pipeline/candidates/r2-owner-exact-source-003.png",
+        "parentSha256": "027938a98ef75a4da87fae437c242b54c2b74997ded899ffc499a924366a579a",
+        "crop": {"left": 0, "top": 688, "width": 1179, "height": 1179},
+        "decodedPixelSha256": "f8519a48e196ac44aae5751f6230a31c81ab5f9437c57198032f1eada0c3cd5c"
+      }
+    },
+    {
+      "id": "r4-bowl-max-detail",
+      "recipeId": "r4",
+      "vesselId": "VESSEL_BOWL",
+      "asset": "docs/food-portrait-pipeline/candidates/r4-chicken-spinach-bowl-approved-001.webp",
+      "sha256": "26792719ab69fa2475ce62b2bad13ad9658dad815b8a8b00430af56c6a3d0f10",
+      "width": 1254,
+      "height": 1254,
+      "roles": ["BOWL_WARM_PROTEIN_COMPLEXITY", "APPROVED_MAX_DETAIL_NOT_TARGET"],
+      "immutable": true
+    }
+  ],
+  "selectionPolicy": {
+    "PLATE_COMPACT_SCULPTED": "a10-plate-sculpted",
+    "PLATE_COMPLEX_HOT_WET": "a18-plate-complex-hot-wet",
+    "PLATE_DEFAULT": "r1-plate-ideal",
+    "BOWL_DEFAULT": "r2-bowl-ideal",
+    "BOWL_MAX_DETAIL_BOUNDARY": "r4-bowl-max-detail",
+    "OTHER_VESSEL": "USE_ONLY_ITS_FROZEN_VESSEL_REFERENCE",
+    "rule": "Use exactly one role-relevant visual reference per new generation. A second reference is allowed only for a targeted correction. QA evaluates against the full five-model envelope; never average toward photography."
+  },
+  "authority": {
+    "referenceFreezeOnly": true,
+    "automaticRecipeApproval": false,
+    "integration": false,
+    "deployment": false
+  }
+}

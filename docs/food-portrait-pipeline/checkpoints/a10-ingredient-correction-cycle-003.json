@@ -44,12 +44,12 @@
     "blockingDefects": []
   },
   "authority": {
-    "ownerApproved": false,
-    "frozen": false,
+    "ownerApproved": true,
+    "frozen": true,
     "integrated": false,
     "deployed": false
   },
   "pilotProgress": "1/10 QA_PASS_CANDIDATE_ONLY",
-  "backgroundStatus": "PAUSED_PENDING_A18_STYLE_CORRECTION",
-  "nextGate": "ONE_OWNER_AUTHORIZED_TARGETED_STYLE_CORRECTION_FOR_A18"
+  "backgroundStatus": "REFERENCE_LOCKED",
+  "nextGate": "CANONICAL_MODEL_GATE"
 }
