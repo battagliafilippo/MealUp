@@ -1,0 +1,32 @@
+{
+  "schema": "mealup-food-portrait-fast-same-gates-benchmark-completion-v1",
+  "checkpointId": "FPP-FAST-BENCHMARK-COMPLETE-001",
+  "recordedAt": "2026-10-16",
+  "status": "SYNTHETIC_PASS_PRODUCTION_GO_NOT_YET_PROVEN",
+  "constitution": {
+    "version": "1.9",
+    "canonicalSha256": "51043574d188c085de51282e50f8784d8f5cf779300891dee0fe8014414470eb",
+    "canonicalShaVerified": true,
+    "protectedTaskPacket": "PRIVATE_LOCAL_ONLY",
+    "activeRuleCount": 90,
+    "handoffRuleCount": 71,
+    "continuity": "VERIFIED"
+  },
+  "benchmark": {
+    "artifact": "docs/food-portrait-pipeline/checkpoints/fast-same-gates-synthetic-benchmark-001.json",
+    "recipes": 10,
+    "medianContextByteSavingPercent": 96.5,
+    "minimumContextByteSavingPercent": 96.25,
+    "imageCalls": 0,
+    "networkCalls": 0,
+    "deterministicReplay": "PASS"
+  },
+  "unverified": [
+    "ACTUAL_PROVIDER_INPUT_OUTPUT_TOKENS",
+    "END_TO_END_MEDIAN_WALL_CLOCK",
+    "VISUAL_NON_INFERIORITY",
+    "OWNER_ACCEPTANCE_OF_NEW_PIXELS"
+  ],
+  "decision": "The compact-context target is proven synthetically. It does not authorize production GO, automatic acceptance, freeze, integration or deployment.",
+  "nextGate": "OWNER_AUTHORIZATION_OF_CONTROLLED_REAL_PILOT_EXECUTION_WITH_EXISTING_STOP_RULES"
+}
