@@ -789,3 +789,13 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Il freeze resta separato: nessun pixel futuro viene pre-approvato automaticamente.
 
 **Prossimo micro-step necessario:** continuazione autonoma da `r5` fino al batch 10/10, senza richieste owner intermedie.
+
+### Catalog cycle 003 — r5 background run blocked by visual QA
+
+- Prima esecuzione heartbeat non presidiata con ImageGen realmente completata: una sola candidate `r5`, reference FROZEN `r1` PLATE e testo esatto `410 kcal`.
+- Il PNG originale superava il budget byte; unica ricodifica WebP lossless autorizzata, pixel decodificati identici e QA tecnico PASS sul WebP (`1.436.136` byte).
+- QA visivo indipendente FAIL: garnish verde estraneo alla fonte verificata e lancetta nell'arancione, troppo redward per `410 kcal` rispetto alla scala FROZEN.
+- Asset conservato come evidenza non approvata, SHA-256 `bdc3def79e6690742202105840e23989f9c4ffa36d23e6d8481c812459c07b04`.
+- Coda fermata fail-closed a 2/10. Nessuna seconda generazione, auto-approvazione, freeze, integrazione o deploy.
+
+**Prossimo micro-step necessario:** decisione owner separata per autorizzare o meno un nuovo tentativo corretto di `r5`; fino ad allora l'Office resta bloccato.

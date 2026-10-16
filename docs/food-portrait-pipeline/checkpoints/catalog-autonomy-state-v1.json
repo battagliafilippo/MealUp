@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-catalog-autonomy-state-v1",
   "version": "1.0",
-  "status": "ACTIVE_READY",
+  "status": "BLOCKED_VISUAL_QA_R5",
   "source": {
     "matrixPath": "G8/composition-matrix.json",
     "matrixSha256": "7439f54470e6c0a0ec51c38efd24ca27fb96ae428e8ce11165279a669d09ace7",
@@ -13,7 +13,7 @@
     "eligible": 437,
     "blocked": 5,
     "completed": 2,
-    "pending": 435,
+    "pending": 434,
     "frozen": 1
   },
   "queue": [
@@ -51,7 +51,7 @@
         "asset": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
         "sha256": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0"
       },
-      "state": "PENDING"
+      "state": "QA_FAIL_BLOCKED"
     },
     {
       "recipeId": "p01",
@@ -5296,10 +5296,14 @@
   ],
   "activeRecipeId": null,
   "lastRun": {
-    "recipeId": "r4",
-    "result": "QA_PASS_CANDIDATE_ONLY",
-    "assetSha256": "edb8904b1a50c6110c888f19ea78e3cf01a422e9dd9f94c2ebb278674755bdc5",
-    "batchProgress": "2/10"
+    "recipeId": "r5",
+    "result": "VISUAL_QA_FAIL_BLOCKED",
+    "assetSha256": "bdc3def79e6690742202105840e23989f9c4ffa36d23e6d8481c812459c07b04",
+    "batchProgress": "2/10",
+    "reasons": [
+      "UNLISTED_VISIBLE_HERB_GARNISH",
+      "GAUGE_NEEDLE_TOO_REDWARD_FOR_410_KCAL"
+    ]
   },
   "gates": {
     "candidateLimitPerCycle": 1,

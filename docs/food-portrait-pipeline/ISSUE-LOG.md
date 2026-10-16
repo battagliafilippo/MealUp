@@ -14,3 +14,4 @@
 - `OPEN / REFERENCE GATE` — `r6`, `k01`, `w01`, `w12`, `k14` restano esclususe dalla produzione: manca una reference FROZEN per `VESSEL_PIZZA_SURFACE` o `VESSEL_CUP`.
 - `RESOLVED` — Il PNG `r7` superava il budget byte (`2.094.881`). Ricodifica WebP lossless senza rigenerazione; pixel decodificati identici e QA tecnico PASS a `1.477.012` byte.
 - `RESOLVED / PROCESS` — I cicli `r7` e `r4` sono stati eseguiti in primo piano dopo comandi `procedi`, non dal heartbeat. Il report per-candidate ha creato l'impressione errata di richiedere approvazione singola. Automazione aggiornata: avanzamento continuo e unica review dopo 10 QA PASS.
+- `OPEN / BLOCKED VISUAL QA` — Prima vera run heartbeat ImageGen dimostrata su `r5`, ma la candidate contiene un garnish verde non previsto dalla fonte e la lancetta è troppo verso l'arancione per `410 kcal`. QA tecnico PASS dopo WebP lossless con pixel identici; nessuna seconda generazione, coda fermata fail-closed a 2/10.
