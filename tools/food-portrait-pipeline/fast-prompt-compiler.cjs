@@ -27,7 +27,7 @@ function compilePrompt(packet) {
     `Recipe: ${packet.recipeFacts.title}. Ingredients: ${ingredients}. Prepared form: ${preparation}`,
     `Show exactly ${packet.displayPlan.exactCount.count} ${packet.displayPlan.exactCount.unit}: ${packet.displayPlan.subject}. Primary visible ingredients: ${list(roles.PRIMARY_VISIBLE)}.`,
     surfaceRule,
-    `Integrated, never separate or decorative: ${list(roles.INTEGRATED_ONLY)}. Not visible after preparation: ${list(roles.NOT_VISIBLE_AFTER_PROCESS)}. Keep the vessel base and rim visually clean.`,
+    `Integrated into the prepared form, never separate, scattered or decorative: ${list(roles.INTEGRATED_ONLY)}. Any authorized chunks may be visible only inside or attached to that prepared form, never loose around it. Not visible after preparation: ${list(roles.NOT_VISIBLE_AFTER_PROCESS)}. Keep the vessel base and rim visually clean.`,
     `Forbidden visible forms: ${roles.FORBIDDEN_VISIBLE.join(', ')}. Show one complete integrated recipe in ${packet.vessel.vesselId}; ${packet.promptDelta.rule}.`,
     'Render large rounded simplified MealUp Toys 3D forms with smooth continuous soft-gloss surfaces, broad controlled highlights, clean color blocks and low-frequency texture only. The full five-model owner set is the QA envelope and r4 is the maximum-realism boundary, not a target; do not average references or drift toward photography.',
     'Avoid photographic micro-texture: no pores, fibers, powder grain, micro-striation, wrinkles, dense individual particles, noisy speculars, photographic crumbs or hard naturalistic crust.',

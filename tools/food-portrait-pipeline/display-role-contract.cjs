@@ -26,7 +26,23 @@ const stem = (name) => normalize(name).split(/\s+/)[0].replace(/[^a-z0-9]/g, '')
 const mentions = (text, name) => text.includes(stem(name));
 const seasoning = /^(olio|sale|pepe|aglio|aceto|vino|senape|paprika|cannella|succo|scorza|lievito)/;
 
-function classifyIngredient(name, stepsText) {
+const COMPOSITE_BAKED_FORM = /\b(muffin|torta|cake|brownie|biscott|plumcake|pane|focaccia|cheesecake|sformato|pasticcio)\b/;
+const MIXTURE_TRANSFORM = /\b(mescol|amalgam|impast|unisc|incorpor|frull|monta|sbatt|composto|impasto|pastella)\w*/;
+const HEAT_TRANSFORM = /\b(inforn|forno|cuoc|cott|forn|sforn)\w*|\b\d+\s*minut\w*\s+(?:a|in)\s+\d{2,3}\b/;
+
+function preparationMode(facts, stepsText) {
+  const title = normalize(facts.title);
+  const compositeForm = title.match(COMPOSITE_BAKED_FORM);
+  if (!compositeForm) return {kind: 'DIRECT_PRESENTATION'};
+  const hasMixtureTransform = MIXTURE_TRANSFORM.test(stepsText);
+  const hasHeatTransform = HEAT_TRANSFORM.test(stepsText);
+  if (hasMixtureTransform && hasHeatTransform) {
+    return {kind: 'COOKED_COMPOSITE', unit: compositeForm[1].toUpperCase()};
+  }
+  throw new Error(`DISPLAY_ROLE_AMBIGUOUS_TRANSFORMED_PREPARATION:${facts.title}`);
+}
+
+function classifyIngredient(name, stepsText, mode) {
   const key = stem(name);
   if (!key) throw new Error('DISPLAY_ROLE_EMPTY_INGREDIENT');
   const surfacePattern = new RegExp(`(rotol|rivest|impan|spolver)[^.]{0,80}${key}|${key}[^.]{0,80}(rivest|ader|copertura)`);
@@ -34,14 +50,18 @@ function classifyIngredient(name, stepsText) {
   const integratedPattern = new RegExp(`(frull|trit|sciogl|sfum|emulsion|mescol|amalgam|impast)[^.]{0,100}${key}|${key}[^.]{0,100}(trit|frull|sciolt|incorpor)`);
   if (removedPattern.test(stepsText)) return 'NOT_VISIBLE_AFTER_PROCESS';
   if (surfacePattern.test(stepsText)) return 'SURFACE_BOUND_VISIBLE';
+  // Once ingredients are mixed into a cooked composite, the visible hero is the
+  // prepared form. Even chunks explicitly kept "inside" belong to that form and
+  // must never become a loose ingredient, garnish or surrounding pile.
+  if (mode.kind === 'COOKED_COMPOSITE') return 'INTEGRATED_ONLY';
   if (integratedPattern.test(stepsText) || seasoning.test(normalize(name))) return 'INTEGRATED_ONLY';
   return 'PRIMARY_VISIBLE';
 }
 
-function exactCount(facts, stepsText) {
+function exactCount(facts, stepsText, mode) {
   const words = {una: 1, un: 1, due: 2, tre: 3, quattro: 4, cinque: 5, sei: 6, sette: 7, otto: 8, nove: 9, dieci: 10};
   const match = stepsText.match(/(?:forma|disponi|crea|prepara)\s+(una|un|due|tre|quattro|cinque|sei|sette|otto|nove|dieci|\d+)\s+([a-z]+)/);
-  if (!match) return {count: 1, unit: 'COMPLETE_RECIPE'};
+  if (!match) return {count: 1, unit: mode.kind === 'COOKED_COMPOSITE' ? mode.unit : 'COMPLETE_RECIPE'};
   return {count: Number(match[1]) || words[match[1]], unit: match[2].toUpperCase()};
 }
 
@@ -50,16 +70,18 @@ function buildDisplayPlan(facts) {
     throw new Error('DISPLAY_ROLE_SOURCE_INCOMPLETE');
   }
   const stepsText = normalize(facts.steps.join(' '));
+  const mode = preparationMode(facts, stepsText);
   const roles = Object.fromEntries(ROLE_NAMES.map((role) => [role, []]));
   for (const ingredient of facts.ingredients) {
-    const role = classifyIngredient(ingredient.name, stepsText);
+    const role = classifyIngredient(ingredient.name, stepsText, mode);
     roles[role].push(ingredient.name);
   }
   roles.FORBIDDEN_VISIBLE = [...UNIVERSAL_FORBIDDEN];
-  const count = exactCount(facts, stepsText);
+  const count = exactCount(facts, stepsText, mode);
   const plan = {
     version: 'DISPLAY_ROLE_V1',
     subject: facts.title,
+    preparationMode: mode.kind,
     exactCount: count,
     roles,
     cleanBaseAndRim: true,
@@ -71,6 +93,7 @@ function buildDisplayPlan(facts) {
 
 function validateDisplayPlan(plan, facts) {
   if (plan?.version !== 'DISPLAY_ROLE_V1' || plan.cleanBaseAndRim !== true) throw new Error('DISPLAY_PLAN_INVALID');
+  if (!['DIRECT_PRESENTATION', 'COOKED_COMPOSITE'].includes(plan.preparationMode)) throw new Error('DISPLAY_PREPARATION_MODE_INVALID');
   for (const role of ROLE_NAMES) if (!Array.isArray(plan.roles?.[role])) throw new Error('DISPLAY_ROLE_MISSING:' + role);
   const assigned = ['PRIMARY_VISIBLE', 'SURFACE_BOUND_VISIBLE', 'INTEGRATED_ONLY', 'NOT_VISIBLE_AFTER_PROCESS']
     .flatMap((role) => plan.roles[role]);

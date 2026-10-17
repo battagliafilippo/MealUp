@@ -136,6 +136,42 @@ test('display plan is total and rejects missing or duplicated classifications', 
   assert.throws(() => validateDisplayPlan(broken, facts), /DISPLAY_ROLE_NOT_TOTAL_OR_DISJOINT/);
 });
 
+test('do15 cooked batter resolves to one muffin with every ingredient integrated', () => {
+  const packet = buildPacket({root, recipeId: 'do15'});
+  assert.equal(packet.displayPlan.preparationMode, 'COOKED_COMPOSITE');
+  assert.deepEqual(packet.displayPlan.exactCount, {count: 1, unit: 'MUFFIN'});
+  assert.deepEqual(packet.displayPlan.roles.PRIMARY_VISIBLE, []);
+  assert.deepEqual(packet.displayPlan.roles.SURFACE_BOUND_VISIBLE, []);
+  assert.deepEqual(packet.displayPlan.roles.INTEGRATED_ONLY, [
+    'farina', 'zucchero', 'burro', 'uovo', 'latte', 'cioccolato fondente', 'lievito per dolci'
+  ]);
+  const compiled = compilePrompt(packet);
+  assert.match(compiled.text, /Show exactly 1 MUFFIN: Muffin al cioccolato/);
+  assert.match(compiled.text, /chunks may be visible only inside or attached to that prepared form, never loose around it/);
+});
+
+test('analogous baked composite integrates batter ingredients instead of exposing them', () => {
+  const facts = {
+    title: 'Torta alle mele',
+    ingredients: [{name: 'farina'}, {name: 'uovo'}, {name: 'latte'}, {name: 'mele'}],
+    steps: ['Mescola farina, uovo e latte in un impasto.', 'Incorpora le mele e cuoci in forno.']
+  };
+  const plan = buildDisplayPlan(facts);
+  assert.equal(plan.preparationMode, 'COOKED_COMPOSITE');
+  assert.deepEqual(plan.exactCount, {count: 1, unit: 'TORTA'});
+  assert.deepEqual(plan.roles.PRIMARY_VISIBLE, []);
+  assert.deepEqual(plan.roles.INTEGRATED_ONLY, ['farina', 'uovo', 'latte', 'mele']);
+});
+
+test('composite prepared form fails closed when transformation steps are incomplete', () => {
+  const facts = {
+    title: 'Muffin salato',
+    ingredients: [{name: 'farina'}, {name: 'uovo'}],
+    steps: ['Mescola farina e uovo.']
+  };
+  assert.throws(() => buildDisplayPlan(facts), /DISPLAY_ROLE_AMBIGUOUS_TRANSFORMED_PREPARATION/);
+});
+
 test('prompt compiler fails closed when display or texture contract drifts', () => {
   const packet = structuredClone(buildPacket({root, recipeId: 'do04'}));
   packet.textureBudget.frequency = 'HIGH';
