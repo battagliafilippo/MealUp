@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-fast-runtime-state-v1",
   "version": "1.0",
-  "status": "BLOCKED_SOURCE_AMBIGUITY",
+  "status": "ACTIVE_READY",
   "modelSetVersion": "FPP_CANONICAL_MODELS_V1",
   "queue": [
     {"recipeId": "a10", "state": "QA_PASS_OWNER_REFERENCE_FROZEN"},
@@ -10,18 +10,12 @@
     {"recipeId": "p10", "state": "QA_PASS_CANDIDATE_ONLY", "assetSha256": "23c1a1cebeec83dee7341ef6f31995921451bc5600afcfc0f3e7c2bdefd95c5c"},
     {"recipeId": "s11", "state": "QA_PASS_CANDIDATE_ONLY_BY_OWNER_TEXTURE_DECISION", "assetSha256": "d1e4dfba6536cb7bc6be5085b23784e0c5bd63b215f56e63d24064fc9c5b279a"},
     {"recipeId": "do04", "state": "QA_PASS_CANDIDATE_ONLY", "assetSha256": "46bb9ba3356c9e439fed0206b900b2dd734f40aa932ca82b422933176f74628c"},
-    {"recipeId": "do15", "state": "BLOCKED_PRE_IMAGEGEN_DISPLAY_PLAN"},
+    {"recipeId": "do15", "state": "PENDING"},
     {"recipeId": "p28", "state": "PENDING"},
     {"recipeId": "b17", "state": "PENDING"},
     {"recipeId": "v01", "state": "PENDING"}
   ],
   "activeRecipeId": null,
-  "blocked": {
-    "recipeId": "do15",
-    "reason": "DISPLAY_PLAN_MARKS_INTEGRATED_BATTER_INGREDIENTS_AS_PRIMARY_VISIBLE",
-    "automaticRetryAllowed": false,
-    "requiredAction": "CORRECT_DETERMINISTIC_DISPLAY_ROLE_CLASSIFICATION_BEFORE_IMAGEGEN"
-  },
   "qaPassCount": 6,
   "ownerReviewAt": 10,
   "gates": {

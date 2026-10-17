@@ -3,7 +3,7 @@
   "checkpointId": "FPP-FAST-DO15-PREIMAGEGEN-BLOCK-001",
   "recordedAt": "2026-10-17",
   "recipeId": "do15",
-  "status": "BLOCKED_PRE_IMAGEGEN_DISPLAY_PLAN",
+  "status": "RESOLVED_PRE_IMAGEGEN_ZERO_IMAGE_CALLS",
   "imageCalls": 0,
   "sourceHash": "c85c40a18c68d9ee214d8a0ead77455a395d875f09573f667a92f13808109207",
   "packetSha256": "52bfb478e672eca0401c7636a72172bbb1f7354ffcb2fa5a879650583ee78979",
@@ -13,5 +13,6 @@
   "requiredPreparedForm": "ONE_CHOCOLATE_MUFFIN_WITH_CHOCOLATE_PIECES_INTEGRATED_INTO_BATTER",
   "authority": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
   "pilotProgress": "6/10 QA_PASS",
-  "nextGate": "FIX_DISPLAY_ROLE_CLASSIFIER_AND_RECOMPILE"
+  "resolution": {"commit": "a0ed88a", "tests": "20/20 PASS", "preparedForm": "ONE_MUFFIN", "ingredientsIntegrated": true},
+  "nextGate": "BACKGROUND_MAY_RESUME"
 }
