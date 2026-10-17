@@ -10,5 +10,14 @@
   "technicalQa": {"status": "FAIL", "errors": ["IMAGE_EXCEEDS_BYTE_BUDGET"], "losslessRecodeSkipped": "VISUAL_QA_ALREADY_FAILED"},
   "visualQa": {"status": "FAIL", "reviewAuthority": "INDEPENDENT_QA_RELIABILITY_AGENT", "passingGates": ["EXACTLY_THREE_BALLS", "VESSEL_DESSERT_MOLD", "SAFE_CROP", "PHYSICAL_GAUGE", "235_KCAL_UNIQUE_EXACT", "LIME_NEEDLE", "NO_EXTRA_TEXT_UI_PROP"], "blockingDefects": ["LOOSE_COCOA_BED_FUNCTIONS_AS_GARNISH", "PHOTOREAL_DENSE_COCOA_MICROTEXTURE"]},
   "acceptance": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
-  "stopReason": "FIRST_VISUAL_QA_FAIL_NO_AUTOMATIC_RETRY"
+  "stopReason": "FIRST_VISUAL_QA_FAIL_NO_AUTOMATIC_RETRY",
+  "ownerAuthorizedCorrection": {
+    "candidateId": "FPP-FAST-DO04-002-CORRECTED",
+    "assetPath": "docs/food-portrait-pipeline/candidates/do04-fast-pilot-candidate-002-corrected.png",
+    "assetSha256": "030f5de4c9735eee54887e58f1d088b318f13bc4f2479a340a7bf20747d10783",
+    "technicalQa": "PASS",
+    "visualQa": "FAIL_PHOTOREAL_HIGH_FREQUENCY_FILAMENT_MICROTEXTURE",
+    "resolvedDefects": ["LOOSE_COCOA_BED_FUNCTIONS_AS_GARNISH"],
+    "automaticRetry": false
+  }
 }

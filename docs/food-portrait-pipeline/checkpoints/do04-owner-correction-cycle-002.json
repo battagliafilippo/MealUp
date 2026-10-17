@@ -1,0 +1,28 @@
+{
+  "schema": "mealup-food-portrait-owner-correction-cycle-v1",
+  "checkpointId": "FPP-FAST-DO04-CORRECTION-002",
+  "recordedAt": "2026-10-17",
+  "recipeId": "do04",
+  "status": "FAIL_CORRECTION_CANDIDATE_ONLY_STOPPED",
+  "editCalls": 1,
+  "automaticRetry": false,
+  "sourceAssetSha256": "742129d0a371da0a6e15858c3242f00dc7708f653bba03ac1b682fa23e0d1188",
+  "correctedAsset": {
+    "path": "docs/food-portrait-pipeline/candidates/do04-fast-pilot-candidate-002-corrected.png",
+    "sha256": "030f5de4c9735eee54887e58f1d088b318f13bc4f2479a340a7bf20747d10783",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1766425,
+    "format": "png",
+    "originalPreserved": true
+  },
+  "technicalQa": "PASS",
+  "independentVisualQa": {
+    "status": "FAIL",
+    "resolved": ["LOOSE_COCOA_BED", "GARNISH", "DIRTY_VESSEL_BASE"],
+    "blockingDefect": "PHOTOREAL_HIGH_FREQUENCY_FILAMENT_MICROTEXTURE"
+  },
+  "authority": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
+  "pilotProgress": "5/10 QA_PASS; DO04 CORRECTION FAILED",
+  "nextGate": "OWNER_DECISION_REQUIRED"
+}
