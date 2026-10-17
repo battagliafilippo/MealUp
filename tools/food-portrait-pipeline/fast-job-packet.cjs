@@ -5,11 +5,12 @@ const crypto = require('node:crypto');
 const { extract } = require('./catalog-recipe-source.cjs');
 const { gaugeState } = require('./gauge-mapping.cjs');
 const {verifyCanonicalModelSet, selectVisualReference} = require('./canonical-model-gate.cjs');
+const {TEXTURE_BUDGET, buildDisplayPlan} = require('./display-role-contract.cjs');
 
 const PACKET_SCHEMA = 'mealup-food-portrait-fast-job-packet-v1';
-const PROMPT_VERSION = 'FPP_FAST_PROMPT_V1';
-const GATE_VERSION = 'FPP_FROZEN_GATES_V1';
-const MAX_PACKET_BYTES = 4096;
+const PROMPT_VERSION = 'FPP_FAST_PROMPT_V2_DISPLAY_ROLE_TEXTURE_BUDGET';
+const GATE_VERSION = 'FPP_FROZEN_GATES_V2_DISPLAY_ROLE_TEXTURE_BUDGET';
+const MAX_PACKET_BYTES = 6144;
 const fail = (message) => { throw new Error(message); };
 const sha256Buffer = (value) => crypto.createHash('sha256').update(value).digest('hex');
 const sha256File = (file) => sha256Buffer(fs.readFileSync(file));
@@ -57,6 +58,7 @@ function buildPacket(options) {
   const visualReference = selectVisualReference(modelSet, facts, frozen);
   const visualReferencePath = path.resolve(root, visualReference.asset);
   if (!fs.existsSync(visualReferencePath) || sha256File(visualReferencePath) !== visualReference.sha256) fail('VISUAL_REFERENCE_HASH_MISMATCH:' + recipeId);
+  const displayPlan = buildDisplayPlan(facts);
   const payload = {
     schema: PACKET_SCHEMA,
     gateVersion: GATE_VERSION,
@@ -98,6 +100,8 @@ function buildPacket(options) {
       zone: gauge.zone,
       saturatedHigh: gauge.saturatedHigh
     },
+    displayPlan,
+    textureBudget: TEXTURE_BUDGET,
     promptDelta: {
       subject: facts.title,
       rule: facts.vesselId === 'VESSEL_FREE' ? 'PREPARED_OBJECT_IS_SUBJECT_NO_SERVING_VESSEL' : 'ONE_COMPLETE_INTEGRATED_RECIPE',

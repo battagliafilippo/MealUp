@@ -9,6 +9,9 @@ const {buildPacket, canonicalJson, MAX_PACKET_BYTES} = require('./fast-job-packe
 const {runDryRun} = require('./fast-rollback-harness.cjs');
 const {verifyCanonicalModelSet, selectVisualReference} = require('./canonical-model-gate.cjs');
 const {inspect: inspectFastBackground} = require('./fast-background-preflight.cjs');
+const {TEXTURE_BUDGET, buildDisplayPlan, validateDisplayPlan} = require('./display-role-contract.cjs');
+const {buildQaContract, validateQaReport} = require('./fast-qa-contract.cjs');
+const {compilePrompt} = require('./fast-prompt-compiler.cjs');
 
 const root = path.resolve(__dirname, '..', '..');
 
@@ -27,6 +30,8 @@ test('packet is deterministic, compact and source/reference locked', () => {
   assert.equal(first.gates.independentVisualQaRequired, true);
   assert.equal(first.gates.automaticAcceptance, false);
   assert.equal(first.gates.budgetEUR, 0);
+  assert.equal(validateDisplayPlan(first.displayPlan, first.recipeFacts), true);
+  assert.deepEqual(first.textureBudget, TEXTURE_BUDGET);
 });
 
 test('different recipe facts produce a different packet hash', () => {
@@ -109,4 +114,54 @@ test('background preflight selects the first pending guarded-pilot recipe', () =
   }
   const expected = state.queue.find((entry) => entry.state === 'PENDING');
   assert.deepEqual(inspectFastBackground(root), {decision: 'READY', recipeId: expected.recipeId, qaPassCount: state.qaPassCount, ownerReviewAt: state.ownerReviewAt, modelSetVersion: state.modelSetVersion});
+});
+
+test('do04 display plan binds cocoa to the three balls and forbids a loose bed', () => {
+  const packet = buildPacket({root, recipeId: 'do04'});
+  assert.equal(packet.displayPlan.exactCount.count, 3);
+  assert.deepEqual(packet.displayPlan.roles.SURFACE_BOUND_VISIBLE, ['cacao amaro']);
+  assert.deepEqual(packet.displayPlan.roles.INTEGRATED_ONLY.sort(), ['datteri', 'mandorle'].sort());
+  assert.ok(packet.displayPlan.roles.FORBIDDEN_VISIBLE.includes('LOOSE_BED'));
+  const compiled = compilePrompt(packet);
+  assert.match(compiled.text, /zero loose residue, bed, pile or dusting/);
+  assert.match(compiled.text, /Avoid photographic micro-texture: no pores, fibers, powder grain/);
+});
+
+test('display plan is total and rejects missing or duplicated classifications', () => {
+  const facts = {title: 'Test', ingredients: [{name: 'cacao'}, {name: 'mandorle'}], steps: ['Frulla le mandorle. Rivesti col cacao.']};
+  const plan = buildDisplayPlan(facts);
+  assert.equal(validateDisplayPlan(plan, facts), true);
+  const broken = structuredClone(plan);
+  broken.roles.PRIMARY_VISIBLE.push('cacao');
+  assert.throws(() => validateDisplayPlan(broken, facts), /DISPLAY_ROLE_NOT_TOTAL_OR_DISJOINT/);
+});
+
+test('prompt compiler fails closed when display or texture contract drifts', () => {
+  const packet = structuredClone(buildPacket({root, recipeId: 'do04'}));
+  packet.textureBudget.frequency = 'HIGH';
+  assert.throws(() => compilePrompt(packet), /PACKET_SHA_MISMATCH/);
+  const missingRole = structuredClone(buildPacket({root, recipeId: 'do04'}));
+  delete missingRole.displayPlan.roles.SURFACE_BOUND_VISIBLE;
+  assert.throws(() => compilePrompt(missingRole), /PACKET_SHA_MISMATCH/);
+});
+
+test('QA contract requires five independent PASS verdicts and both views', () => {
+  const packet = buildPacket({root, recipeId: 'do04'});
+  const contract = buildQaContract(packet);
+  assert.deepEqual(contract.requiredVerdicts, ['CONTENT_COUNT', 'ATTACHMENT_GARNISH', 'STYLE_MICROTEXTURE', 'VESSEL_CROP', 'GAUGE_TEXT']);
+  const report = {
+    packetSha256: packet.packetSha256,
+    canonicalModelSetSha256: packet.ownerModelSet.manifestSha256,
+    visualReferenceSha256: packet.visualReference.sha256,
+    producer: 'VISUAL_PRODUCTION', reviewer: 'INDEPENDENT_VISUAL_QA',
+    views: ['CARD_360_SQUARE', 'ORIGINAL_1_TO_1'],
+    verdicts: Object.fromEntries(contract.requiredVerdicts.map((key) => [key, 'PASS'])),
+    overall: 'PASS_CANDIDATE_ONLY'
+  };
+  assert.equal(validateQaReport(contract, report), true);
+  report.verdicts.STYLE_MICROTEXTURE = 'FAIL';
+  assert.throws(() => validateQaReport(contract, report), /QA_VERDICT_FAIL:STYLE_MICROTEXTURE/);
+  report.verdicts.STYLE_MICROTEXTURE = 'PASS';
+  report.reviewer = report.producer;
+  assert.throws(() => validateQaReport(contract, report), /QA_REVIEWER_NOT_INDEPENDENT/);
 });
