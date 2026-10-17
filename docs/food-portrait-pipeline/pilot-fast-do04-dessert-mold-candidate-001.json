@@ -19,5 +19,17 @@
     "visualQa": "FAIL_PHOTOREAL_HIGH_FREQUENCY_FILAMENT_MICROTEXTURE",
     "resolvedDefects": ["LOOSE_COCOA_BED_FUNCTIONS_AS_GARNISH"],
     "automaticRetry": false
+  },
+  "ownerAuthorizedFinalCorrection": {
+    "candidateId": "FPP-FAST-DO04-003-FINAL-CORRECTION",
+    "assetPath": "docs/food-portrait-pipeline/candidates/do04-fast-pilot-candidate-003-final-correction.png",
+    "assetSha256": "46bb9ba3356c9e439fed0206b900b2dd734f40aa932ca82b422933176f74628c",
+    "technicalQa": "PASS",
+    "visualQa": "PASS_5_OF_5_CANDIDATE_ONLY",
+    "automaticRetry": false,
+    "ownerApproved": false,
+    "frozen": false,
+    "integrated": false,
+    "deployed": false
   }
 }

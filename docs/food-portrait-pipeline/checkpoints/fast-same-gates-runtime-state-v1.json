@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-fast-runtime-state-v1",
   "version": "1.0",
-  "status": "BLOCKED_QA_FAIL",
+  "status": "ACTIVE_READY",
   "modelSetVersion": "FPP_CANONICAL_MODELS_V1",
   "queue": [
     {"recipeId": "a10", "state": "QA_PASS_OWNER_REFERENCE_FROZEN"},
@@ -9,20 +9,14 @@
     {"recipeId": "p09", "state": "QA_PASS_CANDIDATE_ONLY", "assetSha256": "061c5c12a5e28aa7b4a1e077f12a99b6935f5aebb02909c38d6ca81e7dbadb81"},
     {"recipeId": "p10", "state": "QA_PASS_CANDIDATE_ONLY", "assetSha256": "23c1a1cebeec83dee7341ef6f31995921451bc5600afcfc0f3e7c2bdefd95c5c"},
     {"recipeId": "s11", "state": "QA_PASS_CANDIDATE_ONLY_BY_OWNER_TEXTURE_DECISION", "assetSha256": "d1e4dfba6536cb7bc6be5085b23784e0c5bd63b215f56e63d24064fc9c5b279a"},
-    {"recipeId": "do04", "state": "FAIL_CORRECTION_CANDIDATE_ONLY", "assetSha256": "030f5de4c9735eee54887e58f1d088b318f13bc4f2479a340a7bf20747d10783"},
+    {"recipeId": "do04", "state": "QA_PASS_CANDIDATE_ONLY", "assetSha256": "46bb9ba3356c9e439fed0206b900b2dd734f40aa932ca82b422933176f74628c"},
     {"recipeId": "do15", "state": "PENDING"},
     {"recipeId": "p28", "state": "PENDING"},
     {"recipeId": "b17", "state": "PENDING"},
     {"recipeId": "v01", "state": "PENDING"}
   ],
   "activeRecipeId": null,
-  "blocked": {
-    "recipeId": "do04",
-    "reason": "PHOTOREAL_HIGH_FREQUENCY_MICROTEXTURE_AFTER_OWNER_CORRECTION",
-    "automaticRetryAllowed": false,
-    "requiredAction": "OWNER_DECISION_AFTER_AUTHORIZED_CORRECTION_FAILED_VISUAL_QA"
-  },
-  "qaPassCount": 5,
+  "qaPassCount": 6,
   "ownerReviewAt": 10,
   "gates": {
     "candidateLimitPerCycle": 1,

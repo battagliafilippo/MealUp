@@ -1,0 +1,17 @@
+{
+  "schema": "mealup-food-portrait-owner-correction-cycle-v1",
+  "checkpointId": "FPP-FAST-DO04-FINAL-CORRECTION-003",
+  "recordedAt": "2026-10-17",
+  "recipeId": "do04",
+  "status": "QA_PASS_CANDIDATE_ONLY",
+  "editCalls": 1,
+  "automaticRetry": false,
+  "sourceAssetSha256": "030f5de4c9735eee54887e58f1d088b318f13bc4f2479a340a7bf20747d10783",
+  "asset": {"path": "docs/food-portrait-pipeline/candidates/do04-fast-pilot-candidate-003-final-correction.png", "sha256": "46bb9ba3356c9e439fed0206b900b2dd734f40aa932ca82b422933176f74628c", "width": 1254, "height": 1254, "bytes": 1646805, "format": "png", "originalPreserved": true},
+  "technicalQa": "PASS",
+  "independentVisualQa": {"status": "PASS_CANDIDATE_ONLY", "verdicts": {"CONTENT_COUNT": "PASS", "ATTACHMENT_GARNISH": "PASS", "STYLE_MICROTEXTURE": "PASS", "VESSEL_CROP": "PASS", "GAUGE_TEXT": "PASS"}},
+  "authority": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
+  "pilotProgress": "6/10 QA_PASS",
+  "nextRecipeId": "do15",
+  "nextGate": "BACKGROUND_MAY_RESUME"
+}
