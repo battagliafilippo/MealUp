@@ -1,0 +1,14 @@
+{
+  "schema": "mealup-food-portrait-fast-candidate-v1",
+  "candidateId": "FPP-FAST-DO15-001",
+  "program": "FAST_SAME_GATES_V1",
+  "status": "FAIL_CANDIDATE_ONLY",
+  "recipe": {"id": "do15", "title": "Muffin al cioccolato", "kcal": 2690, "vesselId": "VESSEL_DESSERT_MOLD", "sourceHash": "c85c40a18c68d9ee214d8a0ead77455a395d875f09573f667a92f13808109207"},
+  "packet": {"sha256": "d71373483f876b269c07856d7a323dfc510702eb213d36b3d774bd106a5aa9d2", "bytes": 3539, "promptSha256": "b1fead09dd1f2352a4bb7ce32ca26807c5e58a4794a14dc3b82c06cba012687b", "promptBytes": 2551, "modelSetVersion": "FPP_CANONICAL_MODELS_V1"},
+  "asset": {"path": "docs/food-portrait-pipeline/candidates/do15-fast-pilot-candidate-001.png", "sha256": "5abae8ef30cd769db6ea9c81b4747874a85115d5c5eb57b222f58be2aca3ded6", "width": 1254, "height": 1254, "bytes": 1979349, "format": "png", "originalPreserved": true},
+  "generation": {"mode": "OPENAI_BUILT_IN_IMAGEGEN_HEARTBEAT_FAST_SAME_GATES", "providerReceipt": "exec-eedffb3a-4474-4fc3-a00a-111c5ac6b99f.png", "imagesRequested": 1, "imagesGenerated": 1, "automaticRetry": false, "extraCostEUR": 0},
+  "technicalQa": {"status": "PASS", "errors": []},
+  "visualQa": {"status": "FAIL", "reviewAuthority": "INDEPENDENT_QA_RELIABILITY_AGENT", "verdicts": {"CONTENT_COUNT": "FAIL_UNCOOKED_COLLAPSED_MUFFIN_FORM", "ATTACHMENT_GARNISH": "PASS", "STYLE_MICROTEXTURE": "FAIL_PHOTOREAL_POROUS_GLOSSY_TEXTURE", "VESSEL_CROP": "PASS", "GAUGE_TEXT": "PASS"}},
+  "acceptance": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
+  "stopReason": "FIRST_VISUAL_QA_FAIL_NO_AUTOMATIC_RETRY"
+}

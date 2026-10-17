@@ -1,0 +1,15 @@
+{
+  "schema": "mealup-food-portrait-fast-pilot-cycle-v1",
+  "checkpointId": "FPP-FAST-DO15-CYCLE-001",
+  "recordedAt": "2026-10-17",
+  "recipeId": "do15",
+  "status": "FAIL_CANDIDATE_ONLY_STOPPED",
+  "imageCalls": 1,
+  "automaticRetry": false,
+  "assetSha256": "5abae8ef30cd769db6ea9c81b4747874a85115d5c5eb57b222f58be2aca3ded6",
+  "technicalQa": "PASS",
+  "independentVisualQa": "FAIL_UNCOOKED_FORM_AND_PHOTOREAL_MICROTEXTURE",
+  "authority": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
+  "pilotProgress": "6/10 QA_PASS; DO15 FAILED",
+  "nextGate": "OWNER_MAY_AUTHORIZE_ONE_TARGETED_CORRECTION"
+}
