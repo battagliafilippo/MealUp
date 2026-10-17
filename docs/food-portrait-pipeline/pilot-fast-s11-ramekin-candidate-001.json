@@ -2,18 +2,20 @@
   "schema": "mealup-food-portrait-fast-candidate-v1",
   "candidateId": "FPP-FAST-S11-001",
   "program": "FAST_SAME_GATES_V1",
-  "status": "FAIL_CANDIDATE_ONLY",
+  "status": "QA_PASS_CANDIDATE_ONLY_BY_OWNER_TEXTURE_DECISION",
   "recipe": {"id": "s11", "title": "Salsa tonnata leggera", "kcal": 165, "vesselId": "VESSEL_RAMEKIN", "sourceHash": "5ba4f2c3ddceb9d744f5db0eae9311ae0b104b0ae28242ab1cc395bfa1e8d74c"},
   "packet": {"sha256": "d7837b339b831d4dbcfae544f4355b64b0a4bf7660b92d030e37b5e09a016a72", "bytes": 2477, "promptSha256": "5acba363084179c4011a3718e7853abe7d955f36052ca5895ca9ed1f4af5d6d4", "promptBytes": 1726, "modelSetVersion": "FPP_CANONICAL_MODELS_V1"},
   "asset": {"path": "docs/food-portrait-pipeline/candidates/s11-fast-pilot-candidate-001.png", "sha256": "d1e4dfba6536cb7bc6be5085b23784e0c5bd63b215f56e63d24064fc9c5b279a", "width": 1254, "height": 1254, "bytes": 1711817, "format": "png", "originalPreserved": true},
   "generation": {"mode": "OPENAI_BUILT_IN_IMAGEGEN_HEARTBEAT_FAST_SAME_GATES", "providerReceipt": "exec-8eecd99e-187e-4fbf-842e-6dc0e4e5a667.png", "imagesRequested": 1, "imagesGenerated": 1, "automaticRetry": false, "extraCostEUR": 0},
   "technicalQa": {"status": "PASS", "errors": []},
   "visualQa": {
-    "status": "FAIL",
+    "status": "PASS_BY_OWNER_TEXTURE_DECISION",
     "reviewAuthority": "INDEPENDENT_QA_RELIABILITY_AGENT",
     "passingGates": ["VESSEL_RAMEKIN", "CROP", "GAUGE", "165_KCAL", "GREEN_NEEDLE", "NO_EXTRA_UI_TEXT_PROP"],
-    "blockingDefect": "Sauce surface is granular with discrete grey-green caper-like pieces instead of fully smooth blended tuna-yogurt cream."
+    "ownerTextureDecision": {"accepted": true, "recipeSpecific": true, "scope": "S11_CANDIDATE_001_ONLY"},
+    "independentReReview": "PASS_CANDIDATE_ONLY_BY_OWNER_TEXTURE_DECISION",
+    "note": "The previously blocking granular texture is explicitly accepted by the owner for this S11 candidate only; no other blocking defect remains."
   },
   "acceptance": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
-  "stopReason": "FIRST_VISUAL_QA_FAIL_NO_AUTOMATIC_RETRY"
+  "stopReason": null
 }

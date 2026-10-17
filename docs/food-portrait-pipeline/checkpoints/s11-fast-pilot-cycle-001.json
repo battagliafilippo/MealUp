@@ -3,13 +3,14 @@
   "checkpointId": "FPP-FAST-S11-CYCLE-001",
   "recordedAt": "2026-10-16",
   "recipeId": "s11",
-  "status": "FAIL_CANDIDATE_ONLY_STOPPED",
+  "status": "SUPERSEDED_BY_OWNER_TEXTURE_DECISION",
   "imageCalls": 1,
   "automaticRetry": false,
   "assetSha256": "d1e4dfba6536cb7bc6be5085b23784e0c5bd63b215f56e63d24064fc9c5b279a",
   "technicalQa": "PASS",
   "independentVisualQa": "FAIL_SAUCE_NOT_FULLY_SMOOTH",
   "authority": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
-  "pilotProgress": "4/10 QA_PASS; S11 FAILED",
-  "nextGate": "OWNER_MAY_AUTHORIZE_ONE_TARGETED_SMOOTHNESS_CORRECTION"
+  "pilotProgress": "5/10 QA_PASS after recipe-specific owner texture decision",
+  "nextGate": "COMPLETED_BY_S11_OWNER_TEXTURE_DECISION_002",
+  "supersededBy": "docs/food-portrait-pipeline/checkpoints/s11-owner-texture-decision-002.json"
 }

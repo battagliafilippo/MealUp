@@ -1,0 +1,30 @@
+{
+  "schema": "mealup-food-portrait-owner-texture-decision-v1",
+  "checkpointId": "FPP-FAST-S11-OWNER-TEXTURE-002",
+  "recordedAt": "2026-10-17",
+  "recipeId": "s11",
+  "candidateId": "FPP-FAST-S11-001",
+  "status": "QA_PASS_CANDIDATE_ONLY_BY_OWNER_TEXTURE_DECISION",
+  "decision": {
+    "acceptedVariation": "SMALL_LUMPS_AND_GRANULAR_TEXTURE",
+    "scope": "THIS_S11_CANDIDATE_ONLY",
+    "generalPrecedent": false,
+    "regenerationAuthorized": false
+  },
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/s11-fast-pilot-candidate-001.png",
+    "sha256": "d1e4dfba6536cb7bc6be5085b23784e0c5bd63b215f56e63d24064fc9c5b279a",
+    "originalPreserved": true
+  },
+  "imageCallsAdded": 0,
+  "technicalQa": "PASS",
+  "independentVisualReReview": {
+    "status": "PASS_CANDIDATE_ONLY_BY_OWNER_TEXTURE_DECISION",
+    "otherBlockingDefects": [],
+    "confirmedGates": ["VESSEL_RAMEKIN", "SAFE_CROP", "PHYSICAL_GAUGE", "165_KCAL_UNIQUE_EXACT", "GREEN_NEEDLE", "NO_EXTRA_TEXT_UI_PROPS", "TOYS_3D_STYLE_WITHIN_OWNER_ENVELOPE"]
+  },
+  "authority": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
+  "pilotProgress": "5/10 QA_PASS",
+  "nextRecipeId": "do04",
+  "nextGate": "BACKGROUND_MAY_RESUME"
+}
