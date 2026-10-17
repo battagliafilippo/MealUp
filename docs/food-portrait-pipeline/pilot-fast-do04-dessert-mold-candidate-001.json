@@ -1,0 +1,14 @@
+{
+  "schema": "mealup-food-portrait-fast-candidate-v1",
+  "candidateId": "FPP-FAST-DO04-001",
+  "program": "FAST_SAME_GATES_V1",
+  "status": "FAIL_CANDIDATE_ONLY",
+  "recipe": {"id": "do04", "title": "Palline di datteri e mandorle", "kcal": 235, "vesselId": "VESSEL_DESSERT_MOLD", "sourceHash": "66a487799dce8b36d160be794ef64abd0362a064eb387185638242b40e0c7b0b"},
+  "packet": {"sha256": "1c400914bbf34b49ff67a6a6c9752903667a0189caaf0ed95d6851f7ebac3bf5", "bytes": 2426, "promptSha256": "e4d1cf7741d6d6932ffdd675091fb341fb32f794c544ffeaa162dc2ce7990b77", "promptBytes": 1738, "modelSetVersion": "FPP_CANONICAL_MODELS_V1"},
+  "asset": {"path": "docs/food-portrait-pipeline/candidates/do04-fast-pilot-candidate-001.png", "sha256": "742129d0a371da0a6e15858c3242f00dc7708f653bba03ac1b682fa23e0d1188", "width": 1254, "height": 1254, "bytes": 2045241, "format": "png", "originalPreserved": true},
+  "generation": {"mode": "OPENAI_BUILT_IN_IMAGEGEN_HEARTBEAT_FAST_SAME_GATES", "providerReceipt": "exec-86a7d511-2416-44da-b130-f961d9e82dcf.png", "imagesRequested": 1, "imagesGenerated": 1, "automaticRetry": false, "extraCostEUR": 0},
+  "technicalQa": {"status": "FAIL", "errors": ["IMAGE_EXCEEDS_BYTE_BUDGET"], "losslessRecodeSkipped": "VISUAL_QA_ALREADY_FAILED"},
+  "visualQa": {"status": "FAIL", "reviewAuthority": "INDEPENDENT_QA_RELIABILITY_AGENT", "passingGates": ["EXACTLY_THREE_BALLS", "VESSEL_DESSERT_MOLD", "SAFE_CROP", "PHYSICAL_GAUGE", "235_KCAL_UNIQUE_EXACT", "LIME_NEEDLE", "NO_EXTRA_TEXT_UI_PROP"], "blockingDefects": ["LOOSE_COCOA_BED_FUNCTIONS_AS_GARNISH", "PHOTOREAL_DENSE_COCOA_MICROTEXTURE"]},
+  "acceptance": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
+  "stopReason": "FIRST_VISUAL_QA_FAIL_NO_AUTOMATIC_RETRY"
+}

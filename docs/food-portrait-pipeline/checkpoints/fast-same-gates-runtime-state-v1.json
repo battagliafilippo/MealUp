@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-fast-runtime-state-v1",
   "version": "1.0",
-  "status": "ACTIVE_READY",
+  "status": "BLOCKED_QA_FAIL",
   "modelSetVersion": "FPP_CANONICAL_MODELS_V1",
   "queue": [
     {"recipeId": "a10", "state": "QA_PASS_OWNER_REFERENCE_FROZEN"},
@@ -9,13 +9,19 @@
     {"recipeId": "p09", "state": "QA_PASS_CANDIDATE_ONLY", "assetSha256": "061c5c12a5e28aa7b4a1e077f12a99b6935f5aebb02909c38d6ca81e7dbadb81"},
     {"recipeId": "p10", "state": "QA_PASS_CANDIDATE_ONLY", "assetSha256": "23c1a1cebeec83dee7341ef6f31995921451bc5600afcfc0f3e7c2bdefd95c5c"},
     {"recipeId": "s11", "state": "QA_PASS_CANDIDATE_ONLY_BY_OWNER_TEXTURE_DECISION", "assetSha256": "d1e4dfba6536cb7bc6be5085b23784e0c5bd63b215f56e63d24064fc9c5b279a"},
-    {"recipeId": "do04", "state": "PENDING"},
+    {"recipeId": "do04", "state": "FAIL_CANDIDATE_ONLY", "assetSha256": "742129d0a371da0a6e15858c3242f00dc7708f653bba03ac1b682fa23e0d1188"},
     {"recipeId": "do15", "state": "PENDING"},
     {"recipeId": "p28", "state": "PENDING"},
     {"recipeId": "b17", "state": "PENDING"},
     {"recipeId": "v01", "state": "PENDING"}
   ],
   "activeRecipeId": null,
+  "blocked": {
+    "recipeId": "do04",
+    "reason": "LOOSE_COCOA_GARNISH_AND_PHOTOREAL_MICROTEXTURE",
+    "automaticRetryAllowed": false,
+    "requiredAction": "OWNER_AUTHORIZATION_FOR_ONE_TARGETED_CORRECTION"
+  },
   "qaPassCount": 5,
   "ownerReviewAt": 10,
   "gates": {

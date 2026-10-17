@@ -1,0 +1,15 @@
+{
+  "schema": "mealup-food-portrait-fast-pilot-cycle-v1",
+  "checkpointId": "FPP-FAST-DO04-CYCLE-001",
+  "recordedAt": "2026-10-17",
+  "recipeId": "do04",
+  "status": "FAIL_CANDIDATE_ONLY_STOPPED",
+  "imageCalls": 1,
+  "automaticRetry": false,
+  "assetSha256": "742129d0a371da0a6e15858c3242f00dc7708f653bba03ac1b682fa23e0d1188",
+  "technicalQa": "FAIL_IMAGE_EXCEEDS_BYTE_BUDGET",
+  "independentVisualQa": "FAIL_LOOSE_COCOA_GARNISH_AND_PHOTOREAL_MICROTEXTURE",
+  "authority": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
+  "pilotProgress": "5/10 QA_PASS; DO04 FAILED",
+  "nextGate": "OWNER_MAY_AUTHORIZE_ONE_TARGETED_CORRECTION"
+}
