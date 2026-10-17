@@ -1,0 +1,17 @@
+{
+  "schema": "mealup-food-portrait-pre-imagegen-block-v1",
+  "checkpointId": "FPP-FAST-DO15-PREIMAGEGEN-BLOCK-001",
+  "recordedAt": "2026-10-17",
+  "recipeId": "do15",
+  "status": "BLOCKED_PRE_IMAGEGEN_DISPLAY_PLAN",
+  "imageCalls": 0,
+  "sourceHash": "c85c40a18c68d9ee214d8a0ead77455a395d875f09573f667a92f13808109207",
+  "packetSha256": "52bfb478e672eca0401c7636a72172bbb1f7354ffcb2fa5a879650583ee78979",
+  "promptSha256": "ea366ac50589a93a0f4a48a3ddae0327b07a0a1c1ae80f80d05c4a864bee9bab",
+  "blockingDefect": "BATTER_INGREDIENTS_CLASSIFIED_AS_PRIMARY_VISIBLE_INSTEAD_OF_INTEGRATED_ONLY",
+  "affectedIngredients": ["farina", "zucchero", "burro", "uovo", "latte"],
+  "requiredPreparedForm": "ONE_CHOCOLATE_MUFFIN_WITH_CHOCOLATE_PIECES_INTEGRATED_INTO_BATTER",
+  "authority": {"ownerApproved": false, "frozen": false, "integrated": false, "deployed": false},
+  "pilotProgress": "6/10 QA_PASS",
+  "nextGate": "FIX_DISPLAY_ROLE_CLASSIFIER_AND_RECOMPILE"
+}
