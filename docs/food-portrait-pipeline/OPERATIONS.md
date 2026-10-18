@@ -895,3 +895,11 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Errore test registrato: il primo assert usava uguaglianza stretta sul floating point `-27.599999999999994`; sostituito con tolleranza `1e-9`, senza alterare formula o risultato.
 
 **Stato motore:** `BLOCKED_CANONICAL_TEMPLATE_AND_GAUGE_ASSETS`. Vietato aggirare il blocco cambiando gli hash attesi o riusando la calibrazione G7 legacy.
+
+### Remote checkpoint 2026-10-18
+
+- Commit motore/preflight verificato: `43b306e`; workflow `QA - MealUp Food Portrait Contracts`, run `39110008123`.
+- Job `contract-baseline`: **SUCCESS**. Job `preproduction-specs`: **SUCCESS**.
+- Il checkpoint remoto conferma che i contratti preesistenti restano verdi; i nuovi test Office/preflight sono stati eseguiti localmente con esito 148/148 PASS.
+- Micro-step CI successivo: aggiunti al workflow il planner Food Portrait dell'AI Office e il preflight deterministico fail-closed; aggiunto anche `tools/ai-office/**` ai path che attivano il workflow. Verifica remota ancora da eseguire.
+- Nessun output visivo, deploy o modifica a main/tester/PWA.

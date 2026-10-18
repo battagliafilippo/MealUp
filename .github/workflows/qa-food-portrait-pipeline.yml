@@ -5,6 +5,7 @@ on:
       - experiment/food-portrait-pipeline-20261015
     paths:
       - tools/food-portrait-pipeline/**
+      - tools/ai-office/**
       - .github/workflows/qa-food-portrait-pipeline.yml
       - G8/composition-matrix.json
       - G5/references/VESSEL_LIBRARY_reference.png
@@ -163,6 +164,8 @@ jobs:
               r.width,r.height,r.status);
           })().catch(e=>{console.error(e);process.exitCode=1;});
           NODE
+      - name: Enforce deterministic visual engine fail-closed preflight
+        run: node --test tools/food-portrait-pipeline/deterministic-visual-preflight.test.cjs
       - name: Validate isolated integration staging and grouped exception gate
         run: |
           node --check tools/food-portrait-pipeline/staging-catalog.cjs
@@ -186,6 +189,7 @@ jobs:
       - name: Revalidate existing AI Office role routing and Groq reasoning guards
         run: |
           node --test tools/ai-office/agent-registry.test.cjs \
+            tools/ai-office/food-portrait-skill-plan.test.cjs \
             tools/ai-office/office-orchestrator.test.cjs \
             tools/ai-office/router.test.cjs
           node tools/recipe-visuals/groq-reasoner.cjs --self-test
