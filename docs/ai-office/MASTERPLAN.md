@@ -34,7 +34,7 @@ Evidenze storiche al checkpoint: [134/134 test AI Office](https://github.com/bat
 | Fase | Obiettivo finale | Stato attuale e condizione di uscita |
 |---|---|---|
 | **01 — Unificazione** | Un solo registro autorevole di componenti, decisioni, stato, micro-step e recovery | Registro, vista umana, controllo CI e confronto senza perdite; dichiarare VERIFIED solo dopo QA |
-| **02 — Sicurezza + Costituzione** | Proteggere `main` e consentire preflight con l'originale v1.9 senza pubblicarlo | **PARTIAL + BLOCKED:** originale privato verificato (hash + 152 sezioni), protezioni di output e CI passate; `main` non protetto, GitHub runner ancora privo dell'originale |
+| **02 — Sicurezza + Costituzione** | Proteggere `main` e consentire preflight con l'originale v1.9 senza pubblicarlo | **PARTIALLY VERIFIED:** `main` PROTETTO con ruleset attivo (18/10); Costituzione originale privata verificata ma non collegata in modo persistente al Director/GitHub CI |
 | **03 — Director operativo** | Persistenza task, eventi, checkpoint, recupero, quota zero e fail-closed | Da sviluppare su laboratorio dopo architettura e gate di sicurezza |
 | **04 — Qualificazione specialisti** | Candidati con capacità, Skill, costi e prove reali approvati; notifica Scout verificata | Qwen non qualificato Design; no otto agenti nominati |
 | **05 — Pilot end-to-end** | Un lavoro attraversa Director → specialista → Skill+Costituzione → QA → CEO e riprende da checkpoint | Non avviare finché fonte costituzionale, sicurezza, QA e permessi non sono verificati |
@@ -43,7 +43,7 @@ Per ogni micro-step il JSON contiene: **obiettivo, scope, precondizioni, dipende
 
 ## Rischi e limiti da non nascondere
 
-1. **Protezione `main`:** GitHub dichiara `protected:false` e `rulesets:[]` nel controllo del 15 ottobre 2026. Il connettore GitHub disponibile può leggere e scrivere file nel laboratorio ma NON impostare in chat le regole amministrative. Senza gate verificato non dare nuovi permessi di scrittura agli agenti.
+1. **Protezione `main` — RISOLTO il 18/10/2026:** GitHub dichiara `protected:true`; ruleset attivo [`Protect main`](https://github.com/battagliafilippo/MealUp/rules/25214872), obbligo di pull request, divieto di cancellazione e aggiornamenti non-fast-forward, nessun bypass actor. Questo non autorizza comunque nuovi agenti a scrivere.
 2. **Accesso privato alla Costituzione:** il documento canonico è nella Libreria privata dell'utente, non nel repository pubblico. Non copiare la Costituzione su GitHub o negli artifact/log. Il codice attuale verifica hash e versione ma CI non può fornirgli il file; un workflow senza fonte deve rimanere BLOCKED.
 3. **Scout:** il controllo del task schedulato registra `last_run_time:null`, notifiche e email `false`. È configurato, non dimostrato come osservatorio che recapita rapporti.
 4. **Provider/quote:** Qwen Groq è un candidato collegato ma non un Design approvato; quote e failover tra fornitori non sono enforceable con i soli simulatori.
@@ -55,11 +55,17 @@ Controllo **reale indipendente** sulla Costituzione originale privata: hash SHA-
 
 **Stato accurato:** `AIOS-02.2 PARTIALLY_VERIFIED` perché il documento autentico è stato letto in una sessione privata, ma NON è collegato in modo persistente al Director né disponibile a GitHub Actions. `AIOS-02.1 BLOCKED` perché attivare la protezione di main richiede amministrazione GitHub. La procedura guidata e i criteri di verifica sono in [SECURITY-PHASE-02.md](SECURITY-PHASE-02.md).
 
+## Aggiornamento indipendente al 18/10/2026
+
+Il gate `AIOS-02.1` è ora **VERIFIED**: la protezione `main` è stata applicata realmente il 16/10 e verificata via GitHub API il 18/10, con regola attiva `Protect main`, pull request richiesta e blocco di cancellazione e force push. Evidenza: [ruleset](https://github.com/battagliafilippo/MealUp/rules/25214872). Il branch `main` non è stato modificato dal presente controllo.
+
+Il prossimo step è `AIOS-02.2` (ancora PARTIALLY_VERIFIED): collegare, in un runtime privato autorizzato, l'originale della Costituzione v1.9 al preflight di ogni vero incarico del Director. Fino ad allora router, selector e simulazioni non sono una squadra autonoma pronta alla produzione.
+
 ## Recupero e prossimo incarico
 
 - Conservare **tutti gli ID**, le decisioni `DEC`, i problemi `UNK`, i checkpoint e i riferimenti all'evidenza. Usare Git come cronologia delle versioni del JSON, non riscrivere decisioni approvate senza nuova decisione esplicita e traccia di sostituzione.
 - Recuperare baseline/brief/task originali, marcare STALE ogni output vecchio dopo cambi materiali e riconciliare tutto ciò che resta aperto.
-- **Dopo il QA della fase 01, prossimo micro-step:** `AIOS-02.1` — determinare quale protezione di branch sia realmente applicabile e verificarla prima di introdurre agenti con WRITE SCOPE. In parallelo è analizzabile, **senza pubblicare alcun testo riservato**, `AIOS-02.2` — architettura del collegamento privato alla Costituzione.
+- **Prossimo micro-step verificato al 18/10:** `AIOS-02.2` — collegamento privato e persistente alla Costituzione, senza pubblicare alcun testo riservato. `AIOS-02.1` è completato.
 - **Non avviare automaticamente i passi 03–05**. Budget aggiuntivo 0 €, nessun deploy.
 
 Questo piano è separato dal **MealUp Master v1.24 dell'app** e dalla **Food Portrait Production Pipeline**. Nessun loro file è stato modificato nell'unificazione.
