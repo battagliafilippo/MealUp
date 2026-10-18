@@ -5,12 +5,22 @@ const path=require('node:path');
 const {spawnSync}=require('node:child_process');
 const root=path.resolve(__dirname,'../../..');
 const folder=path.join(root,'tools/ai-office');
-const tests=fs.readdirSync(folder).filter(f=>f.endsWith('.test.cjs')&&!f.endsWith('.windows.test.cjs')).sort();
+const platformStorageTests=new Set([
+ 'constitution-protected-handoff.test.cjs','director-host-recovery.test.cjs',
+ 'director-local-readonly.test.cjs','director-private-ledger.test.cjs',
+ 'director-private-mailbox.test.cjs','director-secure-preflight.test.cjs'
+]);
+const all=fs.readdirSync(folder).filter(f=>f.endsWith('.test.cjs')).sort();
+const tests=(process.platform==='win32'
+ ? all.filter(f=>f.endsWith('.windows.test.cjs')||!platformStorageTests.has(f))
+ : all.filter(f=>!f.endsWith('.windows.test.cjs')));
 if(tests.length<12)throw Error('TEST_SUITE_INCOMPLETE');
-const r=spawnSync(process.execPath,['--test',...tests.map(f=>path.join(folder,f))],{
+const runnerArgs=['--test',...(process.platform==='win32'?['--test-concurrency=1']:[]),
+  ...tests.map(f=>path.join(folder,f))];
+const r=spawnSync(process.execPath,runnerArgs,{
   cwd:root,timeout:90000,maxBuffer:1024*1024,encoding:'utf8'
 });
-const matches=(r.stdout||'').match(/# (?:tests|pass|fail) \d+/g)||[];
+const matches=(r.stdout||'').match(/(?:#|ℹ) (?:tests|pass|fail) \d+/g)||[];
 const values=Object.fromEntries(matches.map(line=>{const [,k,v]=line.split(' ');return [k,Number(v)]}));
 const pass=r.status===0&&values.fail===0&&values.tests===values.pass;
 console.log(JSON.stringify({schema:'MEALUP_LAB_INDEPENDENT_QA_V1',

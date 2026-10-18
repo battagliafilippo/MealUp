@@ -61,7 +61,8 @@ function callPinnedScript(which){
    throw Error('UNSAFE_OR_MISSING_RUNNER');
  const run=spawnSync(process.execPath,[full],{cwd:ROOT,encoding:'utf8',
   timeout:which==='qa'?120000:30000,maxBuffer:256*1024,
-  env:{PATH:process.env.PATH||'',CI:'true',GITHUB_REF_NAME:BRANCH}});
+  env:{PATH:process.env.PATH||'',CI:'true',GITHUB_REF_NAME:BRANCH,
+   MEALUP_PYTHON_EXECUTABLE:process.env.MEALUP_PYTHON_EXECUTABLE||''}});
  let value;
  try{value=JSON.parse((run.stdout||'').trim());}catch(_){value=null;}
  const ok=!run.error&&run.status===0&&value?.status==='PASS'&&

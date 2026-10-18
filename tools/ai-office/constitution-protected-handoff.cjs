@@ -11,6 +11,13 @@ const {assertPrivateDirectory,assertPrivateFile,verifyCreatedPrivateFile}=requir
 const CANDIDATES=require('./live-skill-catalog.json').catalog;
 const DESIGN=require('./live-model-skill-catalog.json').skills;
 const repoRoot=path.resolve(__dirname,'../..');
+function pythonExecutable(){
+  const configured=process.env.MEALUP_PYTHON_EXECUTABLE;
+  if(process.platform==='win32'&&typeof configured==='string'&&path.isAbsolute(configured)&&
+     fs.existsSync(configured)&&fs.statSync(configured).isFile()&&
+     !configured.startsWith(repoRoot+path.sep))return configured;
+  return process.platform==='win32'?'python':'python3';
+}
 function createProtectedHandoff({task,assignment,sourcePath,privateDirectory}={}){
   const noAccess={status:'BLOCKED_CANONICAL_CONSTITUTION_NOT_ACCESSIBLE',
     executesAgent:false,apiCalls:0,skillsExecuted:0};
@@ -63,7 +70,7 @@ function createProtectedHandoff({task,assignment,sourcePath,privateDirectory}={}
   }
   fs.writeFileSync(input,JSON.stringify(safeTask),{mode:0o600});
   verifyCreatedPrivateFile(input);
-  const result=spawnSync(process.platform==='win32'?'python':'python3',[
+  const result=spawnSync(pythonExecutable(),[
     path.join(__dirname,'constitution-task-packet.py'),
     '--canonical-docx',canon,'--task-json',input,'--out',packet
   ],{cwd:repoRoot,encoding:'utf8',timeout:12000,maxBuffer:8192});

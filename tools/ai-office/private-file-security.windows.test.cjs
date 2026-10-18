@@ -37,7 +37,8 @@ if(process.platform!=='win32'){
  test('Python accepts native ACL gate before rejecting synthetic source hash',()=>{
   const fake=path.join(original,'SYNTHETIC-NOT-CONSTITUTION.txt');
   if(!fs.existsSync(fake))fs.writeFileSync(fake,'synthetic only');
-  const run=spawnSync('python',[path.join(__dirname,'constitution-task-packet.py'),
+  const python=process.env.MEALUP_PYTHON_EXECUTABLE||'python';
+  const run=spawnSync(python,[path.join(__dirname,'constitution-task-packet.py'),
    '--canonical-docx',fake,'--verify-source-only'],{encoding:'utf8',timeout:20000});
   assert.equal(run.status,2);
   assert.match(run.stderr,/BLOCKED_CANONICAL_VERSION_OR_SHA_MISMATCH/);
