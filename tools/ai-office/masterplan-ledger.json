@@ -1,6 +1,6 @@
 {
   "schema": "MEALUP_AI_OFFICE_MASTERPLAN_V1",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "createdAt": "2026-10-15",
   "canonicalScope": "AI_OFFICE_LAB_ONLY",
   "branch": "experiment/recipe-visual-agents",
@@ -144,6 +144,12 @@
       "path": "docs/ai-office/DIRECTOR-HOST-RECOVERY.md",
       "status": "ACTIVE",
       "notes": "Private host checkpoint snapshot and restore: local POSIX positive pilot, deployment on durable user PC not done"
+    },
+    {
+      "id": "SRC-WINDOWS-HOST",
+      "path": "docs/ai-office/WINDOWS-PRIVATE-HOST-BOOTSTRAP.md",
+      "status": "ACTIVE",
+      "notes": "NTFS ACL bootstrap on real Windows CI; Windows Node+Python integration and real-PC installation not completed"
     }
   ],
   "decisions": [
@@ -344,12 +350,14 @@
         "https://github.com/battagliafilippo/MealUp/actions/runs/39129733085",
         "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/PRIVATE-ORIGINAL-PILOT-20261018.md",
         "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/DIRECTOR-HOST-RECOVERY.md",
-        "https://github.com/battagliafilippo/MealUp/actions/runs/39135454445"
+        "https://github.com/battagliafilippo/MealUp/actions/runs/39135454445",
+        "https://github.com/battagliafilippo/MealUp/actions/runs/39157572574"
       ],
       "missing": [
         "Actual same-host metadata restore with original v1.9 and idempotent QA proven; Windows/other user host not installed",
         "Private snapshots don't protect against malicious writer without authentication, and cross-host backup not qualified",
-        "Provider models and quota monitoring not integrated"
+        "Provider models and quota monitoring not integrated",
+        "Windows directory ACL provisioning tested on native Windows only; secure Windows module integration + user PC install still pending"
       ]
     },
     {
@@ -526,12 +534,14 @@
             "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/DIRECTOR-HOST-RECOVERY.md",
             "https://github.com/battagliafilippo/MealUp/actions/runs/39135454445",
             "https://github.com/battagliafilippo/MealUp/actions/runs/39135660948",
-            "LOCAL_PRIVATE_ORIGINAL_METADATA_SNAPSHOT_RESTORE_2026_10_18"
+            "LOCAL_PRIVATE_ORIGINAL_METADATA_SNAPSHOT_RESTORE_2026_10_18",
+            "https://github.com/battagliafilippo/MealUp/actions/runs/39157572574",
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/WINDOWS-PRIVATE-HOST-BOOTSTRAP.md"
           ],
           "blockingReasons": [
-            "Original v1.9 verified for POSIX local pilot and real restore, but ChatGPT Library is not bound to an authorized durable Director host",
-            "Windows NTFS ACL verification has not been implemented; do not claim Windows deployment",
-            "CEO/specialist external identities not independently authenticated"
+            "Windows real-runner directory ACL bootstrap verified, but Node journal, Python private packet and source file still require Windows file-level ACL integration and positive end-to-end tests",
+            "Actual user's Windows PC has not been accessed or configured; PC-host choice approved but secure installation awaits completion of Windows integration",
+            "Persistent ChatGPT Library binding and authenticated external agents not implemented"
           ]
         },
         {
@@ -605,12 +615,14 @@
             "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/DIRECTOR-HOST-RECOVERY.md",
             "https://github.com/battagliafilippo/MealUp/actions/runs/39135454445",
             "https://github.com/battagliafilippo/MealUp/actions/runs/39135454458",
-            "PRIVATE_LOCAL_RECOVERY_5_EVENTS_3_MESSAGES_NO_REPEAT_2026_10_18"
+            "PRIVATE_LOCAL_RECOVERY_5_EVENTS_3_MESSAGES_NO_REPEAT_2026_10_18",
+            "https://github.com/battagliafilippo/MealUp/actions/runs/39157572574",
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/WINDOWS-PRIVATE-HOST-BOOTSTRAP.md"
           ],
           "blockingReasons": [
-            "Local backup/restore/renewed preflight validated with real original, but no persistent user-owned computer or always-on runtime configured",
-            "Private snapshot SHA guards ordinary corruption, not malicious writers; no independent encrypted off-device backup",
-            "Windows-specific ACL security and live agent identity/remote provider quotas remain unverified"
+            "POSIX private original snapshot/restore positive pilot verified; Windows directory ACL groundwork tested, Windows Node/Python restore not yet ported/verified",
+            "User-owned host not installed, service and off-machine encrypted backup absent",
+            "Provider quota control and remote authenticated identities missing"
           ]
         },
         {
@@ -788,9 +800,9 @@
       "id": "UNK-007",
       "status": "OPEN",
       "topic": "Durable private host and Windows ACL",
-      "fact": "User-owned computer choice and always-on availability not confirmed; POSIX private local restore tested, no Windows ACL adapter or install",
+      "fact": "CEO authorized use of own Windows PC as planned private host. Windows NTFS container bootstrap Provision/Verify validated with 9 synthetic ACL tests on genuine Windows GitHub runner; not installed locally and Node/Constitution file ACL integration not yet done.",
       "whyItMatters": "User wants unattended agents at 0 EUR but continuity requires trusted disk, private source and OS-level access controls",
-      "resolution": "Confirm a user-authorized existing computer; for Windows build an ACL-verified host adapter and then perform a user-approved installation and restart test; never upload original to public Actions",
+      "resolution": "WINDOWS-02 file ACL plus Node/Python fail-closed bridge; Windows positive integration QA; then supervised owner-PC installation, local restart and independent backup",
       "relatedStep": "AIOS-02.2"
     }
   ],
@@ -799,10 +811,8 @@
     "activeBriefVersion": "AI_OFFICE_20261015_V1",
     "currentPhase": "AIOS-02",
     "nextStepId": "AIOS-02.2",
-    "lastVerifiedTechnicalState": "197/197 JS CI tests PASS; on isolated POSIX host original v1.9 verified + 67 active clauses, read-only Engineering and QA PASS, snapshot metadata-only 5 events and 3 messages; restore to empty private folder verified source and resumed without re-running either; still no durable installed PC, Windows ACL, external autonomous agents or live quota",
-    "pendingApprovals": [
-      "CEO_CONFIRM_PRIVATE_HOST_COMPUTER_BEFORE_INSTALLATION"
-    ],
+    "lastVerifiedTechnicalState": "User Windows PC approved as target host, not yet accessed. Native Windows NTFS bootstrap + 9 positive/negative CI tests PASS (39157572574); Node 197 regression CI and Engineering→QA PASS at checkpoint; original v1.9 never exported to GitHub. Next: file ACL bridge to Director, then user-machine supervised installation.",
+    "pendingApprovals": [],
     "noInFlightProviderCalls": true,
     "preservePreviousDecisionIds": true,
     "taskLedgerWriteScope": "tools/ai-office/masterplan-ledger.json + docs/ai-office/MASTERPLAN.md + tests",
@@ -861,6 +871,11 @@
         "version": "1.0.10",
         "change": "Built private source-gated metadata-only checkpoint snapshot/restore; 8 new offline tests and 197/197 QA green; positive original-source restore and resume 5 events 3 messages on isolated host; durable user machine and NTFS ACL gate remain open",
         "sourceCommit": "a5424463269bf0a587b2f06e4e171110ca0a7612"
+      },
+      {
+        "version": "1.0.11",
+        "change": "CEO approved planned existing Windows PC host; built Windows NTFS-only private directory bootstrap and 9 true Windows CI ACL tests PASS. No installation on user PC, no original document transfer, Node/Python Windows bindings still blocked; 02.2 stays PARTIALLY_VERIFIED.",
+        "sourceCommit": "cc216800f582ece731c8faf0fc5fa6ce7ec9ef1b"
       }
     ]
   }
