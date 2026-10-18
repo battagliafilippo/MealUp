@@ -1,6 +1,6 @@
 {
   "schema": "MEALUP_AI_OFFICE_MASTERPLAN_V1",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "createdAt": "2026-10-15",
   "canonicalScope": "AI_OFFICE_LAB_ONLY",
   "branch": "experiment/recipe-visual-agents",
@@ -230,11 +230,12 @@
         "https://github.com/battagliafilippo/MealUp/actions/runs/38704501391",
         "https://github.com/battagliafilippo/MealUp/actions/runs/38760713791",
         "PRIVATE_SOURCE_SHA256_VERIFIED_152_SECTIONS",
-        "https://github.com/battagliafilippo/MealUp/actions/runs/39129081580"
+        "https://github.com/battagliafilippo/MealUp/actions/runs/39129081580",
+        "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/PRIVATE-ORIGINAL-PILOT-20261018.md"
       ],
       "missing": [
-        "Persistent private source host binding not yet supported",
-        "Role/CEO authorization assertion and source digest do not authenticate an external autonomous model"
+        "Private source verified and actual packet used locally for first positive read-only pipeline, but not bound to a long-running authorized Director host or ChatGPT Library connector",
+        "External agents and CEO are not authenticated in local metadata-only trail"
       ]
     },
     {
@@ -333,12 +334,13 @@
         "https://github.com/battagliafilippo/MealUp/actions/runs/39127525590",
         "https://github.com/battagliafilippo/MealUp/actions/runs/39129081580",
         "https://github.com/battagliafilippo/MealUp/actions/runs/39129733082",
-        "https://github.com/battagliafilippo/MealUp/actions/runs/39129733085"
+        "https://github.com/battagliafilippo/MealUp/actions/runs/39129733085",
+        "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/PRIVATE-ORIGINAL-PILOT-20261018.md"
       ],
       "missing": [
-        "Offline local runner now coordinates actual deterministic internal Engineering & QA scripts but no real specialist LLM agents",
-        "Positive source-verified end-to-end run on trusted private host not performed",
-        "No durable authenticated shared cloud runtime, cross-host source access or provider quotas"
+        "Real original-controlled Engineering→QA private-local positive pilot passes with restart; cross-session persistent host not deployed",
+        "AI models not invoked/authenticated; current interdepartment collaboration is fixed local scripts",
+        "Provider quota controls, safe failover and durable cross-host recovery unverified"
       ]
     },
     {
@@ -508,12 +510,14 @@
             "https://github.com/battagliafilippo/MealUp/actions/runs/39129081580",
             "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/DIRECTOR-PRIVATE-LEDGER.md",
             "https://github.com/battagliafilippo/MealUp/actions/runs/39129733082",
-            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/LOCAL-PRIVATE-EXECUTOR.md"
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/LOCAL-PRIVATE-EXECUTOR.md",
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/PRIVATE-ORIGINAL-PILOT-20261018.md",
+            "https://github.com/battagliafilippo/MealUp/actions/runs/39131439877",
+            "PRIVATE_SESSION_REAL_ORIGINAL_POSITIVE_189_TESTS_67_ACTIVE_RULES_2026_10_18"
           ],
           "blockingReasons": [
-            "Automated ChatGPT Library->Director original-source binding is not available on a long-lived approved host; public GitHub Actions must remain without original private text",
-            "New bounded local runner is negative-tested and source fail-closed, but a real positive run with canonical original in the SAME trusted host remains unverified",
-            "No authenticated identities for separate AI specialist agents or CEO-signed authorization"
+            "Original v1.9 positive test completed on isolated ephemeral private host, but no authorized long-running Director service or persistent ChatGPT Library binding",
+            "Technical role messages are not yet independently authenticated CEO/specialist identities"
           ]
         },
         {
@@ -581,12 +585,13 @@
             "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/director-private-mailbox.cjs",
             "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/director-private-mailbox.test.cjs",
             "https://github.com/battagliafilippo/MealUp/actions/runs/39129733085",
-            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/director-local-readonly.cjs"
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/director-local-readonly.cjs",
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/PRIVATE-ORIGINAL-PILOT-20261018.md",
+            "PRIVATE_SESSION_RECOVERY_VERIFIED_5_EVENTS_3_MESSAGES_REUSED_ENGINEERING_QA"
           ],
           "blockingReasons": [
-            "Local source-bound read-only runner, persist/restart and stage controls implemented; 8 negative tests and independent read-only Engineering→QA CI passed",
-            "Actual original-document positive end-to-end private-host run not yet performed",
-            "No trusted hosted private runtime, remote agent identity or live quotas; no AI model collaboration"
+            "Local positive restart/reuse of bounded Engineering→QA chain verified, but cross-host and cross-session durable private host not established",
+            "Agent identities remain internal unverified role strings; no autonomous LLM orchestration or real provider quota control"
           ]
         },
         {
@@ -719,9 +724,9 @@
       "id": "UNK-002",
       "status": "OPEN",
       "topic": "Original v1.9 runtime access",
-      "fact": "Original private v1.9 verified against pinned SHA-256 and 152 clauses. Laboratory now has fixed local source-gated Engineering→QA runner negative-tested in CI; no private original on GitHub runners or authenticated Director host.",
+      "fact": "Private original (SHA256 canonical) used successfully by isolated local Director runtime on 2026-10-18 for real read-only Engineering→QA pilot; hosted automatic ChatGPT Library access remains unavailable.",
       "whyItMatters": "Real rule activation cannot be verified in autonomous GitHub runtime",
-      "resolution": "Run a private-host proof with original 0600 and persistent 0700 workspace; verify positive source-bound Director->Eng->QA and restart; then choose an approved always-available private host.",
+      "resolution": "Qualify a persistent trusted private runtime and authenticated assignment/agent identities; keep the original outside public GitHub and recheck on each task.",
       "relatedStep": "AIOS-02.2"
     },
     {
@@ -766,7 +771,7 @@
     "activeBriefVersion": "AI_OFFICE_20261015_V1",
     "currentPhase": "AIOS-02",
     "nextStepId": "AIOS-02.2",
-    "lastVerifiedTechnicalState": "189/189 Node tests PASS and real deterministic Engineering+QA scripts in GitHub Actions run 39129733085; new bounded local host runner passes missing/invalid-source/permissions/baseline negative tests; NO positive end-to-end with private original on same host yet, NO autonomous LLM agents",
+    "lastVerifiedTechnicalState": "Real source-positive controlled private-host pilot 2026-10-18: 67 activated v1.9 clauses, Engineering PASS, QA 189/189 PASS; restart reuses outputs (5 events 3 messages) without re-execution; missing source/stale baseline fail closed; 0 model calls and 0 project writes. Hosted runtime/identity still unverified.",
     "pendingApprovals": [],
     "noInFlightProviderCalls": true,
     "preservePreviousDecisionIds": true,
@@ -816,6 +821,11 @@
         "version": "1.0.8",
         "change": "Implemented source-gated local read-only Director→Engineering→QA→CEO prototype with fixed vetted scripts, step-level idempotent private checkpoints and safety denials; 189 CI tests PASS; keep source connector and actual agent runtime PARTIALLY VERIFIED",
         "sourceCommit": "3cab75e30ed48f02374c601924edd15d931b947f"
+      },
+      {
+        "version": "1.0.9",
+        "change": "Real private same-host positive pilot with original v1.9 confirmed (67 active rules); independent Engineering→QA 189/189 tests, idempotent restart and two negative controls. Keep source+Director steps PARTIALLY_VERIFIED pending trusted persistent host.",
+        "sourceCommit": "8304eb1d5515111cf6868319af3c0e1475afd6c8"
       }
     ]
   }
