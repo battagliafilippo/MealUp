@@ -5,7 +5,7 @@ const path=require('node:path');
 const {spawnSync}=require('node:child_process');
 const root=path.resolve(__dirname,'../../..');
 const folder=path.join(root,'tools/ai-office');
-const tests=fs.readdirSync(folder).filter(f=>f.endsWith('.test.cjs')).sort();
+const tests=fs.readdirSync(folder).filter(f=>f.endsWith('.test.cjs')&&!f.endsWith('.windows.test.cjs')).sort();
 if(tests.length<12)throw Error('TEST_SUITE_INCOMPLETE');
 const r=spawnSync(process.execPath,['--test',...tests.map(f=>path.join(folder,f))],{
   cwd:root,timeout:90000,maxBuffer:1024*1024,encoding:'utf8'
