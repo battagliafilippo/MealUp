@@ -35,7 +35,7 @@ Evidenze storiche al checkpoint: [134/134 test AI Office](https://github.com/bat
 |---|---|---|
 | **01 — Unificazione** | Un solo registro autorevole di componenti, decisioni, stato, micro-step e recovery | Registro, vista umana, controllo CI e confronto senza perdite; dichiarare VERIFIED solo dopo QA |
 | **02 — Sicurezza + Costituzione** | Proteggere `main` e consentire preflight con l'originale v1.9 senza pubblicarlo | **PARTIALLY VERIFIED:** `main` PROTETTO con ruleset attivo (18/10); Costituzione originale privata verificata ma non collegata in modo persistente al Director/GitHub CI |
-| **03 — Director operativo** | Persistenza task, eventi, checkpoint, recupero, quota zero e fail-closed | **PARZIALE:** registro privato e preflight Director testati; manca host sicuro, autenticazione agenti, ripresa distribuita e monitoraggio quote reale |
+| **03 — Director operativo** | Persistenza task, eventi, checkpoint, recupero, quota zero e fail-closed | **PARZIALE:** registro e mailbox privati testati con messaggi Director → reparto → QA e ripresa locale; manca esecuzione degli agenti, autenticazione, ripresa su altri host e controllo quote reale |
 | **04 — Qualificazione specialisti** | Candidati con capacità, Skill, costi e prove reali approvati; notifica Scout verificata | Qwen non qualificato Design; no otto agenti nominati |
 | **05 — Pilot end-to-end** | Un lavoro attraversa Director → specialista → Skill+Costituzione → QA → CEO e riprende da checkpoint | Non avviare finché fonte costituzionale, sicurezza, QA e permessi non sono verificati |
 
@@ -68,6 +68,12 @@ Implementati e testati nel branch isolato: `director-private-ledger.cjs` (journa
 **Conferme:** il journal può essere riaperto senza perdita di cronologia sullo stesso filesystem privato; la mancanza del documento originale blocca il mandato; non sono stati chiamati modelli AI, dati nuovi privilegi, creati agenti o modificati documenti FROZEN.
 
 **Limiti:** il journal e il bridge non sono ancora un Director AI attivo; GitHub CI non legge la Libreria privata di ChatGPT e un file in /tmp non costituisce memoria cloud duratura fra esecuzioni diverse. `AIOS-03.1` è `PARTIALLY_VERIFIED`, mentre il prossimo gate resta `AIOS-02.2` sul collegamento privato del documento originale. Non confondere il successo dei test con comunicazione autonoma tra reparti o esecuzione reale di un incarico.
+
+## Checkpoint 18/10/2026 — Comunicazione interna in laboratorio
+
+Aggiunto `tools/ai-office/director-private-mailbox.cjs`: mailbox privata e persistente che registra offerta del Director, risultato del reparto assegnato e riscontro QA, con ordine degli eventi, associazione al brief, idempotenza e rilevazione dei conflitti. [179 test JavaScript PASS](https://github.com/battagliafilippo/MealUp/actions/runs/39127525590). Non esegue inferenze AI né autentica l'identità dei modelli: al momento i messaggi sono metadati offline.
+
+Il registro canonico classifica `AIOS-03.2` come `PARTIALLY_VERIFIED`, mantenendo `AIOS-02.2` come prossimo gate non concluso. La Costituzione v1.9 resta privata e non è disponibile al runtime GitHub.
 
 ## Recupero e prossimo incarico
 
