@@ -1,0 +1,41 @@
+name: QA - AI Office Private Windows NTFS Host
+
+# Uses disposable synthetic folders only. NO Constitution, secrets, external AI, or deployment.
+on:
+  push:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - 'tools/ai-office/windows-private-host.ps1'
+      - 'tools/ai-office/windows-private-host.test.ps1'
+      - '.github/workflows/qa-ai-office-windows-host.yml'
+  pull_request:
+    branches:
+      - experiment/recipe-visual-agents
+    paths:
+      - 'tools/ai-office/windows-private-host.ps1'
+      - 'tools/ai-office/windows-private-host.test.ps1'
+      - '.github/workflows/qa-ai-office-windows-host.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  ntfs-bootstrap:
+    runs-on: windows-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout isolated laboratory (no credentials)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify true Windows NTFS sandbox
+        shell: pwsh
+        run: |
+          if (-not $IsWindows) { throw 'WINDOWS_RUNNER_REQUIRED' }
+          if (-not $env:LOCALAPPDATA) { throw 'LOCALAPPDATA_REQUIRED' }
+      - name: Run synthetically scoped ACL tests
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          & .\tools\ai-office\windows-private-host.test.ps1
