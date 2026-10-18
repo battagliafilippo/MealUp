@@ -1,6 +1,6 @@
 # MealUp AI Office — sede privata Windows, gate NTFS
 
-**Stato al 18 ottobre 2026:** **BOOTSTRAP NTFS VERIFICATO SU RUNNER WINDOWS REALE; NON INSTALLATO SUL PC DELL'UTENTE.**
+**Stato al 18 ottobre 2026:** **BOOTSTRAP NTFS E VERIFICA ACL DI SINGOLI FILE TESTATI SU RUNNER WINDOWS REALE; NON INSTALLATI SUL PC DELL'UTENTE.**
 
 Questo documento è parte del progetto AI Office sul solo branch `experiment/recipe-visual-agents`. Non modifica la Costituzione v1.9 FROZEN, MealUp Master, l'app, il tester o la Food Portrait Pipeline.
 
@@ -20,7 +20,7 @@ Il CEO ha accettato di utilizzare il proprio PC Windows già disponibile come fu
 
 ## QA effettivo su GitHub Windows
 
-Il workflow indipendente [QA - AI Office Private Windows NTFS Host](https://github.com/battagliafilippo/MealUp/actions/runs/39157572574) esegue test sintetici su `windows-latest` e verifica:
+Il workflow indipendente [QA - AI Office Private Windows NTFS Host](https://github.com/battagliafilippo/MealUp/actions/runs/39158008874) esegue **12 test sintetici su Windows reale** e verifica:
 
 1. Installazione **solo dei contenitori** e verifica ACL.
 2. Proprietario e protezione dall'ereditarietà.
@@ -30,22 +30,22 @@ Il workflow indipendente [QA - AI Office Private Windows NTFS Host](https://gith
 6. Riparazione controllata di ACL su contenitori vuoti.
 7. Rifiuto di cartella `original` già popolata (non distruttività).
 8. Verifica in sola lettura del contenitore inizializzato.
-9. Nessun servizio, documento originale, connessione AI o pagamento.
+9. Verifica positiva delle ACL di un file fittizio ereditate dalla cartella privata.\n10. Rifiuto di file al di fuori delle tre directory gestite.\n11. Rifiuto di permessi `Everyone` applicati direttamente a un file.\n12. Nessun servizio, documento originale, connessione AI o pagamento.
 
 Il test non carica la Costituzione, non usa credenziali e crea/elimina soltanto cartelle fittizie del runner. Anche i test Node di regressione e il controllo Engineering→QA del laboratorio sono riusciti nella stessa revisione.
 
 ## Cosa NON è stato fatto
 
 - Nessuna installazione sul PC del CEO; il sistema non dispone di un collegamento alle cartelle del suo Windows.
-- Il Director Node ha ancora guardie POSIX sul journal, sugli snapshot e sul file originale. **Non eliminare queste guardie** finché un adattatore NTFS completo non sia stato verificato da test Windows che coprano anche file/symlink/sorgente, non soltanto directory.
+- Il Director Node ha ancora guardie POSIX sul journal, sugli snapshot e sul file originale. **Non eliminare queste guardie** finché un adattatore NTFS completo, che utilizzi anche il validatore `VerifyFile`, non sia stato verificato nella catena Windows Node/Python con un originale autentico su host privato.
 - Nessun avvio automatico, pianificazione all'accesso Windows, memoria cloud, backup cifrato off-host o uptime 24/7.
 - Nessuna connessione persistente dalla Libreria ChatGPT al PC e nessuna identità digitale certificata degli agenti. Non considerare completo `AIOS-02.2`.
 
 ## Sequenza successiva con micro-step e gate
 
-**WINDOWS-01 (verificato in CI):** ACL directory provisioning + negative tests. Evidenza workflow sopra.
+**WINDOWS-01 (verificato in CI):** ACL delle cartelle, verifica ACL dei file e 12 test positivi/negativi su Windows vero. Evidenza workflow sopra.
 
-**WINDOWS-02 (prossimo):** aggiungere un validatore nativo NTFS di *file* per il DOCX originale, journal, mailbox e snapshot, poi collegarlo in modo fail-closed al Director Node e all'estrattore Python, preservando il supporto POSIX già verificato. Servono veri test Windows di scrittura/ripresa e controlli su symlink, hash originale, ACL esplicite su file.
+**WINDOWS-02 (prossimo):** il validatore nativo di file è stato creato e testato; manca **collegarlo in modo fail-closed al Director Node e all'estrattore Python**, preservando il supporto POSIX già verificato. Servono veri test Windows end-to-end di scrittura/ripresa, controlli su symlink, hash del DOCX originale e ACL della nuova copia di ogni file.
 
 **WINDOWS-03 (non avviato):** stabilire una modalità di avvio locale e backup indipendente senza privilegi elevati né servizi a pagamento; l'avvio automatico richiede autorizzazione esplicita perché può consumare risorse PC.
 
