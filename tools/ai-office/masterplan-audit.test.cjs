@@ -40,6 +40,7 @@ test('all VERIFIED steps must carry evidence',()=>{
 });
 test('blocked steps must have a real blocking reason',()=>{
  const x=copy(baseline);
+ x.phases[1].steps[0].status='BLOCKED';
  x.phases[1].steps[0].blockingReasons=[];
  assert.ok(validate(x).errors.some(e=>e.startsWith('BLOCKED_STEP_WITHOUT_REASON')));
 });
