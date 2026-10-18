@@ -4,6 +4,7 @@
 const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),crypto=require('node:crypto');
 const ROOT=path.resolve(__dirname,'../..');
 const SCHEMA='MEALUP_DIRECTOR_PRIVATE_LEDGER_V1';
+const VERIFIED_CONSTITUTION_SHA='51043574d188c085de51282e50f8784d8f5cf779300891dee0fe8014414470eb';
 const TYPES=new Set(['INTAKE_BLOCKED','RULE_PREFLIGHT_READY','STEP_CHECKPOINT','QA_REPORTED','RETURN_TO_CEO']);
 const digest=v=>crypto.createHash('sha256').update(JSON.stringify(v)).digest('hex');
 const copy=x=>JSON.parse(JSON.stringify(x));
@@ -50,7 +51,7 @@ function storeAt(folder){
      JSON.stringify(safe).length>4500)throw Error('UNSAFE_EVENT_FIELDS');
   if(event.type==='RULE_PREFLIGHT_READY'&&
      (event.actor!=='DIRECTOR'||safe.sourceVerified!==true||
-      typeof safe.constitutionSha!=='string'||safe.constitutionSha.length!==64))
+      safe.constitutionSha!==VERIFIED_CONSTITUTION_SHA))
      throw Error('UNVERIFIED_CONSTITUTION_INTAKE');
   if(event.type==='STEP_CHECKPOINT'&&
      (typeof safe.stepId!=='string'||typeof safe.evidenceRef!=='string'||
