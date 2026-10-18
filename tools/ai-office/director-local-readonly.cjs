@@ -117,6 +117,9 @@ function runPrivateOffice({sourcePath,privateDirectory,expectedBaseline}={}){
    receipt=mailbox.read().items.find(e=>e.taskId===task.taskId&&e.kind==='QA_RECEIPT');
   }
   if(receipt.record.resultStatus!=='PASS')return safeResult('INDEPENDENT_QA_PREVIOUS_FAILURE');
+  journal.append({id:'STEP_QA_'+handoffId,taskId:task.taskId,type:'STEP_CHECKPOINT',
+   actor:'DIRECTOR',record:{stepId:'LAB_S2',evidenceRef:receipt.record.evidenceRef,
+    taskPacketSha:preflight.taskPacketSha}});
   journal.append({id:'QA_REPORT_'+handoffId,taskId:task.taskId,type:'QA_REPORTED',
    actor:'QA',record:{resultStatus:'PASS',evidenceRef:receipt.record.evidenceRef,
     taskPacketSha:preflight.taskPacketSha}});
