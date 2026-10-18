@@ -23,6 +23,11 @@ function baseline(){
   return /^[a-f0-9]{40}$/.test(x)?x:null;
  } catch(_){return null;}
 }
+function cleanCheckout(){
+ const run=spawnSync('git',['status','--porcelain','--untracked-files=all'],{
+  cwd:ROOT,encoding:'utf8',timeout:4000,maxBuffer:128*1024});
+ return !run.error&&run.status===0&&run.stdout.trim()==='';
+}
 function taskFor(sha){
  const taskId='LAB_SAFE_'+sha.slice(0,16);
  return {taskId,roleId:'ENGINEERING',agentId:'LAB_ENGINEERING',constitutionVersion:'1.9',
@@ -70,6 +75,7 @@ function runPrivateOffice({sourcePath,privateDirectory,expectedBaseline}={}){
  const sha=baseline();
  if(!sha||sha!==expectedBaseline)return safeResult('BLOCKED_STALE_BRANCH_OR_BASELINE');
  if(!id(expectedBaseline?.slice(0,16)))return safeResult('BLOCKED_INVALID_BASELINE');
+ if(!cleanCheckout())return safeResult('BLOCKED_DIRTY_OR_INACCESSIBLE_LAB_CHECKOUT');
  try {
   if(!sourcePath||!fs.statSync(sourcePath).isFile()||
      fs.lstatSync(sourcePath).isSymbolicLink()||
@@ -96,6 +102,7 @@ function runPrivateOffice({sourcePath,privateDirectory,expectedBaseline}={}){
   let reusedEngineering=!!msg;
   if(!msg){
    const work=callPinnedScript('engineering');
+   if(!cleanCheckout())return safeResult('BLOCKED_REPOSITORY_CHANGED_DURING_ENGINEERING');
    mailbox.append({id:'ENGINEERING_'+handoffId,taskId:task.taskId,
     kind:'SPECIALIST_RESULT',actor:'ENGINEERING',
     record:{handoffId,evidenceRef:work.evidenceRef||'ENGINEERING_FAILED_NO_STDOUT',
@@ -111,6 +118,7 @@ function runPrivateOffice({sourcePath,privateDirectory,expectedBaseline}={}){
   let reusedQA=!!receipt;
   if(!receipt){
    const qa=callPinnedScript('qa');
+   if(!cleanCheckout())return safeResult('BLOCKED_REPOSITORY_CHANGED_DURING_QA');
    mailbox.append({id:'QA_'+handoffId,taskId:task.taskId,kind:'QA_RECEIPT',actor:'QA',
     record:{handoffId,evidenceRef:qa.evidenceRef||'QA_FAILED_NO_STDOUT',resultStatus:qa.status}});
    if(!qa.ok)return safeResult('INDEPENDENT_QA_BLOCKED',{nextStep:'RECONCILE_QA_FAILURE'});
@@ -146,4 +154,4 @@ if(require.main===module){
  console.log(JSON.stringify(value));
  if(value.status!=='PRIVATE_ORIGINAL_LAB_CHAIN_PASS_NOT_AUTONOMOUS_AI')process.exitCode=1;
 }
-module.exports={runPrivateOffice,taskFor,baseline};
+module.exports={runPrivateOffice,taskFor,baseline,cleanCheckout};
