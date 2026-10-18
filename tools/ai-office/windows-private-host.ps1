@@ -24,6 +24,8 @@ if (-not $target.StartsWith($base + '\',[StringComparison]::OrdinalIgnoreCase)) 
 }
 # Private root can only be placed under the profile's local data; no network or mapped shares.
 if ($target.StartsWith('\\')) { throw 'BLOCKED_NETWORK_HOST' }
+$relative = $target.Substring($base.Length + 1)
+if ($relative -match '(^|\\)(?i:Temp)(\\|$)') { throw 'BLOCKED_TEMPORARY_HOST_ROOT' }
 $ownerSid = [System.Security.Principal.WindowsIdentity]::GetCurrent().User
 $allowed = @(
   $ownerSid.Value,
@@ -39,6 +41,13 @@ function Assert-NoReparse([string]$p) {
   if (($attr -band [IO.FileAttributes]::ReparsePoint) -ne 0) {
     throw 'BLOCKED_REPARSE_DIRECTORY'
   }
+}
+# Deny NTFS junction/reparse traversal from LocalAppData down to the chosen root.
+$ancestor = $target
+while ($ancestor.Length -gt $base.Length) {
+  if ([IO.Directory]::Exists($ancestor)) { Assert-NoReparse $ancestor }
+  elseif ([IO.File]::Exists($ancestor)) { throw 'BLOCKED_HOST_ANCESTOR_IS_FILE' }
+  $ancestor = [IO.Path]::GetDirectoryName($ancestor)
 }
 function Set-StrictAcl([string]$p) {
   Assert-NoReparse $p
