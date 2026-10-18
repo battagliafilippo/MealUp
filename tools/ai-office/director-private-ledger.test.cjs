@@ -92,11 +92,15 @@ test('step completion requires traceable evidence; QA is independent',()=>{
     {stepId:'S1'})),/STEP_REQUIRES_EVIDENCE/);
   assert.throws(()=>s.append(event('EV-QA','QA_REPORTED','DIRECTOR',
     {resultStatus:'PASS'})),/INDEPENDENT_QA_REQUIRED/);
+  assert.throws(()=>s.append(event('EV-STEP','STEP_CHECKPOINT','DIRECTOR',
+    {stepId:'S1',evidenceRef:'CI-RUN-123'})),/CHECKPOINT_REQUIRES_VERIFIED_PREFLIGHT/);
+  s.append(event('EV-RULES','RULE_PREFLIGHT_READY','DIRECTOR',
+    {sourceVerified:true,constitutionSha:'51043574d188c085de51282e50f8784d8f5cf779300891dee0fe8014414470eb'}));
   s.append(event('EV-STEP','STEP_CHECKPOINT','DIRECTOR',
     {stepId:'S1',evidenceRef:'CI-RUN-123'}));
   s.append(event('EV-QA','QA_REPORTED','QA',
     {resultStatus:'PARTIAL',evidenceRef:'AUDIT-456'}));
-  assert.equal(s.read().events.length,2);
+  assert.equal(s.read().events.length,3);
  }finally{fs.rmSync(p,{recursive:true,force:true});}
 });
 test('an active lock refuses concurrent journal writes without modifying history',()=>{
