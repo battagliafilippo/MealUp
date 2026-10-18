@@ -87,6 +87,14 @@ La lettura separata dell'originale v1.9 privato in questa sessione ha confermato
 
 Prove: [189/189 test Node](https://github.com/battagliafilippo/MealUp/actions/runs/39129733082), inclusi **8 nuovi casi negativi del runtime privato**, e [esecuzione reale di strumenti interni Engineering + QA](https://github.com/battagliafilippo/MealUp/actions/runs/39129733085). **Limite sostanziale:** GitHub Actions NON dispone della Costituzione privata; pertanto in CI è verificata l'assenza di bypass e l'esecuzione separata dei due script, non il percorso positivo completo con sorgente privata nello stesso host. Il collegamento permanente alla Libreria ChatGPT e identità di modelli AI differenti non sono installati. `AIOS-02.2` resta PARTIALLY_VERIFIED, così come `AIOS-03.2`. Prossima prova: run positivo e prova di riavvio su host privato realmente autorizzato.
 
+## Collaudo privato positivo con originale — 18/10/2026
+
+**Novità verificata in sessione privata:** ho estratto una capsula pubblica del codice AI Office dal [workflow GitHub](https://github.com/battagliafilippo/MealUp/actions/runs/39131439877), senza inserire la Costituzione né credenziali negli artifact. In una copia Git locale **isolata** ho usato la Costituzione v1.9 originale conservata in una directory privata diversa dal repository e ho avviato il programma reale `director-local-readonly.cjs`. Il percorso Constitution → Director → Engineering → QA → CEO è arrivato a `PRIVATE_ORIGINAL_LAB_CHAIN_PASS_NOT_AUTONOMOUS_AI`: **67 clausole attive**, Engineering PASS, QA 189/189 PASS, 5 checkpoint e 3 messaggi, nessuna modifica al progetto né chiamata a modelli. Ripetendolo su identica baseline, Engineering e QA sono stati correttamente **riutilizzati** senza eseguire gli script una seconda volta. Fonte mancante e SHA Git errato vengono bloccati.
+
+[Rapporto dettagliato senza testo riservato](PRIVATE-ORIGINAL-PILOT-20261018.md). Questa prova privata e il suo resoconto non costituiscono un CI GitHub che abbia letto il documento originale: la fonte riservata è rimasta fuori da GitHub e l'ambiente isolato del test non è un servizio Director durevole.
+
+**Avanzamento senza overclaim:** `AIOS-02.2 PARTIALLY_VERIFIED` e `AIOS-03.2 PARTIALLY_VERIFIED` restano tali. Prossimo micro-step: definire e provare **dove ospitare in modo duraturo e autorizzato** il runtime privato (senza upload pubblico della Costituzione), con identità di specialisti e QA indipendente; solo in seguito qualificare agenti AI veri.
+
 ## Recupero e prossimo incarico
 
 - Conservare **tutti gli ID**, le decisioni `DEC`, i problemi `UNK`, i checkpoint e i riferimenti all'evidenza. Usare Git come cronologia delle versioni del JSON, non riscrivere decisioni approvate senza nuova decisione esplicita e traccia di sostituzione.
