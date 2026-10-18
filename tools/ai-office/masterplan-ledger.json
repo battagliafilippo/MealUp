@@ -1,6 +1,6 @@
 {
   "schema": "MEALUP_AI_OFFICE_MASTERPLAN_V1",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "createdAt": "2026-10-15",
   "canonicalScope": "AI_OFFICE_LAB_ONLY",
   "branch": "experiment/recipe-visual-agents",
@@ -223,11 +223,12 @@
       "evidence": [
         "https://github.com/battagliafilippo/MealUp/actions/runs/38704501391",
         "https://github.com/battagliafilippo/MealUp/actions/runs/38760713791",
-        "PRIVATE_SOURCE_SHA256_VERIFIED_152_SECTIONS"
+        "PRIVATE_SOURCE_SHA256_VERIFIED_152_SECTIONS",
+        "https://github.com/battagliafilippo/MealUp/actions/runs/39129081580"
       ],
       "missing": [
-        "Permanent authorized private file binding unavailable in GitHub CI",
-        "Synthetic tests and private parse are not end-to-end agent governance"
+        "Persistent private source host binding not yet supported",
+        "Role/CEO authorization assertion and source digest do not authenticate an external autonomous model"
       ]
     },
     {
@@ -321,12 +322,13 @@
       ],
       "evidence": [
         "https://github.com/battagliafilippo/MealUp/actions/runs/39121708920",
-        "https://github.com/battagliafilippo/MealUp/actions/runs/39127525590"
+        "https://github.com/battagliafilippo/MealUp/actions/runs/39127525590",
+        "https://github.com/battagliafilippo/MealUp/actions/runs/39129081580"
       ],
       "missing": [
-        "Local checkpoint and mailbox record metadata, but do not invoke any AI agents",
-        "No authenticated independent provider identity or hosted persistent runtime",
-        "No live cross-host recovery, skill calls or trusted interdepartment communication"
+        "Director local journal/mailbox now bind exact original packet digest but still do not invoke real model agents",
+        "Private runtime not hosted/authenticated; no cross-host recovery",
+        "Live provider quotas not controlled"
       ]
     },
     {
@@ -492,11 +494,13 @@
           "evidence": [
             "https://github.com/battagliafilippo/MealUp/actions/runs/38760713791",
             "PRIVATE_ORIGINAL_SHA256_MATCH_AND_152_RULE_SECTIONS_CHECK_2026-10-15",
-            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/director-secure-preflight.cjs"
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/director-secure-preflight.cjs",
+            "https://github.com/battagliafilippo/MealUp/actions/runs/39129081580",
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/DIRECTOR-PRIVATE-LEDGER.md"
           ],
           "blockingReasons": [
-            "Canonical private original verified in an interactive local context, but no approved persistent bridge into GitHub Actions or autonomous Director",
-            "Every new delegated task requires real source path; no preflight bypass permitted"
+            "Private original verified locally, but automated ChatGPT Library access is NOT available to the GitHub runner or a hosted Director runtime",
+            "Handoff packets now bind exact SHA-256 to Director metadata and mailbox offers; agent and CEO identity authentication is NOT implemented"
           ]
         },
         {
@@ -747,7 +751,7 @@
     "activeBriefVersion": "AI_OFFICE_20261015_V1",
     "currentPhase": "AIOS-02",
     "nextStepId": "AIOS-02.2",
-    "lastVerifiedTechnicalState": "179/179 JS tests pass; Director private mailbox persists scoped Director offer→specialist result→QA receipt offline with fail-closed preflight metadata and journal chain; no provider execution, private v1.9 runtime host still unavailable",
+    "lastVerifiedTechnicalState": "181/181 Node CI tests PASS; Director private preflight now records SHA256 of exact source-derived rule packet and mailbox blocks mismatched packet/baseline, original v1.9 hash and 152 sections independently rechecked in private session 2026-10-18; persistent Director Library binding and live model agents NOT done",
     "pendingApprovals": [],
     "noInFlightProviderCalls": true,
     "preservePreviousDecisionIds": true,
@@ -787,6 +791,11 @@
         "version": "1.0.6",
         "change": "AIOS-03.2 PARTIALLY_VERIFIED: new local private Director mailbox with 12 passing negative/continuity tests; no real agents, no source-bridge overclaim; AIOS-02.2 remains next mandatory gate",
         "sourceCommit": "653ac16a58e6533828842075d2c7b59f204c38ad"
+      },
+      {
+        "version": "1.0.7",
+        "change": "Source-bound SHA256 receipt between verified task-specific private Constitution packet, Director journal and bounded mailbox offer; 181/181 CI tests pass; AIOS-02.2 stays PARTIALLY_VERIFIED pending persistent private host and actual identity verification",
+        "sourceCommit": "cf88351f30a1b3fd644d1cfa7f977a8cd867939d"
       }
     ]
   }
