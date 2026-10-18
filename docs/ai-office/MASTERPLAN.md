@@ -113,7 +113,7 @@ La prova sul [runner Windows reale GitHub (12 test PASS)](https://github.com/bat
 
 ## Checkpoint locale WINDOWS-02 — 18/10/2026
 
-Il bridge `private-file-security.cjs` è ora collegato in modo fail-closed a fonte originale, pacchetti privati prodotti dall'estrattore Python, journal, mailbox, lock e snapshot. Su `win32` ogni directory e file passa dal validatore NTFS PowerShell; non è stato introdotto alcun bypass POSIX. È presente una prova d'integrazione sintetica per Windows che non contiene la Costituzione né segreti. **Stato prudente:** implementazione locale completata, CI Windows nativa ancora da eseguire; nessuna installazione è stata fatta sul PC dell'utente e `AIOS-02.2` resta PARTIALLY_VERIFIED.
+Il bridge `private-file-security.cjs` è ora collegato in modo fail-closed a fonte originale, pacchetti privati prodotti dall'estrattore Python, journal, mailbox, lock e snapshot. Su `win32` ogni directory e file passa dal validatore NTFS PowerShell; non è stato introdotto alcun bypass POSIX. La [prova d'integrazione sintetica Windows](https://github.com/battagliafilippo/MealUp/actions/runs/39158708467), priva di Costituzione e segreti, è PASS; anche [198/198 test Node](https://github.com/battagliafilippo/MealUp/actions/runs/39158708586) e [Engineering→QA read-only](https://github.com/battagliafilippo/MealUp/actions/runs/39158846924) sono PASS. **Stato prudente:** nessuna installazione è stata fatta sul PC dell'utente e il percorso positivo con originale autentico su Windows non è stato eseguito; `AIOS-02.2` resta PARTIALLY_VERIFIED.
 
 ## Recupero e prossimo incarico
 
