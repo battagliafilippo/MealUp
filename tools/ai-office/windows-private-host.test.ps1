@@ -36,7 +36,7 @@ try {
   }
   Pass 'checks all four Windows owners and inheritance flags'
 
-  $outside = Join-Path ([IO.Path]::GetTempPath()) ('MealUpForbidden' + [guid]::NewGuid().ToString('N'))
+  $outside = Join-Path $env:USERPROFILE ('MealUpForbidden' + [guid]::NewGuid().ToString('N'))
   Blocked { & $tool -Action Provision -Root $outside } 'BLOCKED_HOST_MUST_BE_IN_USER_LOCALAPPDATA'
   if (Test-Path $outside) { throw 'UNSAFE_OUTSIDE_DIRECTORY_CREATED' }
   Pass 'cannot create under temp or outside user LocalAppData'
