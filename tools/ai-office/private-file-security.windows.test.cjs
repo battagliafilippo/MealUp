@@ -34,6 +34,15 @@ if(process.platform!=='win32'){
   assert.equal(assertPrivateFile(fake),fs.realpathSync(fake));
   assert.equal(sourceVerified(fake),false);
  });
+ test('Python accepts native ACL gate before rejecting synthetic source hash',()=>{
+  const fake=path.join(original,'SYNTHETIC-NOT-CONSTITUTION.txt');
+  if(!fs.existsSync(fake))fs.writeFileSync(fake,'synthetic only');
+  const run=spawnSync('python',[path.join(__dirname,'constitution-task-packet.py'),
+   '--canonical-docx',fake,'--verify-source-only'],{encoding:'utf8',timeout:20000});
+  assert.equal(run.status,2);
+  assert.match(run.stderr,/BLOCKED_CANONICAL_VERSION_OR_SHA_MISMATCH/);
+  assert.doesNotMatch(run.stderr,/WINDOWS_NATIVE_ACL|PRIVATE_PATH_NOT_MANAGED/);
+ });
  test('journal and snapshot writes are ACL-verified without private source data',()=>{
   storeAt(state).append({id:'SYNTHETIC_INTAKE',taskId:'SYNTHETIC_TASK',
    type:'INTAKE_BLOCKED',actor:'DIRECTOR',record:{reasonCode:'SYNTHETIC_ONLY'}});

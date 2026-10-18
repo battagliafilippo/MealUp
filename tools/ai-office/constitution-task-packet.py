@@ -9,6 +9,7 @@ import json
 import os
 from pathlib import Path
 import re
+import subprocess
 import sys
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
@@ -42,6 +43,33 @@ TRIGGERS = {
 ALLOWED_TAGS = frozenset(TRIGGERS)
 STATUS = frozenset(("OPEN", "VERIFIED", "PARTIALLY_VERIFIED", "BLOCKED", "FAILED"))
 NONEMPTY = lambda s: isinstance(s, str) and bool(s.strip())
+
+def verify_private_acl(candidate, is_file):
+    """On Windows, require the same native NTFS verifier used by the Director."""
+    candidate=Path(candidate).resolve()
+    if os.name!="nt":
+        if candidate.stat().st_mode & 0o077:
+            raise ValueError("BLOCKED_UNSAFE_PRIVATE_PERMISSIONS")
+        return
+    managed=candidate.parent if is_file else candidate
+    if managed.name.lower() not in {"state","archive","original"}:
+        raise ValueError("BLOCKED_WINDOWS_PRIVATE_PATH_NOT_MANAGED")
+    root=managed.parent
+    tool=Path(__file__).with_name("windows-private-host.ps1")
+    command=["pwsh.exe","-NoProfile","-NonInteractive","-ExecutionPolicy","Bypass",
+             "-File",str(tool),"-Action","VerifyFile" if is_file else "Verify",
+             "-Root",str(root)]
+    if is_file:
+        command.extend(["-FilePath",str(candidate)])
+    result=subprocess.run(command,capture_output=True,text=True,timeout=15,check=False)
+    if result.returncode!=0:
+        raise ValueError("BLOCKED_WINDOWS_NATIVE_ACL_VERIFICATION_FAILED")
+    try:
+        value=json.loads(result.stdout.strip())
+    except Exception as err:
+        raise ValueError("BLOCKED_WINDOWS_ACL_RESULT_INVALID") from err
+    if value.get("status")!="ACL_VERIFIED" or (is_file and value.get("fileAclVerified") is not True):
+        raise ValueError("BLOCKED_WINDOWS_ACL_NOT_VERIFIED")
 
 def docx_sections(source):
     source = Path(source).resolve()
@@ -259,6 +287,7 @@ def main():
     canonical=Path(args.canonical_docx).resolve()
     if canonical==repo_root or repo_root in canonical.parents:
         raise ValueError("BLOCKED_PRIVATE_CONSTITUTION_INSIDE_PUBLIC_REPOSITORY")
+    verify_private_acl(canonical,True)
     sections=docx_sections(canonical)
     must_exist={"1.3","2.1","2.17","8.6","8.9","9.3.1",
                 "9.10","12.15","12.16","13.5","14","A.14","B.4"}
@@ -278,19 +307,21 @@ def main():
     out=Path(args.out).resolve()
     if out==repo_root or repo_root in out.parents:
         raise ValueError("BLOCKED_PUBLIC_REPO_RULE_BODY_OUTPUT")
-    t=json.loads(Path(args.task_json).read_text(encoding="utf-8"))
+    task_json=Path(args.task_json).resolve()
+    verify_private_acl(task_json,True)
+    t=json.loads(task_json.read_text(encoding="utf-8"))
     packet=make_packet(t,sections)
     previous=(json.loads(Path(args.previous_packet).read_text(encoding="utf-8"))
               if args.previous_packet else None)
     packet["continuity"]=verify_plan_continuity(previous,packet,t)
     out.parent.mkdir(mode=0o700,parents=True,exist_ok=True)
-    if out.parent.stat().st_mode & 0o077:
-        raise ValueError("BLOCKED_UNSAFE_PRIVATE_OUTPUT_DIRECTORY_PERMISSIONS")
+    verify_private_acl(out.parent,False)
     # No following symlinks or creating world-readable rules in shared /tmp.
     flags=os.O_WRONLY|os.O_CREAT|os.O_TRUNC|getattr(os,"O_NOFOLLOW",0)
     fd=os.open(out,flags,0o600)
     with os.fdopen(fd,"w",encoding="utf-8") as fh:
         fh.write(json.dumps(packet,ensure_ascii=False,indent=2)+"\n")
+    verify_private_acl(out,True)
     print(json.dumps({"status":packet["status"],
         "taskId":packet["taskId"],"activeRuleCount":len(packet["activeRuleIds"]),
         "handoffRuleCount":len(packet["handoffRules"]),

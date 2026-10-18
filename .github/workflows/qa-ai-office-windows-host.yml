@@ -16,6 +16,7 @@ on:
       - 'tools/ai-office/director-local-readonly.cjs'
       - 'tools/ai-office/director-secure-preflight.cjs'
       - 'tools/ai-office/constitution-protected-handoff.cjs'
+      - 'tools/ai-office/constitution-task-packet.py'
       - '.github/workflows/qa-ai-office-windows-host.yml'
   pull_request:
     branches:
@@ -31,6 +32,7 @@ on:
       - 'tools/ai-office/director-local-readonly.cjs'
       - 'tools/ai-office/director-secure-preflight.cjs'
       - 'tools/ai-office/constitution-protected-handoff.cjs'
+      - 'tools/ai-office/constitution-task-packet.py'
       - '.github/workflows/qa-ai-office-windows-host.yml'
 
 permissions:
