@@ -315,7 +315,10 @@ def main():
               if args.previous_packet else None)
     packet["continuity"]=verify_plan_continuity(previous,packet,t)
     out.parent.mkdir(mode=0o700,parents=True,exist_ok=True)
-    verify_private_acl(out.parent,False)
+    if os.name=="nt":
+        verify_private_acl(out.parent,False)
+    elif out.parent.stat().st_mode & 0o077:
+        raise ValueError("BLOCKED_UNSAFE_PRIVATE_OUTPUT_DIRECTORY_PERMISSIONS")
     # No following symlinks or creating world-readable rules in shared /tmp.
     flags=os.O_WRONLY|os.O_CREAT|os.O_TRUNC|getattr(os,"O_NOFOLLOW",0)
     fd=os.open(out,flags,0o600)
