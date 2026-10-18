@@ -5,6 +5,7 @@
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const {storeAt}=require('./director-private-ledger.cjs');
 const {mailboxAt}=require('./director-private-mailbox.cjs');
+const {baseline,cleanCheckout}=require('./director-local-readonly.cjs');
 const ROOT=path.resolve(__dirname,'../..');
 const CANONICAL='51043574d188c085de51282e50f8784d8f5cf779300891dee0fe8014414470eb';
 const SCHEMA='MEALUP_DIRECTOR_OFFLINE_RECOVERY_V1';
@@ -78,8 +79,10 @@ function restoreSnapshot({workingDirectory,archiveDirectory,baselineId,
                          snapshotId,sourcePath,expectedCurrentBaseline}={}){
  // Recovery is always fail-closed; an original must be present ON THIS HOST.
  if(!sourceVerified(sourcePath))throw Error('CANONICAL_PRIVATE_ORIGINAL_REQUIRED');
- if(!revision(expectedCurrentBaseline)||expectedCurrentBaseline!==baselineId)
-   throw Error('CURRENT_BASELINE_MISMATCH');
+ if(!revision(expectedCurrentBaseline)||expectedCurrentBaseline!==baselineId||
+    baseline()!==baselineId||!cleanCheckout()||
+    process.env.GITHUB_REF_NAME!=='experiment/recipe-visual-agents')
+   throw Error('CURRENT_BASELINE_MISMATCH_OR_UNSAFE_CHECKOUT');
  const {work}=locations(workingDirectory,archiveDirectory);
  const {doc}=readSnapshot({archiveDirectory,baselineId,snapshotId});
  const journalPath=path.join(work,'director-events.v1.json');
