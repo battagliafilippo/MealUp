@@ -901,5 +901,7 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Commit motore/preflight verificato: `43b306e`; workflow `QA - MealUp Food Portrait Contracts`, run `39110008123`.
 - Job `contract-baseline`: **SUCCESS**. Job `preproduction-specs`: **SUCCESS**.
 - Il checkpoint remoto conferma che i contratti preesistenti restano verdi; i nuovi test Office/preflight sono stati eseguiti localmente con esito 148/148 PASS.
-- Micro-step CI successivo: aggiunti al workflow il planner Food Portrait dell'AI Office e il preflight deterministico fail-closed; aggiunto anche `tools/ai-office/**` ai path che attivano il workflow. Verifica remota ancora da eseguire.
+- Micro-step CI successivo completato: aggiunti al workflow il planner Food Portrait dell'AI Office e il preflight deterministico fail-closed; aggiunto anche `tools/ai-office/**` ai path che attivano il workflow.
+- Commit CI `33541ca`; run remoto `39110130844`: **SUCCESS**. Job `contract-baseline`: **SUCCESS**. Job `preproduction-specs`: **SUCCESS**, compresi gli step `Enforce deterministic visual engine fail-closed preflight` e `Revalidate existing AI Office role routing and Groq reasoning guards`.
+- Limite strumento registrato: il comando locale `gh` non era disponibile; stato e job sono stati verificati tramite GitHub API.
 - Nessun output visivo, deploy o modifica a main/tester/PWA.
