@@ -812,7 +812,7 @@
     "activeBriefVersion": "AI_OFFICE_20261015_V1",
     "currentPhase": "AIOS-02",
     "nextStepId": "AIOS-02.2",
-    "lastVerifiedTechnicalState": "WINDOWS-02 native ACL bridge PASS: Windows synthetic integration 39158708467, Node regression 39158708586 and read-only Engineering-to-QA 39158846924. No user-PC installation, no private original uploaded, and no positive authentic-source run on Windows.",
+    "lastVerifiedTechnicalState": "Private Windows host installed and authentic v1.9 path PASS: 67 active rules, Engineering PASS, Windows QA 150/150, metadata snapshot/restore 10 events and 9 messages, resumed with reusedEngineering/reusedQA true. Original never uploaded. Physical reboot, independent encrypted backup and agent identity remain open.",
     "pendingApprovals": [],
     "noInFlightProviderCalls": true,
     "preservePreviousDecisionIds": true,
@@ -892,6 +892,11 @@
         "version": "1.0.14",
         "change": "Verified the fail-closed Node/Python NTFS bridge with synthetic Windows CI, full Node regression and read-only Engineering-to-QA. Real-PC installation and authentic private-source Windows run remain explicitly open.",
         "sourceCommit": "8b9ea496c4411edcff96e29b88a85a5749fc7053"
+      },
+      {
+        "version": "1.0.15",
+        "change": "Installed the private NTFS host on the authorized Windows PC and verified authentic-source Director-to-Engineering-to-QA execution plus metadata-only restore/resume. Preserved two blocked attempts and keeps reboot, independent backup and authenticated agent identities open.",
+        "sourceCommit": "6acef223dbc6c1443e727f2dab6bfc70a6f4b0cd"
       }
     ]
   }
