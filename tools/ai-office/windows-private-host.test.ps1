@@ -40,6 +40,11 @@ try {
   Blocked { & $tool -Action Provision -Root $outside } 'BLOCKED_HOST_MUST_BE_IN_USER_LOCALAPPDATA'
   if (Test-Path $outside) { throw 'UNSAFE_OUTSIDE_DIRECTORY_CREATED' }
   Pass 'cannot create under temp or outside user LocalAppData'
+  $temporary = Join-Path (Join-Path $env:LOCALAPPDATA 'Temp') ('MealUpForbidden' + [guid]::NewGuid().ToString('N'))
+  Blocked { & $tool -Action Provision -Root $temporary } 'BLOCKED_TEMPORARY_HOST_ROOT'
+  if (Test-Path $temporary) { throw 'UNSAFE_TEMPORARY_DIRECTORY_CREATED' }
+  Pass 'refuses storage under LocalAppData Temp despite user profile ownership'
+
 
   # Add synthetic Everyone SID access; verify must fail until re-provisioning.
   $state=Join-Path $root 'state'
@@ -69,7 +74,7 @@ try {
   Pass 'never overwrites content and still permits verification'
 
   if (Test-Path $tool -PathType Leaf) { Pass 'test runner uses script already in lab' }
-  if ($passed -ne 8) { throw 'NOT_ALL_WINDOWS_TESTS_EXECUTED' }
+  if ($passed -ne 9) { throw 'NOT_ALL_WINDOWS_TESTS_EXECUTED' }
   Write-Host ('WINDOWS_NTFS_PRIVATE_HOST_QA_PASS tests=' + $passed)
 } finally {
   if (Test-Path $testRoot) { Remove-Item -LiteralPath $testRoot -Recurse -Force }
