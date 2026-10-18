@@ -1057,12 +1057,12 @@
         "VESSEL_PLATE|P1|S2|D1|A0"
       ],
       "body_asset": "vessels/VESSEL_PLATE/source-view.png",
-      "body_sha256": "f00bad1cb6dde3ff31f1876da6db1f6c4f5ea27177ed8dddf65479095cf9e4a8",
+      "body_sha256": "f70bf0f2b3211de8867917b9ee1db11a1e21c030a520391c18e80cb521cda9de",
       "depth_layers": [
         100,
         600
       ],
-      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; runtime uses approved vessel source with separate geometry. No recovered transparent sprite is claimed.",
+      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; exact 350x220 crop at source rectangle [370,100,350,220] from the canonical 1536x1024 vessel board; PNG container reconstructed 2026-10-18 without synthetic vessel pixels. Runtime uses approved vessel source with separate geometry.",
       "glass_policy": null,
       "status": "G5_PASS_FROZEN"
     },

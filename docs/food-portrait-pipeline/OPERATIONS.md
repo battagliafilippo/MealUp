@@ -905,3 +905,15 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Commit CI `33541ca`; run remoto `39110130844`: **SUCCESS**. Job `contract-baseline`: **SUCCESS**. Job `preproduction-specs`: **SUCCESS**, compresi gli step `Enforce deterministic visual engine fail-closed preflight` e `Revalidate existing AI Office role routing and Groq reasoning guards`.
 - Limite strumento registrato: il comando locale `gh` non era disponibile; stato e job sono stati verificati tramite GitHub API.
 - Nessun output visivo, deploy o modifica a main/tester/PWA.
+
+## 2026-10-18 — Recupero asset deterministici con reference proprietario
+
+- Autorizzazione: ricostruire quanto necessario nel solo branch isolato; restano vietati `do01`, main, tester, PWA, deploy e AI Office esterno.
+- `Foto 2.jpg` è stata usata come conferma visiva. Il body `VESSEL_PLATE` è stato recuperato senza ImageGen tramite crop esatto `[370,100,350,220]` dalla tavola canonica FROZEN `G5/references/VESSEL_LIBRARY_reference.png` (SHA-256 `3318fb...a50d5c8`).
+- Nuovo body: `G5/vessels/VESSEL_PLATE/source-view.png`, 350x220, SHA-256 `f70bf0...cda9de`. Aggiornato il solo hash del body e registrata la provenienza; clip e occluder invariati.
+- `Foto 1.jpg` è stata usata soltanto come reference di stile. Creato un contratto gauge Food Portrait separato dal G7 legacy, con scala lineare FROZEN 0–1000 kcal / -60°…60°, cinque zone, numero esatto e shell/lancetta SVG deterministiche.
+- QA visivo 1: **FAIL**, lancetta sovrapposta al valore; corretto il layout.
+- QA visivo 2: **FAIL**, pivot spostato e quindi non coerente con le zone; ripristinato il pivot al centro geometrico dell'arco e spostato soltanto il disco kcal.
+- QA tecnico finale: **PASS**. QA visivo finale: **PASS_CANDIDATE_ONLY** sul pilot a07, 270 kcal, -27,6°, zona LIME.
+- Preflight: i tre blocchi precedenti sono rimossi; resta soltanto `GAUGE_OWNER_APPROVAL_PENDING`. Nessun freeze automatico.
+- Evidenza completa: `docs/food-portrait-pipeline/deterministic-assets-recovery-v1.json`.

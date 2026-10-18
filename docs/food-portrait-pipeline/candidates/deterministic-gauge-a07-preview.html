@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="it">
+<meta charset="utf-8">
+<title>MealUp deterministic gauge a07 candidate</title>
+<style>
+  html,body{margin:0;width:600px;height:480px;overflow:hidden;background:transparent}
+  .gauge{position:relative;width:600px;height:480px}
+  .layer{position:absolute;inset:0;width:600px;height:480px}
+  .needle{transform:rotate(-27.6deg);transform-origin:300px 260px}
+  .value{position:absolute;left:75px;top:292px;width:250px;text-align:center;color:#252525;font-family:Arial,sans-serif;font-weight:800;font-size:72px;line-height:1}
+  .unit{position:absolute;left:75px;top:375px;width:250px;text-align:center;color:#252525;font-family:Arial,sans-serif;font-weight:600;font-size:36px;line-height:1}
+</style>
+<div class="gauge" role="img" aria-label="270 kcal, zona lime, lancetta a meno 27 virgola 6 gradi">
+  <img class="layer" src="../../../tools/food-portrait-pipeline/assets/gauge-shell-frozen-v1.svg" alt="">
+  <img class="layer needle" src="../../../tools/food-portrait-pipeline/assets/gauge-needle-frozen-v1.svg" alt="">
+  <div class="value">270</div>
+  <div class="unit">kcal</div>
+</div>
+</html>

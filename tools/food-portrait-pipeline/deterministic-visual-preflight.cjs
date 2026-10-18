@@ -7,30 +7,40 @@ const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 function preflight({root,vesselId,recipeId,kcal,expectedRecipeAssetSha256}){
  const blockers=[],evidence={};
  const geometryPath=path.join(root,'G5','vessel-geometry.json');
- const contractPath=path.join(root,'G7_Completed','gauge-contract.json');
+ const contractPath=path.join(root,'tools','food-portrait-pipeline','deterministic-gauge-contract.json');
  const recipePath=path.join(root,'docs','food-portrait-pipeline',`${recipeId}-plate-frozen-v1.json`);
  if(!fs.existsSync(geometryPath))blockers.push('VESSEL_GEOMETRY_MISSING');
  else {
   const geometry=read(geometryPath).vessels?.find?.(x=>x.vessel_id===vesselId);
   if(!geometry)blockers.push('VESSEL_GEOMETRY_UNREGISTERED');
-  else evidence.geometryStatus=geometry.status;
+  else {evidence.geometryStatus=geometry.status;evidence.expectedBodySha256=geometry.body_sha256;}
  }
  const vesselDir=path.join(root,'G5','vessels',vesselId);
  for(const [name,file] of [['body','source-view.png'],['foodClip','food-clip.png'],['frontOccluder','front-occluder.png']]){
   const p=path.join(vesselDir,file);
   if(!fs.existsSync(p))blockers.push(`VESSEL_${name.toUpperCase()}_MISSING`);
-  else evidence[name]={path:path.relative(root,p).replaceAll('\\','/'),sha256:sha(p)};
+  else {
+   evidence[name]={path:path.relative(root,p).replaceAll('\\','/'),sha256:sha(p)};
+   if(name==='body'&&evidence.expectedBodySha256&&evidence[name].sha256!==evidence.expectedBodySha256)
+    blockers.push('VESSEL_BODY_SHA_MISMATCH');
+  }
  }
  if(!fs.existsSync(contractPath))blockers.push('GAUGE_CONTRACT_MISSING');
  else {
-  const contract=read(contractPath),shell=path.join(root,'G7_Completed',contract.assets.shell.path);
-  if(!fs.existsSync(shell))blockers.push('GAUGE_SHELL_MISSING');
-  else {
-   const actual=sha(shell);evidence.gaugeShell={expected:contract.assets.shell.sha256,actual};
-   if(actual!==contract.assets.shell.sha256)blockers.push('GAUGE_SHELL_SHA_MISMATCH');
+  const contract=read(contractPath);evidence.gaugeContract={schema:contract.schema,status:contract.status};
+  for(const role of ['shell','needle']){
+   const asset=contract.assets?.[role],assetPath=asset?.path&&path.join(root,asset.path);
+   if(!assetPath||!fs.existsSync(assetPath))blockers.push(`GAUGE_${role.toUpperCase()}_MISSING`);
+   else {
+    const actual=sha(assetPath);evidence[`gauge${role[0].toUpperCase()+role.slice(1)}`]={expected:asset.sha256,actual};
+    if(actual!==asset.sha256)blockers.push(`GAUGE_${role.toUpperCase()}_SHA_MISMATCH`);
+   }
   }
-  if(contract.calibration?.range?.[1]!==1000||contract.calibration?.angles?.[0]!==-60||contract.calibration?.angles?.[1]!==60)
-   blockers.push('GAUGE_LEGACY_CALIBRATION_NOT_FOOD_PORTRAIT_FROZEN');
+  if(contract.schema!=='mealup-food-portrait-deterministic-gauge-v1'||
+    contract.calibration?.rangeKcal?.[0]!==0||contract.calibration?.rangeKcal?.[1]!==1000||
+    contract.calibration?.anglesDegrees?.[0]!==-60||contract.calibration?.anglesDegrees?.[1]!==60)
+   blockers.push('GAUGE_NONCANONICAL_FOOD_PORTRAIT_CALIBRATION');
+  if(contract.status!=='FROZEN_OWNER_APPROVED')blockers.push('GAUGE_OWNER_APPROVAL_PENDING');
  }
  const state=gaugeState(kcal);evidence.foodPortraitGauge=state;
  if(!fs.existsSync(recipePath))blockers.push('FROZEN_RECIPE_MANIFEST_MISSING');

@@ -1,0 +1,54 @@
+{
+  "schema": "mealup-food-portrait-deterministic-assets-recovery-v1",
+  "date": "2026-10-18",
+  "status": "CANDIDATE_OWNER_REVIEW_REQUIRED",
+  "scope": "isolated branch only; no main, tester, PWA, deployment or do01",
+  "vesselPlate": {
+    "method": "EXACT_CROP_FROM_CANONICAL_FROZEN_BOARD",
+    "canonicalBoard": {
+      "path": "G5/references/VESSEL_LIBRARY_reference.png",
+      "sha256": "3318fbf8a718438520b12e9d8d28d88374a46041fc94b3efac1f23b38a50d5c8",
+      "dimensions": [1536, 1024]
+    },
+    "cropPixels": [370, 100, 350, 220],
+    "output": {
+      "path": "G5/vessels/VESSEL_PLATE/source-view.png",
+      "sha256": "f70bf0f2b3211de8867917b9ee1db11a1e21c030a520391c18e80cb521cda9de",
+      "dimensions": [350, 220]
+    },
+    "userPhoto": {
+      "role": "VISUAL_CONFIRMATION_ONLY",
+      "file": "Foto 2.jpg",
+      "sha256": "2d86381982b69657ea54a9b8ae73c3b21dcd457dce1848c44ce7900de85fd097"
+    },
+    "syntheticPixelsAdded": false
+  },
+  "gauge": {
+    "method": "DETERMINISTIC_SVG_RECONSTRUCTION",
+    "contract": "tools/food-portrait-pipeline/deterministic-gauge-contract.json",
+    "reference": {
+      "role": "STYLE_ONLY",
+      "file": "Foto 1.jpg",
+      "sha256": "ee3edfb55a435811fabad7c43c20185f42ae3deb36d990c73f343b12ec043d88"
+    },
+    "pilot": {
+      "recipeId": "a07",
+      "kcal": 270,
+      "angleDegrees": -27.6,
+      "zone": "LIME",
+      "preview": "docs/food-portrait-pipeline/candidates/deterministic-gauge-a07-preview.png",
+      "previewSha256": "d2f1cd0df47e8c810d717efbe492ef33b7ff1ca038412c097ed263d3a30ddace"
+    },
+    "qa": {
+      "technical": "PASS",
+      "visual": "PASS_CANDIDATE_ONLY",
+      "owner": "PENDING",
+      "automaticFreeze": false
+    }
+  },
+  "recordedCorrections": [
+    "Rejected first render because the needle obscured the kcal value.",
+    "Rejected second geometry because moving the pivot broke angular alignment with the colored zones.",
+    "Final candidate keeps the pivot at the arc center and offsets only the value disc."
+  ]
+}
