@@ -1,6 +1,6 @@
 {
   "schema": "MEALUP_AI_OFFICE_MASTERPLAN_V1",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "createdAt": "2026-10-15",
   "canonicalScope": "AI_OFFICE_LAB_ONLY",
   "branch": "experiment/recipe-visual-agents",
@@ -530,7 +530,8 @@
           "doneWhen": "No lost steps on restart",
           "evidence": [
             "https://github.com/battagliafilippo/MealUp/actions/runs/39121708920",
-            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/director-private-ledger.cjs"
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/director-private-ledger.cjs",
+            "https://github.com/battagliafilippo/MealUp/actions/runs/39122107810"
           ],
           "blockingReasons": [
             "Local file checkpoint store proven in CI, but no hosted persistent private runtime or authenticated agent identities",
@@ -730,7 +731,7 @@
     "activeBriefVersion": "AI_OFFICE_20261015_V1",
     "currentPhase": "AIOS-02",
     "nextStepId": "AIOS-02.2",
-    "lastVerifiedTechnicalState": "Director local private checkpoint prototype passes 166/166 Node tests; Constitution preflight refuses missing source; main protected true; original still not bound to autonomous runtime; CI 39121708920",
+    "lastVerifiedTechnicalState": "167/167 Node tests PASS, private Director journal state machine enforces preflight-before-step and independent-QA-before-CEO; original Constitution not connected to hosted runtime; main protected; no model calls or app writes",
     "pendingApprovals": [],
     "noInFlightProviderCalls": true,
     "preservePreviousDecisionIds": true,
@@ -760,6 +761,11 @@
         "version": "1.0.4",
         "change": "AIOS-03.1 PARTIALLY_VERIFIED private journal and source-gated Director preflight; preserve AIOS-02.2 as active unresolved dependency; no agent execution or model promotion",
         "sourceCommit": "b47e9ad3fef8465d530267697e4afec64d24ed1f"
+      },
+      {
+        "version": "1.0.5",
+        "change": "Add verified CI evidence of sequential Director preflight→checkpoint→QA→CEO metadata gate; AIOS-03.1 still PARTIALLY_VERIFIED",
+        "sourceCommit": "03f23c46104f59dc5526eb722de51289b95abcbc"
       }
     ]
   }
