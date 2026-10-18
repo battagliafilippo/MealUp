@@ -105,11 +105,11 @@ Prove: [189/189 test Node](https://github.com/battagliafilippo/MealUp/actions/ru
 
 ## Aggiornamento Windows — 18/10/2026
 
-Il CEO ha approvato il proprio **PC Windows già disponibile** come futura sede privata, senza costi aggiuntivi. È stato implementato nel laboratorio il bootstrap `tools/ai-office/windows-private-host.ps1`, con azioni `Provision` e `Verify`: prepara cartelle private sotto `LOCALAPPDATA`, impedisce ereditarietà di ACL NTFS, controlla SID utente/SYSTEM/Administrators e rifiuta accessi `Everyone`, directory temporanee, junction o contenuti sconosciuti.
+Il CEO ha approvato il proprio **PC Windows già disponibile** come futura sede privata, senza costi aggiuntivi. È stato implementato nel laboratorio il bootstrap `tools/ai-office/windows-private-host.ps1`, con azioni `Provision` e `Verify`: prepara cartelle private sotto `LOCALAPPDATA`, impedisce ereditarietà di ACL NTFS, controlla SID utente/SYSTEM/Administrators e rifiuta accessi `Everyone`, directory temporanee, junction o contenuti sconosciuti. Include ora anche `VerifyFile` per controllare singoli file e impedire autorizzazioni troppo ampie direttamente su documenti e checkpoint.
 
-La prova sul [runner Windows reale GitHub (9 test PASS)](https://github.com/battagliafilippo/MealUp/actions/runs/39157572574) è positiva, anche per i casi negativi. [Specifiche e confini dell'installazione](WINDOWS-PRIVATE-HOST-BOOTSTRAP.md).
+La prova sul [runner Windows reale GitHub (12 test PASS)](https://github.com/battagliafilippo/MealUp/actions/runs/39158008874) è positiva, anche per i casi negativi. [Specifiche e confini dell'installazione](WINDOWS-PRIVATE-HOST-BOOTSTRAP.md).
 
-**Non è un'installazione sul PC del CEO**: il codice JavaScript del Director e quello Python della Costituzione mantengono per ora i vincoli POSIX. Non verranno aggirati senza un controllo NTFS sui singoli file e una prova di integrazione Windows. Prossimo micro-step `WINDOWS-02` dentro `AIOS-02.2`: verificare ACL del DOCX originale, journal, mailbox e snapshot, collegare le guardie fail-closed al runtime Node/Python e collaudare il recupero su Windows. Solo dopo verrà proposta l'installazione locale supervisionata. Zero nuove licenze; no cambi all'app/FROZEN.
+**Non è un'installazione sul PC del CEO**: il codice JavaScript del Director e quello Python della Costituzione mantengono per ora i vincoli POSIX. Non verranno aggirati senza un controllo NTFS sui singoli file e una prova di integrazione Windows. Prossimo micro-step `WINDOWS-02` dentro `AIOS-02.2`: **collegare** il validatore NTFS di file già collaudato alle guardie fail-closed del runtime Node/Python e collaudare davvero il recupero su Windows con fonte autentica in ambiente privato. Solo dopo verrà proposta l'installazione locale supervisionata. Zero nuove licenze; no cambi all'app/FROZEN.
 
 ## Recupero e prossimo incarico
 
