@@ -103,6 +103,14 @@ Prove: [189/189 test Node](https://github.com/battagliafilippo/MealUp/actions/ru
 
 **Limite fondamentale:** i test sono locali e POSIX; non abbiamo installato un host privato sul computer dell'utente. Il modulo rifiuta per ora `win32` fino a un adattatore ACL NTFS qualificato, non esiste un servizio sempre attivo, un backup anti-guasto del disco o una vera identità autenticata degli agenti. Il prossimo gate di `AIOS-02.2` è scegliere col CEO un computer già disponibile, costruire l'installazione sicura per il suo sistema operativo e collaudare davvero un riavvio di quel dispositivo. Zero nuovi abbonamenti e nessun caricamento del DOCX originale su GitHub.
 
+## Aggiornamento Windows — 18/10/2026
+
+Il CEO ha approvato il proprio **PC Windows già disponibile** come futura sede privata, senza costi aggiuntivi. È stato implementato nel laboratorio il bootstrap `tools/ai-office/windows-private-host.ps1`, con azioni `Provision` e `Verify`: prepara cartelle private sotto `LOCALAPPDATA`, impedisce ereditarietà di ACL NTFS, controlla SID utente/SYSTEM/Administrators e rifiuta accessi `Everyone`, directory temporanee, junction o contenuti sconosciuti.
+
+La prova sul [runner Windows reale GitHub (9 test PASS)](https://github.com/battagliafilippo/MealUp/actions/runs/39157572574) è positiva, anche per i casi negativi. [Specifiche e confini dell'installazione](WINDOWS-PRIVATE-HOST-BOOTSTRAP.md).
+
+**Non è un'installazione sul PC del CEO**: il codice JavaScript del Director e quello Python della Costituzione mantengono per ora i vincoli POSIX. Non verranno aggirati senza un controllo NTFS sui singoli file e una prova di integrazione Windows. Prossimo micro-step `WINDOWS-02` dentro `AIOS-02.2`: verificare ACL del DOCX originale, journal, mailbox e snapshot, collegare le guardie fail-closed al runtime Node/Python e collaudare il recupero su Windows. Solo dopo verrà proposta l'installazione locale supervisionata. Zero nuove licenze; no cambi all'app/FROZEN.
+
 ## Recupero e prossimo incarico
 
 - Conservare **tutti gli ID**, le decisioni `DEC`, i problemi `UNK`, i checkpoint e i riferimenti all'evidenza. Usare Git come cronologia delle versioni del JSON, non riscrivere decisioni approvate senza nuova decisione esplicita e traccia di sostituzione.
