@@ -872,3 +872,16 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Coda avanzata a 5/10. Nessuna approvazione automatica, freeze, integrazione o deploy.
 
 **Prossimo micro-step necessario:** prossimo heartbeat sulla successiva ricetta PENDING; review owner unica al raggiungimento di 10/10.
+### AI Office deterministic visual planning integration 2026-10-18
+
+- Audit collegiale dei ruoli, skill e orchestrazione: il problema principale non richiede un nuovo agente generativo; `VISUAL_SYSTEMS_ENGINEERING` è introdotto come sottoruolo di Engineering.
+- Aggiunti profilo centrale `FOOD_PORTRAIT_DETERMINISTIC_PILOT`, catalogo dedicato di 9 skill e planner fail-closed che copre 10 capacità obbligatorie.
+- Il piano ordina Food facts, Design style lock, food-only ImageGen, composizione vessel/gauge deterministica, due corsie QA indipendenti, recovery/pre-lot e libreria correzioni.
+- L'orchestratore allega il piano esplicito `skill → capacità → ordine → ruolo → motivazione` solo per il nuovo task type; i percorsi legacy restano invariati.
+- Gate verificati: attori producer/reviewer distinti, hash input, quota zero-cost, capacità complete, dipendenze, limite massimo e nessun freeze automatico.
+- Errore operativo registrato: il primo baseline test era stato lanciato fuori dalla root repository e mostrava 3 falsi fallimenti di path; rilanciato dalla root corretta: 141/141 PASS.
+- QA dopo l'integrazione: 146/146 test Office PASS; nessuna immagine generata, nessun lotto avviato, nessuna modifica a main/tester/PWA.
+
+**Stato:** `OFFICE_SKILL_PLANNING_INTEGRATED / EXECUTION_DISABLED`. Il motore resta fail-closed finché body PLATE e gauge Food Portrait non sono coerenti.
+
+**Prossimo micro-step necessario:** implementare il compositore deterministico a07 usando asset verificati o bloccare con prova puntuale se il body PLATE canonico non è disponibile.

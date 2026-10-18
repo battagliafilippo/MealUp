@@ -62,3 +62,27 @@ test('No unknown task or unsupported department can enter the office', () => {
   assert.throws(() => office.intake(brief('unknown', 'marketing')), /UNCLASSIFIED_DOMAIN/);
   assert.throws(() => office.handoff('missing'), /UNKNOWN_OFFICE_PLAN/);
 });
+
+test('Food Portrait intake attaches an ordered complete skill plan to the handoff', () => {
+  const office = createOfficeOrchestrator();
+  office.intake(brief('fp-1', 'engineering', {
+    taskType: 'FOOD_PORTRAIT_DETERMINISTIC_PILOT', producerId: 'imagegen',
+    technicalReviewerId: 'qa-tech', visualReviewerId: 'qa-food',
+    inputHashesVerified: true, quotaVerified: true,
+  }));
+  const h = office.handoff('fp-1');
+  assert.equal(h.payload.taskType, 'FOOD_PORTRAIT_DETERMINISTIC_PILOT');
+  assert.equal(h.payload.skillAssignments.length, 9);
+  assert.equal(h.payload.skillAssignments[0].skillId, 'MEALUP_RECIPE_FACT_LOCK');
+  assert.equal(h.payload.skillAssignments.at(-1).skillId, 'MEALUP_VERIFIED_CORRECTION_LIBRARY');
+  assert.equal(office.report('fp-1').skillPlan.status, 'READY_OFFLINE');
+});
+
+test('Food Portrait intake fails closed before handoff when actors overlap', () => {
+  const office = createOfficeOrchestrator();
+  assert.throws(() => office.intake(brief('fp-bad', 'engineering', {
+    taskType: 'FOOD_PORTRAIT_DETERMINISTIC_PILOT', producerId: 'same',
+    technicalReviewerId: 'qa-tech', visualReviewerId: 'same',
+    inputHashesVerified: true, quotaVerified: true,
+  })), /PRODUCER_REVIEWER_NOT_INDEPENDENT/);
+});

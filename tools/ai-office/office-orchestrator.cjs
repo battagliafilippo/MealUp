@@ -7,6 +7,7 @@
  */
 const { createRouter } = require('./router.cjs');
 const { connectionPlan, getRole } = require('./agent-registry.cjs');
+const { compileFoodPortraitSkillPlan, PROFILE: FOOD_PORTRAIT_PROFILE } = require('./food-portrait-skill-plan.cjs');
 const PROTOCOL = 'MEALUP_OFFICE_CONNECTION_V0_1';
 const copy = (value) => JSON.parse(JSON.stringify(value));
 
@@ -17,7 +18,20 @@ function createOfficeOrchestrator() {
   function intake(input) {
     const task = router.intake(input);
     const plan = connectionPlan(task.owner, input.promptSpecializationRequired === true);
-    const record = { task, plan, status: 'CONNECTED_PLAN_READY' };
+    let skillPlan = null;
+    if (input.taskType === FOOD_PORTRAIT_PROFILE.taskType) {
+      skillPlan = compileFoodPortraitSkillPlan({
+        taskType: input.taskType,
+        producerId: input.producerId,
+        technicalReviewerId: input.technicalReviewerId,
+        visualReviewerId: input.visualReviewerId,
+        inputHashesVerified: input.inputHashesVerified,
+        quotaVerified: input.quotaVerified,
+      });
+      if (skillPlan.status !== 'READY_OFFLINE')
+        throw new Error('FOOD_PORTRAIT_SKILL_PLAN_BLOCKED:' + skillPlan.reason);
+    }
+    const record = { task, plan, skillPlan, status: 'CONNECTED_PLAN_READY' };
     plans.set(task.id, record);
     return copy(record);
   }
@@ -48,6 +62,8 @@ function createOfficeOrchestrator() {
         authorization: 'PROPOSAL_ONLY',
         writeScope: 'NONE',
         budgetEUR: 0,
+        taskType: record.skillPlan?.taskType || null,
+        skillAssignments: record.skillPlan?.assignments || [],
       },
       execution: 'NOT_STARTED',
       nextGate: getRole('qa').label,
@@ -63,6 +79,7 @@ function createOfficeOrchestrator() {
     const record = plans.get(taskId);
     if (!record) throw new Error('UNKNOWN_OFFICE_PLAN');
     return { ...router.report(taskId), connectionPlan: copy(record.plan),
+      skillPlan: copy(record.skillPlan),
       executionStatus: 'NO_PROVIDER_OR_WRITE_EXECUTED' };
   }
 
