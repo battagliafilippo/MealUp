@@ -1,6 +1,6 @@
 {
   "schema": "MEALUP_AI_OFFICE_MASTERPLAN_V1",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "createdAt": "2026-10-15",
   "canonicalScope": "AI_OFFICE_LAB_ONLY",
   "branch": "experiment/recipe-visual-agents",
@@ -126,6 +126,12 @@
       "path": "tools/recipe-visuals/visual-director.cjs",
       "status": "SEPARATE",
       "notes": "Food Portrait pipeline in other chat; contractual interface only"
+    },
+    {
+      "id": "SRC-MAILBOX",
+      "path": "tools/ai-office/director-private-mailbox.cjs",
+      "status": "VERIFIED_CODE",
+      "notes": "Private local-only handoff/response/QA protocol; not autonomous inference or authenticated sender"
     }
   ],
   "decisions": [
@@ -310,15 +316,17 @@
         "SRC-GOV",
         "tools/ai-office/office-orchestrator.cjs",
         "tools/ai-office/director-private-ledger.cjs",
-        "tools/ai-office/director-secure-preflight.cjs"
+        "tools/ai-office/director-secure-preflight.cjs",
+        "tools/ai-office/director-private-mailbox.cjs"
       ],
       "evidence": [
-        "https://github.com/battagliafilippo/MealUp/actions/runs/39121708920"
+        "https://github.com/battagliafilippo/MealUp/actions/runs/39121708920",
+        "https://github.com/battagliafilippo/MealUp/actions/runs/39127525590"
       ],
       "missing": [
-        "Local restart-safe audit receipts exist; not yet hosted or authenticated",
-        "No real durable Director event subscriber or cross-department message delivery",
-        "No autonomous execution, private original remains unavailable in GitHub CI"
+        "Local checkpoint and mailbox record metadata, but do not invoke any AI agents",
+        "No authenticated independent provider identity or hosted persistent runtime",
+        "No live cross-host recovery, skill calls or trusted interdepartment communication"
       ]
     },
     {
@@ -541,7 +549,7 @@
         {
           "id": "AIOS-03.2",
           "title": "Add idempotent checkpoints and recovery",
-          "status": "OPEN",
+          "status": "PARTIALLY_VERIFIED",
           "dependsOn": [
             "AIOS-03.1"
           ],
@@ -551,8 +559,16 @@
           "expectedOutput": "Checkpoint validation",
           "verification": "Fault-injection and stale-brief tests",
           "doneWhen": "No repeated side effect or lost MUST",
-          "evidence": [],
-          "blockingReasons": []
+          "evidence": [
+            "https://github.com/battagliafilippo/MealUp/actions/runs/39127525590",
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/director-private-mailbox.cjs",
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/director-private-mailbox.test.cjs"
+          ],
+          "blockingReasons": [
+            "Mailbox journal and offline protocol verified; actual agent identities and model execution not connected",
+            "Cross-host resume and trusted live provider adapter not established",
+            "Private canonical Constitution must be validated on every delegated job"
+          ]
         },
         {
           "id": "AIOS-03.3",
@@ -731,7 +747,7 @@
     "activeBriefVersion": "AI_OFFICE_20261015_V1",
     "currentPhase": "AIOS-02",
     "nextStepId": "AIOS-02.2",
-    "lastVerifiedTechnicalState": "167/167 Node tests PASS, private Director journal state machine enforces preflight-before-step and independent-QA-before-CEO; original Constitution not connected to hosted runtime; main protected; no model calls or app writes",
+    "lastVerifiedTechnicalState": "179/179 JS tests pass; Director private mailbox persists scoped Director offer→specialist result→QA receipt offline with fail-closed preflight metadata and journal chain; no provider execution, private v1.9 runtime host still unavailable",
     "pendingApprovals": [],
     "noInFlightProviderCalls": true,
     "preservePreviousDecisionIds": true,
@@ -766,6 +782,11 @@
         "version": "1.0.5",
         "change": "Add verified CI evidence of sequential Director preflight→checkpoint→QA→CEO metadata gate; AIOS-03.1 still PARTIALLY_VERIFIED",
         "sourceCommit": "03f23c46104f59dc5526eb722de51289b95abcbc"
+      },
+      {
+        "version": "1.0.6",
+        "change": "AIOS-03.2 PARTIALLY_VERIFIED: new local private Director mailbox with 12 passing negative/continuity tests; no real agents, no source-bridge overclaim; AIOS-02.2 remains next mandatory gate",
+        "sourceCommit": "653ac16a58e6533828842075d2c7b59f204c38ad"
       }
     ]
   }
