@@ -37,7 +37,7 @@ function mailboxAt(folder){
   if(!valid(m.id)||!valid(m.taskId)||!valid(m.kind)||!valid(m.actor)||
      !m.record||typeof m.record!=='object'||Array.isArray(m.record))
    throw Error('INVALID_OFFICE_MESSAGE');
-  const allowed=new Set(['handoffId','toRole','scope','briefVersion','baselineId',
+  const allowed=new Set(['handoffId','toRole','scope','briefVersion','baselineId','taskPacketSha',
        'stepId','evidenceRef','resultStatus','reasonCode']);
   if(Object.keys(m.record).some(k=>!allowed.has(k))||
       JSON.stringify(m.record).length>1600)
@@ -60,11 +60,14 @@ function mailboxAt(folder){
     if(m.actor!=='DIRECTOR'||!ROLES.has(rec.toRole)||rec.toRole==='QA'||
        rec.scope!=='LAB_READ_ONLY'||!valid(rec.briefVersion)||!valid(rec.baselineId))
      throw Error('UNAUTHORIZED_OR_UNSCOPED_OFFER');
+    if(!/^[a-f0-9]{64}$/.test(rec.taskPacketSha||''))
+      throw Error('PRIVATE_TASK_PACKET_SHA_REQUIRED');
     const attested=journal.read().events.find(e=>e.taskId===m.taskId&&
        e.type==='RULE_PREFLIGHT_READY'&&e.actor==='DIRECTOR'&&
        e.record.sourceVerified===true&&e.record.constitutionSha===HASH&&
        e.record.roleId===rec.toRole&&e.record.scope===rec.scope&&
-       e.record.briefVersion===rec.briefVersion&&e.record.baselineId===rec.baselineId);
+       e.record.briefVersion===rec.briefVersion&&e.record.baselineId===rec.baselineId&&
+       e.record.taskPacketSha===rec.taskPacketSha);
     if(!attested)throw Error('CONSTITUTION_PREFLIGHT_REQUIRED');
     if(db.items.some(e=>e.taskId===m.taskId&&e.kind==='OFFER'&&e.record.handoffId===rec.handoffId))
       throw Error('HANDOFF_ID_ALREADY_ISSUED');
