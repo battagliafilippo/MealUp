@@ -1,6 +1,6 @@
 {
   "schema": "MEALUP_AI_OFFICE_MASTERPLAN_V1",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "createdAt": "2026-10-15",
   "canonicalScope": "AI_OFFICE_LAB_ONLY",
   "branch": "experiment/recipe-visual-agents",
@@ -305,14 +305,20 @@
       "id": "CMP-008",
       "name": "Director durable task queue and checkpoint recovery",
       "lifecycle": "PROPOSED",
-      "verification": "UNVERIFIED",
+      "verification": "PARTIALLY_VERIFIED",
       "sources": [
         "SRC-GOV",
-        "tools/ai-office/office-orchestrator.cjs"
+        "tools/ai-office/office-orchestrator.cjs",
+        "tools/ai-office/director-private-ledger.cjs",
+        "tools/ai-office/director-secure-preflight.cjs"
       ],
-      "evidence": [],
+      "evidence": [
+        "https://github.com/battagliafilippo/MealUp/actions/runs/39121708920"
+      ],
       "missing": [
-        "No durable store or real restart/resume pipeline"
+        "Local restart-safe audit receipts exist; not yet hosted or authenticated",
+        "No real durable Director event subscriber or cross-department message delivery",
+        "No autonomous execution, private original remains unavailable in GitHub CI"
       ]
     },
     {
@@ -477,12 +483,12 @@
           "doneWhen": "No canonical text in public repo/logs",
           "evidence": [
             "https://github.com/battagliafilippo/MealUp/actions/runs/38760713791",
-            "PRIVATE_ORIGINAL_SHA256_MATCH_AND_152_RULE_SECTIONS_CHECK_2026-10-15"
+            "PRIVATE_ORIGINAL_SHA256_MATCH_AND_152_RULE_SECTIONS_CHECK_2026-10-15",
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/director-secure-preflight.cjs"
           ],
           "blockingReasons": [
-            "REAL_CANONICAL_DOCUMENT_VERIFIED_IN_PRIVATE_CHATGPT_SESSION",
-            "GITHUB_RUNNER_CANNOT_ACCESS_PRIVATE_CHATGPT_LIBRARY",
-            "PERSISTENT_DIRECTOR_INTEGRATION_NOT_IMPLEMENTED"
+            "Canonical private original verified in an interactive local context, but no approved persistent bridge into GitHub Actions or autonomous Director",
+            "Every new delegated task requires real source path; no preflight bypass permitted"
           ]
         },
         {
@@ -507,12 +513,12 @@
     {
       "id": "AIOS-03",
       "title": "Implement Director persistence and quotas",
-      "status": "OPEN",
+      "status": "PARTIALLY_VERIFIED",
       "steps": [
         {
           "id": "AIOS-03.1",
           "title": "Persist task/decision/plan ledger",
-          "status": "OPEN",
+          "status": "PARTIALLY_VERIFIED",
           "dependsOn": [
             "AIOS-01.3"
           ],
@@ -522,8 +528,14 @@
           "expectedOutput": "Durable events and snapshots",
           "verification": "Restart simulation and integrity checks",
           "doneWhen": "No lost steps on restart",
-          "evidence": [],
-          "blockingReasons": []
+          "evidence": [
+            "https://github.com/battagliafilippo/MealUp/actions/runs/39121708920",
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/director-private-ledger.cjs"
+          ],
+          "blockingReasons": [
+            "Local file checkpoint store proven in CI, but no hosted persistent private runtime or authenticated agent identities",
+            "Durable cross-session shared task execution and real inter-department inbox/outbox remain future work"
+          ]
         },
         {
           "id": "AIOS-03.2",
@@ -718,7 +730,7 @@
     "activeBriefVersion": "AI_OFFICE_20261015_V1",
     "currentPhase": "AIOS-02",
     "nextStepId": "AIOS-02.2",
-    "lastVerifiedTechnicalState": "GitHub main protection VERIFIED 2026-10-18 active ruleset 25214872; private v1.9 SHA + 152 clauses verified in prior session, persistent Director binding not yet implemented; prior 149 Node + 22 Constitution tests passing at their checkpoint",
+    "lastVerifiedTechnicalState": "Director local private checkpoint prototype passes 166/166 Node tests; Constitution preflight refuses missing source; main protected true; original still not bound to autonomous runtime; CI 39121708920",
     "pendingApprovals": [],
     "noInFlightProviderCalls": true,
     "preservePreviousDecisionIds": true,
@@ -743,6 +755,11 @@
         "version": "1.0.3",
         "change": "Reconciled successful Work-admin main protection with authoritative GitHub API; AIOS-02.1 VERIFIED, AIOS-02.2 still PARTIALLY_VERIFIED; no changes to app, frozen or agent qualifications",
         "sourceCommit": "d986641d658f33e11bfb3dbd2de0a081e6352025"
+      },
+      {
+        "version": "1.0.4",
+        "change": "AIOS-03.1 PARTIALLY_VERIFIED private journal and source-gated Director preflight; preserve AIOS-02.2 as active unresolved dependency; no agent execution or model promotion",
+        "sourceCommit": "b47e9ad3fef8465d530267697e4afec64d24ed1f"
       }
     ]
   }
