@@ -25,6 +25,14 @@ Results are deliberately limited to safe metadata: status, selected Skill IDs, c
 - A `STEP_CHECKPOINT` requires evidence; only role QA can append `QA_REPORTED`. QA role names stored in the journal do not by themselves authenticate a live remote agent. Authentication and private runtime hosting remain future gates.
 - This module is limited to **local private storage**, not deployed cloud memory, credential management, actual inter-agent inbox/outbox, autonomous quotas or the complete Director runtime.
 
+## Aggiornamento 18/10/2026 — legame del pacchetto costituzionale ai messaggi
+
+L'handoff originale contiene un pacchetto locale privato con clausole v1.9 pertinenti al task. Ora il motore calcola il suo SHA-256 **dal file effettivamente generato**; il Director salva soltanto `taskPacketSha` nel proprio journal e lo restituisce nel riepilogo privo di clausole. La mailbox rifiuta un `OFFER` senza digest o con digest differente da quello del `RULE_PREFLIGHT_READY` per quel task, ruolo, scope, baseline e brief. Un cambio di baseline o pacchetto obbliga a un nuovo preflight invece di riutilizzare l'autorizzazione precedente.
+
+Questa è una protezione di coerenza verificata in CI: **non costituisce autenticazione crittografica degli agenti o prova della firma del CEO**. I processi con permesso di scrivere lo stesso archivio privato rimangono nel medesimo dominio fiduciario. La quota in tempo reale, il binding automatico alla Libreria privata del CEO e la disponibilità del filesystem tra host non sono risolti. Il requisito di sorgente originale inaccessibile al runner GitHub non è aggirabile e resta `AIOS-02.2 PARTIALLY_VERIFIED`.
+
+Evidenza: [test CI delle comunicazioni e degli hash](https://github.com/battagliafilippo/MealUp/actions/runs/39129081580), 181 test JS completati (di cui due nuovi sull'handoff esatto) e Engineering→QA read-only verificato.
+
 ## Verified vs missing
 
 **Verified:** offline safety and restart tests in GitHub Actions; fail-closed when source absent; negative tests for wrong source and unapproved skill; private journal event replay and tampering checks.
