@@ -21,6 +21,9 @@ function createProtectedHandoff({task,assignment,sourcePath}={}){
   if(!task||!assignment||
      typeof task.taskId!=='string'||typeof task.roleId!=='string')
     return {status:'BLOCKED_UNSTRUCTURED_TASK',executesAgent:false,apiCalls:0};
+  // A stale explicit Constitution version must fail closed, never be silently upgraded.
+  if(task.constitutionVersion!==undefined&&task.constitutionVersion!=='1.9')
+    return {status:'BLOCKED_STALE_CONSTITUTION',executesAgent:false,apiCalls:0};
   const selection=selectSkills({
     id:task.taskId,agentId:task.agentId,roleId:task.roleId,
     scope:task.scope,frozenContextVerified:task.frozenContextVerified,
