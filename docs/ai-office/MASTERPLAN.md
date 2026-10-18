@@ -95,6 +95,14 @@ Prove: [189/189 test Node](https://github.com/battagliafilippo/MealUp/actions/ru
 
 **Avanzamento senza overclaim:** `AIOS-02.2 PARTIALLY_VERIFIED` e `AIOS-03.2 PARTIALLY_VERIFIED` restano tali. Prossimo micro-step: definire e provare **dove ospitare in modo duraturo e autorizzato** il runtime privato (senza upload pubblico della Costituzione), con identità di specialisti e QA indipendente; solo in seguito qualificare agenti AI veri.
 
+## Checkpoint 18/10/2026 — backup e ripristino privato
+
+`tools/ai-office/director-host-recovery.cjs` conserva snapshot soltanto dei checkpoint e messaggi locali (`0600` in due directory private `0700` distinte), senza copiare l'originale della Costituzione. Il ripristino richiede la fonte originale SHA-256 verificata sullo stesso host, la revisione Git corretta e una destinazione vuota; snapshot alterati, accessi troppo ampi, symlink, doppioni e baseline diverse vengono respinti.
+
+**Risultato POSITIVO reale, in ambiente isolato privato:** 67 regole originali attivate, Engineering PASS, QA PASS, snapshot di 5 eventi e 3 messaggi, restore della fonte originale e ripresa con `reusedEngineering:true` e `reusedQA:true`, senza doppie esecuzioni. [Prova dettagliata e limite di sicurezza](DIRECTOR-HOST-RECOVERY.md). [197/197 test automatici riusciti](https://github.com/battagliafilippo/MealUp/actions/runs/39135454445), [prova Engineering→QA](https://github.com/battagliafilippo/MealUp/actions/runs/39135454458).
+
+**Limite fondamentale:** i test sono locali e POSIX; non abbiamo installato un host privato sul computer dell'utente. Il modulo rifiuta per ora `win32` fino a un adattatore ACL NTFS qualificato, non esiste un servizio sempre attivo, un backup anti-guasto del disco o una vera identità autenticata degli agenti. Il prossimo gate di `AIOS-02.2` è scegliere col CEO un computer già disponibile, costruire l'installazione sicura per il suo sistema operativo e collaudare davvero un riavvio di quel dispositivo. Zero nuovi abbonamenti e nessun caricamento del DOCX originale su GitHub.
+
 ## Recupero e prossimo incarico
 
 - Conservare **tutti gli ID**, le decisioni `DEC`, i problemi `UNK`, i checkpoint e i riferimenti all'evidenza. Usare Git come cronologia delle versioni del JSON, non riscrivere decisioni approvate senza nuova decisione esplicita e traccia di sostituzione.
