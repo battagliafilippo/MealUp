@@ -70,6 +70,14 @@ function storeAt(folder){
     if(digest(incoming)!==previous.hash)throw Error('CONFLICTING_EVENT_REPLAY');
     return {status:'IDEMPOTENT_REPLAY',seq:previous.seq,head:d.head};
    }
+   const hasPrevious=(type)=>d.events.some(e=>e.taskId===event.taskId&&e.type===type);
+   if(event.type==='STEP_CHECKPOINT'&&!hasPrevious('RULE_PREFLIGHT_READY'))
+     throw Error('CHECKPOINT_REQUIRES_VERIFIED_PREFLIGHT');
+   if(event.type==='QA_REPORTED'&&!hasPrevious('STEP_CHECKPOINT'))
+     throw Error('QA_REQUIRES_RECORDED_STEP');
+   if(event.type==='RETURN_TO_CEO'&&
+     (event.actor!=='DIRECTOR'||!hasPrevious('QA_REPORTED')))
+     throw Error('CEO_REPORT_REQUIRES_INDEPENDENT_QA');
    const row={seq:d.events.length+1,id:event.id,taskId:event.taskId,
      type:event.type,actor:event.actor,record:safe,prev:d.head};
    row.hash=digest(row);d.events.push(row);d.head=row.hash;
