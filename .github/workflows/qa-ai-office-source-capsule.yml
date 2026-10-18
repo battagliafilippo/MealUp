@@ -32,7 +32,8 @@ jobs:
           mkdir -p /tmp/mealup-office-capsule
           printf '%s\n' "$GITHUB_SHA" > /tmp/mealup-office-capsule/commit.txt
           tar -czf /tmp/mealup-office-capsule/office-public-source.tar.gz             --exclude='*.png' --exclude='*.webp'             tools/ai-office .agents/skills docs/ai-office AGENTS.md
-          tar -tzf /tmp/mealup-office-capsule/office-public-source.tar.gz | grep -q 'tools/ai-office/director-local-readonly.cjs'
+          tar -tzf /tmp/mealup-office-capsule/office-public-source.tar.gz > /tmp/mealup-office-capsule/file-list.txt
+          grep -q 'tools/ai-office/director-local-readonly.cjs' /tmp/mealup-office-capsule/file-list.txt
       - name: Upload allowlisted source capsule (NO PRIVATE DATA)
         uses: actions/upload-artifact@v4
         with:
