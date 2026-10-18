@@ -81,6 +81,12 @@ Il percorso preparazione del task -> Constitution v1.9 originale -> Director jou
 
 La lettura separata dell'originale v1.9 privato in questa sessione ha confermato lo SHA canonico e **152 sezioni**, senza esporre il contenuto. I pacchetti con estratti restano fuori dal repository pubblico. **NON equivale ancora** ad accesso ricorrente del Director alla Libreria privata, ad autenticazione crittografica di agenti terzi o a esecuzione automatica di AI specialiste. `AIOS-02.2` e `AIOS-03.2` rimangono PARTIALLY_VERIFIED; il prossimo gate è un runtime privato durevole con vero original-source binding e identità verificate. Nessuna modifica a MealUp, Food Portrait o FROZEN.
 
+## Checkpoint 18/10/2026 — runtime locale con fonte originale obbligatoria
+
+È ora presente [l'esecutore locale read-only](../../tools/ai-office/director-local-readonly.cjs), documentato in [LOCAL-PRIVATE-EXECUTOR.md](LOCAL-PRIVATE-EXECUTOR.md). La catena autorizzata è: **Director -> verifica reale SHA-256 del DOCX originale v1.9 -> pacchetto privato specifico -> mailbox -> strumento Engineering già approvato -> verifica QA indipendente -> checkpoint e riepilogo CEO**. Lo script non accetta istruzioni eseguibili arbitrarie né nuove Skill, ricontrolla il branch e la baseline Git e blocca checkout modificati. Il suo registro privato e i messaggi conservano le operazioni per l'eventuale ripresa sullo stesso disco.
+
+Prove: [189/189 test Node](https://github.com/battagliafilippo/MealUp/actions/runs/39129733082), inclusi **8 nuovi casi negativi del runtime privato**, e [esecuzione reale di strumenti interni Engineering + QA](https://github.com/battagliafilippo/MealUp/actions/runs/39129733085). **Limite sostanziale:** GitHub Actions NON dispone della Costituzione privata; pertanto in CI è verificata l'assenza di bypass e l'esecuzione separata dei due script, non il percorso positivo completo con sorgente privata nello stesso host. Il collegamento permanente alla Libreria ChatGPT e identità di modelli AI differenti non sono installati. `AIOS-02.2` resta PARTIALLY_VERIFIED, così come `AIOS-03.2`. Prossima prova: run positivo e prova di riavvio su host privato realmente autorizzato.
+
 ## Recupero e prossimo incarico
 
 - Conservare **tutti gli ID**, le decisioni `DEC`, i problemi `UNK`, i checkpoint e i riferimenti all'evidenza. Usare Git come cronologia delle versioni del JSON, non riscrivere decisioni approvate senza nuova decisione esplicita e traccia di sostituzione.
