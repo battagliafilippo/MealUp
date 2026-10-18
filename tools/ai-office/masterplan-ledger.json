@@ -1,6 +1,6 @@
 {
   "schema": "MEALUP_AI_OFFICE_MASTERPLAN_V1",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "createdAt": "2026-10-15",
   "canonicalScope": "AI_OFFICE_LAB_ONLY",
   "branch": "experiment/recipe-visual-agents",
@@ -440,12 +440,12 @@
     {
       "id": "AIOS-02",
       "title": "Close security and v1.9 source integration",
-      "status": "BLOCKED",
+      "status": "PARTIALLY_VERIFIED",
       "steps": [
         {
           "id": "AIOS-02.1",
           "title": "Verify and enable protective main branch rules",
-          "status": "BLOCKED",
+          "status": "VERIFIED",
           "dependsOn": [
             "AIOS-01.3"
           ],
@@ -453,13 +453,14 @@
           "scope": "GitHub branch rules",
           "preconditions": "GitHub repo administration access",
           "expectedOutput": "Protected main verification",
-          "verification": "GitHub branch rule and access audit",
-          "doneWhen": "main protected against automated writes",
-          "evidence": [],
-          "blockingReasons": [
-            "GitHub API confirms main protected:false and no rulesets",
-            "GitHub connector lacks admin action for branch protection; owner must create rule via Settings"
-          ]
+          "verification": "GitHub branch main protected:true and active ruleset 25214872 including pull_request, deletion, non_fast_forward and no bypass actors",
+          "doneWhen": "Observed API main protected=true and repository ruleset enforcement=active",
+          "evidence": [
+            "https://github.com/battagliafilippo/MealUp/rules/25214872",
+            "https://api.github.com/repos/battagliafilippo/MealUp/branches/main",
+            "VERIFIED_2026-10-18_RULESET_ACTIVE_MAIN_PULL_REQUEST_DELETION_NON_FAST_FORWARD_NO_BYPASS_ACTORS"
+          ],
+          "blockingReasons": []
         },
         {
           "id": "AIOS-02.2",
@@ -659,11 +660,11 @@
   "knownUnknowns": [
     {
       "id": "UNK-001",
-      "status": "BLOCKED",
+      "status": "VERIFIED",
       "topic": "Main branch protection",
-      "fact": "GitHub branches/main protected:false and rulesets [] on 2026-10-15",
+      "fact": "RESOLVED: GitHub branch main protected:true on 2026-10-18; active rule Protect main id 25214872 created 2026-10-16, pull_request requirement, deletion and non_fast_forward blocked, no bypass actors.",
       "whyItMatters": "Untrusted writers would risk main",
-      "resolution": "Repo admin must configure protection, then independent check",
+      "resolution": "Resolved via GitHub repository rule Protect main; recheck rule before granting future write privileges.",
       "relatedStep": "AIOS-02.1"
     },
     {
@@ -716,11 +717,9 @@
     "lastVerifiedBaseline": "75d72a8e546005da7bca3284d80a7d6cdbe72aef",
     "activeBriefVersion": "AI_OFFICE_20261015_V1",
     "currentPhase": "AIOS-02",
-    "nextStepId": "AIOS-02.1",
-    "lastVerifiedTechnicalState": "149 JavaScript CI tests PASS; 19 synthetic Constitution tests PASS + 3 privacy/permissions tests PASS; PRIVATE original SHA-256 and 152 sections verified; main branch protection BLOCKED",
-    "pendingApprovals": [
-      "GITHUB_OWNER_MUST_CREATE_MAIN_BRANCH_PROTECTION_RULE"
-    ],
+    "nextStepId": "AIOS-02.2",
+    "lastVerifiedTechnicalState": "GitHub main protection VERIFIED 2026-10-18 active ruleset 25214872; private v1.9 SHA + 152 clauses verified in prior session, persistent Director binding not yet implemented; prior 149 Node + 22 Constitution tests passing at their checkpoint",
+    "pendingApprovals": [],
     "noInFlightProviderCalls": true,
     "preservePreviousDecisionIds": true,
     "taskLedgerWriteScope": "tools/ai-office/masterplan-ledger.json + docs/ai-office/MASTERPLAN.md + tests",
@@ -739,6 +738,11 @@
         "version": "1.0.2",
         "change": "Private canonical original independently checked and local security gates strengthened; 02.2 partially verified, 02.1 remains blocked by GitHub admin-only settings",
         "sourceCommit": "ef55faa4f76d66337b7a2a4c738001537a084cc9"
+      },
+      {
+        "version": "1.0.3",
+        "change": "Reconciled successful Work-admin main protection with authoritative GitHub API; AIOS-02.1 VERIFIED, AIOS-02.2 still PARTIALLY_VERIFIED; no changes to app, frozen or agent qualifications",
+        "sourceCommit": "d986641d658f33e11bfb3dbd2de0a081e6352025"
       }
     ]
   }
