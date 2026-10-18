@@ -1,6 +1,6 @@
 {
   "schema": "mealup-food-portrait-deterministic-gauge-v1",
-  "status": "CANONICAL_EXEMPLAR_RECOVERED",
+  "status": "DYNAMIC_COMPONENT_CANDIDATE_QA_PASS",
   "reference": {
     "role": "STYLE_ONLY",
     "file": "Foto 1.jpg",
@@ -15,6 +15,19 @@
       "source": "docs/food-portrait-pipeline/candidates/a07-prosciutto-melone-plate-approved-001.webp",
       "sourceCropPixels": [700, 60, 1210, 480],
       "pixelIdentity": "EXACT_DECODED_CROP_NO_REDRAW"
+    },
+    "shell": {
+      "path": "tools/food-portrait-pipeline/assets/gauge-shell-canonical.png",
+      "sha256": "979233ed80f8e943633e300cb5977eb3b4fc715a2239b01dc4ab4564164e594b",
+      "width": 510,
+      "height": 420
+    },
+    "needle": {
+      "path": "tools/food-portrait-pipeline/assets/gauge-needle-canonical.png",
+      "sha256": "0f2a0ab1081f9d6f8883cae3e261b98187ac9324e75c96a28f2d539a6df5e7df",
+      "width": 510,
+      "height": 420,
+      "pivotPx": [248, 232]
     }
   },
   "calibration": {
@@ -22,7 +35,13 @@
     "rangeKcal": [0, 1000],
     "anglesDegrees": [-60, 60],
     "overflow": "CLAMP_NEEDLE_KEEP_EXACT_VALUE",
-    "zones": ["GREEN", "LIME", "YELLOW", "ORANGE", "RED"]
+    "zones": ["GREEN", "LIME", "YELLOW", "ORANGE", "RED"],
+    "visualTransform": "PIECEWISE_MONOTONIC_CALIBRATED_TO_PHYSICAL_ARC",
+    "anchors": [
+      {"kcal": 95, "contractAngleDegrees": -48.6, "rotationFromA07Degrees": -14},
+      {"kcal": 270, "contractAngleDegrees": -27.6, "rotationFromA07Degrees": 0},
+      {"kcal": 975, "contractAngleDegrees": 57, "rotationFromA07Degrees": 121}
+    ]
   },
   "value": {
     "exactRecipeKcalRequired": true,
@@ -32,6 +51,13 @@
   "approval": {
     "automatic": false,
     "visualAuthority": "INHERITED_FROM_FROZEN_A07_FOR_EXEMPLAR_ONLY",
-    "componentization": "PENDING_PIXEL_IDENTITY_QA"
+    "componentization": "CANDIDATE_QA_PASS_OWNER_REVIEW_REQUIRED"
+  },
+  "motion": {
+    "durationMs": 220,
+    "easing": "cubic-bezier(0.2,0,0,1)",
+    "overshoot": false,
+    "loop": false,
+    "reducedMotionDurationMs": 0
   }
 }

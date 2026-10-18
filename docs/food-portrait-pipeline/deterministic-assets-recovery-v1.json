@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-deterministic-assets-recovery-v1",
   "date": "2026-10-18",
-  "status": "CANONICAL_GAUGE_EXEMPLAR_RECOVERED_COMPONENTIZATION_PENDING",
+  "status": "DYNAMIC_GAUGE_CANDIDATE_QA_PASS_OWNER_REVIEW_REQUIRED",
   "scope": "isolated branch only; no main, tester, PWA, deployment or do01",
   "vesselPlate": {
     "method": "EXACT_CROP_FROM_CANONICAL_FROZEN_BOARD",
@@ -44,9 +44,20 @@
     },
     "qa": {
       "technical": "PASS",
-      "visual": "PASS_PIXEL_IDENTICAL_TO_EXISTING_FROZEN_A07_GAUGE",
-      "owner": "EXISTING_A07_APPROVAL_INHERITED_FOR_EXEMPLAR_ONLY",
+      "visual": "PASS_95_GREEN_270_APPROVED_SOURCE_975_RED",
+      "owner": "CANONICAL_MASTER_APPROVED_DYNAMIC_LAYER_REVIEW_REQUIRED",
       "automaticFreeze": false
+    },
+    "dynamicCandidate": {
+      "shell": "tools/food-portrait-pipeline/assets/gauge-shell-canonical.png",
+      "needle": "tools/food-portrait-pipeline/assets/gauge-needle-canonical.png",
+      "motionContract": "tools/food-portrait-pipeline/deterministic-gauge-motion.cjs",
+      "previews": [
+        "docs/food-portrait-pipeline/candidates/deterministic-gauge-motion-95.png",
+        "docs/food-portrait-pipeline/candidates/deterministic-gauge-motion-270.png",
+        "docs/food-portrait-pipeline/candidates/deterministic-gauge-motion-975.png"
+      ],
+      "behavior": "one 220ms non-overshooting transition; zero duration under reduced motion; exact kcal text retained above 1000 while needle clamps at red maximum"
     }
   },
   "recordedCorrections": [
@@ -54,6 +65,9 @@
     "Rejected second geometry because moving the pivot broke angular alignment with the colored zones.",
     "The deterministic SVG redraw was rejected by the owner because it did not match the gauges in approved Food Portraits.",
     "Both SVG assets were withdrawn; the replacement is an exact decoded crop from the owner-approved FROZEN a07 asset.",
-    "Dynamic shell, needle and value componentization remains blocked until pixel-identity QA against this canonical exemplar."
+    "The first dynamic calibration failed visual QA because 975 kcal landed in orange; it was not accepted.",
+    "A single symmetric correction then pushed 95 kcal below green; it was not accepted.",
+    "The physical arc is asymmetric, so the final candidate uses a piecewise monotonic visual transform anchored at 95, 270 and 975 kcal while preserving the FROZEN logical scale.",
+    "Dynamic shell, needle and value componentization passed technical and three-point visual QA but remains blocked until explicit owner approval."
   ]
 }
