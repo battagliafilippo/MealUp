@@ -108,7 +108,9 @@ function Assert-StrictPrivateFile([string]$candidate) {
     throw 'BLOCKED_PRIVATE_FILE_REPARSE'
   }
   $acl = Get-Acl -LiteralPath $absolute
-  if ($acl.GetOwner([System.Security.Principal.SecurityIdentifier]).Value -ne $ownerSid.Value) {
+  # Elevated Windows tokens can legitimately create files owned by BUILTIN\\Administrators.
+  # Both SYSTEM and local Administrators are already explicit trusted host principals.
+  if ($allowed -notcontains $acl.GetOwner([System.Security.Principal.SecurityIdentifier]).Value) {
     throw 'BLOCKED_UNEXPECTED_FILE_OWNER'
   }
   $foundUser = $false
