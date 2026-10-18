@@ -59,10 +59,15 @@ function callPinnedScript(which){
  const full=path.resolve(ROOT,rel);
  if(!full.startsWith(ROOT+path.sep)||!fs.statSync(full).isFile())
    throw Error('UNSAFE_OR_MISSING_RUNNER');
+ const safeEnv={PATH:process.env.PATH||'',CI:'true',GITHUB_REF_NAME:BRANCH,
+  MEALUP_PYTHON_EXECUTABLE:process.env.MEALUP_PYTHON_EXECUTABLE||''};
+ if(process.platform==='win32')Object.assign(safeEnv,{
+  SystemRoot:process.env.SystemRoot||'',WINDIR:process.env.WINDIR||'',
+  LOCALAPPDATA:process.env.LOCALAPPDATA||'',USERPROFILE:process.env.USERPROFILE||'',
+  PSModulePath:process.env.PSModulePath||'',ComSpec:process.env.ComSpec||''});
  const run=spawnSync(process.execPath,[full],{cwd:ROOT,encoding:'utf8',
   timeout:which==='qa'?120000:30000,maxBuffer:256*1024,
-  env:{PATH:process.env.PATH||'',CI:'true',GITHUB_REF_NAME:BRANCH,
-   MEALUP_PYTHON_EXECUTABLE:process.env.MEALUP_PYTHON_EXECUTABLE||''}});
+  env:safeEnv});
  let value;
  try{value=JSON.parse((run.stdout||'').trim());}catch(_){value=null;}
  const ok=!run.error&&run.status===0&&value?.status==='PASS'&&
