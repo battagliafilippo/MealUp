@@ -49,6 +49,6 @@ Il test non carica la Costituzione, non usa credenziali e crea/elimina soltanto 
 
 **WINDOWS-03 (non avviato):** stabilire una modalità di avvio locale e backup indipendente senza privilegi elevati né servizi a pagamento; l'avvio automatico richiede autorizzazione esplicita perché può consumare risorse PC.
 
-**WINDOWS-04 (installazione privata e restore verificati; riavvio fisico ancora aperto):** sede NTFS primaria, originale canonico, percorso Director read-only e snapshot/restore sono stati collaudati sul PC autorizzato. L'area temporanea di restore è stata rimossa; il test non equivale ancora a una prova dopo riavvio fisico né a disaster recovery su altro disco.
+**WINDOWS-04 (installazione privata, restore e riavvio fisico verificati):** sede NTFS primaria, originale canonico, percorso Director read-only e snapshot/restore sono stati collaudati sul PC autorizzato. Dopo il riavvio reale, ACL, hash, journal, mailbox e snapshot sono rimasti validi; una nuova catena sulla baseline corrente è PASS e la ripetizione ha riusato Engineering e QA. L'area temporanea di restore è stata rimossa. Non è ancora disaster recovery su altro disco.
 
-Non dichiarare `AIOS-02.2 VERIFIED` o otto agenti AI attivi prima del test end-to-end sul PC autorizzato. Il budget aggiuntivo resta 0 EUR.
+Non dichiarare `AIOS-02.2 VERIFIED` o otto agenti AI attivi prima di autenticare le identità operative e completare il backup indipendente. Il budget aggiuntivo resta 0 EUR.

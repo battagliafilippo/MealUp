@@ -537,11 +537,11 @@
             "LOCAL_PRIVATE_ORIGINAL_METADATA_SNAPSHOT_RESTORE_2026_10_18",
             "https://github.com/battagliafilippo/MealUp/actions/runs/39157572574",
             "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/WINDOWS-PRIVATE-HOST-BOOTSTRAP.md",
-            "https://github.com/battagliafilippo/MealUp/actions/runs/39158008874"
+            "https://github.com/battagliafilippo/MealUp/actions/runs/39158008874",
+            "PRIVATE_WINDOWS_PHYSICAL_REBOOT_ACL_HASH_SOURCE_CHAIN_PASS_2026_10_18"
           ],
           "blockingReasons": [
-            "Windows native NTFS bootstrap and file ACL checks verified on genuine Windows CI (12 synthetic tests), but Node/Python Director bridge must still be integrated with fail-closed native ACL checks",
-            "No user PC installation or private-original positive Windows end-to-end run has taken place",
+            "Private Windows source binding survives a physical reboot, but no independent encrypted backup exists",
             "Persistent ChatGPT Library binding and authentication of external AI specialist roles not implemented"
           ]
         },
@@ -618,11 +618,12 @@
             "https://github.com/battagliafilippo/MealUp/actions/runs/39135454458",
             "PRIVATE_LOCAL_RECOVERY_5_EVENTS_3_MESSAGES_NO_REPEAT_2026_10_18",
             "https://github.com/battagliafilippo/MealUp/actions/runs/39157572574",
-            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/WINDOWS-PRIVATE-HOST-BOOTSTRAP.md"
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/WINDOWS-PRIVATE-HOST-BOOTSTRAP.md",
+            "PRIVATE_WINDOWS_REBOOT_RESUME_15_EVENTS_12_MESSAGES_REUSED_ENGINEERING_QA_2026_10_18"
           ],
           "blockingReasons": [
-            "POSIX private original snapshot/restore positive pilot verified; Windows directory ACL groundwork tested, Windows Node/Python restore not yet ported/verified",
-            "User-owned host not installed, service and off-machine encrypted backup absent",
+            "Windows private host, original-source chain, restore and physical reboot resume verified; off-machine encrypted backup absent",
+            "No automatic service is installed; execution remains explicit while the PC is on",
             "Provider quota control and remote authenticated identities missing"
           ]
         },
@@ -801,9 +802,9 @@
       "id": "UNK-007",
       "status": "OPEN",
       "topic": "Durable private host and Windows ACL",
-      "fact": "CEO approved existing Windows PC as future host. Windows genuine CI passed 12 tests including container ACL, individual file ACL, out-of-tree denial and Everyone denial. Node/Python secure file-level integration and deployment remain open.",
+      "fact": "CEO approved and installed the private host on the existing Windows PC. Native NTFS, Node/Python source binding, authentic-source execution, metadata restore and physical-reboot resume are verified.",
       "whyItMatters": "User wants unattended agents at 0 EUR but continuity requires trusted disk, private source and OS-level access controls",
-      "resolution": "Connect Verify/VerifyFile to Director native Windows runtime, prove private original source positive on controlled host, then obtain user authorized PC install and restart/backup check",
+      "resolution": "Add an independent encrypted backup and authenticated agent identities without exposing the original or enabling an always-on service",
       "relatedStep": "AIOS-02.2"
     }
   ],
@@ -812,7 +813,7 @@
     "activeBriefVersion": "AI_OFFICE_20261015_V1",
     "currentPhase": "AIOS-02",
     "nextStepId": "AIOS-02.2",
-    "lastVerifiedTechnicalState": "Private Windows host installed and authentic v1.9 path PASS: 67 active rules, Engineering PASS, Windows QA 150/150, metadata snapshot/restore 10 events and 9 messages, resumed with reusedEngineering/reusedQA true. Original never uploaded. Physical reboot, independent encrypted backup and agent identity remain open.",
+    "lastVerifiedTechnicalState": "Private Windows host survived a physical reboot with NTFS ACL, original hash, journal, mailbox and snapshot intact. Current-baseline authentic v1.9 path PASS: 67 active rules, Engineering PASS, QA PASS, 15 events and 12 messages; immediate rerun reused Engineering and QA. Original never uploaded. Independent encrypted backup and authenticated agent identities remain open; no always-on service.",
     "pendingApprovals": [],
     "noInFlightProviderCalls": true,
     "preservePreviousDecisionIds": true,
@@ -897,6 +898,11 @@
         "version": "1.0.15",
         "change": "Installed the private NTFS host on the authorized Windows PC and verified authentic-source Director-to-Engineering-to-QA execution plus metadata-only restore/resume. Preserved two blocked attempts and keeps reboot, independent backup and authenticated agent identities open.",
         "sourceCommit": "6acef223dbc6c1443e727f2dab6bfc70a6f4b0cd"
+      },
+      {
+        "version": "1.0.16",
+        "change": "Verified persistence across a physical Windows reboot: NTFS ACL, canonical source hash, journal, mailbox and snapshot intact; current-baseline source-gated Engineering and QA PASS, then idempotent reuse. Independent encrypted backup and authenticated agent identities remain open.",
+        "sourceCommit": "158efaa1e9ff07d2947f9ba762b36adf1fccaf63"
       }
     ]
   }

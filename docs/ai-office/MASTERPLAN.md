@@ -121,7 +121,13 @@ Con autorizzazione esplicita del CEO è stata predisposta la sede privata persis
 
 Il journal conserva anche due tentativi precedenti correttamente bloccati: prima il controllo POSIX residuo nell'estrattore Python, poi l'assenza di `LOCALAPPDATA` nell'ambiente minimizzato del QA. Root cause e prevenzione sono ora coperte da [CI Costituzione](https://github.com/battagliafilippo/MealUp/actions/runs/39159417829), [CI NTFS Node/Python](https://github.com/battagliafilippo/MealUp/actions/runs/39160464081) e [regressione Engineering→QA](https://github.com/battagliafilippo/MealUp/actions/runs/39160464138).
 
-Snapshot metadata-only creato con **10 eventi e 9 messaggi**, senza originale; restore in una seconda area NTFS vuota riuscito dopo nuova verifica della fonte. La ripresa ha restituito `reusedEngineering:true` e `reusedQA:true`, senza doppia esecuzione; l'area temporanea di restore è stata poi eliminata, lasciando intatti sede primaria e snapshot. **Limiti:** non è stato simulato un riavvio fisico del PC, non esiste backup cifrato su supporto indipendente, servizio automatico o identità crittografica di agenti. Il PC lavora soltanto quando acceso e il Director viene avviato esplicitamente. `AIOS-02.2` e `AIOS-03.2` restano PARTIALLY_VERIFIED.
+Snapshot metadata-only creato con **10 eventi e 9 messaggi**, senza originale; restore in una seconda area NTFS vuota riuscito dopo nuova verifica della fonte. La ripresa ha restituito `reusedEngineering:true` e `reusedQA:true`, senza doppia esecuzione; l'area temporanea di restore è stata poi eliminata, lasciando intatti sede primaria e snapshot.
+
+## Prova dopo riavvio fisico Windows — 18/10/2026
+
+Dopo il riavvio reale del PC sono stati nuovamente verificati ACL NTFS della sede e dello snapshot, hash dell'originale canonico e persistenza del journal e della mailbox. Il Director ha quindi eseguito sulla baseline corrente `158efaa1e9ff07d2947f9ba762b36adf1fccaf63` una nuova catena con **67 regole attive**, Engineering PASS e QA PASS, zero richieste esterne, zero scritture all'app, zero deploy e costo aggiuntivo 0 EUR. Il secondo avvio sulla stessa baseline ha restituito `reusedEngineering:true` e `reusedQA:true`, mantenendo **15 eventi e 12 messaggi**: la ripresa dopo riavvio è quindi provata senza ripetere gli effetti già registrati.
+
+**Limiti residui:** non esiste un backup cifrato su supporto indipendente, servizio automatico o identità crittografica di agenti. Il PC lavora soltanto quando acceso e il Director viene avviato esplicitamente. La prova riguarda script interni deterministici, non agenti AI autonomi. `AIOS-02.2` e `AIOS-03.2` restano PARTIALLY_VERIFIED.
 
 ## Recupero e prossimo incarico
 
