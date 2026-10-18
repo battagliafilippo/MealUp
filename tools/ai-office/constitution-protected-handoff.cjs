@@ -2,6 +2,7 @@
 // One protected handoff path: dynamic Skill selection -> exact v1.9 packet.
 // It PREPARES a scoped work order; it does not execute an AI agent or QA.
 const fs=require('node:fs');
+const crypto=require('node:crypto');
 const os=require('node:os');
 const path=require('node:path');
 const {spawnSync}=require('node:child_process');
@@ -53,13 +54,16 @@ function createProtectedHandoff({task,assignment,sourcePath}={}){
   try{data=JSON.parse(fs.readFileSync(packet,'utf8'));}catch(_){
     return {status:'BLOCKED_UNREADABLE_PACKET',executesAgent:false,apiCalls:0};
   }
+  // Digest binds the private exact-rule packet to all downstream handoffs.
+  // A digest is NOT proof of real agent identity or CEO consent.
+  const packetSha256=crypto.createHash('sha256').update(fs.readFileSync(packet)).digest('hex');
   return {
     status:'VERIFIED_RULE_PACKET_PREPARED_NOT_EXECUTED',
     taskId:data.taskId,roleId:data.roleId,version:data.canonicalVersion,
     originalSha256:data.canonicalSha256,activeRuleCount:data.activeRuleIds.length,
     handoffRuleCount:data.handoffRuleIds.length,
     selectedSkills:data.selectedSkillIds,nextStep:data.recovery.nextAction,
-    stepCount:data.steps.length,privatePacketPath:packet,
+    stepCount:data.steps.length,privatePacketPath:packet,packetSha256,
     requiresIndependentAuthorizationCheck:true,
     executesAgent:false,apiCalls:0,deploys:0,filesChangedInProject:0
   };
