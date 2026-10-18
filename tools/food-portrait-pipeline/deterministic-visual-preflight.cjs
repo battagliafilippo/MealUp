@@ -28,7 +28,7 @@ function preflight({root,vesselId,recipeId,kcal,expectedRecipeAssetSha256}){
  if(!fs.existsSync(contractPath))blockers.push('GAUGE_CONTRACT_MISSING');
  else {
   const contract=read(contractPath);evidence.gaugeContract={schema:contract.schema,status:contract.status};
-  for(const role of ['shell','needle']){
+  for(const role of ['canonicalMaster']){
    const asset=contract.assets?.[role],assetPath=asset?.path&&path.join(root,asset.path);
    if(!assetPath||!fs.existsSync(assetPath))blockers.push(`GAUGE_${role.toUpperCase()}_MISSING`);
    else {
@@ -40,7 +40,9 @@ function preflight({root,vesselId,recipeId,kcal,expectedRecipeAssetSha256}){
     contract.calibration?.rangeKcal?.[0]!==0||contract.calibration?.rangeKcal?.[1]!==1000||
     contract.calibration?.anglesDegrees?.[0]!==-60||contract.calibration?.anglesDegrees?.[1]!==60)
    blockers.push('GAUGE_NONCANONICAL_FOOD_PORTRAIT_CALIBRATION');
-  if(contract.status!=='FROZEN_OWNER_APPROVED')blockers.push('GAUGE_OWNER_APPROVAL_PENDING');
+  if(contract.status!=='CANONICAL_EXEMPLAR_RECOVERED'||
+    contract.approval?.componentization!=='FROZEN_PIXEL_IDENTICAL')
+   blockers.push('GAUGE_COMPONENTIZATION_PENDING');
  }
  const state=gaugeState(kcal);evidence.foodPortraitGauge=state;
  if(!fs.existsSync(recipePath))blockers.push('FROZEN_RECIPE_MANIFEST_MISSING');

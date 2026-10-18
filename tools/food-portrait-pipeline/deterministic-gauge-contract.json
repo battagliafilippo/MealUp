@@ -1,25 +1,20 @@
 {
   "schema": "mealup-food-portrait-deterministic-gauge-v1",
-  "status": "CANDIDATE_OWNER_REVIEW_REQUIRED",
+  "status": "CANONICAL_EXEMPLAR_RECOVERED",
   "reference": {
     "role": "STYLE_ONLY",
     "file": "Foto 1.jpg",
     "sha256": "ee3edfb55a435811fabad7c43c20185f42ae3deb36d990c73f343b12ec043d88"
   },
   "assets": {
-    "shell": {
-      "path": "tools/food-portrait-pipeline/assets/gauge-shell-frozen-v1.svg",
-      "sha256": "1590ee285fbf6663909a22c0b2cdec2caf095a20bc42e8484cfaf89d45842f1a",
-      "width": 600,
-      "height": 480
-    },
-    "needle": {
-      "path": "tools/food-portrait-pipeline/assets/gauge-needle-frozen-v1.svg",
-      "sha256": "bdbd0237c33bfc463702dfe3b49051a961917991d47acf1b1141eced1919a7de",
-      "width": 600,
-      "height": 480,
-      "pivot": [300, 260],
-      "neutralDirection": "UP"
+    "canonicalMaster": {
+      "path": "tools/food-portrait-pipeline/assets/gauge-canonical-a07-master.png",
+      "sha256": "ad89a7ff89ee8ed079082d67615e0009ba5233598dee291b7eb1d1bf11645d53",
+      "width": 510,
+      "height": 420,
+      "source": "docs/food-portrait-pipeline/candidates/a07-prosciutto-melone-plate-approved-001.webp",
+      "sourceCropPixels": [700, 60, 1210, 480],
+      "pixelIdentity": "EXACT_DECODED_CROP_NO_REDRAW"
     }
   },
   "calibration": {
@@ -36,6 +31,7 @@
   },
   "approval": {
     "automatic": false,
-    "ownerVisualApprovalRequired": true
+    "visualAuthority": "INHERITED_FROM_FROZEN_A07_FOR_EXEMPLAR_ONLY",
+    "componentization": "PENDING_PIXEL_IDENTITY_QA"
   }
 }

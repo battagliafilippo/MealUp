@@ -917,3 +917,12 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - QA tecnico finale: **PASS**. QA visivo finale: **PASS_CANDIDATE_ONLY** sul pilot a07, 270 kcal, -27,6°, zona LIME.
 - Preflight: i tre blocchi precedenti sono rimossi; resta soltanto `GAUGE_OWNER_APPROVAL_PENDING`. Nessun freeze automatico.
 - Evidenza completa: `docs/food-portrait-pipeline/deterministic-assets-recovery-v1.json`.
+
+### Correzione proprietario — gauge non conforme
+
+- Esito proprietario sul primo candidato deterministico: **REJECTED**, perché forma, proporzioni, pivot, disco kcal e pulsante erano diversi dai gauge dei FO Portrait approvati.
+- Causa: ricostruzione SVG ex novo invece di recupero del componente visivo esistente.
+- Azione: ritirati `gauge-shell-frozen-v1.svg`, `gauge-needle-frozen-v1.svg` e il relativo preview HTML.
+- Nuovo master: crop decodificato esatto `[700,60,1210,480]` dal FROZEN `a07-prosciutto-melone-plate-approved-001.webp`; nessun ridisegno, ImageGen o alterazione pixel.
+- SHA-256 master/preview: `ad89a7ff89ee8ed079082d67615e0009ba5233598dee291b7eb1d1bf11645d53`.
+- Nuovo stato preflight: `GAUGE_COMPONENTIZATION_PENDING`. Il master visivo è canonico; la separazione dinamica di shell, lancetta e valore non è ancora approvata né congelata.
