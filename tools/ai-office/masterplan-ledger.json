@@ -1,6 +1,6 @@
 {
   "schema": "MEALUP_AI_OFFICE_MASTERPLAN_V1",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "createdAt": "2026-10-15",
   "canonicalScope": "AI_OFFICE_LAB_ONLY",
   "branch": "experiment/recipe-visual-agents",
@@ -536,12 +536,13 @@
             "https://github.com/battagliafilippo/MealUp/actions/runs/39135660948",
             "LOCAL_PRIVATE_ORIGINAL_METADATA_SNAPSHOT_RESTORE_2026_10_18",
             "https://github.com/battagliafilippo/MealUp/actions/runs/39157572574",
-            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/WINDOWS-PRIVATE-HOST-BOOTSTRAP.md"
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/WINDOWS-PRIVATE-HOST-BOOTSTRAP.md",
+            "https://github.com/battagliafilippo/MealUp/actions/runs/39158008874"
           ],
           "blockingReasons": [
-            "Windows real-runner directory ACL bootstrap verified, but Node journal, Python private packet and source file still require Windows file-level ACL integration and positive end-to-end tests",
-            "Actual user's Windows PC has not been accessed or configured; PC-host choice approved but secure installation awaits completion of Windows integration",
-            "Persistent ChatGPT Library binding and authenticated external agents not implemented"
+            "Windows native NTFS bootstrap and file ACL checks verified on genuine Windows CI (12 synthetic tests), but Node/Python Director bridge must still be integrated with fail-closed native ACL checks",
+            "No user PC installation or private-original positive Windows end-to-end run has taken place",
+            "Persistent ChatGPT Library binding and authentication of external AI specialist roles not implemented"
           ]
         },
         {
@@ -800,9 +801,9 @@
       "id": "UNK-007",
       "status": "OPEN",
       "topic": "Durable private host and Windows ACL",
-      "fact": "CEO authorized use of own Windows PC as planned private host. Windows NTFS container bootstrap Provision/Verify validated with 9 synthetic ACL tests on genuine Windows GitHub runner; not installed locally and Node/Constitution file ACL integration not yet done.",
+      "fact": "CEO approved existing Windows PC as future host. Windows genuine CI passed 12 tests including container ACL, individual file ACL, out-of-tree denial and Everyone denial. Node/Python secure file-level integration and deployment remain open.",
       "whyItMatters": "User wants unattended agents at 0 EUR but continuity requires trusted disk, private source and OS-level access controls",
-      "resolution": "WINDOWS-02 file ACL plus Node/Python fail-closed bridge; Windows positive integration QA; then supervised owner-PC installation, local restart and independent backup",
+      "resolution": "Connect Verify/VerifyFile to Director native Windows runtime, prove private original source positive on controlled host, then obtain user authorized PC install and restart/backup check",
       "relatedStep": "AIOS-02.2"
     }
   ],
@@ -811,7 +812,7 @@
     "activeBriefVersion": "AI_OFFICE_20261015_V1",
     "currentPhase": "AIOS-02",
     "nextStepId": "AIOS-02.2",
-    "lastVerifiedTechnicalState": "User Windows PC approved as target host, not yet accessed. Native Windows NTFS bootstrap + 9 positive/negative CI tests PASS (39157572574); Node 197 regression CI and Engineering→QA PASS at checkpoint; original v1.9 never exported to GitHub. Next: file ACL bridge to Director, then user-machine supervised installation.",
+    "lastVerifiedTechnicalState": "Windows NTFS Provision/Verify/VerifyFile 12/12 synthetic native-Windows CI tests PASS (39158008874); existing Node regression and read-only Engineering→QA PASS at checkpoint; no user PC access, no private original uploaded, no Windows runtime integrated. Next: Windows fail-closed Node/Python adapter.",
     "pendingApprovals": [],
     "noInFlightProviderCalls": true,
     "preservePreviousDecisionIds": true,
@@ -876,6 +877,11 @@
         "version": "1.0.11",
         "change": "CEO approved planned existing Windows PC host; built Windows NTFS-only private directory bootstrap and 9 true Windows CI ACL tests PASS. No installation on user PC, no original document transfer, Node/Python Windows bindings still blocked; 02.2 stays PARTIALLY_VERIFIED.",
         "sourceCommit": "cc216800f582ece731c8faf0fc5fa6ce7ec9ef1b"
+      },
+      {
+        "version": "1.0.12",
+        "change": "Extended verified Windows private-host bootstrap to native file ACL checks, rejecting Everyone and paths outside managed folders; 12/12 Windows CI tests PASS. Windows Director Node/Python bridge and user PC installation remain blocked.",
+        "sourceCommit": "7cdeeaf29ab074f9536239da7f337ca34524d663"
       }
     ]
   }
