@@ -103,6 +103,16 @@ test('step completion requires traceable evidence; QA is independent',()=>{
   assert.equal(s.read().events.length,3);
  }finally{fs.rmSync(p,{recursive:true,force:true});}
 });
+test('Director cannot report to CEO without a prior independent QA receipt',()=>{
+ const p=privateDir();
+ try{
+  const s=storeAt(p);
+  assert.throws(()=>s.append(event('C-END','RETURN_TO_CEO','DIRECTOR',
+    {resultStatus:'PASS'})),/CEO_REPORT_REQUIRES_INDEPENDENT_QA/);
+  assert.throws(()=>s.append(event('C-QA','QA_REPORTED','QA',
+    {resultStatus:'PASS'})),/QA_REQUIRES_RECORDED_STEP/);
+ }finally{fs.rmSync(p,{recursive:true,force:true});}
+});
 test('an active lock refuses concurrent journal writes without modifying history',()=>{
  const p=privateDir();
  try{
