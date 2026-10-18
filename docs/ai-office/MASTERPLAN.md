@@ -75,6 +75,12 @@ Aggiunto `tools/ai-office/director-private-mailbox.cjs`: mailbox privata e persi
 
 Il registro canonico classifica `AIOS-03.2` come `PARTIALLY_VERIFIED`, mantenendo `AIOS-02.2` come prossimo gate non concluso. La Costituzione v1.9 resta privata e non è disponibile al runtime GitHub.
 
+## Checkpoint 18/10/2026 — pacchetto costituzionale legato ai messaggi
+
+Il percorso preparazione del task -> Constitution v1.9 originale -> Director journal -> mailbox privata ora usa l'hash SHA-256 **del pacchetto preciso generato**, non un semplice flag `sourceVerified:true`. Un'offerta priva di `taskPacketSha`, con hash differente, baseline differente o Active Brief diverso viene respinta. Questo migliora la continuità causale e riduce i falsi handoff. Prove: [181 test Node riusciti e verifiche di continuità](https://github.com/battagliafilippo/MealUp/actions/runs/39129081580) e [run di regressione del Masterplan](https://github.com/battagliafilippo/MealUp/actions/runs/39129273058).
+
+La lettura separata dell'originale v1.9 privato in questa sessione ha confermato lo SHA canonico e **152 sezioni**, senza esporre il contenuto. I pacchetti con estratti restano fuori dal repository pubblico. **NON equivale ancora** ad accesso ricorrente del Director alla Libreria privata, ad autenticazione crittografica di agenti terzi o a esecuzione automatica di AI specialiste. `AIOS-02.2` e `AIOS-03.2` rimangono PARTIALLY_VERIFIED; il prossimo gate è un runtime privato durevole con vero original-source binding e identità verificate. Nessuna modifica a MealUp, Food Portrait o FROZEN.
+
 ## Recupero e prossimo incarico
 
 - Conservare **tutti gli ID**, le decisioni `DEC`, i problemi `UNK`, i checkpoint e i riferimenti all'evidenza. Usare Git come cronologia delle versioni del JSON, non riscrivere decisioni approvate senza nuova decisione esplicita e traccia di sostituzione.
