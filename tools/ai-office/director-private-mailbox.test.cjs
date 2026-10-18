@@ -4,9 +4,10 @@ const test=require('node:test'),assert=require('node:assert/strict'),
 const {mailboxAt}=require('./director-private-mailbox.cjs');
 const {storeAt}=require('./director-private-ledger.cjs');
 const SHA='51043574d188c085de51282e50f8784d8f5cf779300891dee0fe8014414470eb';
+const PACKET='b'.repeat(64);
 const privateDir=()=>{const p=fs.mkdtempSync(path.join(os.tmpdir(),'mealup-office-mail-'));fs.chmodSync(p,0o700);return p};
 const offer=()=>({id:'MSG-1',taskId:'T-1',kind:'OFFER',actor:'DIRECTOR',
- record:{handoffId:'H-1',toRole:'ENGINEERING',scope:'LAB_READ_ONLY',briefVersion:'B-1',baselineId:'SHA-1'}});
+ record:{handoffId:'H-1',toRole:'ENGINEERING',scope:'LAB_READ_ONLY',briefVersion:'B-1',baselineId:'SHA-1',taskPacketSha:PACKET}});
 const result=()=>({id:'MSG-2',taskId:'T-1',kind:'SPECIALIST_RESULT',actor:'ENGINEERING',
  record:{handoffId:'H-1',evidenceRef:'CI-READ-ONLY-1',resultStatus:'PARTIAL'}});
 const qa=()=>({id:'MSG-3',taskId:'T-1',kind:'QA_RECEIPT',actor:'QA',
@@ -14,7 +15,7 @@ const qa=()=>({id:'MSG-3',taskId:'T-1',kind:'QA_RECEIPT',actor:'QA',
 function preflight(p){
  storeAt(p).append({id:'GATE-1',taskId:'T-1',type:'RULE_PREFLIGHT_READY',actor:'DIRECTOR',
   record:{sourceVerified:true,constitutionSha:SHA,roleId:'ENGINEERING',
-  scope:'LAB_READ_ONLY',briefVersion:'B-1',baselineId:'SHA-1'}});
+  scope:'LAB_READ_ONLY',briefVersion:'B-1',baselineId:'SHA-1',taskPacketSha:PACKET}});
 }
 test('no Director offer without recorded constitution preflight',()=>{
  const p=privateDir();try{
@@ -114,5 +115,25 @@ test('locks block concurrent writes, private directory required',()=>{
   assert.throws(()=>mailboxAt(p).append(offer()),/MAILBOX_BUSY/);
   assert.equal(mailboxAt(p).read().items.length,0);
   assert.throws(()=>mailboxAt(path.resolve(__dirname,'../..')),/UNSAFE_PRIVATE_STORAGE/);
+ }finally{fs.rmSync(p,{recursive:true,force:true})}
+});
+
+test('cannot offer any job without exact private packet digest',()=>{
+ const p=privateDir();try{preflight(p);const m=mailboxAt(p);
+  const missing=offer();delete missing.record.taskPacketSha;
+  assert.throws(()=>m.append(missing),/PRIVATE_TASK_PACKET_SHA_REQUIRED/);
+  const fake=offer();fake.record.taskPacketSha='c'.repeat(64);
+  assert.throws(()=>m.append(fake),/CONSTITUTION_PREFLIGHT_REQUIRED/);
+  const incorrect=offer();incorrect.record.taskPacketSha='bad';
+  assert.throws(()=>m.append(incorrect),/PRIVATE_TASK_PACKET_SHA_REQUIRED/);
+  assert.equal(m.read().items.length,0);
+ }finally{fs.rmSync(p,{recursive:true,force:true})}
+});
+test('new handoff cannot reuse a stale packet digest after scope changes',()=>{
+ const p=privateDir();try{preflight(p);const m=mailboxAt(p);
+  const fresh=offer();fresh.record.baselineId='DIFFERENT_BASELINE';
+  assert.throws(()=>m.append(fresh),/CONSTITUTION_PREFLIGHT_REQUIRED/);
+  const changed=offer();changed.record.taskPacketSha='d'.repeat(64);
+  assert.throws(()=>m.append(changed),/CONSTITUTION_PREFLIGHT_REQUIRED/);
  }finally{fs.rmSync(p,{recursive:true,force:true})}
 });
