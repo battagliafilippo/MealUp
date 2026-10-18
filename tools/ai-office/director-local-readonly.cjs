@@ -77,9 +77,10 @@ function runPrivateOffice({sourcePath,privateDirectory,expectedBaseline}={}){
  if(!sha||sha!==expectedBaseline)return safeResult('BLOCKED_STALE_BRANCH_OR_BASELINE');
  if(!id(expectedBaseline?.slice(0,16)))return safeResult('BLOCKED_INVALID_BASELINE');
  if(!cleanCheckout())return safeResult('BLOCKED_DIRTY_OR_INACCESSIBLE_LAB_CHECKOUT');
- try {
-  assertPrivateFile(sourcePath);
- }catch(_){return safeResult('BLOCKED_CANONICAL_SOURCE_NOT_AVAILABLE');}
+ if(typeof sourcePath!=='string'||!path.isAbsolute(sourcePath)||!fs.existsSync(sourcePath))
+  return safeResult('BLOCKED_CANONICAL_SOURCE_NOT_AVAILABLE');
+ try{assertPrivateFile(sourcePath);}
+ catch(_){return safeResult('BLOCKED_PRIVATE_SOURCE_PERMISSIONS');}
  let journal,mailbox;
  try{journal=storeAt(privateDirectory);mailbox=mailboxAt(privateDirectory);}
  catch(_){return safeResult('BLOCKED_PRIVATE_HOST_STORAGE');}
