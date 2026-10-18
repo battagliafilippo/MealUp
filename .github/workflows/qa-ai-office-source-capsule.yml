@@ -6,6 +6,8 @@ on:
     branches: [experiment/recipe-visual-agents]
     paths:
       - .github/workflows/qa-ai-office-source-capsule.yml
+      - tools/ai-office/director-host-recovery.cjs
+      - tools/ai-office/director-host-recovery.test.cjs
 permissions:
   contents: read
 jobs:
