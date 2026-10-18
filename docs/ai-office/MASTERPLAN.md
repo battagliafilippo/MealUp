@@ -21,7 +21,7 @@ Un componente può avere **due stati distinti**: uno di autorità (`ACTIVE / FRO
 | CMP-005 | Qwen candidato Design | Una chiamata con due Skill riuscita tecnicamente; QUALITÀ VISIVA NON APPROVATA |
 | CMP-006 | Talent Scout | Matrice otto ruoli + benchmark/requisiti; nessuna nomina automatica |
 | CMP-007 | Scout programmato | Task settimanale abilitato, ma nessuna esecuzione registrata e notifiche disabilitate |
-| CMP-008 | Director persistente | Non implementato |
+| CMP-008 | Director persistente | **Prototipo privato funzionante:** registro hash-linked, checkpoint e ripresa su stesso filesystem testati; runtime ospitato e autentificazione agenti NON pronti |
 | CMP-009 | Quote e provider | Simulatore presente; gestione quote in tempo reale non implementata |
 | CMP-010 | Otto agenti AI autonomi | Non qualificati né integrati |
 | CMP-011 | QA e postflight | CI funziona; non sostituisce QA semantico o visuale |
@@ -35,7 +35,7 @@ Evidenze storiche al checkpoint: [134/134 test AI Office](https://github.com/bat
 |---|---|---|
 | **01 — Unificazione** | Un solo registro autorevole di componenti, decisioni, stato, micro-step e recovery | Registro, vista umana, controllo CI e confronto senza perdite; dichiarare VERIFIED solo dopo QA |
 | **02 — Sicurezza + Costituzione** | Proteggere `main` e consentire preflight con l'originale v1.9 senza pubblicarlo | **PARTIALLY VERIFIED:** `main` PROTETTO con ruleset attivo (18/10); Costituzione originale privata verificata ma non collegata in modo persistente al Director/GitHub CI |
-| **03 — Director operativo** | Persistenza task, eventi, checkpoint, recupero, quota zero e fail-closed | Da sviluppare su laboratorio dopo architettura e gate di sicurezza |
+| **03 — Director operativo** | Persistenza task, eventi, checkpoint, recupero, quota zero e fail-closed | **PARZIALE:** registro privato e preflight Director testati; manca host sicuro, autenticazione agenti, ripresa distribuita e monitoraggio quote reale |
 | **04 — Qualificazione specialisti** | Candidati con capacità, Skill, costi e prove reali approvati; notifica Scout verificata | Qwen non qualificato Design; no otto agenti nominati |
 | **05 — Pilot end-to-end** | Un lavoro attraversa Director → specialista → Skill+Costituzione → QA → CEO e riprende da checkpoint | Non avviare finché fonte costituzionale, sicurezza, QA e permessi non sono verificati |
 
@@ -60,6 +60,14 @@ Controllo **reale indipendente** sulla Costituzione originale privata: hash SHA-
 Il gate `AIOS-02.1` è ora **VERIFIED**: la protezione `main` è stata applicata realmente il 16/10 e verificata via GitHub API il 18/10, con regola attiva `Protect main`, pull request richiesta e blocco di cancellazione e force push. Evidenza: [ruleset](https://github.com/battagliafilippo/MealUp/rules/25214872). Il branch `main` non è stato modificato dal presente controllo.
 
 Il prossimo step è `AIOS-02.2` (ancora PARTIALLY_VERIFIED): collegare, in un runtime privato autorizzato, l'originale della Costituzione v1.9 al preflight di ogni vero incarico del Director. Fino ad allora router, selector e simulazioni non sono una squadra autonoma pronta alla produzione.
+
+## Checkpoint 18/10/2026 — Director gated preflight + memoria privata
+
+Implementati e testati nel branch isolato: `director-private-ledger.cjs` (journal locale persistente, replay idempotente, hash di integrità, privato con permessi restrittivi), `director-secure-preflight.cjs` (selezione Skill e recupero Costituzione reale obbligatorio **prima** di creare il checkpoint), `director-private-ledger.test.cjs` e `director-secure-preflight.test.cjs`. [Audit iniziale 166 test PASS](https://github.com/battagliafilippo/MealUp/actions/runs/39121708920). [Contratto e limitazioni](DIRECTOR-PRIVATE-LEDGER.md).
+
+**Conferme:** il journal può essere riaperto senza perdita di cronologia sullo stesso filesystem privato; la mancanza del documento originale blocca il mandato; non sono stati chiamati modelli AI, dati nuovi privilegi, creati agenti o modificati documenti FROZEN.
+
+**Limiti:** il journal e il bridge non sono ancora un Director AI attivo; GitHub CI non legge la Libreria privata di ChatGPT e un file in /tmp non costituisce memoria cloud duratura fra esecuzioni diverse. `AIOS-03.1` è `PARTIALLY_VERIFIED`, mentre il prossimo gate resta `AIOS-02.2` sul collegamento privato del documento originale. Non confondere il successo dei test con comunicazione autonoma tra reparti o esecuzione reale di un incarico.
 
 ## Recupero e prossimo incarico
 
