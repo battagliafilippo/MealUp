@@ -1,6 +1,6 @@
 {
   "schema": "MEALUP_AI_OFFICE_MASTERPLAN_V1",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "createdAt": "2026-10-15",
   "canonicalScope": "AI_OFFICE_LAB_ONLY",
   "branch": "experiment/recipe-visual-agents",
@@ -138,6 +138,12 @@
       "path": "docs/ai-office/LOCAL-PRIVATE-EXECUTOR.md",
       "status": "ACTIVE",
       "notes": "Source-verified bounded local Engineering→QA runner; actual canonical-positive host E2E still not performed"
+    },
+    {
+      "id": "SRC-HOST",
+      "path": "docs/ai-office/DIRECTOR-HOST-RECOVERY.md",
+      "status": "ACTIVE",
+      "notes": "Private host checkpoint snapshot and restore: local POSIX positive pilot, deployment on durable user PC not done"
     }
   ],
   "decisions": [
@@ -231,11 +237,12 @@
         "https://github.com/battagliafilippo/MealUp/actions/runs/38760713791",
         "PRIVATE_SOURCE_SHA256_VERIFIED_152_SECTIONS",
         "https://github.com/battagliafilippo/MealUp/actions/runs/39129081580",
-        "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/PRIVATE-ORIGINAL-PILOT-20261018.md"
+        "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/PRIVATE-ORIGINAL-PILOT-20261018.md",
+        "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/DIRECTOR-HOST-RECOVERY.md"
       ],
       "missing": [
-        "Private source verified and actual packet used locally for first positive read-only pipeline, but not bound to a long-running authorized Director host or ChatGPT Library connector",
-        "External agents and CEO are not authenticated in local metadata-only trail"
+        "Local real original and safe restore verified, but no long-running private Library→Director connection",
+        "Windows ACL host provisioning and authenticated external agent identity not completed"
       ]
     },
     {
@@ -335,12 +342,14 @@
         "https://github.com/battagliafilippo/MealUp/actions/runs/39129081580",
         "https://github.com/battagliafilippo/MealUp/actions/runs/39129733082",
         "https://github.com/battagliafilippo/MealUp/actions/runs/39129733085",
-        "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/PRIVATE-ORIGINAL-PILOT-20261018.md"
+        "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/PRIVATE-ORIGINAL-PILOT-20261018.md",
+        "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/DIRECTOR-HOST-RECOVERY.md",
+        "https://github.com/battagliafilippo/MealUp/actions/runs/39135454445"
       ],
       "missing": [
-        "Real original-controlled Engineering→QA private-local positive pilot passes with restart; cross-session persistent host not deployed",
-        "AI models not invoked/authenticated; current interdepartment collaboration is fixed local scripts",
-        "Provider quota controls, safe failover and durable cross-host recovery unverified"
+        "Actual same-host metadata restore with original v1.9 and idempotent QA proven; Windows/other user host not installed",
+        "Private snapshots don't protect against malicious writer without authentication, and cross-host backup not qualified",
+        "Provider models and quota monitoring not integrated"
       ]
     },
     {
@@ -513,11 +522,16 @@
             "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/LOCAL-PRIVATE-EXECUTOR.md",
             "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/PRIVATE-ORIGINAL-PILOT-20261018.md",
             "https://github.com/battagliafilippo/MealUp/actions/runs/39131439877",
-            "PRIVATE_SESSION_REAL_ORIGINAL_POSITIVE_189_TESTS_67_ACTIVE_RULES_2026_10_18"
+            "PRIVATE_SESSION_REAL_ORIGINAL_POSITIVE_189_TESTS_67_ACTIVE_RULES_2026_10_18",
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/DIRECTOR-HOST-RECOVERY.md",
+            "https://github.com/battagliafilippo/MealUp/actions/runs/39135454445",
+            "https://github.com/battagliafilippo/MealUp/actions/runs/39135660948",
+            "LOCAL_PRIVATE_ORIGINAL_METADATA_SNAPSHOT_RESTORE_2026_10_18"
           ],
           "blockingReasons": [
-            "Original v1.9 positive test completed on isolated ephemeral private host, but no authorized long-running Director service or persistent ChatGPT Library binding",
-            "Technical role messages are not yet independently authenticated CEO/specialist identities"
+            "Original v1.9 verified for POSIX local pilot and real restore, but ChatGPT Library is not bound to an authorized durable Director host",
+            "Windows NTFS ACL verification has not been implemented; do not claim Windows deployment",
+            "CEO/specialist external identities not independently authenticated"
           ]
         },
         {
@@ -587,11 +601,16 @@
             "https://github.com/battagliafilippo/MealUp/actions/runs/39129733085",
             "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/tools/ai-office/director-local-readonly.cjs",
             "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/PRIVATE-ORIGINAL-PILOT-20261018.md",
-            "PRIVATE_SESSION_RECOVERY_VERIFIED_5_EVENTS_3_MESSAGES_REUSED_ENGINEERING_QA"
+            "PRIVATE_SESSION_RECOVERY_VERIFIED_5_EVENTS_3_MESSAGES_REUSED_ENGINEERING_QA",
+            "https://github.com/battagliafilippo/MealUp/blob/experiment/recipe-visual-agents/docs/ai-office/DIRECTOR-HOST-RECOVERY.md",
+            "https://github.com/battagliafilippo/MealUp/actions/runs/39135454445",
+            "https://github.com/battagliafilippo/MealUp/actions/runs/39135454458",
+            "PRIVATE_LOCAL_RECOVERY_5_EVENTS_3_MESSAGES_NO_REPEAT_2026_10_18"
           ],
           "blockingReasons": [
-            "Local positive restart/reuse of bounded Engineering→QA chain verified, but cross-host and cross-session durable private host not established",
-            "Agent identities remain internal unverified role strings; no autonomous LLM orchestration or real provider quota control"
+            "Local backup/restore/renewed preflight validated with real original, but no persistent user-owned computer or always-on runtime configured",
+            "Private snapshot SHA guards ordinary corruption, not malicious writers; no independent encrypted off-device backup",
+            "Windows-specific ACL security and live agent identity/remote provider quotas remain unverified"
           ]
         },
         {
@@ -764,6 +783,15 @@
       "whyItMatters": "No shared writes or competing steps",
       "resolution": "Integrate only via future versioned manifest/contract after separately validated pipeline",
       "relatedStep": "AIOS-05.2"
+    },
+    {
+      "id": "UNK-007",
+      "status": "OPEN",
+      "topic": "Durable private host and Windows ACL",
+      "fact": "User-owned computer choice and always-on availability not confirmed; POSIX private local restore tested, no Windows ACL adapter or install",
+      "whyItMatters": "User wants unattended agents at 0 EUR but continuity requires trusted disk, private source and OS-level access controls",
+      "resolution": "Confirm a user-authorized existing computer; for Windows build an ACL-verified host adapter and then perform a user-approved installation and restart test; never upload original to public Actions",
+      "relatedStep": "AIOS-02.2"
     }
   ],
   "recovery": {
@@ -771,8 +799,10 @@
     "activeBriefVersion": "AI_OFFICE_20261015_V1",
     "currentPhase": "AIOS-02",
     "nextStepId": "AIOS-02.2",
-    "lastVerifiedTechnicalState": "Real source-positive controlled private-host pilot 2026-10-18: 67 activated v1.9 clauses, Engineering PASS, QA 189/189 PASS; restart reuses outputs (5 events 3 messages) without re-execution; missing source/stale baseline fail closed; 0 model calls and 0 project writes. Hosted runtime/identity still unverified.",
-    "pendingApprovals": [],
+    "lastVerifiedTechnicalState": "197/197 JS CI tests PASS; on isolated POSIX host original v1.9 verified + 67 active clauses, read-only Engineering and QA PASS, snapshot metadata-only 5 events and 3 messages; restore to empty private folder verified source and resumed without re-running either; still no durable installed PC, Windows ACL, external autonomous agents or live quota",
+    "pendingApprovals": [
+      "CEO_CONFIRM_PRIVATE_HOST_COMPUTER_BEFORE_INSTALLATION"
+    ],
     "noInFlightProviderCalls": true,
     "preservePreviousDecisionIds": true,
     "taskLedgerWriteScope": "tools/ai-office/masterplan-ledger.json + docs/ai-office/MASTERPLAN.md + tests",
@@ -826,6 +856,11 @@
         "version": "1.0.9",
         "change": "Real private same-host positive pilot with original v1.9 confirmed (67 active rules); independent Engineering→QA 189/189 tests, idempotent restart and two negative controls. Keep source+Director steps PARTIALLY_VERIFIED pending trusted persistent host.",
         "sourceCommit": "8304eb1d5515111cf6868319af3c0e1475afd6c8"
+      },
+      {
+        "version": "1.0.10",
+        "change": "Built private source-gated metadata-only checkpoint snapshot/restore; 8 new offline tests and 197/197 QA green; positive original-source restore and resume 5 events 3 messages on isolated host; durable user machine and NTFS ACL gate remain open",
+        "sourceCommit": "a5424463269bf0a587b2f06e4e171110ca0a7612"
       }
     ]
   }
