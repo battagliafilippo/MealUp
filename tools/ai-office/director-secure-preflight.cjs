@@ -22,6 +22,7 @@ function prepare({task,assignment,sourcePath,privateDirectory,attemptId}={}){
    record:ready?{
      sourceVerified:true,roleId:task.roleId,
      constitutionSha:result.originalSha256,
+     taskPacketSha:result.packetSha256,
      skillIds:result.selectedSkills,
      goal:task.goal,scope:task.scope,briefVersion:task.activeBriefVersion,
      baselineId:task.baselineId,nextStepId:result.nextStep
@@ -34,6 +35,7 @@ function prepare({task,assignment,sourcePath,privateDirectory,attemptId}={}){
      journalStatus:persisted.status,
      taskId:task.taskId,attemptId,
      selectedSkills:ready?result.selectedSkills:[],
+     taskPacketSha:ready?result.packetSha256:null,
      activeRuleCount:ready?result.activeRuleCount:0,
      nextStep:ready?result.nextStep:null,
      constitutionVerified:ready,
