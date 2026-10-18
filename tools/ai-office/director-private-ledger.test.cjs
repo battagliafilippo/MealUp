@@ -80,7 +80,7 @@ test('verified rule packets must supply 64-character source hash',()=>{
   assert.throws(()=>s.append(event('EV-BAD','RULE_PREFLIGHT_READY','DIRECTOR',
     {sourceVerified:true,constitutionSha:'fake'})),/UNVERIFIED_CONSTITUTION_INTAKE/);
   s.append(event('EV-GOOD','RULE_PREFLIGHT_READY','DIRECTOR',
-    {sourceVerified:true,constitutionSha:'a'.repeat(64)}));
+    {sourceVerified:true,constitutionSha:'51043574d188c085de51282e50f8784d8f5cf779300891dee0fe8014414470eb'}));
   assert.equal(s.read().events.length,1);
  }finally{fs.rmSync(p,{recursive:true,force:true});}
 });
