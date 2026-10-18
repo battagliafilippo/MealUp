@@ -6,8 +6,9 @@ No public GitHub runner should receive private canonical files.
 #>
 [CmdletBinding()]
 param(
-  [ValidateSet('Provision','Verify')][string]$Action = 'Verify',
-  [string]$Root = (Join-Path $env:LOCALAPPDATA 'MealUp\AI-Office-Private')
+  [ValidateSet('Provision','Verify','VerifyFile')][string]$Action = 'Verify',
+  [string]$Root = (Join-Path $env:LOCALAPPDATA 'MealUp\AI-Office-Private'),
+  [string]$FilePath = ''
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -94,6 +95,36 @@ function Assert-StrictAcl([string]$p) {
   if (-not $foundUser) { throw 'BLOCKED_OWNER_MISSING_FULL_CONTROL' }
 }
 $managed = @($target,(Join-Path $target 'state'),(Join-Path $target 'archive'),(Join-Path $target 'original'))
+function Assert-StrictPrivateFile([string]$candidate) {
+  if ([string]::IsNullOrWhiteSpace($candidate)) { throw 'BLOCKED_FILE_ARGUMENT_REQUIRED' }
+  $absolute = [System.IO.Path]::GetFullPath($candidate)
+  $parent = [IO.Path]::GetDirectoryName($absolute)
+  # The file must sit directly in one of the protected managed directories.
+  $validParents = @((Join-Path $target 'original'), (Join-Path $target 'state'), (Join-Path $target 'archive'))
+  if ($validParents -notcontains $parent) { throw 'BLOCKED_FILE_OUTSIDE_PRIVATE_HOST' }
+  if (-not [IO.File]::Exists($absolute)) { throw 'BLOCKED_PRIVATE_FILE_MISSING' }
+  $attrs = [IO.File]::GetAttributes($absolute)
+  if (($attrs -band [IO.FileAttributes]::ReparsePoint) -ne 0) {
+    throw 'BLOCKED_PRIVATE_FILE_REPARSE'
+  }
+  $acl = Get-Acl -LiteralPath $absolute
+  if ($acl.GetOwner([System.Security.Principal.SecurityIdentifier]).Value -ne $ownerSid.Value) {
+    throw 'BLOCKED_UNEXPECTED_FILE_OWNER'
+  }
+  $foundUser = $false
+  foreach ($entry in $acl.GetAccessRules($true,$true,[System.Security.Principal.SecurityIdentifier])) {
+    if ($entry.AccessControlType -ne $aclType -or
+        $allowed -notcontains $entry.IdentityReference.Value) {
+      throw 'BLOCKED_UNTRUSTED_FILE_ACL'
+    }
+    if ($entry.IdentityReference.Value -eq $ownerSid.Value -and
+        (($entry.FileSystemRights -band [System.Security.AccessControl.FileSystemRights]::FullControl) -eq
+         [System.Security.AccessControl.FileSystemRights]::FullControl)) {
+      $foundUser = $true
+    }
+  }
+  if (-not $foundUser) { throw 'BLOCKED_FILE_OWNER_MISSING_CONTROL' }
+}
 if ($Action -eq 'Provision') {
   if (-not [IO.Directory]::Exists($target)) {
     New-Item -ItemType Directory -Path $target -Force | Out-Null
@@ -113,11 +144,13 @@ if ($Action -eq 'Provision') {
   foreach ($p in $managed) { Set-StrictAcl $p }
 }
 foreach ($p in $managed) { Assert-StrictAcl $p }
+if ($Action -eq 'VerifyFile') { Assert-StrictPrivateFile $FilePath }
 [pscustomobject]@{
   schema = 'MEALUP_WINDOWS_PRIVATE_HOST_ACL_V1'
   status = 'ACL_VERIFIED'
   action = $Action
   verifiedDirectories = $managed.Count
+  fileAclVerified = ($Action -eq 'VerifyFile')
   sourceDocumentImported = $false
   directorInstalled = $false
   backgroundServiceStarted = $false
