@@ -1,6 +1,8 @@
 # MealUp AI Office — Fase 02: protezione del repository e preflight privato
 **Stato:** PARZIALMENTE VERIFICATO / blocchi amministrativi aperti. Data 15/10/2026. Scope: SOLO documentazione e laboratorio `experiment/recipe-visual-agents`.
 
+> **AGGIORNAMENTO 18/10/2026 (prevale sullo storico sotto):** il gate AIOS-02.1 è stato COMPLETATO. La regola GitHub [Protect main](https://github.com/battagliafilippo/MealUp/rules/25214872) è ACTIVE, `main` risulta `protected:true`, richiede PR e blocca cancellazioni/non-fast-forward. Le istruzioni di creazione seguenti sono conservate soltanto per documentare il blocco storico e non vanno rieseguite. Rimane aperto AIOS-02.2, accesso privato alla Costituzione nel Director.
+
 ## Gate 02.1 — Branch main (BLOCKED; amministrazione GitHub)
 
 Controllo effettivo via GitHub API: `branches/main` segnala `protected:false`, `rulesets` restituisce `[]`. Il connettore autorizzato in chat non espone una funzione per creare o modificare regole di protezione. Una regola di branch richiede permessi amministrativi sulla pagina delle impostazioni del repository. Nessuna scrittura su main né permessi di modifica ad agenti finché il controllo non è superato.
