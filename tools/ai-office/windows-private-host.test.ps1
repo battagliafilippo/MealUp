@@ -73,8 +73,27 @@ try {
   if ($verify.status -ne 'ACL_VERIFIED') { throw 'VERIFICATION_CANNOT_READ_INITIALIZED_HOST' }
   Pass 'never overwrites content and still permits verification'
 
+  $fileAcl = (& $tool -Action VerifyFile -Root $root -FilePath $synthetic | ConvertFrom-Json)
+  if (-not $fileAcl.fileAclVerified) { throw 'EXPECTED_FILE_NTFS_VERIFY' }
+  Pass 'validates NTFS inherited rights for one private synthetic file'
+
+  $outsideFile = Join-Path $env:USERPROFILE ('fakeOutside-' + [guid]::NewGuid().ToString('N') + '.txt')
+  Blocked { & $tool -Action VerifyFile -Root $root -FilePath $outsideFile } 'BLOCKED_FILE_OUTSIDE_PRIVATE_HOST'
+  Pass 'rejects file paths outside any of the three managed directories'
+
+  $fa = Get-Acl -LiteralPath $synthetic
+  $tooBroad = [System.Security.AccessControl.FileSystemAccessRule]::new(
+    [System.Security.Principal.SecurityIdentifier]::new('S-1-1-0'),
+    [System.Security.AccessControl.FileSystemRights]::Read,
+    [System.Security.AccessControl.AccessControlType]::Allow
+  )
+  $fa.AddAccessRule($tooBroad)
+  Set-Acl -LiteralPath $synthetic -AclObject $fa
+  Blocked { & $tool -Action VerifyFile -Root $root -FilePath $synthetic } 'BLOCKED_UNTRUSTED_FILE_ACL'
+  Pass 'rejects Anyone/Everyone on private original/checkpoint file'
+
   if (Test-Path $tool -PathType Leaf) { Pass 'test runner uses script already in lab' }
-  if ($passed -ne 9) { throw 'NOT_ALL_WINDOWS_TESTS_EXECUTED' }
+  if ($passed -ne 12) { throw 'NOT_ALL_WINDOWS_TESTS_EXECUTED' }
   Write-Host ('WINDOWS_NTFS_PRIVATE_HOST_QA_PASS tests=' + $passed)
 } finally {
   if (Test-Path $testRoot) { Remove-Item -LiteralPath $testRoot -Recurse -Force }
