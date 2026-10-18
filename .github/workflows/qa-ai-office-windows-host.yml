@@ -8,6 +8,14 @@ on:
     paths:
       - 'tools/ai-office/windows-private-host.ps1'
       - 'tools/ai-office/windows-private-host.test.ps1'
+      - 'tools/ai-office/private-file-security.cjs'
+      - 'tools/ai-office/private-file-security.windows.test.cjs'
+      - 'tools/ai-office/director-private-ledger.cjs'
+      - 'tools/ai-office/director-private-mailbox.cjs'
+      - 'tools/ai-office/director-host-recovery.cjs'
+      - 'tools/ai-office/director-local-readonly.cjs'
+      - 'tools/ai-office/director-secure-preflight.cjs'
+      - 'tools/ai-office/constitution-protected-handoff.cjs'
       - '.github/workflows/qa-ai-office-windows-host.yml'
   pull_request:
     branches:
@@ -15,6 +23,14 @@ on:
     paths:
       - 'tools/ai-office/windows-private-host.ps1'
       - 'tools/ai-office/windows-private-host.test.ps1'
+      - 'tools/ai-office/private-file-security.cjs'
+      - 'tools/ai-office/private-file-security.windows.test.cjs'
+      - 'tools/ai-office/director-private-ledger.cjs'
+      - 'tools/ai-office/director-private-mailbox.cjs'
+      - 'tools/ai-office/director-host-recovery.cjs'
+      - 'tools/ai-office/director-local-readonly.cjs'
+      - 'tools/ai-office/director-secure-preflight.cjs'
+      - 'tools/ai-office/constitution-protected-handoff.cjs'
       - '.github/workflows/qa-ai-office-windows-host.yml'
 
 permissions:
@@ -39,3 +55,9 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           & .\tools\ai-office\windows-private-host.test.ps1
+      - name: Verify fail-closed Node and Python bridge without private source
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          node --test .\tools\ai-office\private-file-security.windows.test.cjs
+          python -c "compile(open(r'tools/ai-office/constitution-task-packet.py', encoding='utf-8').read(), r'tools/ai-office/constitution-task-packet.py', 'exec')"

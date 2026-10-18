@@ -7,16 +7,21 @@ const os=require('node:os');
 const path=require('node:path');
 const {spawnSync}=require('node:child_process');
 const {selectSkills}=require('./dynamic-skill-selector.cjs');
+const {assertPrivateDirectory,assertPrivateFile,verifyCreatedPrivateFile}=require('./private-file-security.cjs');
 const CANDIDATES=require('./live-skill-catalog.json').catalog;
 const DESIGN=require('./live-model-skill-catalog.json').skills;
 const repoRoot=path.resolve(__dirname,'../..');
-function createProtectedHandoff({task,assignment,sourcePath}={}){
+function createProtectedHandoff({task,assignment,sourcePath,privateDirectory}={}){
   const noAccess={status:'BLOCKED_CANONICAL_CONSTITUTION_NOT_ACCESSIBLE',
     executesAgent:false,apiCalls:0,skillsExecuted:0};
   if(typeof sourcePath!=='string'||!sourcePath.trim()||
      !fs.existsSync(sourcePath)||!fs.statSync(sourcePath).isFile())
     return noAccess;
-  const canon=fs.realpathSync(sourcePath);
+  const sourceAbsolute=path.resolve(sourcePath);
+  if(sourceAbsolute===repoRoot||sourceAbsolute.startsWith(repoRoot+path.sep))
+    return {...noAccess,status:'BLOCKED_PRIVATE_SOURCE_IN_PUBLIC_REPOSITORY'};
+  let canon;
+  try{canon=assertPrivateFile(sourcePath);}catch(_){return noAccess;}
   if(canon.startsWith(repoRoot+path.sep))
     return {...noAccess,status:'BLOCKED_PRIVATE_SOURCE_IN_PUBLIC_REPOSITORY'};
   if(!task||!assignment||
@@ -37,12 +42,28 @@ function createProtectedHandoff({task,assignment,sourcePath}={}){
     selectedSkillIds:selection.selected,assignedBy:assignment.assignedBy,
     assignmentRef:assignment.reference,
     assignmentVerified:assignment.authorized===true};
-  const output=fs.mkdtempSync(path.join(os.tmpdir(),'mealup-constitution-'));
-  fs.chmodSync(output,0o700);
-  const input=path.join(output,'task-input.json');
-  const packet=path.join(output,'handoff-private.json');
+  let output,input,packet;
+  if(process.platform==='win32'){
+    let state;
+    try{state=assertPrivateDirectory(privateDirectory);}catch(_){
+      return {...noAccess,status:'BLOCKED_WINDOWS_PRIVATE_HOST_ACL'};
+    }
+    const original=path.join(path.dirname(state),'original');
+    try{output=assertPrivateDirectory(original);}catch(_){
+      return {...noAccess,status:'BLOCKED_WINDOWS_PRIVATE_HOST_ACL'};
+    }
+    const nonce=crypto.randomBytes(12).toString('hex');
+    input=path.join(output,'task-input-'+nonce+'.json');
+    packet=path.join(output,'handoff-private-'+nonce+'.json');
+  }else{
+    output=fs.mkdtempSync(path.join(os.tmpdir(),'mealup-constitution-'));
+    fs.chmodSync(output,0o700);
+    input=path.join(output,'task-input.json');
+    packet=path.join(output,'handoff-private.json');
+  }
   fs.writeFileSync(input,JSON.stringify(safeTask),{mode:0o600});
-  const result=spawnSync('python3',[
+  verifyCreatedPrivateFile(input);
+  const result=spawnSync(process.platform==='win32'?'python':'python3',[
     path.join(__dirname,'constitution-task-packet.py'),
     '--canonical-docx',canon,'--task-json',input,'--out',packet
   ],{cwd:repoRoot,encoding:'utf8',timeout:12000,maxBuffer:8192});
@@ -50,6 +71,9 @@ function createProtectedHandoff({task,assignment,sourcePath}={}){
     return {status:'BLOCKED_CANONICAL_PREFLIGHT_FAILED',
       reason:'Consult secure local preflight without exposing rule text in public logs',
       privateWorkspace:output,executesAgent:false,apiCalls:0};
+  try{verifyCreatedPrivateFile(packet);}catch(_){
+    return {status:'BLOCKED_PRIVATE_PACKET_ACL',executesAgent:false,apiCalls:0};
+  }
   let data;
   try{data=JSON.parse(fs.readFileSync(packet,'utf8'));}catch(_){
     return {status:'BLOCKED_UNREADABLE_PACKET',executesAgent:false,apiCalls:0};

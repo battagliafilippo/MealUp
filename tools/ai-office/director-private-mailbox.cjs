@@ -3,6 +3,7 @@
 // Actual identity of agents is NOT authenticated by this file-based prototype.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const {storeAt}=require('./director-private-ledger.cjs');
+const {assertPrivateFile,verifyCreatedPrivateFile}=require('./private-file-security.cjs');
 const ROLES=new Set(['DESIGN','ENGINEERING','FOOD','VISUAL_PRODUCTION','PROMPT_ARCHITECT','QA']);
 const HASH='51043574d188c085de51282e50f8784d8f5cf779300891dee0fe8014414470eb';
 const SCHEMA='MEALUP_OFFICE_PRIVATE_MAILBOX_V1';
@@ -15,9 +16,7 @@ function mailboxAt(folder){
  const lock=path.join(root,'.office-mailbox.lock');
  function read(){
   if(!fs.existsSync(file))return {schema:SCHEMA,items:[],head:'GENESIS'};
-  const s=fs.lstatSync(file);
-  if(s.isSymbolicLink()||!s.isFile()||(s.mode&0o077)!==0)
-   throw Error('UNSAFE_PRIVATE_MAILBOX');
+  try{assertPrivateFile(file);}catch(_){throw Error('UNSAFE_PRIVATE_MAILBOX');}
   const db=JSON.parse(fs.readFileSync(file,'utf8'));
   if(db.schema!==SCHEMA||!Array.isArray(db.items))throw Error('INVALID_MAILBOX');
   let last='GENESIS';const ids=new Set();
@@ -44,7 +43,7 @@ function mailboxAt(folder){
    throw Error('UNSAFE_OFFICE_PAYLOAD');
   if(!['OFFER','SPECIALIST_RESULT','QA_RECEIPT'].includes(m.kind))
    throw Error('UNKNOWN_MESSAGE_KIND');
-  const fd=(()=>{try{return fs.openSync(lock,fs.constants.O_CREAT|fs.constants.O_EXCL|fs.constants.O_WRONLY,0o600)}
+  const fd=(()=>{try{const value=fs.openSync(lock,fs.constants.O_CREAT|fs.constants.O_EXCL|fs.constants.O_WRONLY,0o600);verifyCreatedPrivateFile(lock);return value}
        catch(_){throw Error('MAILBOX_BUSY')}})();
   try{
    const db=read();const prior=db.items.find(e=>e.id===m.id);
@@ -96,8 +95,9 @@ function mailboxAt(folder){
    const tmp=path.join(root,'.mailbox-'+crypto.randomBytes(10).toString('hex')+'.tmp');
    try{
     const out=fs.openSync(tmp,fs.constants.O_WRONLY|fs.constants.O_CREAT|fs.constants.O_EXCL,0o600);
+    verifyCreatedPrivateFile(tmp);
     try{fs.writeSync(out,JSON.stringify(db)+'\n');fs.fsyncSync(out)}finally{fs.closeSync(out)}
-    fs.renameSync(tmp,file);
+    fs.renameSync(tmp,file);verifyCreatedPrivateFile(file);
    }finally{if(fs.existsSync(tmp))fs.unlinkSync(tmp)}
    return {status:'RECORDED_OFFLINE_NOT_DISPATCHED',seq:row.seq,head:db.head};
   }finally{fs.closeSync(fd);fs.unlinkSync(lock)}

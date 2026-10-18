@@ -2,6 +2,7 @@
 // Private local event journal; not a model executor or online inbox.
 // No rule text, credentials, production mutations, or repository storage.
 const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),crypto=require('node:crypto');
+const {assertPrivateDirectory,assertPrivateFile,verifyCreatedPrivateFile}=require('./private-file-security.cjs');
 const ROOT=path.resolve(__dirname,'../..');
 const SCHEMA='MEALUP_DIRECTOR_PRIVATE_LEDGER_V1';
 const VERIFIED_CONSTITUTION_SHA='51043574d188c085de51282e50f8784d8f5cf779300891dee0fe8014414470eb';
@@ -10,15 +11,12 @@ const digest=v=>crypto.createHash('sha256').update(JSON.stringify(v)).digest('he
 const copy=x=>JSON.parse(JSON.stringify(x));
 function storeAt(folder){
  if(typeof folder!=='string'||!path.isAbsolute(folder))throw Error('PRIVATE_ABSOLUTE_DIR_REQUIRED');
- const real=fs.realpathSync(folder),s=fs.lstatSync(folder),st=fs.statSync(real);
- if(s.isSymbolicLink()||!st.isDirectory()||real===ROOT||real.startsWith(ROOT+path.sep)||
-    (st.mode&0o077)!==0)throw Error('UNSAFE_PRIVATE_STORAGE');
+ let real;
+ try{real=assertPrivateDirectory(folder);}catch(_){throw Error('UNSAFE_PRIVATE_STORAGE');}
  const dest=path.join(real,'director-events.v1.json');
  function read(){
   if(!fs.existsSync(dest))return {schema:SCHEMA,events:[],head:'GENESIS'};
-  const lst=fs.lstatSync(dest);
-  if(!lst.isFile()||lst.isSymbolicLink()||(lst.mode&0o077)!==0)
-    throw Error('UNSAFE_LEDGER_FILE');
+  try{assertPrivateFile(dest);}catch(_){throw Error('UNSAFE_LEDGER_FILE');}
   const d=JSON.parse(fs.readFileSync(dest,'utf8'));
   if(d.schema!==SCHEMA||!Array.isArray(d.events))throw Error('LEDGER_FORMAT');
   let hash='GENESIS';
@@ -59,7 +57,7 @@ function storeAt(folder){
   if(event.type==='QA_REPORTED'&&event.actor!=='QA')throw Error('INDEPENDENT_QA_REQUIRED');
   const lock=path.join(real,'.director-events.lock');
   let fd;
-  try{fd=fs.openSync(lock,fs.constants.O_CREAT|fs.constants.O_EXCL|fs.constants.O_WRONLY,0o600);}
+  try{fd=fs.openSync(lock,fs.constants.O_CREAT|fs.constants.O_EXCL|fs.constants.O_WRONLY,0o600);verifyCreatedPrivateFile(lock);}
   catch(_){throw Error('PRIVATE_STORE_BUSY');}
   try{
    const d=read();
@@ -84,8 +82,9 @@ function storeAt(folder){
    const tmp=path.join(real,'.director-'+crypto.randomBytes(8).toString('hex')+'.tmp');
    try{
     const f=fs.openSync(tmp,fs.constants.O_CREAT|fs.constants.O_EXCL|fs.constants.O_WRONLY,0o600);
+    verifyCreatedPrivateFile(tmp);
     try{fs.writeSync(f,JSON.stringify(d)+'\n');fs.fsyncSync(f);}finally{fs.closeSync(f);}
-    fs.renameSync(tmp,dest);
+    fs.renameSync(tmp,dest);verifyCreatedPrivateFile(dest);
    }finally{if(fs.existsSync(tmp))fs.unlinkSync(tmp);}
    return {status:'APPENDED',seq:row.seq,head:d.head};
   }finally{fs.closeSync(fd);fs.unlinkSync(lock);}

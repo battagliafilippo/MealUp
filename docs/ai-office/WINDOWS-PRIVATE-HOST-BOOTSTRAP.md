@@ -45,7 +45,7 @@ Il test non carica la Costituzione, non usa credenziali e crea/elimina soltanto 
 
 **WINDOWS-01 (verificato in CI):** ACL delle cartelle, verifica ACL dei file e 12 test positivi/negativi su Windows vero. Evidenza workflow sopra.
 
-**WINDOWS-02 (prossimo):** il validatore nativo di file è stato creato e testato; manca **collegarlo in modo fail-closed al Director Node e all'estrattore Python**, preservando il supporto POSIX già verificato. Servono veri test Windows end-to-end di scrittura/ripresa, controlli su symlink, hash del DOCX originale e ACL della nuova copia di ogni file.
+**WINDOWS-02 (implementato, in attesa di CI nativa):** `private-file-security.cjs` collega il validatore PowerShell in modo fail-closed al Director Node. Journal, mailbox, lock, pacchetti dell'estrattore Python, fonte originale e snapshot devono superare `Verify`/`VerifyFile`; su Windows non esiste fallback ai mode bit POSIX. La prova sintetica non usa il DOCX reale e non può completare il gate privato: dopo il CI Windows serve ancora un collaudo supervisionato sul PC autorizzato con l'originale, senza upload.
 
 **WINDOWS-03 (non avviato):** stabilire una modalità di avvio locale e backup indipendente senza privilegi elevati né servizi a pagamento; l'avvio automatico richiede autorizzazione esplicita perché può consumare risorse PC.
 

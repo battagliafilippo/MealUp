@@ -7,6 +7,7 @@ const {spawnSync,execFileSync}=require('node:child_process');
 const {prepare}=require('./director-secure-preflight.cjs');
 const {storeAt}=require('./director-private-ledger.cjs');
 const {mailboxAt}=require('./director-private-mailbox.cjs');
+const {assertPrivateFile}=require('./private-file-security.cjs');
 const ROOT=path.resolve(__dirname,'../..');
 const BRANCH='experiment/recipe-visual-agents';
 const SCRIPTS=Object.freeze({
@@ -77,10 +78,7 @@ function runPrivateOffice({sourcePath,privateDirectory,expectedBaseline}={}){
  if(!id(expectedBaseline?.slice(0,16)))return safeResult('BLOCKED_INVALID_BASELINE');
  if(!cleanCheckout())return safeResult('BLOCKED_DIRTY_OR_INACCESSIBLE_LAB_CHECKOUT');
  try {
-  if(!sourcePath||!fs.statSync(sourcePath).isFile()||
-     fs.lstatSync(sourcePath).isSymbolicLink()||
-     (fs.statSync(sourcePath).mode&0o077)!==0)
-   return safeResult('BLOCKED_PRIVATE_SOURCE_PERMISSIONS');
+  assertPrivateFile(sourcePath);
  }catch(_){return safeResult('BLOCKED_CANONICAL_SOURCE_NOT_AVAILABLE');}
  let journal,mailbox;
  try{journal=storeAt(privateDirectory);mailbox=mailboxAt(privateDirectory);}

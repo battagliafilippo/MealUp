@@ -812,7 +812,7 @@
     "activeBriefVersion": "AI_OFFICE_20261015_V1",
     "currentPhase": "AIOS-02",
     "nextStepId": "AIOS-02.2",
-    "lastVerifiedTechnicalState": "Windows NTFS Provision/Verify/VerifyFile 12/12 synthetic native-Windows CI tests PASS (39158008874); existing Node regression and read-only Engineering→QA PASS at checkpoint; no user PC access, no private original uploaded, no Windows runtime integrated. Next: Windows fail-closed Node/Python adapter.",
+    "lastVerifiedTechnicalState": "WINDOWS-02 fail-closed Node/Python ACL bridge implemented locally; native Windows CI pending. Prior NTFS Provision/Verify/VerifyFile 12/12 synthetic tests PASS (39158008874); no user-PC installation and no private original uploaded.",
     "pendingApprovals": [],
     "noInFlightProviderCalls": true,
     "preservePreviousDecisionIds": true,
@@ -882,6 +882,11 @@
         "version": "1.0.12",
         "change": "Extended verified Windows private-host bootstrap to native file ACL checks, rejecting Everyone and paths outside managed folders; 12/12 Windows CI tests PASS. Windows Director Node/Python bridge and user PC installation remain blocked.",
         "sourceCommit": "7cdeeaf29ab074f9536239da7f337ca34524d663"
+      },
+      {
+        "version": "1.0.13",
+        "change": "Connected native NTFS Verify and VerifyFile fail-closed to Director source, Python packet, journal, mailbox and recovery paths; added synthetic Windows integration without private source. Native CI and supervised real-PC original-source test still required.",
+        "sourceCommit": "68e8fad9eb5e0d022c6093f4d298da5c828ec388"
       }
     ]
   }

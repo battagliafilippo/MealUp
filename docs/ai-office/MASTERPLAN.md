@@ -111,6 +111,10 @@ La prova sul [runner Windows reale GitHub (12 test PASS)](https://github.com/bat
 
 **Non è un'installazione sul PC del CEO**: il codice JavaScript del Director e quello Python della Costituzione mantengono per ora i vincoli POSIX. Non verranno aggirati senza un controllo NTFS sui singoli file e una prova di integrazione Windows. Prossimo micro-step `WINDOWS-02` dentro `AIOS-02.2`: **collegare** il validatore NTFS di file già collaudato alle guardie fail-closed del runtime Node/Python e collaudare davvero il recupero su Windows con fonte autentica in ambiente privato. Solo dopo verrà proposta l'installazione locale supervisionata. Zero nuove licenze; no cambi all'app/FROZEN.
 
+## Checkpoint locale WINDOWS-02 — 18/10/2026
+
+Il bridge `private-file-security.cjs` è ora collegato in modo fail-closed a fonte originale, pacchetti privati prodotti dall'estrattore Python, journal, mailbox, lock e snapshot. Su `win32` ogni directory e file passa dal validatore NTFS PowerShell; non è stato introdotto alcun bypass POSIX. È presente una prova d'integrazione sintetica per Windows che non contiene la Costituzione né segreti. **Stato prudente:** implementazione locale completata, CI Windows nativa ancora da eseguire; nessuna installazione è stata fatta sul PC dell'utente e `AIOS-02.2` resta PARTIALLY_VERIFIED.
+
 ## Recupero e prossimo incarico
 
 - Conservare **tutti gli ID**, le decisioni `DEC`, i problemi `UNK`, i checkpoint e i riferimenti all'evidenza. Usare Git come cronologia delle versioni del JSON, non riscrivere decisioni approvate senza nuova decisione esplicita e traccia di sostituzione.

@@ -13,7 +13,7 @@ function prepare({task,assignment,sourcePath,privateDirectory,attemptId}={}){
    return {status:'BLOCKED_PRIVATE_STORAGE_UNAVAILABLE',executed:false};
  }
  let result;
- try{result=createProtectedHandoff({task,assignment,sourcePath});}
+ try{result=createProtectedHandoff({task,assignment,sourcePath,privateDirectory});}
  catch(_){result={status:'BLOCKED_RULE_PREFLIGHT_EXCEPTION'};}
  const ready=result.status==='VERIFIED_RULE_PACKET_PREPARED_NOT_EXECUTED';
  const event={

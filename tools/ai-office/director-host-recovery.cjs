@@ -6,6 +6,7 @@ const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypt
 const {storeAt}=require('./director-private-ledger.cjs');
 const {mailboxAt}=require('./director-private-mailbox.cjs');
 const {baseline,cleanCheckout}=require('./director-local-readonly.cjs');
+const {assertPrivateDirectory,assertPrivateFile,verifyCreatedPrivateFile}=require('./private-file-security.cjs');
 const ROOT=path.resolve(__dirname,'../..');
 const CANONICAL='51043574d188c085de51282e50f8784d8f5cf779300891dee0fe8014414470eb';
 const SCHEMA='MEALUP_DIRECTOR_OFFLINE_RECOVERY_V1';
@@ -15,11 +16,7 @@ const revision=x=>typeof x==='string'&&/^[a-f0-9]{40}$/.test(x);
 const within=(a,b)=>a===b||a.startsWith(b+path.sep);
 function folder(value){
  if(typeof value!=='string'||!path.isAbsolute(value))throw Error('ABSOLUTE_PRIVATE_DIR_REQUIRED');
- if(process.platform==='win32')throw Error('WINDOWS_ACL_REQUIRES_INDEPENDENT_VERIFICATION');
- const stat=fs.lstatSync(value),real=fs.realpathSync(value),mode=fs.statSync(real);
- if(stat.isSymbolicLink()||!mode.isDirectory()||(mode.mode&0o077)!==0||
-    within(real,ROOT))throw Error('UNSAFE_PRIVATE_DIRECTORY');
- return real;
+ return assertPrivateDirectory(value);
 }
 function locations(workspace,archive){
  const work=folder(workspace),dest=folder(archive);
@@ -37,7 +34,7 @@ function writeNew(file,body){
  const flags=fs.constants.O_WRONLY|fs.constants.O_CREAT|fs.constants.O_EXCL|
    (fs.constants.O_NOFOLLOW||0);
  const fd=fs.openSync(file,flags,0o600);
- try{fs.writeSync(fd,body);fs.fsyncSync(fd);}finally{fs.closeSync(fd);}
+ try{verifyCreatedPrivateFile(file);fs.writeSync(fd,body);fs.fsyncSync(fd);}finally{fs.closeSync(fd);}
 }
 function createSnapshot({workingDirectory,archiveDirectory,baselineId,snapshotId}={}){
  if(!revision(baselineId)||!slug(snapshotId))throw Error('INVALID_BASELINE_OR_SNAPSHOT_ID');
@@ -53,9 +50,7 @@ function createSnapshot({workingDirectory,archiveDirectory,baselineId,snapshotId
 function readSnapshot({archiveDirectory,baselineId,snapshotId}={}){
  if(!revision(baselineId)||!slug(snapshotId))throw Error('INVALID_BASELINE_OR_SNAPSHOT_ID');
  const dest=folder(archiveDirectory),file=filePath(dest,snapshotId);
- const lst=fs.lstatSync(file);
- if(!lst.isFile()||lst.isSymbolicLink()||(lst.mode&0o077)!==0)
-   throw Error('UNSAFE_PRIVATE_SNAPSHOT');
+ try{assertPrivateFile(file);}catch(_){throw Error('UNSAFE_PRIVATE_SNAPSHOT');}
  const doc=JSON.parse(fs.readFileSync(file,'utf8'));
  const p=doc.payload;
  if(!p||p.schema!==SCHEMA||p.snapshotId!==snapshotId||
@@ -69,9 +64,7 @@ function readSnapshot({archiveDirectory,baselineId,snapshotId}={}){
 function sourceVerified(sourcePath){
  if(typeof sourcePath!=='string'||!path.isAbsolute(sourcePath))return false;
  try{
-  const st=fs.lstatSync(sourcePath),real=fs.realpathSync(sourcePath);
-  if(!st.isFile()||st.isSymbolicLink()||(st.mode&0o077)!==0||
-     within(real,ROOT))return false;
+  const real=assertPrivateFile(sourcePath);
   return hash(fs.readFileSync(sourcePath))===CANONICAL;
  }catch(_){return false;}
 }
