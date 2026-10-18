@@ -885,3 +885,13 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Stato:** `OFFICE_SKILL_PLANNING_INTEGRATED / EXECUTION_DISABLED`. Il motore resta fail-closed finché body PLATE e gauge Food Portrait non sono coerenti.
 
 **Prossimo micro-step necessario:** implementare il compositore deterministico a07 usando asset verificati o bloccare con prova puntuale se il body PLATE canonico non è disponibile.
+
+### Deterministic visual engine preflight 2026-10-18
+
+- Aggiunto preflight eseguibile e fail-closed per verificare geometria, body/clip/occluder vessel, contratto e asset gauge, mapping Food Portrait e manifest ricetta FROZEN prima di qualunque generazione.
+- `a07` è correttamente `BLOCKED`: `VESSEL_BODY_MISSING`, `GAUGE_SHELL_SHA_MISMATCH`, `GAUGE_LEGACY_CALIBRATION_NOT_FOOD_PORTRAIT_FROZEN`.
+- Prove: shell atteso `db159463…`, reale `f452fe0b…`; G7 usa 0–800 / −70°…70°, mentre la mapping Food Portrait verificata produce 270 kcal → −27,6° / LIME su 0–1000 / −60°…60°.
+- Il manifest FROZEN a07 e il relativo asset SHA restano conformi; ImageGen non è stato invocato e il lotto non è avanzato.
+- Errore test registrato: il primo assert usava uguaglianza stretta sul floating point `-27.599999999999994`; sostituito con tolleranza `1e-9`, senza alterare formula o risultato.
+
+**Stato motore:** `BLOCKED_CANONICAL_TEMPLATE_AND_GAUGE_ASSETS`. Vietato aggirare il blocco cambiando gli hash attesi o riusando la calibrazione G7 legacy.
