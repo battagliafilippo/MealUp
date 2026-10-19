@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-deterministic-assets-recovery-v1",
   "date": "2026-10-18",
-  "status": "GAUGE_MULTIFRAME_CANDIDATE_V4_OWNER_REVIEW_PENDING",
+  "status": "GAUGE_MULTIFRAME_V4_FROZEN_OWNER_APPROVED",
   "scope": "isolated branch only; no main, tester, PWA, deployment or do01",
   "vesselPlate": {
     "method": "EXACT_CROP_FROM_CANONICAL_FROZEN_BOARD",
@@ -41,7 +41,7 @@
     "qa": {
       "technical": "PASS",
       "visual": "PASS_CANDIDATE_ONLY_THREE_POINT_SCALE",
-      "owner": "PENDING_NEW_V4_REVIEW",
+      "owner": "APPROVED_2026_10_19",
       "automaticFreeze": false
     }
   },
@@ -54,6 +54,7 @@
     "The separate gauge engine was withdrawn after the owner rejected reconstructions that changed the approved design.",
     "Three aligned owner-supplied Food Portraits later made deterministic multiframe recovery possible: the median removes differently positioned needles while preserving the shared housing.",
     "Single-frame inpainting and generated restoration were rejected because they left seams, ghosts or changed geometry.",
-    "Candidate v4 uses the recovered housing, one extracted needle layer, exact deterministic text and a monotonic 0-1000 kcal mapping. It remains candidate-only pending explicit owner approval."
+    "Candidate v4 uses the recovered housing, one extracted needle layer, exact deterministic text and a monotonic 0-1000 kcal mapping.",
+    "The owner approved v4 on 2026-10-19. The component is FROZEN for the isolated Food Portrait compositor; ImageGen is restricted to food-only pixels."
   ]
 }

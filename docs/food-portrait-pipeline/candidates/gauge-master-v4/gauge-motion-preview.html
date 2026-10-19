@@ -9,7 +9,7 @@ html,body{margin:0;width:510px;height:420px;overflow:hidden;background:#fff8e9}
 @keyframes settle{0%{transform:rotate(var(--start))}58%{transform:rotate(var(--over))}78%{transform:rotate(var(--under))}100%{transform:rotate(var(--target))}}
 @media(prefers-reduced-motion:reduce){.needle{animation:none;transform:rotate(var(--target))}}
 </style>
-<div class="g"><img src="gauge-shell-final.png"><img class="needle" src="gauge-needle-final.png"><div class="value"><span></span><small>kcal</small></div></div>
+<div class="g"><img src="../../../../tools/food-portrait-pipeline/assets/gauge-frozen-v1/gauge-shell.png"><img class="needle" src="../../../../tools/food-portrait-pipeline/assets/gauge-frozen-v1/gauge-needle.png"><div class="value"><span></span><small>kcal</small></div></div>
 <script>
 const q=new URLSearchParams(location.search),kcal=Math.max(0,Number(q.get('kcal')||380));
 const clamped=Math.min(kcal,1000),target=-60+120*clamped/1000;

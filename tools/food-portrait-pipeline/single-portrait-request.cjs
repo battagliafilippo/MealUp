@@ -36,7 +36,7 @@ function makeRequest(packs,recipeId){
   'Non creare un manifesto, poster, griglia, confronto, card multipla o infografica.',
   'Ricetta ESATTA: '+facts.title+'; ID interno di tracciabilità '+recipeId+'.',
   'Vessel ID CANONICO: '+facts.vesselId+'. Rispettare questa tipologia.',
-  'GAUGE FROZEN ESATTO: mostra '+facts.kcal+' kcal; lancetta a '+gauge.angleDegrees+' gradi, zona '+gauge.zone+'.',
+  'TARGET GAUGE RISERVATO AL COMPOSITORE: '+facts.kcal+' kcal; angolo '+gauge.angleDegrees+' gradi, zona '+gauge.zone+'. Non disegnarlo.',
   facts.vesselId==='VESSEL_FREE'?'NESSUN vessel aggiuntivo: VESSEL_FREE.':
     'Un solo contenitore della categoria canonica; non sostituire con altri tipi.',
   'Ingredienti ESCLUSIVAMENTE presenti nella ricetta:',
@@ -45,8 +45,8 @@ function makeRequest(packs,recipeId){
   ...facts.preparationSteps.map((s,i)=>String(i+1)+'. '+s),
   'Stile di riferimento: MealUp Toys 3D premium con forme morbide e materiali glossy ma non fotografici, base crema e accenti arancioni, luce calda uniforme, vista tre quarti e composizione leggibile su smartphone.',
   'Il soggetto e UN piatto o preparazione integrata; non mostrare ingredienti separati come un collage.',
-  'INCLUDI nel raster il gauge FROZEN: housing fisico crema, arco segmentato verde-lime-giallo-arancione-rosso, lancetta scura con perno visibile e valore kcal esatto fornito dal ciclo.',
-  'Non aggiungere altro testo, etichetta, titolo, tag, pulsante, logo, icona UI o mockup di card.',
+  'NON includere gauge, lancetta, kcal o testo nel raster: saranno applicati dal compositore deterministico approvato.',
+  'Non aggiungere testo, etichetta, titolo, tag, pulsante, logo, icona UI o mockup di card.',
   'Sfondo pulito/trasparente se possibile, asset quadrato 1:1, un solo protagonista, margine sicuro dal crop.',
   'Non aggiungere ingredienti non presenti; quando la disposizione non e esplicita NON dichiararla canonica.',
   'Se il vessel canonico non e verificabile dai master originali, l output e soltanto una candidatura sperimentale non approvata.'
@@ -59,7 +59,8 @@ function makeRequest(packs,recipeId){
     sha256:blocks.A_STYLE_CORE.sourceSha256,
     sourceAvailability:'PRIVATE_LIBRARY_REFERENCE_MUST_BE_EXPLICITLY_PROVIDED'},
   contract:{maxImages:1,maxRecipesPerImage:1,aspectRatio:'1:1',
-    frozenGaugeBakedInRequired:true,noAdditionalUiBakedIn:true,noInfographicOrMultiCard:true,
+    imageGenerationScope:'FOOD_ONLY_NO_GAUGE_NO_TEXT',frozenGaugeBakedInRequired:false,
+    deterministicGaugeCompositionRequired:true,noAdditionalUiBakedIn:true,noInfographicOrMultiCard:true,
     vesselId:facts.vesselId,kcal:facts.kcal,gaugeAngleDegrees:gauge.angleDegrees,
     gaugeZone:gauge.zone,producedAssetMayBeAutoAccepted:false},
   promptText:lines.join('\n'),
@@ -86,15 +87,15 @@ function selfTest(){
  }]};
  const ok=makeRequest(p,'x');
  assert(ok.contract.maxImages===1&&ok.imagesGenerated===0&&
-   ok.promptText.includes('INCLUDI nel raster il gauge FROZEN')&&
-   ok.contract.frozenGaugeBakedInRequired&&ok.contract.kcal===320&&
+   ok.promptText.includes('NON includere gauge')&&
+   ok.contract.deterministicGaugeCompositionRequired&&!ok.contract.frozenGaugeBakedInRequired&&ok.contract.kcal===320&&
    ok.contract.gaugeAngleDegrees===-21.6&&ok.contract.noInfographicOrMultiCard,'SELFTEST_ISOLATION');
  let rejected=false;try{makeRequest(p,'unknown')}catch(e){rejected=/RECIPE_NOT_UNIQUELY_SELECTED/.test(e.message)}
  assert(rejected,'SELFTEST_UNKNOWN_RECIPE_REJECTED');
  p.packs.push(p.packs[0]);
  rejected=false;try{makeRequest(p,'x')}catch(e){rejected=/RECIPE_NOT_UNIQUELY_SELECTED/.test(e.message)}
  assert(rejected,'SELFTEST_DUPLICATE_REJECTED');
- console.log('PASS single-image request: exact recipe, frozen gauge baked in, no extra UI, no auto-generation');
+ console.log('PASS single-image request: exact recipe, food-only ImageGen, deterministic gauge post-composition');
 }
 function main(argv){
  if(argv.includes('--self-test'))return selfTest();

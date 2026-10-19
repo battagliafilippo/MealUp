@@ -32,7 +32,8 @@ function calibrateV10({manifestPath,assetPath,checkpointPath,producer='OPENAI_BU
   recipeId:'v10',mode:'CALIBRATION_REPLAY_NO_GENERATION',providerAdapter:'OPENAI_BUILT_IN_IMAGEGEN_INTERACTIVE',
   candidateLimit:1,candidatesRecorded:1,imagesGeneratedThisRun:0,do01Generated:false,budgetEUR:0,
   producer,reviewer,asset:{path:assetPath,sha256:actual,bytes:bytes.length},
-  gauge:{kcal:m.recipe.kcal,angleDegrees:gauge.angleDegrees,zone:gauge.zone,bakedInRequired:true},
+  gauge:{kcal:m.recipe.kcal,angleDegrees:gauge.angleDegrees,zone:gauge.zone,bakedInRequired:false,
+   compositorRequired:true,imageGenerationScope:'FOOD_ONLY_NO_GAUGE_NO_TEXT'},
   gates:{technicalQa:'PASS',independentVisualQa:'PASS_CANDIDATE_ONLY',ownerApproval:true,
    automaticAcceptance:false,automaticFreeze:false,integration:false,deployment:false},
   state:'CALIBRATION_VERIFIED_AWAITING_SEPARATE_FREEZE_DECISION'};

@@ -1,7 +1,8 @@
 {
   "schema": "mealup-food-portrait-deterministic-gauge-v2",
-  "status": "MULTIFRAME_COMPONENT_CANDIDATE_V4_QA_PASS_OWNER_PENDING",
-  "scope": "isolated branch only; candidate is not FROZEN and not integrated",
+  "status": "FROZEN_OWNER_APPROVED",
+  "scope": "isolated Food Portrait compositor; no tester, PWA or deployment",
+  "ownerApprovalDate": "2026-10-19",
   "sources": {
     "method": "ALIGNED_THREE_FRAME_MEDIAN_RECOVERY",
     "cropPixels": [700, 60, 510, 420],
@@ -10,13 +11,13 @@
   },
   "assets": {
     "shell": {
-      "path": "docs/food-portrait-pipeline/candidates/gauge-master-v4/gauge-shell-final.png",
+      "path": "tools/food-portrait-pipeline/assets/gauge-frozen-v1/gauge-shell.png",
       "sha256": "c2e1a86821e379593fe622b3085f4a4b10f312ef672ba1564f15fcff1beb6996",
       "width": 510,
       "height": 420
     },
     "needle": {
-      "path": "docs/food-portrait-pipeline/candidates/gauge-master-v4/gauge-needle-final.png",
+      "path": "tools/food-portrait-pipeline/assets/gauge-frozen-v1/gauge-needle.png",
       "sha256": "f564b641ef425d0d24ad11c52c0736bfe68d2069a75876b911b5268aa822c5aa",
       "width": 510,
       "height": 420,
@@ -44,8 +45,8 @@
   "approval": {
     "technicalQa": "PASS",
     "visualQa": "PASS_CANDIDATE_ONLY",
-    "owner": "PENDING",
+    "owner": "APPROVED",
     "automaticFreeze": false,
-    "integration": "NOT_AUTHORIZED"
+    "integration": "FOOD_PORTRAIT_COMPOSITOR_AUTHORIZED"
   }
 }

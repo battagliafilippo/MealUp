@@ -2,6 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const {gaugeLayer} = require('./deterministic-gauge-compositor.cjs');
 
 const root = path.resolve(__dirname, '..', '..');
 const contract = JSON.parse(fs.readFileSync(path.join(__dirname, 'deterministic-gauge-contract.json'), 'utf8'));
@@ -19,9 +20,18 @@ test('candidate keeps movable needle, reduced-motion fallback and explicit appro
   assert.deepEqual(contract.assets.needle.pivotPixels, [254, 231]);
   assert.equal(contract.motion.durationMs, 680);
   assert.equal(contract.motion.reducedMotion, 'STATIC_TARGET');
-  assert.equal(contract.approval.owner, 'PENDING');
+  assert.equal(contract.approval.owner, 'APPROVED');
   assert.equal(contract.approval.automaticFreeze, false);
   for (const asset of ['shell', 'needle']) {
     assert.ok(fs.existsSync(path.join(root, contract.assets[asset].path)));
   }
+});
+
+test('approved compositor emits a verified food-only overlay plan', () => {
+  const layer=gaugeLayer({root,kcal:380});
+  assert.equal(layer.status,'READY');
+  assert.equal(layer.value.text,'380 kcal');
+  assert.ok(Math.abs(layer.needle.angleDegrees-(-14.4))<1e-9);
+  assert.equal(layer.imageGenerationScope,'FOOD_ONLY_NO_GAUGE_NO_TEXT');
+  assert.deepEqual(layer.renderOrder,['FOOD_PORTRAIT','GAUGE_SHELL','GAUGE_NEEDLE','EXACT_KCAL_TEXT']);
 });

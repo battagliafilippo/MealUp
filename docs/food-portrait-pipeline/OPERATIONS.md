@@ -947,3 +947,16 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Nuovo master: crop decodificato esatto `[700,60,1210,480]` dal FROZEN `a07-prosciutto-melone-plate-approved-001.webp`; nessun ridisegno, ImageGen o alterazione pixel.
 - SHA-256 master/preview: `ad89a7ff89ee8ed079082d67615e0009ba5233598dee291b7eb1d1bf11645d53`.
 - Nuovo stato preflight: `GAUGE_COMPONENTIZATION_PENDING`. Il master visivo è canonico; la separazione dinamica di shell, lancetta e valore non è ancora approvata né congelata.
+
+### Approvazione proprietario e freeze gauge v4 — 2026-10-19
+
+- L’owner approva esplicitamente i checkpoint v4 da `95`, `380` e `975 kcal`.
+- Scocca e lancetta v4 sono promosse a componenti FROZEN del solo compositore Food Portrait isolato, con hash bloccati e pivot `[254,231]`.
+- ImageGen è ora limitato al solo cibo/vessel: gauge, testo kcal e lancetta sono vietati nei pixel generati.
+- Il compositore verifica gli hash, mantiene il valore kcal esatto, calcola la posizione sulla scala FROZEN e applica l’eventuale microanimazione dopo il QA del cibo.
+- Il preflight fallisce chiuso se stato, autorizzazione o hash dei componenti non coincidono.
+- Nessun lotto avviato, nessuna nuova immagine generata e nessuna modifica a `do01`, main, tester, PWA, deploy o Office esterno.
+
+**Stato:** `GAUGE_V4_FROZEN / DETERMINISTIC_COMPOSITOR_CONNECTED / EXECUTION_IDLE`.
+
+**Prossimo micro-step necessario:** eseguire una prova di composizione non generativa su un Food Portrait esistente e sottoporla a QA indipendente prima di riaprire qualunque lotto.

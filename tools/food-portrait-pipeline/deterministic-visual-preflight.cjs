@@ -1,6 +1,7 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const {gaugeState}=require('./gauge-mapping.cjs');
+const {gaugeLayer}=require('./deterministic-gauge-compositor.cjs');
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 
@@ -28,12 +29,17 @@ function preflight({root,vesselId,recipeId,kcal,expectedRecipeAssetSha256}){
  if(!fs.existsSync(stylePath))blockers.push('FOOD_PORTRAIT_STYLE_CONTRACT_MISSING');
  else {
   const style=read(stylePath);const gauge=style.gaugeBehavior;
-  evidence.gaugeContract={schema:style.schema,status:style.status,rendering:'FOOD_PORTRAIT_RASTER'};
+  evidence.gaugeContract={schema:style.schema,status:style.status,rendering:'DETERMINISTIC_POST_COMPOSITOR'};
   if(style.schema!=='mealup-food-portrait-style-frozen-v1'||style.status!=='FROZEN'||
     gauge?.minimumKcal!==0||gauge?.maximumKcal!==1000||
     gauge?.minimumAngleDegrees!==-60||gauge?.maximumAngleDegrees!==60||
-    style.separationRule?.gaugeVisibleInCandidateRaster!==true)
+    style.separationRule?.gaugeVisibleInCandidateRaster!==false||
+    style.separationRule?.gaugeAddedByDeterministicCompositor!==true)
    blockers.push('GAUGE_NONCANONICAL_FOOD_PORTRAIT_CALIBRATION');
+  else {
+   try{evidence.gaugeLayer=gaugeLayer({root,kcal,animate:true})}
+   catch(e){blockers.push(e.message)}
+  }
  }
  const state=gaugeState(kcal);evidence.foodPortraitGauge=state;
  if(!fs.existsSync(recipePath))blockers.push('FROZEN_RECIPE_MANIFEST_MISSING');

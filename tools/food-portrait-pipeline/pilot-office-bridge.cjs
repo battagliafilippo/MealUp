@@ -74,8 +74,8 @@ function build(portraits,selection,style){
        mandatory:['Use exact canonical vessel ID; never swap type','No independent disconnected ingredient collage',
          'Do not fabricate missing vessel geometry'],
        activeGate:'HISTORICAL_FROZEN_BOARD_SHA_MISMATCH_BLOCKS_CANONICAL_VESSEL_APPROVAL',
-       gaugeProductionContract:['The Food Portrait candidate includes the visible FROZEN gauge housing, exact recipe kcal text and mapped needle position in its pixels',
-         'Gauge values are computed from recipe data before generation; a mismatched raster fails QA and is regenerated, never silently corrected']
+       gaugeProductionContract:['ImageGen produces food and vessel only: no gauge, kcal text, needle or UI pixels',
+         'The approved deterministic compositor adds the FROZEN housing, exact recipe kcal and mapped movable needle after food QA']
      },
      C_RECIPE_SPECIFIC:{
        facts,
@@ -89,7 +89,7 @@ function build(portraits,selection,style){
        semantic:['Every distinctive ingredient or justified integrated omission',
          'Dish recognizable','Canonical vessel verified or VESSEL_FREE',
          'Consistent 3D materials, proportions, color, lighting, camera',
-         'Mobile thumbnail readability','Visible gauge matches exact kcal text, frozen mapping and physical housing'],
+         'Mobile thumbnail readability','Composited gauge matches exact kcal text, frozen mapping and approved physical housing'],
        reviewState:'NOT_EXECUTED',autoAcceptance:false
      },
      E_OUTPUT:{
