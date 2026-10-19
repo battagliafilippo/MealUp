@@ -1,0 +1,37 @@
+{
+  "schema": "mealup-food-portrait-card-geometry-v1",
+  "status": "FROZEN_OWNER_DELEGATED",
+  "canvas": {
+    "aspectRatio": "1:1",
+    "referencePixels": [1254, 1254],
+    "responsiveRule": "all geometry scales from the square visual width"
+  },
+  "foodPortrait": {
+    "safeBoxPercent": {"left": 4, "top": 20, "right": 96, "bottom": 94},
+    "maximumSubjectWidthPercent": 92,
+    "maximumSubjectHeightPercent": 74,
+    "visualBaselinePercent": 92,
+    "rule": "preserve aspect ratio; never stretch; normalize crop before composition"
+  },
+  "gauge": {
+    "widthPercent": 34,
+    "aspectRatio": 1.2142857143,
+    "topPercent": 2.5,
+    "rightPercent": 2.5,
+    "pivotPercent": [49.8039215686, 55],
+    "minimumMobileWidthPixelsAt390Card": 132.6,
+    "minimumValidatedCardWidthPixels": 390,
+    "zOrder": 20
+  },
+  "selectionRationale": [
+    "34 percent keeps the gauge within the 32-38 percent range observed in approved Food Portrait references.",
+    "The food remains dominant while the kcal value stays readable on a 390 pixel card.",
+    "Equal percentage geometry removes per-recipe gauge scaling and placement drift."
+  ],
+  "approval": {
+    "technicalQa": "PASS",
+    "visualQa": "PASS_WITH_MOBILE_TEXT_RESERVE",
+    "owner": "DELEGATED_DECISION_APPROVED_2026_10_19",
+    "automaticFreeze": false
+  }
+}

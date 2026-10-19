@@ -18,6 +18,10 @@ function gaugeLayer({root,kcal,animate=true}){
   assets[key]={path:spec.path,sha256:spec.sha256};
  }
  const state=gaugeState(kcal);
+ const geometry=read(path.join(root,'docs','food-portrait-pipeline','food-portrait-card-geometry-v1.json'));
+ if(geometry.schema!=='mealup-food-portrait-card-geometry-v1'||
+   geometry.gauge?.widthPercent!==34||geometry.gauge?.topPercent!==2.5||
+   geometry.gauge?.rightPercent!==2.5)throw Error('CARD_GEOMETRY_NONCANONICAL');
  return {
   schema:'mealup-food-portrait-gauge-layer-v1',
   status:'READY',
@@ -25,6 +29,15 @@ function gaugeLayer({root,kcal,animate=true}){
   value:{exactKcal:kcal,text:Math.round(kcal)+' kcal'},
   needle:{angleDegrees:state.angleDegrees,zone:state.zone,pivotPixels:contract.assets.needle.pivotPixels},
   motion:animate?contract.motion:{...contract.motion,durationMs:0,sequence:['TARGET']},
+  layout:{
+   canvasAspectRatio:geometry.canvas.aspectRatio,
+   foodSafeBoxPercent:geometry.foodPortrait.safeBoxPercent,
+   foodMaximumWidthPercent:geometry.foodPortrait.maximumSubjectWidthPercent,
+   foodMaximumHeightPercent:geometry.foodPortrait.maximumSubjectHeightPercent,
+   gaugeWidthPercent:geometry.gauge.widthPercent,
+   gaugeTopPercent:geometry.gauge.topPercent,
+   gaugeRightPercent:geometry.gauge.rightPercent
+  },
   renderOrder:['FOOD_PORTRAIT','GAUGE_SHELL','GAUGE_NEEDLE','EXACT_KCAL_TEXT'],
   imageGenerationScope:'FOOD_ONLY_NO_GAUGE_NO_TEXT',
   automaticFreeze:false

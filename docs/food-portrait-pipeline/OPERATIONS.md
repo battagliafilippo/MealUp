@@ -973,3 +973,17 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Stato:** `COMPOSITOR_NON_GENERATIVE_QA_PASS / EXECUTION_IDLE`. Lotto ancora chiuso; `do01` non generato.
 
 **Prossimo micro-step necessario:** usare il contratto verificato nel prossimo ciclo singolo autorizzato, mantenendo QA pre-lotto e gate proprietario.
+
+### Standard proporzioni Food Portrait / gauge nelle card
+
+- Decisione delegata dall’owner: un solo sistema proporzionale per tutte le card, senza valori per-ricetta.
+- Canvas visuale `1:1`; soggetto cibo massimo `92% × 74%`, baseline al `92%`; aspect ratio sempre preservato, nessuno stretching.
+- Gauge largo `34%` della card, ancorato a `2,5%` dall’alto e `2,5%` da destra; pivot e forma FROZEN invariati.
+- Motivazione: il 34% resta nell’intervallo 32–38% osservato nei FO approvati, mantiene il cibo dominante e rende `kcal` leggibile sulla card mobile da 390 px.
+- QA indipendente a `1254×1254`: PASS. QA a `390×390`: PASS con riserva non bloccante sulla parola `kcal` sotto la larghezza validata.
+- Sotto 390 px nessuna conformità viene presunta: serve una prova browser sulla dimensione reale prima dell’integrazione UI.
+- Nessun raster esistente modificato automaticamente; r2 resta fixture non promossa; tester/PWA e lotto restano invariati.
+
+**Stato:** `CARD_GEOMETRY_V1_FROZEN_OWNER_DELEGATED`.
+
+**Prossimo micro-step necessario:** applicare questa geometria al prossimo ciclo singolo; prima di qualunque integrazione UI, misurare la larghezza CSS reale della card senza modificare il tester.

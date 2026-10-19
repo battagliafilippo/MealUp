@@ -1,0 +1,44 @@
+{
+  "schema": "mealup-food-portrait-card-geometry-checkpoint-v1",
+  "date": "2026-10-19",
+  "status": "PASS_GEOMETRY_FROZEN",
+  "geometryContract": "docs/food-portrait-pipeline/food-portrait-card-geometry-v1.json",
+  "standard": {
+    "canvasAspectRatio": "1:1",
+    "foodMaximumWidthPercent": 92,
+    "foodMaximumHeightPercent": 74,
+    "foodVisualBaselinePercent": 92,
+    "gaugeWidthPercent": 34,
+    "gaugeTopPercent": 2.5,
+    "gaugeRightPercent": 2.5,
+    "minimumValidatedCardWidthPixels": 390
+  },
+  "evidence": {
+    "html": {
+      "path": "docs/food-portrait-pipeline/review/gauge-v4-card-standard-r2.html",
+      "sha256": "7c0c0a8269e2a628b6548ea34dd3836d5d58e62296201e677b2582612d7626b6"
+    },
+    "desktop1254": {
+      "path": "docs/food-portrait-pipeline/review/gauge-v4-card-standard-r2-1254.png",
+      "sha256": "458c3782121d1bed0262fbd726a7b5049ba912493d62ef8aa5293d91a537e2b8"
+    },
+    "mobile390": {
+      "path": "docs/food-portrait-pipeline/review/gauge-v4-card-standard-r2-390.png",
+      "sha256": "6f4d3648607b7930b8a23ae6399a448211967e1c2fd36212ca1591216a134631"
+    }
+  },
+  "independentVisualQa": {
+    "status": "PASS_VISUAL_GEOMETRY_WITH_MOBILE_TEXT_RESERVE",
+    "desktop1254": "PASS",
+    "mobile390": "PASS_WITH_RESERVE",
+    "crossResolutionConsistency": "PASS",
+    "reserve": "Below the validated 390 pixel card width, kcal unit readability requires a separate browser test."
+  },
+  "scope": {
+    "appliesTo": "all Food Portrait recipe-card compositions on the isolated branch",
+    "existingRastersAutomaticallyModified": false,
+    "r2Promoted": false,
+    "testerOrPwaModified": false,
+    "batchAuthorized": false
+  }
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="it">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MealUp Food Portrait · standard proporzioni card</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#fff8e9}
+.stage{position:relative;width:min(100vw,100vh);height:min(100vw,100vh);overflow:hidden;background:#fff8e9}
+.portrait{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gauge{position:absolute;z-index:20;right:2.5%;top:2.5%;width:34%;aspect-ratio:510/420;container-type:inline-size}
+.gauge img{position:absolute;inset:0;width:100%;height:100%}
+.needle{transform-origin:49.8039215686% 55%;animation:settle 680ms cubic-bezier(.2,.75,.24,1) both}
+.value{position:absolute;left:33.333%;top:63.571%;width:33.333%;text-align:center;color:#292825;font-family:Arial,sans-serif;font-weight:700;font-size:10.588cqw;line-height:.82}
+.value small{display:block;font-size:57.407%;line-height:1.05}
+@keyframes settle{0%{transform:rotate(-60deg)}58%{transform:rotate(5.8deg)}78%{transform:rotate(-4.2deg)}100%{transform:rotate(-1.2deg)}}
+@media(prefers-reduced-motion:reduce){.needle{animation:none;transform:rotate(-1.2deg)}}
+</style>
+<main class="stage">
+  <img class="portrait" src="../candidates/r2-poke-visual-candidate-002.png" alt="Poke bowl tonno e avocado">
+  <div class="gauge" role="img" aria-label="490 chilocalorie, lancetta nella zona gialla">
+    <img src="../../../tools/food-portrait-pipeline/assets/gauge-frozen-v1/gauge-shell.png" alt="">
+    <img class="needle" src="../../../tools/food-portrait-pipeline/assets/gauge-frozen-v1/gauge-needle.png" alt="">
+    <div class="value">490<small>kcal</small></div>
+  </div>
+</main>
+</html>
