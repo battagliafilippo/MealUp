@@ -1,20 +1,26 @@
 {
-  "schema": "mealup-food-portrait-deterministic-gauge-v1",
-  "status": "WITHDRAWN_DO_NOT_COMPONENTIZE",
-  "reference": {
-    "role": "STYLE_ONLY",
-    "file": "Foto 1.jpg",
-    "sha256": "ee3edfb55a435811fabad7c43c20185f42ae3deb36d990c73f343b12ec043d88"
+  "schema": "mealup-food-portrait-deterministic-gauge-v2",
+  "status": "MULTIFRAME_COMPONENT_CANDIDATE_V4_QA_PASS_OWNER_PENDING",
+  "scope": "isolated branch only; candidate is not FROZEN and not integrated",
+  "sources": {
+    "method": "ALIGNED_THREE_FRAME_MEDIAN_RECOVERY",
+    "cropPixels": [700, 60, 510, 420],
+    "framesKcal": [380, 1600, 570],
+    "generatedPixelsAccepted": false
   },
   "assets": {
-    "canonicalMaster": {
-      "path": "tools/food-portrait-pipeline/assets/gauge-canonical-a07-master.png",
-      "sha256": "ad89a7ff89ee8ed079082d67615e0009ba5233598dee291b7eb1d1bf11645d53",
+    "shell": {
+      "path": "docs/food-portrait-pipeline/candidates/gauge-master-v4/gauge-shell-final.png",
+      "sha256": "c2e1a86821e379593fe622b3085f4a4b10f312ef672ba1564f15fcff1beb6996",
+      "width": 510,
+      "height": 420
+    },
+    "needle": {
+      "path": "docs/food-portrait-pipeline/candidates/gauge-master-v4/gauge-needle-final.png",
+      "sha256": "f564b641ef425d0d24ad11c52c0736bfe68d2069a75876b911b5268aa822c5aa",
       "width": 510,
       "height": 420,
-      "source": "docs/food-portrait-pipeline/candidates/a07-prosciutto-melone-plate-approved-001.webp",
-      "sourceCropPixels": [700, 60, 1210, 480],
-      "pixelIdentity": "EXACT_DECODED_CROP_NO_REDRAW"
+      "pivotPixels": [254, 231]
     }
   },
   "calibration": {
@@ -24,15 +30,22 @@
     "overflow": "CLAMP_NEEDLE_KEEP_EXACT_VALUE",
     "zones": ["GREEN", "LIME", "YELLOW", "ORANGE", "RED"]
   },
+  "motion": {
+    "trigger": "CARD_OPEN",
+    "durationMs": 680,
+    "sequence": ["START_GREEN", "TARGET_PLUS_7_DEGREES", "TARGET_MINUS_3_DEGREES", "TARGET"],
+    "reducedMotion": "STATIC_TARGET"
+  },
   "value": {
     "exactRecipeKcalRequired": true,
     "unit": "kcal",
-    "renderedDeterministically": false,
-    "renderingAuthority": "FROZEN_FOOD_PORTRAIT_RASTER_PIPELINE"
+    "renderedDeterministically": true
   },
   "approval": {
-    "automatic": false,
-    "visualAuthority": "INHERITED_FROM_FROZEN_A07_FOR_EXEMPLAR_ONLY",
-    "componentization": "NOT_AUTHORIZED"
+    "technicalQa": "PASS",
+    "visualQa": "PASS_CANDIDATE_ONLY",
+    "owner": "PENDING",
+    "automaticFreeze": false,
+    "integration": "NOT_AUTHORIZED"
   }
 }

@@ -818,6 +818,20 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 
 **Prossimo micro-step necessario:** prossimo heartbeat sulla successiva ricetta PENDING; review owner unica al raggiungimento di 10/10.
 
+### Gauge Food Portrait multiframe candidate v4 — 2026-10-19
+
+- Tre FO Portrait proprietari allineati (`380`, `570`, `1600 kcal`) mostrano la stessa scocca con lancette in posizioni diverse: questo rende possibile il recupero deterministico che prima non era dimostrabile.
+- Recuperata la scocca con mediana pixel su tre frame; estratta una sola lancetta mobile dal frame verticale; valore kcal reso separatamente e in modo esatto.
+- Scala: `0–1000 kcal` → `-60°…60°`, monotona e con clamp della sola lancetta; il numero mostrato non viene alterato.
+- Microanimazione di apertura: partenza dal verde, piccolo superamento, ritorno e assestamento in `680 ms`; con reduced motion la lancetta appare direttamente sul valore finale.
+- Errori registrati: restauro generativo scartato perché cambiava il design; inpainting singolo scartato per aloni/giunzioni; primo cutout multiframe scartato perché conservava pixel del piatto; seconda maschera scartata per bordo inferiore discontinuo.
+- QA visivo finale candidate-only: `95` nel verde, `380` nella zona intermedia, `975` verso il rosso; stessa lancetta, stesso pivot, nessun fantasma di posizioni precedenti.
+- Nessuna modifica a `do01`, main, tester, PWA, deploy o AI Office esterno. Nessun costo sostenuto.
+
+**Stato:** `CANDIDATE_V4_QA_PASS / OWNER_APPROVAL_PENDING`. Non FROZEN e non integrato.
+
+**Prossimo micro-step necessario:** review visiva del proprietario sui tre checkpoint; solo dopo approvazione esplicita si potrà congelare il componente e collegarlo al compositore.
+
 ### Catalog cycle 010 — p06 candidate QA PASS
 
 - Generata una sola candidate `p06` usando la reference FROZEN `r2` BOWL; testo esatto `505 kcal` e lancetta nella transizione giallo-arancione.

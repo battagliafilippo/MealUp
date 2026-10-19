@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-deterministic-assets-recovery-v1",
   "date": "2026-10-18",
-  "status": "GAUGE_COMPONENTIZATION_WITHDRAWN_KEEP_FROZEN_RASTER_PIPELINE",
+  "status": "GAUGE_MULTIFRAME_CANDIDATE_V4_OWNER_REVIEW_PENDING",
   "scope": "isolated branch only; no main, tester, PWA, deployment or do01",
   "vesselPlate": {
     "method": "EXACT_CROP_FROM_CANONICAL_FROZEN_BOARD",
@@ -24,7 +24,7 @@
     "syntheticPixelsAdded": false
   },
   "gauge": {
-    "method": "NO_SEPARATE_COMPONENTIZATION_USE_EXISTING_FROZEN_FOOD_PORTRAIT_RASTER",
+    "method": "ALIGNED_THREE_FRAME_MEDIAN_RECOVERY_WITH_SEPARATE_NEEDLE",
     "contract": "tools/food-portrait-pipeline/deterministic-gauge-contract.json",
     "reference": {
       "role": "STYLE_ONLY",
@@ -32,20 +32,16 @@
       "sha256": "ee3edfb55a435811fabad7c43c20185f42ae3deb36d990c73f343b12ec043d88"
     },
     "pilot": {
-      "recipeId": "a07",
-      "kcal": 270,
-      "angleDegrees": -27.6,
-      "zone": "LIME",
-      "preview": "docs/food-portrait-pipeline/candidates/deterministic-gauge-a07-preview.png",
-      "previewSha256": "ad89a7ff89ee8ed079082d67615e0009ba5233598dee291b7eb1d1bf11645d53",
-      "sourceAsset": "docs/food-portrait-pipeline/candidates/a07-prosciutto-melone-plate-approved-001.webp",
-      "sourceCropPixels": [700, 60, 1210, 480],
-      "redrawn": false
+      "previewsKcal": [95, 380, 975],
+      "previewDirectory": "docs/food-portrait-pipeline/candidates/gauge-master-v4",
+      "motionPreview": "gauge-motion-preview.html",
+      "recoveryScript": "tools/food-portrait-pipeline/recover-fo-gauge-multiframe.ps1",
+      "redrawn": "ONLY_TEXTURELESS_DIAL_FACE_AND_OCCLUDED_LOWER_RIM"
     },
     "qa": {
       "technical": "PASS",
-      "visual": "PASS_PIXEL_IDENTICAL_TO_EXISTING_FROZEN_A07_GAUGE",
-      "owner": "DYNAMIC_COMPONENTIZATION_REJECTED_KEEP_EXISTING_FOOD_PORTRAIT_GAUGE",
+      "visual": "PASS_CANDIDATE_ONLY_THREE_POINT_SCALE",
+      "owner": "PENDING_NEW_V4_REVIEW",
       "automaticFreeze": false
     }
   },
@@ -55,6 +51,9 @@
     "The deterministic SVG redraw was rejected by the owner because it did not match the gauges in approved Food Portraits.",
     "Both SVG assets were withdrawn; the replacement is an exact decoded crop from the owner-approved FROZEN a07 asset.",
     "Dynamic shell, needle and value componentization was attempted and rejected because every separated reconstruction changed a gauge that was already visually correct in approved Food Portraits.",
-    "The separate gauge engine is withdrawn. Food Portrait production keeps the FROZEN raster gauge contract; QA checks exact kcal and the mapped needle zone without redrawing the component."
+    "The separate gauge engine was withdrawn after the owner rejected reconstructions that changed the approved design.",
+    "Three aligned owner-supplied Food Portraits later made deterministic multiframe recovery possible: the median removes differently positioned needles while preserving the shared housing.",
+    "Single-frame inpainting and generated restoration were rejected because they left seams, ghosts or changed geometry.",
+    "Candidate v4 uses the recovered housing, one extracted needle layer, exact deterministic text and a monotonic 0-1000 kcal mapping. It remains candidate-only pending explicit owner approval."
   ]
 }

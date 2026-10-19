@@ -1,0 +1,20 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Food Portrait gauge multiframe candidate</title>
+<style>
+html,body{margin:0;width:510px;height:420px;overflow:hidden;background:#fff8e9}
+.g{position:relative;width:510px;height:420px}.g img{position:absolute;inset:0;width:510px;height:420px}
+.needle{transform-origin:254px 231px;animation:settle 680ms cubic-bezier(.2,.75,.24,1) both}
+.value{position:absolute;left:170px;top:267px;width:170px;text-align:center;color:#292825;font-family:Arial,sans-serif;font-weight:700;font-size:54px;line-height:.82}.value small{display:block;font-size:31px;line-height:1.05}
+@keyframes settle{0%{transform:rotate(var(--start))}58%{transform:rotate(var(--over))}78%{transform:rotate(var(--under))}100%{transform:rotate(var(--target))}}
+@media(prefers-reduced-motion:reduce){.needle{animation:none;transform:rotate(var(--target))}}
+</style>
+<div class="g"><img src="gauge-shell-final.png"><img class="needle" src="gauge-needle-final.png"><div class="value"><span></span><small>kcal</small></div></div>
+<script>
+const q=new URLSearchParams(location.search),kcal=Math.max(0,Number(q.get('kcal')||380));
+const clamped=Math.min(kcal,1000),target=-60+120*clamped/1000;
+const needle=document.querySelector('.needle'),start=-60,over=Math.min(60,target+7),under=Math.max(-60,target-3);
+for(const [name,value] of [['--start',start],['--over',over],['--under',under],['--target',target]])needle.style.setProperty(name,value+'deg');
+if(q.get('static')==='1'){needle.style.animation='none';needle.style.transform=`rotate(${target}deg)`}
+document.querySelector('.value span').textContent=Math.round(kcal);
+</script>
