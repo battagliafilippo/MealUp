@@ -1,0 +1,53 @@
+{
+  "schema": "mealup-food-portrait-immutable-card-composition-cycle-v1",
+  "date": "2026-10-19",
+  "status": "PASS_IMMUTABLE_LAYER_COMPOSITION",
+  "scope": "isolated Food Portrait composition evidence; no tester, PWA or deployment",
+  "recipe": {
+    "id": "r2",
+    "title": "Poke bowl tonno e avocado",
+    "kcal": 490,
+    "candidateStatus": "REJECTED_AUDIT_FIXTURE_NOT_PROMOTED"
+  },
+  "composition": {
+    "mode": "DOM_LAYERS_NO_PIXEL_MUTATION",
+    "geometryContract": "docs/food-portrait-pipeline/food-portrait-card-geometry-v1.json",
+    "gaugeContract": "tools/food-portrait-pipeline/deterministic-gauge-contract.json",
+    "gaugeWidthPercent": 34,
+    "gaugeTopPercent": 2.5,
+    "gaugeRightPercent": 2.5,
+    "needleAngleDegrees": -1.2,
+    "foodAspectRatioPreserved": true
+  },
+  "immutableInputs": {
+    "foodPortrait": {
+      "path": "docs/food-portrait-pipeline/candidates/r2-poke-visual-candidate-002.png",
+      "sha256Before": "ad2cca0c90da0c1137b5e48e885b009727cda6dc661200ee2ffb565458960f85",
+      "sha256After": "ad2cca0c90da0c1137b5e48e885b009727cda6dc661200ee2ffb565458960f85"
+    },
+    "gaugeShell": {
+      "path": "tools/food-portrait-pipeline/assets/gauge-frozen-v1/gauge-shell.png",
+      "sha256Before": "c2e1a86821e379593fe622b3085f4a4b10f312ef672ba1564f15fcff1beb6996",
+      "sha256After": "c2e1a86821e379593fe622b3085f4a4b10f312ef672ba1564f15fcff1beb6996"
+    },
+    "gaugeNeedle": {
+      "path": "tools/food-portrait-pipeline/assets/gauge-frozen-v1/gauge-needle.png",
+      "sha256Before": "f564b641ef425d0d24ad11c52c0736bfe68d2069a75876b911b5268aa822c5aa",
+      "sha256After": "f564b641ef425d0d24ad11c52c0736bfe68d2069a75876b911b5268aa822c5aa"
+    }
+  },
+  "evidence": {
+    "html": "docs/food-portrait-pipeline/review/gauge-v4-compact-card-r2.html",
+    "render": "docs/food-portrait-pipeline/review/gauge-v4-compact-card-r2-390.png",
+    "integrityCheck": "tools/food-portrait-pipeline/card-composition-integrity.cjs"
+  },
+  "invariants": {
+    "foodPortraitPixelsModified": false,
+    "gaugePixelsModified": false,
+    "imageGenerationCalls": 0,
+    "do01Generated": false,
+    "officialTesterModified": false,
+    "pwaModified": false,
+    "candidatePromoted": false
+  }
+}
