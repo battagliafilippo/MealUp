@@ -1,0 +1,50 @@
+{
+  "schema": "mealup-food-portrait-food-only-frozen-asset-v1",
+  "status": "FROZEN_OWNER_APPROVED",
+  "decisionDate": "2026-10-19",
+  "authority": "OWNER_EXPLICIT_APPROVAL_OF_SPECIFIC_CANDIDATE",
+  "recipeId": "r1",
+  "title": "Carpaccio di manzo con rucola e feta",
+  "vesselId": "VESSEL_PLATE",
+  "kcal": 380,
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/r1-carpaccio-food-only-candidate-001.png",
+    "sha256": "de278c29fdc648a6cb6628d9b76283b4c54c6725ee966eef0cca343b4ecd962f",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1963774,
+    "format": "png",
+    "foodOnly": true
+  },
+  "frozenComposition": {
+    "gaugeShellSha256": "c2e1a86821e379593fe622b3085f4a4b10f312ef672ba1564f15fcff1beb6996",
+    "gaugeNeedleSha256": "f564b641ef425d0d24ad11c52c0736bfe68d2069a75876b911b5268aa822c5aa",
+    "gaugeWidthPercent": 34,
+    "gaugeTopPercent": 2.5,
+    "gaugeRightPercent": 2.5,
+    "needleAngleDegrees": -14.4,
+    "exactValue": "380 kcal",
+    "mode": "DOM_LAYERS_NO_PIXEL_MUTATION"
+  },
+  "evidence": {
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": "APPROVED",
+    "gaugeAbsentFromFoodRaster": true,
+    "visibleRemovalArtifacts": "NONE",
+    "exactPixelIdentityToOldBakedGaugeAssetClaimed": false
+  },
+  "frozenScope": [
+    "r1 food-only candidate bytes",
+    "food and VESSEL_PLATE visual composition",
+    "separate FROZEN gauge asset hashes",
+    "card geometry and 380 kcal needle mapping"
+  ],
+  "notAuthorized": [
+    "automatic lot advance",
+    "generation of do01",
+    "tester or PWA integration",
+    "deployment",
+    "modification of main",
+    "replacement or deletion of the historical approved r1 asset"
+  ]
+}

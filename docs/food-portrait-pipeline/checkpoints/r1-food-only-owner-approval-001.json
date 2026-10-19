@@ -1,0 +1,35 @@
+{
+  "schema": "mealup-food-portrait-approval-checkpoint-v1",
+  "checkpointId": "FPP-R1-FOOD-ONLY-APPROVAL-001",
+  "date": "2026-10-19",
+  "recipeId": "r1",
+  "predecessor": "checkpoints/r1-food-only-composition-cycle-001.json",
+  "ownerDecision": "APPROVED_SPECIFIC_FOOD_ONLY_CANDIDATE",
+  "asset": {
+    "path": "docs/food-portrait-pipeline/candidates/r1-carpaccio-food-only-candidate-001.png",
+    "sha256": "de278c29fdc648a6cb6628d9b76283b4c54c6725ee966eef0cca343b4ecd962f",
+    "bytes": 1963774,
+    "reencoded": false,
+    "pixelsModifiedAfterApproval": false
+  },
+  "composition": {
+    "html": "docs/food-portrait-pipeline/review/gauge-v4-compact-card-r1-food-only.html",
+    "gaugeContract": "tools/food-portrait-pipeline/deterministic-gauge-contract.json",
+    "geometryContract": "docs/food-portrait-pipeline/food-portrait-card-geometry-v1.json",
+    "authorized": true,
+    "gaugeModified": false
+  },
+  "gates": {
+    "technicalQa": "PASS_WITH_TOOLING_LIMIT_RECORDED",
+    "independentVisualQa": "PASS_CANDIDATE_ONLY",
+    "ownerApproval": true,
+    "frozen": true,
+    "automaticLotAdvance": false,
+    "integration": false,
+    "deployment": false
+  },
+  "imagesGeneratedThisCheckpoint": 0,
+  "do01Generated": false,
+  "budgetEUR": 0,
+  "state": "FROZEN_AWAITING_SEPARATE_INTEGRATION_AUTHORIZATION"
+}
