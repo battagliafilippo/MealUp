@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-deterministic-assets-recovery-v1",
   "date": "2026-10-18",
-  "status": "DYNAMIC_GAUGE_CANDIDATE_QA_PASS_OWNER_REVIEW_REQUIRED",
+  "status": "DYNAMIC_GAUGE_CANDIDATE_V2_QA_PASS_OWNER_REVIEW_REQUIRED",
   "scope": "isolated branch only; no main, tester, PWA, deployment or do01",
   "vesselPlate": {
     "method": "EXACT_CROP_FROM_CANONICAL_FROZEN_BOARD",
@@ -44,7 +44,7 @@
     },
     "qa": {
       "technical": "PASS",
-      "visual": "PASS_95_GREEN_270_APPROVED_SOURCE_975_RED",
+      "visual": "PASS_V2_95_GREEN_270_APPROVED_SOURCE_975_RED_NO_PREVIOUS_NEEDLE_GHOST",
       "owner": "CANONICAL_MASTER_APPROVED_DYNAMIC_LAYER_REVIEW_REQUIRED",
       "automaticFreeze": false
     },
@@ -68,6 +68,8 @@
     "The first dynamic calibration failed visual QA because 975 kcal landed in orange; it was not accepted.",
     "A single symmetric correction then pushed 95 kcal below green; it was not accepted.",
     "The physical arc is asymmetric, so the final candidate uses a piecewise monotonic visual transform anchored at 95, 270 and 975 kcal while preserving the FROZEN logical scale.",
-    "Dynamic shell, needle and value componentization passed technical and three-point visual QA but remains blocked until explicit owner approval."
+    "The owner rejected candidate v1 because it was visibly rasterized and retained halos from the old needle position.",
+    "Candidate v2 uses 2x runtime layers, a restored clean dial face, a complete fixed pivot and a separately antialiased deterministic shaft; no previous-position shaft pixels are present in the moving layer.",
+    "Dynamic candidate v2 passed technical and three-point visual QA but remains blocked until explicit owner approval."
   ]
 }

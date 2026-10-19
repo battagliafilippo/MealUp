@@ -1,6 +1,6 @@
 {
   "schema": "mealup-food-portrait-deterministic-gauge-v1",
-  "status": "DYNAMIC_COMPONENT_CANDIDATE_QA_PASS",
+  "status": "DYNAMIC_COMPONENT_CANDIDATE_V2_QA_PASS",
   "reference": {
     "role": "STYLE_ONLY",
     "file": "Foto 1.jpg",
@@ -18,15 +18,15 @@
     },
     "shell": {
       "path": "tools/food-portrait-pipeline/assets/gauge-shell-canonical.png",
-      "sha256": "979233ed80f8e943633e300cb5977eb3b4fc715a2239b01dc4ab4564164e594b",
-      "width": 510,
-      "height": 420
+      "sha256": "c74e237b68007c228efbfa5f4522524d2f677e088b7809b54ff163e76b7ecaf6",
+      "width": 1020,
+      "height": 840
     },
     "needle": {
       "path": "tools/food-portrait-pipeline/assets/gauge-needle-canonical.png",
-      "sha256": "0f2a0ab1081f9d6f8883cae3e261b98187ac9324e75c96a28f2d539a6df5e7df",
-      "width": 510,
-      "height": 420,
+      "sha256": "4b9dede24259477aac8862d11ab3fbcb96156dbf5c4addcd13189e1ede8a2c37",
+      "width": 1020,
+      "height": 840,
       "pivotPx": [248, 232]
     }
   },
@@ -51,7 +51,7 @@
   "approval": {
     "automatic": false,
     "visualAuthority": "INHERITED_FROM_FROZEN_A07_FOR_EXEMPLAR_ONLY",
-    "componentization": "CANDIDATE_QA_PASS_OWNER_REVIEW_REQUIRED"
+    "componentization": "CANDIDATE_V2_QA_PASS_OWNER_REVIEW_REQUIRED"
   },
   "motion": {
     "durationMs": 220,

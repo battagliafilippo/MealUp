@@ -935,3 +935,10 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - La prima trasformazione lineare unica ha fallito QA: `975 kcal` cadeva nell'arancio. Una seconda correzione simmetrica ha portato `95 kcal` sotto il verde. Entrambe sono state scartate e registrate.
 - Candidate corrente: trasformazione visuale monotona a due pendenze, ancorata a `95/270/975 kcal`; QA render PASS rispettivamente verde/verde/rosso. Microanimazione singola `220 ms`, senza overshoot o loop, disattivata con `prefers-reduced-motion`.
 - Stato: `DYNAMIC_COMPONENT_CANDIDATE_QA_PASS`; nessun freeze automatico. Il preflight resta `BLOCKED` su `GAUGE_DYNAMIC_LAYER_OWNER_APPROVAL_PENDING` fino all'approvazione visuale esplicita.
+
+### Correzione owner candidate dinamica v2
+
+- Candidate v1 respinta: resa sgranata e aloni visibili della precedente posizione della lancetta.
+- Causa verificata: shell a risoluzione nativa e ombra residua incorporata nel layer raster estratto della lancetta.
+- Candidate v2: shell e lancetta a `1020×840`, quadrante centrale ripulito, perno fisso completo e stelo antialias separato; la rotazione non trasporta più pixel della posizione precedente.
+- QA visuale ripetuto a `95`, `270` e `975 kcal`: lancetta rispettivamente nel verde, posa canonica e rosso; nessun freeze automatico, approvazione owner ancora necessaria.
