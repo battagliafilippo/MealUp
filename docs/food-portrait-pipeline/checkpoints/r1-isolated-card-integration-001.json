@@ -1,0 +1,62 @@
+{
+  "schema": "mealup-food-portrait-isolated-card-integration-v1",
+  "date": "2026-10-19",
+  "status": "TECHNICAL_PASS_VISUAL_QA_BLOCKED",
+  "scope": "isolated review card only; no official tester, PWA or deployment",
+  "recipe": {
+    "id": "r1",
+    "title": "Carpaccio di manzo con rucola e feta",
+    "kcal": 380
+  },
+  "integration": {
+    "html": "docs/food-portrait-pipeline/review/gauge-v4-compact-card-r1-food-only.html",
+    "mode": "DOM_LAYERS_NO_PIXEL_MUTATION",
+    "viewportWidthPixels": 390,
+    "cardOuterWidthPixels": 175,
+    "artBoxPixels": [151, 104],
+    "gaugeWidthPercent": 34,
+    "gaugeTopPercent": 2.5,
+    "gaugeRightPercent": 2.5,
+    "needleAngleDegrees": -14.4,
+    "exactValue": "380 kcal"
+  },
+  "immutableInputs": {
+    "foodPortraitSha256": "de278c29fdc648a6cb6628d9b76283b4c54c6725ee966eef0cca343b4ecd962f",
+    "gaugeShellSha256": "c2e1a86821e379593fe622b3085f4a4b10f312ef672ba1564f15fcff1beb6996",
+    "gaugeNeedleSha256": "f564b641ef425d0d24ad11c52c0736bfe68d2069a75876b911b5268aa822c5aa"
+  },
+  "technicalQa": {
+    "status": "PASS",
+    "assetHashes": "PASS",
+    "geometryContract": "PASS",
+    "exactKcal": "PASS",
+    "needleMapping": "PASS",
+    "duplicateKcalMetadata": "PASS_NONE",
+    "forbiddenRasterTreatments": "PASS_NONE"
+  },
+  "visualQa": {
+    "status": "BLOCKED_CAPTURE_UNAVAILABLE",
+    "reason": "browser security policy prevents automated observation of local file URLs",
+    "attemptedWorkaround": false,
+    "passClaimed": false
+  },
+  "gates": {
+    "ownerApprovedFoodOnlyAsset": true,
+    "foodOnlyAssetFrozen": true,
+    "isolatedTechnicalIntegration": true,
+    "isolatedVisualQa": false,
+    "officialTesterIntegration": false,
+    "deployment": false,
+    "automaticAdvance": false
+  },
+  "invariants": {
+    "foodPortraitModified": false,
+    "gaugeModified": false,
+    "imagesGeneratedThisCheckpoint": 0,
+    "do01Generated": false,
+    "officialTesterModified": false,
+    "pwaModified": false,
+    "mainModified": false
+  },
+  "requiredNextEvidence": "owner confirms the visible isolated card or provides a screenshot for independent visual QA"
+}
