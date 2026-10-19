@@ -1,0 +1,38 @@
+{
+  "schema": "mealup-food-portrait-immutable-card-composition-preflight-v1",
+  "date": "2026-10-19",
+  "status": "BLOCKED_SOURCE_CONTAINS_BAKED_GAUGE",
+  "scope": "single-candidate preflight only; no image generation, editing, integration or deployment",
+  "recipe": {
+    "id": "r1",
+    "title": "Carpaccio di manzo con rucola e feta",
+    "kcal": 380,
+    "selectionReason": "first owner-approved FROZEN candidate"
+  },
+  "source": {
+    "path": "docs/food-portrait-pipeline/candidates/r1-carpaccio-plate-approved-001.webp",
+    "sha256Before": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0",
+    "sha256After": "7be03065e37431a37dc97798cb4c2a2d8660080c30d193f4061ad2808dfc78c0",
+    "frozen": true,
+    "visualInspection": "GAUGE_AND_NEEDLE_ARE_BAKED_INTO_SOURCE_PIXELS"
+  },
+  "decision": {
+    "composeSeparateFrozenGauge": false,
+    "reason": "would duplicate the visible gauge",
+    "extractOrEraseBakedGauge": false,
+    "reasonForNoExtraction": "would modify the approved Food Portrait pixels",
+    "generateReplacementFoodOnlyPortrait": false,
+    "reasonForNoGeneration": "current step explicitly forbids changing Food Portrait details"
+  },
+  "invariants": {
+    "foodPortraitPixelsModified": false,
+    "gaugePixelsModified": false,
+    "imageGenerationCalls": 0,
+    "do01Generated": false,
+    "officialTesterModified": false,
+    "pwaModified": false,
+    "mainModified": false,
+    "candidatePromoted": false
+  },
+  "requiredNextInput": "authorize one new food-only candidate while preserving the FROZEN gauge as a separate immutable layer"
+}
