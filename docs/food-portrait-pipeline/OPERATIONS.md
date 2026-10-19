@@ -886,6 +886,13 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 
 **Prossimo micro-step necessario:** implementare il compositore deterministico a07 usando asset verificati o bloccare con prova puntuale se il body PLATE canonico non è disponibile.
 
+### Ritiro del motore gauge separato — decisione owner 2026-10-19
+
+- Tutti i candidati di componentizzazione del gauge sono respinti: alteravano un elemento già coerente nei Food Portrait approvati.
+- Ritirati preview, shell, lancetta e microanimazione separata; nessun candidato dinamico resta in approvazione.
+- Ripristinato come unica autorità il contratto FROZEN del Food Portrait raster: il gauge rimane parte del ritratto completo; i controlli verificano kcal esatte e zona della lancetta senza ridisegnarlo.
+- Il lavoro visuale torna a concentrarsi sugli errori reali del cibo. Nessuna modifica a Food Portrait approvati, main, tester, PWA o deploy.
+
 ### Deterministic visual engine preflight 2026-10-18
 
 - Aggiunto preflight eseguibile e fail-closed per verificare geometria, body/clip/occluder vessel, contratto e asset gauge, mapping Food Portrait e manifest ricetta FROZEN prima di qualunque generazione.
@@ -926,27 +933,3 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Nuovo master: crop decodificato esatto `[700,60,1210,480]` dal FROZEN `a07-prosciutto-melone-plate-approved-001.webp`; nessun ridisegno, ImageGen o alterazione pixel.
 - SHA-256 master/preview: `ad89a7ff89ee8ed079082d67615e0009ba5233598dee291b7eb1d1bf11645d53`.
 - Nuovo stato preflight: `GAUGE_COMPONENTIZATION_PENDING`. Il master visivo è canonico; la separazione dinamica di shell, lancetta e valore non è ancora approvata né congelata.
-
-## 2026-10-18 — Candidate gauge deterministico mobile
-
-- Recuperato il master esatto dal Food Portrait `a07` già approvato; nessun ridisegno ImageGen.
-- Separati deterministicamente housing e stelo mobile. Il perno arancione resta fisso per evitare disallineamenti durante la rotazione.
-- Conservata la scala logica FROZEN `0..1000 kcal -> -60..60°`, con overflow bloccato al rosso e valore kcal reale sempre visibile.
-- La prima trasformazione lineare unica ha fallito QA: `975 kcal` cadeva nell'arancio. Una seconda correzione simmetrica ha portato `95 kcal` sotto il verde. Entrambe sono state scartate e registrate.
-- Candidate corrente: trasformazione visuale monotona a due pendenze, ancorata a `95/270/975 kcal`; QA render PASS rispettivamente verde/verde/rosso. Microanimazione singola `220 ms`, senza overshoot o loop, disattivata con `prefers-reduced-motion`.
-- Stato: `DYNAMIC_COMPONENT_CANDIDATE_QA_PASS`; nessun freeze automatico. Il preflight resta `BLOCKED` su `GAUGE_DYNAMIC_LAYER_OWNER_APPROVAL_PENDING` fino all'approvazione visuale esplicita.
-
-### Correzione owner candidate dinamica v2
-
-- Candidate v1 respinta: resa sgranata e aloni visibili della precedente posizione della lancetta.
-- Causa verificata: shell a risoluzione nativa e ombra residua incorporata nel layer raster estratto della lancetta.
-- Candidate v2: shell e lancetta a `1020×840`, quadrante centrale ripulito, perno fisso completo e stelo antialias separato; la rotazione non trasporta più pixel della posizione precedente.
-- QA visuale ripetuto a `95`, `270` e `975 kcal`: lancetta rispettivamente nel verde, posa canonica e rosso; nessun freeze automatico, approvazione owner ancora necessaria.
-
-### Correzione owner candidate dinamica v3
-
-- Candidate v2 respinta: bordo esterno irregolare e lancetta non coerente per forma e posa con i gauge Food Portrait precedenti.
-- Il riferimento proprietario `Screenshot 2026-10-18 101907.png` (380 kcal) è ora autorità geometrica esplicita, non semplice riferimento di stile.
-- Candidate v3: housing vettoriale continuo con bordi regolari e un solo stelo vettoriale di forma fissa; durante la microanimazione cambia esclusivamente la rotazione attorno al perno `[232,184]`.
-- Calibrazione visuale verificata a `95`, `380` e `975 kcal`: verde, posa del riferimento e rosso. Nessun alone raster della posizione precedente è possibile nei due layer vettoriali separati.
-- Stato: `DYNAMIC_COMPONENT_CANDIDATE_V3_QA_PASS`; nessun freeze automatico. Resta obbligatoria l'approvazione visiva esplicita del proprietario.

@@ -1,7 +1,7 @@
 {
   "schema": "mealup-food-portrait-deterministic-assets-recovery-v1",
   "date": "2026-10-18",
-  "status": "DYNAMIC_GAUGE_CANDIDATE_V3_QA_PASS_OWNER_REVIEW_REQUIRED",
+  "status": "GAUGE_COMPONENTIZATION_WITHDRAWN_KEEP_FROZEN_RASTER_PIPELINE",
   "scope": "isolated branch only; no main, tester, PWA, deployment or do01",
   "vesselPlate": {
     "method": "EXACT_CROP_FROM_CANONICAL_FROZEN_BOARD",
@@ -24,12 +24,12 @@
     "syntheticPixelsAdded": false
   },
   "gauge": {
-    "method": "DETERMINISTIC_VECTOR_GEOMETRY_FROM_OWNER_FOOD_PORTRAIT_REFERENCE",
+    "method": "NO_SEPARATE_COMPONENTIZATION_USE_EXISTING_FROZEN_FOOD_PORTRAIT_RASTER",
     "contract": "tools/food-portrait-pipeline/deterministic-gauge-contract.json",
     "reference": {
-      "role": "GEOMETRY_AUTHORITY",
-      "file": "Screenshot 2026-10-18 101907.png",
-      "sha256": "a364f3c6558732e2e4540eab59efebc94067bcc10f5cbd54dc36f97d366405a5"
+      "role": "STYLE_ONLY",
+      "file": "Foto 1.jpg",
+      "sha256": "ee3edfb55a435811fabad7c43c20185f42ae3deb36d990c73f343b12ec043d88"
     },
     "pilot": {
       "recipeId": "a07",
@@ -44,20 +44,9 @@
     },
     "qa": {
       "technical": "PASS",
-      "visual": "PASS_V3_SMOOTH_VECTOR_BORDER_FIXED_NEEDLE_SHAPE_95_GREEN_380_REFERENCE_975_RED",
-      "owner": "CANDIDATE_V3_REVIEW_REQUIRED",
+      "visual": "PASS_PIXEL_IDENTICAL_TO_EXISTING_FROZEN_A07_GAUGE",
+      "owner": "DYNAMIC_COMPONENTIZATION_REJECTED_KEEP_EXISTING_FOOD_PORTRAIT_GAUGE",
       "automaticFreeze": false
-    },
-    "dynamicCandidate": {
-      "shell": "tools/food-portrait-pipeline/assets/gauge-shell-canonical-v2.svg",
-      "needle": "tools/food-portrait-pipeline/assets/gauge-needle-canonical-v2.svg",
-      "motionContract": "tools/food-portrait-pipeline/deterministic-gauge-motion.cjs",
-      "previews": [
-        "docs/food-portrait-pipeline/candidates/deterministic-gauge-motion-95.png",
-        "docs/food-portrait-pipeline/candidates/deterministic-gauge-motion-380.png",
-        "docs/food-portrait-pipeline/candidates/deterministic-gauge-motion-975.png"
-      ],
-      "behavior": "one 220ms non-overshooting transition; zero duration under reduced motion; exact kcal text retained above 1000 while needle clamps at red maximum"
     }
   },
   "recordedCorrections": [
@@ -65,13 +54,7 @@
     "Rejected second geometry because moving the pivot broke angular alignment with the colored zones.",
     "The deterministic SVG redraw was rejected by the owner because it did not match the gauges in approved Food Portraits.",
     "Both SVG assets were withdrawn; the replacement is an exact decoded crop from the owner-approved FROZEN a07 asset.",
-    "The first dynamic calibration failed visual QA because 975 kcal landed in orange; it was not accepted.",
-    "A single symmetric correction then pushed 95 kcal below green; it was not accepted.",
-    "The physical arc is asymmetric, so the final candidate uses a piecewise monotonic visual transform anchored at 95, 270 and 975 kcal while preserving the FROZEN logical scale.",
-    "The owner rejected candidate v1 because it was visibly rasterized and retained halos from the old needle position.",
-    "Candidate v2 uses 2x runtime layers, a restored clean dial face, a complete fixed pivot and a separately antialiased deterministic shaft; no previous-position shaft pixels are present in the moving layer.",
-    "Dynamic candidate v2 passed technical QA but was rejected by the owner because the outer border was irregular and the needle geometry did not match prior Food Portrait gauges.",
-    "Candidate v3 replaces the moving layers with deterministic vector geometry traced from the owner-provided 380 kcal Food Portrait reference: one continuous smooth housing and one fixed needle silhouette rotating around [232,184].",
-    "Candidate v3 passed three-point visual QA at 95, 380 and 975 kcal but remains blocked until explicit owner approval."
+    "Dynamic shell, needle and value componentization was attempted and rejected because every separated reconstruction changed a gauge that was already visually correct in approved Food Portraits.",
+    "The separate gauge engine is withdrawn. Food Portrait production keeps the FROZEN raster gauge contract; QA checks exact kcal and the mapped needle zone without redrawing the component."
   ]
 }

@@ -7,7 +7,7 @@ const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 function preflight({root,vesselId,recipeId,kcal,expectedRecipeAssetSha256}){
  const blockers=[],evidence={};
  const geometryPath=path.join(root,'G5','vessel-geometry.json');
- const contractPath=path.join(root,'tools','food-portrait-pipeline','deterministic-gauge-contract.json');
+ const stylePath=path.join(root,'docs','food-portrait-pipeline','food-portrait-style-frozen-v1.json');
  const recipePath=path.join(root,'docs','food-portrait-pipeline',`${recipeId}-plate-frozen-v1.json`);
  if(!fs.existsSync(geometryPath))blockers.push('VESSEL_GEOMETRY_MISSING');
  else {
@@ -25,24 +25,15 @@ function preflight({root,vesselId,recipeId,kcal,expectedRecipeAssetSha256}){
     blockers.push('VESSEL_BODY_SHA_MISMATCH');
   }
  }
- if(!fs.existsSync(contractPath))blockers.push('GAUGE_CONTRACT_MISSING');
+ if(!fs.existsSync(stylePath))blockers.push('FOOD_PORTRAIT_STYLE_CONTRACT_MISSING');
  else {
-  const contract=read(contractPath);evidence.gaugeContract={schema:contract.schema,status:contract.status};
-  for(const role of ['canonicalMaster','shell','needle']){
-   const asset=contract.assets?.[role],assetPath=asset?.path&&path.join(root,asset.path);
-   if(!assetPath||!fs.existsSync(assetPath))blockers.push(`GAUGE_${role.toUpperCase()}_MISSING`);
-   else {
-    const actual=sha(assetPath);evidence[`gauge${role[0].toUpperCase()+role.slice(1)}`]={expected:asset.sha256,actual};
-    if(actual!==asset.sha256)blockers.push(`GAUGE_${role.toUpperCase()}_SHA_MISMATCH`);
-   }
-  }
-  if(contract.schema!=='mealup-food-portrait-deterministic-gauge-v1'||
-    contract.calibration?.rangeKcal?.[0]!==0||contract.calibration?.rangeKcal?.[1]!==1000||
-    contract.calibration?.anglesDegrees?.[0]!==-60||contract.calibration?.anglesDegrees?.[1]!==60)
+  const style=read(stylePath);const gauge=style.gaugeBehavior;
+  evidence.gaugeContract={schema:style.schema,status:style.status,rendering:'FOOD_PORTRAIT_RASTER'};
+  if(style.schema!=='mealup-food-portrait-style-frozen-v1'||style.status!=='FROZEN'||
+    gauge?.minimumKcal!==0||gauge?.maximumKcal!==1000||
+    gauge?.minimumAngleDegrees!==-60||gauge?.maximumAngleDegrees!==60||
+    style.separationRule?.gaugeVisibleInCandidateRaster!==true)
    blockers.push('GAUGE_NONCANONICAL_FOOD_PORTRAIT_CALIBRATION');
-  if(contract.status!=='DYNAMIC_COMPONENT_FROZEN'||
-    contract.approval?.componentization!=='FROZEN_PIXEL_IDENTICAL')
-   blockers.push('GAUGE_DYNAMIC_LAYER_OWNER_APPROVAL_PENDING');
  }
  const state=gaugeState(kcal);evidence.foodPortraitGauge=state;
  if(!fs.existsSync(recipePath))blockers.push('FROZEN_RECIPE_MANIFEST_MISSING');
