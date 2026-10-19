@@ -942,3 +942,11 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Causa verificata: shell a risoluzione nativa e ombra residua incorporata nel layer raster estratto della lancetta.
 - Candidate v2: shell e lancetta a `1020×840`, quadrante centrale ripulito, perno fisso completo e stelo antialias separato; la rotazione non trasporta più pixel della posizione precedente.
 - QA visuale ripetuto a `95`, `270` e `975 kcal`: lancetta rispettivamente nel verde, posa canonica e rosso; nessun freeze automatico, approvazione owner ancora necessaria.
+
+### Correzione owner candidate dinamica v3
+
+- Candidate v2 respinta: bordo esterno irregolare e lancetta non coerente per forma e posa con i gauge Food Portrait precedenti.
+- Il riferimento proprietario `Screenshot 2026-10-18 101907.png` (380 kcal) è ora autorità geometrica esplicita, non semplice riferimento di stile.
+- Candidate v3: housing vettoriale continuo con bordi regolari e un solo stelo vettoriale di forma fissa; durante la microanimazione cambia esclusivamente la rotazione attorno al perno `[232,184]`.
+- Calibrazione visuale verificata a `95`, `380` e `975 kcal`: verde, posa del riferimento e rosso. Nessun alone raster della posizione precedente è possibile nei due layer vettoriali separati.
+- Stato: `DYNAMIC_COMPONENT_CANDIDATE_V3_QA_PASS`; nessun freeze automatico. Resta obbligatoria l'approvazione visiva esplicita del proprietario.

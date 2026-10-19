@@ -14,7 +14,7 @@ test('dynamic gauge candidate leaves only owner approval closed',()=>{
  assert.equal(r.evidence.gaugeShell.actual,r.evidence.gaugeShell.expected);
  assert.equal(r.evidence.gaugeNeedle.actual,r.evidence.gaugeNeedle.expected);
  assert.deepEqual(r.evidence.gaugeContract,{
-  schema:'mealup-food-portrait-deterministic-gauge-v1',status:'DYNAMIC_COMPONENT_CANDIDATE_V2_QA_PASS'});
+  schema:'mealup-food-portrait-deterministic-gauge-v1',status:'DYNAMIC_COMPONENT_CANDIDATE_V3_QA_PASS'});
  assert.ok(Math.abs(r.evidence.foodPortraitGauge.angleDegrees-(-27.6))<1e-9);
  assert.equal(r.evidence.recipeAsset.sha256,'0277d9faf985ff415afb80f6de74a272743c6a9f939995ea7419839cb6cab299');
 });

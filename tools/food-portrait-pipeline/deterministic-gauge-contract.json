@@ -1,10 +1,10 @@
 {
   "schema": "mealup-food-portrait-deterministic-gauge-v1",
-  "status": "DYNAMIC_COMPONENT_CANDIDATE_V2_QA_PASS",
+  "status": "DYNAMIC_COMPONENT_CANDIDATE_V3_QA_PASS",
   "reference": {
-    "role": "STYLE_ONLY",
-    "file": "Foto 1.jpg",
-    "sha256": "ee3edfb55a435811fabad7c43c20185f42ae3deb36d990c73f343b12ec043d88"
+    "role": "GEOMETRY_AUTHORITY",
+    "file": "Screenshot 2026-10-18 101907.png",
+    "sha256": "a364f3c6558732e2e4540eab59efebc94067bcc10f5cbd54dc36f97d366405a5"
   },
   "assets": {
     "canonicalMaster": {
@@ -17,17 +17,17 @@
       "pixelIdentity": "EXACT_DECODED_CROP_NO_REDRAW"
     },
     "shell": {
-      "path": "tools/food-portrait-pipeline/assets/gauge-shell-canonical.png",
-      "sha256": "c74e237b68007c228efbfa5f4522524d2f677e088b7809b54ff163e76b7ecaf6",
-      "width": 1020,
-      "height": 840
+      "path": "tools/food-portrait-pipeline/assets/gauge-shell-canonical-v2.svg",
+      "sha256": "b66a85a68bf067d9c8e28a8841446c8c8de3ae3423536c2eadeabd8c4b40c328",
+      "width": 484,
+      "height": 354
     },
     "needle": {
-      "path": "tools/food-portrait-pipeline/assets/gauge-needle-canonical.png",
-      "sha256": "4b9dede24259477aac8862d11ab3fbcb96156dbf5c4addcd13189e1ede8a2c37",
-      "width": 1020,
-      "height": 840,
-      "pivotPx": [248, 232]
+      "path": "tools/food-portrait-pipeline/assets/gauge-needle-canonical-v2.svg",
+      "sha256": "0f437c27c34b68af69cb1581fb786e98dce598b2d5304996cdf0c9435f3366f8",
+      "width": 484,
+      "height": 354,
+      "pivotPx": [232, 184]
     }
   },
   "calibration": {
@@ -38,9 +38,9 @@
     "zones": ["GREEN", "LIME", "YELLOW", "ORANGE", "RED"],
     "visualTransform": "PIECEWISE_MONOTONIC_CALIBRATED_TO_PHYSICAL_ARC",
     "anchors": [
-      {"kcal": 95, "contractAngleDegrees": -48.6, "rotationFromA07Degrees": -14},
-      {"kcal": 270, "contractAngleDegrees": -27.6, "rotationFromA07Degrees": 0},
-      {"kcal": 975, "contractAngleDegrees": 57, "rotationFromA07Degrees": 121}
+      {"kcal": 95, "contractAngleDegrees": -48.6, "rotationFromReferenceDegrees": -19},
+      {"kcal": 380, "contractAngleDegrees": -14.4, "rotationFromReferenceDegrees": 0},
+      {"kcal": 975, "contractAngleDegrees": 57, "rotationFromReferenceDegrees": 116}
     ]
   },
   "value": {
@@ -50,8 +50,8 @@
   },
   "approval": {
     "automatic": false,
-    "visualAuthority": "INHERITED_FROM_FROZEN_A07_FOR_EXEMPLAR_ONLY",
-    "componentization": "CANDIDATE_V2_QA_PASS_OWNER_REVIEW_REQUIRED"
+    "visualAuthority": "OWNER_380_KCAL_FOOD_PORTRAIT_REFERENCE",
+    "componentization": "CANDIDATE_V3_QA_PASS_OWNER_REVIEW_REQUIRED"
   },
   "motion": {
     "durationMs": 220,

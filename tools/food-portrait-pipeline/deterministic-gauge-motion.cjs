@@ -1,19 +1,18 @@
 'use strict';
 const {gaugeState}=require('./gauge-mapping.cjs');
 
-const SOURCE=Object.freeze({kcal:270,angleDegrees:-27.6,pivotPx:Object.freeze([248,232])});
-// The frozen logical scale is -60..60. The photographed physical arc has a
-// wider sweep: a07 (-27.6) is the zero-rotation source and approved d32 (57)
-// supplies the red-end calibration. The extracted shaft needs 121 degrees of
-// clockwise CSS rotation to land visibly inside the red segment.
+const SOURCE=Object.freeze({kcal:380,angleDegrees:-14.4,pivotPx:Object.freeze([232,184])});
+// The frozen logical scale is -60..60. The owner-provided 380 kcal gauge fixes
+// the zero-rotation geometry; the outer anchors keep the same shaft shape while
+// placing low values in green and high values in red.
 const VISUAL_CALIBRATION=Object.freeze({
- sourceContractAngleDegrees:-27.6,
+ sourceContractAngleDegrees:-14.4,
  greenAnchorContractAngleDegrees:-48.6,
- greenAnchorRotationDegrees:-14,
+ greenAnchorRotationDegrees:-19,
  redAnchorContractAngleDegrees:57,
- redAnchorRotationDegrees:121,
- lowRotationPerContractDegree:14/(-27.6-(-48.6)),
- highRotationPerContractDegree:121/(57-(-27.6))
+ redAnchorRotationDegrees:116,
+ lowRotationPerContractDegree:19/(-14.4-(-48.6)),
+ highRotationPerContractDegree:116/(57-(-14.4))
 });
 const MOTION=Object.freeze({durationMs:220,easing:'cubic-bezier(0.2,0,0,1)',
  reducedMotionDurationMs:0,overshoot:false,loop:false});
