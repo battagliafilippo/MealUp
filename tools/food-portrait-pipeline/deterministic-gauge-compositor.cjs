@@ -36,7 +36,8 @@ function gaugeLayer({root,kcal,animate=true}){
    foodMaximumHeightPercent:geometry.foodPortrait.maximumSubjectHeightPercent,
    gaugeWidthPercent:geometry.gauge.widthPercent,
    gaugeTopPercent:geometry.gauge.topPercent,
-   gaugeRightPercent:geometry.gauge.rightPercent
+   gaugeRightPercent:geometry.gauge.rightPercent,
+   compactCard:geometry.gauge.compactCard
   },
   renderOrder:['FOOD_PORTRAIT','GAUGE_SHELL','GAUGE_NEEDLE','EXACT_KCAL_TEXT'],
   imageGenerationScope:'FOOD_ONLY_NO_GAUGE_NO_TEXT',

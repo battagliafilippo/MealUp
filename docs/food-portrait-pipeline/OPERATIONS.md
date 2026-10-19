@@ -987,3 +987,16 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Stato:** `CARD_GEOMETRY_V1_FROZEN_OWNER_DELEGATED`.
 
 **Prossimo micro-step necessario:** applicare questa geometria al prossimo ciclo singolo; prima di qualunque integrazione UI, misurare la larghezza CSS reale della card senza modificare il tester.
+
+### Verifica geometria sulla mini-card reale — sola lettura
+
+- Misurato il layout esistente senza modificarlo: viewport 390 px, griglia a due colonne, gap 12 px, card circa 175 px, padding 12 px, area arte `151×104 px`; Home con area arte alta 144 px.
+- Confermato lo stesso rapporto esterno: gauge `34%` dell’area arte, margini `2,5%`; nessuna geometria specifica per ricetta.
+- Per evitare perdita di leggibilità nella mini-card, testo dinamico con minimo `10 px` per il numero e `8 px` per `kcal`.
+- Eliminata nella specifica la duplicazione informativa: quando il gauge è attivo, la riga metadati non ripete le kcal e conserva il tempo.
+- QA indipendente finale: `PASS_COMPACT_CARD_CORRECTED`; cibo dominante, gauge secondario, testo completo leggibile e nessuna collisione.
+- Il tester e la PWA sono rimasti in sola lettura; la regola è stata integrata esclusivamente nel contratto/compositore del branch isolato.
+
+**Stato:** `CARD_GEOMETRY_V1_FROZEN / DETAIL_AND_COMPACT_QA_PASS`.
+
+**Prossimo micro-step necessario:** usare lo standard nel prossimo ciclo Food Portrait singolo autorizzato; l’integrazione effettiva nelle card resta un gate separato.

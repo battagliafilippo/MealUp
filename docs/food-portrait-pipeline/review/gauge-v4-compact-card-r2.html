@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="it">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MealUp · compact recipe-card geometry QA</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:390px;height:240px;overflow:hidden;background:#fff8ef;font-family:Arial,sans-serif}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px}
+.card{width:175px;padding:12px;border:1px solid #eadbca;border-radius:18px;background:#fffaf3;box-shadow:0 8px 20px #5b30141a}
+.art{position:relative;width:151px;height:104px;overflow:hidden;border-radius:14px;background:#fff8e9}
+.portrait{display:block;width:100%;height:100%;object-fit:contain}
+.gauge{position:absolute;z-index:2;right:2.5%;top:2.5%;width:34%;aspect-ratio:510/420;container-type:inline-size}
+.gauge img{position:absolute;inset:0;width:100%;height:100%}
+.needle{transform:rotate(-1.2deg);transform-origin:49.8039215686% 55%}
+.value{position:absolute;left:33.333%;top:63.571%;width:33.333%;text-align:center;color:#292825;font-weight:800;font-size:max(10.588cqw,10px);line-height:.78}
+.value small{display:block;font-size:max(57.407%,8px);line-height:1}
+.title{margin:8px 0 3px;font-size:13.76px;font-weight:700;line-height:1.15}.meta{font-size:11px;color:#696057}
+</style>
+<main class="grid">
+ <article class="card">
+  <div class="art">
+   <img class="portrait" src="../candidates/r2-poke-visual-candidate-002.png" alt="Poke bowl tonno e avocado">
+   <div class="gauge" role="img" aria-label="490 chilocalorie">
+    <img src="../../../tools/food-portrait-pipeline/assets/gauge-frozen-v1/gauge-shell.png" alt="">
+    <img class="needle" src="../../../tools/food-portrait-pipeline/assets/gauge-frozen-v1/gauge-needle.png" alt="">
+    <div class="value">490<small>kcal</small></div>
+   </div>
+  </div>
+  <div class="title">Poke bowl tonno e avocado</div>
+  <div class="meta">20 min</div>
+ </article>
+</main>
+</html>

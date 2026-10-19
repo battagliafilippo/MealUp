@@ -21,6 +21,13 @@
     "pivotPercent": [49.8039215686, 55],
     "minimumMobileWidthPixelsAt390Card": 132.6,
     "minimumValidatedCardWidthPixels": 390,
+    "compactCard": {
+      "outerWidthPixelsAt390Viewport": 175,
+      "artBoxPixels": [151, 104],
+      "numberMinimumPixels": 10,
+      "unitMinimumPixels": 8,
+      "duplicateKcalMetadataPolicy": "SUPPRESS_WHEN_GAUGE_ACTIVE"
+    },
     "zOrder": 20
   },
   "selectionRationale": [
@@ -30,7 +37,7 @@
   ],
   "approval": {
     "technicalQa": "PASS",
-    "visualQa": "PASS_WITH_MOBILE_TEXT_RESERVE",
+    "visualQa": "PASS_DETAIL_AND_COMPACT_CARD",
     "owner": "DELEGATED_DECISION_APPROVED_2026_10_19",
     "automaticFreeze": false
   }

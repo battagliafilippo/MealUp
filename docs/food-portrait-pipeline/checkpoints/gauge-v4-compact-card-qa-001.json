@@ -1,0 +1,49 @@
+{
+  "schema": "mealup-food-portrait-compact-card-checkpoint-v1",
+  "date": "2026-10-19",
+  "status": "PASS_COMPACT_CARD_CORRECTED",
+  "measurementSource": {
+    "filesReadOnly": ["assets/mealup-v124.css", "dist/index.html"],
+    "viewportPixels": 390,
+    "gridColumns": 2,
+    "gridGapPixels": 12,
+    "cardOuterWidthPixels": 175,
+    "cardPaddingPixels": 12,
+    "artBoxPixels": [151, 104]
+  },
+  "frozenGeometry": {
+    "gaugeWidthPercentOfArt": 34,
+    "topPercent": 2.5,
+    "rightPercent": 2.5,
+    "numberMinimumPixels": 10,
+    "unitMinimumPixels": 8,
+    "duplicateKcalMetadataPolicy": "SUPPRESS_WHEN_GAUGE_ACTIVE"
+  },
+  "evidence": {
+    "html": {
+      "path": "docs/food-portrait-pipeline/review/gauge-v4-compact-card-r2.html",
+      "sha256": "3c4bd3d8dfcb8fe12b6d6bed17578e6df4d4ab446ca73239994de4323b47771a"
+    },
+    "render": {
+      "path": "docs/food-portrait-pipeline/review/gauge-v4-compact-card-r2-390.png",
+      "sha256": "0a2c1c9d3d9188cff408c63a0d0e28279d9f7bc1c5786f828c0e701bdca92a1b",
+      "bytes": 27161
+    }
+  },
+  "independentVisualQa": {
+    "status": "PASS_COMPACT_CARD_CORRECTED",
+    "foodDominant": "PASS",
+    "gaugeSecondaryAndComplete": "PASS",
+    "exactKcalReadable": "PASS",
+    "duplicateKcalRemoved": "PASS",
+    "hierarchy": "PASS",
+    "collisions": "PASS"
+  },
+  "invariants": {
+    "unitMustRemainAtLeast8CssPixels": true,
+    "noFurtherRasterDownscaleClaimed": true,
+    "testerModified": false,
+    "pwaModified": false,
+    "r2Promoted": false
+  }
+}

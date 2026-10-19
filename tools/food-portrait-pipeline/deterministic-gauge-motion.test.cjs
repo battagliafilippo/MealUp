@@ -62,4 +62,8 @@ test('all recipe cards share one frozen proportional geometry', () => {
   assert.equal(geometry.gauge.topPercent,2.5);
   assert.equal(geometry.gauge.rightPercent,2.5);
   assert.equal(geometry.gauge.minimumValidatedCardWidthPixels,390);
+  assert.deepEqual(geometry.gauge.compactCard.artBoxPixels,[151,104]);
+  assert.equal(geometry.gauge.compactCard.numberMinimumPixels,10);
+  assert.equal(geometry.gauge.compactCard.unitMinimumPixels,8);
+  assert.equal(geometry.gauge.compactCard.duplicateKcalMetadataPolicy,'SUPPRESS_WHEN_GAUGE_ACTIVE');
 });
