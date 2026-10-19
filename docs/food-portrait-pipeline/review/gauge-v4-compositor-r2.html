@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="it">
+<meta charset="utf-8">
+<title>MealUp Food Portrait · gauge v4 compositor QA</title>
+<style>
+html,body{margin:0;width:1254px;height:1254px;overflow:hidden;background:#fff8e9}
+.portrait{position:absolute;inset:0;width:1254px;height:1254px}
+.gauge{position:absolute;right:18px;top:18px;width:510px;height:420px;transform:scale(.72);transform-origin:top right}
+.gauge img{position:absolute;inset:0;width:510px;height:420px}
+.needle{transform-origin:254px 231px;animation:settle 680ms cubic-bezier(.2,.75,.24,1) both}
+.value{position:absolute;left:170px;top:267px;width:170px;text-align:center;color:#292825;font:700 54px/.82 Arial,sans-serif}
+.value small{display:block;font-size:31px;line-height:1.05}
+@keyframes settle{0%{transform:rotate(-60deg)}58%{transform:rotate(5.8deg)}78%{transform:rotate(-4.2deg)}100%{transform:rotate(-1.2deg)}}
+@media(prefers-reduced-motion:reduce){.needle{animation:none;transform:rotate(-1.2deg)}}
+</style>
+<img class="portrait" src="../candidates/r2-poke-visual-candidate-002.png" alt="Poke bowl tonno e avocado">
+<div class="gauge" role="img" aria-label="490 chilocalorie, lancetta nella zona gialla">
+  <img src="../../../tools/food-portrait-pipeline/assets/gauge-frozen-v1/gauge-shell.png" alt="">
+  <img class="needle" src="../../../tools/food-portrait-pipeline/assets/gauge-frozen-v1/gauge-needle.png" alt="">
+  <div class="value">490<small>kcal</small></div>
+</div>
+</html>

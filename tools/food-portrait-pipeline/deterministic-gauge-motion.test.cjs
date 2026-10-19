@@ -35,3 +35,13 @@ test('approved compositor emits a verified food-only overlay plan', () => {
   assert.equal(layer.imageGenerationScope,'FOOD_ONLY_NO_GAUGE_NO_TEXT');
   assert.deepEqual(layer.renderOrder,['FOOD_PORTRAIT','GAUGE_SHELL','GAUGE_NEEDLE','EXACT_KCAL_TEXT']);
 });
+
+test('non-generative r2 compositor checkpoint preserves gates', () => {
+  const checkpoint=JSON.parse(fs.readFileSync(path.join(root,'docs','food-portrait-pipeline','checkpoints','gauge-v4-compositor-r2-qa-001.json'),'utf8'));
+  assert.equal(checkpoint.status,'PASS_NON_GENERATIVE_COMPOSITION_QA');
+  assert.equal(checkpoint.composition.imageGenerationCalls,0);
+  assert.equal(checkpoint.independentVisualQa.status,'PASS_VISUAL_QA_ONLY');
+  assert.equal(checkpoint.gates.sourcePortraitPromoted,false);
+  assert.equal(checkpoint.gates.batchReopened,false);
+  assert.equal(checkpoint.gates.do01Generated,false);
+});

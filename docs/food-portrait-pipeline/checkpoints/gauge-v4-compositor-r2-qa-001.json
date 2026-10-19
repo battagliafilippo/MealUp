@@ -1,0 +1,62 @@
+{
+  "schema": "mealup-food-portrait-gauge-compositor-checkpoint-v1",
+  "date": "2026-10-19",
+  "branch": "experiment/food-portrait-pipeline-20261015",
+  "status": "PASS_NON_GENERATIVE_COMPOSITION_QA",
+  "recipe": {
+    "id": "r2",
+    "kcal": 490,
+    "gaugeAngleDegrees": -1.2,
+    "gaugeZone": "YELLOW"
+  },
+  "sourcePortrait": {
+    "path": "docs/food-portrait-pipeline/candidates/r2-poke-visual-candidate-002.png",
+    "sha256": "ad2cca0c90da0c1137b5e48e885b009727cda6dc661200ee2ffb565458960f85",
+    "status": "REJECTED_AUDIT_FIXTURE_NOT_PROMOTED",
+    "gaugeBakedIn": false
+  },
+  "composition": {
+    "html": "docs/food-portrait-pipeline/review/gauge-v4-compositor-r2.html",
+    "htmlSha256": "63a8584fb9b122996f722f088bfa0e88669a13f755107e5c1850176da2d59995",
+    "render": "docs/food-portrait-pipeline/review/gauge-v4-compositor-r2.png",
+    "renderSha256": "f266dd6cd0cda312a8d696723b8c68a85445dd29f9eeb3f8b34c6e56d35c425a",
+    "dimensions": [1254, 1254],
+    "bytes": 1665578,
+    "imageGenerationCalls": 0
+  },
+  "technicalQa": {
+    "status": "PASS",
+    "shellShaVerified": true,
+    "needleShaVerified": true,
+    "sourcePortraitShaUnchanged": true,
+    "exactKcalText": true,
+    "mappingVerifiedByAutomatedTest": true
+  },
+  "independentVisualQa": {
+    "reviewer": "AI_OFFICE_INDEPENDENT_QA_ROLE",
+    "status": "PASS_VISUAL_QA_ONLY",
+    "checks": {
+      "singleDish": "PASS",
+      "singleGauge": "PASS",
+      "gaugeCompleteAndNotClipped": "PASS",
+      "exact490Kcal": "PASS",
+      "needleInYellowZone": "PASS",
+      "needleNoGhosting": "PASS",
+      "mobileReadability": "PASS",
+      "sourceNotPromoted": "PASS"
+    },
+    "limits": [
+      "Perceptual pixel review does not independently prove the kcal-to-angle formula.",
+      "No physical-device rendering was tested."
+    ]
+  },
+  "gates": {
+    "gaugeFrozen": true,
+    "sourcePortraitPromoted": false,
+    "batchReopened": false,
+    "do01Generated": false,
+    "deploymentAllowed": false,
+    "automaticAcceptance": false
+  },
+  "nextStep": "Use the verified compositor contract in the next separately authorized single-candidate Food Portrait cycle; keep pre-lot QA and owner gates."
+}

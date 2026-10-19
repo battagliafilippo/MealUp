@@ -960,3 +960,16 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 **Stato:** `GAUGE_V4_FROZEN / DETERMINISTIC_COMPOSITOR_CONNECTED / EXECUTION_IDLE`.
 
 **Prossimo micro-step necessario:** eseguire una prova di composizione non generativa su un Food Portrait esistente e sottoporla a QA indipendente prima di riaprire qualunque lotto.
+
+### Prova non generativa compositore gauge v4 — r2
+
+- Usato come fixture il Food Portrait r2 già esistente e privo di gauge; nessuna chiamata ImageGen e nessuna modifica ai suoi byte.
+- Applicati in post-composizione scocca FROZEN, lancetta mobile e testo esatto `490 kcal`; mapping verificata: `-1,2°`, zona gialla.
+- QA tecnico PASS: output `1254×1254`, hash di source/scocca/lancetta verificati, un solo gauge e nessuna duplicazione nel raster sorgente.
+- QA visivo indipendente PASS sugli otto controlli: singolo piatto, singolo gauge, gauge completo, testo esatto, zona corretta, nessun alone, leggibilità mobile e nessuna promozione di r2.
+- Limiti registrati: la verifica visiva non prova da sola la formula matematica e non sostituisce una prova su dispositivo fisico.
+- Il precedente r2 resta una fixture respinta conservata per audit; non viene approvato, congelato o integrato.
+
+**Stato:** `COMPOSITOR_NON_GENERATIVE_QA_PASS / EXECUTION_IDLE`. Lotto ancora chiuso; `do01` non generato.
+
+**Prossimo micro-step necessario:** usare il contratto verificato nel prossimo ciclo singolo autorizzato, mantenendo QA pre-lotto e gate proprietario.
