@@ -245,14 +245,16 @@ jobs:
           assert.equal(p.contract.kcal,490);
           assert.ok(Math.abs(p.contract.gaugeAngleDegrees-(-1.2))<1e-9);
           assert.equal(p.contract.gaugeZone,'YELLOW');
-          assert.equal(p.contract.frozenGaugeBakedInRequired,true);
+          assert.equal(p.contract.frozenGaugeBakedInRequired,false);
+          assert.equal(p.contract.deterministicGaugeCompositionRequired,true);
+          assert.equal(p.contract.imageGenerationScope,'FOOD_ONLY_NO_GAUGE_NO_TEXT');
           assert.equal(p.contract.noAdditionalUiBakedIn,true);
           assert.equal(p.contract.noInfographicOrMultiCard,true);
           assert.equal(p.imagesGenerated,0);
           assert.equal(p.autoAcceptanceAllowed,false);
           for(const food of ['tonno','riso','avocado','salsa di soia','sesamo'])
             assert.ok(p.promptText.includes(food),'missing '+food);
-          console.log('PASS isolated prompt packet: exactly r2, five ingredients, frozen gauge required');
+          console.log('PASS isolated prompt packet: exactly r2, five ingredients, food-only generation and frozen gauge compositor');
           NODE
       - name: Calibrate guarded Visual Production cycle on existing v10 only
         run: |
