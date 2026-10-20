@@ -12,6 +12,7 @@ const {inspect: inspectFastBackground} = require('./fast-background-preflight.cj
 const {TEXTURE_BUDGET, buildDisplayPlan, validateDisplayPlan} = require('./display-role-contract.cjs');
 const {buildQaContract, validateQaReport} = require('./fast-qa-contract.cjs');
 const {compilePrompt} = require('./fast-prompt-compiler.cjs');
+const {evaluateEarlyStyleGate} = require('./fast-early-style-gate.cjs');
 
 const root = path.resolve(__dirname, '..', '..');
 
@@ -27,6 +28,12 @@ test('packet is deterministic, compact and source/reference locked', () => {
   assert.equal('queue' in first, false);
   assert.equal('history' in first, false);
   assert.equal(first.constraints.maximumImages, 1);
+  assert.equal(first.constraints.gaugeForbiddenInCandidateRaster, true);
+  assert.equal(first.constraints.vesselForbiddenInCandidateRaster, true);
+  assert.equal(first.constraints.transparentBackgroundRequired, true);
+  assert.equal(first.constraints.deterministicVesselCompositionRequired, true);
+  assert.equal(first.constraints.deterministicGaugeCompositionRequired, true);
+  assert.equal(first.gaugeTarget.compositorOnly, true);
   assert.equal(first.gates.independentVisualQaRequired, true);
   assert.equal(first.gates.automaticAcceptance, false);
   assert.equal(first.gates.budgetEUR, 0);
@@ -124,7 +131,11 @@ test('do04 display plan binds cocoa to the three balls and forbids a loose bed',
   assert.ok(packet.displayPlan.roles.FORBIDDEN_VISIBLE.includes('LOOSE_BED'));
   const compiled = compilePrompt(packet);
   assert.match(compiled.text, /zero loose residue, bed, pile or dusting/);
-  assert.match(compiled.text, /Avoid photographic micro-texture: no pores, fibers, powder grain/);
+  assert.match(compiled.text, /FORBIDDEN PHOTOREALISM: no translucent wet flesh/);
+  assert.match(compiled.text, /FOOD-ONLY MealUp Food Portrait candidate/);
+  assert.match(compiled.text, /Do not draw any gauge/);
+  assert.match(compiled.text, /transparent-background food layer only/);
+  assert.match(compiled.text, /do not render the vessel/);
 });
 
 test('display plan is total and rejects missing or duplicated classifications', () => {
@@ -181,10 +192,11 @@ test('prompt compiler fails closed when display or texture contract drifts', () 
   assert.throws(() => compilePrompt(missingRole), /PACKET_SHA_MISMATCH/);
 });
 
-test('QA contract requires five independent PASS verdicts and both views', () => {
+test('QA contract checks Toys 3D style and gauge absence first, with independent review', () => {
   const packet = buildPacket({root, recipeId: 'do04'});
   const contract = buildQaContract(packet);
-  assert.deepEqual(contract.requiredVerdicts, ['CONTENT_COUNT', 'ATTACHMENT_GARNISH', 'STYLE_MICROTEXTURE', 'VESSEL_CROP', 'GAUGE_TEXT']);
+  assert.deepEqual(contract.requiredVerdicts, ['STYLE_TOYS_3D', 'PHOTOREALISM_REJECTION', 'ALPHA_BACKGROUND', 'GAUGE_ABSENCE', 'VESSEL_ABSENCE', 'CONTENT_COUNT', 'ATTACHMENT_GARNISH', 'VESSEL_CROP']);
+  assert.deepEqual(contract.earlyExitOrder, ['STYLE_TOYS_3D', 'PHOTOREALISM_REJECTION', 'ALPHA_BACKGROUND', 'GAUGE_ABSENCE', 'VESSEL_ABSENCE']);
   const report = {
     packetSha256: packet.packetSha256,
     canonicalModelSetSha256: packet.ownerModelSet.manifestSha256,
@@ -195,9 +207,21 @@ test('QA contract requires five independent PASS verdicts and both views', () =>
     overall: 'PASS_CANDIDATE_ONLY'
   };
   assert.equal(validateQaReport(contract, report), true);
-  report.verdicts.STYLE_MICROTEXTURE = 'FAIL';
-  assert.throws(() => validateQaReport(contract, report), /QA_VERDICT_FAIL:STYLE_MICROTEXTURE/);
-  report.verdicts.STYLE_MICROTEXTURE = 'PASS';
+  report.verdicts.STYLE_TOYS_3D = 'FAIL';
+  assert.throws(() => validateQaReport(contract, report), /QA_VERDICT_FAIL:STYLE_TOYS_3D/);
+  report.verdicts.STYLE_TOYS_3D = 'PASS';
   report.reviewer = report.producer;
   assert.throws(() => validateQaReport(contract, report), /QA_REVIEWER_NOT_INDEPENDENT/);
+});
+
+test('early Toys 3D gate stops before deterministic composition and never retries', () => {
+  const pass = Object.fromEntries(['STYLE_TOYS_3D', 'PHOTOREALISM_REJECTION', 'ALPHA_BACKGROUND', 'GAUGE_ABSENCE', 'VESSEL_ABSENCE'].map((key) => [key, 'PASS']));
+  const good = evaluateEarlyStyleGate({producer: 'VISUAL_PRODUCTION', reviewer: 'INDEPENDENT_VISUAL_QA', verdicts: pass});
+  assert.equal(good.status, 'PASS_EARLY_STYLE');
+  assert.equal(good.compositionAllowed, true);
+  const bad = evaluateEarlyStyleGate({producer: 'VISUAL_PRODUCTION', reviewer: 'INDEPENDENT_VISUAL_QA', verdicts: {...pass, STYLE_TOYS_3D: 'FAIL'}});
+  assert.equal(bad.status, 'FAIL_CANDIDATE_ONLY');
+  assert.equal(bad.failedVerdict, 'STYLE_TOYS_3D');
+  assert.equal(bad.compositionAllowed, false);
+  assert.equal(bad.automaticRetry, false);
 });

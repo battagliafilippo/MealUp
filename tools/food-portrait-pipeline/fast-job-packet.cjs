@@ -8,8 +8,8 @@ const {verifyCanonicalModelSet, selectVisualReference} = require('./canonical-mo
 const {TEXTURE_BUDGET, buildDisplayPlan} = require('./display-role-contract.cjs');
 
 const PACKET_SCHEMA = 'mealup-food-portrait-fast-job-packet-v1';
-const PROMPT_VERSION = 'FPP_FAST_PROMPT_V2_DISPLAY_ROLE_TEXTURE_BUDGET';
-const GATE_VERSION = 'FPP_FROZEN_GATES_V2_DISPLAY_ROLE_TEXTURE_BUDGET';
+const PROMPT_VERSION = 'FPP_FAST_PROMPT_V3_TOYS_3D_FOOD_ONLY';
+const GATE_VERSION = 'FPP_FROZEN_GATES_V3_STYLE_FIRST_SEPARATE_GAUGE';
 const MAX_PACKET_BYTES = 6144;
 const fail = (message) => { throw new Error(message); };
 const sha256Buffer = (value) => crypto.createHash('sha256').update(value).digest('hex');
@@ -98,7 +98,8 @@ function buildPacket(options) {
       exactKcalText: `${facts.kcal} kcal`,
       angleDegrees: gauge.angleDegrees,
       zone: gauge.zone,
-      saturatedHigh: gauge.saturatedHigh
+      saturatedHigh: gauge.saturatedHigh,
+      compositorOnly: true
     },
     displayPlan,
     textureBudget: TEXTURE_BUDGET,
@@ -111,8 +112,13 @@ function buildPacket(options) {
       maximumImages: 1,
       maximumRecipes: 1,
       aspectRatio: '1:1',
-      physicalGaugeRequired: true,
-      exactKcalRequired: true,
+      imageGenerationScope: 'FOOD_ONLY_ALPHA',
+      gaugeForbiddenInCandidateRaster: true,
+      vesselForbiddenInCandidateRaster: true,
+      transparentBackgroundRequired: true,
+      deterministicVesselCompositionRequired: true,
+      deterministicGaugeCompositionRequired: true,
+      exactKcalRequiredInCompositor: true,
       noOtherTextOrUi: true,
       noExtraIngredientsOrProps: true
     },

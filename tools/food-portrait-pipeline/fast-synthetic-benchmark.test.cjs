@@ -32,6 +32,8 @@ test('compiled prompts enforce the owner style envelope against photorealistic d
   const {compilePrompt} = require('./fast-prompt-compiler.cjs');
   const text = compilePrompt(buildPacket({root, recipeId: 'a10'})).text;
   assert.match(text, /MealUp Toys 3D/);
-  assert.match(text, /Avoid photographic micro-texture/);
-  assert.match(text, /maximum-realism boundary/);
+  assert.match(text, /FORBIDDEN PHOTOREALISM/);
+  assert.match(text, /absolute realism ceiling/);
+  assert.match(text, /transparent-background food layer only/);
+  assert.match(text, /Do not draw any gauge/);
 });

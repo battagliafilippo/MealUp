@@ -1,6 +1,15 @@
 'use strict';
 
-const REQUIRED_VERDICTS = Object.freeze(['CONTENT_COUNT', 'ATTACHMENT_GARNISH', 'STYLE_MICROTEXTURE', 'VESSEL_CROP', 'GAUGE_TEXT']);
+const REQUIRED_VERDICTS = Object.freeze([
+  'STYLE_TOYS_3D',
+  'PHOTOREALISM_REJECTION',
+  'ALPHA_BACKGROUND',
+  'GAUGE_ABSENCE',
+  'VESSEL_ABSENCE',
+  'CONTENT_COUNT',
+  'ATTACHMENT_GARNISH',
+  'VESSEL_CROP'
+]);
 
 function buildQaContract(packet) {
   return Object.freeze({
@@ -11,6 +20,7 @@ function buildQaContract(packet) {
     sourceHash: packet.recipeFacts.sourceHash,
     requiredViews: ['CARD_360_SQUARE', 'ORIGINAL_1_TO_1'],
     requiredVerdicts: [...REQUIRED_VERDICTS],
+    earlyExitOrder: ['STYLE_TOYS_3D', 'PHOTOREALISM_REJECTION', 'ALPHA_BACKGROUND', 'GAUGE_ABSENCE', 'VESSEL_ABSENCE'],
     passValue: 'PASS',
     overallPassValue: 'PASS_CANDIDATE_ONLY',
     producerReviewerMustDiffer: true,

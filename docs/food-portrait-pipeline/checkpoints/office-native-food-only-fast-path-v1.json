@@ -1,0 +1,69 @@
+{
+  "schema": "mealup-food-portrait-office-correction-v1",
+  "checkpointId": "office-native-food-only-fast-path-v1",
+  "status": "PASS_READY_FOR_SINGLE_NATIVE_FOOD_ONLY_PILOT",
+  "branch": "experiment/food-portrait-pipeline-20261015",
+  "rootCause": {
+    "failedMethod": "whole-image generative removal from an old baked-gauge Food Portrait",
+    "effects": [
+      "the source's realistic food rendering was inherited",
+      "unrelated pixels changed before late QA",
+      "the cycle spent time on an output that should have failed earlier"
+    ],
+    "quarantinedEvidence": "r3-food-only-removal-cycle-001"
+  },
+  "correctedContract": {
+    "imageGeneration": "one native food-only transparent candidate",
+    "styleCenter": "r2-bowl-ideal",
+    "realismCeiling": "r4-reference",
+    "forbiddenInCandidate": [
+      "photorealism",
+      "vessel",
+      "gauge",
+      "text",
+      "background",
+      "cast shadow"
+    ],
+    "requiredStyle": [
+      "MealUp Toys 3D",
+      "chunky rounded sculpted forms",
+      "simplified geometry",
+      "smooth molded surfaces",
+      "broad soft highlights",
+      "clean saturated color blocks"
+    ],
+    "earlyIndependentGate": [
+      "STYLE_TOYS_3D",
+      "PHOTOREALISM_REJECTION",
+      "ALPHA_BACKGROUND",
+      "GAUGE_ABSENCE",
+      "VESSEL_ABSENCE"
+    ],
+    "postGateComposition": [
+      "deterministic vessel",
+      "immutable deterministic gauge",
+      "exact kcal text",
+      "movable needle position derived from kcal"
+    ],
+    "automaticRetry": false,
+    "candidatesPerCycle": 1,
+    "imageGenInvocationRequirement": "transparent_background=true"
+  },
+  "protectedScope": {
+    "budget": 0,
+    "do01Generated": false,
+    "mainModified": false,
+    "officialTesterModified": false,
+    "pwaModified": false,
+    "externalOfficeModified": false,
+    "frozenGaugeModified": false
+  },
+  "verification": {
+    "pipelineTests": "32/32 PASS",
+    "officeTests": "146/146 PASS",
+    "syntheticCohort": "10/10 under 4096-byte packet and prompt ceilings",
+    "minimumContextByteSavingPercent": 94.13,
+    "visualNonInferiority": "UNVERIFIED_NO_NEW_IMAGE_GENERATED"
+  },
+  "nextGate": "Run exactly one new native r3 food-only transparent candidate, then apply the early independent style gate before any vessel or gauge composition."
+}
