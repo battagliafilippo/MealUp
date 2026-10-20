@@ -1,0 +1,73 @@
+{
+  "schema": "mealup-food-portrait-food-only-removal-cycle-v1",
+  "date": "2026-10-20",
+  "status": "FAIL_CANDIDATE_ONLY_GLOBAL_PIXEL_DRIFT",
+  "recipe": {
+    "id": "r3",
+    "title": "Yogurt bowl proteica ai frutti di bosco",
+    "kcal": 320,
+    "vesselId": "VESSEL_BOWL"
+  },
+  "office": {
+    "preflight": "READY",
+    "productionOwner": "VISUAL_PRODUCTION",
+    "independentQa": "OFFICE_ROLES",
+    "candidateLimit": 1,
+    "automaticRetry": false
+  },
+  "source": {
+    "path": "docs/food-portrait-pipeline/candidates/r3-yogurt-berry-bowl-approved-001.webp",
+    "sha256": "64b23af744baa469be91dfec6ffda39dc6b2f054dddc61a8f1bae6f81ea91cd2",
+    "modified": false
+  },
+  "candidate": {
+    "path": "docs/food-portrait-pipeline/candidates/r3-yogurt-berry-bowl-food-only-candidate-001.png",
+    "sha256": "9793b65852f43b38580c5411d65e9a1038542b4a3fda1a8b08dabedecdc4b19e",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1858010,
+    "format": "png",
+    "imagesGeneratedThisCycle": 1
+  },
+  "technicalQa": {
+    "status": "TECHNICAL_PASS_VISUAL_REVIEW_REQUIRED",
+    "errors": [],
+    "outsideGaugeMask": {
+      "pixelsCompared": 1283882,
+      "changedPixels": 1243426,
+      "changedPercent": 96.8489,
+      "meanMaxChannelDeltaChanged": 4.632,
+      "maxChannelDelta": 213
+    }
+  },
+  "independentVisualQa": {
+    "status": "FAIL_CANDIDATE_ONLY",
+    "gaugeAbsent": "PASS",
+    "textAndUiAbsent": "PASS",
+    "frontVesselButtonPreserved": "PASS",
+    "ingredientsAndVesselPerceptuallyCoherent": "PASS",
+    "localizedEditIntegrity": "FAIL",
+    "blockingReason": "96.8489 percent of pixels outside the permitted gauge mask changed"
+  },
+  "gauge": {
+    "shellSha256": "c2e1a86821e379593fe622b3085f4a4b10f312ef672ba1564f15fcff1beb6996",
+    "needleSha256": "f564b641ef425d0d24ad11c52c0736bfe68d2069a75876b911b5268aa822c5aa",
+    "modified": false,
+    "compositionAttempted": false
+  },
+  "gates": {
+    "ownerApproval": false,
+    "frozen": false,
+    "integration": false,
+    "deployment": false,
+    "automaticAdvance": false
+  },
+  "invariants": {
+    "budgetEUR": 0,
+    "do01Generated": false,
+    "officialTesterModified": false,
+    "pwaModified": false,
+    "mainModified": false
+  },
+  "nextRequiredChange": "replace whole-image generative removal with a truly masked local edit or deterministic reconstruction before any new candidate cycle"
+}
