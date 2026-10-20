@@ -20,3 +20,16 @@ test('wrong recipe asset expectation adds an independent blocker',()=>{
  const r=preflight({root,vesselId:'VESSEL_PLATE',recipeId:'a07',kcal:270,expectedRecipeAssetSha256:'bad'});
  assert.ok(r.blockers.includes('FROZEN_RECIPE_ASSET_SHA_MISMATCH'));
 });
+
+test('r3 resolves its bowl manifest and treats the provenance-only body as a warning',()=>{
+ const r=preflight({root,vesselId:'VESSEL_BOWL',recipeId:'r3',kcal:320,
+  expectedRecipeAssetSha256:'64b23af744baa469be91dfec6ffda39dc6b2f054dddc61a8f1bae6f81ea91cd2'});
+ assert.equal(r.status,'READY');
+ assert.equal(r.generationAllowed,true);
+ assert.deepEqual(r.blockers,[]);
+ assert.deepEqual(r.warnings,['VESSEL_BODY_PROVENANCE_PREVIEW_MISSING']);
+ assert.equal(r.evidence.body.runtimeRequired,false);
+ assert.equal(r.evidence.recipeManifestPath,'docs/food-portrait-pipeline/r3-bowl-frozen-v1.json');
+ assert.equal(r.evidence.recipeAsset.sha256,'64b23af744baa469be91dfec6ffda39dc6b2f054dddc61a8f1bae6f81ea91cd2');
+ assert.ok(Math.abs(r.evidence.foodPortraitGauge.angleDegrees-(-21.6))<1e-9);
+});
