@@ -1,0 +1,71 @@
+{
+  "schema": "mealup-food-portrait-native-food-only-cycle-v1",
+  "date": "2026-10-20",
+  "status": "FAIL_CANDIDATE_ONLY",
+  "recipe": {
+    "id": "r3",
+    "title": "Yogurt bowl proteica ai frutti di bosco",
+    "vesselId": "VESSEL_BOWL",
+    "kcal": 320
+  },
+  "production": {
+    "method": "OPENAI_BUILT_IN_IMAGEGEN_NATIVE_FOOD_ONLY",
+    "candidateLimit": 1,
+    "imagesGenerated": 1,
+    "automaticRetry": false,
+    "transparentBackgroundRequested": true,
+    "referenceId": "r2-bowl-ideal",
+    "referenceSha256": "70034093e72a9d06abab889d5bff337a8ac02e72763058d89b0063b7fb40d9a6"
+  },
+  "candidate": {
+    "path": "docs/food-portrait-pipeline/candidates/r3-yogurt-berry-bowl-native-food-only-candidate-002.png",
+    "sha256": "98576f12486db361c2f90227825955bbb15b66ee4c870f7a6d2162f244ddd6ae",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1164565
+  },
+  "technicalQa": {
+    "status": "TECHNICAL_PASS_VISUAL_REVIEW_REQUIRED",
+    "alphaMin": 0,
+    "alphaMax": 255,
+    "visibleFraction": 0.371624,
+    "transparentFraction": 0.628376,
+    "opaquePixels": 465,
+    "partialAlphaPixels": 583920,
+    "edgeTouchPixels": 0,
+    "bbox": [101,274,1066,752],
+    "primaryToolError": "image-technical-qa.cjs unavailable because local sharp dependency is missing",
+    "fallback": "System.Drawing full-pixel alpha scan"
+  },
+  "earlyIndependentQa": {
+    "reviewer": "OFFICE_ORCHESTRATION_INDEPENDENT_QA",
+    "producerIndependent": true,
+    "STYLE_TOYS_3D": "PASS",
+    "PHOTOREALISM_REJECTION": "PASS",
+    "ALPHA_BACKGROUND": "FAIL",
+    "GAUGE_ABSENCE": "PASS",
+    "VESSEL_ABSENCE": "PASS",
+    "INGREDIENTS": "PASS_YOGURT_BLUEBERRY_RASPBERRY_STRAWBERRY_ALMOND_HONEY",
+    "INTEGRATED_RECIPE": "PASS",
+    "BOWL_COMPATIBILITY": "PASS_PERCEPTUAL",
+    "CARD_READABILITY": "PASS",
+    "blocker": "FOOD_LAYER_INTERIOR_ALPHA_NOT_OPAQUE"
+  },
+  "gate": {
+    "failedVerdict": "ALPHA_BACKGROUND",
+    "compositionAllowed": false,
+    "gaugeCompositionAttempted": false,
+    "vesselCompositionAttempted": false,
+    "ownerApproval": false,
+    "automaticAdvance": false
+  },
+  "protectedScope": {
+    "budgetEUR": 0,
+    "do01Generated": false,
+    "mainModified": false,
+    "officialTesterModified": false,
+    "pwaModified": false,
+    "frozenAssetsModified": false
+  },
+  "nextRequiredChange": "Harden the native food-only alpha contract so interior food pixels are opaque and partial alpha is confined to the silhouette edge; validate without an ImageGen retry in this cycle."
+}
