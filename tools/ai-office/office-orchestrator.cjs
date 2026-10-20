@@ -27,6 +27,13 @@ function createOfficeOrchestrator() {
         visualReviewerId: input.visualReviewerId,
         inputHashesVerified: input.inputHashesVerified,
         quotaVerified: input.quotaVerified,
+        recipeId: input.recipeId,
+        vesselId: input.vesselId,
+        vesselTemplate: input.vesselTemplate,
+        gaugeContractVerified: input.gaugeContractVerified,
+        candidateLimit: input.candidateLimit,
+        budgetEUR: input.budgetEUR,
+        automaticRetry: input.automaticRetry,
       });
       if (skillPlan.status !== 'READY_OFFLINE')
         throw new Error('FOOD_PORTRAIT_SKILL_PLAN_BLOCKED:' + skillPlan.reason);
@@ -64,6 +71,9 @@ function createOfficeOrchestrator() {
         budgetEUR: 0,
         taskType: record.skillPlan?.taskType || null,
         skillAssignments: record.skillPlan?.assignments || [],
+        candidateLimit: record.skillPlan?.candidateLimit || null,
+        earlyQaBeforeComposition: record.skillPlan?.earlyQaBeforeComposition || false,
+        finalQaAfterComposition: record.skillPlan?.finalQaAfterComposition || false,
       },
       execution: 'NOT_STARTED',
       nextGate: getRole('qa').label,

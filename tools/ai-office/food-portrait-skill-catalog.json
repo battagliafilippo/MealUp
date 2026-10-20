@@ -1,15 +1,15 @@
 {
-  "schema": "mealup-food-portrait-skill-catalog-v1",
-  "version": "1.0",
+  "schema": "mealup-food-portrait-skill-catalog-v2",
+  "version": "2.0",
+  "workflowSkill": ".agents/skills/mealup-food-portrait-fast-same-gates/SKILL.md",
   "skills": [
-    {"id":"MEALUP_RECIPE_FACT_LOCK","version":"1.0","roleId":"FOOD","phase":"FACTS","capabilities":["RECIPE_FACT_LOCK"],"requires":[],"conflictsWith":[],"qaVerified":true,"securityReviewed":true,"extraCostEUR":0},
-    {"id":"MEALUP_FROZEN_STYLE_LOCK","version":"1.0","roleId":"DESIGN","phase":"STYLE","capabilities":["FROZEN_STYLE_LOCK"],"requires":["MEALUP_RECIPE_FACT_LOCK"],"conflictsWith":[],"qaVerified":true,"securityReviewed":true,"extraCostEUR":0},
-    {"id":"MEALUP_FOOD_ONLY_IMAGEGEN","version":"1.0","roleId":"VISUAL_PRODUCTION","phase":"FOOD_LAYER","capabilities":["FOOD_ONLY_IMAGE_GENERATION"],"requires":["MEALUP_RECIPE_FACT_LOCK","MEALUP_FROZEN_STYLE_LOCK"],"conflictsWith":["MEALUP_IMAGEGEN_FULL_SCENE"],"qaVerified":true,"securityReviewed":true,"extraCostEUR":0},
-    {"id":"MEALUP_VESSEL_TEMPLATE_COMPOSITOR","version":"1.0","roleId":"ENGINEERING","subrole":"VISUAL_SYSTEMS_ENGINEERING","phase":"COMPOSE","capabilities":["DETERMINISTIC_VESSEL_COMPOSITION"],"requires":["MEALUP_FOOD_ONLY_IMAGEGEN"],"conflictsWith":[],"qaVerified":true,"securityReviewed":true,"extraCostEUR":0},
-    {"id":"MEALUP_FROZEN_GAUGE_RENDERER","version":"1.0","roleId":"ENGINEERING","subrole":"VISUAL_SYSTEMS_ENGINEERING","phase":"COMPOSE","capabilities":["FROZEN_GAUGE_RENDERING"],"requires":["MEALUP_RECIPE_FACT_LOCK"],"conflictsWith":["MEALUP_G7_LEGACY_0_800_GAUGE"],"qaVerified":true,"securityReviewed":true,"extraCostEUR":0},
-    {"id":"MEALUP_FOOD_LAYER_TECHNICAL_QA","version":"1.0","roleId":"QA","lane":"TECHNICAL","phase":"QA_TECHNICAL","capabilities":["FOOD_LAYER_TECHNICAL_QA"],"requires":["MEALUP_VESSEL_TEMPLATE_COMPOSITOR","MEALUP_FROZEN_GAUGE_RENDERER"],"conflictsWith":[],"qaVerified":true,"securityReviewed":true,"extraCostEUR":0},
-    {"id":"MEALUP_INDEPENDENT_FOOD_SEMANTIC_REVIEW","version":"1.0","roleId":"QA","lane":"VISUAL_CULINARY","phase":"QA_VISUAL_CULINARY","capabilities":["INDEPENDENT_FOOD_SEMANTIC_REVIEW"],"requires":["MEALUP_VESSEL_TEMPLATE_COMPOSITOR","MEALUP_FROZEN_GAUGE_RENDERER"],"conflictsWith":["MEALUP_FOOD_ONLY_IMAGEGEN"],"conflictMode":"SAME_ACTOR_ONLY","qaVerified":true,"securityReviewed":true,"extraCostEUR":0},
-    {"id":"MEALUP_PRELOT_READINESS_AND_RECOVERY","version":"1.0","roleId":"QA","phase":"QA_TECHNICAL","capabilities":["PRELOT_READINESS_GATE","CHECKPOINT_RECOVERY"],"requires":["MEALUP_FOOD_LAYER_TECHNICAL_QA","MEALUP_INDEPENDENT_FOOD_SEMANTIC_REVIEW"],"conflictsWith":[],"qaVerified":true,"securityReviewed":true,"extraCostEUR":0},
-    {"id":"MEALUP_VERIFIED_CORRECTION_LIBRARY","version":"1.0","roleId":"DIRECTOR","phase":"OWNER_GATE","capabilities":["CORRECTION_LIBRARY"],"requires":["MEALUP_PRELOT_READINESS_AND_RECOVERY"],"conflictsWith":[],"qaVerified":true,"securityReviewed":true,"extraCostEUR":0}
-  ]
+    {"id":"MEALUP_SOURCE_FACTS_DISPLAY_ROLES","version":"2.0","roleId":"FOOD","phase":"SOURCE","capabilities":["SOURCE_FACTS_DISPLAY_ROLES"],"requires":[],"toolBindings":["catalog-recipe-source.cjs","display-role-contract.cjs"]},
+    {"id":"MEALUP_REFERENCE_PROMPT_COMPILER","version":"2.0","roleId":"PROMPT_ARCHITECT","phase":"PROMPT","capabilities":["REFERENCE_SELECTOR","COMPACT_PROMPT_COMPILER"],"requires":["MEALUP_SOURCE_FACTS_DISPLAY_ROLES"],"toolBindings":["canonical-model-gate.cjs","fast-job-packet.cjs","fast-prompt-compiler.cjs"]},
+    {"id":"MEALUP_FOOD_ONLY_IMAGEGEN","version":"2.0","roleId":"VISUAL_PRODUCTION","phase":"FOOD_LAYER","capabilities":["FOOD_ONLY_IMAGE_GENERATION"],"requires":["MEALUP_REFERENCE_PROMPT_COMPILER"],"toolBindings":["imagegen:transparent_background=true"]},
+    {"id":"MEALUP_EARLY_STYLE_QA","version":"2.0","roleId":"QA","lane":"EARLY_STYLE","phase":"QA_EARLY","capabilities":["EARLY_INDEPENDENT_STYLE_QA"],"requires":["MEALUP_FOOD_ONLY_IMAGEGEN"],"toolBindings":["image-technical-qa.cjs","fast-early-style-gate.cjs"]},
+    {"id":"MEALUP_DETERMINISTIC_VESSEL_GAUGE_COMPOSITOR","version":"2.0","roleId":"ENGINEERING","subrole":"VISUAL_SYSTEMS_ENGINEERING","phase":"COMPOSE","capabilities":["DETERMINISTIC_VESSEL_COMPOSITION","FROZEN_GAUGE_RENDERING"],"requires":["MEALUP_EARLY_STYLE_QA"],"requiresGate":["EARLY_STYLE_QA_PASS"],"toolBindings":["deterministic-visual-preflight.cjs","deterministic-gauge-compositor.cjs"]},
+    {"id":"MEALUP_FINAL_INDEPENDENT_QA","version":"2.0","roleId":"QA","lane":"FINAL","phase":"QA_FINAL","capabilities":["FINAL_TECHNICAL_CONTENT_QA"],"requires":["MEALUP_DETERMINISTIC_VESSEL_GAUGE_COMPOSITOR"],"toolBindings":["image-technical-qa.cjs","fast-qa-contract.cjs"]},
+    {"id":"MEALUP_CHECKPOINT_AUDIT","version":"2.0","roleId":"DIRECTOR","phase":"AUDIT","capabilities":["PERSISTENT_CHECKPOINT_AUDIT"],"requires":["MEALUP_FINAL_INDEPENDENT_QA"],"toolBindings":["atomic-checkpoint-contract"]}
+  ],
+  "commonEligibility": {"qaVerified":true,"securityReviewed":true,"extraCostEUR":0,"needsNewPrivileges":false,"changesFrozen":false}
 }

@@ -515,12 +515,12 @@
         "VESSEL_BOWL|P1|S1|D0|A1"
       ],
       "body_asset": "vessels/VESSEL_BOWL/source-view.png",
-      "body_sha256": "acc75874d70a3706841e1ab85effb1059d282ce10def9f7558791bedf356b1ff",
+      "body_sha256": "94bd8595f01c800ba1d7e05a357dbde3eef4fd815faf6681673dcd0fbf26e818",
       "depth_layers": [
         100,
         600
       ],
-      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; runtime uses approved vessel source with separate geometry. No recovered transparent sprite is claimed.",
+      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; exact 310x265 crop at source rectangle [50,60,310,265] from the canonical 1536x1024 vessel board; no synthetic vessel pixels.",
       "glass_policy": null,
       "status": "G5_PASS_FROZEN"
     },
@@ -1651,12 +1651,12 @@
         "VESSEL_BAKING_DISH|P1|S4|D0|A1"
       ],
       "body_asset": "vessels/VESSEL_BAKING_DISH/source-view.png",
-      "body_sha256": "2be8448d8d91f156b13a236ab8bb38321e6f18b62852909862fc92fc429a870a",
+      "body_sha256": "42f9ef5a3e858e13631ec555574a92e58b16243c2f98bda0f1db6739e6c1256d",
       "depth_layers": [
         100,
         600
       ],
-      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; runtime uses approved vessel source with separate geometry. No recovered transparent sprite is claimed.",
+      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; exact 365x245 crop at source rectangle [475,320,365,245] from the canonical 1536x1024 vessel board; no synthetic vessel pixels.",
       "glass_policy": null,
       "status": "G5_PASS_FROZEN"
     },
@@ -2174,12 +2174,12 @@
         "VESSEL_DESSERT_MOLD|P1|S3|D0|A0"
       ],
       "body_asset": "vessels/VESSEL_DESSERT_MOLD/source-view.png",
-      "body_sha256": "bf43b51f7fe7c196f0fd9294c9eadce5d46ad2464560fb8495375ad7da275393",
+      "body_sha256": "a7cc017f0abb60c632ddc3fb884ffdb08380b170323a7fcdb6ddc43edef80462",
       "depth_layers": [
         100,
         600
       ],
-      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; runtime uses approved vessel source with separate geometry. No recovered transparent sprite is claimed.",
+      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; exact 285x245 crop at source rectangle [880,320,285,245] from the canonical 1536x1024 vessel board; no synthetic vessel pixels.",
       "glass_policy": null,
       "status": "G5_PASS_FROZEN"
     },
@@ -2580,12 +2580,12 @@
         "VESSEL_RAMEKIN|P1|S4|D0|A0"
       ],
       "body_asset": "vessels/VESSEL_RAMEKIN/source-view.png",
-      "body_sha256": "b6e0a4e4fa5aef19371933f1dd35c798f6ea02e626f74f5f1d8b3f0e06f2640a",
+      "body_sha256": "1db5eaa9c1aab9cd8e3dcc9d0bd704116e087872dbf66d9f15f12f5b5a47883d",
       "depth_layers": [
         100,
         600
       ],
-      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; runtime uses approved vessel source with separate geometry. No recovered transparent sprite is claimed.",
+      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; exact 225x210 crop at source rectangle [1240,350,225,210] from the canonical 1536x1024 vessel board; no synthetic vessel pixels.",
       "glass_policy": null,
       "status": "G5_PASS_FROZEN"
     },
@@ -3100,12 +3100,12 @@
         "VESSEL_CUP|P1|S0|D0|A0"
       ],
       "body_asset": "vessels/VESSEL_CUP/source-view.png",
-      "body_sha256": "07971548208b3d1866949375261e8d0f963b003fcf7d350e51873dac870e8922",
+      "body_sha256": "218384e290514f1d6a9c526e1376351691a5e2e0269bf15d73bd3c4da2ebde9b",
       "depth_layers": [
         100,
         600
       ],
-      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; runtime uses approved vessel source with separate geometry. No recovered transparent sprite is claimed.",
+      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; exact 285x275 crop at source rectangle [355,540,285,275] from the canonical 1536x1024 vessel board; no synthetic vessel pixels.",
       "glass_policy": null,
       "status": "G5_PASS_FROZEN"
     },
@@ -3486,12 +3486,12 @@
         "VESSEL_GLASS|P1|S3|D0|A0"
       ],
       "body_asset": "vessels/VESSEL_GLASS/source-view.png",
-      "body_sha256": "ccc3bbf7c65f10121ef93f505a777fe42173fb2e41612bb24a264e9cd12770d9",
+      "body_sha256": "88f0976d2d7a0b269e7d41b31fd369ac1db5775aca411add8fba92737aa9a6ff",
       "depth_layers": [
         100,
         600
       ],
-      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; runtime uses approved vessel source with separate geometry. No recovered transparent sprite is claimed.",
+      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; exact 200x250 crop at source rectangle [100,565,200,250] from the canonical 1536x1024 vessel board; no synthetic vessel pixels.",
       "glass_policy": "Exact flattened-source view; no synthetic transparent wall reconstruction.",
       "status": "G5_PASS_FROZEN"
     },
@@ -4060,12 +4060,12 @@
         "VESSEL_PIZZA_SURFACE|P1|S3|D0|A0"
       ],
       "body_asset": "vessels/VESSEL_PIZZA_SURFACE/source-view.png",
-      "body_sha256": "524fd4fdaf06e9b11be3f8edbb92993152c1ac3ffd54d7197cfb9fd34b754a68",
+      "body_sha256": "59ad5692bc6cffbb4da1aa98b5cf0ebcb8f53c67d247b7d4b4322023dcbe88e2",
       "depth_layers": [
         100,
         600
       ],
-      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; runtime uses approved vessel source with separate geometry. No recovered transparent sprite is claimed.",
+      "body_asset_usage": "PROVENANCE_RGB_VIEW_ONLY; exact 380x215 crop at source rectangle [855,795,380,215] from the canonical 1536x1024 vessel board; no synthetic vessel pixels.",
       "glass_policy": null,
       "status": "G5_PASS_FROZEN"
     }

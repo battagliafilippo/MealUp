@@ -1,0 +1,46 @@
+{
+  "schema": "mealup-vessel-board-owner-confirmed-recovery-v1",
+  "status": "PASS_PROVENANCE_VIEWS_RECOVERED",
+  "branch": "experiment/food-portrait-pipeline-20261015",
+  "ownerEvidence": {
+    "statement": "Questi sono i vessel.",
+    "attachedPreviewRole": "VISUAL_CONFIRMATION_ONLY",
+    "attachedPreviewSha256": "2d86381982b69657ea54a9b8ae73c3b21dcd457dce1848c44ce7900de85fd097",
+    "attachedPreviewDimensions": [1280, 853]
+  },
+  "canonicalBoard": {
+    "path": "G5/references/VESSEL_LIBRARY_reference.png",
+    "sha256": "3318fbf8a718438520b12e9d8d28d88374a46041fc94b3efac1f23b38a50d5c8",
+    "dimensions": [1536, 1024],
+    "method": "EXACT_RECTANGULAR_CROPS_WITHOUT_SYNTHETIC_PIXELS"
+  },
+  "recoveredViews": [
+    {"vesselId":"VESSEL_BOWL","crop":[50,60,310,265],"sha256":"94bd8595f01c800ba1d7e05a357dbde3eef4fd815faf6681673dcd0fbf26e818"},
+    {"vesselId":"VESSEL_PLATE","crop":[370,100,350,220],"sha256":"f70bf0f2b3211de8867917b9ee1db11a1e21c030a520391c18e80cb521cda9de"},
+    {"vesselId":"VESSEL_BAKING_DISH","crop":[475,320,365,245],"sha256":"42f9ef5a3e858e13631ec555574a92e58b16243c2f98bda0f1db6739e6c1256d"},
+    {"vesselId":"VESSEL_DESSERT_MOLD","crop":[880,320,285,245],"sha256":"a7cc017f0abb60c632ddc3fb884ffdb08380b170323a7fcdb6ddc43edef80462"},
+    {"vesselId":"VESSEL_RAMEKIN","crop":[1240,350,225,210],"sha256":"1db5eaa9c1aab9cd8e3dcc9d0bd704116e087872dbf66d9f15f12f5b5a47883d"},
+    {"vesselId":"VESSEL_CUP","crop":[355,540,285,275],"sha256":"218384e290514f1d6a9c526e1376351691a5e2e0269bf15d73bd3c4da2ebde9b"},
+    {"vesselId":"VESSEL_GLASS","crop":[100,565,200,250],"sha256":"88f0976d2d7a0b269e7d41b31fd369ac1db5775aca411add8fba92737aa9a6ff"},
+    {"vesselId":"VESSEL_PIZZA_SURFACE","crop":[855,795,380,215],"sha256":"59ad5692bc6cffbb4da1aa98b5cf0ebcb8f53c67d247b7d4b4322023dcbe88e2"}
+  ],
+  "scope": {
+    "assetType": "PROVENANCE_RGB_VIEW_ONLY",
+    "transparentSpritesClaimed": false,
+    "foodClipAndOccluderChanged": false,
+    "imageGenUsed": false,
+    "syntheticPixelsAdded": false,
+    "mainModified": false,
+    "officialTesterModified": false,
+    "pwaModified": false,
+    "do01Generated": false,
+    "budgetEUR": 0
+  },
+  "visualInspection": {
+    "cleanRectangularViews": ["VESSEL_BOWL","VESSEL_PLATE","VESSEL_DESSERT_MOLD","VESSEL_RAMEKIN","VESSEL_GLASS"],
+    "edgeNeighbourFragments": ["VESSEL_BAKING_DISH","VESSEL_CUP","VESSEL_PIZZA_SURFACE"],
+    "decision": "Do not retouch or synthesize pixels. The affected files remain provenance views and require the verified geometry, food clips and front occluders for isolation."
+  },
+  "knownLimit": "The recovered RGB views preserve the canonical board exactly. They are not transparent standalone sprites and must never be passed directly as clean ImageGen references without geometry-based isolation.",
+  "nextGate": "Full vessel asset audit and Office skill-plan regression must pass before a new Food Portrait candidate is generated."
+}

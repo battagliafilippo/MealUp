@@ -111,7 +111,7 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 - Nuovo validatore: `tools/food-portrait-pipeline/vessel-asset-audit.cjs` con fixture negative. Verifica gli SHA-256 effettivi delle reference, dei sedici file maschera e la copertura delle otto geometrie G5.
 - CI sul commit `c9486158adff83c23f5fac723892b3255695a6ff`: https://github.com/battagliafilippo/MealUp/actions/runs/38719090602 — **FAIL INTENZIONALE DEL GATE** (non è un test tecnico considerato verde).
 - Unico errore rimasto: `G5/references/VESSEL_LIBRARY_reference.png`. Hash FROZEN dichiarato da G0/G5: `3318fbf8a718438520b12e9d8d28d88374a46041fc94b3efac1f23b38a50d5c8`. Hash SHA-256 binario reale nel repository: `28bba33ad0caaf6da129ae32ec5e9b771723f99ac9c9fd83aeec3e5c310bef7e`.
-- Sedici maschere G5: nessun errore hash rilevato. Otto `source-view.png` mancanti: **warning** (G5 le classifica `PROVENANCE_RGB_VIEW_ONLY`, non sprite runtime necessari), non modifica dei FROZEN; restano recupero/stato aperti.
+- Sedici maschere G5: nessun errore hash rilevato. Le otto `source-view.png` di provenienza sono state recuperate come crop esatti dalla tavola canonica 1536x1024 confermata dall'owner; nessun pixel sintetico e nessuna pretesa di sprite trasparenti runtime.
 - Origin del file board presente sin dal commit storico `d1300440cca578b9cf7a3b0ce70116c788645903`: non è un cambiamento causato da questa pipeline.
 - Tutti i controlli dati/contratti/fixture precedenti PASS; il QA ha conservato entrambi i report come artifact anche con il gate FAILED, senza modificare immagini.
 - Checkpoint leggibile da altri agenti: `docs/food-portrait-pipeline/reference-audit.v1.json`.
@@ -119,7 +119,7 @@ Stop immediato su mismatch ID, vessel ignoto, asset o hash golden non verificabi
 | ID | Problema / causa | Prevenzione / recovery | Stato |
 | --- | --- | --- | --- |
 | E08 | SHA-256 della board vessel storica diverso dal valore G0 FROZEN | reperire sorgente originale/ricostruire provenienza con prova indipendente; vietato cambiare hash previsto per far passare CI | **BLOCKING SOURCE APPROVAL** |
-| E09 | Otto preview `source-view.png` dichiarate ma non depositate | classificate come provenance-only, non rigenerate né spacciate per presenti | WARNING DOCUMENTATO |
+| E09 | Otto preview `source-view.png` dichiarate ma non depositate | RISOLTO tecnicamente: crop lossless esatti e hash verificati. BAKING_DISH, CUP e PIZZA_SURFACE conservano frammenti marginali della tavola: restano provenance-only e richiedono maschere/contorni G5 | PASS RECOVERY CON LIMITE VISIVO |
 
 **Impatto:** il dato `vessel_id` e le sedici maschere sono riutilizzabili come specifiche strutturali, ma l'immagine della board corrente NON può ancora essere promossa a Golden Master ufficiale. La generazione di output finali basata su tale sorgente è sospesa; lavoro su schemi, coda e QA indipendente può proseguire senza dipendere da essa.
 
