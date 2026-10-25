@@ -108,10 +108,10 @@ header{display:flex;justify-content:space-between;align-items:flex-start;gap:12p
   </div>
   <section class="filters" aria-label="Filtri combinabili per trovare ricette">
   <div class="selector-slot" id="slotFilters"></div>
-  <div class="facet-head"><span>Come la vuoi oggi?</span><button type="button" class="reset-facets" id="clearQuick" hidden>Azzera filtri</button></div>
+  <div class="facet-head"><span>Affina la ricerca</span><button type="button" class="reset-facets" id="clearQuick" hidden>Azzera filtri</button></div>
   <div class="facet-toolbar" id="facetToolbar" role="group" aria-label="Filtri indipendenti: scegli in qualsiasi ordine">
-    <button type="button" class="facet-open" data-facet-open="tempo" aria-expanded="false" aria-controls="facetOptions"><span class="facet-label">⏱ Tempo</span><span class="facet-value" id="facetTempo">Quanto hai?</span></button>
-    <button type="button" class="facet-open" data-facet-open="voglia" aria-expanded="false" aria-controls="facetOptions"><span class="facet-label">✦ Voglia</span><span class="facet-value" id="facetVoglia">Come ti va?</span></button>
+    <button type="button" class="facet-open" data-facet-open="tempo" aria-expanded="false" aria-controls="facetOptions"><span class="facet-label">⏱ Tempo</span><span class="facet-value" id="facetTempo">Senza limiti</span></button>
+    <button type="button" class="facet-open" data-facet-open="voglia" aria-expanded="false" aria-controls="facetOptions"><span class="facet-label">✦ Voglia</span><span class="facet-value" id="facetVoglia">Qualsiasi</span></button>
     <button type="button" class="facet-open" data-facet-open="gusti" aria-expanded="false" aria-controls="facetOptions"><span class="facet-label">♡ Gusti</span><span class="facet-value" id="facetGusti">Preferenze</span></button>
   </div>
   <div class="facet-options" id="facetOptions" hidden><div class="facet-options-head"><strong id="facetOptionsTitle"></strong><button type="button" class="facet-close" id="closeFacet" aria-label="Chiudi le opzioni">×</button></div><div class="facet-options-list" id="facetOptionsList"></div></div>
@@ -188,8 +188,8 @@ function getFiltered(){let c=categories[idx],q=query.trim().toLocaleLowerCase('i
 function selectedLabel(group,value){return facets[group].find(item=>item[0]===value)?.[1]||'';}
 function activeCount(){return Number(Boolean(choice.tempo&&choice.tempo!=='any'))+Number(Boolean(choice.voglia))+choice.gusti.size;}
 function renderFacets(){
- const time=choice.tempo&&choice.tempo!=='any'?selectedLabel('tempo',choice.tempo):'Quanto hai?';
- const mood=choice.voglia?selectedLabel('voglia',choice.voglia):'Come ti va?';
+ const time=choice.tempo&&choice.tempo!=='any'?selectedLabel('tempo',choice.tempo):'Senza limiti';
+ const mood=choice.voglia?selectedLabel('voglia',choice.voglia):'Qualsiasi';
  const taste=choice.gusti.size?([...choice.gusti].map(x=>selectedLabel('gusti',x)).join(' · ')):'Preferenze';
  $('facetTempo').textContent=time;$('facetVoglia').textContent=mood;$('facetGusti').textContent=taste;
  const n=activeCount();$('clearQuick').hidden=n===0;
@@ -260,7 +260,7 @@ function render(direction=1,initial=false){
  renderFacets();
  lastList=getFiltered();$('resultsTitle').textContent=idx===0?'Ricette da scoprire':name;$('resultsCount').textContent=lastList.length+' esempi';
  $('cards').replaceChildren(...lastList.map(r=>{let b=document.createElement('button');b.type='button';b.className='recipe';b.innerHTML=`<div class="recipe-image" aria-hidden="true">${r.icon}</div><div class="recipe-title">${escapeHTML(r.name)}</div><div class="recipe-meta">${escapeHTML(r.course)} · ${r.time} min</div>`;b.addEventListener('click',()=>openRecipe(r));return b}));
- if(!lastList.length){let p=document.createElement('p');p.className='empty';p.textContent='Nessuna ricetta di esempio con questi filtri.';$('cards').appendChild(p)}
+ if(!lastList.length){let p=document.createElement('p');p.className='empty';p.textContent='Nessuna ricetta con questa combinazione. Cambia un filtro o usa Azzera filtri.';$('cards').appendChild(p)}
  window.dispatchEvent(new CustomEvent('mealup-preview:portata',{detail:{portata:name,index:idx}}));
 }
 function change(i,preferredDirection=0){
