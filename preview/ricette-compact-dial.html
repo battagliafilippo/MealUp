@@ -4,162 +4,113 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f5ebdf">
-<title>MealUp · Ricette — selettore compatto interattivo</title>
+<title>MealUp · Ricette | Ghiera compatta v2</title>
 <style>
-  :root{--canvas:#f5ebdf;--surface:#fffbf5;--paper:#fff8ee;--ink:#24201e;--muted:#75685e;--line:#e8d8ca;--accent:#ec602e;--accent-dark:#bc4120;--shadow:0 9px 25px rgba(91,62,41,.075);font-family:"Satoshi",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
-  *{box-sizing:border-box}
-  html{background:#e7ddd3}
-  body{margin:0;background:var(--canvas);min-height:100vh;overflow-x:hidden}
-  button,input{font:inherit}
-  button{cursor:pointer}
-  .app{width:min(100%,480px);min-height:100svh;margin:auto;background:radial-gradient(ellipse at 70% 15%,#fff3e9 0,transparent 55%),var(--canvas);padding:22px 20px 100px;position:relative;box-shadow:0 0 60px rgba(0,0,0,.045)}
-  .micro{font-size:10px;letter-spacing:.15em;text-transform:uppercase;font-weight:800;color:#aa8068}
-  .head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-  .head .brand{font-size:11px;color:var(--accent-dark);letter-spacing:.14em;font-weight:850}
-  h1{font-size:42px;letter-spacing:-.055em;line-height:1.1;margin:7px 0 18px;font-weight:840}
-  .header-icon{width:42px;height:42px;background:var(--surface);border:1px solid #f0e3d6;border-radius:15px;box-shadow:var(--shadow);display:grid;place-items:center;color:var(--ink)}
-  .searchbox{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid #eadbcf;border-radius:22px;padding:7px 8px 7px 16px;box-shadow:var(--shadow);height:60px}
-  .searchbox svg{flex:none}
-  .searchbox input{font-size:15px;color:var(--ink);border:0;outline:none;min-width:0;flex:1;background:transparent}
-  .searchbox input::placeholder{color:#87776a;opacity:1}
-  .mic{border:0;border-radius:16px;background:#f1e1d2;width:43px;height:43px;display:grid;place-items:center}
-  .actions{display:flex;gap:10px;margin:13px 0 21px}
-  .action{border:1px solid #eee1d7;background:#fffaf3;padding:9px 14px;border-radius:999px;font-size:13px;font-weight:720;box-shadow:0 3px 12px #75503b0c;display:flex;align-items:center;gap:7px}
-  .section-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
-  h2{font-size:20px;letter-spacing:-.035em;margin:0;font-weight:800}
-  .finder{display:flex;min-height:114px;justify-content:space-between;align-items:center;gap:8px;background:linear-gradient(115deg,#fffaf4,#f8eee2);border:1px solid rgba(232,213,198,.95);border-radius:26px;padding:15px 17px 15px 19px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-  .finder::after{content:"";position:absolute;right:-35px;bottom:-79px;width:185px;height:185px;background:radial-gradient(circle,#ffead9 10%,transparent 70%);pointer-events:none}
-  .finder .left{position:relative;z-index:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start}
-  .finder-title{font-size:23px;letter-spacing:-.04em;font-weight:850;line-height:1.2;margin:6px 0 4px;max-width:240px}
-  .finder-subtitle{font-size:13px;color:var(--muted)}
-  .finder-hint{margin-top:9px;display:flex;align-items:center;gap:5px;font-size:11px;font-weight:750;color:var(--accent-dark)}
-  .dial-compact{position:relative;border:0;padding:0;background:none;width:88px;height:88px;flex:0 0 88px;z-index:1;border-radius:50%;touch-action:none;outline-offset:5px}
-  .dial-compact::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(from 0deg,#a8947d 0 1deg,transparent 1deg 20deg),linear-gradient(135deg,#fffaf1,#ceb7a4);border:4px solid #f9eee3;box-shadow:0 3px 8px #66452d33,inset 0 1px 1px #fff9;opacity:.93}
-  .dial-compact::after{content:"";position:absolute;inset:11px;border-radius:50%;background:linear-gradient(140deg,#fffef8 8%,#e6d8c7 95%);border:1px solid #d0bba8;box-shadow:inset 1px 2px 5px #fff,3px 4px 8px #785d483d}
-  .compact-rotor{position:absolute;inset:14px;z-index:2;border-radius:50%;transform:rotate(var(--rotation,0deg));transition:transform 170ms ease-out}
-  .compact-rotor::before{content:"";position:absolute;left:calc(50% - 3px);top:2px;width:6px;height:14px;background:var(--accent);border-radius:6px;box-shadow:0 1px 1px #9e46282b}
-  .dial-compact .center{position:absolute;z-index:3;inset:29px;display:grid;place-items:center;color:#bb7051;font-size:21px;line-height:1}
-  .dial-compact:hover{filter:brightness(1.02)}
-  .filter-section{margin-top:25px}
-  .filter-section .section-top{margin-bottom:11px}
-  .edit{color:var(--accent-dark);border:none;background:none;font-size:12px;font-weight:800;padding:5px 2px}
-  .chips{display:flex;gap:9px;overflow-x:auto;scrollbar-width:none;margin:0 -20px;padding:1px 20px 11px}
-  .chips::-webkit-scrollbar{display:none}
-  .chip{white-space:nowrap;background:#fff9f3;color:#514339;border:1px solid #e9dacc;padding:10px 13px;border-radius:13px;font-weight:670;font-size:12px}
-  .chip[aria-pressed="true"]{background:#ffe5d7;border-color:#f5ab88;color:var(--accent-dark)}
-  .recipes-head{margin-top:18px;display:flex;align-items:end;justify-content:space-between;gap:15px}
-  .recipes-head small{font-size:12px;color:var(--muted)}
-  .recipe-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-  .recipe{min-height:183px;background:var(--surface);border:1px solid #e8dace;border-radius:23px;padding:14px;box-shadow:0 4px 18px #5f412715}
-  .recipe-art{height:91px;border-radius:17px;background:radial-gradient(circle at 40% 40%,#fff6e2,#f5ddbf);display:grid;place-items:center;margin-bottom:10px;font-size:42px}
-  .recipe .title{font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.03em}
-  .recipe .desc{font-size:11px;margin-top:5px;color:var(--muted)}
-  .note{font-size:11px;color:#958174;margin-top:20px;line-height:1.5}
-  /* Bottom sheet */
-  .overlay{position:fixed;z-index:30;inset:0;background:#2c1c1590;display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transition:opacity 180ms ease,visibility 180ms ease}
-  .overlay.open{opacity:1;visibility:visible}
-  .sheet{max-height:min(91svh,780px);overflow-y:auto;background:#fff9f1;box-shadow:0 -10px 45px #1e120b33;width:min(100%,480px);border-radius:29px 29px 0 0;padding:11px 23px max(25px,env(safe-area-inset-bottom));transform:translateY(20px);transition:transform 200ms ease;overscroll-behavior:contain}
-  .overlay.open .sheet{transform:translateY(0)}
-  .grab{width:39px;height:4px;border-radius:9px;background:#ddccbd;margin:0 auto 17px}
-  .sheet-head{display:flex;justify-content:space-between;gap:10px;align-items:start}
-  .sheet-head h2{font-size:25px;margin:4px 0 3px}
-  .sheet-head p{color:var(--muted);font-size:13px;margin:0}
-  .close{width:38px;height:38px;border-radius:12px;border:1px solid #ecd9cb;background:#fff4e8;font-size:23px;line-height:1}
-  .knob-wrap{display:flex;align-items:center;justify-content:center;margin:22px auto 9px;height:170px}
-  .knob-track{width:170px;height:170px;position:relative;display:grid;place-items:center;touch-action:none;cursor:grab;outline-offset:6px}
-  .knob-track:active{cursor:grabbing}
-  .knob-track::before{content:"";position:absolute;inset:1px;border-radius:50%;background:repeating-conic-gradient(from 0deg,#96826d 0deg 1deg,transparent 1deg 10deg),radial-gradient(circle,#fffcf5 59%,#d2bba7 62%,#fbf2e7 72%);box-shadow:0 5px 14px #78513523;border:3px solid #fff6ec}
-  .knob-face{position:absolute;inset:19px;border-radius:50%;background:linear-gradient(142deg,#fffdfa 10%,#e5d4c2 90%);border:2px solid #d3bdab;box-shadow:inset 1px 2px 7px #fff,4px 6px 10px #79513835;display:grid;place-items:center;transform:rotate(var(--rotation,0deg));transition:transform 160ms ease-out}
-  .knob-face::before{content:"";position:absolute;left:calc(50% - 4px);top:9px;width:8px;height:19px;background:var(--accent);border-radius:5px;box-shadow:0 1px 2px #a6401f55}
-  .knob-cap{position:absolute;z-index:2;top:57px;left:57px;width:56px;height:56px;border-radius:50%;background:linear-gradient(145deg,#fff9ef,#f2e2d4);box-shadow:inset 1px 1px 1px #fff,0 2px 4px #90735e22;display:grid;place-items:center;font-size:10px;color:#775745;font-weight:850;letter-spacing:.07em}
-  .knob-selected{font-size:14px;text-align:center;font-weight:850;margin:0 0 8px}
-  .knob-instruction{font-size:12px;text-align:center;color:var(--muted);margin:0 0 15px}
-  .categories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
-  .category{border:1px solid #ebdacc;background:#fffdf8;min-height:46px;padding:7px 6px;border-radius:13px;color:#625449;font-size:13px;font-weight:750}
-  .category[aria-pressed="true"]{background:#ffe3d5;color:var(--accent-dark);border-color:#e9885b;box-shadow:inset 0 0 0 1px #e9896255}
-  .confirm{margin-top:17px;display:block;width:100%;padding:15px;border:0;border-radius:16px;background:#e96332;color:white;font-size:15px;font-weight:850;box-shadow:0 5px 10px #a54d2a35}
-  .footer-nav{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);z-index:5;width:min(calc(100% - 24px),440px);height:61px;border-radius:22px;background:#39302c;box-shadow:0 5px 21px #291a1266;display:flex;justify-content:space-around;align-items:center;color:#efe0d3}
-  .navitem{font-size:11px;opacity:.7;text-align:center;min-width:45px}
-  .navitem span{display:block;font-size:20px;margin-bottom:1px}
-  .navitem.active{opacity:1;color:#ff936a}
-  .preview-label{position:fixed;right:12px;top:12px;background:#342821;color:#fff;padding:5px 8px;font-size:10px;border-radius:8px;opacity:.8;z-index:8;display:none}
-  @media(min-width:520px){.app{min-height:920px}.footer-nav{bottom:16px}.preview-label{display:block}}
-  @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0.001ms!important;animation-duration:0.001ms!important}}
-  @media(max-width:360px){.app{padding-inline:16px}.finder{padding-left:15px}.finder-title{font-size:21px}.dial-compact{width:78px;height:78px;flex-basis:78px}}
+:root{font-family:"Satoshi",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--bg:#f5ebdf;--paper:#fffcf6;--cream:#fff8ef;--ink:#231e1c;--muted:#77695f;--line:#e8d9cd;--orange:#ed612e;--orange-dark:#b84522;--shadow:0 7px 17px #53371e0c;color:var(--ink)}
+*{box-sizing:border-box}html{background:#e5dbd2}body{margin:0;background:var(--bg);min-height:100vh}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #eb7548;outline-offset:3px}
+.app{margin:0 auto;max-width:480px;min-height:100svh;padding:15px 19px 94px;background:radial-gradient(ellipse 220px 180px at 86% 4%,#fff4e8,transparent),var(--bg);box-shadow:0 0 60px #3b2c1a09}
+.demo-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:#87685a;margin-bottom:14px}.demo-bar strong{font-size:10px;letter-spacing:.075em;text-transform:uppercase}.demo-switch{display:flex;gap:2px;background:#e8d8cb;padding:3px;border-radius:12px}.demo-switch button{padding:6px 8px;border:0;background:transparent;border-radius:9px;color:#69554a;font-weight:750;font-size:11px}.demo-switch button[aria-pressed="true"]{background:var(--paper);color:var(--orange-dark);box-shadow:0 2px 6px #66544016}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.brand{font-size:11px;color:var(--orange-dark);font-weight:830;letter-spacing:.09em}.menu{width:42px;height:42px;background:var(--paper);border:1px solid var(--line);border-radius:15px;font-size:22px}.head-title{font-size:42px;font-weight:880;letter-spacing:-.058em;line-height:1.1;margin:4px 0 21px}
+.searchbox{width:100%;display:flex;gap:9px;align-items:center;height:57px;background:var(--paper);border:1px solid var(--line);border-radius:19px;padding:6px 7px 6px 15px;box-shadow:var(--shadow)}.searchbox svg{flex:none}.searchbox input{border:0;min-width:0;flex:1;background:transparent;outline:0;font-size:14px;color:var(--ink)}.searchbox input::placeholder{color:#8d7868}.mic{width:42px;height:42px;border-radius:14px;border:0;background:#f2e1d2;color:#513d32;display:grid;place-items:center}
+.actions{display:flex;align-items:center;gap:9px;margin:12px 0 13px}.action{border:1px solid #ede0d4;background:#fffaf4;border-radius:99px;font-size:13px;font-weight:750;padding:10px 14px;box-shadow:0 3px 9px #5d412813}
+.selector-slot{min-height:0}.selector{display:flex;align-items:center;gap:10px;min-height:75px;border:1px solid #e6d6c7;background:linear-gradient(120deg,#fffaf3,#f8ecdf);border-radius:20px;padding:7px 11px 7px 15px;box-shadow:var(--shadow)}.selector-copy{min-width:0;flex:1}.eyebrow{font-weight:850;letter-spacing:.11em;color:#a67660;font-size:10px;text-transform:uppercase}.sel-title{display:block;text-align:left;padding:2px 0 1px;border:0;background:transparent;color:var(--ink);font-size:19px;font-weight:850;letter-spacing:-.025em}.sel-title .chevron{display:inline-block;font-size:12px;color:var(--orange-dark);padding-left:3px;vertical-align:middle}.sel-sub{color:var(--muted);font-size:11.5px;line-height:1.4}.sel-help{color:var(--orange-dark);font-size:11px;font-weight:720;margin-top:2px}
+/* Manopola leggera: due superfici, rilievo e tacche generati in CSS */
+.knob-mini{position:relative;isolation:isolate;width:57px;height:57px;border:0;flex:0 0 57px;border-radius:50%;padding:0;background:radial-gradient(circle at 32% 22%,#fffefa 4%,#eee0d2 56%,#c7ad98 100%);box-shadow:0 4px 10px #64432e40,inset 0 0 0 3px #f8eee1;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
+.knob-mini::before{content:"";position:absolute;inset:2px;border-radius:50%;background:repeating-conic-gradient(#9e8575 0deg 1.6deg,transparent 1.6deg 20deg);-webkit-mask:radial-gradient(transparent 0 76%,black 79% 100%);mask:radial-gradient(transparent 0 76%,black 79% 100%);pointer-events:none}.knob-mini:active{cursor:grabbing}
+.rotor{position:absolute;inset:8px;border-radius:50%;background:linear-gradient(135deg,#fffdf5,#ead9c9);box-shadow:inset 1px 1px 2px #fff,2px 3px 5px #86665432;border:1px solid #ddc9b9;transform:rotate(var(--angle,0deg));transition:transform .12s ease-out;pointer-events:none}.rotor::after{content:"";position:absolute;top:4px;left:calc(50% - 3px);height:11px;width:6px;background:var(--orange);border-radius:5px;box-shadow:0 1px 2px #8c47303a}.rotor-core{position:absolute;inset:19px;background:#fcf4eb;border-radius:50%;box-shadow:inset 0 1px 3px #b09b861a;pointer-events:none}
+.section-heading{font-size:18px;letter-spacing:-.025em;margin:0;font-weight:850}.filters{margin-top:18px}.section-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}.linkbtn{background:none;border:0;color:var(--orange-dark);font-size:12px;font-weight:770;padding:6px 3px}
+/* Nella variante B la stessa ghiera è inserita tra intestazione e chip */
+#slotFilters:not(:empty){margin-bottom:12px}.chiprow{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -19px;padding:1px 19px 9px}.chiprow::-webkit-scrollbar{display:none}.chip{flex:0 0 auto;border:1px solid #e9d8c9;background:var(--paper);border-radius:14px;font-size:12px;font-weight:650;padding:10px 12px;white-space:nowrap;color:#544236}.chip[aria-pressed="true"]{color:var(--orange-dark);background:#ffe6d7;border-color:#e99470}
+.result-top{margin:17px 0 11px;display:flex;align-items:flex-end;justify-content:space-between}.count{font-size:11px;color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.recipe{appearance:none;text-align:left;display:block;border:1px solid #e9dacd;background:#fffbf6;border-radius:21px;min-width:0;padding:11px;box-shadow:0 3px 12px #64452b0d;color:var(--ink)}.recipe-image{height:84px;border-radius:14px;display:grid;place-items:center;font-size:36px;background:radial-gradient(circle at 35% 22%,#fffaee,#f2d7ba)}.recipe-title{font-size:13px;font-weight:830;margin:10px 0 4px;line-height:1.18}.recipe-meta{font-size:11px;color:var(--muted)}.recipe.highlight{outline:3px solid var(--orange);outline-offset:1px}.empty{font-size:13px;color:var(--muted);grid-column:1/-1;padding:22px 0}.toast{min-height:15px;font-size:11px;color:var(--orange-dark);margin-top:9px}
+.note{margin:18px 1px 0;font-size:11px;color:#9b8779;line-height:1.45}.nav{position:fixed;left:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translateX(-50%);max-width:442px;width:calc(100% - 24px);display:flex;align-items:center;justify-content:space-around;height:61px;border-radius:22px;background:#37302b;z-index:10;box-shadow:0 5px 18px #47322655;color:#f1e4da}.nav span{font-size:11px;text-align:center;opacity:.72}.nav span.active{color:#ff9a73;opacity:1}.nav b{display:block;font-size:18px;line-height:1.2}
+/* Bottom sheet interattivo */
+.backdrop{position:fixed;z-index:20;inset:0;background:#2b1b15a8;display:flex;align-items:flex-end;justify-content:center;visibility:hidden;opacity:0;transition:opacity .14s,visibility .14s}.backdrop.open{opacity:1;visibility:visible}.sheet{background:#fff9f2;border-radius:24px 24px 0 0;width:min(100%,480px);max-height:min(92svh,770px);overflow-y:auto;overscroll-behavior:contain;transform:translateY(16px);transition:transform .14s;box-shadow:0 -12px 30px #2e1f1944;padding:10px 21px max(24px,env(safe-area-inset-bottom))}.backdrop.open .sheet{transform:translateY(0)}.grab{width:39px;height:4px;background:#d9c8b8;border-radius:4px;margin:0 auto 17px}.sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.sheet h2{margin:3px 0 3px;font-size:24px;letter-spacing:-.04em}.sheet p{margin:0;color:var(--muted);font-size:12px}.close{width:40px;height:40px;border-radius:13px;border:1px solid #eddbcc;background:#fffef7;font-size:23px;flex:0 0 40px}.dial-row{margin:22px auto 8px;display:flex;align-items:center;justify-content:center;gap:17px}.step{width:40px;height:45px;border:1px solid #e4d3c3;background:#fffef7;border-radius:14px;font-size:25px;color:#644f42}.knob-large{position:relative;width:142px;height:142px;border:0;border-radius:50%;padding:0;background:repeating-conic-gradient(from 0deg,#b4a18f 0deg 1deg,transparent 1deg 12deg),radial-gradient(circle,#fff6e9 48%,#d0b9a5 70%,#f9eee0 76%);box-shadow:0 4px 13px #6f52342b,inset 0 0 0 3px #fff9f0;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}.knob-large:active{cursor:grabbing}.knob-large .rotor{inset:18px;background:linear-gradient(145deg,#fffdf8,#e1cdbb)}.knob-large .rotor::after{top:8px;height:22px;width:8px;left:calc(50% - 4px)}.knob-large .rotor-core{inset:44px;display:grid;place-items:center;font-weight:850;letter-spacing:.04em;font-size:11px;color:#805e4e;z-index:2;box-shadow:inset 0 1px 3px #654d3820}.dial-name{text-align:center;font-size:17px;font-weight:830;margin:8px 0 2px}.dial-hint{text-align:center;margin:0 0 15px;color:var(--muted);font-size:12px}.catgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.category{border:1px solid #e8d8c8;background:#fffcf8;border-radius:13px;min-height:45px;padding:7px 5px;color:#564638;font-size:12.5px;font-weight:750}.category[aria-pressed="true"]{background:#ffe3d4;border-color:#e78459;color:var(--orange-dark);box-shadow:inset 0 0 0 1px #ef987c4a}.confirm{border:0;border-radius:14px;min-height:47px;width:100%;margin-top:15px;background:var(--orange);color:white;font-size:15px;font-weight:830}
+.filter-grid{display:grid;gap:8px;margin-top:16px}.toggle-row{display:flex;gap:10px;align-items:center;border:1px solid var(--line);background:var(--paper);padding:12px;border-radius:13px;font-size:14px}.toggle-row input{accent-color:var(--orange);width:20px;height:20px}.secondary-btn{display:block;margin-top:12px;background:transparent;border:1px solid var(--line);border-radius:13px;padding:10px;width:100%}
+@media(max-width:355px){.app{padding-inline:14px}.chiprow{margin-inline:-14px;padding-inline:14px}.sel-title{font-size:17px}.selector{padding-left:12px}.cards{gap:9px}.demo-bar{gap:3px}.demo-switch button{padding:6px}}@media(prefers-reduced-motion:reduce){.rotor,.backdrop,.sheet{transition:none}}
 </style>
 </head>
 <body>
-<div class="preview-label">PROTOTIPO INTERATTIVO</div>
 <main class="app">
-  <header class="head"><div><div class="brand">MealUp <span style="color:#aa8e7b">/ ESPLORA</span></div><h1>Ricette</h1></div><button class="header-icon" aria-label="Menu">☰</button></header>
-  <label class="searchbox"><svg aria-hidden="true" width="19" height="19" fill="none" viewBox="0 0 24 24" stroke="#8a7767" stroke-width="2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search" placeholder="Cerca una ricetta o un ingrediente" aria-label="Cerca ricette"/><button class="mic" aria-label="Ricerca vocale" type="button"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="#6e4934" stroke-width="2" stroke-linecap="round"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4m-4 0h8"/></svg></button></label>
-  <div class="actions"><button class="action" id="random">✧ &nbsp; Sorprendimi</button><button class="action" id="filters">☷ &nbsp; Filtri</button></div>
-  <section aria-label="Selezione portata"><div class="section-top"><h2>Che cosa cuciniamo?</h2></div>
-    <div class="finder"><div class="left"><div class="micro">PORTATA</div><div class="finder-title" id="selectedTitle">Tutte le portate</div><div class="finder-subtitle" id="selectedCount">399 ricette da esplorare</div><div class="finder-hint">↻ <span>Ruota o tocca per scegliere</span></div></div>
-      <button id="miniDial" type="button" class="dial-compact" aria-label="Scegli la portata; ruota o apri l'elenco"><span class="compact-rotor" id="miniRotor"></span><span class="center">↗</span></button>
-    </div>
-  </section>
-  <section class="filter-section" aria-label="Filtri rapidi"><div class="section-top"><h2>Filtri rapidi</h2><button class="edit" id="editFilters">Modifica</button></div><div class="chips" id="chips"><button class="chip" aria-pressed="false" data-quick="⏱ Entro 20 min">⏱ Entro 20 min</button><button class="chip" aria-pressed="false" data-quick="✳ Con le tue scorte">✳ Con le tue scorte</button><button class="chip" aria-pressed="false" data-quick="🥬 Vegetariano">🥬 Vegetariano</button><button class="chip" aria-pressed="false" data-quick="♨ Facile">♨ Facile</button></div></section>
-  <section><div class="recipes-head"><h2 id="resultsTitle">Da scoprire</h2><small id="resultsHint">Esempi di ricette</small></div><div class="recipe-list" id="recipeList"></div></section>
-  <p class="note">Anteprima funzionale del nuovo selettore: i contenuti delle card sono dimostrativi. Nel progetto reale il controllo deve collegarsi alla ricerca e al catalogo MealUp esistenti.</p>
+  <div class="demo-bar"><strong>Studio UX · versione 2</strong><div class="demo-switch" role="group" aria-label="Confronta due posizioni nella pagina"><button type="button" id="modeA" aria-pressed="true">A · Sopra filtri</button><button type="button" id="modeB" aria-pressed="false">B · Nei filtri</button></div></div>
+  <header><div><div class="brand">MealUp / ESPLORA</div><h1 class="head-title">Ricette</h1></div><button class="menu" type="button" aria-label="Menu demo">☰</button></header>
+  <label class="searchbox"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#917d70" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="6"/><path d="m14.5 14.5 5 5"/></svg><input id="search" placeholder="Cerca una ricetta o un ingrediente" aria-label="Cerca ricetta o ingrediente"><button class="mic" type="button" aria-label="Microfono demo" id="mic"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4m-4 0h8"/></svg></button></label>
+  <div class="actions"><button class="action" type="button" id="random">✧ &nbsp; Sorprendimi</button><button class="action" type="button" id="filtersBtn">☷ &nbsp; Filtri</button></div>
+  <div class="selector-slot" id="slotBefore">
+    <div class="selector" id="selector"><div class="selector-copy"><div class="eyebrow">Scegli una portata</div><button class="sel-title" id="openCategories" type="button"><span id="selectedName">Tutte</span> <span class="chevron">⌄</span></button><div class="sel-sub" id="selectedSubtitle">9 portate disponibili</div><div class="sel-help">Tocca la manopola per cambiare ↻</div></div><button class="knob-mini" type="button" id="miniKnob" aria-label="Portata: Tutte. Tocca per avanzare, trascina per ruotare"><span class="rotor" id="miniRotor"></span><span class="rotor-core"></span></button></div>
+  </div>
+  <section class="filters"><div class="section-top"><h2 class="section-heading">Filtri rapidi</h2><button class="linkbtn" type="button" id="editFilters">Modifica</button></div><div class="selector-slot" id="slotFilters"></div><div class="chiprow" id="chips"></div></section>
+  <section><div class="result-top"><h2 class="section-heading" id="resultsTitle">Ricette da scoprire</h2><span class="count" id="resultsCount">Esempi dimostrativi</span></div><div class="cards" id="cards"></div><div class="toast" role="status" aria-live="polite" id="status"></div></section>
+  <p class="note">Anteprima di layout e interazione: le nove portate sono quelle della tua schermata. Ricette e filtri rapidi qui sono dati dimostrativi, non il database MealUp. La scelta finale non modifica main né il tester.</p>
 </main>
-<nav class="footer-nav" aria-label="Navigazione demo"><div class="navitem"><span>⌂</span>Home</div><div class="navitem active"><span>◉</span>Ricette</div><div class="navitem"><span>▤</span>Scorte</div><div class="navitem"><span>♙</span>Profilo</div></nav>
-<div class="overlay" id="overlay" aria-hidden="true"><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"><div class="grab"></div><div class="sheet-head"><div><div class="micro">SELETTORE MEALUP</div><h2 id="sheetTitle">Scegli una portata</h2><p>Come la manopola del forno, ma più semplice.</p></div><button class="close" id="close" aria-label="Chiudi selettore">×</button></div>
-  <div class="knob-wrap"><div class="knob-track" id="bigDial" role="slider" tabindex="0" aria-label="Seleziona la portata ruotando la manopola" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" aria-valuetext="Tutte"><div class="knob-face" id="bigRotor"></div><span class="knob-cap">MealUp</span></div></div>
-  <div class="knob-selected" id="knobSelected">Tutte le portate</div><p class="knob-instruction">Ruota la ghiera o tocca direttamente una categoria</p>
-  <div class="categories" id="categories"></div><button class="confirm" id="confirm">Mostra le ricette</button>
+<nav class="nav" aria-label="Navigazione in anteprima"><span><b>⌂</b>Home</span><span class="active"><b>◉</b>Ricette</span><span><b>▤</b>Scorte</span><span><b>♙</b>Profilo</span></nav>
+<div class="backdrop" id="categoryBackdrop" aria-hidden="true"><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="categoryTitle"><div class="grab"></div><div class="sheet-head"><div><div class="eyebrow">TUTTE LE 9 PORTATE</div><h2 id="categoryTitle">Scegli una portata</h2><p>Tocca una voce oppure ruota la manopola.</p></div><button type="button" class="close" id="closeCategories" aria-label="Chiudi">×</button></div>
+<div class="dial-row"><button type="button" class="step" id="previous" aria-label="Portata precedente">‹</button><button class="knob-large" type="button" id="largeKnob" aria-label="Ruota la manopola o tocca per avanzare" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" aria-valuetext="Tutte"><span class="rotor" id="largeRotor"></span><span class="rotor-core">MU</span></button><button type="button" class="step" id="next" aria-label="Portata successiva">›</button></div>
+<div class="dial-name" id="dialName">Tutte</div><div class="dial-hint">Un tocco = uno scatto · Trascina per ruotare</div><div class="catgrid" id="categories"></div><button class="confirm" type="button" id="showRecipes">Mostra ricette</button>
 </section></div>
+<div class="backdrop" id="filterBackdrop" aria-hidden="true"><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="filterTitle"><div class="grab"></div><div class="sheet-head"><div><div class="eyebrow">FILTRI DI PROVA</div><h2 id="filterTitle">Filtra le ricette</h2><p>Questi quattro filtri dimostrativi agiscono sulle card di esempio.</p></div><button type="button" class="close" id="closeFilters" aria-label="Chiudi">×</button></div><div class="filter-grid" id="filterGrid"></div><button type="button" class="secondary-btn" id="clearFilters">Azzera filtri</button><button type="button" class="confirm" id="applyFilters">Mostra risultati</button></section></div>
+<div class="backdrop" id="recipeBackdrop" aria-hidden="true"><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="recipeTitle"><div class="grab"></div><div class="sheet-head"><div><div class="eyebrow">SCHEDA DI ESEMPIO</div><h2 id="recipeTitle">Ricetta</h2><p id="recipeDetails"></p></div><button type="button" class="close" id="closeRecipe" aria-label="Chiudi">×</button></div><button type="button" class="confirm" id="backRecipes">Torna alle ricette</button></section></div>
 <script>
-(()=>{
-  'use strict';
-  const CATEGORIES=['Tutte','Colazioni','Antipasti','Primi','Secondi','Contorni','Bevande','Salse','Altro'];
-  // Le card sono di esempio: il numero 399 proviene dallo screenshot, non da questo catalogo.
-  const PREVIEW={
-   'Tutte':[['Carbonara','Primi','🍝'],['Toast e uova','Colazioni','🥪'],['Verdure al forno','Contorni','🥕'],['Pasta al pomodoro','Primi','🍅']],
-   'Colazioni':[['Toast e uova','Colazioni','🥪'],['Yogurt con frutta','Colazioni','🍓']],
-   'Antipasti':[['Bruschette','Antipasti','🍞'],['Hummus','Antipasti','🫘']],
-   'Primi':[['Carbonara','Primi','🍝'],['Pasta al pomodoro','Primi','🍅'],['Riso alle verdure','Primi','🍚']],
-   'Secondi':[['Pollo alle erbe','Secondi','🍗'],['Frittata','Secondi','🍳']],
-   'Contorni':[['Verdure al forno','Contorni','🥕'],['Insalata croccante','Contorni','🥗']],
-   'Bevande':[['Frullato','Bevande','🥤'],['Spremuta','Bevande','🍊']],
-   'Salse':[['Salsa yogurt','Salse','🥣'],['Pesto','Salse','🌱']],
-   'Altro':[['Pane fatto in casa','Altro','🍞'],['Crostata','Altro','🥧']]
-  };
-  const $=id=>document.getElementById(id);
-  const overlay=$('overlay'),mini=$('miniDial'),big=$('bigDial'),categories=$('categories');
-  let index=0, query='',activeFilters=new Set(),pointerStart=null,moved=false;
-  const humanName=s=>s==='Tutte'?'Tutte le portate':s;
-  const current=()=>CATEGORIES[index];
-  const rotation=()=>`${index*40}deg`;
-  const card=(r)=>`<article class="recipe"><div class="recipe-art" aria-hidden="true">${r[2]}</div><div class="title">${r[0]}</div><div class="desc">${r[1]} · Anteprima</div></article>`;
-  function updateList(){let q=query.trim().toLocaleLowerCase('it');let items=(PREVIEW[current()]||PREVIEW.Tutte).filter(x=>!q||x[0].toLocaleLowerCase('it').includes(q));$('resultsTitle').textContent=current()==='Tutte'?'Da scoprire':`Esplora: ${current()}`;$('resultsHint').textContent=activeFilters.size?'Filtri demo attivi':'Esempi di ricette';$('recipeList').innerHTML=items.length?items.map(card).join(''):'<p style="grid-column:1/-1;color:#7a695c">Nessun esempio corrispondente.</p>'}
-  function setSelection(i){index=(i%CATEGORIES.length+CATEGORIES.length)%CATEGORIES.length;let name=current();$('selectedTitle').textContent=humanName(name);$('selectedCount').textContent=name==='Tutte'?'399 ricette da esplorare':'Esplora le ricette della portata';$('knobSelected').textContent=humanName(name);$('miniRotor').style.setProperty('--rotation',rotation());$('bigRotor').style.setProperty('--rotation',rotation());big.setAttribute('aria-valuenow',String(index));big.setAttribute('aria-valuetext',name);Array.from(categories.children).forEach((b,i)=>b.setAttribute('aria-pressed',String(index===i)));updateList();window.dispatchEvent(new CustomEvent('mealup:portata-changed',{detail:{portata:name,index}}));}
-  CATEGORIES.forEach((name,i)=>{let b=document.createElement('button');b.className='category';b.textContent=name;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>{setSelection(i);closeSheet()});categories.appendChild(b)});
-  let focusedBefore=null;
-  function openSheet(){focusedBefore=document.activeElement;overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('close').focus()}
-  function closeSheet(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.style.overflow='';if(focusedBefore?.focus)focusedBefore.focus()}
-  $('close').addEventListener('click',closeSheet);$('confirm').addEventListener('click',closeSheet);overlay.addEventListener('pointerdown',ev=>{if(ev.target===overlay)closeSheet()});
-  document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&overlay.classList.contains('open')){ev.preventDefault();closeSheet()}if(overlay.classList.contains('open')&&ev.key==='Tab'){const list=[...overlay.querySelectorAll('button,[tabindex="0"]')];const first=list[0],last=list[list.length-1];if(ev.shiftKey&&document.activeElement===first){ev.preventDefault();last.focus()}else if(!ev.shiftKey&&document.activeElement===last){ev.preventDefault();first.focus()}}});
-  const degrees=(ev,el)=>{let box=el.getBoundingClientRect();return Math.atan2(ev.clientY-(box.top+box.height/2),ev.clientX-(box.left+box.width/2))*180/Math.PI};
-  const delta=(a,b)=>((a-b+540)%360)-180;
-  function attachRotation(el,isMini){let startIndex=0,startAngle=0,total=0,dragged=false;
-    el.addEventListener('pointerdown',e=>{if(e.button!==0)return;startAngle=degrees(e,el);startIndex=index;total=0;dragged=false;el.setPointerCapture(e.pointerId)});
-    el.addEventListener('pointermove',e=>{if(!el.hasPointerCapture(e.pointerId))return;const a=degrees(e,el),d=delta(a,startAngle);total=d;const next=(startIndex+Math.round(d/40)+CATEGORIES.length)%CATEGORIES.length;if(Math.abs(d)>7){dragged=true;if(next!==index)setSelection(next)}});
-    el.addEventListener('pointerup',e=>{if(!el.hasPointerCapture(e.pointerId))return;el.releasePointerCapture(e.pointerId);if(isMini&&!dragged)openSheet();el.dataset.suppressClick=dragged?'1':'0';});
-    el.addEventListener('pointercancel',e=>{if(el.hasPointerCapture(e.pointerId))el.releasePointerCapture(e.pointerId)});
-    el.addEventListener('click',e=>{if(isMini&&(e.detail===0))openSheet()});
-    el.addEventListener('wheel',e=>{e.preventDefault();setSelection(index+(e.deltaY>0?1:-1))},{passive:false});
-    el.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowUp'){e.preventDefault();setSelection(index+1)}else if(e.key==='ArrowLeft'||e.key==='ArrowDown'){e.preventDefault();setSelection(index-1)}else if(isMini&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openSheet()}});
-  }
-  attachRotation(mini,true);attachRotation(big,false);
-  $('search').addEventListener('input',e=>{query=e.target.value;updateList()});
-  $('chips').addEventListener('click',e=>{let b=e.target.closest('button[data-quick]');if(!b)return;const val=b.dataset.quick;if(activeFilters.has(val))activeFilters.delete(val);else activeFilters.add(val);b.setAttribute('aria-pressed',String(activeFilters.has(val)));updateList()});
-  $('filters').addEventListener('click',()=>$('chips').scrollIntoView({behavior:'smooth',block:'center'}));$('editFilters').addEventListener('click',()=>$('chips').scrollIntoView({behavior:'smooth',block:'center'}));
-  $('random').addEventListener('click',()=>{setSelection(Math.floor(Math.random()*CATEGORIES.length));document.querySelector('.finder').scrollIntoView({behavior:'smooth',block:'center'})});
-  $('confirm').textContent='Mostra le ricette';
-  setSelection(0);
-  // Hook di integrazione: MealUp può leggere l'evento o impostare la portata via API.
-  window.MealUpCompactDial={setPortata:(name)=>{const i=CATEGORIES.indexOf(name);if(i>=0)setSelection(i)},getPortata:()=>current(),open:openSheet};
+(()=>{'use strict';
+const categories=['Tutte','Colazioni','Antipasti','Primi','Secondi','Contorni','Bevande','Salse','Altro'];
+// I filtri qui sotto sono ESCLUSIVAMENTE dati di esempio, non dichiarati uguali al tester reale.
+const quick=[['fast','⏱ Entro 20 min'],['stock','✳ Con le tue scorte'],['vegetarian','🥬 Vegetariano'],['easy','♨ Facile']];
+const recipes=[
+{name:'Carbonara',course:'Primi',icon:'🍝',time:22,stock:false,vegetarian:false,easy:false,ingredients:'pasta uova guanciale'},
+{name:'Pasta al pomodoro',course:'Primi',icon:'🍅',time:17,stock:true,vegetarian:true,easy:true,ingredients:'pasta pomodoro basilico'},
+{name:'Toast e uova',course:'Colazioni',icon:'🥪',time:10,stock:true,vegetarian:true,easy:true,ingredients:'pane uova'},
+{name:'Yogurt e frutta',course:'Colazioni',icon:'🍓',time:4,stock:true,vegetarian:true,easy:true,ingredients:'yogurt fragole frutta'},
+{name:'Bruschette',course:'Antipasti',icon:'🍞',time:12,stock:true,vegetarian:true,easy:true,ingredients:'pane pomodoro'},
+{name:'Hummus',course:'Antipasti',icon:'🫘',time:14,stock:false,vegetarian:true,easy:true,ingredients:'ceci limone'},
+{name:'Pollo alle erbe',course:'Secondi',icon:'🍗',time:28,stock:false,vegetarian:false,easy:true,ingredients:'pollo salvia rosmarino'},
+{name:'Frittata',course:'Secondi',icon:'🍳',time:12,stock:true,vegetarian:true,easy:true,ingredients:'uova formaggio'},
+{name:'Verdure al forno',course:'Contorni',icon:'🥕',time:30,stock:true,vegetarian:true,easy:true,ingredients:'carote verdure'},
+{name:'Insalata croccante',course:'Contorni',icon:'🥗',time:8,stock:true,vegetarian:true,easy:true,ingredients:'lattuga pomodori'},
+{name:'Frullato di frutta',course:'Bevande',icon:'🥤',time:5,stock:false,vegetarian:true,easy:true,ingredients:'banana fragole latte'},
+{name:'Spremuta',course:'Bevande',icon:'🍊',time:4,stock:true,vegetarian:true,easy:true,ingredients:'arancia'},
+{name:'Salsa yogurt',course:'Salse',icon:'🥣',time:6,stock:true,vegetarian:true,easy:true,ingredients:'yogurt limone'},
+{name:'Pesto',course:'Salse',icon:'🌱',time:15,stock:false,vegetarian:true,easy:false,ingredients:'basilico parmigiano'},
+{name:'Pane in padella',course:'Altro',icon:'🍞',time:26,stock:false,vegetarian:true,easy:false,ingredients:'farina acqua'},
+{name:'Crostata',course:'Altro',icon:'🥧',time:45,stock:false,vegetarian:true,easy:false,ingredients:'farina marmellata'}
+];
+const $=id=>document.getElementById(id);let idx=0;let allFilters=new Set();let query='';let lastList=[];let opened=null;let priorFocus=null;
+function getFiltered(){let c=categories[idx],q=query.trim().toLocaleLowerCase('it');return recipes.filter(x=>(c==='Tutte'||x.course===c)&&(!q||(x.name+' '+x.ingredients).toLocaleLowerCase('it').includes(q))&&(!allFilters.has('fast')||x.time<=20)&&(!allFilters.has('stock')||x.stock)&&(!allFilters.has('vegetarian')||x.vegetarian)&&(!allFilters.has('easy')||x.easy));}
+const escapeHTML=s=>s.replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+function render(){let name=categories[idx],angle=(idx*40)+'deg';$('selectedName').textContent=name;$('selectedSubtitle').textContent=name==='Tutte'?'9 portate · selezione rapida':'Portata selezionata';$('dialName').textContent=name;
+$('miniRotor').style.setProperty('--angle',angle);$('largeRotor').style.setProperty('--angle',angle);$('miniKnob').setAttribute('aria-label',`Portata ${name}. Tocca per avanzare, trascina per ruotare`);$('largeKnob').setAttribute('aria-valuenow',String(idx));$('largeKnob').setAttribute('aria-valuetext',name);
+[...$('categories').children].forEach((b,i)=>b.setAttribute('aria-pressed',String(i===idx)));[...document.querySelectorAll('[data-filter]')].forEach(b=>{const value=b.dataset.filter;if(b.tagName==='INPUT')b.checked=allFilters.has(value);else b.setAttribute('aria-pressed',String(allFilters.has(value)))});
+lastList=getFiltered();$('resultsTitle').textContent=idx===0?'Ricette da scoprire':name;$('resultsCount').textContent=lastList.length+' esempi';$('cards').replaceChildren(...lastList.map(r=>{let b=document.createElement('button');b.type='button';b.className='recipe';b.innerHTML=`<div class="recipe-image" aria-hidden="true">${r.icon}</div><div class="recipe-title">${escapeHTML(r.name)}</div><div class="recipe-meta">${escapeHTML(r.course)} · ${r.time} min</div>`;b.addEventListener('click',()=>openRecipe(r));return b}));if(!lastList.length){let p=document.createElement('p');p.className='empty';p.textContent='Nessuna ricetta di esempio con questi filtri.';$('cards').appendChild(p)}
+window.dispatchEvent(new CustomEvent('mealup-preview:portata',{detail:{portata:name,index:idx}}));}
+function change(i){idx=(i%categories.length+categories.length)%categories.length;render()}
+function openModal(el){if(opened)closeModal();priorFocus=document.activeElement;opened=el;el.classList.add('open');el.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';el.querySelector('.close').focus()}
+function closeModal(){if(!opened)return;opened.classList.remove('open');opened.setAttribute('aria-hidden','true');opened=null;document.body.style.overflow='';if(priorFocus&&priorFocus.isConnected)priorFocus.focus()}
+function openRecipe(r){$('recipeTitle').textContent=r.name;$('recipeDetails').textContent=`${r.course} · ${r.time} min · Anteprima senza ingredienti completi.`;openModal($('recipeBackdrop'))}
+const degree=(e,el)=>{let r=el.getBoundingClientRect();return Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2))*180/Math.PI};const diff=(a,b)=>((a-b+540)%360)-180;
+// Un tocco sul pomello produce sempre UNO scatto. Trascinando si aggiornano le portate.
+// Sommiamo i movimenti piccoli per consentire rotazioni oltre i 180°, senza blocco a metà giro.
+function attachKnob(el){let active=null;el.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;active={id:e.pointerId,last:degree(e,el),total:0,start:idx,dragged:false};el.setPointerCapture(e.pointerId)});
+el.addEventListener('pointermove',e=>{if(!active||e.pointerId!==active.id)return;let a=degree(e,el);active.total+=diff(a,active.last);active.last=a;if(Math.abs(active.total)>8){active.dragged=true;let steps=Math.round(active.total/40);let next=(active.start+steps+categories.length*50)%categories.length;if(next!==idx)change(next)}});
+el.addEventListener('pointerup',e=>{if(!active||e.pointerId!==active.id)return;const tapped=!active.dragged;active=null;if(el.hasPointerCapture(e.pointerId))el.releasePointerCapture(e.pointerId);if(tapped)change(idx+1)});
+el.addEventListener('pointercancel',e=>{if(active&&active.id===e.pointerId)active=null;if(el.hasPointerCapture(e.pointerId))el.releasePointerCapture(e.pointerId)});
+el.addEventListener('keydown',e=>{if(['ArrowRight','ArrowUp'].includes(e.key)){e.preventDefault();change(idx+1)}else if(['ArrowLeft','ArrowDown'].includes(e.key)){e.preventDefault();change(idx-1)}else if(['Enter',' '].includes(e.key)){e.preventDefault();change(idx+1)}});
+el.addEventListener('wheel',e=>{e.preventDefault();change(idx+(e.deltaY>=0?1:-1))},{passive:false});}
+function toggleFilter(id){if(allFilters.has(id))allFilters.delete(id);else allFilters.add(id);render()}
+quick.forEach(([id,label])=>{let b=document.createElement('button');b.type='button';b.className='chip';b.dataset.filter=id;b.textContent=label;b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>toggleFilter(id));$('chips').appendChild(b);
+let l=document.createElement('label');l.className='toggle-row';let input=document.createElement('input');input.type='checkbox';input.dataset.filter=id;input.addEventListener('change',()=>toggleFilter(id));let t=document.createElement('span');t.textContent=label;l.append(input,t);$('filterGrid').appendChild(l)});
+categories.forEach((name,i)=>{let b=document.createElement('button');b.type='button';b.className='category';b.textContent=name;b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>{change(i);closeModal()});$('categories').appendChild(b)});
+attachKnob($('miniKnob'));attachKnob($('largeKnob'));
+$('previous').addEventListener('click',()=>change(idx-1));$('next').addEventListener('click',()=>change(idx+1));
+$('openCategories').addEventListener('click',()=>openModal($('categoryBackdrop')));
+$('showRecipes').addEventListener('click',closeModal);$('closeCategories').addEventListener('click',closeModal);
+$('filtersBtn').addEventListener('click',()=>openModal($('filterBackdrop')));$('editFilters').addEventListener('click',()=>openModal($('filterBackdrop')));$('closeFilters').addEventListener('click',closeModal);$('applyFilters').addEventListener('click',closeModal);$('clearFilters').addEventListener('click',()=>{allFilters.clear();render()});
+$('closeRecipe').addEventListener('click',closeModal);$('backRecipes').addEventListener('click',closeModal);
+for(const e of document.querySelectorAll('.backdrop'))e.addEventListener('pointerdown',ev=>{if(ev.target===e)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&opened)closeModal();else if(e.key==='Tab'&&opened){const focusables=[...opened.querySelectorAll('button,input,[tabindex="0"]')];if(e.shiftKey&&document.activeElement===focusables[0]){e.preventDefault();focusables.at(-1).focus()}else if(!e.shiftKey&&document.activeElement===focusables.at(-1)){e.preventDefault();focusables[0].focus()}}});
+$('search').addEventListener('input',e=>{query=e.target.value;render()});$('random').addEventListener('click',()=>{let pool=getFiltered();if(!pool.length){$('status').textContent='Nessun esempio disponibile: modifica i filtri.';return}let r=pool[Math.floor(Math.random()*pool.length)];$('status').textContent='Proposta: '+r.name;let i=pool.indexOf(r);const cards=$('cards').querySelectorAll('.recipe');cards.forEach(c=>c.classList.remove('highlight'));cards[i]?.classList.add('highlight')});
+$('mic').addEventListener('click',()=>{$('status').textContent='Il microfono è disponibile nell’app reale, non in questa anteprima.'});
+function position(mode){let slot=mode==='B'?$('slotFilters'):$('slotBefore');slot.appendChild($('selector'));$('modeA').setAttribute('aria-pressed',String(mode==='A'));$('modeB').setAttribute('aria-pressed',String(mode==='B'));}
+$('modeA').addEventListener('click',()=>position('A'));$('modeB').addEventListener('click',()=>position('B'));
+window.MealUpDialDemo={setPortata:name=>{const i=categories.indexOf(name);if(i>=0)change(i)},getPortata:()=>categories[idx],setPosition:position,open:()=>openModal($('categoryBackdrop'))};
+render();
 })();
 </script>
 </body>
