@@ -38,9 +38,9 @@ header{display:flex;justify-content:space-between;align-items:flex-start;gap:12p
 .date-window{position:relative;width:100%;height:68px;display:block;padding:5px;overflow:hidden;border:1px solid #d1b59e;color:#231f1b;border-radius:45% 45% 29% 29% / 25% 25% 21% 21%;background:linear-gradient(180deg,#d8bda6 0%,#fffbf5 10%,#fef6e9 80%,#bca28d 100%);box-shadow:0 1px 1px #fff inset, 0 2px 5px #76513c3a;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .date-window::before{content:"";position:absolute;z-index:1;inset:4px;pointer-events:none;border:1px solid #e1d1bf;border-radius:inherit;box-shadow:inset 0 8px 10px #876a4929,inset 0 -4px 9px #b3886630;background:linear-gradient(90deg,#e8dacb09,#fffbf438 50%,#e7d0ba14)}
 .reel-display{position:absolute;inset:6px;display:block;overflow:hidden;border-radius:44% 44% 28% 28% / 24% 24% 20% 20%;background:linear-gradient(180deg,#fff8ec,#fbf2e5 55%,#f5e7d6);mask-image:linear-gradient(90deg,#0008,#000 15% 85%,#0008)}
-.reel-word,.reel-exit{position:absolute;z-index:4;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(16px,5vw,23px);font-weight:900;letter-spacing:-.045em;white-space:nowrap;line-height:1;text-transform:uppercase;will-change:transform,opacity;pointer-events:none}
+.reel-word,.reel-exit{position:absolute;z-index:4;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(17px,5.5vw,23px);font-weight:900;letter-spacing:-.045em;white-space:nowrap;line-height:1;text-transform:uppercase;will-change:transform,opacity;pointer-events:none}
 .reel-peek{position:absolute;z-index:2;top:0;height:100%;width:31%;display:flex;align-items:center;justify-content:center;font-size:13px;white-space:nowrap;font-weight:750;letter-spacing:-.035em;color:#806b5a;opacity:.35;overflow:hidden;pointer-events:none}
-.reel-peek-left{left:-23%;border-right:1px solid #94745d88}.reel-peek-right{right:-23%;border-left:1px solid #94745d88}
+.reel-peek-left{left:-10%;width:40%;border-right:1px solid #94745d88}.reel-peek-right{right:-10%;width:40%;border-left:1px solid #94745d88}
 .oven-pointer{width:0;height:0;margin:-1px auto 0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:14px solid #f26532;filter:drop-shadow(0 1px 1px #8a4e392d)}
 .selector .sel-sub{font-size:10.5px;color:#8e7b6b;line-height:1.25;margin:8px 0 0;text-align:center}
 .control-divider{height:126px;flex:0 0 1px;width:1px;background:#dbc3b0;align-self:center}
@@ -50,9 +50,9 @@ header{display:flex;justify-content:space-between;align-items:flex-start;gap:12p
 .knob-mini .rotor{inset:15px;background:linear-gradient(145deg,#fffefa 0%,#f9f0e4 49%,#e4ceba 100%);border:1px solid #d5bca5;box-shadow:inset 1px 2px 2px #fff,3px 5px 7px #75564041;transition-duration:.19s}
 .knob-mini .rotor::after{top:8px;width:8px;height:22px;left:calc(50% - 4px);box-shadow:0 1px 3px #ba563d63}
 .knob-mini .rotor-core{display:none}
-.rotate-arrows{position:absolute;inset:-2px -5px;display:flex;align-items:flex-start;justify-content:space-between;color:#ed612e;pointer-events:none;font-size:23px;font-weight:400;z-index:1}.rotate-arrows span{align-self:center}
+.rotate-arrows{position:absolute;inset:-1px -7px;width:calc(100% + 14px);height:calc(100% + 2px);pointer-events:none;z-index:1}
 /* Usability: category display is tappable, the dial has real pointer + keyboard rotation. */
-@media(max-width:355px){.selector{padding:11px 8px 12px 10px;gap:6px;min-height:152px}.knob-place{flex-basis:112px;width:112px;height:112px}.knob-mini{width:110px;height:110px;flex-basis:110px}.knob-mini .rotor{inset:13px}.oven-eyebrow{font-size:9px;letter-spacing:.24em;gap:3px}.date-window{height:62px}.reel-peek{font-size:11px}.control-divider{height:109px}.selector .sel-sub{font-size:9px}.rotate-arrows{font-size:20px}}
+@media(max-width:355px){.selector{padding:11px 8px 12px 10px;gap:6px;min-height:152px}.knob-place{flex-basis:112px;width:112px;height:112px}.knob-mini{width:110px;height:110px;flex-basis:110px}.knob-mini .rotor{inset:13px}.oven-eyebrow{font-size:9px;letter-spacing:.24em;gap:3px}.date-window{height:62px}.reel-peek{font-size:11px}.control-divider{height:109px}.selector .sel-sub{font-size:9px}.rotate-arrows{inset:-1px -5px;width:calc(100% + 10px)}}
 @media(prefers-reduced-motion:reduce){.reel-word,.reel-exit{animation:none!important;transition:none!important}.rotor{transition:none!important}}
 
 </style>
@@ -80,7 +80,7 @@ header{display:flex;justify-content:space-between;align-items:flex-start;gap:12p
       </div>
       <div class="control-divider" aria-hidden="true"></div>
       <div class="knob-place">
-        <span class="rotate-arrows" aria-hidden="true">↶ <span>↷</span></span>
+        <svg class="rotate-arrows" viewBox="0 0 150 150" focusable="false" aria-hidden="true"><g fill="none" stroke="#ed612e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 85 A54 54 0 0 1 39 33"/><path d="m30 35 9 -3 -2 9"/><path d="M112 33 A54 54 0 0 1 128 85"/><path d="m120 81 9 5 4 -9"/></g></svg>
         <button class="knob-mini" type="button" id="miniKnob" role="slider" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" aria-valuetext="Tutte" aria-label="Portata, ruota la manopola con il dito o usa le frecce">
           <span class="rotor" id="miniRotor"></span><span class="rotor-core"></span>
         </button>
@@ -233,7 +233,7 @@ let windowSwipe=null,suppressOpen=false;
 $('openCategories').addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;windowSwipe={id:e.pointerId,x:e.clientX,y:e.clientY};});
 $('openCategories').addEventListener('pointerup',e=>{if(!windowSwipe||e.pointerId!==windowSwipe.id)return;
  const dx=e.clientX-windowSwipe.x,dy=e.clientY-windowSwipe.y;windowSwipe=null;
- if(Math.abs(dx)>=27&&Math.abs(dx)>Math.abs(dy)*1.3){suppressOpen=true;change(idx+(dx<0?1:-1));}
+ if(Math.abs(dx)>=27&&Math.abs(dx)>Math.abs(dy)*1.3){suppressOpen=true;setTimeout(()=>{suppressOpen=false},0);change(idx+(dx<0?1:-1));}
 });
 $('openCategories').addEventListener('pointercancel',()=>{windowSwipe=null});
 $('openCategories').addEventListener('click',e=>{if(suppressOpen){suppressOpen=false;e.preventDefault();return;}openModal($('categoryBackdrop'))});
