@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f6f1e8">
+<title>MealUp — Prototipo animazione card → dettaglio</title>
+<style>
+:root{--cream:#f7f1e7;--cream2:#fffaf2;--ink:#292824;--muted:#77716b;--orange:#ff681f;--line:#e9e0d3;--ease-out:cubic-bezier(.23,1,.32,1);--ease-in-out:cubic-bezier(.77,0,.175,1)}
+*{box-sizing:border-box}html{color-scheme:light}body{margin:0;color:var(--ink);background:#eae4da;font-family:Satoshi,Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid var(--orange);outline-offset:4px}button:disabled{cursor:default}
+.viewport{min-height:100dvh;max-width:470px;margin:0 auto;background:var(--cream);position:relative;overflow-x:hidden;box-shadow:0 24px 80px #2d221420}.main{padding:21px 19px 115px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px}.wordmark{font-size:30px;font-weight:900;letter-spacing:-1.9px}.wordmark span{color:var(--orange)}.eyebrow{font-size:11px;letter-spacing:.1em;font-weight:800;text-transform:uppercase;color:var(--muted)}.top-badge{height:39px;min-width:39px;border-radius:50%;background:var(--cream2);border:1px solid var(--line);display:grid;place-items:center;font-size:18px}.intro{padding:40px 0 24px}.intro h1{font-size:42px;line-height:1.02;letter-spacing:-2.1px;margin:8px 0 12px;max-width:390px}.intro h1 em{font-style:normal;color:var(--orange)}.intro p{font-size:14px;line-height:1.55;color:#6c655e;max-width:285px;margin:0}.header-row{display:flex;justify-content:space-between;align-items:baseline;margin:19px 0 14px}.header-row h2{font-size:18px;letter-spacing:-.6px;margin:0}.header-row small{font-size:12px;color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.recipe-card{border:1px solid #e9e2d8;background:#fffdf7;text-align:left;border-radius:6px;padding:8px 8px 13px;min-width:0;position:relative;box-shadow:0 8px 16px rgba(71,44,17,.055);transform:translateZ(0);transition:transform 160ms var(--ease-out),box-shadow 160ms var(--ease-out)}.recipe-card:active{transform:scale(.97)}@media(hover:hover) and (pointer:fine){.recipe-card:hover{transform:translateY(-3px);box-shadow:0 13px 27px rgba(71,44,17,.08)}}.photo{aspect-ratio:1/1.1;border-radius:3px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#e8ebce}.photo.rose{background:#efd9cd}.photo:before{content:"";position:absolute;width:65%;height:65%;border-radius:50%;background:#fff8e4;opacity:.5;filter:blur(20px)}.food{width:82%;height:82%;position:relative;z-index:1;filter:drop-shadow(0 10px 8px rgba(66,55,29,.15))}.food path{fill:none;stroke:#e8b656;stroke-width:17;stroke-linecap:round;stroke-linejoin:round}.food .highlight{stroke:#ffe1a1;stroke-width:5}.food.leaf path{stroke:#719360;stroke-width:16}.food.leaf .highlight{stroke:#b5d29d}.photo-tag{position:absolute;bottom:9px;left:9px;font-size:10px;font-weight:800;letter-spacing:.02em;background:#fffaf1;color:#292824;padding:5px 8px;border-radius:100px;z-index:2}.card-copy{padding:11px 5px 0}.card-copy strong{font-size:15px;display:block;line-height:1.19;letter-spacing:-.35px}.card-copy small{display:block;font-size:11px;color:var(--muted);margin-top:5px}.cards .recipe-card:nth-child(2){transform:rotate(1.5deg)}.cards .recipe-card:nth-child(2):active{transform:rotate(1.5deg) scale(.97)}
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,470px);height:79px;padding:9px 22px max(12px,env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(247,241,231,.86),var(--cream) 26%);border-top:1px solid #e6ddcf;z-index:2;pointer-events:none}.bottom-nav span{font-size:11px;text-align:center;display:flex;flex-direction:column;gap:3px;align-items:center;color:#8b8479;font-weight:650}.bottom-nav b{font-size:21px;font-weight:600}.bottom-nav .active{color:var(--orange)}
+/* Solo il prototipo usa un overlay dedicato: nessuna modifica all'app esistente. */
+.overlay{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;padding:16px max(12px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom));isolation:isolate}.overlay[data-active="true"]{display:flex}.scrim{position:absolute;inset:0;background:rgba(28,25,22,.59);opacity:0}.sheet{z-index:1;position:relative;width:min(100%,450px);height:min(750px,calc(100dvh - 32px));background:var(--cream2);border-radius:26px;overflow:hidden;box-shadow:0 18px 70px rgba(0,0,0,.20);transform-origin:top left;display:flex;flex-direction:column;will-change:transform,opacity}.sheet-head{padding:17px 18px 10px;display:flex;align-items:center;justify-content:space-between;flex:none}.sheet-head .hint{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:850;color:#81776c}.close{height:44px;width:44px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;font-size:24px;line-height:1;color:#403d37}.sheet-scroll{overflow:auto;overscroll-behavior:contain;flex:1;padding:0 18px 28px}.sheet-art{height:225px;display:flex;justify-content:center;align-items:center;border-radius:18px;overflow:hidden;background:#e8ebce;position:relative}.sheet-art.rose{background:#efd9cd}.sheet-art:before{content:"";position:absolute;width:60%;height:70%;background:#fff7d8;filter:blur(38px);opacity:.6}.sheet-art .food{height:230px;width:230px}.sheet-art .photo-tag{font-size:11px;padding:7px 11px;bottom:13px;left:13px}.sheet-copy h2{font-size:32px;line-height:1.04;letter-spacing:-1.5px;margin:22px 0 10px}.sheet-copy .subtitle{font-size:14px;color:#746d66;line-height:1.5;margin:0 0 18px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:10px 0 22px}.stat{border-radius:13px;padding:12px 6px;text-align:center;background:#f1eadf}.stat strong{display:block;font-size:16px;letter-spacing:-.5px}.stat span{font-size:10px;color:#796f63}.section-title{font-size:16px;margin:10px 0}.ingredients{margin:0;padding:0;list-style:none;display:grid;gap:9px}.ingredients li{display:flex;align-items:center;gap:10px;font-size:13px;padding:9px 0;border-bottom:1px solid var(--line)}.ingredients li:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange);flex:none}.note{margin-top:18px;padding:14px;background:#ffefe5;border-radius:13px;font-size:12px;line-height:1.5;color:#714a34}.sheet-footer{padding:12px 18px max(14px,env(safe-area-inset-bottom));background:var(--cream2);border-top:1px solid var(--line);flex:none}.cta{border:0;background:var(--orange);color:#fff;width:100%;min-height:50px;border-radius:14px;font-weight:800;letter-spacing:-.2px;transition:transform 150ms var(--ease-out)}.cta:active{transform:scale(.98)}.motion-content{opacity:0}
+@media(prefers-reduced-motion:reduce){.recipe-card,.cta{transition:none}.recipe-card:active{transform:none}}
+@media(min-width:650px){body{padding:28px 0}.viewport{min-height:870px;border-radius:24px}.bottom-nav{position:absolute;bottom:0}.intro{padding-top:52px}}
+</style>
+</head>
+<body>
+<div class="viewport" id="app">
+  <main class="main" id="main">
+    <header class="top"><div class="wordmark">Meal<span>Up</span></div><span class="top-badge" aria-hidden="true">✦</span></header>
+    <section class="intro"><div class="eyebrow">La cucina, più semplice</div><h1>Che cosa ti va <em>oggi?</em></h1><p>Un'idea per pranzo, senza perderti tra mille possibilità.</p></section>
+    <div class="header-row"><h2>Per te, oggi</h2><small>Tocca una ricetta</small></div>
+    <div class="cards" id="cards"></div>
+  </main>
+  <nav class="bottom-nav" aria-label="Navigazione illustrativa, non attiva"><span><b>⌂</b>Home</span><span class="active"><b>▤</b>Ricette</span><span><b>◫</b>Scorte</span><span><b>♙</b>Profilo</span></nav>
+</div>
+<div class="overlay" id="overlay" data-active="false" role="presentation">
+  <div class="scrim" id="scrim"></div>
+  <section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="detail-title" aria-hidden="true">
+    <div class="sheet-head"><span class="hint">MealUp · La tua ricetta</span><button class="close motion-content" id="close" aria-label="Chiudi il dettaglio" type="button">×</button></div>
+    <div class="sheet-scroll motion-content" id="sheet-scroll"></div>
+    <div class="sheet-footer motion-content"><button class="cta" id="done" type="button">Torna alle ricette</button></div>
+  </section>
+</div>
+<template id="food-pasta"><svg class="food" viewBox="0 0 240 240" aria-hidden="true"><path d="M66 166c-45-28-15-112 38-93s61 70 22 96-67 9-41-17 70-22 83-58-22-56-51-33"/><path d="M55 134c-22-51 32-96 79-73s42 61 17 82-67 8-43-20 56-16 71 7-12 57-51 51"/><path d="M73 187c26 18 74 14 87-22"/><path class="highlight" d="M57 126c-8-33 21-56 46-52s41 30 30 44"/></svg></template>
+<template id="food-green"><svg class="food leaf" viewBox="0 0 240 240" aria-hidden="true"><path d="M81 181c-26-19-32-59-8-80s55-8 58 18 24 35 42 8-3-61-36-60-59 40-37 60 65 8 78-12"/><path d="M64 155c20 42 73 48 103 9"/><path class="highlight" d="M81 103c28-27 61-7 54 20"/></svg></template>
+<script>
+(() => {
+  'use strict';
+  const recipes = [
+    {id:'pasta',name:'Pasta al pesto',tag:'PRIMO · 20 MIN',time:'20 min',kcal:'485',protein:'17 g',carbs:'66 g',fat:'16 g',category:'pasta',desc:'Un primo profumato, con tutto il gusto del basilico.',ingredients:['Pasta · 80 g','Pesto al basilico · 30 g','Parmigiano · 10 g','Acqua di cottura · q.b.']},
+    {id:'green',name:'Verdure croccanti',tag:'CONTORNO · 15 MIN',time:'15 min',kcal:'190',protein:'5 g',carbs:'20 g',fat:'9 g',category:'rose',desc:'Un contorno veloce, colorato e piacevole da preparare.',ingredients:['Verdure miste · 200 g','Olio EVO · 10 g','Sale ed erbe · q.b.']}
+  ];
+  const $=id=>document.getElementById(id), cards=$('cards'), overlay=$('overlay'), sheet=$('sheet'), scrim=$('scrim');
+  const svgFor=id=>$(id==='pasta'?'food-pasta':'food-green').innerHTML;
+  // I simboli culinari sono segnaposto illustrativi del prototipo, NON nuovi Food Portrait approvati.
+  cards.innerHTML=recipes.map(r=>`<button type="button" class="recipe-card" data-recipe="${r.id}" aria-label="Apri dettaglio: ${r.name}"><div class="photo ${r.category==='rose'?'rose':''}">${svgFor(r.id)}<span class="photo-tag">${r.tag}</span></div><div class="card-copy"><strong>${r.name}</strong><small>${r.kcal} kcal · ${r.time}</small></div></button>`).join('');
+  let source=null,current=null,phase='closed',running=[],lastFocus=null;
+  const easing='cubic-bezier(0.23, 1, 0.32, 1)';
+  const reduced=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function transformFrom(trigger){
+    const a=trigger.getBoundingClientRect(),b=sheet.getBoundingClientRect();
+    return `translate3d(${(a.left-b.left).toFixed(2)}px,${(a.top-b.top).toFixed(2)}px,0) scale(${(a.width/b.width).toFixed(4)},${(a.height/b.height).toFixed(4)})`;
+  }
+  function animate(el,from,to,duration,delay=0){
+    const a=el.animate([from,to],{duration,delay,easing,fill:'both'});running.push(a);return a;
+  }
+  function clearRunning(){running.forEach(a=>{try{a.cancel()}catch{}});running=[]}
+  function render(r){
+    $('sheet-scroll').innerHTML=`<div class="sheet-art ${r.category==='rose'?'rose':''}">${svgFor(r.id)}<span class="photo-tag">${r.tag}</span></div><div class="sheet-copy"><h2 id="detail-title">${r.name}</h2><p class="subtitle">${r.desc}</p><div class="stats"><div class="stat"><strong>${r.kcal}</strong><span>kcal</span></div><div class="stat"><strong>${r.protein}</strong><span>proteine</span></div><div class="stat"><strong>${r.carbs}</strong><span>carbo</span></div><div class="stat"><strong>${r.fat}</strong><span>grassi</span></div></div><h3 class="section-title">Ingredienti</h3><ul class="ingredients">${r.ingredients.map(i=>`<li>${i}</li>`).join('')}</ul><p class="note">Prototipo di interazione: dati e illustrazioni sono dimostrativi, non modificano le ricette reali.</p></div>`;
+    $('sheet-scroll').scrollTop=0;
+  }
+  function openRecipe(trigger){
+    if(phase!=='closed')return;
+    source=trigger;lastFocus=document.activeElement;current=recipes.find(r=>r.id===trigger.dataset.recipe);if(!current)return;
+    phase='opening';render(current);overlay.dataset.active='true';sheet.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+    clearRunning();const t=reduced()?130:260;
+    const panel=animate(sheet,reduced()?{opacity:0}:{transform:transformFrom(source),opacity:.97},reduced()?{opacity:1}:{transform:'none',opacity:1},t);
+    animate(scrim,{opacity:0},{opacity:1},t);
+    Array.from(overlay.querySelectorAll('.motion-content')).forEach(el=>animate(el,{opacity:0},{opacity:1},reduced()?100:160,reduced()?0:65));
+    panel.finished.then(()=>{if(phase==='opening'){phase='open';$('close').focus({preventScroll:true});}}).catch(()=>{});
+  }
+  function closeRecipe(){
+    if(phase==='closed'||phase==='closing')return;
+    phase='closing';clearRunning();const t=reduced()?100:220;
+    const panel=animate(sheet,reduced()?{opacity:1}:{transform:'none',opacity:1},reduced()?{opacity:0}:{transform:source?transformFrom(source):'none',opacity:.97},t);
+    animate(scrim,{opacity:1},{opacity:0},t);
+    Array.from(overlay.querySelectorAll('.motion-content')).forEach(el=>animate(el,{opacity:1},{opacity:0},reduced()?70:125));
+    panel.finished.then(()=>{if(phase==='closing'){phase='closed';overlay.dataset.active='false';sheet.setAttribute('aria-hidden','true');document.body.style.overflow='';clearRunning();(source||lastFocus)?.focus({preventScroll:true});source=null;}}).catch(()=>{});
+  }
+  cards.addEventListener('click',e=>{const b=e.target.closest('button[data-recipe]');if(b)openRecipe(b)});
+  $('close').addEventListener('click',closeRecipe);$('done').addEventListener('click',closeRecipe);
+  overlay.addEventListener('pointerdown',e=>{if(e.target===overlay||e.target===scrim)closeRecipe()});
+  document.addEventListener('keydown',e=>{
+    if(phase==='closed')return;
+    if(e.key==='Escape'){e.preventDefault();closeRecipe();return}
+    if(e.key==='Tab'){
+      const f=[...sheet.querySelectorAll('button:not([disabled])')];if(!f.length)return;
+      const first=f[0],last=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+    }
+  });
+  window.__mealupMotionTest={get phase(){return phase},open:()=>cards.querySelector('button')?.click(),close:closeRecipe};
+})();
+</script>
+</body>
+</html>
